@@ -2,7 +2,7 @@ module Deku.DOM.Attr.LimitingConeAngle where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.FeSpotLight (FeSpotLight_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -11,8 +11,8 @@ data LimitingConeAngle = LimitingConeAngle
 
 instance Attr FeSpotLight_ LimitingConeAngle String where
   attr LimitingConeAngle bothValues = unsafeAttribute $ Both
-    { key: "limitingConeAngle", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "limitingConeAngle", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "limitingConeAngle", value: prop' value }
     )
   pureAttr LimitingConeAngle value = unsafeAttribute $ This
@@ -23,7 +23,7 @@ instance Attr FeSpotLight_ LimitingConeAngle String where
 instance Attr everything LimitingConeAngle Unit where
   attr LimitingConeAngle bothValues = unsafeAttribute $ Both
     { key: "limitingConeAngle", value: unset' }
-    (snd bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
   pureAttr LimitingConeAngle _ = unsafeAttribute $ This
     { key: "limitingConeAngle", value: unset' }
   unpureAttr LimitingConeAngle eventValue = unsafeAttribute $ That $ eventValue

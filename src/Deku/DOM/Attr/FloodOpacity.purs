@@ -2,7 +2,7 @@ module Deku.DOM.Attr.FloodOpacity where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -30,8 +30,8 @@ data FloodOpacity = FloodOpacity
 
 instance Attr FeBlend_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,8 +39,8 @@ instance Attr FeBlend_ FloodOpacity String where
 
 instance Attr FeColorMatrix_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -48,8 +48,8 @@ instance Attr FeColorMatrix_ FloodOpacity String where
 
 instance Attr FeComponentTransfer_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,8 +57,8 @@ instance Attr FeComponentTransfer_ FloodOpacity String where
 
 instance Attr FeComposite_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,8 +66,8 @@ instance Attr FeComposite_ FloodOpacity String where
 
 instance Attr FeConvolveMatrix_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,8 +75,8 @@ instance Attr FeConvolveMatrix_ FloodOpacity String where
 
 instance Attr FeDiffuseLighting_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -84,8 +84,8 @@ instance Attr FeDiffuseLighting_ FloodOpacity String where
 
 instance Attr FeDisplacementMap_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -93,8 +93,8 @@ instance Attr FeDisplacementMap_ FloodOpacity String where
 
 instance Attr FeDropShadow_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -102,8 +102,8 @@ instance Attr FeDropShadow_ FloodOpacity String where
 
 instance Attr FeFlood_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -111,8 +111,8 @@ instance Attr FeFlood_ FloodOpacity String where
 
 instance Attr FeGaussianBlur_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -120,8 +120,8 @@ instance Attr FeGaussianBlur_ FloodOpacity String where
 
 instance Attr FeImage_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -129,8 +129,8 @@ instance Attr FeImage_ FloodOpacity String where
 
 instance Attr FeMerge_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -138,8 +138,8 @@ instance Attr FeMerge_ FloodOpacity String where
 
 instance Attr FeMorphology_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -147,8 +147,8 @@ instance Attr FeMorphology_ FloodOpacity String where
 
 instance Attr FeOffset_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -156,8 +156,8 @@ instance Attr FeOffset_ FloodOpacity String where
 
 instance Attr FeSpecularLighting_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,8 +165,8 @@ instance Attr FeSpecularLighting_ FloodOpacity String where
 
 instance Attr FeTile_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,8 +174,8 @@ instance Attr FeTile_ FloodOpacity String where
 
 instance Attr FeTurbulence_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -183,8 +183,8 @@ instance Attr FeTurbulence_ FloodOpacity String where
 
 instance Attr Filter_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -192,8 +192,8 @@ instance Attr Filter_ FloodOpacity String where
 
 instance Attr Image_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,8 +201,8 @@ instance Attr Image_ FloodOpacity String where
 
 instance Attr Switch_ FloodOpacity String where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
-    { key: "flood-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
+    { key: "flood-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "flood-opacity", value: prop' value })
   pureAttr FloodOpacity value = unsafeAttribute $ This
     { key: "flood-opacity", value: prop' value }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,7 +211,7 @@ instance Attr Switch_ FloodOpacity String where
 instance Attr everything FloodOpacity Unit where
   attr FloodOpacity bothValues = unsafeAttribute $ Both
     { key: "flood-opacity", value: unset' }
-    (snd bothValues <#> \_ -> { key: "flood-opacity", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "flood-opacity", value: unset' })
   pureAttr FloodOpacity _ = unsafeAttribute $ This
     { key: "flood-opacity", value: unset' }
   unpureAttr FloodOpacity eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.BaselineShift where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data BaselineShift = BaselineShift
 
 instance Attr FeBlend_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,8 +38,8 @@ instance Attr FeBlend_ BaselineShift String where
 
 instance Attr FeColorMatrix_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -47,8 +47,8 @@ instance Attr FeColorMatrix_ BaselineShift String where
 
 instance Attr FeComponentTransfer_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,8 +56,8 @@ instance Attr FeComponentTransfer_ BaselineShift String where
 
 instance Attr FeComposite_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -65,8 +65,8 @@ instance Attr FeComposite_ BaselineShift String where
 
 instance Attr FeConvolveMatrix_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,8 +74,8 @@ instance Attr FeConvolveMatrix_ BaselineShift String where
 
 instance Attr FeDiffuseLighting_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,8 +83,8 @@ instance Attr FeDiffuseLighting_ BaselineShift String where
 
 instance Attr FeDisplacementMap_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -92,8 +92,8 @@ instance Attr FeDisplacementMap_ BaselineShift String where
 
 instance Attr FeFlood_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,8 +101,8 @@ instance Attr FeFlood_ BaselineShift String where
 
 instance Attr FeGaussianBlur_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,8 +110,8 @@ instance Attr FeGaussianBlur_ BaselineShift String where
 
 instance Attr FeImage_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,8 +119,8 @@ instance Attr FeImage_ BaselineShift String where
 
 instance Attr FeMerge_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -128,8 +128,8 @@ instance Attr FeMerge_ BaselineShift String where
 
 instance Attr FeMorphology_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -137,8 +137,8 @@ instance Attr FeMorphology_ BaselineShift String where
 
 instance Attr FeOffset_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -146,8 +146,8 @@ instance Attr FeOffset_ BaselineShift String where
 
 instance Attr FeSpecularLighting_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,8 +155,8 @@ instance Attr FeSpecularLighting_ BaselineShift String where
 
 instance Attr FeTile_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -164,8 +164,8 @@ instance Attr FeTile_ BaselineShift String where
 
 instance Attr FeTurbulence_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -173,8 +173,8 @@ instance Attr FeTurbulence_ BaselineShift String where
 
 instance Attr Filter_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -182,8 +182,8 @@ instance Attr Filter_ BaselineShift String where
 
 instance Attr Image_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,8 +191,8 @@ instance Attr Image_ BaselineShift String where
 
 instance Attr Switch_ BaselineShift String where
   attr BaselineShift bothValues = unsafeAttribute $ Both
-    { key: "baseline-shift", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
+    { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
   pureAttr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,7 +201,7 @@ instance Attr Switch_ BaselineShift String where
 instance Attr everything BaselineShift Unit where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: unset' }
-    (snd bothValues <#> \_ -> { key: "baseline-shift", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "baseline-shift", value: unset' })
   pureAttr BaselineShift _ = unsafeAttribute $ This
     { key: "baseline-shift", value: unset' }
   unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPlaying where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnPlaying = OnPlaying
 
 instance Attr anything OnPlaying Cb where
   attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "playing", value: cb' value })
+    { key: "playing", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "playing", value: cb' value })
   pureAttr OnPlaying value = unsafeAttribute $ This
     { key: "playing", value: cb' value }
   unpureAttr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnPlaying Cb where
 
 instance Attr anything OnPlaying (Effect Unit) where
   attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "playing", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "playing", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnPlaying value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnPlaying (Effect Unit) where
 
 instance Attr anything OnPlaying (Effect Boolean) where
   attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "playing", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "playing", value: cb' (Cb (const value)) }
     )
   pureAttr OnPlaying value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnPlayingEffect =
 instance Attr everything OnPlaying Unit where
   attr OnPlaying bothValues = unsafeAttribute $ Both
     { key: "playing", value: unset' }
-    (snd bothValues <#> \_ -> { key: "playing", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "playing", value: unset' })
   pureAttr OnPlaying _ = unsafeAttribute $ This
     { key: "playing", value: unset' }
   unpureAttr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaOrientation where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaOrientation = AriaOrientation
 
 instance Attr Circle_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaOrientation String where
 
 instance Attr Ellipse_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaOrientation String where
 
 instance Attr ForeignObject_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaOrientation String where
 
 instance Attr G_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -71,8 +71,8 @@ instance Attr G_ AriaOrientation String where
 
 instance Attr Line_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -82,8 +82,8 @@ instance Attr Line_ AriaOrientation String where
 
 instance Attr Marker_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaOrientation String where
 
 instance Attr Path_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -104,8 +104,8 @@ instance Attr Path_ AriaOrientation String where
 
 instance Attr Polygon_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaOrientation String where
 
 instance Attr Polyline_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaOrientation String where
 
 instance Attr Rect_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaOrientation String where
 
 instance Attr Svg_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaOrientation String where
 
 instance Attr Symbol_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaOrientation String where
 
 instance Attr Text_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -170,8 +170,8 @@ instance Attr Text_ AriaOrientation String where
 
 instance Attr TextPath_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaOrientation String where
 
 instance Attr Tspan_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaOrientation String where
 
 instance Attr Use_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -203,8 +203,8 @@ instance Attr Use_ AriaOrientation String where
 
 instance Attr View_ AriaOrientation String where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
   pureAttr AriaOrientation value = unsafeAttribute $ This
@@ -215,7 +215,7 @@ instance Attr View_ AriaOrientation String where
 instance Attr everything AriaOrientation Unit where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
   pureAttr AriaOrientation _ = unsafeAttribute $ This
     { key: "aria-orientation", value: unset' }
   unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnStalled where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnStalled = OnStalled
 
 instance Attr anything OnStalled Cb where
   attr OnStalled bothValues = unsafeAttribute $ Both
-    { key: "stalled", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stalled", value: cb' value })
+    { key: "stalled", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stalled", value: cb' value })
   pureAttr OnStalled value = unsafeAttribute $ This
     { key: "stalled", value: cb' value }
   unpureAttr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnStalled Cb where
 
 instance Attr anything OnStalled (Effect Unit) where
   attr OnStalled bothValues = unsafeAttribute $ Both
-    { key: "stalled", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "stalled", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stalled", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnStalled value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnStalled (Effect Unit) where
 
 instance Attr anything OnStalled (Effect Boolean) where
   attr OnStalled bothValues = unsafeAttribute $ Both
-    { key: "stalled", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "stalled", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stalled", value: cb' (Cb (const value)) }
     )
   pureAttr OnStalled value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnStalledEffect =
 instance Attr everything OnStalled Unit where
   attr OnStalled bothValues = unsafeAttribute $ Both
     { key: "stalled", value: unset' }
-    (snd bothValues <#> \_ -> { key: "stalled", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "stalled", value: unset' })
   pureAttr OnStalled _ = unsafeAttribute $ This
     { key: "stalled", value: unset' }
   unpureAttr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>

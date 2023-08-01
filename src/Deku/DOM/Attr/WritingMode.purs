@@ -2,7 +2,7 @@ module Deku.DOM.Attr.WritingMode where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data WritingMode = WritingMode
 
 instance Attr FeBlend_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,8 +38,8 @@ instance Attr FeBlend_ WritingMode String where
 
 instance Attr FeColorMatrix_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -47,8 +47,8 @@ instance Attr FeColorMatrix_ WritingMode String where
 
 instance Attr FeComponentTransfer_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,8 +56,8 @@ instance Attr FeComponentTransfer_ WritingMode String where
 
 instance Attr FeComposite_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -65,8 +65,8 @@ instance Attr FeComposite_ WritingMode String where
 
 instance Attr FeConvolveMatrix_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,8 +74,8 @@ instance Attr FeConvolveMatrix_ WritingMode String where
 
 instance Attr FeDiffuseLighting_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,8 +83,8 @@ instance Attr FeDiffuseLighting_ WritingMode String where
 
 instance Attr FeDisplacementMap_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -92,8 +92,8 @@ instance Attr FeDisplacementMap_ WritingMode String where
 
 instance Attr FeFlood_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,8 +101,8 @@ instance Attr FeFlood_ WritingMode String where
 
 instance Attr FeGaussianBlur_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,8 +110,8 @@ instance Attr FeGaussianBlur_ WritingMode String where
 
 instance Attr FeImage_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,8 +119,8 @@ instance Attr FeImage_ WritingMode String where
 
 instance Attr FeMerge_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -128,8 +128,8 @@ instance Attr FeMerge_ WritingMode String where
 
 instance Attr FeMorphology_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -137,8 +137,8 @@ instance Attr FeMorphology_ WritingMode String where
 
 instance Attr FeOffset_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -146,8 +146,8 @@ instance Attr FeOffset_ WritingMode String where
 
 instance Attr FeSpecularLighting_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,8 +155,8 @@ instance Attr FeSpecularLighting_ WritingMode String where
 
 instance Attr FeTile_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -164,8 +164,8 @@ instance Attr FeTile_ WritingMode String where
 
 instance Attr FeTurbulence_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -173,8 +173,8 @@ instance Attr FeTurbulence_ WritingMode String where
 
 instance Attr Filter_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -182,8 +182,8 @@ instance Attr Filter_ WritingMode String where
 
 instance Attr Image_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,8 +191,8 @@ instance Attr Image_ WritingMode String where
 
 instance Attr Switch_ WritingMode String where
   attr WritingMode bothValues = unsafeAttribute $ Both
-    { key: "writing-mode", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
+    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
   pureAttr WritingMode value = unsafeAttribute $ This
     { key: "writing-mode", value: prop' value }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,7 +201,7 @@ instance Attr Switch_ WritingMode String where
 instance Attr everything WritingMode Unit where
   attr WritingMode bothValues = unsafeAttribute $ Both
     { key: "writing-mode", value: unset' }
-    (snd bothValues <#> \_ -> { key: "writing-mode", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "writing-mode", value: unset' })
   pureAttr WritingMode _ = unsafeAttribute $ This
     { key: "writing-mode", value: unset' }
   unpureAttr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>

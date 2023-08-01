@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Media where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
@@ -15,8 +15,8 @@ data Media = Media
 
 instance Attr A_ Media String where
   attr Media bothValues = unsafeAttribute $ Both
-    { key: "media", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+    { key: "media", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "media", value: prop' value })
   pureAttr Media value = unsafeAttribute $ This
     { key: "media", value: prop' value }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -24,8 +24,8 @@ instance Attr A_ Media String where
 
 instance Attr Area_ Media String where
   attr Media bothValues = unsafeAttribute $ Both
-    { key: "media", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+    { key: "media", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "media", value: prop' value })
   pureAttr Media value = unsafeAttribute $ This
     { key: "media", value: prop' value }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -33,8 +33,8 @@ instance Attr Area_ Media String where
 
 instance Attr Link_ Media String where
   attr Media bothValues = unsafeAttribute $ Both
-    { key: "media", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+    { key: "media", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "media", value: prop' value })
   pureAttr Media value = unsafeAttribute $ This
     { key: "media", value: prop' value }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,8 +42,8 @@ instance Attr Link_ Media String where
 
 instance Attr Source_ Media String where
   attr Media bothValues = unsafeAttribute $ Both
-    { key: "media", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+    { key: "media", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "media", value: prop' value })
   pureAttr Media value = unsafeAttribute $ This
     { key: "media", value: prop' value }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,8 +51,8 @@ instance Attr Source_ Media String where
 
 instance Attr Style_ Media String where
   attr Media bothValues = unsafeAttribute $ Both
-    { key: "media", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "media", value: prop' value })
+    { key: "media", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "media", value: prop' value })
   pureAttr Media value = unsafeAttribute $ This
     { key: "media", value: prop' value }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -60,7 +60,7 @@ instance Attr Style_ Media String where
 
 instance Attr everything Media Unit where
   attr Media bothValues = unsafeAttribute $ Both { key: "media", value: unset' }
-    (snd bothValues <#> \_ -> { key: "media", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "media", value: unset' })
   pureAttr Media _ = unsafeAttribute $ This { key: "media", value: unset' }
   unpureAttr Media eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "media", value: unset' }

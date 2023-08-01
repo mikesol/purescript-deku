@@ -2,7 +2,7 @@ module Deku.DOM.Attr.PreserveAspectRatio where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Symbol (Symbol_)
@@ -17,8 +17,8 @@ data PreserveAspectRatio = PreserveAspectRatio
 
 instance Attr FeImage_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -28,8 +28,8 @@ instance Attr FeImage_ PreserveAspectRatio String where
 
 instance Attr Image_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -39,8 +39,8 @@ instance Attr Image_ PreserveAspectRatio String where
 
 instance Attr Marker_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -50,8 +50,8 @@ instance Attr Marker_ PreserveAspectRatio String where
 
 instance Attr Pattern_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -61,8 +61,8 @@ instance Attr Pattern_ PreserveAspectRatio String where
 
 instance Attr Svg_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -72,8 +72,8 @@ instance Attr Svg_ PreserveAspectRatio String where
 
 instance Attr Symbol_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -83,8 +83,8 @@ instance Attr Symbol_ PreserveAspectRatio String where
 
 instance Attr View_ PreserveAspectRatio String where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
-    { key: "preserveAspectRatio", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "preserveAspectRatio", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "preserveAspectRatio", value: prop' value }
     )
   pureAttr PreserveAspectRatio value = unsafeAttribute $ This
@@ -95,7 +95,7 @@ instance Attr View_ PreserveAspectRatio String where
 instance Attr everything PreserveAspectRatio Unit where
   attr PreserveAspectRatio bothValues = unsafeAttribute $ Both
     { key: "preserveAspectRatio", value: unset' }
-    (snd bothValues <#> \_ -> { key: "preserveAspectRatio", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "preserveAspectRatio", value: unset' })
   pureAttr PreserveAspectRatio _ = unsafeAttribute $ This
     { key: "preserveAspectRatio", value: unset' }
   unpureAttr PreserveAspectRatio eventValue = unsafeAttribute $ That $

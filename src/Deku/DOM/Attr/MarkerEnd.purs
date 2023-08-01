@@ -2,7 +2,7 @@ module Deku.DOM.Attr.MarkerEnd where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data MarkerEnd = MarkerEnd
 
 instance Attr FeBlend_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,8 +38,8 @@ instance Attr FeBlend_ MarkerEnd String where
 
 instance Attr FeColorMatrix_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -47,8 +47,8 @@ instance Attr FeColorMatrix_ MarkerEnd String where
 
 instance Attr FeComponentTransfer_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,8 +56,8 @@ instance Attr FeComponentTransfer_ MarkerEnd String where
 
 instance Attr FeComposite_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -65,8 +65,8 @@ instance Attr FeComposite_ MarkerEnd String where
 
 instance Attr FeConvolveMatrix_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,8 +74,8 @@ instance Attr FeConvolveMatrix_ MarkerEnd String where
 
 instance Attr FeDiffuseLighting_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,8 +83,8 @@ instance Attr FeDiffuseLighting_ MarkerEnd String where
 
 instance Attr FeDisplacementMap_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -92,8 +92,8 @@ instance Attr FeDisplacementMap_ MarkerEnd String where
 
 instance Attr FeFlood_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,8 +101,8 @@ instance Attr FeFlood_ MarkerEnd String where
 
 instance Attr FeGaussianBlur_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,8 +110,8 @@ instance Attr FeGaussianBlur_ MarkerEnd String where
 
 instance Attr FeImage_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,8 +119,8 @@ instance Attr FeImage_ MarkerEnd String where
 
 instance Attr FeMerge_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -128,8 +128,8 @@ instance Attr FeMerge_ MarkerEnd String where
 
 instance Attr FeMorphology_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -137,8 +137,8 @@ instance Attr FeMorphology_ MarkerEnd String where
 
 instance Attr FeOffset_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -146,8 +146,8 @@ instance Attr FeOffset_ MarkerEnd String where
 
 instance Attr FeSpecularLighting_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,8 +155,8 @@ instance Attr FeSpecularLighting_ MarkerEnd String where
 
 instance Attr FeTile_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -164,8 +164,8 @@ instance Attr FeTile_ MarkerEnd String where
 
 instance Attr FeTurbulence_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -173,8 +173,8 @@ instance Attr FeTurbulence_ MarkerEnd String where
 
 instance Attr Filter_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -182,8 +182,8 @@ instance Attr Filter_ MarkerEnd String where
 
 instance Attr Image_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,8 +191,8 @@ instance Attr Image_ MarkerEnd String where
 
 instance Attr Switch_ MarkerEnd String where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
-    { key: "marker-end", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "marker-end", value: prop' value })
+    { key: "marker-end", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "marker-end", value: prop' value })
   pureAttr MarkerEnd value = unsafeAttribute $ This
     { key: "marker-end", value: prop' value }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,7 +201,7 @@ instance Attr Switch_ MarkerEnd String where
 instance Attr everything MarkerEnd Unit where
   attr MarkerEnd bothValues = unsafeAttribute $ Both
     { key: "marker-end", value: unset' }
-    (snd bothValues <#> \_ -> { key: "marker-end", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "marker-end", value: unset' })
   pureAttr MarkerEnd _ = unsafeAttribute $ This
     { key: "marker-end", value: unset' }
   unpureAttr MarkerEnd eventValue = unsafeAttribute $ That $ eventValue <#>

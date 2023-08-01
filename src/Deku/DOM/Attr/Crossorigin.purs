@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Crossorigin where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Audio (Audio_)
@@ -16,8 +16,8 @@ data Crossorigin = Crossorigin
 
 instance Attr Audio_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,8 +25,8 @@ instance Attr Audio_ Crossorigin String where
 
 instance Attr Img_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -34,8 +34,8 @@ instance Attr Img_ Crossorigin String where
 
 instance Attr Link_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -43,8 +43,8 @@ instance Attr Link_ Crossorigin String where
 
 instance Attr Script_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,8 +52,8 @@ instance Attr Script_ Crossorigin String where
 
 instance Attr Video_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,8 +61,8 @@ instance Attr Video_ Crossorigin String where
 
 instance Attr Image_ Crossorigin String where
   attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
   pureAttr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -71,7 +71,7 @@ instance Attr Image_ Crossorigin String where
 instance Attr everything Crossorigin Unit where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: unset' }
-    (snd bothValues <#> \_ -> { key: "crossorigin", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "crossorigin", value: unset' })
   pureAttr Crossorigin _ = unsafeAttribute $ This
     { key: "crossorigin", value: unset' }
   unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>

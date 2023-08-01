@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Lang where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -165,8 +165,8 @@ data Lang = Lang
 
 instance Attr A_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -174,8 +174,8 @@ instance Attr A_ Lang String where
 
 instance Attr Abbr_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -183,8 +183,8 @@ instance Attr Abbr_ Lang String where
 
 instance Attr Acronym_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -192,8 +192,8 @@ instance Attr Acronym_ Lang String where
 
 instance Attr Address_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -201,8 +201,8 @@ instance Attr Address_ Lang String where
 
 instance Attr Applet_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -210,8 +210,8 @@ instance Attr Applet_ Lang String where
 
 instance Attr Area_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -219,8 +219,8 @@ instance Attr Area_ Lang String where
 
 instance Attr Article_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -228,8 +228,8 @@ instance Attr Article_ Lang String where
 
 instance Attr Aside_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -237,8 +237,8 @@ instance Attr Aside_ Lang String where
 
 instance Attr Audio_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -246,8 +246,8 @@ instance Attr Audio_ Lang String where
 
 instance Attr B_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -255,8 +255,8 @@ instance Attr B_ Lang String where
 
 instance Attr Base_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -264,8 +264,8 @@ instance Attr Base_ Lang String where
 
 instance Attr Basefont_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -273,8 +273,8 @@ instance Attr Basefont_ Lang String where
 
 instance Attr Bdi_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -282,8 +282,8 @@ instance Attr Bdi_ Lang String where
 
 instance Attr Bdo_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -291,8 +291,8 @@ instance Attr Bdo_ Lang String where
 
 instance Attr Big_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -300,8 +300,8 @@ instance Attr Big_ Lang String where
 
 instance Attr Blockquote_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -309,8 +309,8 @@ instance Attr Blockquote_ Lang String where
 
 instance Attr Body_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -318,8 +318,8 @@ instance Attr Body_ Lang String where
 
 instance Attr Br_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -327,8 +327,8 @@ instance Attr Br_ Lang String where
 
 instance Attr Button_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -336,8 +336,8 @@ instance Attr Button_ Lang String where
 
 instance Attr Canvas_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -345,8 +345,8 @@ instance Attr Canvas_ Lang String where
 
 instance Attr Caption_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -354,8 +354,8 @@ instance Attr Caption_ Lang String where
 
 instance Attr Center_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -363,8 +363,8 @@ instance Attr Center_ Lang String where
 
 instance Attr Cite_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -372,8 +372,8 @@ instance Attr Cite_ Lang String where
 
 instance Attr Code_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -381,8 +381,8 @@ instance Attr Code_ Lang String where
 
 instance Attr Col_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -390,8 +390,8 @@ instance Attr Col_ Lang String where
 
 instance Attr Colgroup_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -399,8 +399,8 @@ instance Attr Colgroup_ Lang String where
 
 instance Attr Xdata_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -408,8 +408,8 @@ instance Attr Xdata_ Lang String where
 
 instance Attr Datalist_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -417,8 +417,8 @@ instance Attr Datalist_ Lang String where
 
 instance Attr Dd_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -426,8 +426,8 @@ instance Attr Dd_ Lang String where
 
 instance Attr Del_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -435,8 +435,8 @@ instance Attr Del_ Lang String where
 
 instance Attr Details_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -444,8 +444,8 @@ instance Attr Details_ Lang String where
 
 instance Attr Dfn_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -453,8 +453,8 @@ instance Attr Dfn_ Lang String where
 
 instance Attr Dialog_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -462,8 +462,8 @@ instance Attr Dialog_ Lang String where
 
 instance Attr Dir_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -471,8 +471,8 @@ instance Attr Dir_ Lang String where
 
 instance Attr Div_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -480,8 +480,8 @@ instance Attr Div_ Lang String where
 
 instance Attr Dl_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -489,8 +489,8 @@ instance Attr Dl_ Lang String where
 
 instance Attr Dt_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -498,8 +498,8 @@ instance Attr Dt_ Lang String where
 
 instance Attr Em_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -507,8 +507,8 @@ instance Attr Em_ Lang String where
 
 instance Attr Embed_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -516,8 +516,8 @@ instance Attr Embed_ Lang String where
 
 instance Attr Fieldset_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -525,8 +525,8 @@ instance Attr Fieldset_ Lang String where
 
 instance Attr Figcaption_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -534,8 +534,8 @@ instance Attr Figcaption_ Lang String where
 
 instance Attr Figure_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -543,8 +543,8 @@ instance Attr Figure_ Lang String where
 
 instance Attr Font_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -552,8 +552,8 @@ instance Attr Font_ Lang String where
 
 instance Attr Footer_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -561,8 +561,8 @@ instance Attr Footer_ Lang String where
 
 instance Attr Form_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -570,8 +570,8 @@ instance Attr Form_ Lang String where
 
 instance Attr Frame_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -579,8 +579,8 @@ instance Attr Frame_ Lang String where
 
 instance Attr Frameset_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -588,8 +588,8 @@ instance Attr Frameset_ Lang String where
 
 instance Attr H1_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -597,8 +597,8 @@ instance Attr H1_ Lang String where
 
 instance Attr H2_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -606,8 +606,8 @@ instance Attr H2_ Lang String where
 
 instance Attr H3_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -615,8 +615,8 @@ instance Attr H3_ Lang String where
 
 instance Attr H4_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -624,8 +624,8 @@ instance Attr H4_ Lang String where
 
 instance Attr H5_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -633,8 +633,8 @@ instance Attr H5_ Lang String where
 
 instance Attr H6_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -642,8 +642,8 @@ instance Attr H6_ Lang String where
 
 instance Attr Head_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -651,8 +651,8 @@ instance Attr Head_ Lang String where
 
 instance Attr Header_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -660,8 +660,8 @@ instance Attr Header_ Lang String where
 
 instance Attr Hr_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -669,8 +669,8 @@ instance Attr Hr_ Lang String where
 
 instance Attr Html_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -678,8 +678,8 @@ instance Attr Html_ Lang String where
 
 instance Attr I_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -687,8 +687,8 @@ instance Attr I_ Lang String where
 
 instance Attr Iframe_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -696,8 +696,8 @@ instance Attr Iframe_ Lang String where
 
 instance Attr Img_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -705,8 +705,8 @@ instance Attr Img_ Lang String where
 
 instance Attr Input_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -714,8 +714,8 @@ instance Attr Input_ Lang String where
 
 instance Attr Ins_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -723,8 +723,8 @@ instance Attr Ins_ Lang String where
 
 instance Attr Kbd_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -732,8 +732,8 @@ instance Attr Kbd_ Lang String where
 
 instance Attr Label_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -741,8 +741,8 @@ instance Attr Label_ Lang String where
 
 instance Attr Legend_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -750,8 +750,8 @@ instance Attr Legend_ Lang String where
 
 instance Attr Li_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -759,8 +759,8 @@ instance Attr Li_ Lang String where
 
 instance Attr Link_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -768,8 +768,8 @@ instance Attr Link_ Lang String where
 
 instance Attr Main_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -777,8 +777,8 @@ instance Attr Main_ Lang String where
 
 instance Attr Map_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -786,8 +786,8 @@ instance Attr Map_ Lang String where
 
 instance Attr Mark_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -795,8 +795,8 @@ instance Attr Mark_ Lang String where
 
 instance Attr Meta_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -804,8 +804,8 @@ instance Attr Meta_ Lang String where
 
 instance Attr Meter_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -813,8 +813,8 @@ instance Attr Meter_ Lang String where
 
 instance Attr Nav_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -822,8 +822,8 @@ instance Attr Nav_ Lang String where
 
 instance Attr Noframes_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -831,8 +831,8 @@ instance Attr Noframes_ Lang String where
 
 instance Attr Noscript_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -840,8 +840,8 @@ instance Attr Noscript_ Lang String where
 
 instance Attr Object_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -849,8 +849,8 @@ instance Attr Object_ Lang String where
 
 instance Attr Ol_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -858,8 +858,8 @@ instance Attr Ol_ Lang String where
 
 instance Attr Optgroup_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -867,8 +867,8 @@ instance Attr Optgroup_ Lang String where
 
 instance Attr Option_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -876,8 +876,8 @@ instance Attr Option_ Lang String where
 
 instance Attr Output_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -885,8 +885,8 @@ instance Attr Output_ Lang String where
 
 instance Attr P_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -894,8 +894,8 @@ instance Attr P_ Lang String where
 
 instance Attr Param_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -903,8 +903,8 @@ instance Attr Param_ Lang String where
 
 instance Attr Picture_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -912,8 +912,8 @@ instance Attr Picture_ Lang String where
 
 instance Attr Pre_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -921,8 +921,8 @@ instance Attr Pre_ Lang String where
 
 instance Attr Progress_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -930,8 +930,8 @@ instance Attr Progress_ Lang String where
 
 instance Attr Q_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -939,8 +939,8 @@ instance Attr Q_ Lang String where
 
 instance Attr Rp_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -948,8 +948,8 @@ instance Attr Rp_ Lang String where
 
 instance Attr Rt_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -957,8 +957,8 @@ instance Attr Rt_ Lang String where
 
 instance Attr Ruby_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -966,8 +966,8 @@ instance Attr Ruby_ Lang String where
 
 instance Attr S_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -975,8 +975,8 @@ instance Attr S_ Lang String where
 
 instance Attr Samp_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -984,8 +984,8 @@ instance Attr Samp_ Lang String where
 
 instance Attr Script_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -993,8 +993,8 @@ instance Attr Script_ Lang String where
 
 instance Attr Section_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1002,8 +1002,8 @@ instance Attr Section_ Lang String where
 
 instance Attr Select_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1011,8 +1011,8 @@ instance Attr Select_ Lang String where
 
 instance Attr Small_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1020,8 +1020,8 @@ instance Attr Small_ Lang String where
 
 instance Attr Source_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1029,8 +1029,8 @@ instance Attr Source_ Lang String where
 
 instance Attr Span_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1038,8 +1038,8 @@ instance Attr Span_ Lang String where
 
 instance Attr Strike_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1047,8 +1047,8 @@ instance Attr Strike_ Lang String where
 
 instance Attr Strong_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1056,8 +1056,8 @@ instance Attr Strong_ Lang String where
 
 instance Attr Style_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1065,8 +1065,8 @@ instance Attr Style_ Lang String where
 
 instance Attr Sub_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1074,8 +1074,8 @@ instance Attr Sub_ Lang String where
 
 instance Attr Summary_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1083,8 +1083,8 @@ instance Attr Summary_ Lang String where
 
 instance Attr Sup_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1092,8 +1092,8 @@ instance Attr Sup_ Lang String where
 
 instance Attr Svg_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1101,8 +1101,8 @@ instance Attr Svg_ Lang String where
 
 instance Attr Table_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1110,8 +1110,8 @@ instance Attr Table_ Lang String where
 
 instance Attr Tbody_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1119,8 +1119,8 @@ instance Attr Tbody_ Lang String where
 
 instance Attr Td_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1128,8 +1128,8 @@ instance Attr Td_ Lang String where
 
 instance Attr Template_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1137,8 +1137,8 @@ instance Attr Template_ Lang String where
 
 instance Attr Textarea_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1146,8 +1146,8 @@ instance Attr Textarea_ Lang String where
 
 instance Attr Tfoot_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1155,8 +1155,8 @@ instance Attr Tfoot_ Lang String where
 
 instance Attr Th_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1164,8 +1164,8 @@ instance Attr Th_ Lang String where
 
 instance Attr Thead_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1173,8 +1173,8 @@ instance Attr Thead_ Lang String where
 
 instance Attr Time_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1182,8 +1182,8 @@ instance Attr Time_ Lang String where
 
 instance Attr Title_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1191,8 +1191,8 @@ instance Attr Title_ Lang String where
 
 instance Attr Tr_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1200,8 +1200,8 @@ instance Attr Tr_ Lang String where
 
 instance Attr Track_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1209,8 +1209,8 @@ instance Attr Track_ Lang String where
 
 instance Attr Tt_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1218,8 +1218,8 @@ instance Attr Tt_ Lang String where
 
 instance Attr U_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1227,8 +1227,8 @@ instance Attr U_ Lang String where
 
 instance Attr Ul_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1236,8 +1236,8 @@ instance Attr Ul_ Lang String where
 
 instance Attr Var_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1245,8 +1245,8 @@ instance Attr Var_ Lang String where
 
 instance Attr Video_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1254,8 +1254,8 @@ instance Attr Video_ Lang String where
 
 instance Attr Wbr_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1263,8 +1263,8 @@ instance Attr Wbr_ Lang String where
 
 instance Attr AnimateTransform_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1272,8 +1272,8 @@ instance Attr AnimateTransform_ Lang String where
 
 instance Attr Defs_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1281,8 +1281,8 @@ instance Attr Defs_ Lang String where
 
 instance Attr Discard_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1290,8 +1290,8 @@ instance Attr Discard_ Lang String where
 
 instance Attr FeBlend_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1299,8 +1299,8 @@ instance Attr FeBlend_ Lang String where
 
 instance Attr FeColorMatrix_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1308,8 +1308,8 @@ instance Attr FeColorMatrix_ Lang String where
 
 instance Attr FeComponentTransfer_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1317,8 +1317,8 @@ instance Attr FeComponentTransfer_ Lang String where
 
 instance Attr FeComposite_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1326,8 +1326,8 @@ instance Attr FeComposite_ Lang String where
 
 instance Attr FeConvolveMatrix_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1335,8 +1335,8 @@ instance Attr FeConvolveMatrix_ Lang String where
 
 instance Attr FeDiffuseLighting_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1344,8 +1344,8 @@ instance Attr FeDiffuseLighting_ Lang String where
 
 instance Attr FeDisplacementMap_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1353,8 +1353,8 @@ instance Attr FeDisplacementMap_ Lang String where
 
 instance Attr FeDistantLight_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1362,8 +1362,8 @@ instance Attr FeDistantLight_ Lang String where
 
 instance Attr FeFlood_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1371,8 +1371,8 @@ instance Attr FeFlood_ Lang String where
 
 instance Attr FeFuncA_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1380,8 +1380,8 @@ instance Attr FeFuncA_ Lang String where
 
 instance Attr FeFuncB_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1389,8 +1389,8 @@ instance Attr FeFuncB_ Lang String where
 
 instance Attr FeFuncG_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1398,8 +1398,8 @@ instance Attr FeFuncG_ Lang String where
 
 instance Attr FeFuncR_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1407,8 +1407,8 @@ instance Attr FeFuncR_ Lang String where
 
 instance Attr FeGaussianBlur_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1416,8 +1416,8 @@ instance Attr FeGaussianBlur_ Lang String where
 
 instance Attr FeImage_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1425,8 +1425,8 @@ instance Attr FeImage_ Lang String where
 
 instance Attr FeMerge_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1434,8 +1434,8 @@ instance Attr FeMerge_ Lang String where
 
 instance Attr FeMergeNode_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1443,8 +1443,8 @@ instance Attr FeMergeNode_ Lang String where
 
 instance Attr FeMorphology_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1452,8 +1452,8 @@ instance Attr FeMorphology_ Lang String where
 
 instance Attr FeOffset_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1461,8 +1461,8 @@ instance Attr FeOffset_ Lang String where
 
 instance Attr FePointLight_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1470,8 +1470,8 @@ instance Attr FePointLight_ Lang String where
 
 instance Attr FeSpecularLighting_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1479,8 +1479,8 @@ instance Attr FeSpecularLighting_ Lang String where
 
 instance Attr FeSpotLight_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1488,8 +1488,8 @@ instance Attr FeSpotLight_ Lang String where
 
 instance Attr FeTile_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1497,8 +1497,8 @@ instance Attr FeTile_ Lang String where
 
 instance Attr FeTurbulence_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1506,8 +1506,8 @@ instance Attr FeTurbulence_ Lang String where
 
 instance Attr Filter_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1515,8 +1515,8 @@ instance Attr Filter_ Lang String where
 
 instance Attr Image_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1524,8 +1524,8 @@ instance Attr Image_ Lang String where
 
 instance Attr Metadata_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1533,8 +1533,8 @@ instance Attr Metadata_ Lang String where
 
 instance Attr Mpath_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1542,8 +1542,8 @@ instance Attr Mpath_ Lang String where
 
 instance Attr Switch_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1551,8 +1551,8 @@ instance Attr Switch_ Lang String where
 
 instance Attr View_ Lang String where
   attr Lang bothValues = unsafeAttribute $ Both
-    { key: "lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lang", value: prop' value })
+    { key: "lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
   pureAttr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1560,7 +1560,7 @@ instance Attr View_ Lang String where
 
 instance Attr everything Lang Unit where
   attr Lang bothValues = unsafeAttribute $ Both { key: "lang", value: unset' }
-    (snd bothValues <#> \_ -> { key: "lang", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "lang", value: unset' })
   pureAttr Lang _ = unsafeAttribute $ This { key: "lang", value: unset' }
   unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "lang", value: unset' }

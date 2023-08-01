@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaLive where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaLive = AriaLive
 
 instance Attr Circle_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr Circle_ AriaLive String where
 
 instance Attr Ellipse_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Ellipse_ AriaLive String where
 
 instance Attr ForeignObject_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr ForeignObject_ AriaLive String where
 
 instance Attr G_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr G_ AriaLive String where
 
 instance Attr Line_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Line_ AriaLive String where
 
 instance Attr Marker_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Marker_ AriaLive String where
 
 instance Attr Path_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,8 +90,8 @@ instance Attr Path_ AriaLive String where
 
 instance Attr Polygon_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,8 +99,8 @@ instance Attr Polygon_ AriaLive String where
 
 instance Attr Polyline_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,8 +108,8 @@ instance Attr Polyline_ AriaLive String where
 
 instance Attr Rect_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -117,8 +117,8 @@ instance Attr Rect_ AriaLive String where
 
 instance Attr Svg_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,8 +126,8 @@ instance Attr Svg_ AriaLive String where
 
 instance Attr Symbol_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,8 +135,8 @@ instance Attr Symbol_ AriaLive String where
 
 instance Attr Text_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,8 +144,8 @@ instance Attr Text_ AriaLive String where
 
 instance Attr TextPath_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -153,8 +153,8 @@ instance Attr TextPath_ AriaLive String where
 
 instance Attr Tspan_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -162,8 +162,8 @@ instance Attr Tspan_ AriaLive String where
 
 instance Attr Use_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -171,8 +171,8 @@ instance Attr Use_ AriaLive String where
 
 instance Attr View_ AriaLive String where
   attr AriaLive bothValues = unsafeAttribute $ Both
-    { key: "aria-live", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-live", value: prop' value })
+    { key: "aria-live", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-live", value: prop' value })
   pureAttr AriaLive value = unsafeAttribute $ This
     { key: "aria-live", value: prop' value }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -181,7 +181,7 @@ instance Attr View_ AriaLive String where
 instance Attr everything AriaLive Unit where
   attr AriaLive bothValues = unsafeAttribute $ Both
     { key: "aria-live", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-live", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-live", value: unset' })
   pureAttr AriaLive _ = unsafeAttribute $ This
     { key: "aria-live", value: unset' }
   unpureAttr AriaLive eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

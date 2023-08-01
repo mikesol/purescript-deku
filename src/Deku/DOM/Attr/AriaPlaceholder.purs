@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaPlaceholder where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaPlaceholder = AriaPlaceholder
 
 instance Attr Circle_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaPlaceholder String where
 
 instance Attr Ellipse_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaPlaceholder String where
 
 instance Attr ForeignObject_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaPlaceholder String where
 
 instance Attr G_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -71,8 +71,8 @@ instance Attr G_ AriaPlaceholder String where
 
 instance Attr Line_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -82,8 +82,8 @@ instance Attr Line_ AriaPlaceholder String where
 
 instance Attr Marker_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaPlaceholder String where
 
 instance Attr Path_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -104,8 +104,8 @@ instance Attr Path_ AriaPlaceholder String where
 
 instance Attr Polygon_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaPlaceholder String where
 
 instance Attr Polyline_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaPlaceholder String where
 
 instance Attr Rect_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaPlaceholder String where
 
 instance Attr Svg_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaPlaceholder String where
 
 instance Attr Symbol_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaPlaceholder String where
 
 instance Attr Text_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -170,8 +170,8 @@ instance Attr Text_ AriaPlaceholder String where
 
 instance Attr TextPath_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaPlaceholder String where
 
 instance Attr Tspan_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaPlaceholder String where
 
 instance Attr Use_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -203,8 +203,8 @@ instance Attr Use_ AriaPlaceholder String where
 
 instance Attr View_ AriaPlaceholder String where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
-    { key: "aria-placeholder", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "aria-placeholder", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-placeholder", value: prop' value }
     )
   pureAttr AriaPlaceholder value = unsafeAttribute $ This
@@ -215,7 +215,7 @@ instance Attr View_ AriaPlaceholder String where
 instance Attr everything AriaPlaceholder Unit where
   attr AriaPlaceholder bothValues = unsafeAttribute $ Both
     { key: "aria-placeholder", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-placeholder", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-placeholder", value: unset' })
   pureAttr AriaPlaceholder _ = unsafeAttribute $ This
     { key: "aria-placeholder", value: unset' }
   unpureAttr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue

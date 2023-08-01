@@ -2,7 +2,7 @@ module Deku.DOM.Attr.TextDecoration where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data TextDecoration = TextDecoration
 
 instance Attr FeBlend_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -40,8 +40,8 @@ instance Attr FeBlend_ TextDecoration String where
 
 instance Attr FeColorMatrix_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -51,8 +51,8 @@ instance Attr FeColorMatrix_ TextDecoration String where
 
 instance Attr FeComponentTransfer_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -62,8 +62,8 @@ instance Attr FeComponentTransfer_ TextDecoration String where
 
 instance Attr FeComposite_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -73,8 +73,8 @@ instance Attr FeComposite_ TextDecoration String where
 
 instance Attr FeConvolveMatrix_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -84,8 +84,8 @@ instance Attr FeConvolveMatrix_ TextDecoration String where
 
 instance Attr FeDiffuseLighting_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -95,8 +95,8 @@ instance Attr FeDiffuseLighting_ TextDecoration String where
 
 instance Attr FeDisplacementMap_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -106,8 +106,8 @@ instance Attr FeDisplacementMap_ TextDecoration String where
 
 instance Attr FeFlood_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -117,8 +117,8 @@ instance Attr FeFlood_ TextDecoration String where
 
 instance Attr FeGaussianBlur_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -128,8 +128,8 @@ instance Attr FeGaussianBlur_ TextDecoration String where
 
 instance Attr FeImage_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -139,8 +139,8 @@ instance Attr FeImage_ TextDecoration String where
 
 instance Attr FeMerge_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -150,8 +150,8 @@ instance Attr FeMerge_ TextDecoration String where
 
 instance Attr FeMorphology_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -161,8 +161,8 @@ instance Attr FeMorphology_ TextDecoration String where
 
 instance Attr FeOffset_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -172,8 +172,8 @@ instance Attr FeOffset_ TextDecoration String where
 
 instance Attr FeSpecularLighting_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -183,8 +183,8 @@ instance Attr FeSpecularLighting_ TextDecoration String where
 
 instance Attr FeTile_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -194,8 +194,8 @@ instance Attr FeTile_ TextDecoration String where
 
 instance Attr FeTurbulence_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -205,8 +205,8 @@ instance Attr FeTurbulence_ TextDecoration String where
 
 instance Attr Filter_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -216,8 +216,8 @@ instance Attr Filter_ TextDecoration String where
 
 instance Attr Image_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -227,8 +227,8 @@ instance Attr Image_ TextDecoration String where
 
 instance Attr Switch_ TextDecoration String where
   attr TextDecoration bothValues = unsafeAttribute $ Both
-    { key: "text-decoration", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "text-decoration", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "text-decoration", value: prop' value }
     )
   pureAttr TextDecoration value = unsafeAttribute $ This
@@ -239,7 +239,7 @@ instance Attr Switch_ TextDecoration String where
 instance Attr everything TextDecoration Unit where
   attr TextDecoration bothValues = unsafeAttribute $ Both
     { key: "text-decoration", value: unset' }
-    (snd bothValues <#> \_ -> { key: "text-decoration", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "text-decoration", value: unset' })
   pureAttr TextDecoration _ = unsafeAttribute $ This
     { key: "text-decoration", value: unset' }
   unpureAttr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>

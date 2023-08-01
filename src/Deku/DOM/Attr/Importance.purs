@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Importance where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Iframe (Iframe_)
 import Deku.DOM.Elt.Img (Img_)
@@ -14,8 +14,8 @@ data Importance = Importance
 
 instance Attr Iframe_ Importance String where
   attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
   pureAttr Importance value = unsafeAttribute $ This
     { key: "importance", value: prop' value }
   unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Iframe_ Importance String where
 
 instance Attr Img_ Importance String where
   attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
   pureAttr Importance value = unsafeAttribute $ This
     { key: "importance", value: prop' value }
   unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr Img_ Importance String where
 
 instance Attr Link_ Importance String where
   attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
   pureAttr Importance value = unsafeAttribute $ This
     { key: "importance", value: prop' value }
   unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr Link_ Importance String where
 
 instance Attr Script_ Importance String where
   attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "importance", value: prop' value })
+    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
   pureAttr Importance value = unsafeAttribute $ This
     { key: "importance", value: prop' value }
   unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Script_ Importance String where
 instance Attr everything Importance Unit where
   attr Importance bothValues = unsafeAttribute $ Both
     { key: "importance", value: unset' }
-    (snd bothValues <#> \_ -> { key: "importance", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "importance", value: unset' })
   pureAttr Importance _ = unsafeAttribute $ This
     { key: "importance", value: unset' }
   unpureAttr Importance eventValue = unsafeAttribute $ That $ eventValue <#>

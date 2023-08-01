@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Restart where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
@@ -14,8 +14,8 @@ data Restart = Restart
 
 instance Attr Animate_ Restart String where
   attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "restart", value: prop' value })
+    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
   pureAttr Restart value = unsafeAttribute $ This
     { key: "restart", value: prop' value }
   unpureAttr Restart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Animate_ Restart String where
 
 instance Attr AnimateMotion_ Restart String where
   attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "restart", value: prop' value })
+    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
   pureAttr Restart value = unsafeAttribute $ This
     { key: "restart", value: prop' value }
   unpureAttr Restart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr AnimateMotion_ Restart String where
 
 instance Attr AnimateTransform_ Restart String where
   attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "restart", value: prop' value })
+    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
   pureAttr Restart value = unsafeAttribute $ This
     { key: "restart", value: prop' value }
   unpureAttr Restart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ Restart String where
 
 instance Attr Set_ Restart String where
   attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "restart", value: prop' value })
+    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
   pureAttr Restart value = unsafeAttribute $ This
     { key: "restart", value: prop' value }
   unpureAttr Restart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Set_ Restart String where
 instance Attr everything Restart Unit where
   attr Restart bothValues = unsafeAttribute $ Both
     { key: "restart", value: unset' }
-    (snd bothValues <#> \_ -> { key: "restart", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "restart", value: unset' })
   pureAttr Restart _ = unsafeAttribute $ This { key: "restart", value: unset' }
   unpureAttr Restart eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "restart", value: unset' }

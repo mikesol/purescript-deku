@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnEmptied where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnEmptied = OnEmptied
 
 instance Attr anything OnEmptied Cb where
   attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "emptied", value: cb' value })
+    { key: "emptied", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "emptied", value: cb' value })
   pureAttr OnEmptied value = unsafeAttribute $ This
     { key: "emptied", value: cb' value }
   unpureAttr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnEmptied Cb where
 
 instance Attr anything OnEmptied (Effect Unit) where
   attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "emptied", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnEmptied value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnEmptied (Effect Unit) where
 
 instance Attr anything OnEmptied (Effect Boolean) where
   attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "emptied", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const value)) }
     )
   pureAttr OnEmptied value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnEmptiedEffect =
 instance Attr everything OnEmptied Unit where
   attr OnEmptied bothValues = unsafeAttribute $ Both
     { key: "emptied", value: unset' }
-    (snd bothValues <#> \_ -> { key: "emptied", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "emptied", value: unset' })
   pureAttr OnEmptied _ = unsafeAttribute $ This
     { key: "emptied", value: unset' }
   unpureAttr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>

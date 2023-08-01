@@ -2,7 +2,7 @@ module Deku.DOM.Attr.StrokeMiterlimit where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -51,8 +51,8 @@ data StrokeMiterlimit = StrokeMiterlimit
 
 instance Attr Circle_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -62,8 +62,8 @@ instance Attr Circle_ StrokeMiterlimit String where
 
 instance Attr ClipPath_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -73,8 +73,8 @@ instance Attr ClipPath_ StrokeMiterlimit String where
 
 instance Attr Defs_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -84,8 +84,8 @@ instance Attr Defs_ StrokeMiterlimit String where
 
 instance Attr Ellipse_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -95,8 +95,8 @@ instance Attr Ellipse_ StrokeMiterlimit String where
 
 instance Attr FeBlend_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -106,8 +106,8 @@ instance Attr FeBlend_ StrokeMiterlimit String where
 
 instance Attr FeColorMatrix_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ StrokeMiterlimit String where
 
 instance Attr FeComponentTransfer_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ StrokeMiterlimit String where
 
 instance Attr FeComposite_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -139,8 +139,8 @@ instance Attr FeComposite_ StrokeMiterlimit String where
 
 instance Attr FeConvolveMatrix_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ StrokeMiterlimit String where
 
 instance Attr FeDiffuseLighting_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ StrokeMiterlimit String where
 
 instance Attr FeDisplacementMap_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ StrokeMiterlimit String where
 
 instance Attr FeFlood_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -183,8 +183,8 @@ instance Attr FeFlood_ StrokeMiterlimit String where
 
 instance Attr FeGaussianBlur_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ StrokeMiterlimit String where
 
 instance Attr FeImage_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -205,8 +205,8 @@ instance Attr FeImage_ StrokeMiterlimit String where
 
 instance Attr FeMerge_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -216,8 +216,8 @@ instance Attr FeMerge_ StrokeMiterlimit String where
 
 instance Attr FeMorphology_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ StrokeMiterlimit String where
 
 instance Attr FeOffset_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -238,8 +238,8 @@ instance Attr FeOffset_ StrokeMiterlimit String where
 
 instance Attr FeSpecularLighting_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ StrokeMiterlimit String where
 
 instance Attr FeTile_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -260,8 +260,8 @@ instance Attr FeTile_ StrokeMiterlimit String where
 
 instance Attr FeTurbulence_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ StrokeMiterlimit String where
 
 instance Attr Filter_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -282,8 +282,8 @@ instance Attr Filter_ StrokeMiterlimit String where
 
 instance Attr ForeignObject_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ StrokeMiterlimit String where
 
 instance Attr G_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -304,8 +304,8 @@ instance Attr G_ StrokeMiterlimit String where
 
 instance Attr Image_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -315,8 +315,8 @@ instance Attr Image_ StrokeMiterlimit String where
 
 instance Attr Line_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -326,8 +326,8 @@ instance Attr Line_ StrokeMiterlimit String where
 
 instance Attr LinearGradient_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ StrokeMiterlimit String where
 
 instance Attr Marker_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -348,8 +348,8 @@ instance Attr Marker_ StrokeMiterlimit String where
 
 instance Attr Mask_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -359,8 +359,8 @@ instance Attr Mask_ StrokeMiterlimit String where
 
 instance Attr Path_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -370,8 +370,8 @@ instance Attr Path_ StrokeMiterlimit String where
 
 instance Attr Pattern_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -381,8 +381,8 @@ instance Attr Pattern_ StrokeMiterlimit String where
 
 instance Attr Polygon_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -392,8 +392,8 @@ instance Attr Polygon_ StrokeMiterlimit String where
 
 instance Attr Polyline_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -403,8 +403,8 @@ instance Attr Polyline_ StrokeMiterlimit String where
 
 instance Attr RadialGradient_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ StrokeMiterlimit String where
 
 instance Attr Rect_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -425,8 +425,8 @@ instance Attr Rect_ StrokeMiterlimit String where
 
 instance Attr Svg_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -436,8 +436,8 @@ instance Attr Svg_ StrokeMiterlimit String where
 
 instance Attr Switch_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -447,8 +447,8 @@ instance Attr Switch_ StrokeMiterlimit String where
 
 instance Attr Symbol_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -458,8 +458,8 @@ instance Attr Symbol_ StrokeMiterlimit String where
 
 instance Attr Text_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -469,8 +469,8 @@ instance Attr Text_ StrokeMiterlimit String where
 
 instance Attr TextPath_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -480,8 +480,8 @@ instance Attr TextPath_ StrokeMiterlimit String where
 
 instance Attr Tspan_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -491,8 +491,8 @@ instance Attr Tspan_ StrokeMiterlimit String where
 
 instance Attr Use_ StrokeMiterlimit String where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
   pureAttr StrokeMiterlimit value = unsafeAttribute $ This
@@ -503,7 +503,7 @@ instance Attr Use_ StrokeMiterlimit String where
 instance Attr everything StrokeMiterlimit Unit where
   attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
     { key: "stroke-miterlimit", value: unset' }
-    (snd bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
   pureAttr StrokeMiterlimit _ = unsafeAttribute $ This
     { key: "stroke-miterlimit", value: unset' }
   unpureAttr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue

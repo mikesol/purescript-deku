@@ -2,7 +2,7 @@ module Deku.DOM.Attr.SpreadMethod where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 import Deku.DOM.Elt.LinearGradient (LinearGradient_)
@@ -12,8 +12,8 @@ data SpreadMethod = SpreadMethod
 
 instance Attr LinearGradient_ SpreadMethod String where
   attr SpreadMethod bothValues = unsafeAttribute $ Both
-    { key: "spreadMethod", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
+    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
   pureAttr SpreadMethod value = unsafeAttribute $ This
     { key: "spreadMethod", value: prop' value }
   unpureAttr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr LinearGradient_ SpreadMethod String where
 
 instance Attr RadialGradient_ SpreadMethod String where
   attr SpreadMethod bothValues = unsafeAttribute $ Both
-    { key: "spreadMethod", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
+    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
   pureAttr SpreadMethod value = unsafeAttribute $ This
     { key: "spreadMethod", value: prop' value }
   unpureAttr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr RadialGradient_ SpreadMethod String where
 instance Attr everything SpreadMethod Unit where
   attr SpreadMethod bothValues = unsafeAttribute $ Both
     { key: "spreadMethod", value: unset' }
-    (snd bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
   pureAttr SpreadMethod _ = unsafeAttribute $ This
     { key: "spreadMethod", value: unset' }
   unpureAttr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>

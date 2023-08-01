@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointerlockchange where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnPointerlockchange = OnPointerlockchange
 
 instance Attr anything OnPointerlockchange Cb where
   attr OnPointerlockchange bothValues = unsafeAttribute $ Both
-    { key: "pointerlockchange", value: cb' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "pointerlockchange", value: cb' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' value }
     )
   pureAttr OnPointerlockchange value = unsafeAttribute $ This
@@ -23,9 +23,9 @@ instance Attr anything OnPointerlockchange Cb where
 instance Attr anything OnPointerlockchange (Effect Unit) where
   attr OnPointerlockchange bothValues = unsafeAttribute $ Both
     { key: "pointerlockchange"
-    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
     }
-    ( snd bothValues <#> \value ->
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnPointerlockchange value = unsafeAttribute $ This
@@ -36,8 +36,8 @@ instance Attr anything OnPointerlockchange (Effect Unit) where
 
 instance Attr anything OnPointerlockchange (Effect Boolean) where
   attr OnPointerlockchange bothValues = unsafeAttribute $ Both
-    { key: "pointerlockchange", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "pointerlockchange", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' (Cb (const value)) }
     )
   pureAttr OnPointerlockchange value = unsafeAttribute $ This
@@ -54,7 +54,7 @@ type OnPointerlockchangeEffect =
 instance Attr everything OnPointerlockchange Unit where
   attr OnPointerlockchange bothValues = unsafeAttribute $ Both
     { key: "pointerlockchange", value: unset' }
-    (snd bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
   pureAttr OnPointerlockchange _ = unsafeAttribute $ This
     { key: "pointerlockchange", value: unset' }
   unpureAttr OnPointerlockchange eventValue = unsafeAttribute $ That $

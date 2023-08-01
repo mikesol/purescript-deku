@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDblclick where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnDblclick = OnDblclick
 
 instance Attr anything OnDblclick Cb where
   attr OnDblclick bothValues = unsafeAttribute $ Both
-    { key: "dblclick", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "dblclick", value: cb' value })
+    { key: "dblclick", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "dblclick", value: cb' value })
   pureAttr OnDblclick value = unsafeAttribute $ This
     { key: "dblclick", value: cb' value }
   unpureAttr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnDblclick Cb where
 
 instance Attr anything OnDblclick (Effect Unit) where
   attr OnDblclick bothValues = unsafeAttribute $ Both
-    { key: "dblclick", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "dblclick", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dblclick", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnDblclick value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnDblclick (Effect Unit) where
 
 instance Attr anything OnDblclick (Effect Boolean) where
   attr OnDblclick bothValues = unsafeAttribute $ Both
-    { key: "dblclick", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "dblclick", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dblclick", value: cb' (Cb (const value)) }
     )
   pureAttr OnDblclick value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnDblclickEffect =
 instance Attr everything OnDblclick Unit where
   attr OnDblclick bothValues = unsafeAttribute $ Both
     { key: "dblclick", value: unset' }
-    (snd bothValues <#> \_ -> { key: "dblclick", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "dblclick", value: unset' })
   pureAttr OnDblclick _ = unsafeAttribute $ This
     { key: "dblclick", value: unset' }
   unpureAttr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>

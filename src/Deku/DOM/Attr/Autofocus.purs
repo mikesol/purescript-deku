@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Autofocus where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -14,8 +14,8 @@ data Autofocus = Autofocus
 
 instance Attr Button_ Autofocus String where
   attr Autofocus bothValues = unsafeAttribute $ Both
-    { key: "autofocus", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autofocus", value: prop' value })
+    { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
   pureAttr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
   unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Button_ Autofocus String where
 
 instance Attr Input_ Autofocus String where
   attr Autofocus bothValues = unsafeAttribute $ Both
-    { key: "autofocus", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autofocus", value: prop' value })
+    { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
   pureAttr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
   unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr Input_ Autofocus String where
 
 instance Attr Select_ Autofocus String where
   attr Autofocus bothValues = unsafeAttribute $ Both
-    { key: "autofocus", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autofocus", value: prop' value })
+    { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
   pureAttr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
   unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr Select_ Autofocus String where
 
 instance Attr Textarea_ Autofocus String where
   attr Autofocus bothValues = unsafeAttribute $ Both
-    { key: "autofocus", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autofocus", value: prop' value })
+    { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
   pureAttr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
   unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Textarea_ Autofocus String where
 instance Attr everything Autofocus Unit where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: unset' }
-    (snd bothValues <#> \_ -> { key: "autofocus", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "autofocus", value: unset' })
   pureAttr Autofocus _ = unsafeAttribute $ This
     { key: "autofocus", value: unset' }
   unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>

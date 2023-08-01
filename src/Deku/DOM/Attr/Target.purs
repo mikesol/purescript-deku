@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Target where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
@@ -14,8 +14,8 @@ data Target = Target
 
 instance Attr A_ Target String where
   attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "target", value: prop' value })
+    { key: "target", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
   pureAttr Target value = unsafeAttribute $ This
     { key: "target", value: prop' value }
   unpureAttr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr A_ Target String where
 
 instance Attr Area_ Target String where
   attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "target", value: prop' value })
+    { key: "target", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
   pureAttr Target value = unsafeAttribute $ This
     { key: "target", value: prop' value }
   unpureAttr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr Area_ Target String where
 
 instance Attr Base_ Target String where
   attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "target", value: prop' value })
+    { key: "target", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
   pureAttr Target value = unsafeAttribute $ This
     { key: "target", value: prop' value }
   unpureAttr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr Base_ Target String where
 
 instance Attr Form_ Target String where
   attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "target", value: prop' value })
+    { key: "target", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
   pureAttr Target value = unsafeAttribute $ This
     { key: "target", value: prop' value }
   unpureAttr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Form_ Target String where
 instance Attr everything Target Unit where
   attr Target bothValues = unsafeAttribute $ Both
     { key: "target", value: unset' }
-    (snd bothValues <#> \_ -> { key: "target", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "target", value: unset' })
   pureAttr Target _ = unsafeAttribute $ This { key: "target", value: unset' }
   unpureAttr Target eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "target", value: unset' }

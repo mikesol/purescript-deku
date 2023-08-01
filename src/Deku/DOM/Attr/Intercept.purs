@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Intercept where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.FeFuncR (FeFuncR_)
 import Deku.DOM.Elt.FeFuncG (FeFuncG_)
@@ -14,8 +14,8 @@ data Intercept = Intercept
 
 instance Attr FeFuncA_ Intercept String where
   attr Intercept bothValues = unsafeAttribute $ Both
-    { key: "intercept", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+    { key: "intercept", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
   pureAttr Intercept value = unsafeAttribute $ This
     { key: "intercept", value: prop' value }
   unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr FeFuncA_ Intercept String where
 
 instance Attr FeFuncB_ Intercept String where
   attr Intercept bothValues = unsafeAttribute $ Both
-    { key: "intercept", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+    { key: "intercept", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
   pureAttr Intercept value = unsafeAttribute $ This
     { key: "intercept", value: prop' value }
   unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr FeFuncB_ Intercept String where
 
 instance Attr FeFuncG_ Intercept String where
   attr Intercept bothValues = unsafeAttribute $ Both
-    { key: "intercept", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+    { key: "intercept", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
   pureAttr Intercept value = unsafeAttribute $ This
     { key: "intercept", value: prop' value }
   unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr FeFuncG_ Intercept String where
 
 instance Attr FeFuncR_ Intercept String where
   attr Intercept bothValues = unsafeAttribute $ Both
-    { key: "intercept", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "intercept", value: prop' value })
+    { key: "intercept", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
   pureAttr Intercept value = unsafeAttribute $ This
     { key: "intercept", value: prop' value }
   unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr FeFuncR_ Intercept String where
 instance Attr everything Intercept Unit where
   attr Intercept bothValues = unsafeAttribute $ Both
     { key: "intercept", value: unset' }
-    (snd bothValues <#> \_ -> { key: "intercept", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "intercept", value: unset' })
   pureAttr Intercept _ = unsafeAttribute $ This
     { key: "intercept", value: unset' }
   unpureAttr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>

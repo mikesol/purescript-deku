@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnChange where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnChange = OnChange
 
 instance Attr anything OnChange Cb where
   attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "change", value: cb' value })
+    { key: "change", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "change", value: cb' value })
   pureAttr OnChange value = unsafeAttribute $ This
     { key: "change", value: cb' value }
   unpureAttr OnChange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnChange Cb where
 
 instance Attr anything OnChange (Effect Unit) where
   attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "change", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "change", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnChange value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnChange (Effect Unit) where
 
 instance Attr anything OnChange (Effect Boolean) where
   attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "change", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "change", value: cb' (Cb (const value)) }
     )
   pureAttr OnChange value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnChangeEffect =
 instance Attr everything OnChange Unit where
   attr OnChange bothValues = unsafeAttribute $ Both
     { key: "change", value: unset' }
-    (snd bothValues <#> \_ -> { key: "change", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "change", value: unset' })
   pureAttr OnChange _ = unsafeAttribute $ This { key: "change", value: unset' }
   unpureAttr OnChange eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "change", value: unset' }

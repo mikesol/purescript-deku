@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnTouchcancel where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnTouchcancel = OnTouchcancel
 
 instance Attr anything OnTouchcancel Cb where
   attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "touchcancel", value: cb' value })
+    { key: "touchcancel", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "touchcancel", value: cb' value })
   pureAttr OnTouchcancel value = unsafeAttribute $ This
     { key: "touchcancel", value: cb' value }
   unpureAttr OnTouchcancel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnTouchcancel Cb where
 
 instance Attr anything OnTouchcancel (Effect Unit) where
   attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "touchcancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnTouchcancel value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnTouchcancel (Effect Unit) where
 
 instance Attr anything OnTouchcancel (Effect Boolean) where
   attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "touchcancel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const value)) }
     )
   pureAttr OnTouchcancel value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnTouchcancelEffect =
 instance Attr everything OnTouchcancel Unit where
   attr OnTouchcancel bothValues = unsafeAttribute $ Both
     { key: "touchcancel", value: unset' }
-    (snd bothValues <#> \_ -> { key: "touchcancel", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "touchcancel", value: unset' })
   pureAttr OnTouchcancel _ = unsafeAttribute $ This
     { key: "touchcancel", value: unset' }
   unpureAttr OnTouchcancel eventValue = unsafeAttribute $ That $ eventValue <#>

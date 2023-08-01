@@ -2,7 +2,7 @@ module Deku.DOM.Attr.PointerEvents where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -49,8 +49,8 @@ data PointerEvents = PointerEvents
 
 instance Attr Circle_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -58,8 +58,8 @@ instance Attr Circle_ PointerEvents String where
 
 instance Attr Defs_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -67,8 +67,8 @@ instance Attr Defs_ PointerEvents String where
 
 instance Attr Ellipse_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -76,8 +76,8 @@ instance Attr Ellipse_ PointerEvents String where
 
 instance Attr FeBlend_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -85,8 +85,8 @@ instance Attr FeBlend_ PointerEvents String where
 
 instance Attr FeColorMatrix_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -94,8 +94,8 @@ instance Attr FeColorMatrix_ PointerEvents String where
 
 instance Attr FeComponentTransfer_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -103,8 +103,8 @@ instance Attr FeComponentTransfer_ PointerEvents String where
 
 instance Attr FeComposite_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -112,8 +112,8 @@ instance Attr FeComposite_ PointerEvents String where
 
 instance Attr FeConvolveMatrix_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,8 +121,8 @@ instance Attr FeConvolveMatrix_ PointerEvents String where
 
 instance Attr FeDiffuseLighting_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,8 +130,8 @@ instance Attr FeDiffuseLighting_ PointerEvents String where
 
 instance Attr FeDisplacementMap_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -139,8 +139,8 @@ instance Attr FeDisplacementMap_ PointerEvents String where
 
 instance Attr FeFlood_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -148,8 +148,8 @@ instance Attr FeFlood_ PointerEvents String where
 
 instance Attr FeGaussianBlur_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -157,8 +157,8 @@ instance Attr FeGaussianBlur_ PointerEvents String where
 
 instance Attr FeImage_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -166,8 +166,8 @@ instance Attr FeImage_ PointerEvents String where
 
 instance Attr FeMerge_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -175,8 +175,8 @@ instance Attr FeMerge_ PointerEvents String where
 
 instance Attr FeMorphology_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -184,8 +184,8 @@ instance Attr FeMorphology_ PointerEvents String where
 
 instance Attr FeOffset_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -193,8 +193,8 @@ instance Attr FeOffset_ PointerEvents String where
 
 instance Attr FeSpecularLighting_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -202,8 +202,8 @@ instance Attr FeSpecularLighting_ PointerEvents String where
 
 instance Attr FeTile_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,8 +211,8 @@ instance Attr FeTile_ PointerEvents String where
 
 instance Attr FeTurbulence_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,8 +220,8 @@ instance Attr FeTurbulence_ PointerEvents String where
 
 instance Attr Filter_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -229,8 +229,8 @@ instance Attr Filter_ PointerEvents String where
 
 instance Attr ForeignObject_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -238,8 +238,8 @@ instance Attr ForeignObject_ PointerEvents String where
 
 instance Attr G_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -247,8 +247,8 @@ instance Attr G_ PointerEvents String where
 
 instance Attr Image_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -256,8 +256,8 @@ instance Attr Image_ PointerEvents String where
 
 instance Attr Line_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -265,8 +265,8 @@ instance Attr Line_ PointerEvents String where
 
 instance Attr LinearGradient_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -274,8 +274,8 @@ instance Attr LinearGradient_ PointerEvents String where
 
 instance Attr Marker_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -283,8 +283,8 @@ instance Attr Marker_ PointerEvents String where
 
 instance Attr Path_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -292,8 +292,8 @@ instance Attr Path_ PointerEvents String where
 
 instance Attr Pattern_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -301,8 +301,8 @@ instance Attr Pattern_ PointerEvents String where
 
 instance Attr Polygon_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -310,8 +310,8 @@ instance Attr Polygon_ PointerEvents String where
 
 instance Attr Polyline_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -319,8 +319,8 @@ instance Attr Polyline_ PointerEvents String where
 
 instance Attr RadialGradient_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -328,8 +328,8 @@ instance Attr RadialGradient_ PointerEvents String where
 
 instance Attr Rect_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -337,8 +337,8 @@ instance Attr Rect_ PointerEvents String where
 
 instance Attr Svg_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -346,8 +346,8 @@ instance Attr Svg_ PointerEvents String where
 
 instance Attr Switch_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -355,8 +355,8 @@ instance Attr Switch_ PointerEvents String where
 
 instance Attr Symbol_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -364,8 +364,8 @@ instance Attr Symbol_ PointerEvents String where
 
 instance Attr Text_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -373,8 +373,8 @@ instance Attr Text_ PointerEvents String where
 
 instance Attr TextPath_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -382,8 +382,8 @@ instance Attr TextPath_ PointerEvents String where
 
 instance Attr Tspan_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -391,8 +391,8 @@ instance Attr Tspan_ PointerEvents String where
 
 instance Attr Use_ PointerEvents String where
   attr PointerEvents bothValues = unsafeAttribute $ Both
-    { key: "pointer-events", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointer-events", value: prop' value })
+    { key: "pointer-events", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointer-events", value: prop' value })
   pureAttr PointerEvents value = unsafeAttribute $ This
     { key: "pointer-events", value: prop' value }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -401,7 +401,7 @@ instance Attr Use_ PointerEvents String where
 instance Attr everything PointerEvents Unit where
   attr PointerEvents bothValues = unsafeAttribute $ Both
     { key: "pointer-events", value: unset' }
-    (snd bothValues <#> \_ -> { key: "pointer-events", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "pointer-events", value: unset' })
   pureAttr PointerEvents _ = unsafeAttribute $ This
     { key: "pointer-events", value: unset' }
   unpureAttr PointerEvents eventValue = unsafeAttribute $ That $ eventValue <#>

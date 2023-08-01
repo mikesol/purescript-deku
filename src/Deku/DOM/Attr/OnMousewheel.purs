@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnMousewheel where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnMousewheel = OnMousewheel
 
 instance Attr anything OnMousewheel Cb where
   attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "mousewheel", value: cb' value })
+    { key: "mousewheel", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "mousewheel", value: cb' value })
   pureAttr OnMousewheel value = unsafeAttribute $ This
     { key: "mousewheel", value: cb' value }
   unpureAttr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnMousewheel Cb where
 
 instance Attr anything OnMousewheel (Effect Unit) where
   attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "mousewheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnMousewheel value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnMousewheel (Effect Unit) where
 
 instance Attr anything OnMousewheel (Effect Boolean) where
   attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "mousewheel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousewheel", value: cb' (Cb (const value)) }
     )
   pureAttr OnMousewheel value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnMousewheelEffect =
 instance Attr everything OnMousewheel Unit where
   attr OnMousewheel bothValues = unsafeAttribute $ Both
     { key: "mousewheel", value: unset' }
-    (snd bothValues <#> \_ -> { key: "mousewheel", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "mousewheel", value: unset' })
   pureAttr OnMousewheel _ = unsafeAttribute $ This
     { key: "mousewheel", value: unset' }
   unpureAttr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>

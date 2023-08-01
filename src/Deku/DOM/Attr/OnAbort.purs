@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnAbort where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnAbort = OnAbort
 
 instance Attr anything OnAbort Cb where
   attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "abort", value: cb' value })
+    { key: "abort", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "abort", value: cb' value })
   pureAttr OnAbort value = unsafeAttribute $ This
     { key: "abort", value: cb' value }
   unpureAttr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnAbort Cb where
 
 instance Attr anything OnAbort (Effect Unit) where
   attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "abort", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "abort", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnAbort value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnAbort (Effect Unit) where
 
 instance Attr anything OnAbort (Effect Boolean) where
   attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "abort", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "abort", value: cb' (Cb (const value)) }
     )
   pureAttr OnAbort value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnAbortEffect =
 instance Attr everything OnAbort Unit where
   attr OnAbort bothValues = unsafeAttribute $ Both
     { key: "abort", value: unset' }
-    (snd bothValues <#> \_ -> { key: "abort", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "abort", value: unset' })
   pureAttr OnAbort _ = unsafeAttribute $ This { key: "abort", value: unset' }
   unpureAttr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "abort", value: unset' }

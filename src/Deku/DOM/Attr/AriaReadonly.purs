@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaReadonly where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaReadonly = AriaReadonly
 
 instance Attr Circle_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr Circle_ AriaReadonly String where
 
 instance Attr Ellipse_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Ellipse_ AriaReadonly String where
 
 instance Attr ForeignObject_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr ForeignObject_ AriaReadonly String where
 
 instance Attr G_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr G_ AriaReadonly String where
 
 instance Attr Line_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Line_ AriaReadonly String where
 
 instance Attr Marker_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Marker_ AriaReadonly String where
 
 instance Attr Path_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,8 +90,8 @@ instance Attr Path_ AriaReadonly String where
 
 instance Attr Polygon_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,8 +99,8 @@ instance Attr Polygon_ AriaReadonly String where
 
 instance Attr Polyline_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,8 +108,8 @@ instance Attr Polyline_ AriaReadonly String where
 
 instance Attr Rect_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -117,8 +117,8 @@ instance Attr Rect_ AriaReadonly String where
 
 instance Attr Svg_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,8 +126,8 @@ instance Attr Svg_ AriaReadonly String where
 
 instance Attr Symbol_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,8 +135,8 @@ instance Attr Symbol_ AriaReadonly String where
 
 instance Attr Text_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,8 +144,8 @@ instance Attr Text_ AriaReadonly String where
 
 instance Attr TextPath_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -153,8 +153,8 @@ instance Attr TextPath_ AriaReadonly String where
 
 instance Attr Tspan_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -162,8 +162,8 @@ instance Attr Tspan_ AriaReadonly String where
 
 instance Attr Use_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -171,8 +171,8 @@ instance Attr Use_ AriaReadonly String where
 
 instance Attr View_ AriaReadonly String where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
-    { key: "aria-readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
+    { key: "aria-readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-readonly", value: prop' value })
   pureAttr AriaReadonly value = unsafeAttribute $ This
     { key: "aria-readonly", value: prop' value }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -181,7 +181,7 @@ instance Attr View_ AriaReadonly String where
 instance Attr everything AriaReadonly Unit where
   attr AriaReadonly bothValues = unsafeAttribute $ Both
     { key: "aria-readonly", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-readonly", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-readonly", value: unset' })
   pureAttr AriaReadonly _ = unsafeAttribute $ This
     { key: "aria-readonly", value: unset' }
   unpureAttr AriaReadonly eventValue = unsafeAttribute $ That $ eventValue <#>

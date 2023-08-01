@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Autocomplete where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Form (Form_)
 import Deku.DOM.Elt.Input (Input_)
@@ -14,8 +14,8 @@ data Autocomplete = Autocomplete
 
 instance Attr Form_ Autocomplete String where
   attr Autocomplete bothValues = unsafeAttribute $ Both
-    { key: "autocomplete", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
+    { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
   pureAttr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
   unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Form_ Autocomplete String where
 
 instance Attr Input_ Autocomplete String where
   attr Autocomplete bothValues = unsafeAttribute $ Both
-    { key: "autocomplete", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
+    { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
   pureAttr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
   unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr Input_ Autocomplete String where
 
 instance Attr Select_ Autocomplete String where
   attr Autocomplete bothValues = unsafeAttribute $ Both
-    { key: "autocomplete", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
+    { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
   pureAttr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
   unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr Select_ Autocomplete String where
 
 instance Attr Textarea_ Autocomplete String where
   attr Autocomplete bothValues = unsafeAttribute $ Both
-    { key: "autocomplete", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
+    { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
   pureAttr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
   unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Textarea_ Autocomplete String where
 instance Attr everything Autocomplete Unit where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: unset' }
-    (snd bothValues <#> \_ -> { key: "autocomplete", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "autocomplete", value: unset' })
   pureAttr Autocomplete _ = unsafeAttribute $ This
     { key: "autocomplete", value: unset' }
   unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>

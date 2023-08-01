@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaRowspan where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaRowspan = AriaRowspan
 
 instance Attr Circle_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr Circle_ AriaRowspan String where
 
 instance Attr Ellipse_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Ellipse_ AriaRowspan String where
 
 instance Attr ForeignObject_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr ForeignObject_ AriaRowspan String where
 
 instance Attr G_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr G_ AriaRowspan String where
 
 instance Attr Line_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Line_ AriaRowspan String where
 
 instance Attr Marker_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Marker_ AriaRowspan String where
 
 instance Attr Path_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,8 +90,8 @@ instance Attr Path_ AriaRowspan String where
 
 instance Attr Polygon_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,8 +99,8 @@ instance Attr Polygon_ AriaRowspan String where
 
 instance Attr Polyline_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,8 +108,8 @@ instance Attr Polyline_ AriaRowspan String where
 
 instance Attr Rect_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -117,8 +117,8 @@ instance Attr Rect_ AriaRowspan String where
 
 instance Attr Svg_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,8 +126,8 @@ instance Attr Svg_ AriaRowspan String where
 
 instance Attr Symbol_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,8 +135,8 @@ instance Attr Symbol_ AriaRowspan String where
 
 instance Attr Text_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,8 +144,8 @@ instance Attr Text_ AriaRowspan String where
 
 instance Attr TextPath_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -153,8 +153,8 @@ instance Attr TextPath_ AriaRowspan String where
 
 instance Attr Tspan_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -162,8 +162,8 @@ instance Attr Tspan_ AriaRowspan String where
 
 instance Attr Use_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -171,8 +171,8 @@ instance Attr Use_ AriaRowspan String where
 
 instance Attr View_ AriaRowspan String where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
-    { key: "aria-rowspan", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
+    { key: "aria-rowspan", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowspan", value: prop' value })
   pureAttr AriaRowspan value = unsafeAttribute $ This
     { key: "aria-rowspan", value: prop' value }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -181,7 +181,7 @@ instance Attr View_ AriaRowspan String where
 instance Attr everything AriaRowspan Unit where
   attr AriaRowspan bothValues = unsafeAttribute $ Both
     { key: "aria-rowspan", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-rowspan", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-rowspan", value: unset' })
   pureAttr AriaRowspan _ = unsafeAttribute $ This
     { key: "aria-rowspan", value: unset' }
   unpureAttr AriaRowspan eventValue = unsafeAttribute $ That $ eventValue <#>

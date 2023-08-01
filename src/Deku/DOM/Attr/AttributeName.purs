@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AttributeName where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
@@ -14,8 +14,8 @@ data AttributeName = AttributeName
 
 instance Attr Animate_ AttributeName String where
   attr AttributeName bothValues = unsafeAttribute $ Both
-    { key: "attributeName", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
+    { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
   pureAttr AttributeName value = unsafeAttribute $ This
     { key: "attributeName", value: prop' value }
   unpureAttr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Animate_ AttributeName String where
 
 instance Attr AnimateMotion_ AttributeName String where
   attr AttributeName bothValues = unsafeAttribute $ Both
-    { key: "attributeName", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
+    { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
   pureAttr AttributeName value = unsafeAttribute $ This
     { key: "attributeName", value: prop' value }
   unpureAttr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr AnimateMotion_ AttributeName String where
 
 instance Attr AnimateTransform_ AttributeName String where
   attr AttributeName bothValues = unsafeAttribute $ Both
-    { key: "attributeName", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
+    { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
   pureAttr AttributeName value = unsafeAttribute $ This
     { key: "attributeName", value: prop' value }
   unpureAttr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ AttributeName String where
 
 instance Attr Set_ AttributeName String where
   attr AttributeName bothValues = unsafeAttribute $ Both
-    { key: "attributeName", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
+    { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
   pureAttr AttributeName value = unsafeAttribute $ This
     { key: "attributeName", value: prop' value }
   unpureAttr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Set_ AttributeName String where
 instance Attr everything AttributeName Unit where
   attr AttributeName bothValues = unsafeAttribute $ Both
     { key: "attributeName", value: unset' }
-    (snd bothValues <#> \_ -> { key: "attributeName", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "attributeName", value: unset' })
   pureAttr AttributeName _ = unsafeAttribute $ This
     { key: "attributeName", value: unset' }
   unpureAttr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>

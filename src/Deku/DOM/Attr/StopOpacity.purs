@@ -2,7 +2,7 @@ module Deku.DOM.Attr.StopOpacity where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Stop (Stop_)
@@ -30,8 +30,8 @@ data StopOpacity = StopOpacity
 
 instance Attr FeBlend_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,8 +39,8 @@ instance Attr FeBlend_ StopOpacity String where
 
 instance Attr FeColorMatrix_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -48,8 +48,8 @@ instance Attr FeColorMatrix_ StopOpacity String where
 
 instance Attr FeComponentTransfer_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,8 +57,8 @@ instance Attr FeComponentTransfer_ StopOpacity String where
 
 instance Attr FeComposite_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,8 +66,8 @@ instance Attr FeComposite_ StopOpacity String where
 
 instance Attr FeConvolveMatrix_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,8 +75,8 @@ instance Attr FeConvolveMatrix_ StopOpacity String where
 
 instance Attr FeDiffuseLighting_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -84,8 +84,8 @@ instance Attr FeDiffuseLighting_ StopOpacity String where
 
 instance Attr FeDisplacementMap_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -93,8 +93,8 @@ instance Attr FeDisplacementMap_ StopOpacity String where
 
 instance Attr FeFlood_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -102,8 +102,8 @@ instance Attr FeFlood_ StopOpacity String where
 
 instance Attr FeGaussianBlur_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -111,8 +111,8 @@ instance Attr FeGaussianBlur_ StopOpacity String where
 
 instance Attr FeImage_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -120,8 +120,8 @@ instance Attr FeImage_ StopOpacity String where
 
 instance Attr FeMerge_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -129,8 +129,8 @@ instance Attr FeMerge_ StopOpacity String where
 
 instance Attr FeMorphology_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -138,8 +138,8 @@ instance Attr FeMorphology_ StopOpacity String where
 
 instance Attr FeOffset_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -147,8 +147,8 @@ instance Attr FeOffset_ StopOpacity String where
 
 instance Attr FeSpecularLighting_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -156,8 +156,8 @@ instance Attr FeSpecularLighting_ StopOpacity String where
 
 instance Attr FeTile_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,8 +165,8 @@ instance Attr FeTile_ StopOpacity String where
 
 instance Attr FeTurbulence_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,8 +174,8 @@ instance Attr FeTurbulence_ StopOpacity String where
 
 instance Attr Filter_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -183,8 +183,8 @@ instance Attr Filter_ StopOpacity String where
 
 instance Attr Image_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -192,8 +192,8 @@ instance Attr Image_ StopOpacity String where
 
 instance Attr Stop_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,8 +201,8 @@ instance Attr Stop_ StopOpacity String where
 
 instance Attr Switch_ StopOpacity String where
   attr StopOpacity bothValues = unsafeAttribute $ Both
-    { key: "stop-opacity", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
+    { key: "stop-opacity", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "stop-opacity", value: prop' value })
   pureAttr StopOpacity value = unsafeAttribute $ This
     { key: "stop-opacity", value: prop' value }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,7 +211,7 @@ instance Attr Switch_ StopOpacity String where
 instance Attr everything StopOpacity Unit where
   attr StopOpacity bothValues = unsafeAttribute $ Both
     { key: "stop-opacity", value: unset' }
-    (snd bothValues <#> \_ -> { key: "stop-opacity", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "stop-opacity", value: unset' })
   pureAttr StopOpacity _ = unsafeAttribute $ This
     { key: "stop-opacity", value: unset' }
   unpureAttr StopOpacity eventValue = unsafeAttribute $ That $ eventValue <#>

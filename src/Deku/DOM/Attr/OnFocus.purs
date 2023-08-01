@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnFocus where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnFocus = OnFocus
 
 instance Attr anything OnFocus Cb where
   attr OnFocus bothValues = unsafeAttribute $ Both
-    { key: "focus", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "focus", value: cb' value })
+    { key: "focus", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "focus", value: cb' value })
   pureAttr OnFocus value = unsafeAttribute $ This
     { key: "focus", value: cb' value }
   unpureAttr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnFocus Cb where
 
 instance Attr anything OnFocus (Effect Unit) where
   attr OnFocus bothValues = unsafeAttribute $ Both
-    { key: "focus", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "focus", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "focus", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnFocus value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnFocus (Effect Unit) where
 
 instance Attr anything OnFocus (Effect Boolean) where
   attr OnFocus bothValues = unsafeAttribute $ Both
-    { key: "focus", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "focus", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "focus", value: cb' (Cb (const value)) }
     )
   pureAttr OnFocus value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnFocusEffect =
 instance Attr everything OnFocus Unit where
   attr OnFocus bothValues = unsafeAttribute $ Both
     { key: "focus", value: unset' }
-    (snd bothValues <#> \_ -> { key: "focus", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "focus", value: unset' })
   pureAttr OnFocus _ = unsafeAttribute $ This { key: "focus", value: unset' }
   unpureAttr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "focus", value: unset' }

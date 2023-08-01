@@ -2,7 +2,7 @@ module Deku.DOM.Attr.From where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
@@ -13,8 +13,8 @@ data From = From
 
 instance Attr Animate_ From String where
   attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "from", value: prop' value })
+    { key: "from", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
   pureAttr From value = unsafeAttribute $ This
     { key: "from", value: prop' value }
   unpureAttr From eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -22,8 +22,8 @@ instance Attr Animate_ From String where
 
 instance Attr AnimateMotion_ From String where
   attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "from", value: prop' value })
+    { key: "from", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
   pureAttr From value = unsafeAttribute $ This
     { key: "from", value: prop' value }
   unpureAttr From eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -31,8 +31,8 @@ instance Attr AnimateMotion_ From String where
 
 instance Attr AnimateTransform_ From String where
   attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "from", value: prop' value })
+    { key: "from", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
   pureAttr From value = unsafeAttribute $ This
     { key: "from", value: prop' value }
   unpureAttr From eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -40,7 +40,7 @@ instance Attr AnimateTransform_ From String where
 
 instance Attr everything From Unit where
   attr From bothValues = unsafeAttribute $ Both { key: "from", value: unset' }
-    (snd bothValues <#> \_ -> { key: "from", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "from", value: unset' })
   pureAttr From _ = unsafeAttribute $ This { key: "from", value: unset' }
   unpureAttr From eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "from", value: unset' }

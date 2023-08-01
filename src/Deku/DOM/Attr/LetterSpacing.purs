@@ -2,7 +2,7 @@ module Deku.DOM.Attr.LetterSpacing where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data LetterSpacing = LetterSpacing
 
 instance Attr FeBlend_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,8 +38,8 @@ instance Attr FeBlend_ LetterSpacing String where
 
 instance Attr FeColorMatrix_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -47,8 +47,8 @@ instance Attr FeColorMatrix_ LetterSpacing String where
 
 instance Attr FeComponentTransfer_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,8 +56,8 @@ instance Attr FeComponentTransfer_ LetterSpacing String where
 
 instance Attr FeComposite_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -65,8 +65,8 @@ instance Attr FeComposite_ LetterSpacing String where
 
 instance Attr FeConvolveMatrix_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,8 +74,8 @@ instance Attr FeConvolveMatrix_ LetterSpacing String where
 
 instance Attr FeDiffuseLighting_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,8 +83,8 @@ instance Attr FeDiffuseLighting_ LetterSpacing String where
 
 instance Attr FeDisplacementMap_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -92,8 +92,8 @@ instance Attr FeDisplacementMap_ LetterSpacing String where
 
 instance Attr FeFlood_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,8 +101,8 @@ instance Attr FeFlood_ LetterSpacing String where
 
 instance Attr FeGaussianBlur_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,8 +110,8 @@ instance Attr FeGaussianBlur_ LetterSpacing String where
 
 instance Attr FeImage_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,8 +119,8 @@ instance Attr FeImage_ LetterSpacing String where
 
 instance Attr FeMerge_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -128,8 +128,8 @@ instance Attr FeMerge_ LetterSpacing String where
 
 instance Attr FeMorphology_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -137,8 +137,8 @@ instance Attr FeMorphology_ LetterSpacing String where
 
 instance Attr FeOffset_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -146,8 +146,8 @@ instance Attr FeOffset_ LetterSpacing String where
 
 instance Attr FeSpecularLighting_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,8 +155,8 @@ instance Attr FeSpecularLighting_ LetterSpacing String where
 
 instance Attr FeTile_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -164,8 +164,8 @@ instance Attr FeTile_ LetterSpacing String where
 
 instance Attr FeTurbulence_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -173,8 +173,8 @@ instance Attr FeTurbulence_ LetterSpacing String where
 
 instance Attr Filter_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -182,8 +182,8 @@ instance Attr Filter_ LetterSpacing String where
 
 instance Attr Image_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,8 +191,8 @@ instance Attr Image_ LetterSpacing String where
 
 instance Attr Switch_ LetterSpacing String where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
-    { key: "letter-spacing", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
+    { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
   pureAttr LetterSpacing value = unsafeAttribute $ This
     { key: "letter-spacing", value: prop' value }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,7 +201,7 @@ instance Attr Switch_ LetterSpacing String where
 instance Attr everything LetterSpacing Unit where
   attr LetterSpacing bothValues = unsafeAttribute $ Both
     { key: "letter-spacing", value: unset' }
-    (snd bothValues <#> \_ -> { key: "letter-spacing", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "letter-spacing", value: unset' })
   pureAttr LetterSpacing _ = unsafeAttribute $ This
     { key: "letter-spacing", value: unset' }
   unpureAttr LetterSpacing eventValue = unsafeAttribute $ That $ eventValue <#>

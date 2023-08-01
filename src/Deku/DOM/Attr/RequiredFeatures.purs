@@ -2,7 +2,7 @@ module Deku.DOM.Attr.RequiredFeatures where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -30,8 +30,8 @@ data RequiredFeatures = RequiredFeatures
 
 instance Attr AnimateTransform_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ RequiredFeatures String where
 
 instance Attr Discard_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -52,8 +52,8 @@ instance Attr Discard_ RequiredFeatures String where
 
 instance Attr Ellipse_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -63,8 +63,8 @@ instance Attr Ellipse_ RequiredFeatures String where
 
 instance Attr ForeignObject_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -74,8 +74,8 @@ instance Attr ForeignObject_ RequiredFeatures String where
 
 instance Attr G_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -85,8 +85,8 @@ instance Attr G_ RequiredFeatures String where
 
 instance Attr Image_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -96,8 +96,8 @@ instance Attr Image_ RequiredFeatures String where
 
 instance Attr Line_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -107,8 +107,8 @@ instance Attr Line_ RequiredFeatures String where
 
 instance Attr Marker_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -118,8 +118,8 @@ instance Attr Marker_ RequiredFeatures String where
 
 instance Attr Mask_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -129,8 +129,8 @@ instance Attr Mask_ RequiredFeatures String where
 
 instance Attr Path_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -140,8 +140,8 @@ instance Attr Path_ RequiredFeatures String where
 
 instance Attr Pattern_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -151,8 +151,8 @@ instance Attr Pattern_ RequiredFeatures String where
 
 instance Attr Polygon_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -162,8 +162,8 @@ instance Attr Polygon_ RequiredFeatures String where
 
 instance Attr Polyline_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -173,8 +173,8 @@ instance Attr Polyline_ RequiredFeatures String where
 
 instance Attr Rect_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -184,8 +184,8 @@ instance Attr Rect_ RequiredFeatures String where
 
 instance Attr Svg_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -195,8 +195,8 @@ instance Attr Svg_ RequiredFeatures String where
 
 instance Attr Switch_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -206,8 +206,8 @@ instance Attr Switch_ RequiredFeatures String where
 
 instance Attr Text_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -217,8 +217,8 @@ instance Attr Text_ RequiredFeatures String where
 
 instance Attr TextPath_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -228,8 +228,8 @@ instance Attr TextPath_ RequiredFeatures String where
 
 instance Attr Tspan_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -239,8 +239,8 @@ instance Attr Tspan_ RequiredFeatures String where
 
 instance Attr Use_ RequiredFeatures String where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
   pureAttr RequiredFeatures value = unsafeAttribute $ This
@@ -251,7 +251,7 @@ instance Attr Use_ RequiredFeatures String where
 instance Attr everything RequiredFeatures Unit where
   attr RequiredFeatures bothValues = unsafeAttribute $ Both
     { key: "requiredFeatures", value: unset' }
-    (snd bothValues <#> \_ -> { key: "requiredFeatures", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "requiredFeatures", value: unset' })
   pureAttr RequiredFeatures _ = unsafeAttribute $ This
     { key: "requiredFeatures", value: unset' }
   unpureAttr RequiredFeatures eventValue = unsafeAttribute $ That $ eventValue

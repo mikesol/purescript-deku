@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnSelectstart where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnSelectstart = OnSelectstart
 
 instance Attr anything OnSelectstart Cb where
   attr OnSelectstart bothValues = unsafeAttribute $ Both
-    { key: "selectstart", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "selectstart", value: cb' value })
+    { key: "selectstart", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "selectstart", value: cb' value })
   pureAttr OnSelectstart value = unsafeAttribute $ This
     { key: "selectstart", value: cb' value }
   unpureAttr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnSelectstart Cb where
 
 instance Attr anything OnSelectstart (Effect Unit) where
   attr OnSelectstart bothValues = unsafeAttribute $ Both
-    { key: "selectstart", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "selectstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "selectstart", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnSelectstart value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnSelectstart (Effect Unit) where
 
 instance Attr anything OnSelectstart (Effect Boolean) where
   attr OnSelectstart bothValues = unsafeAttribute $ Both
-    { key: "selectstart", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "selectstart", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "selectstart", value: cb' (Cb (const value)) }
     )
   pureAttr OnSelectstart value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnSelectstartEffect =
 instance Attr everything OnSelectstart Unit where
   attr OnSelectstart bothValues = unsafeAttribute $ Both
     { key: "selectstart", value: unset' }
-    (snd bothValues <#> \_ -> { key: "selectstart", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "selectstart", value: unset' })
   pureAttr OnSelectstart _ = unsafeAttribute $ This
     { key: "selectstart", value: unset' }
   unpureAttr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -28,6 +28,7 @@ import Data.Foldable (foldl)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
+import Data.NonEmpty (NonEmpty(..))
 import Data.Profunctor (dimap, lcmap)
 import Data.These (These(..))
 import Data.Tuple (Tuple(..))
@@ -347,16 +348,16 @@ text_ txt = text_' (Just txt) Nothing
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | a string. The node is set immediately with the string and then changes based on the event.
-text' :: String -> Event String -> Nut
-text' txt e = text_' (Just txt) (Just e)
+text' :: NonEmpty Event String -> Nut
+text' (NonEmpty txt e) = text_' (Just txt) (Just e)
 
 -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
 -- | something that can be morphed into a string. The node is set immediately with the string and then changes based on the event.
-textUsing' :: forall a b. (a -> String) -> (b -> String) -> a -> Event b -> Nut
-textUsing' f1 f2 txt e = text_' (Just (f1 txt)) (Just (f2 <$> e))
+textUsing' :: forall a. (a -> String) -> NonEmpty Event a -> Nut
+textUsing' f1 (NonEmpty txt e) = text_' (Just (f1 txt)) (Just (f1 <$> e))
 
-textShow' :: forall a b. Show a => Show b => a -> Event b -> Nut
-textShow' = textUsing' show show
+textShow' :: forall a. Show a => NonEmpty Event a -> Nut
+textShow' = textUsing' show
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

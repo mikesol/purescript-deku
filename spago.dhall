@@ -17,6 +17,7 @@
   , "lists"
   , "maybe"
   , "newtype"
+  , "nonempty"
   , "ordered-collections"
   , "prelude"
   , "profunctor"

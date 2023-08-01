@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Id where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -191,1455 +191,1455 @@ data Id = Id
 
 instance Attr A_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Abbr_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Acronym_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Address_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Applet_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Area_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Article_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Aside_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Audio_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr B_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Base_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Basefont_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Bdi_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Bdo_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Big_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Blockquote_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Body_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Br_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Button_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Canvas_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Caption_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Center_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Cite_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Code_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Col_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Colgroup_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Xdata_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Datalist_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dd_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Del_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Details_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dfn_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dialog_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dir_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Div_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dl_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Dt_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Em_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Embed_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Fieldset_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Figcaption_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Figure_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Font_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Footer_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Form_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Frame_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Frameset_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H1_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H2_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H3_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H4_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H5_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr H6_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Head_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Header_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Hr_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Html_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr I_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Iframe_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Img_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Input_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Ins_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Kbd_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Label_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Legend_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Li_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Link_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Main_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Map_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Mark_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Meta_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Meter_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Nav_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Noframes_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Noscript_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Object_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Ol_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Optgroup_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Option_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Output_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr P_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Param_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Picture_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Pre_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Progress_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Q_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Rp_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Rt_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Ruby_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr S_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Samp_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Script_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Section_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Select_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Small_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Source_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Span_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Strike_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Strong_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Style_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Sub_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Summary_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Sup_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Svg_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Table_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Tbody_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Td_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Template_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Textarea_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Tfoot_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Th_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Thead_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Time_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Title_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Tr_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Track_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Tt_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr U_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Ul_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Var_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Video_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Wbr_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Animate_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr AnimateMotion_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr AnimateTransform_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Circle_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr ClipPath_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Defs_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Desc_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Discard_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Ellipse_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeBlend_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeColorMatrix_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeComponentTransfer_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeComposite_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeDisplacementMap_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeDistantLight_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeDropShadow_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeFlood_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeFuncA_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeFuncB_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeFuncG_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeFuncR_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeGaussianBlur_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeImage_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeMerge_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeMergeNode_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeMorphology_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeOffset_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FePointLight_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeSpecularLighting_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeSpotLight_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeTile_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr FeTurbulence_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Filter_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr ForeignObject_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr G_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Image_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Line_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr LinearGradient_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Marker_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Mask_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Metadata_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Mpath_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Path_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Pattern_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Polygon_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Polyline_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr RadialGradient_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Rect_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Set_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Stop_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Switch_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Symbol_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Text_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr TextPath_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Tspan_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr Use_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr View_ Id String where
   attr Id bothValues = unsafeAttribute $ Both
-    { key: "id", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "id", value: prop' value })
+    { key: "id", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
   pureAttr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
 
 instance Attr everything Id Unit where
   attr Id bothValues = unsafeAttribute $ Both { key: "id", value: unset' }
-    (snd bothValues <#> \_ -> { key: "id", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "id", value: unset' })
   pureAttr Id _ = unsafeAttribute $ This { key: "id", value: unset' }
   unpureAttr Id eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "id", value: unset' }

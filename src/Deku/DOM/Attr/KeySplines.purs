@@ -2,7 +2,7 @@ module Deku.DOM.Attr.KeySplines where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
@@ -13,8 +13,8 @@ data KeySplines = KeySplines
 
 instance Attr Animate_ KeySplines String where
   attr KeySplines bothValues = unsafeAttribute $ Both
-    { key: "keySplines", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
+    { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
   pureAttr KeySplines value = unsafeAttribute $ This
     { key: "keySplines", value: prop' value }
   unpureAttr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -22,8 +22,8 @@ instance Attr Animate_ KeySplines String where
 
 instance Attr AnimateMotion_ KeySplines String where
   attr KeySplines bothValues = unsafeAttribute $ Both
-    { key: "keySplines", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
+    { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
   pureAttr KeySplines value = unsafeAttribute $ This
     { key: "keySplines", value: prop' value }
   unpureAttr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,8 +31,8 @@ instance Attr AnimateMotion_ KeySplines String where
 
 instance Attr AnimateTransform_ KeySplines String where
   attr KeySplines bothValues = unsafeAttribute $ Both
-    { key: "keySplines", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
+    { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
   pureAttr KeySplines value = unsafeAttribute $ This
     { key: "keySplines", value: prop' value }
   unpureAttr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr AnimateTransform_ KeySplines String where
 instance Attr everything KeySplines Unit where
   attr KeySplines bothValues = unsafeAttribute $ Both
     { key: "keySplines", value: unset' }
-    (snd bothValues <#> \_ -> { key: "keySplines", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "keySplines", value: unset' })
   pureAttr KeySplines _ = unsafeAttribute $ This
     { key: "keySplines", value: unset' }
   unpureAttr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>

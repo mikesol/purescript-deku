@@ -2,7 +2,7 @@ module Deku.DOM.Attr.RequiredExtensions where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -32,8 +32,8 @@ data RequiredExtensions = RequiredExtensions
 
 instance Attr AnimateTransform_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -43,8 +43,8 @@ instance Attr AnimateTransform_ RequiredExtensions String where
 
 instance Attr Circle_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -54,8 +54,8 @@ instance Attr Circle_ RequiredExtensions String where
 
 instance Attr ClipPath_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -65,8 +65,8 @@ instance Attr ClipPath_ RequiredExtensions String where
 
 instance Attr Discard_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -76,8 +76,8 @@ instance Attr Discard_ RequiredExtensions String where
 
 instance Attr Ellipse_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -87,8 +87,8 @@ instance Attr Ellipse_ RequiredExtensions String where
 
 instance Attr ForeignObject_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -98,8 +98,8 @@ instance Attr ForeignObject_ RequiredExtensions String where
 
 instance Attr G_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -109,8 +109,8 @@ instance Attr G_ RequiredExtensions String where
 
 instance Attr Image_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -120,8 +120,8 @@ instance Attr Image_ RequiredExtensions String where
 
 instance Attr Line_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -131,8 +131,8 @@ instance Attr Line_ RequiredExtensions String where
 
 instance Attr Marker_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -142,8 +142,8 @@ instance Attr Marker_ RequiredExtensions String where
 
 instance Attr Mask_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -153,8 +153,8 @@ instance Attr Mask_ RequiredExtensions String where
 
 instance Attr Path_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -164,8 +164,8 @@ instance Attr Path_ RequiredExtensions String where
 
 instance Attr Pattern_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -175,8 +175,8 @@ instance Attr Pattern_ RequiredExtensions String where
 
 instance Attr Polygon_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -186,8 +186,8 @@ instance Attr Polygon_ RequiredExtensions String where
 
 instance Attr Polyline_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -197,8 +197,8 @@ instance Attr Polyline_ RequiredExtensions String where
 
 instance Attr Rect_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -208,8 +208,8 @@ instance Attr Rect_ RequiredExtensions String where
 
 instance Attr Svg_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -219,8 +219,8 @@ instance Attr Svg_ RequiredExtensions String where
 
 instance Attr Switch_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -230,8 +230,8 @@ instance Attr Switch_ RequiredExtensions String where
 
 instance Attr Text_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -241,8 +241,8 @@ instance Attr Text_ RequiredExtensions String where
 
 instance Attr TextPath_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -252,8 +252,8 @@ instance Attr TextPath_ RequiredExtensions String where
 
 instance Attr Tspan_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -263,8 +263,8 @@ instance Attr Tspan_ RequiredExtensions String where
 
 instance Attr Use_ RequiredExtensions String where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
-    { key: "requiredExtensions", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
   pureAttr RequiredExtensions value = unsafeAttribute $ This
@@ -275,7 +275,7 @@ instance Attr Use_ RequiredExtensions String where
 instance Attr everything RequiredExtensions Unit where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both
     { key: "requiredExtensions", value: unset' }
-    (snd bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
   pureAttr RequiredExtensions _ = unsafeAttribute $ This
     { key: "requiredExtensions", value: unset' }
   unpureAttr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Srcset where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Source (Source_)
@@ -12,8 +12,8 @@ data Srcset = Srcset
 
 instance Attr Img_ Srcset String where
   attr Srcset bothValues = unsafeAttribute $ Both
-    { key: "srcset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "srcset", value: prop' value })
+    { key: "srcset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
   pureAttr Srcset value = unsafeAttribute $ This
     { key: "srcset", value: prop' value }
   unpureAttr Srcset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Img_ Srcset String where
 
 instance Attr Source_ Srcset String where
   attr Srcset bothValues = unsafeAttribute $ Both
-    { key: "srcset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "srcset", value: prop' value })
+    { key: "srcset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
   pureAttr Srcset value = unsafeAttribute $ This
     { key: "srcset", value: prop' value }
   unpureAttr Srcset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Source_ Srcset String where
 instance Attr everything Srcset Unit where
   attr Srcset bothValues = unsafeAttribute $ Both
     { key: "srcset", value: unset' }
-    (snd bothValues <#> \_ -> { key: "srcset", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "srcset", value: unset' })
   pureAttr Srcset _ = unsafeAttribute $ This { key: "srcset", value: unset' }
   unpureAttr Srcset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srcset", value: unset' }

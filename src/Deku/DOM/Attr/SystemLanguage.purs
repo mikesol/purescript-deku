@@ -2,7 +2,7 @@ module Deku.DOM.Attr.SystemLanguage where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -32,8 +32,8 @@ data SystemLanguage = SystemLanguage
 
 instance Attr AnimateTransform_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ SystemLanguage String where
 
 instance Attr Circle_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,8 +50,8 @@ instance Attr Circle_ SystemLanguage String where
 
 instance Attr ClipPath_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -59,8 +59,8 @@ instance Attr ClipPath_ SystemLanguage String where
 
 instance Attr Discard_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -68,8 +68,8 @@ instance Attr Discard_ SystemLanguage String where
 
 instance Attr Ellipse_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,8 +77,8 @@ instance Attr Ellipse_ SystemLanguage String where
 
 instance Attr ForeignObject_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,8 +86,8 @@ instance Attr ForeignObject_ SystemLanguage String where
 
 instance Attr G_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -95,8 +95,8 @@ instance Attr G_ SystemLanguage String where
 
 instance Attr Image_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -104,8 +104,8 @@ instance Attr Image_ SystemLanguage String where
 
 instance Attr Line_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -113,8 +113,8 @@ instance Attr Line_ SystemLanguage String where
 
 instance Attr Marker_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -122,8 +122,8 @@ instance Attr Marker_ SystemLanguage String where
 
 instance Attr Mask_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -131,8 +131,8 @@ instance Attr Mask_ SystemLanguage String where
 
 instance Attr Path_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -140,8 +140,8 @@ instance Attr Path_ SystemLanguage String where
 
 instance Attr Pattern_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -149,8 +149,8 @@ instance Attr Pattern_ SystemLanguage String where
 
 instance Attr Polygon_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -158,8 +158,8 @@ instance Attr Polygon_ SystemLanguage String where
 
 instance Attr Polyline_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -167,8 +167,8 @@ instance Attr Polyline_ SystemLanguage String where
 
 instance Attr Rect_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,8 +176,8 @@ instance Attr Rect_ SystemLanguage String where
 
 instance Attr Svg_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,8 +185,8 @@ instance Attr Svg_ SystemLanguage String where
 
 instance Attr Switch_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -194,8 +194,8 @@ instance Attr Switch_ SystemLanguage String where
 
 instance Attr Text_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -203,8 +203,8 @@ instance Attr Text_ SystemLanguage String where
 
 instance Attr TextPath_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -212,8 +212,8 @@ instance Attr TextPath_ SystemLanguage String where
 
 instance Attr Tspan_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -221,8 +221,8 @@ instance Attr Tspan_ SystemLanguage String where
 
 instance Attr Use_ SystemLanguage String where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
-    { key: "systemLanguage", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
+    { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
   pureAttr SystemLanguage value = unsafeAttribute $ This
     { key: "systemLanguage", value: prop' value }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Use_ SystemLanguage String where
 instance Attr everything SystemLanguage Unit where
   attr SystemLanguage bothValues = unsafeAttribute $ Both
     { key: "systemLanguage", value: unset' }
-    (snd bothValues <#> \_ -> { key: "systemLanguage", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "systemLanguage", value: unset' })
   pureAttr SystemLanguage _ = unsafeAttribute $ This
     { key: "systemLanguage", value: unset' }
   unpureAttr SystemLanguage eventValue = unsafeAttribute $ That $ eventValue <#>

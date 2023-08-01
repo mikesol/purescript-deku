@@ -2,7 +2,7 @@ module Deku.DOM.Attr.GlyphOrientationVertical where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data GlyphOrientationVertical = GlyphOrientationVertical
 
 instance Attr FeBlend_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -41,8 +41,8 @@ instance Attr FeBlend_ GlyphOrientationVertical String where
 
 instance Attr FeColorMatrix_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -53,8 +53,8 @@ instance Attr FeColorMatrix_ GlyphOrientationVertical String where
 
 instance Attr FeComponentTransfer_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -65,8 +65,8 @@ instance Attr FeComponentTransfer_ GlyphOrientationVertical String where
 
 instance Attr FeComposite_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -77,8 +77,8 @@ instance Attr FeComposite_ GlyphOrientationVertical String where
 
 instance Attr FeConvolveMatrix_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -89,8 +89,8 @@ instance Attr FeConvolveMatrix_ GlyphOrientationVertical String where
 
 instance Attr FeDiffuseLighting_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -101,8 +101,8 @@ instance Attr FeDiffuseLighting_ GlyphOrientationVertical String where
 
 instance Attr FeDisplacementMap_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -113,8 +113,8 @@ instance Attr FeDisplacementMap_ GlyphOrientationVertical String where
 
 instance Attr FeFlood_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -125,8 +125,8 @@ instance Attr FeFlood_ GlyphOrientationVertical String where
 
 instance Attr FeGaussianBlur_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -137,8 +137,8 @@ instance Attr FeGaussianBlur_ GlyphOrientationVertical String where
 
 instance Attr FeImage_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -149,8 +149,8 @@ instance Attr FeImage_ GlyphOrientationVertical String where
 
 instance Attr FeMerge_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -161,8 +161,8 @@ instance Attr FeMerge_ GlyphOrientationVertical String where
 
 instance Attr FeMorphology_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -173,8 +173,8 @@ instance Attr FeMorphology_ GlyphOrientationVertical String where
 
 instance Attr FeOffset_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -185,8 +185,8 @@ instance Attr FeOffset_ GlyphOrientationVertical String where
 
 instance Attr FeSpecularLighting_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -197,8 +197,8 @@ instance Attr FeSpecularLighting_ GlyphOrientationVertical String where
 
 instance Attr FeTile_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -209,8 +209,8 @@ instance Attr FeTile_ GlyphOrientationVertical String where
 
 instance Attr FeTurbulence_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -221,8 +221,8 @@ instance Attr FeTurbulence_ GlyphOrientationVertical String where
 
 instance Attr Filter_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -233,8 +233,8 @@ instance Attr Filter_ GlyphOrientationVertical String where
 
 instance Attr Image_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -245,8 +245,8 @@ instance Attr Image_ GlyphOrientationVertical String where
 
 instance Attr Switch_ GlyphOrientationVertical String where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
-    { key: "glyph-orientation-vertical", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
   pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
@@ -258,7 +258,7 @@ instance Attr Switch_ GlyphOrientationVertical String where
 instance Attr everything GlyphOrientationVertical Unit where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: unset' }
-    ( snd bothValues <#> \_ ->
+    ( NonEmpty.tail bothValues <#> \_ ->
         { key: "glyph-orientation-vertical", value: unset' }
     )
   pureAttr GlyphOrientationVertical _ = unsafeAttribute $ This

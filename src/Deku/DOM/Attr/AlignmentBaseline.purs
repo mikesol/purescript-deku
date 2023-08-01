@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AlignmentBaseline where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data AlignmentBaseline = AlignmentBaseline
 
 instance Attr FeBlend_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -40,8 +40,8 @@ instance Attr FeBlend_ AlignmentBaseline String where
 
 instance Attr FeColorMatrix_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -51,8 +51,8 @@ instance Attr FeColorMatrix_ AlignmentBaseline String where
 
 instance Attr FeComponentTransfer_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -62,8 +62,8 @@ instance Attr FeComponentTransfer_ AlignmentBaseline String where
 
 instance Attr FeComposite_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -73,8 +73,8 @@ instance Attr FeComposite_ AlignmentBaseline String where
 
 instance Attr FeConvolveMatrix_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -84,8 +84,8 @@ instance Attr FeConvolveMatrix_ AlignmentBaseline String where
 
 instance Attr FeDiffuseLighting_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -95,8 +95,8 @@ instance Attr FeDiffuseLighting_ AlignmentBaseline String where
 
 instance Attr FeDisplacementMap_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -106,8 +106,8 @@ instance Attr FeDisplacementMap_ AlignmentBaseline String where
 
 instance Attr FeFlood_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -117,8 +117,8 @@ instance Attr FeFlood_ AlignmentBaseline String where
 
 instance Attr FeGaussianBlur_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -128,8 +128,8 @@ instance Attr FeGaussianBlur_ AlignmentBaseline String where
 
 instance Attr FeImage_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -139,8 +139,8 @@ instance Attr FeImage_ AlignmentBaseline String where
 
 instance Attr FeMerge_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -150,8 +150,8 @@ instance Attr FeMerge_ AlignmentBaseline String where
 
 instance Attr FeMorphology_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -161,8 +161,8 @@ instance Attr FeMorphology_ AlignmentBaseline String where
 
 instance Attr FeOffset_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -172,8 +172,8 @@ instance Attr FeOffset_ AlignmentBaseline String where
 
 instance Attr FeSpecularLighting_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -183,8 +183,8 @@ instance Attr FeSpecularLighting_ AlignmentBaseline String where
 
 instance Attr FeTile_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -194,8 +194,8 @@ instance Attr FeTile_ AlignmentBaseline String where
 
 instance Attr FeTurbulence_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -205,8 +205,8 @@ instance Attr FeTurbulence_ AlignmentBaseline String where
 
 instance Attr Filter_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -216,8 +216,8 @@ instance Attr Filter_ AlignmentBaseline String where
 
 instance Attr Image_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -227,8 +227,8 @@ instance Attr Image_ AlignmentBaseline String where
 
 instance Attr Switch_ AlignmentBaseline String where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
   pureAttr AlignmentBaseline value = unsafeAttribute $ This
@@ -239,7 +239,7 @@ instance Attr Switch_ AlignmentBaseline String where
 instance Attr everything AlignmentBaseline Unit where
   attr AlignmentBaseline bothValues = unsafeAttribute $ Both
     { key: "alignment-baseline", value: unset' }
-    (snd bothValues <#> \_ -> { key: "alignment-baseline", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "alignment-baseline", value: unset' })
   pureAttr AlignmentBaseline _ = unsafeAttribute $ This
     { key: "alignment-baseline", value: unset' }
   unpureAttr AlignmentBaseline eventValue = unsafeAttribute $ That $ eventValue

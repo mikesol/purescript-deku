@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Formnovalidate where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -12,8 +12,8 @@ data Formnovalidate = Formnovalidate
 
 instance Attr Button_ Formnovalidate String where
   attr Formnovalidate bothValues = unsafeAttribute $ Both
-    { key: "formnovalidate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
+    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
   pureAttr Formnovalidate value = unsafeAttribute $ This
     { key: "formnovalidate", value: prop' value }
   unpureAttr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Button_ Formnovalidate String where
 
 instance Attr Input_ Formnovalidate String where
   attr Formnovalidate bothValues = unsafeAttribute $ Both
-    { key: "formnovalidate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
+    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
   pureAttr Formnovalidate value = unsafeAttribute $ This
     { key: "formnovalidate", value: prop' value }
   unpureAttr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Input_ Formnovalidate String where
 instance Attr everything Formnovalidate Unit where
   attr Formnovalidate bothValues = unsafeAttribute $ Both
     { key: "formnovalidate", value: unset' }
-    (snd bothValues <#> \_ -> { key: "formnovalidate", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "formnovalidate", value: unset' })
   pureAttr Formnovalidate _ = unsafeAttribute $ This
     { key: "formnovalidate", value: unset' }
   unpureAttr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>

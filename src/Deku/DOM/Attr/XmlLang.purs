@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XmlLang where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -42,8 +42,8 @@ data XmlLang = XmlLang
 
 instance Attr AnimateTransform_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,8 +51,8 @@ instance Attr AnimateTransform_ XmlLang String where
 
 instance Attr Discard_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -60,8 +60,8 @@ instance Attr Discard_ XmlLang String where
 
 instance Attr FeBlend_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -69,8 +69,8 @@ instance Attr FeBlend_ XmlLang String where
 
 instance Attr FeColorMatrix_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -78,8 +78,8 @@ instance Attr FeColorMatrix_ XmlLang String where
 
 instance Attr FeComponentTransfer_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -87,8 +87,8 @@ instance Attr FeComponentTransfer_ XmlLang String where
 
 instance Attr FeComposite_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -96,8 +96,8 @@ instance Attr FeComposite_ XmlLang String where
 
 instance Attr FeConvolveMatrix_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -105,8 +105,8 @@ instance Attr FeConvolveMatrix_ XmlLang String where
 
 instance Attr FeDiffuseLighting_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -114,8 +114,8 @@ instance Attr FeDiffuseLighting_ XmlLang String where
 
 instance Attr FeDisplacementMap_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -123,8 +123,8 @@ instance Attr FeDisplacementMap_ XmlLang String where
 
 instance Attr FeDistantLight_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,8 +132,8 @@ instance Attr FeDistantLight_ XmlLang String where
 
 instance Attr FeFlood_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,8 +141,8 @@ instance Attr FeFlood_ XmlLang String where
 
 instance Attr FeFuncA_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -150,8 +150,8 @@ instance Attr FeFuncA_ XmlLang String where
 
 instance Attr FeFuncB_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -159,8 +159,8 @@ instance Attr FeFuncB_ XmlLang String where
 
 instance Attr FeFuncG_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -168,8 +168,8 @@ instance Attr FeFuncG_ XmlLang String where
 
 instance Attr FeFuncR_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -177,8 +177,8 @@ instance Attr FeFuncR_ XmlLang String where
 
 instance Attr FeGaussianBlur_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -186,8 +186,8 @@ instance Attr FeGaussianBlur_ XmlLang String where
 
 instance Attr FeImage_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -195,8 +195,8 @@ instance Attr FeImage_ XmlLang String where
 
 instance Attr FeMerge_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -204,8 +204,8 @@ instance Attr FeMerge_ XmlLang String where
 
 instance Attr FeMergeNode_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -213,8 +213,8 @@ instance Attr FeMergeNode_ XmlLang String where
 
 instance Attr FeMorphology_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -222,8 +222,8 @@ instance Attr FeMorphology_ XmlLang String where
 
 instance Attr FeOffset_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,8 +231,8 @@ instance Attr FeOffset_ XmlLang String where
 
 instance Attr FePointLight_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -240,8 +240,8 @@ instance Attr FePointLight_ XmlLang String where
 
 instance Attr FeSpecularLighting_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ XmlLang String where
 
 instance Attr FeSpotLight_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -258,8 +258,8 @@ instance Attr FeSpotLight_ XmlLang String where
 
 instance Attr FeTile_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -267,8 +267,8 @@ instance Attr FeTile_ XmlLang String where
 
 instance Attr FeTurbulence_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -276,8 +276,8 @@ instance Attr FeTurbulence_ XmlLang String where
 
 instance Attr Filter_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -285,8 +285,8 @@ instance Attr Filter_ XmlLang String where
 
 instance Attr Image_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -294,8 +294,8 @@ instance Attr Image_ XmlLang String where
 
 instance Attr Metadata_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -303,8 +303,8 @@ instance Attr Metadata_ XmlLang String where
 
 instance Attr Mpath_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -312,8 +312,8 @@ instance Attr Mpath_ XmlLang String where
 
 instance Attr Switch_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -321,8 +321,8 @@ instance Attr Switch_ XmlLang String where
 
 instance Attr View_ XmlLang String where
   attr XmlLang bothValues = unsafeAttribute $ Both
-    { key: "xml:lang", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xml:lang", value: prop' value })
+    { key: "xml:lang", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xml:lang", value: prop' value })
   pureAttr XmlLang value = unsafeAttribute $ This
     { key: "xml:lang", value: prop' value }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -331,7 +331,7 @@ instance Attr View_ XmlLang String where
 instance Attr everything XmlLang Unit where
   attr XmlLang bothValues = unsafeAttribute $ Both
     { key: "xml:lang", value: unset' }
-    (snd bothValues <#> \_ -> { key: "xml:lang", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "xml:lang", value: unset' })
   pureAttr XmlLang _ = unsafeAttribute $ This { key: "xml:lang", value: unset' }
   unpureAttr XmlLang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "xml:lang", value: unset' }

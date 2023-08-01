@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Bgcolor where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Body (Body_)
 import Deku.DOM.Elt.Col (Col_)
@@ -19,8 +19,8 @@ data Bgcolor = Bgcolor
 
 instance Attr Body_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,8 +28,8 @@ instance Attr Body_ Bgcolor String where
 
 instance Attr Col_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -37,8 +37,8 @@ instance Attr Col_ Bgcolor String where
 
 instance Attr Colgroup_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -46,8 +46,8 @@ instance Attr Colgroup_ Bgcolor String where
 
 instance Attr Table_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,8 +55,8 @@ instance Attr Table_ Bgcolor String where
 
 instance Attr Tbody_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,8 +64,8 @@ instance Attr Tbody_ Bgcolor String where
 
 instance Attr Tfoot_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -73,8 +73,8 @@ instance Attr Tfoot_ Bgcolor String where
 
 instance Attr Td_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -82,8 +82,8 @@ instance Attr Td_ Bgcolor String where
 
 instance Attr Th_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -91,8 +91,8 @@ instance Attr Th_ Bgcolor String where
 
 instance Attr Tr_ Bgcolor String where
   attr Bgcolor bothValues = unsafeAttribute $ Both
-    { key: "bgcolor", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "bgcolor", value: prop' value })
+    { key: "bgcolor", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "bgcolor", value: prop' value })
   pureAttr Bgcolor value = unsafeAttribute $ This
     { key: "bgcolor", value: prop' value }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,7 +101,7 @@ instance Attr Tr_ Bgcolor String where
 instance Attr everything Bgcolor Unit where
   attr Bgcolor bothValues = unsafeAttribute $ Both
     { key: "bgcolor", value: unset' }
-    (snd bothValues <#> \_ -> { key: "bgcolor", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "bgcolor", value: unset' })
   pureAttr Bgcolor _ = unsafeAttribute $ This { key: "bgcolor", value: unset' }
   unpureAttr Bgcolor eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "bgcolor", value: unset' }

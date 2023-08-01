@@ -2,7 +2,7 @@ module Deku.DOM.Attr.LengthAdjust where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -13,8 +13,8 @@ data LengthAdjust = LengthAdjust
 
 instance Attr Text_ LengthAdjust String where
   attr LengthAdjust bothValues = unsafeAttribute $ Both
-    { key: "lengthAdjust", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
+    { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
   pureAttr LengthAdjust value = unsafeAttribute $ This
     { key: "lengthAdjust", value: prop' value }
   unpureAttr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -22,8 +22,8 @@ instance Attr Text_ LengthAdjust String where
 
 instance Attr TextPath_ LengthAdjust String where
   attr LengthAdjust bothValues = unsafeAttribute $ Both
-    { key: "lengthAdjust", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
+    { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
   pureAttr LengthAdjust value = unsafeAttribute $ This
     { key: "lengthAdjust", value: prop' value }
   unpureAttr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,8 +31,8 @@ instance Attr TextPath_ LengthAdjust String where
 
 instance Attr Tspan_ LengthAdjust String where
   attr LengthAdjust bothValues = unsafeAttribute $ Both
-    { key: "lengthAdjust", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
+    { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
   pureAttr LengthAdjust value = unsafeAttribute $ This
     { key: "lengthAdjust", value: prop' value }
   unpureAttr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr Tspan_ LengthAdjust String where
 instance Attr everything LengthAdjust Unit where
   attr LengthAdjust bothValues = unsafeAttribute $ Both
     { key: "lengthAdjust", value: unset' }
-    (snd bothValues <#> \_ -> { key: "lengthAdjust", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "lengthAdjust", value: unset' })
   pureAttr LengthAdjust _ = unsafeAttribute $ This
     { key: "lengthAdjust", value: unset' }
   unpureAttr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>

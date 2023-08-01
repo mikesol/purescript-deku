@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Size where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Select (Select_)
@@ -12,8 +12,8 @@ data Size = Size
 
 instance Attr Input_ Size String where
   attr Size bothValues = unsafeAttribute $ Both
-    { key: "size", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "size", value: prop' value })
+    { key: "size", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "size", value: prop' value })
   pureAttr Size value = unsafeAttribute $ This
     { key: "size", value: prop' value }
   unpureAttr Size eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -21,8 +21,8 @@ instance Attr Input_ Size String where
 
 instance Attr Select_ Size String where
   attr Size bothValues = unsafeAttribute $ Both
-    { key: "size", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "size", value: prop' value })
+    { key: "size", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "size", value: prop' value })
   pureAttr Size value = unsafeAttribute $ This
     { key: "size", value: prop' value }
   unpureAttr Size eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -30,7 +30,7 @@ instance Attr Select_ Size String where
 
 instance Attr everything Size Unit where
   attr Size bothValues = unsafeAttribute $ Both { key: "size", value: unset' }
-    (snd bothValues <#> \_ -> { key: "size", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "size", value: unset' })
   pureAttr Size _ = unsafeAttribute $ This { key: "size", value: unset' }
   unpureAttr Size eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "size", value: unset' }

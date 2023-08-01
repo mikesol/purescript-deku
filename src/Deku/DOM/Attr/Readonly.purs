@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Readonly where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
@@ -12,8 +12,8 @@ data Readonly = Readonly
 
 instance Attr Input_ Readonly String where
   attr Readonly bothValues = unsafeAttribute $ Both
-    { key: "readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "readonly", value: prop' value })
+    { key: "readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "readonly", value: prop' value })
   pureAttr Readonly value = unsafeAttribute $ This
     { key: "readonly", value: prop' value }
   unpureAttr Readonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Input_ Readonly String where
 
 instance Attr Textarea_ Readonly String where
   attr Readonly bothValues = unsafeAttribute $ Both
-    { key: "readonly", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "readonly", value: prop' value })
+    { key: "readonly", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "readonly", value: prop' value })
   pureAttr Readonly value = unsafeAttribute $ This
     { key: "readonly", value: prop' value }
   unpureAttr Readonly eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Textarea_ Readonly String where
 instance Attr everything Readonly Unit where
   attr Readonly bothValues = unsafeAttribute $ Both
     { key: "readonly", value: unset' }
-    (snd bothValues <#> \_ -> { key: "readonly", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "readonly", value: unset' })
   pureAttr Readonly _ = unsafeAttribute $ This
     { key: "readonly", value: unset' }
   unpureAttr Readonly eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

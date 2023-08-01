@@ -2,7 +2,7 @@ module Deku.DOM.Attr.FontStretch where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -31,8 +31,8 @@ data FontStretch = FontStretch
 
 instance Attr FeBlend_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,8 +40,8 @@ instance Attr FeBlend_ FontStretch String where
 
 instance Attr FeColorMatrix_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -49,8 +49,8 @@ instance Attr FeColorMatrix_ FontStretch String where
 
 instance Attr FeComponentTransfer_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -58,8 +58,8 @@ instance Attr FeComponentTransfer_ FontStretch String where
 
 instance Attr FeComposite_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -67,8 +67,8 @@ instance Attr FeComposite_ FontStretch String where
 
 instance Attr FeConvolveMatrix_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -76,8 +76,8 @@ instance Attr FeConvolveMatrix_ FontStretch String where
 
 instance Attr FeDiffuseLighting_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -85,8 +85,8 @@ instance Attr FeDiffuseLighting_ FontStretch String where
 
 instance Attr FeDisplacementMap_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -94,8 +94,8 @@ instance Attr FeDisplacementMap_ FontStretch String where
 
 instance Attr FeFlood_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -103,8 +103,8 @@ instance Attr FeFlood_ FontStretch String where
 
 instance Attr FeGaussianBlur_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -112,8 +112,8 @@ instance Attr FeGaussianBlur_ FontStretch String where
 
 instance Attr FeImage_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,8 +121,8 @@ instance Attr FeImage_ FontStretch String where
 
 instance Attr FeMerge_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,8 +130,8 @@ instance Attr FeMerge_ FontStretch String where
 
 instance Attr FeMorphology_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -139,8 +139,8 @@ instance Attr FeMorphology_ FontStretch String where
 
 instance Attr FeOffset_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -148,8 +148,8 @@ instance Attr FeOffset_ FontStretch String where
 
 instance Attr FeSpecularLighting_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -157,8 +157,8 @@ instance Attr FeSpecularLighting_ FontStretch String where
 
 instance Attr FeTile_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -166,8 +166,8 @@ instance Attr FeTile_ FontStretch String where
 
 instance Attr FeTurbulence_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -175,8 +175,8 @@ instance Attr FeTurbulence_ FontStretch String where
 
 instance Attr Filter_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -184,8 +184,8 @@ instance Attr Filter_ FontStretch String where
 
 instance Attr Image_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -193,8 +193,8 @@ instance Attr Image_ FontStretch String where
 
 instance Attr Switch_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -202,8 +202,8 @@ instance Attr Switch_ FontStretch String where
 
 instance Attr Text_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,8 +211,8 @@ instance Attr Text_ FontStretch String where
 
 instance Attr Tspan_ FontStretch String where
   attr FontStretch bothValues = unsafeAttribute $ Both
-    { key: "font-stretch", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-stretch", value: prop' value })
+    { key: "font-stretch", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-stretch", value: prop' value })
   pureAttr FontStretch value = unsafeAttribute $ This
     { key: "font-stretch", value: prop' value }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -221,7 +221,7 @@ instance Attr Tspan_ FontStretch String where
 instance Attr everything FontStretch Unit where
   attr FontStretch bothValues = unsafeAttribute $ Both
     { key: "font-stretch", value: unset' }
-    (snd bothValues <#> \_ -> { key: "font-stretch", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "font-stretch", value: unset' })
   pureAttr FontStretch _ = unsafeAttribute $ This
     { key: "font-stretch", value: unset' }
   unpureAttr FontStretch eventValue = unsafeAttribute $ That $ eventValue <#>

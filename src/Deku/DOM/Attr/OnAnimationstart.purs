@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnAnimationstart where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnAnimationstart = OnAnimationstart
 
 instance Attr anything OnAnimationstart Cb where
   attr OnAnimationstart bothValues = unsafeAttribute $ Both
-    { key: "animationstart", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "animationstart", value: cb' value })
+    { key: "animationstart", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "animationstart", value: cb' value })
   pureAttr OnAnimationstart value = unsafeAttribute $ This
     { key: "animationstart", value: cb' value }
   unpureAttr OnAnimationstart eventValue = unsafeAttribute $ That $ eventValue
@@ -21,9 +21,9 @@ instance Attr anything OnAnimationstart Cb where
 instance Attr anything OnAnimationstart (Effect Unit) where
   attr OnAnimationstart bothValues = unsafeAttribute $ Both
     { key: "animationstart"
-    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
     }
-    ( snd bothValues <#> \value ->
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "animationstart", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnAnimationstart value = unsafeAttribute $ This
@@ -34,8 +34,8 @@ instance Attr anything OnAnimationstart (Effect Unit) where
 
 instance Attr anything OnAnimationstart (Effect Boolean) where
   attr OnAnimationstart bothValues = unsafeAttribute $ Both
-    { key: "animationstart", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "animationstart", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "animationstart", value: cb' (Cb (const value)) }
     )
   pureAttr OnAnimationstart value = unsafeAttribute $ This
@@ -51,7 +51,7 @@ type OnAnimationstartEffect =
 instance Attr everything OnAnimationstart Unit where
   attr OnAnimationstart bothValues = unsafeAttribute $ Both
     { key: "animationstart", value: unset' }
-    (snd bothValues <#> \_ -> { key: "animationstart", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "animationstart", value: unset' })
   pureAttr OnAnimationstart _ = unsafeAttribute $ This
     { key: "animationstart", value: unset' }
   unpureAttr OnAnimationstart eventValue = unsafeAttribute $ That $ eventValue

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.RefX where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Symbol (Symbol_)
 import Deku.DOM.Elt.Marker (Marker_)
@@ -12,8 +12,8 @@ data RefX = RefX
 
 instance Attr Marker_ RefX String where
   attr RefX bothValues = unsafeAttribute $ Both
-    { key: "refX", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "refX", value: prop' value })
+    { key: "refX", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
   pureAttr RefX value = unsafeAttribute $ This
     { key: "refX", value: prop' value }
   unpureAttr RefX eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -21,8 +21,8 @@ instance Attr Marker_ RefX String where
 
 instance Attr Symbol_ RefX String where
   attr RefX bothValues = unsafeAttribute $ Both
-    { key: "refX", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "refX", value: prop' value })
+    { key: "refX", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
   pureAttr RefX value = unsafeAttribute $ This
     { key: "refX", value: prop' value }
   unpureAttr RefX eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -30,7 +30,7 @@ instance Attr Symbol_ RefX String where
 
 instance Attr everything RefX Unit where
   attr RefX bothValues = unsafeAttribute $ Both { key: "refX", value: unset' }
-    (snd bothValues <#> \_ -> { key: "refX", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "refX", value: unset' })
   pureAttr RefX _ = unsafeAttribute $ This { key: "refX", value: unset' }
   unpureAttr RefX eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "refX", value: unset' }

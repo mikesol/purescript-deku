@@ -4,7 +4,7 @@
 -- | ```purescript
 -- | Deku.do
 -- |  setCount /\ count <- useState 0
--- |  Deku.button (click $ counter <#> add 1 >>> setCount) [ text (show count) ]
+-- |  Deku.button (click' $ counter <#> add 1 >>> setCount) [ textShow' count ]
 -- | ```
 -- |
 -- | Deku hooks are covered more extensively in the
@@ -13,6 +13,7 @@
 module Deku.Hooks
   ( (<##~>)
   , (<#~>)
+  , (<$$~>)
   , (<$~>)
   , dynOptions
   , switcher
@@ -36,8 +37,9 @@ module Deku.Hooks
   , useMemoized'
   , useRef
   , useState
-  )
-  where
+  , useState'
+  , useStateWithRef
+  ) where
 
 import Prelude
 
@@ -52,6 +54,7 @@ import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
+import Data.NonEmpty (NonEmpty(..), tail)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
@@ -81,10 +84,10 @@ __internalDekuFlatten
 __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
-useState
+useState'
   :: forall a
    . Hook ((a -> Effect Unit) /\ Event a)
-useState f = Nut go'
+useState' f = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -95,6 +98,24 @@ useState f = Nut go'
   go i di = do
     { event, push } <- create
     let Nut nf = f (push /\ event)
+    __internalDekuFlatten nf i di
+
+-- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
+useState
+  :: forall a
+   . a
+  -> Hook ((a -> Effect Unit) /\ NonEmpty Event a)
+useState a f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = do
+    { event, push } <- create
+    let Nut nf = f (push /\ NonEmpty a event)
     __internalDekuFlatten nf i di
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
@@ -127,7 +148,7 @@ useMemoized'
    . (Event a -> Event b)
   -> Hook ((a -> Effect Unit) /\ Event b)
 useMemoized' f0 makeHook = Deku.do
-  push /\ e <- useState
+  push /\ e <- useState'
   m <- useMemoized (f0 e)
   makeHook (push /\ m)
 
@@ -158,6 +179,15 @@ useRef a e makeHook = Nut go'
       pure do
         u0
         u1
+
+useStateWithRef
+  :: forall a
+   . a
+  -> Hook (Effect a /\ (a -> Effect Unit) /\ NonEmpty Event a)
+useStateWithRef a f = Deku.do
+  push /\ e <- useState a
+  ref <- useRef a (tail e)
+  f (ref /\ push /\ e)
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
 -- | given an address, at which point they listen for a payload. This is useful when listening to
@@ -233,7 +263,7 @@ useDynWith arr e opts f = Nut go'
     c0 <- create
     c1 <- create
     let
-      Nut nf = dyn $ Tuple  (map (mc c0) arr) $ map (mc c1) e
+      Nut nf = dyn $ Tuple (map (mc c0) arr) $ map (mc c1) e
     __internalDekuFlatten nf i di
 
 useDynAtBeginningWith
@@ -300,12 +330,12 @@ infixl 4 switcher as <$~>
 -- | A version of switcher that produces an initial value when `Nothing` is passed in.
 switcherWithInitialValue
   :: forall a
-   . (Maybe a -> Nut)
-  -> Event a
+   . (a -> Nut)
+  -> NonEmpty Event a
   -> Nut
-switcherWithInitialValue f event = Deku.do
+switcherWithInitialValue f (NonEmpty h event) = Deku.do
   ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith [ Tuple 0 Nothing ] (map (map Just) ctr) $
+  { value } <- useDynAtBeginningWith [ Tuple 0 h ] ctr $
     dynOptions
       { remove = \(Tuple oldV _) -> filterMap
           (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
@@ -331,8 +361,8 @@ infixl 1 switcherFlipped as <#~>
 
 switcherWithInitialValueFlipped
   :: forall a
-   . Event a
-  -> (Maybe a -> Nut)
+   . NonEmpty Event a
+  -> (a -> Nut)
   -> Nut
 switcherWithInitialValueFlipped = flip switcherWithInitialValue
 

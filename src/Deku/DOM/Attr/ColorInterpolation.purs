@@ -2,7 +2,7 @@ module Deku.DOM.Attr.ColorInterpolation where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -49,8 +49,8 @@ data ColorInterpolation = ColorInterpolation
 
 instance Attr Circle_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -60,8 +60,8 @@ instance Attr Circle_ ColorInterpolation String where
 
 instance Attr Defs_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -71,8 +71,8 @@ instance Attr Defs_ ColorInterpolation String where
 
 instance Attr Ellipse_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -82,8 +82,8 @@ instance Attr Ellipse_ ColorInterpolation String where
 
 instance Attr FeBlend_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -93,8 +93,8 @@ instance Attr FeBlend_ ColorInterpolation String where
 
 instance Attr FeColorMatrix_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -104,8 +104,8 @@ instance Attr FeColorMatrix_ ColorInterpolation String where
 
 instance Attr FeComponentTransfer_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -115,8 +115,8 @@ instance Attr FeComponentTransfer_ ColorInterpolation String where
 
 instance Attr FeComposite_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -126,8 +126,8 @@ instance Attr FeComposite_ ColorInterpolation String where
 
 instance Attr FeConvolveMatrix_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -137,8 +137,8 @@ instance Attr FeConvolveMatrix_ ColorInterpolation String where
 
 instance Attr FeDiffuseLighting_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -148,8 +148,8 @@ instance Attr FeDiffuseLighting_ ColorInterpolation String where
 
 instance Attr FeDisplacementMap_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -159,8 +159,8 @@ instance Attr FeDisplacementMap_ ColorInterpolation String where
 
 instance Attr FeFlood_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -170,8 +170,8 @@ instance Attr FeFlood_ ColorInterpolation String where
 
 instance Attr FeGaussianBlur_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -181,8 +181,8 @@ instance Attr FeGaussianBlur_ ColorInterpolation String where
 
 instance Attr FeImage_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -192,8 +192,8 @@ instance Attr FeImage_ ColorInterpolation String where
 
 instance Attr FeMerge_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -203,8 +203,8 @@ instance Attr FeMerge_ ColorInterpolation String where
 
 instance Attr FeMorphology_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -214,8 +214,8 @@ instance Attr FeMorphology_ ColorInterpolation String where
 
 instance Attr FeOffset_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -225,8 +225,8 @@ instance Attr FeOffset_ ColorInterpolation String where
 
 instance Attr FeSpecularLighting_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -236,8 +236,8 @@ instance Attr FeSpecularLighting_ ColorInterpolation String where
 
 instance Attr FeTile_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -247,8 +247,8 @@ instance Attr FeTile_ ColorInterpolation String where
 
 instance Attr FeTurbulence_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -258,8 +258,8 @@ instance Attr FeTurbulence_ ColorInterpolation String where
 
 instance Attr Filter_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -269,8 +269,8 @@ instance Attr Filter_ ColorInterpolation String where
 
 instance Attr ForeignObject_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -280,8 +280,8 @@ instance Attr ForeignObject_ ColorInterpolation String where
 
 instance Attr G_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -291,8 +291,8 @@ instance Attr G_ ColorInterpolation String where
 
 instance Attr Image_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -302,8 +302,8 @@ instance Attr Image_ ColorInterpolation String where
 
 instance Attr Line_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -313,8 +313,8 @@ instance Attr Line_ ColorInterpolation String where
 
 instance Attr LinearGradient_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -324,8 +324,8 @@ instance Attr LinearGradient_ ColorInterpolation String where
 
 instance Attr Marker_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -335,8 +335,8 @@ instance Attr Marker_ ColorInterpolation String where
 
 instance Attr Path_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -346,8 +346,8 @@ instance Attr Path_ ColorInterpolation String where
 
 instance Attr Pattern_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -357,8 +357,8 @@ instance Attr Pattern_ ColorInterpolation String where
 
 instance Attr Polygon_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -368,8 +368,8 @@ instance Attr Polygon_ ColorInterpolation String where
 
 instance Attr Polyline_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -379,8 +379,8 @@ instance Attr Polyline_ ColorInterpolation String where
 
 instance Attr RadialGradient_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -390,8 +390,8 @@ instance Attr RadialGradient_ ColorInterpolation String where
 
 instance Attr Rect_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -401,8 +401,8 @@ instance Attr Rect_ ColorInterpolation String where
 
 instance Attr Svg_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -412,8 +412,8 @@ instance Attr Svg_ ColorInterpolation String where
 
 instance Attr Switch_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -423,8 +423,8 @@ instance Attr Switch_ ColorInterpolation String where
 
 instance Attr Symbol_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -434,8 +434,8 @@ instance Attr Symbol_ ColorInterpolation String where
 
 instance Attr Text_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -445,8 +445,8 @@ instance Attr Text_ ColorInterpolation String where
 
 instance Attr TextPath_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -456,8 +456,8 @@ instance Attr TextPath_ ColorInterpolation String where
 
 instance Attr Tspan_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -467,8 +467,8 @@ instance Attr Tspan_ ColorInterpolation String where
 
 instance Attr Use_ ColorInterpolation String where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "color-interpolation", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation", value: prop' value }
     )
   pureAttr ColorInterpolation value = unsafeAttribute $ This
@@ -479,7 +479,7 @@ instance Attr Use_ ColorInterpolation String where
 instance Attr everything ColorInterpolation Unit where
   attr ColorInterpolation bothValues = unsafeAttribute $ Both
     { key: "color-interpolation", value: unset' }
-    (snd bothValues <#> \_ -> { key: "color-interpolation", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "color-interpolation", value: unset' })
   pureAttr ColorInterpolation _ = unsafeAttribute $ This
     { key: "color-interpolation", value: unset' }
   unpureAttr ColorInterpolation eventValue = unsafeAttribute $ That $ eventValue

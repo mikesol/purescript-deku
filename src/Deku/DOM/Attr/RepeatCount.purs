@@ -2,7 +2,7 @@ module Deku.DOM.Attr.RepeatCount where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
@@ -14,8 +14,8 @@ data RepeatCount = RepeatCount
 
 instance Attr Animate_ RepeatCount String where
   attr RepeatCount bothValues = unsafeAttribute $ Both
-    { key: "repeatCount", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
+    { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
   pureAttr RepeatCount value = unsafeAttribute $ This
     { key: "repeatCount", value: prop' value }
   unpureAttr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Animate_ RepeatCount String where
 
 instance Attr AnimateMotion_ RepeatCount String where
   attr RepeatCount bothValues = unsafeAttribute $ Both
-    { key: "repeatCount", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
+    { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
   pureAttr RepeatCount value = unsafeAttribute $ This
     { key: "repeatCount", value: prop' value }
   unpureAttr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr AnimateMotion_ RepeatCount String where
 
 instance Attr AnimateTransform_ RepeatCount String where
   attr RepeatCount bothValues = unsafeAttribute $ Both
-    { key: "repeatCount", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
+    { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
   pureAttr RepeatCount value = unsafeAttribute $ This
     { key: "repeatCount", value: prop' value }
   unpureAttr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ RepeatCount String where
 
 instance Attr Set_ RepeatCount String where
   attr RepeatCount bothValues = unsafeAttribute $ Both
-    { key: "repeatCount", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
+    { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
   pureAttr RepeatCount value = unsafeAttribute $ This
     { key: "repeatCount", value: prop' value }
   unpureAttr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Set_ RepeatCount String where
 instance Attr everything RepeatCount Unit where
   attr RepeatCount bothValues = unsafeAttribute $ Both
     { key: "repeatCount", value: unset' }
-    (snd bothValues <#> \_ -> { key: "repeatCount", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "repeatCount", value: unset' })
   pureAttr RepeatCount _ = unsafeAttribute $ This
     { key: "repeatCount", value: unset' }
   unpureAttr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>

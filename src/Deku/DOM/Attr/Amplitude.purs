@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Amplitude where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.FeFuncR (FeFuncR_)
 import Deku.DOM.Elt.FeFuncG (FeFuncG_)
@@ -14,8 +14,8 @@ data Amplitude = Amplitude
 
 instance Attr FeFuncA_ Amplitude String where
   attr Amplitude bothValues = unsafeAttribute $ Both
-    { key: "amplitude", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "amplitude", value: prop' value })
+    { key: "amplitude", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "amplitude", value: prop' value })
   pureAttr Amplitude value = unsafeAttribute $ This
     { key: "amplitude", value: prop' value }
   unpureAttr Amplitude eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr FeFuncA_ Amplitude String where
 
 instance Attr FeFuncB_ Amplitude String where
   attr Amplitude bothValues = unsafeAttribute $ Both
-    { key: "amplitude", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "amplitude", value: prop' value })
+    { key: "amplitude", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "amplitude", value: prop' value })
   pureAttr Amplitude value = unsafeAttribute $ This
     { key: "amplitude", value: prop' value }
   unpureAttr Amplitude eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr FeFuncB_ Amplitude String where
 
 instance Attr FeFuncG_ Amplitude String where
   attr Amplitude bothValues = unsafeAttribute $ Both
-    { key: "amplitude", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "amplitude", value: prop' value })
+    { key: "amplitude", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "amplitude", value: prop' value })
   pureAttr Amplitude value = unsafeAttribute $ This
     { key: "amplitude", value: prop' value }
   unpureAttr Amplitude eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr FeFuncG_ Amplitude String where
 
 instance Attr FeFuncR_ Amplitude String where
   attr Amplitude bothValues = unsafeAttribute $ Both
-    { key: "amplitude", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "amplitude", value: prop' value })
+    { key: "amplitude", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "amplitude", value: prop' value })
   pureAttr Amplitude value = unsafeAttribute $ This
     { key: "amplitude", value: prop' value }
   unpureAttr Amplitude eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr FeFuncR_ Amplitude String where
 instance Attr everything Amplitude Unit where
   attr Amplitude bothValues = unsafeAttribute $ Both
     { key: "amplitude", value: unset' }
-    (snd bothValues <#> \_ -> { key: "amplitude", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "amplitude", value: unset' })
   pureAttr Amplitude _ = unsafeAttribute $ This
     { key: "amplitude", value: unset' }
   unpureAttr Amplitude eventValue = unsafeAttribute $ That $ eventValue <#>

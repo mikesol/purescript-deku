@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XlinkTitle where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
 import Deku.DOM.Elt.Pattern (Pattern_)
@@ -18,8 +18,8 @@ data XlinkTitle = XlinkTitle
 
 instance Attr AnimateTransform_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,8 +27,8 @@ instance Attr AnimateTransform_ XlinkTitle String where
 
 instance Attr FeImage_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr FeImage_ XlinkTitle String where
 
 instance Attr Filter_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Filter_ XlinkTitle String where
 
 instance Attr Image_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr Image_ XlinkTitle String where
 
 instance Attr LinearGradient_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr LinearGradient_ XlinkTitle String where
 
 instance Attr Mpath_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Mpath_ XlinkTitle String where
 
 instance Attr Pattern_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Pattern_ XlinkTitle String where
 
 instance Attr RadialGradient_ XlinkTitle String where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
-    { key: "xlink:title", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:title", value: prop' value })
+    { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
   pureAttr XlinkTitle value = unsafeAttribute $ This
     { key: "xlink:title", value: prop' value }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -91,7 +91,7 @@ instance Attr RadialGradient_ XlinkTitle String where
 instance Attr everything XlinkTitle Unit where
   attr XlinkTitle bothValues = unsafeAttribute $ Both
     { key: "xlink:title", value: unset' }
-    (snd bothValues <#> \_ -> { key: "xlink:title", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:title", value: unset' })
   pureAttr XlinkTitle _ = unsafeAttribute $ This
     { key: "xlink:title", value: unset' }
   unpureAttr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>

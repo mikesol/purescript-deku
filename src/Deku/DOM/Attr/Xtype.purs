@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Xtype where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -26,8 +26,8 @@ data Xtype = Xtype
 
 instance Attr Button_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -35,8 +35,8 @@ instance Attr Button_ Xtype String where
 
 instance Attr Input_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,8 +44,8 @@ instance Attr Input_ Xtype String where
 
 instance Attr Embed_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,8 +53,8 @@ instance Attr Embed_ Xtype String where
 
 instance Attr Object_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,8 +62,8 @@ instance Attr Object_ Xtype String where
 
 instance Attr Script_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -71,8 +71,8 @@ instance Attr Script_ Xtype String where
 
 instance Attr Source_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -80,8 +80,8 @@ instance Attr Source_ Xtype String where
 
 instance Attr Style_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -89,8 +89,8 @@ instance Attr Style_ Xtype String where
 
 instance Attr Link_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -98,8 +98,8 @@ instance Attr Link_ Xtype String where
 
 instance Attr AnimateTransform_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -107,8 +107,8 @@ instance Attr AnimateTransform_ Xtype String where
 
 instance Attr FeColorMatrix_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -116,8 +116,8 @@ instance Attr FeColorMatrix_ Xtype String where
 
 instance Attr FeFuncA_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -125,8 +125,8 @@ instance Attr FeFuncA_ Xtype String where
 
 instance Attr FeFuncB_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -134,8 +134,8 @@ instance Attr FeFuncB_ Xtype String where
 
 instance Attr FeFuncG_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,8 +143,8 @@ instance Attr FeFuncG_ Xtype String where
 
 instance Attr FeFuncR_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,8 +152,8 @@ instance Attr FeFuncR_ Xtype String where
 
 instance Attr FeTurbulence_ Xtype String where
   attr Xtype bothValues = unsafeAttribute $ Both
-    { key: "type", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "type", value: prop' value })
+    { key: "type", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
   pureAttr Xtype value = unsafeAttribute $ This
     { key: "type", value: prop' value }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -161,7 +161,7 @@ instance Attr FeTurbulence_ Xtype String where
 
 instance Attr everything Xtype Unit where
   attr Xtype bothValues = unsafeAttribute $ Both { key: "type", value: unset' }
-    (snd bothValues <#> \_ -> { key: "type", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "type", value: unset' })
   pureAttr Xtype _ = unsafeAttribute $ This { key: "type", value: unset' }
   unpureAttr Xtype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "type", value: unset' }

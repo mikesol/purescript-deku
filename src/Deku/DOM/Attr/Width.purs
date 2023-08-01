@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Width where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Symbol (Symbol_)
@@ -43,8 +43,8 @@ data Width = Width
 
 instance Attr Canvas_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,8 +52,8 @@ instance Attr Canvas_ Width String where
 
 instance Attr Embed_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,8 +61,8 @@ instance Attr Embed_ Width String where
 
 instance Attr Iframe_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -70,8 +70,8 @@ instance Attr Iframe_ Width String where
 
 instance Attr Img_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -79,8 +79,8 @@ instance Attr Img_ Width String where
 
 instance Attr Input_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,8 +88,8 @@ instance Attr Input_ Width String where
 
 instance Attr Object_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,8 +97,8 @@ instance Attr Object_ Width String where
 
 instance Attr Video_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -106,8 +106,8 @@ instance Attr Video_ Width String where
 
 instance Attr FeBlend_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -115,8 +115,8 @@ instance Attr FeBlend_ Width String where
 
 instance Attr FeColorMatrix_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -124,8 +124,8 @@ instance Attr FeColorMatrix_ Width String where
 
 instance Attr FeComponentTransfer_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -133,8 +133,8 @@ instance Attr FeComponentTransfer_ Width String where
 
 instance Attr FeComposite_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -142,8 +142,8 @@ instance Attr FeComposite_ Width String where
 
 instance Attr FeConvolveMatrix_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -151,8 +151,8 @@ instance Attr FeConvolveMatrix_ Width String where
 
 instance Attr FeDiffuseLighting_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -160,8 +160,8 @@ instance Attr FeDiffuseLighting_ Width String where
 
 instance Attr FeDisplacementMap_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -169,8 +169,8 @@ instance Attr FeDisplacementMap_ Width String where
 
 instance Attr FeDropShadow_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -178,8 +178,8 @@ instance Attr FeDropShadow_ Width String where
 
 instance Attr FeFlood_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,8 +187,8 @@ instance Attr FeFlood_ Width String where
 
 instance Attr FeGaussianBlur_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,8 +196,8 @@ instance Attr FeGaussianBlur_ Width String where
 
 instance Attr FeImage_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -205,8 +205,8 @@ instance Attr FeImage_ Width String where
 
 instance Attr FeMerge_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -214,8 +214,8 @@ instance Attr FeMerge_ Width String where
 
 instance Attr FeMorphology_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -223,8 +223,8 @@ instance Attr FeMorphology_ Width String where
 
 instance Attr FeOffset_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -232,8 +232,8 @@ instance Attr FeOffset_ Width String where
 
 instance Attr FeSpecularLighting_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -241,8 +241,8 @@ instance Attr FeSpecularLighting_ Width String where
 
 instance Attr FeTile_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -250,8 +250,8 @@ instance Attr FeTile_ Width String where
 
 instance Attr FeTurbulence_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -259,8 +259,8 @@ instance Attr FeTurbulence_ Width String where
 
 instance Attr Filter_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -268,8 +268,8 @@ instance Attr Filter_ Width String where
 
 instance Attr ForeignObject_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -277,8 +277,8 @@ instance Attr ForeignObject_ Width String where
 
 instance Attr Image_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -286,8 +286,8 @@ instance Attr Image_ Width String where
 
 instance Attr Mask_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -295,8 +295,8 @@ instance Attr Mask_ Width String where
 
 instance Attr Pattern_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -304,8 +304,8 @@ instance Attr Pattern_ Width String where
 
 instance Attr Rect_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -313,8 +313,8 @@ instance Attr Rect_ Width String where
 
 instance Attr Svg_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -322,8 +322,8 @@ instance Attr Svg_ Width String where
 
 instance Attr Symbol_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -331,8 +331,8 @@ instance Attr Symbol_ Width String where
 
 instance Attr Use_ Width String where
   attr Width bothValues = unsafeAttribute $ Both
-    { key: "width", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "width", value: prop' value })
+    { key: "width", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
   pureAttr Width value = unsafeAttribute $ This
     { key: "width", value: prop' value }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -340,7 +340,7 @@ instance Attr Use_ Width String where
 
 instance Attr everything Width Unit where
   attr Width bothValues = unsafeAttribute $ Both { key: "width", value: unset' }
-    (snd bothValues <#> \_ -> { key: "width", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "width", value: unset' })
   pureAttr Width _ = unsafeAttribute $ This { key: "width", value: unset' }
   unpureAttr Width eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "width", value: unset' }

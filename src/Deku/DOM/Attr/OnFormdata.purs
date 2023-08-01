@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnFormdata where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnFormdata = OnFormdata
 
 instance Attr anything OnFormdata Cb where
   attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "formdata", value: cb' value })
+    { key: "formdata", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "formdata", value: cb' value })
   pureAttr OnFormdata value = unsafeAttribute $ This
     { key: "formdata", value: cb' value }
   unpureAttr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnFormdata Cb where
 
 instance Attr anything OnFormdata (Effect Unit) where
   attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "formdata", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnFormdata value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnFormdata (Effect Unit) where
 
 instance Attr anything OnFormdata (Effect Boolean) where
   attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "formdata", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const value)) }
     )
   pureAttr OnFormdata value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnFormdataEffect =
 instance Attr everything OnFormdata Unit where
   attr OnFormdata bothValues = unsafeAttribute $ Both
     { key: "formdata", value: unset' }
-    (snd bothValues <#> \_ -> { key: "formdata", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "formdata", value: unset' })
   pureAttr OnFormdata _ = unsafeAttribute $ This
     { key: "formdata", value: unset' }
   unpureAttr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnCanplaythrough where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnCanplaythrough = OnCanplaythrough
 
 instance Attr anything OnCanplaythrough Cb where
   attr OnCanplaythrough bothValues = unsafeAttribute $ Both
-    { key: "canplaythrough", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "canplaythrough", value: cb' value })
+    { key: "canplaythrough", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "canplaythrough", value: cb' value })
   pureAttr OnCanplaythrough value = unsafeAttribute $ This
     { key: "canplaythrough", value: cb' value }
   unpureAttr OnCanplaythrough eventValue = unsafeAttribute $ That $ eventValue
@@ -21,9 +21,9 @@ instance Attr anything OnCanplaythrough Cb where
 instance Attr anything OnCanplaythrough (Effect Unit) where
   attr OnCanplaythrough bothValues = unsafeAttribute $ Both
     { key: "canplaythrough"
-    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
     }
-    ( snd bothValues <#> \value ->
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnCanplaythrough value = unsafeAttribute $ This
@@ -34,8 +34,8 @@ instance Attr anything OnCanplaythrough (Effect Unit) where
 
 instance Attr anything OnCanplaythrough (Effect Boolean) where
   attr OnCanplaythrough bothValues = unsafeAttribute $ Both
-    { key: "canplaythrough", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "canplaythrough", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "canplaythrough", value: cb' (Cb (const value)) }
     )
   pureAttr OnCanplaythrough value = unsafeAttribute $ This
@@ -51,7 +51,7 @@ type OnCanplaythroughEffect =
 instance Attr everything OnCanplaythrough Unit where
   attr OnCanplaythrough bothValues = unsafeAttribute $ Both
     { key: "canplaythrough", value: unset' }
-    (snd bothValues <#> \_ -> { key: "canplaythrough", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "canplaythrough", value: unset' })
   pureAttr OnCanplaythrough _ = unsafeAttribute $ This
     { key: "canplaythrough", value: unset' }
   unpureAttr OnCanplaythrough eventValue = unsafeAttribute $ That $ eventValue

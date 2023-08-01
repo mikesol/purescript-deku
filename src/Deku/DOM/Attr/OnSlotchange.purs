@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnSlotchange where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnSlotchange = OnSlotchange
 
 instance Attr anything OnSlotchange Cb where
   attr OnSlotchange bothValues = unsafeAttribute $ Both
-    { key: "slotchange", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slotchange", value: cb' value })
+    { key: "slotchange", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slotchange", value: cb' value })
   pureAttr OnSlotchange value = unsafeAttribute $ This
     { key: "slotchange", value: cb' value }
   unpureAttr OnSlotchange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnSlotchange Cb where
 
 instance Attr anything OnSlotchange (Effect Unit) where
   attr OnSlotchange bothValues = unsafeAttribute $ Both
-    { key: "slotchange", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "slotchange", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "slotchange", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnSlotchange value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnSlotchange (Effect Unit) where
 
 instance Attr anything OnSlotchange (Effect Boolean) where
   attr OnSlotchange bothValues = unsafeAttribute $ Both
-    { key: "slotchange", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "slotchange", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "slotchange", value: cb' (Cb (const value)) }
     )
   pureAttr OnSlotchange value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnSlotchangeEffect =
 instance Attr everything OnSlotchange Unit where
   attr OnSlotchange bothValues = unsafeAttribute $ Both
     { key: "slotchange", value: unset' }
-    (snd bothValues <#> \_ -> { key: "slotchange", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "slotchange", value: unset' })
   pureAttr OnSlotchange _ = unsafeAttribute $ This
     { key: "slotchange", value: unset' }
   unpureAttr OnSlotchange eventValue = unsafeAttribute $ That $ eventValue <#>

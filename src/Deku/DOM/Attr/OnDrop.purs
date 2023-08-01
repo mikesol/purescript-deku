@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDrop where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnDrop = OnDrop
 
 instance Attr anything OnDrop Cb where
   attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "drop", value: cb' value })
+    { key: "drop", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "drop", value: cb' value })
   pureAttr OnDrop value = unsafeAttribute $ This
     { key: "drop", value: cb' value }
   unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnDrop Cb where
 
 instance Attr anything OnDrop (Effect Unit) where
   attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "drop", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnDrop value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnDrop (Effect Unit) where
 
 instance Attr anything OnDrop (Effect Boolean) where
   attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "drop", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const value)) }
     )
   pureAttr OnDrop value = unsafeAttribute $ This
@@ -45,7 +45,7 @@ type OnDropEffect =
 
 instance Attr everything OnDrop Unit where
   attr OnDrop bothValues = unsafeAttribute $ Both { key: "drop", value: unset' }
-    (snd bothValues <#> \_ -> { key: "drop", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "drop", value: unset' })
   pureAttr OnDrop _ = unsafeAttribute $ This { key: "drop", value: unset' }
   unpureAttr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "drop", value: unset' }

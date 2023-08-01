@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Autoplay where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Video (Video_)
@@ -12,8 +12,8 @@ data Autoplay = Autoplay
 
 instance Attr Audio_ Autoplay String where
   attr Autoplay bothValues = unsafeAttribute $ Both
-    { key: "autoplay", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autoplay", value: prop' value })
+    { key: "autoplay", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
   pureAttr Autoplay value = unsafeAttribute $ This
     { key: "autoplay", value: prop' value }
   unpureAttr Autoplay eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Audio_ Autoplay String where
 
 instance Attr Video_ Autoplay String where
   attr Autoplay bothValues = unsafeAttribute $ Both
-    { key: "autoplay", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "autoplay", value: prop' value })
+    { key: "autoplay", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
   pureAttr Autoplay value = unsafeAttribute $ This
     { key: "autoplay", value: prop' value }
   unpureAttr Autoplay eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Video_ Autoplay String where
 instance Attr everything Autoplay Unit where
   attr Autoplay bothValues = unsafeAttribute $ Both
     { key: "autoplay", value: unset' }
-    (snd bothValues <#> \_ -> { key: "autoplay", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "autoplay", value: unset' })
   pureAttr Autoplay _ = unsafeAttribute $ This
     { key: "autoplay", value: unset' }
   unpureAttr Autoplay eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

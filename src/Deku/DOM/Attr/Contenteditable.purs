@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Contenteditable where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -132,8 +132,8 @@ data Contenteditable = Contenteditable
 
 instance Attr A_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -143,8 +143,8 @@ instance Attr A_ Contenteditable String where
 
 instance Attr Abbr_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -154,8 +154,8 @@ instance Attr Abbr_ Contenteditable String where
 
 instance Attr Acronym_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -165,8 +165,8 @@ instance Attr Acronym_ Contenteditable String where
 
 instance Attr Address_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -176,8 +176,8 @@ instance Attr Address_ Contenteditable String where
 
 instance Attr Applet_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -187,8 +187,8 @@ instance Attr Applet_ Contenteditable String where
 
 instance Attr Area_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -198,8 +198,8 @@ instance Attr Area_ Contenteditable String where
 
 instance Attr Article_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -209,8 +209,8 @@ instance Attr Article_ Contenteditable String where
 
 instance Attr Aside_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -220,8 +220,8 @@ instance Attr Aside_ Contenteditable String where
 
 instance Attr Audio_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -231,8 +231,8 @@ instance Attr Audio_ Contenteditable String where
 
 instance Attr B_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -242,8 +242,8 @@ instance Attr B_ Contenteditable String where
 
 instance Attr Base_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -253,8 +253,8 @@ instance Attr Base_ Contenteditable String where
 
 instance Attr Basefont_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -264,8 +264,8 @@ instance Attr Basefont_ Contenteditable String where
 
 instance Attr Bdi_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -275,8 +275,8 @@ instance Attr Bdi_ Contenteditable String where
 
 instance Attr Bdo_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -286,8 +286,8 @@ instance Attr Bdo_ Contenteditable String where
 
 instance Attr Big_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -297,8 +297,8 @@ instance Attr Big_ Contenteditable String where
 
 instance Attr Blockquote_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -308,8 +308,8 @@ instance Attr Blockquote_ Contenteditable String where
 
 instance Attr Body_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -319,8 +319,8 @@ instance Attr Body_ Contenteditable String where
 
 instance Attr Br_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -330,8 +330,8 @@ instance Attr Br_ Contenteditable String where
 
 instance Attr Button_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -341,8 +341,8 @@ instance Attr Button_ Contenteditable String where
 
 instance Attr Canvas_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -352,8 +352,8 @@ instance Attr Canvas_ Contenteditable String where
 
 instance Attr Caption_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -363,8 +363,8 @@ instance Attr Caption_ Contenteditable String where
 
 instance Attr Center_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -374,8 +374,8 @@ instance Attr Center_ Contenteditable String where
 
 instance Attr Cite_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -385,8 +385,8 @@ instance Attr Cite_ Contenteditable String where
 
 instance Attr Code_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -396,8 +396,8 @@ instance Attr Code_ Contenteditable String where
 
 instance Attr Col_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -407,8 +407,8 @@ instance Attr Col_ Contenteditable String where
 
 instance Attr Colgroup_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -418,8 +418,8 @@ instance Attr Colgroup_ Contenteditable String where
 
 instance Attr Xdata_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -429,8 +429,8 @@ instance Attr Xdata_ Contenteditable String where
 
 instance Attr Datalist_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -440,8 +440,8 @@ instance Attr Datalist_ Contenteditable String where
 
 instance Attr Dd_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -451,8 +451,8 @@ instance Attr Dd_ Contenteditable String where
 
 instance Attr Del_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -462,8 +462,8 @@ instance Attr Del_ Contenteditable String where
 
 instance Attr Details_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -473,8 +473,8 @@ instance Attr Details_ Contenteditable String where
 
 instance Attr Dfn_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -484,8 +484,8 @@ instance Attr Dfn_ Contenteditable String where
 
 instance Attr Dialog_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -495,8 +495,8 @@ instance Attr Dialog_ Contenteditable String where
 
 instance Attr Dir_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -506,8 +506,8 @@ instance Attr Dir_ Contenteditable String where
 
 instance Attr Div_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -517,8 +517,8 @@ instance Attr Div_ Contenteditable String where
 
 instance Attr Dl_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -528,8 +528,8 @@ instance Attr Dl_ Contenteditable String where
 
 instance Attr Dt_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -539,8 +539,8 @@ instance Attr Dt_ Contenteditable String where
 
 instance Attr Em_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -550,8 +550,8 @@ instance Attr Em_ Contenteditable String where
 
 instance Attr Embed_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -561,8 +561,8 @@ instance Attr Embed_ Contenteditable String where
 
 instance Attr Fieldset_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -572,8 +572,8 @@ instance Attr Fieldset_ Contenteditable String where
 
 instance Attr Figcaption_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -583,8 +583,8 @@ instance Attr Figcaption_ Contenteditable String where
 
 instance Attr Figure_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -594,8 +594,8 @@ instance Attr Figure_ Contenteditable String where
 
 instance Attr Font_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -605,8 +605,8 @@ instance Attr Font_ Contenteditable String where
 
 instance Attr Footer_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -616,8 +616,8 @@ instance Attr Footer_ Contenteditable String where
 
 instance Attr Form_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -627,8 +627,8 @@ instance Attr Form_ Contenteditable String where
 
 instance Attr Frame_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -638,8 +638,8 @@ instance Attr Frame_ Contenteditable String where
 
 instance Attr Frameset_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -649,8 +649,8 @@ instance Attr Frameset_ Contenteditable String where
 
 instance Attr H1_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -660,8 +660,8 @@ instance Attr H1_ Contenteditable String where
 
 instance Attr H2_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -671,8 +671,8 @@ instance Attr H2_ Contenteditable String where
 
 instance Attr H3_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -682,8 +682,8 @@ instance Attr H3_ Contenteditable String where
 
 instance Attr H4_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -693,8 +693,8 @@ instance Attr H4_ Contenteditable String where
 
 instance Attr H5_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -704,8 +704,8 @@ instance Attr H5_ Contenteditable String where
 
 instance Attr H6_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -715,8 +715,8 @@ instance Attr H6_ Contenteditable String where
 
 instance Attr Head_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -726,8 +726,8 @@ instance Attr Head_ Contenteditable String where
 
 instance Attr Header_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -737,8 +737,8 @@ instance Attr Header_ Contenteditable String where
 
 instance Attr Hr_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -748,8 +748,8 @@ instance Attr Hr_ Contenteditable String where
 
 instance Attr Html_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -759,8 +759,8 @@ instance Attr Html_ Contenteditable String where
 
 instance Attr I_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -770,8 +770,8 @@ instance Attr I_ Contenteditable String where
 
 instance Attr Iframe_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -781,8 +781,8 @@ instance Attr Iframe_ Contenteditable String where
 
 instance Attr Img_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -792,8 +792,8 @@ instance Attr Img_ Contenteditable String where
 
 instance Attr Input_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -803,8 +803,8 @@ instance Attr Input_ Contenteditable String where
 
 instance Attr Ins_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -814,8 +814,8 @@ instance Attr Ins_ Contenteditable String where
 
 instance Attr Kbd_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -825,8 +825,8 @@ instance Attr Kbd_ Contenteditable String where
 
 instance Attr Label_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -836,8 +836,8 @@ instance Attr Label_ Contenteditable String where
 
 instance Attr Legend_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -847,8 +847,8 @@ instance Attr Legend_ Contenteditable String where
 
 instance Attr Li_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -858,8 +858,8 @@ instance Attr Li_ Contenteditable String where
 
 instance Attr Link_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -869,8 +869,8 @@ instance Attr Link_ Contenteditable String where
 
 instance Attr Main_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -880,8 +880,8 @@ instance Attr Main_ Contenteditable String where
 
 instance Attr Map_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -891,8 +891,8 @@ instance Attr Map_ Contenteditable String where
 
 instance Attr Mark_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -902,8 +902,8 @@ instance Attr Mark_ Contenteditable String where
 
 instance Attr Meta_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -913,8 +913,8 @@ instance Attr Meta_ Contenteditable String where
 
 instance Attr Meter_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -924,8 +924,8 @@ instance Attr Meter_ Contenteditable String where
 
 instance Attr Nav_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -935,8 +935,8 @@ instance Attr Nav_ Contenteditable String where
 
 instance Attr Noframes_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -946,8 +946,8 @@ instance Attr Noframes_ Contenteditable String where
 
 instance Attr Noscript_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -957,8 +957,8 @@ instance Attr Noscript_ Contenteditable String where
 
 instance Attr Object_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -968,8 +968,8 @@ instance Attr Object_ Contenteditable String where
 
 instance Attr Ol_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -979,8 +979,8 @@ instance Attr Ol_ Contenteditable String where
 
 instance Attr Optgroup_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -990,8 +990,8 @@ instance Attr Optgroup_ Contenteditable String where
 
 instance Attr Option_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1001,8 +1001,8 @@ instance Attr Option_ Contenteditable String where
 
 instance Attr Output_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1012,8 +1012,8 @@ instance Attr Output_ Contenteditable String where
 
 instance Attr P_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1023,8 +1023,8 @@ instance Attr P_ Contenteditable String where
 
 instance Attr Param_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1034,8 +1034,8 @@ instance Attr Param_ Contenteditable String where
 
 instance Attr Picture_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1045,8 +1045,8 @@ instance Attr Picture_ Contenteditable String where
 
 instance Attr Pre_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1056,8 +1056,8 @@ instance Attr Pre_ Contenteditable String where
 
 instance Attr Progress_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1067,8 +1067,8 @@ instance Attr Progress_ Contenteditable String where
 
 instance Attr Q_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1078,8 +1078,8 @@ instance Attr Q_ Contenteditable String where
 
 instance Attr Rp_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1089,8 +1089,8 @@ instance Attr Rp_ Contenteditable String where
 
 instance Attr Rt_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1100,8 +1100,8 @@ instance Attr Rt_ Contenteditable String where
 
 instance Attr Ruby_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1111,8 +1111,8 @@ instance Attr Ruby_ Contenteditable String where
 
 instance Attr S_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1122,8 +1122,8 @@ instance Attr S_ Contenteditable String where
 
 instance Attr Samp_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1133,8 +1133,8 @@ instance Attr Samp_ Contenteditable String where
 
 instance Attr Script_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1144,8 +1144,8 @@ instance Attr Script_ Contenteditable String where
 
 instance Attr Section_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1155,8 +1155,8 @@ instance Attr Section_ Contenteditable String where
 
 instance Attr Select_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1166,8 +1166,8 @@ instance Attr Select_ Contenteditable String where
 
 instance Attr Small_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1177,8 +1177,8 @@ instance Attr Small_ Contenteditable String where
 
 instance Attr Source_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1188,8 +1188,8 @@ instance Attr Source_ Contenteditable String where
 
 instance Attr Span_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1199,8 +1199,8 @@ instance Attr Span_ Contenteditable String where
 
 instance Attr Strike_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1210,8 +1210,8 @@ instance Attr Strike_ Contenteditable String where
 
 instance Attr Strong_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1221,8 +1221,8 @@ instance Attr Strong_ Contenteditable String where
 
 instance Attr Style_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1232,8 +1232,8 @@ instance Attr Style_ Contenteditable String where
 
 instance Attr Sub_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1243,8 +1243,8 @@ instance Attr Sub_ Contenteditable String where
 
 instance Attr Summary_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1254,8 +1254,8 @@ instance Attr Summary_ Contenteditable String where
 
 instance Attr Sup_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1265,8 +1265,8 @@ instance Attr Sup_ Contenteditable String where
 
 instance Attr Svg_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1276,8 +1276,8 @@ instance Attr Svg_ Contenteditable String where
 
 instance Attr Table_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1287,8 +1287,8 @@ instance Attr Table_ Contenteditable String where
 
 instance Attr Tbody_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1298,8 +1298,8 @@ instance Attr Tbody_ Contenteditable String where
 
 instance Attr Td_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1309,8 +1309,8 @@ instance Attr Td_ Contenteditable String where
 
 instance Attr Template_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1320,8 +1320,8 @@ instance Attr Template_ Contenteditable String where
 
 instance Attr Textarea_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1331,8 +1331,8 @@ instance Attr Textarea_ Contenteditable String where
 
 instance Attr Tfoot_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1342,8 +1342,8 @@ instance Attr Tfoot_ Contenteditable String where
 
 instance Attr Th_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1353,8 +1353,8 @@ instance Attr Th_ Contenteditable String where
 
 instance Attr Thead_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1364,8 +1364,8 @@ instance Attr Thead_ Contenteditable String where
 
 instance Attr Time_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1375,8 +1375,8 @@ instance Attr Time_ Contenteditable String where
 
 instance Attr Title_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1386,8 +1386,8 @@ instance Attr Title_ Contenteditable String where
 
 instance Attr Tr_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1397,8 +1397,8 @@ instance Attr Tr_ Contenteditable String where
 
 instance Attr Track_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1408,8 +1408,8 @@ instance Attr Track_ Contenteditable String where
 
 instance Attr Tt_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1419,8 +1419,8 @@ instance Attr Tt_ Contenteditable String where
 
 instance Attr U_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1430,8 +1430,8 @@ instance Attr U_ Contenteditable String where
 
 instance Attr Ul_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1441,8 +1441,8 @@ instance Attr Ul_ Contenteditable String where
 
 instance Attr Var_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1452,8 +1452,8 @@ instance Attr Var_ Contenteditable String where
 
 instance Attr Video_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1463,8 +1463,8 @@ instance Attr Video_ Contenteditable String where
 
 instance Attr Wbr_ Contenteditable String where
   attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
   pureAttr Contenteditable value = unsafeAttribute $ This
@@ -1475,7 +1475,7 @@ instance Attr Wbr_ Contenteditable String where
 instance Attr everything Contenteditable Unit where
   attr Contenteditable bothValues = unsafeAttribute $ Both
     { key: "contenteditable", value: unset' }
-    (snd bothValues <#> \_ -> { key: "contenteditable", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "contenteditable", value: unset' })
   pureAttr Contenteditable _ = unsafeAttribute $ This
     { key: "contenteditable", value: unset' }
   unpureAttr Contenteditable eventValue = unsafeAttribute $ That $ eventValue

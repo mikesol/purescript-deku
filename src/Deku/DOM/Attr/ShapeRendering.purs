@@ -2,7 +2,7 @@ module Deku.DOM.Attr.ShapeRendering where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -51,8 +51,8 @@ data ShapeRendering = ShapeRendering
 
 instance Attr Circle_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -62,8 +62,8 @@ instance Attr Circle_ ShapeRendering String where
 
 instance Attr ClipPath_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -73,8 +73,8 @@ instance Attr ClipPath_ ShapeRendering String where
 
 instance Attr Defs_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -84,8 +84,8 @@ instance Attr Defs_ ShapeRendering String where
 
 instance Attr Ellipse_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -95,8 +95,8 @@ instance Attr Ellipse_ ShapeRendering String where
 
 instance Attr FeBlend_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -106,8 +106,8 @@ instance Attr FeBlend_ ShapeRendering String where
 
 instance Attr FeColorMatrix_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ ShapeRendering String where
 
 instance Attr FeComponentTransfer_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ ShapeRendering String where
 
 instance Attr FeComposite_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -139,8 +139,8 @@ instance Attr FeComposite_ ShapeRendering String where
 
 instance Attr FeConvolveMatrix_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ ShapeRendering String where
 
 instance Attr FeDiffuseLighting_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ ShapeRendering String where
 
 instance Attr FeDisplacementMap_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ ShapeRendering String where
 
 instance Attr FeFlood_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -183,8 +183,8 @@ instance Attr FeFlood_ ShapeRendering String where
 
 instance Attr FeGaussianBlur_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ ShapeRendering String where
 
 instance Attr FeImage_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -205,8 +205,8 @@ instance Attr FeImage_ ShapeRendering String where
 
 instance Attr FeMerge_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -216,8 +216,8 @@ instance Attr FeMerge_ ShapeRendering String where
 
 instance Attr FeMorphology_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ ShapeRendering String where
 
 instance Attr FeOffset_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -238,8 +238,8 @@ instance Attr FeOffset_ ShapeRendering String where
 
 instance Attr FeSpecularLighting_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ ShapeRendering String where
 
 instance Attr FeTile_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -260,8 +260,8 @@ instance Attr FeTile_ ShapeRendering String where
 
 instance Attr FeTurbulence_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ ShapeRendering String where
 
 instance Attr Filter_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -282,8 +282,8 @@ instance Attr Filter_ ShapeRendering String where
 
 instance Attr ForeignObject_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ ShapeRendering String where
 
 instance Attr G_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -304,8 +304,8 @@ instance Attr G_ ShapeRendering String where
 
 instance Attr Image_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -315,8 +315,8 @@ instance Attr Image_ ShapeRendering String where
 
 instance Attr Line_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -326,8 +326,8 @@ instance Attr Line_ ShapeRendering String where
 
 instance Attr LinearGradient_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ ShapeRendering String where
 
 instance Attr Marker_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -348,8 +348,8 @@ instance Attr Marker_ ShapeRendering String where
 
 instance Attr Mask_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -359,8 +359,8 @@ instance Attr Mask_ ShapeRendering String where
 
 instance Attr Path_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -370,8 +370,8 @@ instance Attr Path_ ShapeRendering String where
 
 instance Attr Pattern_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -381,8 +381,8 @@ instance Attr Pattern_ ShapeRendering String where
 
 instance Attr Polygon_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -392,8 +392,8 @@ instance Attr Polygon_ ShapeRendering String where
 
 instance Attr Polyline_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -403,8 +403,8 @@ instance Attr Polyline_ ShapeRendering String where
 
 instance Attr RadialGradient_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ ShapeRendering String where
 
 instance Attr Rect_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -425,8 +425,8 @@ instance Attr Rect_ ShapeRendering String where
 
 instance Attr Svg_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -436,8 +436,8 @@ instance Attr Svg_ ShapeRendering String where
 
 instance Attr Switch_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -447,8 +447,8 @@ instance Attr Switch_ ShapeRendering String where
 
 instance Attr Symbol_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -458,8 +458,8 @@ instance Attr Symbol_ ShapeRendering String where
 
 instance Attr Text_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -469,8 +469,8 @@ instance Attr Text_ ShapeRendering String where
 
 instance Attr TextPath_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -480,8 +480,8 @@ instance Attr TextPath_ ShapeRendering String where
 
 instance Attr Tspan_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -491,8 +491,8 @@ instance Attr Tspan_ ShapeRendering String where
 
 instance Attr Use_ ShapeRendering String where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
   pureAttr ShapeRendering value = unsafeAttribute $ This
@@ -503,7 +503,7 @@ instance Attr Use_ ShapeRendering String where
 instance Attr everything ShapeRendering Unit where
   attr ShapeRendering bothValues = unsafeAttribute $ Both
     { key: "shape-rendering", value: unset' }
-    (snd bothValues <#> \_ -> { key: "shape-rendering", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "shape-rendering", value: unset' })
   pureAttr ShapeRendering _ = unsafeAttribute $ This
     { key: "shape-rendering", value: unset' }
   unpureAttr ShapeRendering eventValue = unsafeAttribute $ That $ eventValue <#>

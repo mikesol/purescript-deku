@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnLoadedmetadata where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnLoadedmetadata = OnLoadedmetadata
 
 instance Attr anything OnLoadedmetadata Cb where
   attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
-    { key: "loadedmetadata", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "loadedmetadata", value: cb' value })
+    { key: "loadedmetadata", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "loadedmetadata", value: cb' value })
   pureAttr OnLoadedmetadata value = unsafeAttribute $ This
     { key: "loadedmetadata", value: cb' value }
   unpureAttr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue
@@ -21,9 +21,9 @@ instance Attr anything OnLoadedmetadata Cb where
 instance Attr anything OnLoadedmetadata (Effect Unit) where
   attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
     { key: "loadedmetadata"
-    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
     }
-    ( snd bothValues <#> \value ->
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnLoadedmetadata value = unsafeAttribute $ This
@@ -34,8 +34,8 @@ instance Attr anything OnLoadedmetadata (Effect Unit) where
 
 instance Attr anything OnLoadedmetadata (Effect Boolean) where
   attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
-    { key: "loadedmetadata", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "loadedmetadata", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadedmetadata", value: cb' (Cb (const value)) }
     )
   pureAttr OnLoadedmetadata value = unsafeAttribute $ This
@@ -51,7 +51,7 @@ type OnLoadedmetadataEffect =
 instance Attr everything OnLoadedmetadata Unit where
   attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
     { key: "loadedmetadata", value: unset' }
-    (snd bothValues <#> \_ -> { key: "loadedmetadata", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "loadedmetadata", value: unset' })
   pureAttr OnLoadedmetadata _ = unsafeAttribute $ This
     { key: "loadedmetadata", value: unset' }
   unpureAttr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue

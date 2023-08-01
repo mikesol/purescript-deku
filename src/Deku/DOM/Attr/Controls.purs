@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Controls where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Audio (Audio_)
 import Deku.DOM.Elt.Video (Video_)
@@ -12,8 +12,8 @@ data Controls = Controls
 
 instance Attr Audio_ Controls String where
   attr Controls bothValues = unsafeAttribute $ Both
-    { key: "controls", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "controls", value: prop' value })
+    { key: "controls", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "controls", value: prop' value })
   pureAttr Controls value = unsafeAttribute $ This
     { key: "controls", value: prop' value }
   unpureAttr Controls eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Audio_ Controls String where
 
 instance Attr Video_ Controls String where
   attr Controls bothValues = unsafeAttribute $ Both
-    { key: "controls", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "controls", value: prop' value })
+    { key: "controls", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "controls", value: prop' value })
   pureAttr Controls value = unsafeAttribute $ This
     { key: "controls", value: prop' value }
   unpureAttr Controls eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Video_ Controls String where
 instance Attr everything Controls Unit where
   attr Controls bothValues = unsafeAttribute $ Both
     { key: "controls", value: unset' }
-    (snd bothValues <#> \_ -> { key: "controls", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "controls", value: unset' })
   pureAttr Controls _ = unsafeAttribute $ This
     { key: "controls", value: unset' }
   unpureAttr Controls eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

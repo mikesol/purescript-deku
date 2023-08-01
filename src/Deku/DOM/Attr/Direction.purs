@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Direction where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Image (Image_)
@@ -29,8 +29,8 @@ data Direction = Direction
 
 instance Attr FeBlend_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,8 +38,8 @@ instance Attr FeBlend_ Direction String where
 
 instance Attr FeColorMatrix_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -47,8 +47,8 @@ instance Attr FeColorMatrix_ Direction String where
 
 instance Attr FeComponentTransfer_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,8 +56,8 @@ instance Attr FeComponentTransfer_ Direction String where
 
 instance Attr FeComposite_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -65,8 +65,8 @@ instance Attr FeComposite_ Direction String where
 
 instance Attr FeConvolveMatrix_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,8 +74,8 @@ instance Attr FeConvolveMatrix_ Direction String where
 
 instance Attr FeDiffuseLighting_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,8 +83,8 @@ instance Attr FeDiffuseLighting_ Direction String where
 
 instance Attr FeDisplacementMap_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -92,8 +92,8 @@ instance Attr FeDisplacementMap_ Direction String where
 
 instance Attr FeFlood_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,8 +101,8 @@ instance Attr FeFlood_ Direction String where
 
 instance Attr FeGaussianBlur_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,8 +110,8 @@ instance Attr FeGaussianBlur_ Direction String where
 
 instance Attr FeImage_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,8 +119,8 @@ instance Attr FeImage_ Direction String where
 
 instance Attr FeMerge_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -128,8 +128,8 @@ instance Attr FeMerge_ Direction String where
 
 instance Attr FeMorphology_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -137,8 +137,8 @@ instance Attr FeMorphology_ Direction String where
 
 instance Attr FeOffset_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -146,8 +146,8 @@ instance Attr FeOffset_ Direction String where
 
 instance Attr FeSpecularLighting_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,8 +155,8 @@ instance Attr FeSpecularLighting_ Direction String where
 
 instance Attr FeTile_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -164,8 +164,8 @@ instance Attr FeTile_ Direction String where
 
 instance Attr FeTurbulence_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -173,8 +173,8 @@ instance Attr FeTurbulence_ Direction String where
 
 instance Attr Filter_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -182,8 +182,8 @@ instance Attr Filter_ Direction String where
 
 instance Attr Image_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,8 +191,8 @@ instance Attr Image_ Direction String where
 
 instance Attr Switch_ Direction String where
   attr Direction bothValues = unsafeAttribute $ Both
-    { key: "direction", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "direction", value: prop' value })
+    { key: "direction", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
   pureAttr Direction value = unsafeAttribute $ This
     { key: "direction", value: prop' value }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -201,7 +201,7 @@ instance Attr Switch_ Direction String where
 instance Attr everything Direction Unit where
   attr Direction bothValues = unsafeAttribute $ Both
     { key: "direction", value: unset' }
-    (snd bothValues <#> \_ -> { key: "direction", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "direction", value: unset' })
   pureAttr Direction _ = unsafeAttribute $ This
     { key: "direction", value: unset' }
   unpureAttr Direction eventValue = unsafeAttribute $ That $ eventValue <#>

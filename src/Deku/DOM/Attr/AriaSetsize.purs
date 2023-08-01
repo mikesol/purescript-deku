@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaSetsize where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaSetsize = AriaSetsize
 
 instance Attr Circle_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr Circle_ AriaSetsize String where
 
 instance Attr Ellipse_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Ellipse_ AriaSetsize String where
 
 instance Attr ForeignObject_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr ForeignObject_ AriaSetsize String where
 
 instance Attr G_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr G_ AriaSetsize String where
 
 instance Attr Line_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Line_ AriaSetsize String where
 
 instance Attr Marker_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Marker_ AriaSetsize String where
 
 instance Attr Path_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,8 +90,8 @@ instance Attr Path_ AriaSetsize String where
 
 instance Attr Polygon_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,8 +99,8 @@ instance Attr Polygon_ AriaSetsize String where
 
 instance Attr Polyline_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,8 +108,8 @@ instance Attr Polyline_ AriaSetsize String where
 
 instance Attr Rect_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -117,8 +117,8 @@ instance Attr Rect_ AriaSetsize String where
 
 instance Attr Svg_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,8 +126,8 @@ instance Attr Svg_ AriaSetsize String where
 
 instance Attr Symbol_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,8 +135,8 @@ instance Attr Symbol_ AriaSetsize String where
 
 instance Attr Text_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,8 +144,8 @@ instance Attr Text_ AriaSetsize String where
 
 instance Attr TextPath_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -153,8 +153,8 @@ instance Attr TextPath_ AriaSetsize String where
 
 instance Attr Tspan_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -162,8 +162,8 @@ instance Attr Tspan_ AriaSetsize String where
 
 instance Attr Use_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -171,8 +171,8 @@ instance Attr Use_ AriaSetsize String where
 
 instance Attr View_ AriaSetsize String where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
-    { key: "aria-setsize", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
+    { key: "aria-setsize", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-setsize", value: prop' value })
   pureAttr AriaSetsize value = unsafeAttribute $ This
     { key: "aria-setsize", value: prop' value }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -181,7 +181,7 @@ instance Attr View_ AriaSetsize String where
 instance Attr everything AriaSetsize Unit where
   attr AriaSetsize bothValues = unsafeAttribute $ Both
     { key: "aria-setsize", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-setsize", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-setsize", value: unset' })
   pureAttr AriaSetsize _ = unsafeAttribute $ This
     { key: "aria-setsize", value: unset' }
   unpureAttr AriaSetsize eventValue = unsafeAttribute $ That $ eventValue <#>

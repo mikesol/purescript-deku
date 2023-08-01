@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnMousedown where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnMousedown = OnMousedown
 
 instance Attr anything OnMousedown Cb where
   attr OnMousedown bothValues = unsafeAttribute $ Both
-    { key: "mousedown", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "mousedown", value: cb' value })
+    { key: "mousedown", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "mousedown", value: cb' value })
   pureAttr OnMousedown value = unsafeAttribute $ This
     { key: "mousedown", value: cb' value }
   unpureAttr OnMousedown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnMousedown Cb where
 
 instance Attr anything OnMousedown (Effect Unit) where
   attr OnMousedown bothValues = unsafeAttribute $ Both
-    { key: "mousedown", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "mousedown", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousedown", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnMousedown value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnMousedown (Effect Unit) where
 
 instance Attr anything OnMousedown (Effect Boolean) where
   attr OnMousedown bothValues = unsafeAttribute $ Both
-    { key: "mousedown", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "mousedown", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousedown", value: cb' (Cb (const value)) }
     )
   pureAttr OnMousedown value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnMousedownEffect =
 instance Attr everything OnMousedown Unit where
   attr OnMousedown bothValues = unsafeAttribute $ Both
     { key: "mousedown", value: unset' }
-    (snd bothValues <#> \_ -> { key: "mousedown", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "mousedown", value: unset' })
   pureAttr OnMousedown _ = unsafeAttribute $ This
     { key: "mousedown", value: unset' }
   unpureAttr OnMousedown eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointermove where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnPointermove = OnPointermove
 
 instance Attr anything OnPointermove Cb where
   attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointermove", value: cb' value })
+    { key: "pointermove", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointermove", value: cb' value })
   pureAttr OnPointermove value = unsafeAttribute $ This
     { key: "pointermove", value: cb' value }
   unpureAttr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnPointermove Cb where
 
 instance Attr anything OnPointermove (Effect Unit) where
   attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "pointermove", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointermove", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnPointermove value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnPointermove (Effect Unit) where
 
 instance Attr anything OnPointermove (Effect Boolean) where
   attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "pointermove", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointermove", value: cb' (Cb (const value)) }
     )
   pureAttr OnPointermove value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnPointermoveEffect =
 instance Attr everything OnPointermove Unit where
   attr OnPointermove bothValues = unsafeAttribute $ Both
     { key: "pointermove", value: unset' }
-    (snd bothValues <#> \_ -> { key: "pointermove", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "pointermove", value: unset' })
   pureAttr OnPointermove _ = unsafeAttribute $ This
     { key: "pointermove", value: unset' }
   unpureAttr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>

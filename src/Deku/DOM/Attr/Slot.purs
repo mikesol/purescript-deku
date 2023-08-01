@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Slot where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -132,8 +132,8 @@ data Slot = Slot
 
 instance Attr A_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -141,8 +141,8 @@ instance Attr A_ Slot String where
 
 instance Attr Abbr_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -150,8 +150,8 @@ instance Attr Abbr_ Slot String where
 
 instance Attr Acronym_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -159,8 +159,8 @@ instance Attr Acronym_ Slot String where
 
 instance Attr Address_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -168,8 +168,8 @@ instance Attr Address_ Slot String where
 
 instance Attr Applet_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -177,8 +177,8 @@ instance Attr Applet_ Slot String where
 
 instance Attr Area_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -186,8 +186,8 @@ instance Attr Area_ Slot String where
 
 instance Attr Article_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -195,8 +195,8 @@ instance Attr Article_ Slot String where
 
 instance Attr Aside_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -204,8 +204,8 @@ instance Attr Aside_ Slot String where
 
 instance Attr Audio_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -213,8 +213,8 @@ instance Attr Audio_ Slot String where
 
 instance Attr B_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -222,8 +222,8 @@ instance Attr B_ Slot String where
 
 instance Attr Base_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -231,8 +231,8 @@ instance Attr Base_ Slot String where
 
 instance Attr Basefont_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -240,8 +240,8 @@ instance Attr Basefont_ Slot String where
 
 instance Attr Bdi_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -249,8 +249,8 @@ instance Attr Bdi_ Slot String where
 
 instance Attr Bdo_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -258,8 +258,8 @@ instance Attr Bdo_ Slot String where
 
 instance Attr Big_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -267,8 +267,8 @@ instance Attr Big_ Slot String where
 
 instance Attr Blockquote_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -276,8 +276,8 @@ instance Attr Blockquote_ Slot String where
 
 instance Attr Body_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -285,8 +285,8 @@ instance Attr Body_ Slot String where
 
 instance Attr Br_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -294,8 +294,8 @@ instance Attr Br_ Slot String where
 
 instance Attr Button_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -303,8 +303,8 @@ instance Attr Button_ Slot String where
 
 instance Attr Canvas_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -312,8 +312,8 @@ instance Attr Canvas_ Slot String where
 
 instance Attr Caption_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -321,8 +321,8 @@ instance Attr Caption_ Slot String where
 
 instance Attr Center_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -330,8 +330,8 @@ instance Attr Center_ Slot String where
 
 instance Attr Cite_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -339,8 +339,8 @@ instance Attr Cite_ Slot String where
 
 instance Attr Code_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -348,8 +348,8 @@ instance Attr Code_ Slot String where
 
 instance Attr Col_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -357,8 +357,8 @@ instance Attr Col_ Slot String where
 
 instance Attr Colgroup_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -366,8 +366,8 @@ instance Attr Colgroup_ Slot String where
 
 instance Attr Xdata_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -375,8 +375,8 @@ instance Attr Xdata_ Slot String where
 
 instance Attr Datalist_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -384,8 +384,8 @@ instance Attr Datalist_ Slot String where
 
 instance Attr Dd_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -393,8 +393,8 @@ instance Attr Dd_ Slot String where
 
 instance Attr Del_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -402,8 +402,8 @@ instance Attr Del_ Slot String where
 
 instance Attr Details_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -411,8 +411,8 @@ instance Attr Details_ Slot String where
 
 instance Attr Dfn_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -420,8 +420,8 @@ instance Attr Dfn_ Slot String where
 
 instance Attr Dialog_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -429,8 +429,8 @@ instance Attr Dialog_ Slot String where
 
 instance Attr Dir_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -438,8 +438,8 @@ instance Attr Dir_ Slot String where
 
 instance Attr Div_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -447,8 +447,8 @@ instance Attr Div_ Slot String where
 
 instance Attr Dl_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -456,8 +456,8 @@ instance Attr Dl_ Slot String where
 
 instance Attr Dt_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -465,8 +465,8 @@ instance Attr Dt_ Slot String where
 
 instance Attr Em_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -474,8 +474,8 @@ instance Attr Em_ Slot String where
 
 instance Attr Embed_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -483,8 +483,8 @@ instance Attr Embed_ Slot String where
 
 instance Attr Fieldset_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -492,8 +492,8 @@ instance Attr Fieldset_ Slot String where
 
 instance Attr Figcaption_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -501,8 +501,8 @@ instance Attr Figcaption_ Slot String where
 
 instance Attr Figure_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -510,8 +510,8 @@ instance Attr Figure_ Slot String where
 
 instance Attr Font_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -519,8 +519,8 @@ instance Attr Font_ Slot String where
 
 instance Attr Footer_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -528,8 +528,8 @@ instance Attr Footer_ Slot String where
 
 instance Attr Form_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -537,8 +537,8 @@ instance Attr Form_ Slot String where
 
 instance Attr Frame_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -546,8 +546,8 @@ instance Attr Frame_ Slot String where
 
 instance Attr Frameset_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -555,8 +555,8 @@ instance Attr Frameset_ Slot String where
 
 instance Attr H1_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -564,8 +564,8 @@ instance Attr H1_ Slot String where
 
 instance Attr H2_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -573,8 +573,8 @@ instance Attr H2_ Slot String where
 
 instance Attr H3_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -582,8 +582,8 @@ instance Attr H3_ Slot String where
 
 instance Attr H4_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -591,8 +591,8 @@ instance Attr H4_ Slot String where
 
 instance Attr H5_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -600,8 +600,8 @@ instance Attr H5_ Slot String where
 
 instance Attr H6_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -609,8 +609,8 @@ instance Attr H6_ Slot String where
 
 instance Attr Head_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -618,8 +618,8 @@ instance Attr Head_ Slot String where
 
 instance Attr Header_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -627,8 +627,8 @@ instance Attr Header_ Slot String where
 
 instance Attr Hr_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -636,8 +636,8 @@ instance Attr Hr_ Slot String where
 
 instance Attr Html_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -645,8 +645,8 @@ instance Attr Html_ Slot String where
 
 instance Attr I_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -654,8 +654,8 @@ instance Attr I_ Slot String where
 
 instance Attr Iframe_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -663,8 +663,8 @@ instance Attr Iframe_ Slot String where
 
 instance Attr Img_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -672,8 +672,8 @@ instance Attr Img_ Slot String where
 
 instance Attr Input_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -681,8 +681,8 @@ instance Attr Input_ Slot String where
 
 instance Attr Ins_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -690,8 +690,8 @@ instance Attr Ins_ Slot String where
 
 instance Attr Kbd_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -699,8 +699,8 @@ instance Attr Kbd_ Slot String where
 
 instance Attr Label_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -708,8 +708,8 @@ instance Attr Label_ Slot String where
 
 instance Attr Legend_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -717,8 +717,8 @@ instance Attr Legend_ Slot String where
 
 instance Attr Li_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -726,8 +726,8 @@ instance Attr Li_ Slot String where
 
 instance Attr Link_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -735,8 +735,8 @@ instance Attr Link_ Slot String where
 
 instance Attr Main_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -744,8 +744,8 @@ instance Attr Main_ Slot String where
 
 instance Attr Map_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -753,8 +753,8 @@ instance Attr Map_ Slot String where
 
 instance Attr Mark_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -762,8 +762,8 @@ instance Attr Mark_ Slot String where
 
 instance Attr Meta_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -771,8 +771,8 @@ instance Attr Meta_ Slot String where
 
 instance Attr Meter_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -780,8 +780,8 @@ instance Attr Meter_ Slot String where
 
 instance Attr Nav_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -789,8 +789,8 @@ instance Attr Nav_ Slot String where
 
 instance Attr Noframes_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -798,8 +798,8 @@ instance Attr Noframes_ Slot String where
 
 instance Attr Noscript_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -807,8 +807,8 @@ instance Attr Noscript_ Slot String where
 
 instance Attr Object_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -816,8 +816,8 @@ instance Attr Object_ Slot String where
 
 instance Attr Ol_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -825,8 +825,8 @@ instance Attr Ol_ Slot String where
 
 instance Attr Optgroup_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -834,8 +834,8 @@ instance Attr Optgroup_ Slot String where
 
 instance Attr Option_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -843,8 +843,8 @@ instance Attr Option_ Slot String where
 
 instance Attr Output_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -852,8 +852,8 @@ instance Attr Output_ Slot String where
 
 instance Attr P_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -861,8 +861,8 @@ instance Attr P_ Slot String where
 
 instance Attr Param_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -870,8 +870,8 @@ instance Attr Param_ Slot String where
 
 instance Attr Picture_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -879,8 +879,8 @@ instance Attr Picture_ Slot String where
 
 instance Attr Pre_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -888,8 +888,8 @@ instance Attr Pre_ Slot String where
 
 instance Attr Progress_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -897,8 +897,8 @@ instance Attr Progress_ Slot String where
 
 instance Attr Q_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -906,8 +906,8 @@ instance Attr Q_ Slot String where
 
 instance Attr Rp_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -915,8 +915,8 @@ instance Attr Rp_ Slot String where
 
 instance Attr Rt_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -924,8 +924,8 @@ instance Attr Rt_ Slot String where
 
 instance Attr Ruby_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -933,8 +933,8 @@ instance Attr Ruby_ Slot String where
 
 instance Attr S_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -942,8 +942,8 @@ instance Attr S_ Slot String where
 
 instance Attr Samp_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -951,8 +951,8 @@ instance Attr Samp_ Slot String where
 
 instance Attr Script_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -960,8 +960,8 @@ instance Attr Script_ Slot String where
 
 instance Attr Section_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -969,8 +969,8 @@ instance Attr Section_ Slot String where
 
 instance Attr Select_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -978,8 +978,8 @@ instance Attr Select_ Slot String where
 
 instance Attr Small_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -987,8 +987,8 @@ instance Attr Small_ Slot String where
 
 instance Attr Source_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -996,8 +996,8 @@ instance Attr Source_ Slot String where
 
 instance Attr Span_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1005,8 +1005,8 @@ instance Attr Span_ Slot String where
 
 instance Attr Strike_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1014,8 +1014,8 @@ instance Attr Strike_ Slot String where
 
 instance Attr Strong_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1023,8 +1023,8 @@ instance Attr Strong_ Slot String where
 
 instance Attr Style_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1032,8 +1032,8 @@ instance Attr Style_ Slot String where
 
 instance Attr Sub_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1041,8 +1041,8 @@ instance Attr Sub_ Slot String where
 
 instance Attr Summary_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1050,8 +1050,8 @@ instance Attr Summary_ Slot String where
 
 instance Attr Sup_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1059,8 +1059,8 @@ instance Attr Sup_ Slot String where
 
 instance Attr Svg_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1068,8 +1068,8 @@ instance Attr Svg_ Slot String where
 
 instance Attr Table_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1077,8 +1077,8 @@ instance Attr Table_ Slot String where
 
 instance Attr Tbody_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1086,8 +1086,8 @@ instance Attr Tbody_ Slot String where
 
 instance Attr Td_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1095,8 +1095,8 @@ instance Attr Td_ Slot String where
 
 instance Attr Template_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1104,8 +1104,8 @@ instance Attr Template_ Slot String where
 
 instance Attr Textarea_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1113,8 +1113,8 @@ instance Attr Textarea_ Slot String where
 
 instance Attr Tfoot_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1122,8 +1122,8 @@ instance Attr Tfoot_ Slot String where
 
 instance Attr Th_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1131,8 +1131,8 @@ instance Attr Th_ Slot String where
 
 instance Attr Thead_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1140,8 +1140,8 @@ instance Attr Thead_ Slot String where
 
 instance Attr Time_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1149,8 +1149,8 @@ instance Attr Time_ Slot String where
 
 instance Attr Title_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1158,8 +1158,8 @@ instance Attr Title_ Slot String where
 
 instance Attr Tr_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1167,8 +1167,8 @@ instance Attr Tr_ Slot String where
 
 instance Attr Track_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1176,8 +1176,8 @@ instance Attr Track_ Slot String where
 
 instance Attr Tt_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1185,8 +1185,8 @@ instance Attr Tt_ Slot String where
 
 instance Attr U_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1194,8 +1194,8 @@ instance Attr U_ Slot String where
 
 instance Attr Ul_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1203,8 +1203,8 @@ instance Attr Ul_ Slot String where
 
 instance Attr Var_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1212,8 +1212,8 @@ instance Attr Var_ Slot String where
 
 instance Attr Video_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1221,8 +1221,8 @@ instance Attr Video_ Slot String where
 
 instance Attr Wbr_ Slot String where
   attr Slot bothValues = unsafeAttribute $ Both
-    { key: "slot", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "slot", value: prop' value })
+    { key: "slot", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "slot", value: prop' value })
   pureAttr Slot value = unsafeAttribute $ This
     { key: "slot", value: prop' value }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1230,7 +1230,7 @@ instance Attr Wbr_ Slot String where
 
 instance Attr everything Slot Unit where
   attr Slot bothValues = unsafeAttribute $ Both { key: "slot", value: unset' }
-    (snd bothValues <#> \_ -> { key: "slot", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "slot", value: unset' })
   pureAttr Slot _ = unsafeAttribute $ This { key: "slot", value: unset' }
   unpureAttr Slot eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "slot", value: unset' }

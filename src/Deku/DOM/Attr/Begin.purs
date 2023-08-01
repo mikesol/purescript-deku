@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Begin where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
@@ -14,8 +14,8 @@ data Begin = Begin
 
 instance Attr Animate_ Begin String where
   attr Begin bothValues = unsafeAttribute $ Both
-    { key: "begin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "begin", value: prop' value })
+    { key: "begin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "begin", value: prop' value })
   pureAttr Begin value = unsafeAttribute $ This
     { key: "begin", value: prop' value }
   unpureAttr Begin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Animate_ Begin String where
 
 instance Attr AnimateMotion_ Begin String where
   attr Begin bothValues = unsafeAttribute $ Both
-    { key: "begin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "begin", value: prop' value })
+    { key: "begin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "begin", value: prop' value })
   pureAttr Begin value = unsafeAttribute $ This
     { key: "begin", value: prop' value }
   unpureAttr Begin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr AnimateMotion_ Begin String where
 
 instance Attr AnimateTransform_ Begin String where
   attr Begin bothValues = unsafeAttribute $ Both
-    { key: "begin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "begin", value: prop' value })
+    { key: "begin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "begin", value: prop' value })
   pureAttr Begin value = unsafeAttribute $ This
     { key: "begin", value: prop' value }
   unpureAttr Begin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr AnimateTransform_ Begin String where
 
 instance Attr Set_ Begin String where
   attr Begin bothValues = unsafeAttribute $ Both
-    { key: "begin", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "begin", value: prop' value })
+    { key: "begin", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "begin", value: prop' value })
   pureAttr Begin value = unsafeAttribute $ This
     { key: "begin", value: prop' value }
   unpureAttr Begin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr Set_ Begin String where
 
 instance Attr everything Begin Unit where
   attr Begin bothValues = unsafeAttribute $ Both { key: "begin", value: unset' }
-    (snd bothValues <#> \_ -> { key: "begin", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "begin", value: unset' })
   pureAttr Begin _ = unsafeAttribute $ This { key: "begin", value: unset' }
   unpureAttr Begin eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "begin", value: unset' }

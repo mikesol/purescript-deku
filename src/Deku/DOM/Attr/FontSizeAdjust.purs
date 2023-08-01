@@ -2,7 +2,7 @@ module Deku.DOM.Attr.FontSizeAdjust where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -31,8 +31,8 @@ data FontSizeAdjust = FontSizeAdjust
 
 instance Attr FeBlend_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -42,8 +42,8 @@ instance Attr FeBlend_ FontSizeAdjust String where
 
 instance Attr FeColorMatrix_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -53,8 +53,8 @@ instance Attr FeColorMatrix_ FontSizeAdjust String where
 
 instance Attr FeComponentTransfer_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -64,8 +64,8 @@ instance Attr FeComponentTransfer_ FontSizeAdjust String where
 
 instance Attr FeComposite_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -75,8 +75,8 @@ instance Attr FeComposite_ FontSizeAdjust String where
 
 instance Attr FeConvolveMatrix_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -86,8 +86,8 @@ instance Attr FeConvolveMatrix_ FontSizeAdjust String where
 
 instance Attr FeDiffuseLighting_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -97,8 +97,8 @@ instance Attr FeDiffuseLighting_ FontSizeAdjust String where
 
 instance Attr FeDisplacementMap_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -108,8 +108,8 @@ instance Attr FeDisplacementMap_ FontSizeAdjust String where
 
 instance Attr FeFlood_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -119,8 +119,8 @@ instance Attr FeFlood_ FontSizeAdjust String where
 
 instance Attr FeGaussianBlur_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -130,8 +130,8 @@ instance Attr FeGaussianBlur_ FontSizeAdjust String where
 
 instance Attr FeImage_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -141,8 +141,8 @@ instance Attr FeImage_ FontSizeAdjust String where
 
 instance Attr FeMerge_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -152,8 +152,8 @@ instance Attr FeMerge_ FontSizeAdjust String where
 
 instance Attr FeMorphology_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -163,8 +163,8 @@ instance Attr FeMorphology_ FontSizeAdjust String where
 
 instance Attr FeOffset_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -174,8 +174,8 @@ instance Attr FeOffset_ FontSizeAdjust String where
 
 instance Attr FeSpecularLighting_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -185,8 +185,8 @@ instance Attr FeSpecularLighting_ FontSizeAdjust String where
 
 instance Attr FeTile_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -196,8 +196,8 @@ instance Attr FeTile_ FontSizeAdjust String where
 
 instance Attr FeTurbulence_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -207,8 +207,8 @@ instance Attr FeTurbulence_ FontSizeAdjust String where
 
 instance Attr Filter_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -218,8 +218,8 @@ instance Attr Filter_ FontSizeAdjust String where
 
 instance Attr Image_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -229,8 +229,8 @@ instance Attr Image_ FontSizeAdjust String where
 
 instance Attr Switch_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -240,8 +240,8 @@ instance Attr Switch_ FontSizeAdjust String where
 
 instance Attr Text_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -251,8 +251,8 @@ instance Attr Text_ FontSizeAdjust String where
 
 instance Attr Tspan_ FontSizeAdjust String where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
-    { key: "font-size-adjust", value: prop' (fst bothValues) }
-    ( snd bothValues <#> \value ->
+    { key: "font-size-adjust", value: prop' (NonEmpty.head bothValues) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
     )
   pureAttr FontSizeAdjust value = unsafeAttribute $ This
@@ -263,7 +263,7 @@ instance Attr Tspan_ FontSizeAdjust String where
 instance Attr everything FontSizeAdjust Unit where
   attr FontSizeAdjust bothValues = unsafeAttribute $ Both
     { key: "font-size-adjust", value: unset' }
-    (snd bothValues <#> \_ -> { key: "font-size-adjust", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "font-size-adjust", value: unset' })
   pureAttr FontSizeAdjust _ = unsafeAttribute $ This
     { key: "font-size-adjust", value: unset' }
   unpureAttr FontSizeAdjust eventValue = unsafeAttribute $ That $ eventValue <#>

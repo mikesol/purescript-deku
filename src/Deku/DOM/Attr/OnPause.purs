@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPause where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnPause = OnPause
 
 instance Attr anything OnPause Cb where
   attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pause", value: cb' value })
+    { key: "pause", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pause", value: cb' value })
   pureAttr OnPause value = unsafeAttribute $ This
     { key: "pause", value: cb' value }
   unpureAttr OnPause eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnPause Cb where
 
 instance Attr anything OnPause (Effect Unit) where
   attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "pause", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pause", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnPause value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnPause (Effect Unit) where
 
 instance Attr anything OnPause (Effect Boolean) where
   attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "pause", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pause", value: cb' (Cb (const value)) }
     )
   pureAttr OnPause value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnPauseEffect =
 instance Attr everything OnPause Unit where
   attr OnPause bothValues = unsafeAttribute $ Both
     { key: "pause", value: unset' }
-    (snd bothValues <#> \_ -> { key: "pause", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "pause", value: unset' })
   pureAttr OnPause _ = unsafeAttribute $ This { key: "pause", value: unset' }
   unpureAttr OnPause eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "pause", value: unset' }

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Offset where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Stop (Stop_)
 import Deku.DOM.Elt.FeFuncR (FeFuncR_)
@@ -15,8 +15,8 @@ data Offset = Offset
 
 instance Attr FeFuncA_ Offset String where
   attr Offset bothValues = unsafeAttribute $ Both
-    { key: "offset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "offset", value: prop' value })
+    { key: "offset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
   pureAttr Offset value = unsafeAttribute $ This
     { key: "offset", value: prop' value }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -24,8 +24,8 @@ instance Attr FeFuncA_ Offset String where
 
 instance Attr FeFuncB_ Offset String where
   attr Offset bothValues = unsafeAttribute $ Both
-    { key: "offset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "offset", value: prop' value })
+    { key: "offset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
   pureAttr Offset value = unsafeAttribute $ This
     { key: "offset", value: prop' value }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -33,8 +33,8 @@ instance Attr FeFuncB_ Offset String where
 
 instance Attr FeFuncG_ Offset String where
   attr Offset bothValues = unsafeAttribute $ Both
-    { key: "offset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "offset", value: prop' value })
+    { key: "offset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
   pureAttr Offset value = unsafeAttribute $ This
     { key: "offset", value: prop' value }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,8 +42,8 @@ instance Attr FeFuncG_ Offset String where
 
 instance Attr FeFuncR_ Offset String where
   attr Offset bothValues = unsafeAttribute $ Both
-    { key: "offset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "offset", value: prop' value })
+    { key: "offset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
   pureAttr Offset value = unsafeAttribute $ This
     { key: "offset", value: prop' value }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,8 +51,8 @@ instance Attr FeFuncR_ Offset String where
 
 instance Attr Stop_ Offset String where
   attr Offset bothValues = unsafeAttribute $ Both
-    { key: "offset", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "offset", value: prop' value })
+    { key: "offset", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
   pureAttr Offset value = unsafeAttribute $ This
     { key: "offset", value: prop' value }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,7 +61,7 @@ instance Attr Stop_ Offset String where
 instance Attr everything Offset Unit where
   attr Offset bothValues = unsafeAttribute $ Both
     { key: "offset", value: unset' }
-    (snd bothValues <#> \_ -> { key: "offset", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "offset", value: unset' })
   pureAttr Offset _ = unsafeAttribute $ This { key: "offset", value: unset' }
   unpureAttr Offset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "offset", value: unset' }

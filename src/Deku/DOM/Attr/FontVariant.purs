@@ -2,7 +2,7 @@ module Deku.DOM.Attr.FontVariant where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -31,8 +31,8 @@ data FontVariant = FontVariant
 
 instance Attr FeBlend_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,8 +40,8 @@ instance Attr FeBlend_ FontVariant String where
 
 instance Attr FeColorMatrix_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -49,8 +49,8 @@ instance Attr FeColorMatrix_ FontVariant String where
 
 instance Attr FeComponentTransfer_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -58,8 +58,8 @@ instance Attr FeComponentTransfer_ FontVariant String where
 
 instance Attr FeComposite_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -67,8 +67,8 @@ instance Attr FeComposite_ FontVariant String where
 
 instance Attr FeConvolveMatrix_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -76,8 +76,8 @@ instance Attr FeConvolveMatrix_ FontVariant String where
 
 instance Attr FeDiffuseLighting_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -85,8 +85,8 @@ instance Attr FeDiffuseLighting_ FontVariant String where
 
 instance Attr FeDisplacementMap_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -94,8 +94,8 @@ instance Attr FeDisplacementMap_ FontVariant String where
 
 instance Attr FeFlood_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -103,8 +103,8 @@ instance Attr FeFlood_ FontVariant String where
 
 instance Attr FeGaussianBlur_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -112,8 +112,8 @@ instance Attr FeGaussianBlur_ FontVariant String where
 
 instance Attr FeImage_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,8 +121,8 @@ instance Attr FeImage_ FontVariant String where
 
 instance Attr FeMerge_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,8 +130,8 @@ instance Attr FeMerge_ FontVariant String where
 
 instance Attr FeMorphology_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -139,8 +139,8 @@ instance Attr FeMorphology_ FontVariant String where
 
 instance Attr FeOffset_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -148,8 +148,8 @@ instance Attr FeOffset_ FontVariant String where
 
 instance Attr FeSpecularLighting_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -157,8 +157,8 @@ instance Attr FeSpecularLighting_ FontVariant String where
 
 instance Attr FeTile_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -166,8 +166,8 @@ instance Attr FeTile_ FontVariant String where
 
 instance Attr FeTurbulence_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -175,8 +175,8 @@ instance Attr FeTurbulence_ FontVariant String where
 
 instance Attr Filter_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -184,8 +184,8 @@ instance Attr Filter_ FontVariant String where
 
 instance Attr Image_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -193,8 +193,8 @@ instance Attr Image_ FontVariant String where
 
 instance Attr Switch_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -202,8 +202,8 @@ instance Attr Switch_ FontVariant String where
 
 instance Attr Text_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,8 +211,8 @@ instance Attr Text_ FontVariant String where
 
 instance Attr Tspan_ FontVariant String where
   attr FontVariant bothValues = unsafeAttribute $ Both
-    { key: "font-variant", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "font-variant", value: prop' value })
+    { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
   pureAttr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -221,7 +221,7 @@ instance Attr Tspan_ FontVariant String where
 instance Attr everything FontVariant Unit where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: unset' }
-    (snd bothValues <#> \_ -> { key: "font-variant", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "font-variant", value: unset' })
   pureAttr FontVariant _ = unsafeAttribute $ This
     { key: "font-variant", value: unset' }
   unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>

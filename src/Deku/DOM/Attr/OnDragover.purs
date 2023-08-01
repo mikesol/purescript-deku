@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDragover where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnDragover = OnDragover
 
 instance Attr anything OnDragover Cb where
   attr OnDragover bothValues = unsafeAttribute $ Both
-    { key: "dragover", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "dragover", value: cb' value })
+    { key: "dragover", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "dragover", value: cb' value })
   pureAttr OnDragover value = unsafeAttribute $ This
     { key: "dragover", value: cb' value }
   unpureAttr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnDragover Cb where
 
 instance Attr anything OnDragover (Effect Unit) where
   attr OnDragover bothValues = unsafeAttribute $ Both
-    { key: "dragover", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "dragover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragover", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnDragover value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnDragover (Effect Unit) where
 
 instance Attr anything OnDragover (Effect Boolean) where
   attr OnDragover bothValues = unsafeAttribute $ Both
-    { key: "dragover", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "dragover", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragover", value: cb' (Cb (const value)) }
     )
   pureAttr OnDragover value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnDragoverEffect =
 instance Attr everything OnDragover Unit where
   attr OnDragover bothValues = unsafeAttribute $ Both
     { key: "dragover", value: unset' }
-    (snd bothValues <#> \_ -> { key: "dragover", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "dragover", value: unset' })
   pureAttr OnDragover _ = unsafeAttribute $ This
     { key: "dragover", value: unset' }
   unpureAttr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>

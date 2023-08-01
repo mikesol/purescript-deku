@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Background where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Body (Body_)
 import Deku.DOM.Elt.Table (Table_)
@@ -14,8 +14,8 @@ data Background = Background
 
 instance Attr Body_ Background String where
   attr Background bothValues = unsafeAttribute $ Both
-    { key: "background", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "background", value: prop' value })
+    { key: "background", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
   pureAttr Background value = unsafeAttribute $ This
     { key: "background", value: prop' value }
   unpureAttr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -23,8 +23,8 @@ instance Attr Body_ Background String where
 
 instance Attr Table_ Background String where
   attr Background bothValues = unsafeAttribute $ Both
-    { key: "background", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "background", value: prop' value })
+    { key: "background", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
   pureAttr Background value = unsafeAttribute $ This
     { key: "background", value: prop' value }
   unpureAttr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -32,8 +32,8 @@ instance Attr Table_ Background String where
 
 instance Attr Td_ Background String where
   attr Background bothValues = unsafeAttribute $ Both
-    { key: "background", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "background", value: prop' value })
+    { key: "background", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
   pureAttr Background value = unsafeAttribute $ This
     { key: "background", value: prop' value }
   unpureAttr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,8 +41,8 @@ instance Attr Td_ Background String where
 
 instance Attr Th_ Background String where
   attr Background bothValues = unsafeAttribute $ Both
-    { key: "background", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "background", value: prop' value })
+    { key: "background", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
   pureAttr Background value = unsafeAttribute $ This
     { key: "background", value: prop' value }
   unpureAttr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Th_ Background String where
 instance Attr everything Background Unit where
   attr Background bothValues = unsafeAttribute $ Both
     { key: "background", value: unset' }
-    (snd bothValues <#> \_ -> { key: "background", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "background", value: unset' })
   pureAttr Background _ = unsafeAttribute $ This
     { key: "background", value: unset' }
   unpureAttr Background eventValue = unsafeAttribute $ That $ eventValue <#>

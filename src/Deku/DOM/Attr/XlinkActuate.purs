@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XlinkActuate where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Mpath (Mpath_)
 import Deku.DOM.Elt.Image (Image_)
@@ -15,8 +15,8 @@ data XlinkActuate = XlinkActuate
 
 instance Attr AnimateTransform_ XlinkActuate String where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
-    { key: "xlink:actuate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
+    { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
   pureAttr XlinkActuate value = unsafeAttribute $ This
     { key: "xlink:actuate", value: prop' value }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -24,8 +24,8 @@ instance Attr AnimateTransform_ XlinkActuate String where
 
 instance Attr FeImage_ XlinkActuate String where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
-    { key: "xlink:actuate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
+    { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
   pureAttr XlinkActuate value = unsafeAttribute $ This
     { key: "xlink:actuate", value: prop' value }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -33,8 +33,8 @@ instance Attr FeImage_ XlinkActuate String where
 
 instance Attr Filter_ XlinkActuate String where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
-    { key: "xlink:actuate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
+    { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
   pureAttr XlinkActuate value = unsafeAttribute $ This
     { key: "xlink:actuate", value: prop' value }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,8 +42,8 @@ instance Attr Filter_ XlinkActuate String where
 
 instance Attr Image_ XlinkActuate String where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
-    { key: "xlink:actuate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
+    { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
   pureAttr XlinkActuate value = unsafeAttribute $ This
     { key: "xlink:actuate", value: prop' value }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,8 +51,8 @@ instance Attr Image_ XlinkActuate String where
 
 instance Attr Mpath_ XlinkActuate String where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
-    { key: "xlink:actuate", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
+    { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
   pureAttr XlinkActuate value = unsafeAttribute $ This
     { key: "xlink:actuate", value: prop' value }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,7 +61,7 @@ instance Attr Mpath_ XlinkActuate String where
 instance Attr everything XlinkActuate Unit where
   attr XlinkActuate bothValues = unsafeAttribute $ Both
     { key: "xlink:actuate", value: unset' }
-    (snd bothValues <#> \_ -> { key: "xlink:actuate", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:actuate", value: unset' })
   pureAttr XlinkActuate _ = unsafeAttribute $ This
     { key: "xlink:actuate", value: unset' }
   unpureAttr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>

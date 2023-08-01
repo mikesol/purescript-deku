@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnWheel where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnWheel = OnWheel
 
 instance Attr anything OnWheel Cb where
   attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "wheel", value: cb' value })
+    { key: "wheel", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "wheel", value: cb' value })
   pureAttr OnWheel value = unsafeAttribute $ This
     { key: "wheel", value: cb' value }
   unpureAttr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnWheel Cb where
 
 instance Attr anything OnWheel (Effect Unit) where
   attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "wheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnWheel value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnWheel (Effect Unit) where
 
 instance Attr anything OnWheel (Effect Boolean) where
   attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "wheel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const value)) }
     )
   pureAttr OnWheel value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnWheelEffect =
 instance Attr everything OnWheel Unit where
   attr OnWheel bothValues = unsafeAttribute $ Both
     { key: "wheel", value: unset' }
-    (snd bothValues <#> \_ -> { key: "wheel", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "wheel", value: unset' })
   pureAttr OnWheel _ = unsafeAttribute $ This { key: "wheel", value: unset' }
   unpureAttr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "wheel", value: unset' }

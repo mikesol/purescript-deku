@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDragleave where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnDragleave = OnDragleave
 
 instance Attr anything OnDragleave Cb where
   attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "dragleave", value: cb' value })
+    { key: "dragleave", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "dragleave", value: cb' value })
   pureAttr OnDragleave value = unsafeAttribute $ This
     { key: "dragleave", value: cb' value }
   unpureAttr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnDragleave Cb where
 
 instance Attr anything OnDragleave (Effect Unit) where
   attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "dragleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnDragleave value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnDragleave (Effect Unit) where
 
 instance Attr anything OnDragleave (Effect Boolean) where
   attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "dragleave", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const value)) }
     )
   pureAttr OnDragleave value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnDragleaveEffect =
 instance Attr everything OnDragleave Unit where
   attr OnDragleave bothValues = unsafeAttribute $ Both
     { key: "dragleave", value: unset' }
-    (snd bothValues <#> \_ -> { key: "dragleave", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "dragleave", value: unset' })
   pureAttr OnDragleave _ = unsafeAttribute $ This
     { key: "dragleave", value: unset' }
   unpureAttr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>

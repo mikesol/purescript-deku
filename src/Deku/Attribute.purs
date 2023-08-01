@@ -30,8 +30,8 @@ import Prelude
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Data.NonEmpty (NonEmpty)
 import Data.These (These(..))
-import Data.Tuple (Tuple)
 import Effect (Effect)
 import FRP.Event as FRP
 import Safe.Coerce (coerce)
@@ -113,7 +113,7 @@ class Attr e a b where
   -- | aka `D.Style := "color: red;"` is a valid attribute or listener for any element.
   unpureAttr :: a -> FRP.Event b -> Attribute e
   pureAttr :: a -> b -> Attribute e
-  attr :: a -> (Tuple b (FRP.Event b)) -> Attribute e
+  attr :: a -> NonEmpty FRP.Event b -> Attribute e
 
 infixr 5 attr as :=
 infixr 5 unpureAttr as <:=>

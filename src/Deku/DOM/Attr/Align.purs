@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Align where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Applet (Applet_)
 import Deku.DOM.Elt.Caption (Caption_)
@@ -24,8 +24,8 @@ data Align = Align
 
 instance Attr Applet_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -33,8 +33,8 @@ instance Attr Applet_ Align String where
 
 instance Attr Caption_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,8 +42,8 @@ instance Attr Caption_ Align String where
 
 instance Attr Col_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,8 +51,8 @@ instance Attr Col_ Align String where
 
 instance Attr Colgroup_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -60,8 +60,8 @@ instance Attr Colgroup_ Align String where
 
 instance Attr Hr_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -69,8 +69,8 @@ instance Attr Hr_ Align String where
 
 instance Attr Iframe_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -78,8 +78,8 @@ instance Attr Iframe_ Align String where
 
 instance Attr Img_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -87,8 +87,8 @@ instance Attr Img_ Align String where
 
 instance Attr Table_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -96,8 +96,8 @@ instance Attr Table_ Align String where
 
 instance Attr Tbody_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -105,8 +105,8 @@ instance Attr Tbody_ Align String where
 
 instance Attr Td_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -114,8 +114,8 @@ instance Attr Td_ Align String where
 
 instance Attr Tfoot_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -123,8 +123,8 @@ instance Attr Tfoot_ Align String where
 
 instance Attr Th_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,8 +132,8 @@ instance Attr Th_ Align String where
 
 instance Attr Thead_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,8 +141,8 @@ instance Attr Thead_ Align String where
 
 instance Attr Tr_ Align String where
   attr Align bothValues = unsafeAttribute $ Both
-    { key: "align", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "align", value: prop' value })
+    { key: "align", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
   pureAttr Align value = unsafeAttribute $ This
     { key: "align", value: prop' value }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -150,7 +150,7 @@ instance Attr Tr_ Align String where
 
 instance Attr everything Align Unit where
   attr Align bothValues = unsafeAttribute $ Both { key: "align", value: unset' }
-    (snd bothValues <#> \_ -> { key: "align", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "align", value: unset' })
   pureAttr Align _ = unsafeAttribute $ This { key: "align", value: unset' }
   unpureAttr Align eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "align", value: unset' }

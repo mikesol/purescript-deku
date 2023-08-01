@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnDurationchange where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnDurationchange = OnDurationchange
 
 instance Attr anything OnDurationchange Cb where
   attr OnDurationchange bothValues = unsafeAttribute $ Both
-    { key: "durationchange", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "durationchange", value: cb' value })
+    { key: "durationchange", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "durationchange", value: cb' value })
   pureAttr OnDurationchange value = unsafeAttribute $ This
     { key: "durationchange", value: cb' value }
   unpureAttr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue
@@ -21,9 +21,9 @@ instance Attr anything OnDurationchange Cb where
 instance Attr anything OnDurationchange (Effect Unit) where
   attr OnDurationchange bothValues = unsafeAttribute $ Both
     { key: "durationchange"
-    , value: cb' (Cb (const ((fst bothValues) $> true)))
+    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
     }
-    ( snd bothValues <#> \value ->
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "durationchange", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnDurationchange value = unsafeAttribute $ This
@@ -34,8 +34,8 @@ instance Attr anything OnDurationchange (Effect Unit) where
 
 instance Attr anything OnDurationchange (Effect Boolean) where
   attr OnDurationchange bothValues = unsafeAttribute $ Both
-    { key: "durationchange", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "durationchange", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "durationchange", value: cb' (Cb (const value)) }
     )
   pureAttr OnDurationchange value = unsafeAttribute $ This
@@ -51,7 +51,7 @@ type OnDurationchangeEffect =
 instance Attr everything OnDurationchange Unit where
   attr OnDurationchange bothValues = unsafeAttribute $ Both
     { key: "durationchange", value: unset' }
-    (snd bothValues <#> \_ -> { key: "durationchange", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "durationchange", value: unset' })
   pureAttr OnDurationchange _ = unsafeAttribute $ This
     { key: "durationchange", value: unset' }
   unpureAttr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.OnPointerleave where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
 import FRP.Event (Event)
@@ -11,8 +11,8 @@ data OnPointerleave = OnPointerleave
 
 instance Attr anything OnPointerleave Cb where
   attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "pointerleave", value: cb' value })
+    { key: "pointerleave", value: cb' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "pointerleave", value: cb' value })
   pureAttr OnPointerleave value = unsafeAttribute $ This
     { key: "pointerleave", value: cb' value }
   unpureAttr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -20,8 +20,8 @@ instance Attr anything OnPointerleave Cb where
 
 instance Attr anything OnPointerleave (Effect Unit) where
   attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (Cb (const ((fst bothValues) $> true))) }
-    ( snd bothValues <#> \value ->
+    { key: "pointerleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
     )
   pureAttr OnPointerleave value = unsafeAttribute $ This
@@ -31,8 +31,8 @@ instance Attr anything OnPointerleave (Effect Unit) where
 
 instance Attr anything OnPointerleave (Effect Boolean) where
   attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (Cb (const (fst bothValues))) }
-    ( snd bothValues <#> \value ->
+    { key: "pointerleave", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+    ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerleave", value: cb' (Cb (const value)) }
     )
   pureAttr OnPointerleave value = unsafeAttribute $ This
@@ -48,7 +48,7 @@ type OnPointerleaveEffect =
 instance Attr everything OnPointerleave Unit where
   attr OnPointerleave bothValues = unsafeAttribute $ Both
     { key: "pointerleave", value: unset' }
-    (snd bothValues <#> \_ -> { key: "pointerleave", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "pointerleave", value: unset' })
   pureAttr OnPointerleave _ = unsafeAttribute $ This
     { key: "pointerleave", value: unset' }
   unpureAttr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>

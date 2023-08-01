@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaHaspopup where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -27,8 +27,8 @@ data AriaHaspopup = AriaHaspopup
 
 instance Attr Circle_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -36,8 +36,8 @@ instance Attr Circle_ AriaHaspopup String where
 
 instance Attr Ellipse_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,8 +45,8 @@ instance Attr Ellipse_ AriaHaspopup String where
 
 instance Attr ForeignObject_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,8 +54,8 @@ instance Attr ForeignObject_ AriaHaspopup String where
 
 instance Attr G_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,8 +63,8 @@ instance Attr G_ AriaHaspopup String where
 
 instance Attr Line_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -72,8 +72,8 @@ instance Attr Line_ AriaHaspopup String where
 
 instance Attr Marker_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -81,8 +81,8 @@ instance Attr Marker_ AriaHaspopup String where
 
 instance Attr Path_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,8 +90,8 @@ instance Attr Path_ AriaHaspopup String where
 
 instance Attr Polygon_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,8 +99,8 @@ instance Attr Polygon_ AriaHaspopup String where
 
 instance Attr Polyline_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,8 +108,8 @@ instance Attr Polyline_ AriaHaspopup String where
 
 instance Attr Rect_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -117,8 +117,8 @@ instance Attr Rect_ AriaHaspopup String where
 
 instance Attr Svg_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,8 +126,8 @@ instance Attr Svg_ AriaHaspopup String where
 
 instance Attr Symbol_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,8 +135,8 @@ instance Attr Symbol_ AriaHaspopup String where
 
 instance Attr Text_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,8 +144,8 @@ instance Attr Text_ AriaHaspopup String where
 
 instance Attr TextPath_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -153,8 +153,8 @@ instance Attr TextPath_ AriaHaspopup String where
 
 instance Attr Tspan_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -162,8 +162,8 @@ instance Attr Tspan_ AriaHaspopup String where
 
 instance Attr Use_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -171,8 +171,8 @@ instance Attr Use_ AriaHaspopup String where
 
 instance Attr View_ AriaHaspopup String where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
-    { key: "aria-haspopup", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
+    { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
   pureAttr AriaHaspopup value = unsafeAttribute $ This
     { key: "aria-haspopup", value: prop' value }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -181,7 +181,7 @@ instance Attr View_ AriaHaspopup String where
 instance Attr everything AriaHaspopup Unit where
   attr AriaHaspopup bothValues = unsafeAttribute $ Both
     { key: "aria-haspopup", value: unset' }
-    (snd bothValues <#> \_ -> { key: "aria-haspopup", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-haspopup", value: unset' })
   pureAttr AriaHaspopup _ = unsafeAttribute $ This
     { key: "aria-haspopup", value: unset' }
   unpureAttr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>

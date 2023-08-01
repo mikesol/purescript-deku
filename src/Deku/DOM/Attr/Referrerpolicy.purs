@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Referrerpolicy where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
@@ -16,8 +16,8 @@ data Referrerpolicy = Referrerpolicy
 
 instance Attr A_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,8 +25,8 @@ instance Attr A_ Referrerpolicy String where
 
 instance Attr Area_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -34,8 +34,8 @@ instance Attr Area_ Referrerpolicy String where
 
 instance Attr Iframe_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -43,8 +43,8 @@ instance Attr Iframe_ Referrerpolicy String where
 
 instance Attr Img_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,8 +52,8 @@ instance Attr Img_ Referrerpolicy String where
 
 instance Attr Link_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,8 +61,8 @@ instance Attr Link_ Referrerpolicy String where
 
 instance Attr Script_ Referrerpolicy String where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
-    { key: "referrerpolicy", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
+    { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
   pureAttr Referrerpolicy value = unsafeAttribute $ This
     { key: "referrerpolicy", value: prop' value }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -71,7 +71,7 @@ instance Attr Script_ Referrerpolicy String where
 instance Attr everything Referrerpolicy Unit where
   attr Referrerpolicy bothValues = unsafeAttribute $ Both
     { key: "referrerpolicy", value: unset' }
-    (snd bothValues <#> \_ -> { key: "referrerpolicy", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "referrerpolicy", value: unset' })
   pureAttr Referrerpolicy _ = unsafeAttribute $ This
     { key: "referrerpolicy", value: unset' }
   unpureAttr Referrerpolicy eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Minlength where
 
 import Prelude
 import Data.These (These(..))
-import Data.Tuple (fst, snd)
+import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Input (Input_)
 import Deku.DOM.Elt.Textarea (Textarea_)
@@ -12,8 +12,8 @@ data Minlength = Minlength
 
 instance Attr Input_ Minlength String where
   attr Minlength bothValues = unsafeAttribute $ Both
-    { key: "minlength", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "minlength", value: prop' value })
+    { key: "minlength", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "minlength", value: prop' value })
   pureAttr Minlength value = unsafeAttribute $ This
     { key: "minlength", value: prop' value }
   unpureAttr Minlength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -21,8 +21,8 @@ instance Attr Input_ Minlength String where
 
 instance Attr Textarea_ Minlength String where
   attr Minlength bothValues = unsafeAttribute $ Both
-    { key: "minlength", value: prop' (fst bothValues) }
-    (snd bothValues <#> \value -> { key: "minlength", value: prop' value })
+    { key: "minlength", value: prop' (NonEmpty.head bothValues) }
+    (NonEmpty.tail bothValues <#> \value -> { key: "minlength", value: prop' value })
   pureAttr Minlength value = unsafeAttribute $ This
     { key: "minlength", value: prop' value }
   unpureAttr Minlength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -31,7 +31,7 @@ instance Attr Textarea_ Minlength String where
 instance Attr everything Minlength Unit where
   attr Minlength bothValues = unsafeAttribute $ Both
     { key: "minlength", value: unset' }
-    (snd bothValues <#> \_ -> { key: "minlength", value: unset' })
+    (NonEmpty.tail bothValues <#> \_ -> { key: "minlength", value: unset' })
   pureAttr Minlength _ = unsafeAttribute $ This
     { key: "minlength", value: unset' }
   unpureAttr Minlength eventValue = unsafeAttribute $ That $ eventValue <#>
