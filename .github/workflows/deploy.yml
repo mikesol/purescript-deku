@@ -24,88 +24,11 @@ jobs:
             ${{ hashFiles('package-lock.json') }}-
             ${{ hashFiles('spago.dhall') }}-
             ${{ hashFiles('packages.dhall') }}-
-            ${{ hashFiles('test.dhall') }}-
-            ${{ hashFiles('examples.dhall') }}
+            ${{ hashFiles('test.dhall') }}
       - name: Install dependencies
         run: npm ci
       - name: Test
         run: npm t
-      - name: Spago build examples
-        run: npm run build:examples
-      # - name: Build make
-      #   run: npx spago -x examples.dhall bundle-app --main Deku.Example.Docs.Static.Build --to examples/docs/Static/make.mjs --platform node
-      # - name: Build hydration
-      #   run: npx spago -x examples.dhall bundle-module --main Deku.Example.Docs.Static.Live --to examples/docs/Static/bundle.js --minify
-      # - name: Make index.html for netlify
-      #   run: |
-      #     cd examples/docs/Static
-      #     mkdir -p intro
-      #     echo '{"page":"Intro","slug":"/","top":true}' > config.json
-      #     node make.mjs config.json > index.html
-      #     mkdir -p hello
-      #     echo '{"page":"HelloWorld","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > hello/index.html
-      #     mkdir -p simple
-      #     echo '{"page":"SimpleComponent","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > simple/index.html
-      #     mkdir -p pursx1
-      #     echo '{"page":"PURSX1","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > pursx1/index.html
-      #     mkdir -p pursx2
-      #     echo '{"page":"PURSX2","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > pursx2/index.html
-      #     mkdir -p events1
-      #     echo '{"page":"Events","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > events1/index.html
-      #     mkdir -p effects
-      #     echo '{"page":"Effects","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > effects/index.html
-      #     mkdir -p events2
-      #     echo '{"page":"Events2","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > events2/index.html
-      #     mkdir -p portals
-      #     echo '{"page":"Portals","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > portals/index.html
-      #     mkdir -p ssr
-      #     echo '{"page":"SSR","slug":"/","top":false}' > config.json
-      #     node make.mjs config.json > ssr/index.html
-      #     cd ../../..
-      # - name: deploy to netlify
-      #   run: NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID }} NETLIFY_AUTH_TOKEN=${{ secrets.NETLIFY_AUTH_TOKEN }} netlify deploy --dir=./examples/docs/Static --prod
-      # - name: Make index.html for github
-      #   run: |
-      #     cd examples/docs/Static
-      #     mkdir -p intro
-      #     echo '{"page":"Intro","slug":"/purescript-deku/","top":true}' > config.json
-      #     node make.mjs config.json > index.html
-      #     mkdir -p hello
-      #     echo '{"page":"HelloWorld","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > hello/index.html
-      #     mkdir -p simple
-      #     echo '{"page":"SimpleComponent","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > simple/index.html
-      #     mkdir -p pursx1
-      #     echo '{"page":"PURSX1","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > pursx1/index.html
-      #     mkdir -p pursx2
-      #     echo '{"page":"PURSX2","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > pursx2/index.html
-      #     mkdir -p events1
-      #     echo '{"page":"Events","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > events1/index.html
-      #     mkdir -p effects
-      #     echo '{"page":"Effects","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > effects/index.html
-      #     mkdir -p events2
-      #     echo '{"page":"Events2","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > events2/index.html
-      #     mkdir -p portals
-      #     echo '{"page":"Portals","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > portals/index.html
-      #     mkdir -p ssr
-      #     echo '{"page":"SSR","slug":"/purescript-deku/","top":false}' > config.json
-      #     node make.mjs config.json > ssr/index.html
-      #     cd ../../..
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
