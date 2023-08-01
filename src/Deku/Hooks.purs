@@ -18,8 +18,10 @@ module Deku.Hooks
   , dynOptions
   , switcher
   , switcherFlipped
+  , cycle
   , switcherWithInitialValue
   , switcherWithInitialValueFlipped
+  , cycleWithInitialValue
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
@@ -332,6 +334,9 @@ switcher f event = Deku.do
     where
     fn a b = (a + 1) /\ (a /\ b)
 
+cycle :: Event Nut -> Nut
+cycle = switcher identity
+
 infixl 4 switcher as <$~>
 
 -- | A version of switcher that produces an initial value when `Nothing` is passed in.
@@ -355,6 +360,9 @@ switcherWithInitialValue f (NonEmpty h event) = Deku.do
     fn a b = (a + 1) /\ (a /\ b)
 
 infixl 4 switcherWithInitialValue as <$$~>
+
+cycleWithInitialValue :: NonEmpty Event Nut -> Nut
+cycleWithInitialValue = switcherWithInitialValue identity
 
 -- | A flipped version of `switcher`.
 switcherFlipped
