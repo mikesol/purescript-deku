@@ -2,37 +2,48 @@ module Test.Main where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
 import Data.Array ((..))
-import Data.Filterable (filter)
-import Data.Foldable (intercalate, oneOfMap)
+import Data.Filterable (compact, filter)
+import Data.Foldable (intercalate)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute ((!:=), (:=))
+import Deku.Attribute ((!:=), (:=), (<:=>))
 import Deku.Attributes (id_)
-import Deku.Control (blank, globalPortal1, portal1, switcher, text, text_, (<#~>))
-import Deku.Core (Hook, Nut, fixed)
+import Deku.Control (globalPortal1, portal1, text, text', textShow', text_)
+import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState')
-import Deku.Lifecycle (onDidMount, onDismount, onWillMount)
+import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useMemoized, useRef, useState, (<##~>), (<#~>))
+import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Event (Event, fold, mapAccum)
+import FRP.Behavior (sampleBy, step)
+import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
+foreign import doStateAssertionsForTests_ :: FFIDOMSnapshot -> Effect Unit
 
 runNoSSR :: Nut -> Effect (Effect Unit)
-runNoSSR = runInBody'
+runNoSSR n = do
+  x <- runInBody' n
+  pure do
+    ffi <- x
+    doStateAssertionsForTests_ ffi
 
 runWithSSR :: Nut -> Effect (Effect Unit)
-runWithSSR = hydrate'
+runWithSSR n = do
+  x <- hydrate' n
+  pure do
+    ffi <- x
+    doStateAssertionsForTests_ ffi
 
 ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
@@ -66,12 +77,12 @@ dynAppearsCorrectlyAtBeginning = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
-  setItem /\ item <- useState'
+  setItem /\ item <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i } <- useDynAtBeginning (counter item)
+        { value: i } <- useDynAtBeginning_ (counter item)
         D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
     ]
@@ -81,12 +92,12 @@ dynAppearsCorrectlyAtEnd = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
-  setItem /\ item <- useState'
+  setItem /\ item <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i } <- useDynAtEnd (counter item)
+        { value: i } <- useDynAtEnd_ (counter item)
         D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
     ]
@@ -96,13 +107,13 @@ deeplyNestedPreservesOrder = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
-  setItem /\ item <- useState'
+  setItem /\ item <- useState
   let
     mydyn n = do
       let sn = show n
       fixed
         [ Deku.do
-            { value: i } <- useDynAtEnd (counter item)
+            { value: i } <- useDynAtEnd_ (counter item)
             if i == 1 then mydyn (n + 1)
             else D.span [ id_ ("dyn" <> sn <> "-" <> show i) ]
               [ text_ (sn <> "-" <> show i) ]
@@ -121,13 +132,14 @@ isAMonoid = intercalate mempty $ map text_ [ "m", "o", "n", "o", "i", "d" ]
 
 sendsToPosition :: Nut
 sendsToPosition = Deku.do
-  setPosIdx /\ posIdx <- useState'
+  setPosIdx /\ posIdx <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then posIdx else empty) sendTo
+        { value: i } <-
+          useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
+            $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "pos", click_ (setPosIdx 1) ]
         [ text_ "send to pos" ]
@@ -135,13 +147,14 @@ sendsToPosition = Deku.do
 
 sendsToPositionFixed :: Nut
 sendsToPositionFixed = Deku.do
-  setPosIdx /\ posIdx <- useState'
+  setPosIdx /\ posIdx <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then posIdx else empty) sendTo
+        { value: i } <-
+          useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
+            $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         fixed
           [ D.span [ id_ ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "a") ]
@@ -162,8 +175,7 @@ insertsAtCorrectPositions = D.div [ id_ "div0" ]
       -- here, we scramble the order and make sure that the dyns
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
-      { value: i } <- useDyn
-        ((Tuple <*> identity) <$> oneOfMap pure [ 3, 0, 4, 2, 1 ])
+      { value: i } <- useDyn ((Tuple <*> identity) <$> [ 3, 0, 4, 2, 1 ]) empty
       D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
@@ -172,11 +184,13 @@ switcherWorksForCompositionalElements = Deku.do
   let
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> 1 + a) (-1) event
-  setItem /\ item <- useState unit
+    unMaybe Nothing = 0
+    unMaybe (Just x) = x + 1
+  setItem /\ item <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
-    , counter item # switcher \i -> fixed
+    , counter item <##~> lcmap unMaybe \i -> fixed
         ( [ 0, 1, 2 ] <#> \j -> D.span [ id_ $ "id" <> show j ]
             [ text_ (show i <> "-" <> show j) ]
         )
@@ -185,7 +199,7 @@ switcherWorksForCompositionalElements = Deku.do
 
 tabbedNavigationWithPursx :: Nut
 tabbedNavigationWithPursx = Deku.do
-  setItem /\ item <- useState 0
+  setItem /\ item <- useState
   D.div [ id_ "div0" ]
     [ D.div_
         [ D.button [ id_ "home-btn", click_ (setItem 0) ]
@@ -195,7 +209,7 @@ tabbedNavigationWithPursx = Deku.do
         , D.button [ id_ "contact-btn", click_ (setItem 2) ]
             [ text_ "contact" ]
         ]
-    , item # switcher case _ of
+    , item <##~> fromMaybe 0 >>> case _ of
         0 -> (Proxy :: _ "<h1 id=\"home\">home</h1>") ~~ {}
         1 -> (Proxy :: _ "<h1 id=\"about\">about ~me~</h1>") ~~
           { me: text_ "deku" }
@@ -206,21 +220,39 @@ tabbedNavigationWithPursx = Deku.do
           }
     ]
 
+switchersCompose :: Nut
+switchersCompose = Deku.do
+  let
+    counter :: forall a. Event a -> Event Int
+    counter event = fold (\a _ -> a + 1) (-1) event
+  setItem /\ item' <- useState
+  item <- useMemoized (counter item')
+  D.div [ id_ "maindiv" ]
+    [ D.div [ id_ "div0" ] [ text_ "d0" ]
+    , item <##~> maybe 0 (add 1) >>>
+        ( (_ `mod` 2) >>> case _ of
+            0 -> D.div [ id_ "div1a" ] [ text_ "d1a" ]
+            _ -> D.div [ id_ "div1b" ] [ text_ "d1b" ]
+        )
+    , D.div [ id_ "div2" ] [ text_ "d2" ]
+    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "click" ]
+    ]
+
 portalsCompose :: Nut
 portalsCompose = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (\a _ -> a + 1) 0 event
-  setItem /\ item' <- useState'
-  item <- useMemoized (counter item' <|> pure 0)
+    counter event = fold (\a _ -> a + 1) (-1) event
+  setItem /\ item' <- useState
+  item <- useMemoized (counter item')
   globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
     do
       let
-        switchMe n = item # switcher
+        switchMe n = item <##~> maybe 0 (add 1) >>>
           ( (_ `mod` 3) >>> case _ of
               i
                 | i == n -> e
-                | otherwise -> blank
+                | otherwise -> mempty
           )
       D.div [ id_ "maindiv" ]
         [ D.div_ [ text_ "d0" ]
@@ -241,19 +273,20 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
 
     limitTo :: Int -> Event ~> Event
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
-  setPortalInContext /\ portalInContext <- useState true
-  setPortedNut /\ portedNut <- useState'
+  setPortalInContext /\ portalInContext <- useState
+  setPortedNut /\ portedNut <- useState
   D.div_
     [ D.div [ id_ "outer-scope" ]
-        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+        [ limitTo 2 (sampleBy Tuple (step true portalInContext) portedNut)
             <#~> \(Tuple tf p) ->
               if not tf then p else D.div_ [ text_ "no dice!" ]
         ]
     , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
           Deku.do
-            useEffect (pure unit) (const (setPortedNut e))
             D.div [ id_ "inner-scope" ]
-              [ (Tuple <$> portalInContext <*> portedNut)
+              [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+                  [ text_ "push ported nut" ]
+              , (Tuple <$> portalInContext <*> portedNut)
                   <#~> \(Tuple tf p) ->
                     if tf then p else D.div_ [ text_ "no dice!" ]
               ]
@@ -274,19 +307,20 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
 
     limitTo :: Int -> Event ~> Event
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
-  setPortalInContext /\ portalInContext <- useState true
-  setPortedNut /\ portedNut <- useState'
+  setPortalInContext /\ portalInContext <- useState
+  setPortedNut /\ portedNut <- useState
   D.div_
     [ D.div [ id_ "outer-scope" ]
-        [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
+        [ limitTo 2 (sampleBy Tuple (step true portalInContext) portedNut)
             <#~> \(Tuple tf p) ->
               if not tf then p else D.div_ [ text_ "no dice!" ]
         ]
     , portal1 (D.div_ [ text_ "foo" ]) \e ->
         Deku.do
-          useEffect (pure unit) (const (setPortedNut e))
           D.div [ id_ "inner-scope" ]
-            [ (Tuple <$> portalInContext <*> portedNut)
+            [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+                [ text_ "push ported nut" ]
+            , (Tuple <$> portalInContext <*> portedNut)
                 <#~> \(Tuple tf p) ->
                   if tf then p else D.div_ [ text_ "no dice!" ]
             ]
@@ -304,68 +338,71 @@ pursXComposes = Deku.do
         { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
     ]
 
-lifecycle :: Nut
-lifecycle = Deku.do
-  setItem /\ item <- useState 0
+switcherSwitches :: Nut
+switcherSwitches = Deku.do
+  setItem /\ item <- useState
+  setGoodbyeC /\ goodbyeC <- useState
+  iref <- useRef (-1) item
+  let
+    gc = do
+      i <- iref
+      when (i == 2) do
+        setGoodbyeC (Just unit)
   D.div [ id_ "div0" ]
     [ D.div_
-        [ D.button [ id_ "home-btn", click_ (setItem 0) ]
+        [ D.button [ id_ "home-btn", click_ $ gc *> setItem 0 ]
             [ text_ "home" ]
-        , D.button [ id_ "about-btn", click_ (setItem 1) ]
+        , D.button [ id_ "about-btn", click_ $ gc *> setItem 1 ]
             [ text_ "about" ]
-        , D.button [ id_ "contact-btn", click_ (setItem 2) ]
+        , D.button [ id_ "contact-btn", click_ $ gc *> setItem 2 ]
             [ text_ "contact" ]
         ]
-    , D.span [ D.Id !:= "hack" ] []
-    , item # switcher case _ of
+    , D.span [ D.Id !:= "hack" ]
+        [ text $ merge
+            [ filter (_ == 1) item $> "hello", compact goodbyeC $> "goodbye" ]
+        ]
+    , item <##~> fromMaybe 0 >>> case _ of
         0 -> D.span_ [ text_ "a" ]
-        1 -> onWillMount (hackyInnerHTML "hack" "hello") $ D.span_ [ text_ "b" ]
-        _ -> onDismount (hackyInnerHTML "hack" "goodbye") $ D.span_
-          [ text_ "c" ]
+        1 -> D.span_ [ text_ "b" ]
+        _ -> D.span_ [ text_ "c" ]
     ]
-
-lifecycleWillAndDidMount :: Nut
-lifecycleWillAndDidMount = D.div_
-  [ Deku.do
-      setInt /\ int <- useState'
-      onWillMount (setInt 42) (D.span [ id_ "span1" ] [ text (show <$> int) ])
-  , Deku.do
-      setInt /\ int <- useState'
-      onDidMount (setInt 42) (D.span [ id_ "span2" ] [ text (show <$> int) ])
-  ]
 
 unsetUnsets :: Nut
 unsetUnsets = Deku.do
-  unsetAttr /\ unset <- useState true
+  let initialAtt = "color:red;"
+  setAttIsPresent /\ attIsPresent <- useState
   D.div [ id_ "div0" ]
     [ text_ "foo"
     , D.span
         [ id_ "span1"
-        , unset <#> if _ then D.Style := "color:red;" else D.Style := unit
+        , D.Style :=
+            (initialAtt /\ (filter identity attIsPresent $> initialAtt))
+        , D.Style <:=> (filter not attIsPresent $> unit)
         ]
         [ text_ "bar" ]
-    , D.button [ id_ "unsetter", click_ (unsetAttr false) ]
+    , D.button [ id_ "unsetter", click_ (setAttIsPresent false) ]
         [ text_ "unset" ]
     ]
 
 emptyTextIsSet :: Nut
-emptyTextIsSet = text mempty
+emptyTextIsSet = text empty
 
 useRefWorks :: Nut
 useRefWorks = Deku.do
   let startsAt = 0
-  setCounter /\ counter <- useState startsAt
+  setCounter /\ counter <- useState
   cref <- useRef startsAt counter
   D.div_
     [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
+        [ click_ do
+            cref <#> add 1 >>= setCounter
         , id_ "counter"
         ]
 
         [ text_ "Increment" ]
     , D.div_
         ( 0 .. 9 <#> \i -> Deku.do
-            setButtonTxt /\ buttonTxt <- useState'
+            setButtonTxt /\ buttonTxt <- useState
             D.button
               [ click_ $ cref >>= setButtonTxt
               , id_ $ "b" <> show i
@@ -378,34 +415,44 @@ useRefWorks = Deku.do
 useEffectWorks :: Nut
 useEffectWorks = Deku.do
   let startsAt = 0
-  setCounter /\ counter <- useState startsAt
-  useEffect counter \i -> when (i `mod` 4 == 1) do
-    setCounter (i + 1)
+  setCounter /\ counter <- useState
+  let counter' = counter <#> \i -> if i `mod` 4 == 1 then i + 1 else i
+  cref <- useRef startsAt counter'
   D.div_
     [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
+        [ click_ do
+            cref <#> add 1 >>= setCounter
         , id_ "counter"
         ]
         [ text_ "Increment" ]
-    , D.div [ id_ "mydiv" ] [ text (show <$> counter) ]
+    , D.div [ id_ "mydiv" ] [ text' (show startsAt) (show <$> counter') ]
     ]
 
 customHooksDoTheirThing :: Nut
 customHooksDoTheirThing = Deku.do
-  setCounter /\ counter <- useState 0
-  e1 /\ e2 <- myHook counter
+  let initialCount = 0
+  setCounter /\ counter <- useState
+  cref <- useRef initialCount counter
+  e1' /\ e2' <- myHook (#) identity initialCount
+  e1 /\ e2 <- myHook useMemoized map counter
   D.div_
     [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
+        [ click_ $ cref <#> add 1 >>= setCounter
         , id_ "counter"
         ]
         [ text_ "Increment" ]
-    , D.div [ id_ "mydiv1" ] [ text (show <$> e1) ]
-    , D.div [ id_ "mydiv2" ] [ text (show <$> e2) ]
+    , D.div [ id_ "mydiv1" ] [ textShow' e1' e1 ]
+    , D.div [ id_ "mydiv2" ] [ textShow' e2' e2 ]
     ]
   where
-  myHook :: Event Int -> Hook (Tuple (Event Int) (Event Int))
-  myHook e makeHook = Deku.do
-    e1 <- useMemoized (add 42 <$> e)
-    e2 <- useMemoized (add 48 <$> e)
+  myHook
+    :: forall e o i c
+     . (i -> (c -> o) -> o)
+    -> ((Int -> Int) -> e -> i)
+    -> e
+    -> (Tuple c c -> o)
+    -> o
+  myHook f1 f2 e makeHook = Deku.do
+    e1 <- f1 (f2 (add 42) e)
+    e2 <- f1 (f2 (add 48) e)
     makeHook (Tuple e1 e2)

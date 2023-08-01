@@ -158,6 +158,7 @@ domableToNode (Nut df) = step1 df
   step1 (NutF (Element' n)) = n
   step1 _ = Node $ Element $ \_ _ -> pure $ Tuple [] $ Tuple [] empty
 
+
 instance pursxToElementConsInsert ::
   ( Row.Cons key (Nut) r' r
   , PursxToElement rest r
@@ -174,21 +175,27 @@ instance pursxToElementConsInsert ::
       { cache: Object.insert (reflectType pxk) false cache
       , element: Nut
           ( NutF
-              ( Element' $ Node $ Element \info di -> do
-                  let Node (Element rest) = domableToNode element
-                  Tuple subscr1 (Tuple unsub1 evt1) <- rest info di
-                  Tuple subscr0 (Tuple unsub0 evt0) <- __internalDekuFlatten
-                    ((\(Nut df) -> df) (get pxk r))
-                    { parent: Just (reflectType pxk <> "@!%" <> pxScope)
-                    , scope: info.scope
-                    , raiseId: \_ -> pure unit
-                    , pos: info.pos
-                    , ez: false
-                    , dynFamily: Nothing
-                    }
-                    di
-                  pure $ Tuple (subscr0 <> subscr1) $ Tuple (unsub0 <> unsub1)
-                    (merge [ evt0, evt1 ])
+              ( Element' $ Node $ Element
+                  \info di@(DOMInterpret { deleteFromCache }) -> do
+                    let Node (Element rest) = domableToNode element
+                    Tuple subscr1 (Tuple unsub1 evt1) <- rest info di
+                    Tuple subscr0 (Tuple unsub0 evt0) <- __internalDekuFlatten
+                      ((\(Nut df) -> df) (get pxk r))
+                      { parent: Just (reflectType pxk <> "@!%" <> pxScope)
+                      , scope: info.scope
+                      , raiseId: \_ -> pure unit
+                      , pos: info.pos
+                      , ez: false
+                      , dynFamily: Nothing
+                      }
+                      di
+                    pure $ Tuple (subscr0 <> subscr1) $ Tuple
+                      ( unsub0 <> unsub1 <>
+                          [ deleteFromCache
+                              { id: reflectType pxk <> "@!%" <> pxScope }
+                          ]
+                      )
+                      (merge [ evt0, evt1 ])
               )
           )
       }

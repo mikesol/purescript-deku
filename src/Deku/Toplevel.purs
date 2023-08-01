@@ -23,9 +23,10 @@ import Data.Newtype (unwrap)
 import Data.Tuple (Tuple(..))
 import Deku.Control (deku)
 import Deku.Core (Node', Nut(..), NutF(..), flattenArgs)
-import Deku.Interpret (fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
+import Effect.Exception (error, throwException)
 import FRP.Event (subscribe)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
@@ -41,7 +42,7 @@ import Web.HTML.Window (document)
 runInElement'
   :: Web.DOM.Element
   -> Nut
-  -> Effect (Effect Unit)
+  -> Effect (Effect FFIDOMSnapshot)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
   seed <- liftST $ RRef.new 0
@@ -55,15 +56,16 @@ runInElement' elt eee = do
   pure do
     for_ unsub executor
     liftST u
+    pure ffi
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody'
   :: Nut
-  -> Effect (Effect Unit)
+  -> Effect (Effect FFIDOMSnapshot)
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
+  maybe (throwException (error "Could not find element")) (flip runInElement' eee) (toElement <$> b')
 
 -- | Runs a deku application in the body of a document
 runInBody
@@ -77,7 +79,7 @@ foreign import dekuRoot :: Effect DOM.Element
 
 -- | Hydrates an application created using `runSSR`, returning a canceler that can
 -- | be used to end the application.
-hydrate' :: Nut -> Effect (Effect Unit)
+hydrate' :: Nut -> Effect (Effect FFIDOMSnapshot)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   getAllComments ffi
@@ -105,7 +107,9 @@ hydrate' children = do
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
     for_ unsub executor
+    (unwrap di).deleteFromCache { id: me } List.Nil ffi
     liftST $ u
+    pure ffi
 
 -- | Hydrates an application created using `runSSR`.
 hydrate :: Nut -> Effect Unit

@@ -188,6 +188,18 @@ describe('deku', () => {
     expect($('#contact').text()).toBe("contact mike at site.com thanks");
   }));
   
+  doTest('switchers compose', (f) => f(tests.switchersCompose, () => {
+    const $ = require('jquery');
+    expect($('#div1a').index()).toBeGreaterThan($('#div0').index());
+    expect($('#div1a').index()).toBeLessThan($('#div2').index());
+    $('#incr').trigger("click");
+    expect($('#div1b').index()).toBeGreaterThan($('#div0').index());
+    expect($('#div1b').index()).toBeLessThan($('#div2').index());
+    $('#incr').trigger("click");
+    expect($('#div1a').index()).toBeGreaterThan($('#div0').index());
+    expect($('#div1a').index()).toBeLessThan($('#div2').index());
+  }));
+
   doTest('portals compose', (f) => f(tests.portalsCompose, () => {
     const $ = require('jquery');
     // d0, then abc, then d1, then d2, then the button
@@ -198,7 +210,7 @@ describe('deku', () => {
     $('#incr').trigger("click");
     // shifts the portal
     expect($('#maindiv').text()).toBe('d0d1d2abcincr');
-  }));
+  }), false);
 
   doTest('global portals retain portalness when sent out of scope', (f) => f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
     const $ = require('jquery');
@@ -251,7 +263,7 @@ describe('deku', () => {
     expect($('#div0').text()).toBe('début milieu après-milieu fin');
   }));
 
-  doTest('lifecycle events work', (f) => f(tests.lifecycle, () => {
+  doTest('switcher switches', (f) => f(tests.switcherSwitches, () => {
     const $ = require('jquery');
     $('#about-btn').trigger('click')
     expect($('#hack').text()).toBe('hello');
@@ -259,12 +271,6 @@ describe('deku', () => {
     expect($('#hack').text()).toBe('hello');
     $('#home-btn').trigger('click')
     expect($('#hack').text()).toBe('goodbye');
-  }));
-
-  doTest('lifecycle has a difference before and after mounting', (f) => f(tests.lifecycleWillAndDidMount, () => {
-    const $ = require('jquery');
-    expect($('#span1').text()).toBe('');
-    expect($('#span2').text()).toBe('42');
   }));
 
   doTest('attributes are correctly unset', (f) => f(tests.unsetUnsets, () => {
@@ -330,4 +336,3 @@ describe('deku', () => {
     expect($('#mydiv2').text()).toBe('49');
   }));
 });
-

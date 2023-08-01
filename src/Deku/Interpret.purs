@@ -29,13 +29,11 @@ import Prelude
 
 import Bolson.Control as BC
 import Bolson.Core (Scope(..))
-import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Internal as Ref
-import Control.Plus (empty)
 import Data.Array as Array
 import Data.Foldable (for_)
 import Data.List ((:))
@@ -47,7 +45,7 @@ import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Data.String.Utils (includes)
 import Data.Tuple (Tuple(..))
-import Deku.Core (DOMInterpret(..), Node', Nut', NutF(..), flattenArgs)
+import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
 import Deku.Core as Core
 import Effect (Effect)
 import FRP.Event (subscribe)
@@ -183,7 +181,7 @@ giveNewParentOrReconstruct
           , scope
           }
           di
-        for_ sub  executor
+        for_ sub executor
         deferId <- liftST ids
         let deferredPath = pure deferId
         for_ unsub (executor <<< deferPayload deferredPath)
@@ -198,7 +196,7 @@ giveNewParentOrReconstruct
     scope <- getScope gnp.id ffi
     case scope, gnp.scope of
       Global, _ -> hasIdAndInScope
-      Local x, Local y ->
+      Local x, Local y -> do
         -- the free thing won't work
         -- that's fine, though
         -- we can issue `associateWithUnsubscribe`
@@ -231,7 +229,7 @@ foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
 
 fullDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
   -> EffectfulExecutor
   -> Core.DOMInterpret EffectfulPayload
 fullDOMInterpret seed deferredCache executor =
@@ -393,14 +391,20 @@ deferPayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
-  => Ref.STRef Global (Map.Map (List.List Int) (List.List Int -> i -> o Unit))
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (Array (List.List Int -> i -> o Unit)))
   -> List.List Int
   -> (List.List Int -> i -> o Unit)
   -> List.List Int
   -> i
   -> o Unit
 deferPayloadE deferredCache l p _ _ = do
-  void $ liftST $ Ref.modify (Map.insert l p) deferredCache
+  void $ liftST $ Ref.modify
+    ( flip Map.alter l case _ of
+        Nothing -> Just [ p ]
+        Just x -> Just (x <> [ p ])
+    )
+    deferredCache
 
 redecorateDeferredPayloadE
   :: forall i o
@@ -417,7 +421,8 @@ forcePayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
-  => Ref.STRef Global (Map.Map (List.List Int) (List.List Int -> i -> o Unit))
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (Array (List.List Int -> i -> o Unit)))
   -> ((List.List Int -> i -> o Unit) -> o Unit)
   -> List.List Int
   -> i
@@ -438,11 +443,12 @@ forcePayloadE deferredCache executor l = fn
           { newMap: Endo (Map.delete k)
           , instructions: Endo $ Array.cons v
           }
-    for_ (unwrap instructions []) executor
+    for_ (join $ unwrap instructions []) executor
     void $ liftST $ Ref.modify (unwrap newMap)
       deferredCache
 
-type FunctionOfArrayInstructionsU = Ref.STRef Global (Array Instruction) -> ST Global Unit
+type FunctionOfArrayInstructionsU =
+  Ref.STRef Global (Array Instruction) -> ST Global Unit
 
 type STPayload = List.List Int -> FunctionOfArrayInstructionsU
 
@@ -453,7 +459,7 @@ type STExecutor = STPayload -> ST Global Unit
 
 ssrDOMInterpret
   :: Ref.STRef Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) STPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array STPayload))
   -> STExecutor
   -> Core.DOMInterpret STPayload
 ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
@@ -497,13 +503,13 @@ sendToPos a = \state -> do
       , ez: false
       , raiseId: mempty
       -- change me!
-      , ctor: NutF (Bolson.envy empty)
+      , ctor: (\(Nut x) -> x) mempty
       }
   coerce (giveNewParent_ Just runOnJust newA) state
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Ref.STRef Global (Map.Map (List.List Int) EffectfulPayload)
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
   -> EffectfulExecutor
   -> Core.DOMInterpret EffectfulPayload
 hydratingDOMInterpret seed deferredCache executor =
@@ -517,27 +523,15 @@ hydratingDOMInterpret seed deferredCache executor =
       , redecorateDeferredPayload: redecorateDeferredPayloadE
       , deferPayload: deferPayloadE deferredCache
       , forcePayload: execute $ forcePayloadE deferredCache executor
-      , makeElement: execute $
-          makeElement_
-            runOnJust
-            true
-      , makeDynBeacon: execute $
-          makeDynBeacon_ runOnJust true
-      , attributeParent: execute $
-          attributeParent_ runOnJust
+      , makeElement: execute $ makeElement_ runOnJust true
+      , makeDynBeacon: execute $ makeDynBeacon_ runOnJust true
+      , attributeParent: execute $ attributeParent_ runOnJust
       , makeRoot: execute $ makeRoot_
-      , makeText: execute $ makeText_
-          runOnJust
-          true
-          (maybe unit)
-      , makePursx: execute $ makePursx_
-          runOnJust
-          true
-          (maybe unit)
+      , makeText: execute $ makeText_ runOnJust true (maybe unit)
+      , makePursx: execute $ makePursx_ runOnJust true (maybe unit)
       , setProp: execute $ setProp_ true
       , setCb: execute $ setCb_ true
-      , unsetAttribute: execute $
-          unsetAttribute_ true
+      , unsetAttribute: execute $ unsetAttribute_ true
       , setText: execute $ setText_
       , sendToPos: execute $ sendToPos
       , deleteFromCache: execute $

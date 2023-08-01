@@ -11,30 +11,53 @@
 -- | [Deku guide section on state](https://purescript-deku.netlify.app/core-concepts/state)
 -- | and the [Deku guide section on collections](https://purescript-deku.netlify.app/core-concepts/collections).
 module Deku.Hooks
-  ( useState
-  , useRef
-  , useMemoized'
-  , useMemoized
-  , useMailboxed
+  ( (<##~>)
+  , (<#~>)
+  , (<$~>)
+  , dynOptions
+  , switcher
+  , switcherFlipped
+  , switcherWithInitialValue
+  , switcherWithInitialValueFlipped
   , useDyn
   , useDynAtBeginning
+  , useDynAtBeginningWith
+  , useDynAtBeginningWith_
+  , useDynAtBeginning_
   , useDynAtEnd
-  ) where
+  , useDynAtEndWith
+  , useDynAtEndWith_
+  , useDynAtEnd_
+  , useDynWith
+  , useDynWith_
+  , useDyn_
+  , useMailboxed
+  , useMemoized
+  , useMemoized'
+  , useRef
+  , useState
+  )
+  where
 
 import Prelude
 
 import Bolson.Control (Flatten)
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), envy)
+import Bolson.Core (Element(..), Entity(..))
+import Bolson.Core as BCore
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Internal as STRef
+import Control.Plus (empty)
+import Data.Array as Array
+import Data.FunctorWithIndex (mapWithIndex)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
-import Data.Tuple (Tuple(..))
+import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Child, DOMInterpret(..), Hook, Node(..), Node', Nut(..), NutF(..), DekuExtra, dyn, insert, remove, sendToPos)
+import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, create, mailbox, makeEvent, mapAccum, memoize, merge, subscribe)
+import FRP.Event (Event, create, filterMap, mailbox, makeEvent, mapAccum, merge, subscribe)
 
 flattenArgs
   :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
@@ -79,16 +102,24 @@ useMemoized
   :: forall a
    . Event a
   -> Hook (Event a)
-useMemoized e f1 = Nut eeee
+useMemoized e f = Nut go'
   where
-  eeee :: forall payload. NutF payload
-  eeee = NutF (envy (map (\(NutF x) -> x) eee))
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
 
-  eee :: forall payload. Event (NutF payload)
-  eee = map (\(Nut df) -> df) ee
-
-  ee :: Event Nut
-  ee = memoize e f1
+  go
+    :: forall payload
+     . Node' payload
+  go i di = do
+    { event, push } <- create
+    u <- subscribe e push
+    let Nut nf = f event
+    Tuple sub (Tuple unsub evt) <- __internalDekuFlatten nf i di
+    pure $ Tuple sub $ Tuple unsub $ makeEvent \k -> do
+      o <- subscribe evt k
+      pure do
+        u
+        o
 
 -- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
 useMemoized'
@@ -149,51 +180,223 @@ useMailboxed f = Nut go'
     let Nut nf = f (push /\ event)
     __internalDekuFlatten nf i di
 
+type DynOptions v =
+  { sendTo :: v -> Event Int, remove :: v -> Event Unit }
+
+dynOptions :: forall v. DynOptions v
+dynOptions = { sendTo: const empty, remove: const empty }
+
 useDyn
   :: forall value
-   . Event (Tuple Int value)
+   . Array (Tuple Int value)
+  -> Event (Tuple Int value)
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDyn x y = useDynWith x y dynOptions
+
+useDynWith
+  :: forall value
+   . Array (Tuple Int value)
+  -> Event (Tuple Int value)
+  -> DynOptions value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynWith arr e opts f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = do
+    let
+      mc cx (Tuple pos v) = Tuple
+        ( merge
+            [ opts.remove v $> Child BCore.Remove
+            , Child <<< BCore.Logic <$> opts.sendTo v
+            , cx.event
+            ]
+        )
+        ( unsafeSetPos pos $ f
+            { value: v
+            , remove: cx.push remove
+            , sendTo: cx.push <<< sendToPos
+            }
+        )
+    c0 <- create
+    c1 <- create
+    let
+      Nut nf = dyn $ Tuple  (map (mc c0) arr) $ map (mc c1) e
+    __internalDekuFlatten nf i di
+
+useDynAtBeginningWith
+  :: forall value
+   . Array value
+  -> Event value
+  -> DynOptions value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-useDyn e f = dyn $ map
-  ( \(Tuple pos value) -> Deku.do
-      { remove, sendTo } <- useDyn' pos e
-      f { remove, sendTo, value }
-  )
-  e
+useDynAtBeginningWith a e = useDynWith ((0 /\ _) <$> a) ((0 /\ _) <$> e)
 
 useDynAtBeginning
   :: forall value
-   . Event value
+   . Array value
+  -> Event value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-useDynAtBeginning e = useDyn ((0 /\ _) <$> e)
+useDynAtBeginning a b = useDynAtBeginningWith a b dynOptions
+
+useDynAtEndWith
+  :: forall value
+   . Array value
+  -> Event value
+  -> DynOptions value
+  -> Hook
+       { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+useDynAtEndWith arr e = useDynWith (mapWithIndex Tuple arr)
+  (mapAccum (\a b -> (a + 1) /\ (a /\ b)) (Array.length arr) e)
 
 useDynAtEnd
   :: forall value
-   . Event value
+   . Array value
+  -> Event value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-useDynAtEnd e = useDyn (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
+useDynAtEnd a b = useDynAtEndWith a b dynOptions
 
-useDyn'
+-- -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
+-- -- | and creates a `Nut`. This allows you to use an event to switch between different
+-- -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
+-- -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
+-- -- | and should be used when the content needs to be replaced wholesale. For a more efficient
+-- -- | approach, see the `useDyn` hook.
+switcher
   :: forall a
-   . Int
+   . (a -> Nut)
   -> Event a
-  -> ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Event Child
-useDyn' i driver f = makeEvent \k -> do
-  { event, push } <- create
-  subscribe
-    ( merge
-        [ driver $> insert i
-            ( f
-                { remove: push remove
-                , sendTo: push <<< sendToPos
-                }
-            )
-        , event
-        ]
-    )
-    k
+  -> Nut
+switcher f event = Deku.do
+  ctr <- useMemoized (counter event)
+  { value } <- useDynAtBeginningWith_ ctr $ dynOptions
+    { remove = \(Tuple oldV _) -> filterMap
+        (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+        ctr
+    }
+  f (snd value)
+  where
+  counter = mapAccum fn 0
+    where
+    fn a b = (a + 1) /\ (a /\ b)
+
+infixl 4 switcher as <$~>
+
+-- | A version of switcher that produces an initial value when `Nothing` is passed in.
+switcherWithInitialValue
+  :: forall a
+   . (Maybe a -> Nut)
+  -> Event a
+  -> Nut
+switcherWithInitialValue f event = Deku.do
+  ctr <- useMemoized (counter event)
+  { value } <- useDynAtBeginningWith [ Tuple 0 Nothing ] (map (map Just) ctr) $
+    dynOptions
+      { remove = \(Tuple oldV _) -> filterMap
+          (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+          ctr
+      }
+  f (snd value)
+  where
+  counter = mapAccum fn 1
+    where
+    fn a b = (a + 1) /\ (a /\ b)
+
+infixl 4 switcherWithInitialValue as <$$~>
+
+-- | A flipped version of `switcher`.
+switcherFlipped
+  :: forall a
+   . Event a
+  -> (a -> Nut)
+  -> Nut
+switcherFlipped = flip switcher
+
+infixl 1 switcherFlipped as <#~>
+
+switcherWithInitialValueFlipped
+  :: forall a
+   . Event a
+  -> (Maybe a -> Nut)
+  -> Nut
+switcherWithInitialValueFlipped = flip switcherWithInitialValue
+
+infixl 1 switcherWithInitialValueFlipped as <##~>
+
+useDyn_
+  :: forall value
+   . Event (Tuple Int value)
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDyn_ = useDyn []
+
+useDynWith_
+  :: forall value
+   . Event (Tuple Int value)
+  -> DynOptions value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynWith_ = useDynWith []
+
+useDynAtBeginning_
+  :: forall value
+   . Event value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynAtBeginning_ = useDynAtBeginning []
+
+useDynAtBeginningWith_
+  :: forall value
+   . Event value
+  -> DynOptions value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynAtBeginningWith_ = useDynAtBeginningWith []
+
+useDynAtEnd_
+  :: forall value
+   . Event value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynAtEnd_ = useDynAtEnd []
+
+useDynAtEndWith_
+  :: forall value
+   . Event value
+  -> DynOptions value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynAtEndWith_ = useDynAtEndWith []

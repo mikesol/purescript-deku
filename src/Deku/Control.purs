@@ -3,21 +3,18 @@
 -- | the DOM, and basic text creation. It also has several internal functions used for
 -- | DOM element creation.
 module Deku.Control
-  ( (<#~>)
-  , (<$~>)
-  , deku
+  ( deku
   , unsafeSetAttribute
   , elementify2
-  , toDeku
   , globalPortal
   , globalPortal1
   , portal
   , portal1
-  , switcher
-  , switcherFlipped
   , text
   , text_
   , text'
+  , textUsing'
+  , textShow'
   ) where
 
 import Prelude
@@ -27,18 +24,16 @@ import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Filterable (filter)
 import Data.Foldable (foldl)
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
 import Data.These (These(..))
-import Data.Tuple (Tuple(..), snd)
-import Data.Tuple.Nested ((/\))
+import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, envy, flattenArgs, insert_, remove, unsafeSetPos)
-import FRP.Event (Event, keepLatest, mapAccum, memoize, merge)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
+import FRP.Event (Event, merge)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -258,12 +253,21 @@ portal
   -> (Vect n Nut -> Nut)
   -> Nut
 portal v' c' =
-  -- todo: we got rid of dyn wrapping to see
-  -- if it matters in the new setup
-  -- worth monitoring
-  Nut
-    ( go (map (\(Nut df) -> df) v')
-        (shouldBeSafe c')
+  -- all local portals are wrapped in a `dyn`
+  -- otherwise, they would have no unique scope, which would not
+  -- allow us to determine if they've exacped their scope
+  -- for global portals, this is not needed as they use the global scope
+  -- todo: this logic is a hack. try to get rid of it.
+  dyn
+    ( Tuple
+        [ Tuple empty
+            ( Nut
+                ( go (map (\(Nut df) -> df) v')
+                    (shouldBeSafe c')
+                )
+            )
+        ]
+        empty
     )
 
   where
@@ -346,6 +350,14 @@ text_ txt = text_' (Just txt) Nothing
 text' :: String -> Event String -> Nut
 text' txt e = text_' (Just txt) (Just e)
 
+-- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
+-- | something that can be morphed into a string. The node is set immediately with the string and then changes based on the event.
+textUsing' :: forall a b. (a -> String) -> (b -> String) -> a -> Event b -> Nut
+textUsing' f1 f2 txt e = text_' (Just (f1 txt)) (Just (f2 <$> e))
+
+textShow' :: forall a b. Show a => Show b => a -> Event b -> Nut
+textShow' = textUsing' show show
+
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku
@@ -358,7 +370,7 @@ deku root (Nut cc) = go cc
     :: forall payload
      . NutF payload
     -> HeadNode' payload
-  go children di@(DOMInterpret { makeRoot }) = do
+  go children di@(DOMInterpret { makeRoot, deleteFromCache }) = do
     let me = "deku-root"
     Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
       children
@@ -370,7 +382,7 @@ deku root (Nut cc) = go cc
       , dynFamily: Nothing
       }
       di
-    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple unsub evt
+    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple (unsub <> [deleteFromCache { id: me}]) evt
 
 data Stage = Begin | Middle | End
 
@@ -379,42 +391,3 @@ __internalDekuFlatten
    . NutF payload
   -> Node' payload
 __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
-
--- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
--- | and creates a `Nut`. This allows you to use an event to switch between different
--- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
--- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
--- | and should be used when the content needs to be replaced wholesale. For a more efficient
--- | approach, see the `useDyn` hook.
-switcher
-  :: forall a
-   . (a -> Nut)
-  -> Event a
-  -> Nut
-switcher f event = dyn $ keepLatest
-  $ memoize (counter event) \cenv -> map
-      ( \(p /\ n) -> merge
-          [ ((const remove) <$> filter (eq (n + 1) <<< snd) cenv)
-          , cenv $> insert_ (coerce (f p))
-          ]
-      )
-      cenv
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (b /\ a)
-
-infixl 4 switcher as <$~>
-
--- | A flipped version of `switcher`.
-switcherFlipped
-  :: forall a
-   . Event a
-  -> (a -> Nut)
-  -> Nut
-switcherFlipped = flip switcher
-
-infixl 1 switcherFlipped as <#~>
-
-toDeku :: forall a. (a -> Event Nut) -> a -> Nut
-toDeku = compose envy

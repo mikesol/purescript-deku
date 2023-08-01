@@ -33,14 +33,11 @@ module Deku.Core
   , NutF(..)
   , Child(..)
   , flattenArgs
-  , insert
-  , insert_
   , remove
   , sendToPos
   , sendToTop
   , dyn
   , fixed
-  , envy
   , unsafeSetPos
   ) where
 
@@ -110,7 +107,12 @@ instance Semigroup Nut where
   append a b = fixed [ a, b ]
 
 instance Monoid Nut where
-  mempty = Nut (NutF (Bolson.envy empty))
+  mempty = Nut
+    ( NutF
+        ( Bolson.Element'
+            (Node (Bolson.Element \_ _ -> pure $ Tuple [] $ Tuple [] empty))
+        )
+    )
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
@@ -132,35 +134,11 @@ unsafeSetPos' i (Nut df) = Nut (g df)
     f ii = case ii of
       Bolson.Element' (Node (Bolson.Element e')) -> Bolson.Element'
         (Node (Bolson.Element (lcmap (_ { pos = i }) e')))
-      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
-        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      -- we don't need to set the pos recursively down as
+      -- dynify guarantees to wrap in an Element
       _ -> ii
 
-newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-insert
-  :: Int
-  -> Nut
-  -> Child
-insert i x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos i x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
-
-insert_
-  :: Nut
-  -> Child
-insert_ x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos' Nothing x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
+newtype Child = Child (Bolson.Child Int)
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 remove :: Child
@@ -418,16 +396,40 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
-  :: Event (Event Child)
+  :: Tuple
+       (Array (Tuple (Event Child) Nut))
+       (Event (Tuple (Event Child) Nut))
   -> Nut
 dyn = dynify myDyn
   where
-  myDyn :: Event (Event Child) -> Nut
-  myDyn e = Nut (myDyn' ((map <<< map) (\(Child c) -> c) e))
+  bolsonify
+    :: forall payload
+     . Tuple (Event Child) Nut
+    -> Tuple (Event (Bolson.Child Int)) (Bolson.Entity Int (Node payload))
+  bolsonify (Tuple child (Nut nut)) = Tuple (map (\(Child x) -> x) child)
+    ((\(NutF n) -> n) nut)
+
+  myDyn
+    :: Tuple
+         (Array (Tuple (Event Child) Nut))
+         (Event (Tuple (Event Child) Nut))
+    -> Nut
+  myDyn e = Nut
+    (myDyn' ((\(Tuple a b) -> Tuple (map bolsonify a) (map bolsonify b)) e))
 
   myDyn'
     :: forall payload
-     . Event (Event (Bolson.Child Int (Node payload)))
+     . Tuple
+         ( Array
+             ( Tuple (Event (Bolson.Child Int))
+                 (Bolson.Entity Int (Node payload))
+             )
+         )
+         ( Event
+             ( Tuple (Event (Bolson.Child Int))
+                 (Bolson.Entity Int (Node payload))
+             )
+         )
     -> NutF payload
   myDyn' x = NutF (Bolson.dyn x)
 
@@ -446,27 +448,3 @@ fixed = dynify myFixed
      . Array (NutF payload)
     -> NutF payload
   myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
-
--- dynify
---   ( coerce
---       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
---   )
-
--- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
--- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
--- | for example `switcher`. It is left in the library for backwards compatibility, but will
--- | likely be deprecated, and then all traces of it will be purged, and then people will be forced to study
--- | a revisionist history of the library that denies it ever existed.
-envy
-  :: Event Nut
-  -> Nut
-envy = dynify myEnvy
-  where
-  myEnvy :: Event Nut -> Nut
-  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
-
-  myEnvy'
-    :: forall payload
-     . Event (NutF payload)
-    -> NutF payload
-  myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))
