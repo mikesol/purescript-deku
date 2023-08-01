@@ -795,7 +795,8 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
           console.log('breaking as insertedBeforeEndBeacon'); //!
           break;
         }
-        if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+        //////// MIKE CHANGE
+        if (state.units[dkid].dynFamily !== a.dynFamily) {
           i++;
           console.log('continuing as dyn families unequal'); //!
           continue;
