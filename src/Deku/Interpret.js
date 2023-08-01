@@ -719,10 +719,13 @@ export const makeRoot_ = (a) => (state) => () => {
   a.root.$dekuId = ptr;
 };
 
+
 export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
   console.log("giveNewParent_", b);
   const insertAt = (ptr, parent, node) => {
+    console.log('running insert at', ptr, parent, node); //!
     if (state.units[ptr].startBeacon) {
+      console.log('found start beacon', ptr, parent, node); //!
       // we continue this operation until we hit the end beacon
       var x = state.units[ptr].startBeacon;
       var y = x.nextSibling;
@@ -734,6 +737,7 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
         x = y;
       }
     } else {
+      console.log('no start beacon', ptr, parent, node); //!
       state.units[parent].main.insertBefore(state.units[ptr].main, node);
     }
   };
@@ -751,7 +755,9 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
       aPos = myPos;
       return true;
     })();
+    console.log('got pos', aPos); //!
     if (aPos === undefined) {
+      console.log('setting ptr to max value'); //!
       aPos = Number.MAX_VALUE;
     }
     const nodes = state.units[parent].main.childNodes;
@@ -766,38 +772,47 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
     while (i < nodes.length) {
       var dkid;
       if ((dkid = nodes[i].$dekuId)) {
+        console.log('found dkid', dkid); //!
         // first, we check if we're alreay at the end of a dyn family
         // and we haven't done the insert yet
         // if so, we perform the insert
         const insertedBeforeEndBeacon = runOnJust(a.dynFamily)((df) => () => {
           if (didInsert) {
+            console.log('did not insert', didInsert); //!
             return false;
           }
           if (state.units[dkid].endBeacon === nodes[i] && df === dkid) {
+            console.log('did insert, fixing', just(pos)); //!
             state.units[ptr].pos = just(pos);
             insertAt(ptr, parent, nodes[i]);
             return true;
           }
+          console.log('no conditions met'); //!
           return false;
         })();
         if (insertedBeforeEndBeacon) {
           didInsert = true;
+          console.log('breaking as insertedBeforeEndBeacon'); //!
           break;
         }
         if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
           i++;
+          console.log('continuing as dyn families unequal'); //!
           continue;
         }
+        console.log('equal dyn families', dkid, state.units[dkid].dynFamily, ptr, state.units[ptr].dynFamily); //!
 
         // if we've found equal positions already we stop here
         // as all we care about is the pos fixer-upper happening above
         if (didInsert) {
           i++;
+          console.log('continuing as received didInsert'); //!
           continue;
         }
 
         // if the positions are equal, insert before and return true
         if (pos === aPos) {
+          console.log('poseq', pos, aPos); //!
           insertAt(ptr, parent, nodes[i]);
           // increment pos by one as there's been an insert
           pos++;
@@ -806,6 +821,7 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
         // only set if not end beacon, as end beacon will have already
         // gotten the position when this iterates over the start beacon
         else if (state.units[dkid].endBeacon !== nodes[i]) {
+          console.log('not endBeacon'); //!
           state.units[dkid].pos = just(pos);
           pos++;
         }
@@ -813,12 +829,16 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
       i++;
     }
     if (didInsert) {
+      console.log('returning because we successfully inserted');
       return;
     }
     // we return true anyway, as this just means that we can tack this onto the end of our structure
+    console.log('at the end');
     if (state.units[ptr].main) {
+      console.log('doing main flow');
       state.units[parent].main.appendChild(state.units[ptr].main);
     } else {
+      console.log('doing beacon flow');
       var x = state.units[ptr].startBeacon;
       var y = x.nextSibling;
       state.units[parent].main.appendChild(x);
@@ -831,6 +851,7 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
     }
   }
 };
+
 
 export const disconnectElement_ = (a) => (state) => () => {
   console.log("disconnectElement_", a);
