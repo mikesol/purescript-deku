@@ -65,7 +65,9 @@ runInBody'
   -> Effect (Effect FFIDOMSnapshot)
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe (throwException (error "Could not find element")) (flip runInElement' eee) (toElement <$> b')
+  maybe (throwException (error "Could not find element"))
+    (flip runInElement' eee)
+    (toElement <$> b')
 
 -- | Runs a deku application in the body of a document
 runInBody
@@ -91,6 +93,7 @@ hydrate' children = do
   (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
   root <- dekuRoot
+  headRedecorator <- liftST $ (unwrap di).ids
   Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
     (unsafeCoerce children)
     { parent: Just "deku-root"
@@ -103,10 +106,11 @@ hydrate' children = do
     di
   (unwrap di).makeRoot { id: me, root } List.Nil ffi
   for_ sub executor
-  u <- liftST $ subscribe evt executor
+  u <- liftST $ subscribe (map ((unwrap di).redecorateDeferredPayload (pure headRedecorator)) evt) executor
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
     for_ unsub executor
+    (unwrap di).forcePayload (pure headRedecorator) List.Nil ffi
     (unwrap di).deleteFromCache { id: me } List.Nil ffi
     liftST $ u
     pure ffi
@@ -137,6 +141,8 @@ runSSR' topTag = go
     instr <- RRef.new []
     cache <- liftST $ RRef.new Map.empty
     let di = ssrDOMInterpret seed cache mempty
+    -- we thunk to create the head redecorator
+    _ <- liftST $ (unwrap di).ids
     Tuple subscr _ <- __internalDekuFlatten
       children
       { parent: Just "deku-root"

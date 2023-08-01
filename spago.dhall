@@ -6,7 +6,6 @@
   , "catenable-lists"
   , "control"
   , "css"
-  , "debug"
   , "effect"
   , "either"
   , "exceptions"

@@ -153,7 +153,7 @@ giveNewParentOrReconstruct
   just
   roj
   gnp
-  _
+  ipl
   ffi = do
   let
     hasIdAndInScope = giveNewParent_ just roj gnp ffi
@@ -183,7 +183,7 @@ giveNewParentOrReconstruct
           di
         for_ sub executor
         deferId <- liftST ids
-        let deferredPath = pure deferId
+        let deferredPath = ipl <> pure deferId
         for_ unsub (executor <<< deferPayload deferredPath)
         unsubscribe <- liftST $ subscribe
           (redecorateDeferredPayload deferredPath <$> evt)

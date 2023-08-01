@@ -18,32 +18,31 @@ import Deku.Control (globalPortal1, portal1, text, text', textShow', text_)
 import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useMemoized, useRef, useState, (<##~>), (<#~>))
+import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useMemoized, useRef, useState, (<##~>))
 import Deku.Interpret (FFIDOMSnapshot)
-import Deku.Listeners (click, click_)
+import Deku.Listeners (click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Behavior (sampleBy, step)
 import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
-foreign import doStateAssertionsForTests_ :: FFIDOMSnapshot -> Effect Unit
+foreign import doStateAssertionsForTests_ :: FFIDOMSnapshot -> Int -> Effect Unit
 
-runNoSSR :: Nut -> Effect (Effect Unit)
-runNoSSR n = do
+runNoSSR :: Nut -> Int -> Effect (Effect Unit)
+runNoSSR n i = do
   x <- runInBody' n
   pure do
     ffi <- x
-    doStateAssertionsForTests_ ffi
+    doStateAssertionsForTests_ ffi i
 
-runWithSSR :: Nut -> Effect (Effect Unit)
-runWithSSR n = do
+runWithSSR :: Nut -> Int -> Effect (Effect Unit)
+runWithSSR n i = do
   x <- hydrate' n
   pure do
     ffi <- x
-    doStateAssertionsForTests_ ffi
+    doStateAssertionsForTests_ ffi i
 
 ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
@@ -245,7 +244,7 @@ portalsCompose = Deku.do
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item' <- useState
   item <- useMemoized (counter item')
-  globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
+  portal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
     do
       let
         switchMe n = item <##~> maybe 0 (add 1) >>>
@@ -274,26 +273,31 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
     limitTo :: Int -> Event ~> Event
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState
+  portalInContextRef <- useRef true portalInContext
   setPortedNut /\ portedNut <- useState
+  let noDice = D.div_ [ text_ "no dice!" ]
   D.div_
     [ D.div [ id_ "outer-scope" ]
-        [ limitTo 2 (sampleBy Tuple (step true portalInContext) portedNut)
-            <#~> \(Tuple tf p) ->
-              if not tf then p else D.div_ [ text_ "no dice!" ]
+        [ limitTo 1 (Tuple <$> portalInContext <*> portedNut)
+            <##~> maybe noDice \(Tuple tf p) ->
+              if not tf then p else noDice
         ]
     , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
           Deku.do
-            D.div [ id_ "inner-scope" ]
+            D.div_
               [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
                   [ text_ "push ported nut" ]
-              , (Tuple <$> portalInContext <*> portedNut)
-                  <#~> \(Tuple tf p) ->
-                    if tf then p else D.div_ [ text_ "no dice!" ]
+              , D.div [ id_ "inner-scope" ]
+                  [ (Tuple <$> portalInContext <*> portedNut)
+                      <##~> maybe e \(Tuple tf p) ->
+                        if tf then p else noDice
+                  ]
               ]
       )
     , D.button
         [ id_ "portal-btn"
-        , click $ portalInContext <#> not >>> setPortalInContext
+        , click_ do
+            portalInContextRef <#> not >>= setPortalInContext
         ]
 
         [ text_ "switch" ]
@@ -309,24 +313,28 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState
   setPortedNut /\ portedNut <- useState
+  portalInContextRef <- useRef true portalInContext
+  let noDice = D.div_ [ text_ "no dice!" ]
   D.div_
     [ D.div [ id_ "outer-scope" ]
-        [ limitTo 2 (sampleBy Tuple (step true portalInContext) portedNut)
-            <#~> \(Tuple tf p) ->
-              if not tf then p else D.div_ [ text_ "no dice!" ]
+        [ limitTo 1 (Tuple <$> portalInContext <*> portedNut)
+            <##~> maybe noDice \(Tuple tf p) ->
+              if not tf then p else noDice
         ]
     , portal1 (D.div_ [ text_ "foo" ]) \e ->
         Deku.do
-          D.div [ id_ "inner-scope" ]
+          D.div_
             [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
                 [ text_ "push ported nut" ]
-            , (Tuple <$> portalInContext <*> portedNut)
-                <#~> \(Tuple tf p) ->
-                  if tf then p else D.div_ [ text_ "no dice!" ]
+            , D.div [ id_ "inner-scope" ]
+                [ (Tuple <$> portalInContext <*> portedNut)
+                    <##~> maybe e \(Tuple tf p) ->
+                      if tf then p else noDice
+                ]
             ]
     , D.button
         [ id_ "portal-btn"
-        , click $ portalInContext <#> not >>> setPortalInContext
+        , click_ do portalInContextRef <#> not >>= setPortalInContext
         ]
         [ text_ "switch" ]
     ]

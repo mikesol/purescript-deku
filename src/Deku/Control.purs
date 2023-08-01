@@ -370,8 +370,19 @@ deku root (Nut cc) = go cc
     :: forall payload
      . NutF payload
     -> HeadNode' payload
-  go children di@(DOMInterpret { makeRoot, deleteFromCache }) = do
+  go
+    children
+    di@
+      ( DOMInterpret
+          { ids
+          , makeRoot
+          , forcePayload
+          , deleteFromCache
+          , redecorateDeferredPayload
+          }
+      ) = do
     let me = "deku-root"
+    headRedecorator <- ids
     Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
       children
       { parent: Just me
@@ -382,7 +393,11 @@ deku root (Nut cc) = go cc
       , dynFamily: Nothing
       }
       di
-    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple (unsub <> [deleteFromCache { id: me}]) evt
+    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple
+      ( unsub <>
+          [ forcePayload (pure headRedecorator), deleteFromCache { id: me } ]
+      )
+      (map (redecorateDeferredPayload (pure headRedecorator)) evt)
 
 data Stage = Begin | Middle | End
 
