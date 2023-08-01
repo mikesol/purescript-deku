@@ -36,6 +36,7 @@ module Deku.Hooks
   , useMemoized
   , useMemoized'
   , useRef
+  , useRefNE
   , useState
   , useState'
   , useStateWithRef
@@ -151,6 +152,12 @@ useMemoized' f0 makeHook = Deku.do
   push /\ e <- useState'
   m <- useMemoized (f0 e)
   makeHook (push /\ m)
+
+useRefNE
+  :: forall a
+   . NonEmpty Event a
+  -> Hook (Effect a)
+useRefNE (NonEmpty x y) = useRef x y
 
 -- | A hook that takes an initial value and an event and produces
 -- | a reference to the value that can be used in listeners. While the value
