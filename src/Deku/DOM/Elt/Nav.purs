@@ -21,4 +21,4 @@ nav_ = nav empty
 nav__
   :: String
   -> Nut
-nav__ t = nav_ [ DC.text_ t ]
+nav__ t = nav_ [ DC.text t ]

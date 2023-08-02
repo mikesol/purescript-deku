@@ -21,4 +21,4 @@ animateMotion_ = animateMotion empty
 animateMotion__
   :: String
   -> Nut
-animateMotion__ t = animateMotion_ [ DC.text_ t ]
+animateMotion__ t = animateMotion_ [ DC.text t ]

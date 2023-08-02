@@ -21,4 +21,4 @@ feSpecularLighting_ = feSpecularLighting empty
 feSpecularLighting__
   :: String
   -> Nut
-feSpecularLighting__ t = feSpecularLighting_ [ DC.text_ t ]
+feSpecularLighting__ t = feSpecularLighting_ [ DC.text t ]

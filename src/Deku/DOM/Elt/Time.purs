@@ -21,4 +21,4 @@ time_ = time empty
 time__
   :: String
   -> Nut
-time__ t = time_ [ DC.text_ t ]
+time__ t = time_ [ DC.text t ]

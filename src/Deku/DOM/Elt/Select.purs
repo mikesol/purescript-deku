@@ -21,4 +21,4 @@ select_ = select empty
 select__
   :: String
   -> Nut
-select__ t = select_ [ DC.text_ t ]
+select__ t = select_ [ DC.text t ]

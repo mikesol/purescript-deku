@@ -21,4 +21,4 @@ html_ = html empty
 html__
   :: String
   -> Nut
-html__ t = html_ [ DC.text_ t ]
+html__ t = html_ [ DC.text t ]

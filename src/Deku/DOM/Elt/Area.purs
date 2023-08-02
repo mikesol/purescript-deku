@@ -21,4 +21,4 @@ area_ = area empty
 area__
   :: String
   -> Nut
-area__ t = area_ [ DC.text_ t ]
+area__ t = area_ [ DC.text t ]

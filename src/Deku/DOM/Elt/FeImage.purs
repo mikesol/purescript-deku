@@ -21,4 +21,4 @@ feImage_ = feImage empty
 feImage__
   :: String
   -> Nut
-feImage__ t = feImage_ [ DC.text_ t ]
+feImage__ t = feImage_ [ DC.text t ]

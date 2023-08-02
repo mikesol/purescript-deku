@@ -21,4 +21,4 @@ kbd_ = kbd empty
 kbd__
   :: String
   -> Nut
-kbd__ t = kbd_ [ DC.text_ t ]
+kbd__ t = kbd_ [ DC.text t ]

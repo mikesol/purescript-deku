@@ -21,4 +21,4 @@ abbr_ = abbr empty
 abbr__
   :: String
   -> Nut
-abbr__ t = abbr_ [ DC.text_ t ]
+abbr__ t = abbr_ [ DC.text t ]

@@ -21,4 +21,4 @@ symbol_ = symbol empty
 symbol__
   :: String
   -> Nut
-symbol__ t = symbol_ [ DC.text_ t ]
+symbol__ t = symbol_ [ DC.text t ]

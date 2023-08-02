@@ -21,4 +21,4 @@ br_ = br empty
 br__
   :: String
   -> Nut
-br__ t = br_ [ DC.text_ t ]
+br__ t = br_ [ DC.text t ]

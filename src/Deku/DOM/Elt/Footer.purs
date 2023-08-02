@@ -21,4 +21,4 @@ footer_ = footer empty
 footer__
   :: String
   -> Nut
-footer__ t = footer_ [ DC.text_ t ]
+footer__ t = footer_ [ DC.text t ]

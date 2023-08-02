@@ -3,18 +3,15 @@
 -- | the DOM, and basic text creation. It also has several internal functions used for
 -- | DOM element creation.
 module Deku.Control
-  ( deku
-  , unsafeSetAttribute
+  ( class Textable
+  , deku
   , elementify2
   , globalPortal
   , globalPortal1
   , portal
   , portal1
   , text
-  , text_
-  , text'
-  , textUsing'
-  , textShow'
+  , unsafeSetAttribute
   ) where
 
 import Prelude
@@ -334,30 +331,20 @@ text_' t1 t2 = Nut go'
       $ Tuple [ deleteFromCache { id: show me } ]
           (maybe empty (map (unsafeSetText di (show me))) t2)
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | the emitted strings. Each emitted string replaces the previous string.
-text
-  :: Event String
-  -> Nut
-text = text_' Nothing <<< Just
+-- | A class representing a conservative smattering of stuff that can turn into a text node
+class Textable text where
+  -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
+  -- | the emitted strings. Each emitted string replaces the previous string.
+  text :: text -> Nut
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | a string. The node is set immediately with the string and does not change.
-text_ :: String -> Nut
-text_ txt = text_' (Just txt) Nothing
+instance Textable (Event String) where
+  text = text_' Nothing <<< Just
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | a string. The node is set immediately with the string and then changes based on the event.
-text' :: NonEmpty Event String -> Nut
-text' (NonEmpty txt e) = text_' (Just txt) (Just e)
+instance Textable String where
+  text txt = text_' (Just txt) Nothing
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | something that can be morphed into a string. The node is set immediately with the string and then changes based on the event.
-textUsing' :: forall a. (a -> String) -> NonEmpty Event a -> Nut
-textUsing' f1 (NonEmpty txt e) = text_' (Just (f1 txt)) (Just (f1 <$> e))
-
-textShow' :: forall a. Show a => NonEmpty Event a -> Nut
-textShow' = textUsing' show
+instance Textable (NonEmpty Event String) where
+  text (NonEmpty txt e) = text_' (Just txt) (Just e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

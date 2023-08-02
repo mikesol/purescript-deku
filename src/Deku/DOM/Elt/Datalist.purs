@@ -21,4 +21,4 @@ datalist_ = datalist empty
 datalist__
   :: String
   -> Nut
-datalist__ t = datalist_ [ DC.text_ t ]
+datalist__ t = datalist_ [ DC.text t ]

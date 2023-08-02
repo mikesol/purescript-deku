@@ -21,4 +21,4 @@ feTile_ = feTile empty
 feTile__
   :: String
   -> Nut
-feTile__ t = feTile_ [ DC.text_ t ]
+feTile__ t = feTile_ [ DC.text t ]

@@ -21,4 +21,4 @@ tfoot_ = tfoot empty
 tfoot__
   :: String
   -> Nut
-tfoot__ t = tfoot_ [ DC.text_ t ]
+tfoot__ t = tfoot_ [ DC.text t ]

@@ -21,4 +21,4 @@ title_ = title empty
 title__
   :: String
   -> Nut
-title__ t = title_ [ DC.text_ t ]
+title__ t = title_ [ DC.text t ]

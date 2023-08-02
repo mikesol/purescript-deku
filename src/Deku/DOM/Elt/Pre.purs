@@ -21,4 +21,4 @@ pre_ = pre empty
 pre__
   :: String
   -> Nut
-pre__ t = pre_ [ DC.text_ t ]
+pre__ t = pre_ [ DC.text t ]

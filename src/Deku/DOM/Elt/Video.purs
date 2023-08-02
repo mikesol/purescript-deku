@@ -21,4 +21,4 @@ video_ = video empty
 video__
   :: String
   -> Nut
-video__ t = video_ [ DC.text_ t ]
+video__ t = video_ [ DC.text t ]

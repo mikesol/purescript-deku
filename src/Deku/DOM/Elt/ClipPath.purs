@@ -21,4 +21,4 @@ clipPath_ = clipPath empty
 clipPath__
   :: String
   -> Nut
-clipPath__ t = clipPath_ [ DC.text_ t ]
+clipPath__ t = clipPath_ [ DC.text t ]

@@ -21,4 +21,4 @@ text_ = text empty
 text__
   :: String
   -> Nut
-text__ t = text_ [ DC.text_ t ]
+text__ t = text_ [ DC.text t ]

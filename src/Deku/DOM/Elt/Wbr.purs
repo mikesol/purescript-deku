@@ -21,4 +21,4 @@ wbr_ = wbr empty
 wbr__
   :: String
   -> Nut
-wbr__ t = wbr_ [ DC.text_ t ]
+wbr__ t = wbr_ [ DC.text t ]

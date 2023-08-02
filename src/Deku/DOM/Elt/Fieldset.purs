@@ -21,4 +21,4 @@ fieldset_ = fieldset empty
 fieldset__
   :: String
   -> Nut
-fieldset__ t = fieldset_ [ DC.text_ t ]
+fieldset__ t = fieldset_ [ DC.text t ]

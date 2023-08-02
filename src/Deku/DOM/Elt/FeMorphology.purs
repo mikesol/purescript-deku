@@ -21,4 +21,4 @@ feMorphology_ = feMorphology empty
 feMorphology__
   :: String
   -> Nut
-feMorphology__ t = feMorphology_ [ DC.text_ t ]
+feMorphology__ t = feMorphology_ [ DC.text t ]

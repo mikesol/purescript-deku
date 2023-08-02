@@ -21,4 +21,4 @@ big_ = big empty
 big__
   :: String
   -> Nut
-big__ t = big_ [ DC.text_ t ]
+big__ t = big_ [ DC.text t ]

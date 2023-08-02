@@ -21,4 +21,4 @@ param_ = param empty
 param__
   :: String
   -> Nut
-param__ t = param_ [ DC.text_ t ]
+param__ t = param_ [ DC.text t ]

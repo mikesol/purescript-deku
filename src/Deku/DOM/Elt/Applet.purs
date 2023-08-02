@@ -21,4 +21,4 @@ applet_ = applet empty
 applet__
   :: String
   -> Nut
-applet__ t = applet_ [ DC.text_ t ]
+applet__ t = applet_ [ DC.text t ]

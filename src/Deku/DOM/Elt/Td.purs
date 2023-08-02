@@ -21,4 +21,4 @@ td_ = td empty
 td__
   :: String
   -> Nut
-td__ t = td_ [ DC.text_ t ]
+td__ t = td_ [ DC.text t ]

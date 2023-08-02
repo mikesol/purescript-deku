@@ -21,4 +21,4 @@ details_ = details empty
 details__
   :: String
   -> Nut
-details__ t = details_ [ DC.text_ t ]
+details__ t = details_ [ DC.text t ]

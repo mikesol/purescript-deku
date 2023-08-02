@@ -21,4 +21,4 @@ bdi_ = bdi empty
 bdi__
   :: String
   -> Nut
-bdi__ t = bdi_ [ DC.text_ t ]
+bdi__ t = bdi_ [ DC.text t ]

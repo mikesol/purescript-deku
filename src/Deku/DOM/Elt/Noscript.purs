@@ -21,4 +21,4 @@ noscript_ = noscript empty
 noscript__
   :: String
   -> Nut
-noscript__ t = noscript_ [ DC.text_ t ]
+noscript__ t = noscript_ [ DC.text t ]

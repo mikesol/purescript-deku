@@ -21,4 +21,4 @@ mpath_ = mpath empty
 mpath__
   :: String
   -> Nut
-mpath__ t = mpath_ [ DC.text_ t ]
+mpath__ t = mpath_ [ DC.text t ]

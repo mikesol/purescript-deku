@@ -11,17 +11,13 @@
 -- | [Deku guide section on state](https://purescript-deku.netlify.app/core-concepts/state)
 -- | and the [Deku guide section on collections](https://purescript-deku.netlify.app/core-concepts/collections).
 module Deku.Hooks
-  ( (<##~>)
-  , (<#~>)
-  , (<$$~>)
+  ( (<#~>)
   , (<$~>)
   , dynOptions
+  , class Switcher
   , switcher
   , switcherFlipped
   , cycle
-  , switcherWithInitialValue
-  , switcherWithInitialValueFlipped
-  , cycleWithInitialValue
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
@@ -310,78 +306,54 @@ useDynAtEnd
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtEnd a b = useDynAtEndWith a b dynOptions
 
--- -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
--- -- | and creates a `Nut`. This allows you to use an event to switch between different
--- -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
--- -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
--- -- | and should be used when the content needs to be replaced wholesale. For a more efficient
--- -- | approach, see the `useDyn` hook.
-switcher
-  :: forall a
-   . (a -> Nut)
-  -> Event a
-  -> Nut
-switcher f event = Deku.do
-  ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith_ ctr $ dynOptions
-    { remove = \(Tuple oldV _) -> filterMap
-        (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr
-    }
-  f (snd value)
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (a /\ b)
+class Switcher f where
+  -- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
+  -- | and creates a `Nut`. This allows you to use an event to switch between different
+  -- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
+  -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
+  -- | and should be used when the content needs to be replaced wholesale. For a more efficient
+  -- | approach, see the `useDyn` hook.
+  switcher :: forall a. (a -> Nut) -> f a -> Nut
 
-cycle :: Event Nut -> Nut
-cycle = switcher identity
-
-infixl 4 switcher as <$~>
-
--- | A version of switcher that produces an initial value when `Nothing` is passed in.
-switcherWithInitialValue
-  :: forall a
-   . (a -> Nut)
-  -> NonEmpty Event a
-  -> Nut
-switcherWithInitialValue f (NonEmpty h event) = Deku.do
-  ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith [ Tuple 0 h ] ctr $
-    dynOptions
+instance Switcher Event where
+  switcher f event = Deku.do
+    ctr <- useMemoized (counter event)
+    { value } <- useDynAtBeginningWith_ ctr $ dynOptions
       { remove = \(Tuple oldV _) -> filterMap
           (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
           ctr
       }
-  f (snd value)
-  where
-  counter = mapAccum fn 1
+    f (snd value)
     where
-    fn a b = (a + 1) /\ (a /\ b)
+    counter = mapAccum fn 0
+      where
+      fn a b = (a + 1) /\ (a /\ b)
 
-infixl 4 switcherWithInitialValue as <$$~>
+instance Switcher (NonEmpty Event) where
+  switcher f (NonEmpty h event) = Deku.do
+    ctr <- useMemoized (counter event)
+    { value } <- useDynAtBeginningWith [ Tuple 0 h ] ctr $
+      dynOptions
+        { remove = \(Tuple oldV _) -> filterMap
+            (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+            ctr
+        }
+    f (snd value)
+    where
+    counter = mapAccum fn 1
+      where
+      fn a b = (a + 1) /\ (a /\ b)
 
-cycleWithInitialValue :: NonEmpty Event Nut -> Nut
-cycleWithInitialValue = switcherWithInitialValue identity
+cycle :: forall f. Switcher f => f Nut -> Nut
+cycle = switcher identity
+
+infixl 4 switcher as <$~>
 
 -- | A flipped version of `switcher`.
-switcherFlipped
-  :: forall a
-   . Event a
-  -> (a -> Nut)
-  -> Nut
+switcherFlipped :: forall f a. Switcher f => f a -> (a -> Nut) -> Nut
 switcherFlipped = flip switcher
 
 infixl 1 switcherFlipped as <#~>
-
-switcherWithInitialValueFlipped
-  :: forall a
-   . NonEmpty Event a
-  -> (a -> Nut)
-  -> Nut
-switcherWithInitialValueFlipped = flip switcherWithInitialValue
-
-infixl 1 switcherWithInitialValueFlipped as <##~>
 
 useDyn_
   :: forall value

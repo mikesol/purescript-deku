@@ -21,4 +21,4 @@ option_ = option empty
 option__
   :: String
   -> Nut
-option__ t = option_ [ DC.text_ t ]
+option__ t = option_ [ DC.text t ]

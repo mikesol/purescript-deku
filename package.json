@@ -7,7 +7,7 @@
 		"postinstall": "node node_modules/puppeteer/install.js",
 		"clean": "rm -rf .spago output node_modules *.lock",
 		"build": "spago build",
-		"format": "purs-tidy format-in-place src/**/*.purs",
+		"format": "purs-tidy format-in-place src/**/*.purs test/**/*.purs",
 		"build:examples": "spago -x examples.dhall build",
 		"build:test": "spago -x test/test.dhall build",
 		"snapshot": "npm run bundle:performance && spago -x test/test.dhall run --main Performance.Snapshot.Write",

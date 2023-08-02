@@ -21,4 +21,4 @@ frame_ = frame empty
 frame__
   :: String
   -> Nut
-frame__ t = frame_ [ DC.text_ t ]
+frame__ t = frame_ [ DC.text t ]

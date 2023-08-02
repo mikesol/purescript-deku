@@ -21,4 +21,4 @@ var_ = var empty
 var__
   :: String
   -> Nut
-var__ t = var_ [ DC.text_ t ]
+var__ t = var_ [ DC.text t ]

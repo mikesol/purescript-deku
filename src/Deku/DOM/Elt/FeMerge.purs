@@ -21,4 +21,4 @@ feMerge_ = feMerge empty
 feMerge__
   :: String
   -> Nut
-feMerge__ t = feMerge_ [ DC.text_ t ]
+feMerge__ t = feMerge_ [ DC.text t ]

@@ -21,4 +21,4 @@ colgroup_ = colgroup empty
 colgroup__
   :: String
   -> Nut
-colgroup__ t = colgroup_ [ DC.text_ t ]
+colgroup__ t = colgroup_ [ DC.text t ]

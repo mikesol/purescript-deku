@@ -21,4 +21,4 @@ path_ = path empty
 path__
   :: String
   -> Nut
-path__ t = path_ [ DC.text_ t ]
+path__ t = path_ [ DC.text t ]

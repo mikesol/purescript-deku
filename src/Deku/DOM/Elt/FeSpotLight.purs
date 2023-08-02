@@ -21,4 +21,4 @@ feSpotLight_ = feSpotLight empty
 feSpotLight__
   :: String
   -> Nut
-feSpotLight__ t = feSpotLight_ [ DC.text_ t ]
+feSpotLight__ t = feSpotLight_ [ DC.text t ]

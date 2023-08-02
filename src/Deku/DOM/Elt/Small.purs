@@ -21,4 +21,4 @@ small_ = small empty
 small__
   :: String
   -> Nut
-small__ t = small_ [ DC.text_ t ]
+small__ t = small_ [ DC.text t ]

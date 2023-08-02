@@ -21,4 +21,4 @@ animateTransform_ = animateTransform empty
 animateTransform__
   :: String
   -> Nut
-animateTransform__ t = animateTransform_ [ DC.text_ t ]
+animateTransform__ t = animateTransform_ [ DC.text t ]

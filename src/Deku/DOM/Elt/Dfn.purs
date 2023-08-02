@@ -21,4 +21,4 @@ dfn_ = dfn empty
 dfn__
   :: String
   -> Nut
-dfn__ t = dfn_ [ DC.text_ t ]
+dfn__ t = dfn_ [ DC.text t ]

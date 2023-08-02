@@ -21,4 +21,4 @@ xdata_ = xdata empty
 xdata__
   :: String
   -> Nut
-xdata__ t = xdata_ [ DC.text_ t ]
+xdata__ t = xdata_ [ DC.text t ]

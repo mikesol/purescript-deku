@@ -21,4 +21,4 @@ ins_ = ins empty
 ins__
   :: String
   -> Nut
-ins__ t = ins_ [ DC.text_ t ]
+ins__ t = ins_ [ DC.text t ]

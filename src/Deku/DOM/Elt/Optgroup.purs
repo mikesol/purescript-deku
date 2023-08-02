@@ -21,4 +21,4 @@ optgroup_ = optgroup empty
 optgroup__
   :: String
   -> Nut
-optgroup__ t = optgroup_ [ DC.text_ t ]
+optgroup__ t = optgroup_ [ DC.text t ]

@@ -21,4 +21,4 @@ canvas_ = canvas empty
 canvas__
   :: String
   -> Nut
-canvas__ t = canvas_ [ DC.text_ t ]
+canvas__ t = canvas_ [ DC.text t ]

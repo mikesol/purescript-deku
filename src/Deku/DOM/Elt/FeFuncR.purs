@@ -21,4 +21,4 @@ feFuncR_ = feFuncR empty
 feFuncR__
   :: String
   -> Nut
-feFuncR__ t = feFuncR_ [ DC.text_ t ]
+feFuncR__ t = feFuncR_ [ DC.text t ]

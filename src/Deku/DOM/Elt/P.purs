@@ -21,4 +21,4 @@ p_ = p empty
 p__
   :: String
   -> Nut
-p__ t = p_ [ DC.text_ t ]
+p__ t = p_ [ DC.text t ]

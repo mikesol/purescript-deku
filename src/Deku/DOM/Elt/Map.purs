@@ -21,4 +21,4 @@ map_ = map empty
 map__
   :: String
   -> Nut
-map__ t = map_ [ DC.text_ t ]
+map__ t = map_ [ DC.text t ]

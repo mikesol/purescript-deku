@@ -21,4 +21,4 @@ h5_ = h5 empty
 h5__
   :: String
   -> Nut
-h5__ t = h5_ [ DC.text_ t ]
+h5__ t = h5_ [ DC.text t ]

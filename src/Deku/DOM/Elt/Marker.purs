@@ -21,4 +21,4 @@ marker_ = marker empty
 marker__
   :: String
   -> Nut
-marker__ t = marker_ [ DC.text_ t ]
+marker__ t = marker_ [ DC.text t ]

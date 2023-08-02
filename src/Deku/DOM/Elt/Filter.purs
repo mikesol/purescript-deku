@@ -21,4 +21,4 @@ filter_ = filter empty
 filter__
   :: String
   -> Nut
-filter__ t = filter_ [ DC.text_ t ]
+filter__ t = filter_ [ DC.text t ]

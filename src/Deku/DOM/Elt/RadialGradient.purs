@@ -21,4 +21,4 @@ radialGradient_ = radialGradient empty
 radialGradient__
   :: String
   -> Nut
-radialGradient__ t = radialGradient_ [ DC.text_ t ]
+radialGradient__ t = radialGradient_ [ DC.text t ]

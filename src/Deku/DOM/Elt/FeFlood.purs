@@ -21,4 +21,4 @@ feFlood_ = feFlood empty
 feFlood__
   :: String
   -> Nut
-feFlood__ t = feFlood_ [ DC.text_ t ]
+feFlood__ t = feFlood_ [ DC.text t ]

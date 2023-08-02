@@ -21,4 +21,4 @@ textarea_ = textarea empty
 textarea__
   :: String
   -> Nut
-textarea__ t = textarea_ [ DC.text_ t ]
+textarea__ t = textarea_ [ DC.text t ]

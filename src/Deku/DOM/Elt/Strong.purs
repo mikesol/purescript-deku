@@ -21,4 +21,4 @@ strong_ = strong empty
 strong__
   :: String
   -> Nut
-strong__ t = strong_ [ DC.text_ t ]
+strong__ t = strong_ [ DC.text t ]

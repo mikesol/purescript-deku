@@ -21,4 +21,4 @@ rt_ = rt empty
 rt__
   :: String
   -> Nut
-rt__ t = rt_ [ DC.text_ t ]
+rt__ t = rt_ [ DC.text t ]

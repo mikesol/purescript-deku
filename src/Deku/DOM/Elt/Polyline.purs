@@ -21,4 +21,4 @@ polyline_ = polyline empty
 polyline__
   :: String
   -> Nut
-polyline__ t = polyline_ [ DC.text_ t ]
+polyline__ t = polyline_ [ DC.text t ]

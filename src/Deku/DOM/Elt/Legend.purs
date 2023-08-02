@@ -21,4 +21,4 @@ legend_ = legend empty
 legend__
   :: String
   -> Nut
-legend__ t = legend_ [ DC.text_ t ]
+legend__ t = legend_ [ DC.text t ]

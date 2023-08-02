@@ -21,4 +21,4 @@ desc_ = desc empty
 desc__
   :: String
   -> Nut
-desc__ t = desc_ [ DC.text_ t ]
+desc__ t = desc_ [ DC.text t ]

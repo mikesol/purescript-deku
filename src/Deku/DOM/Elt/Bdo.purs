@@ -21,4 +21,4 @@ bdo_ = bdo empty
 bdo__
   :: String
   -> Nut
-bdo__ t = bdo_ [ DC.text_ t ]
+bdo__ t = bdo_ [ DC.text t ]

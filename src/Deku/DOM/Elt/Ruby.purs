@@ -21,4 +21,4 @@ ruby_ = ruby empty
 ruby__
   :: String
   -> Nut
-ruby__ t = ruby_ [ DC.text_ t ]
+ruby__ t = ruby_ [ DC.text t ]

@@ -21,4 +21,4 @@ foreignObject_ = foreignObject empty
 foreignObject__
   :: String
   -> Nut
-foreignObject__ t = foreignObject_ [ DC.text_ t ]
+foreignObject__ t = foreignObject_ [ DC.text t ]

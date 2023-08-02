@@ -21,4 +21,4 @@ form_ = form empty
 form__
   :: String
   -> Nut
-form__ t = form_ [ DC.text_ t ]
+form__ t = form_ [ DC.text t ]

@@ -21,4 +21,4 @@ feTurbulence_ = feTurbulence empty
 feTurbulence__
   :: String
   -> Nut
-feTurbulence__ t = feTurbulence_ [ DC.text_ t ]
+feTurbulence__ t = feTurbulence_ [ DC.text t ]

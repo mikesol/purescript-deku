@@ -21,4 +21,4 @@ feConvolveMatrix_ = feConvolveMatrix empty
 feConvolveMatrix__
   :: String
   -> Nut
-feConvolveMatrix__ t = feConvolveMatrix_ [ DC.text_ t ]
+feConvolveMatrix__ t = feConvolveMatrix_ [ DC.text t ]

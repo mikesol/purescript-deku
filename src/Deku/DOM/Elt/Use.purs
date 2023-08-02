@@ -21,4 +21,4 @@ use_ = use empty
 use__
   :: String
   -> Nut
-use__ t = use_ [ DC.text_ t ]
+use__ t = use_ [ DC.text t ]

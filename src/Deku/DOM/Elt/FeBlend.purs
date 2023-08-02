@@ -21,4 +21,4 @@ feBlend_ = feBlend empty
 feBlend__
   :: String
   -> Nut
-feBlend__ t = feBlend_ [ DC.text_ t ]
+feBlend__ t = feBlend_ [ DC.text t ]

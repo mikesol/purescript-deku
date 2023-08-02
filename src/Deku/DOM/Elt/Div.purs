@@ -21,4 +21,4 @@ div_ = div empty
 div__
   :: String
   -> Nut
-div__ t = div_ [ DC.text_ t ]
+div__ t = div_ [ DC.text t ]

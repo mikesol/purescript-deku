@@ -21,4 +21,4 @@ center_ = center empty
 center__
   :: String
   -> Nut
-center__ t = center_ [ DC.text_ t ]
+center__ t = center_ [ DC.text t ]

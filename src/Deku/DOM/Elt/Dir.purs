@@ -21,4 +21,4 @@ dir_ = dir empty
 dir__
   :: String
   -> Nut
-dir__ t = dir_ [ DC.text_ t ]
+dir__ t = dir_ [ DC.text t ]

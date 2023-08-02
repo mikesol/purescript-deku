@@ -21,4 +21,4 @@ ol_ = ol empty
 ol__
   :: String
   -> Nut
-ol__ t = ol_ [ DC.text_ t ]
+ol__ t = ol_ [ DC.text t ]

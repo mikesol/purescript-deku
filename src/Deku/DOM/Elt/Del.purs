@@ -21,4 +21,4 @@ del_ = del empty
 del__
   :: String
   -> Nut
-del__ t = del_ [ DC.text_ t ]
+del__ t = del_ [ DC.text t ]

@@ -21,4 +21,4 @@ ul_ = ul empty
 ul__
   :: String
   -> Nut
-ul__ t = ul_ [ DC.text_ t ]
+ul__ t = ul_ [ DC.text t ]
