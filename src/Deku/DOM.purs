@@ -1634,6 +1634,7 @@ import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 import Effect (Effect)
 import Prelude (Unit, ($), ($>), (<#>))
 import Data.NonEmpty as NonEmpty
+import FRP.Event as Event
 import Data.These (These(..))
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
