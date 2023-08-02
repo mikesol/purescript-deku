@@ -8,8 +8,6 @@ module Deku.Attribute
   , Attribute'
   , class Attr
   , attr
-  , unpureAttr
-  , (<:=>)
   , (:=)
   , unsafeUnAttribute
   , unsafeAttribute
@@ -19,8 +17,6 @@ module Deku.Attribute
   , cb
   , Cb(..)
   , xdata
-  , pureAttr
-  , (!:=)
   , maybeAttr
   , (?:=)
   ) where
@@ -30,7 +26,6 @@ import Prelude
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
-import Data.NonEmpty (NonEmpty)
 import Data.These (These(..))
 import Effect (Effect)
 import FRP.Event as FRP
@@ -111,13 +106,8 @@ unsafeAttribute = Attribute
 class Attr e a b where
   -- | Construct a type-safe attribute or listener. More commonly used in its alias `:=`,
   -- | aka `D.Style := "color: red;"` is a valid attribute or listener for any element.
-  unpureAttr :: a -> FRP.Event b -> Attribute e
-  pureAttr :: a -> b -> Attribute e
-  attr :: a -> NonEmpty FRP.Event b -> Attribute e
+  attr :: a -> b -> Attribute e
 
-infixr 5 attr as :=
-infixr 5 unpureAttr as <:=>
-infixr 5 pureAttr as !:=
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
@@ -131,7 +121,8 @@ maybeAttr
   => a
   -> Maybe b
   -> Attribute e
-maybeAttr a (Just b) = a !:= b
+maybeAttr a (Just b) = a := b
 maybeAttr _ Nothing = Attribute $ That empty
 
 infix 5 maybeAttr as ?:=
+infix 5 attr as :=
