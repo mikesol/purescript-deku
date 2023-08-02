@@ -2,6 +2,7 @@ module Deku.DOM.Attr.OnTouchstart where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
@@ -9,35 +10,41 @@ import FRP.Event (Event)
 
 data OnTouchstart = OnTouchstart
 
-instance Attr anything OnTouchstart Cb where
+instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  Cb ) where
   attr OnTouchstart bothValues = unsafeAttribute $ Both
     { key: "touchstart", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "touchstart", value: cb' value })
-  pureAttr OnTouchstart value = unsafeAttribute $ This
+instance Attr anything OnTouchstart  Cb  where
+  attr OnTouchstart value = unsafeAttribute $ This
     { key: "touchstart", value: cb' value }
-  unpureAttr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnTouchstart (Event.Event  Cb ) where
+  attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "touchstart", value: cb' value }
 
-instance Attr anything OnTouchstart (Effect Unit) where
+instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnTouchstart bothValues = unsafeAttribute $ Both
     { key: "touchstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchstart", value: cb' (Cb (const (value $> true))) }
     )
-  pureAttr OnTouchstart value = unsafeAttribute $ This
+instance Attr anything OnTouchstart  (Effect Unit)  where
+  attr OnTouchstart value = unsafeAttribute $ This
     { key: "touchstart", value: cb' (Cb (const (value $> true))) }
-  unpureAttr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnTouchstart (Event.Event  (Effect Unit) ) where
+  attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "touchstart", value: cb' (Cb (const (value $> true))) }
 
-instance Attr anything OnTouchstart (Effect Boolean) where
+instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
   attr OnTouchstart bothValues = unsafeAttribute $ Both
     { key: "touchstart", value: cb' (Cb (const (NonEmpty.head bothValues))) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchstart", value: cb' (Cb (const value)) }
     )
-  pureAttr OnTouchstart value = unsafeAttribute $ This
+instance Attr anything OnTouchstart  (Effect Boolean)  where
+  attr OnTouchstart value = unsafeAttribute $ This
     { key: "touchstart", value: cb' (Cb (const value)) }
-  unpureAttr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnTouchstart (Event.Event  (Effect Boolean) ) where
+  attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "touchstart", value: cb' (Cb (const value)) }
 
 type OnTouchstartEffect =
@@ -45,11 +52,13 @@ type OnTouchstartEffect =
    . Attr element OnTouchstart (Effect Unit)
   => Event (Attribute element)
 
-instance Attr everything OnTouchstart Unit where
+instance Attr everything OnTouchstart (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnTouchstart bothValues = unsafeAttribute $ Both
     { key: "touchstart", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchstart", value: unset' })
-  pureAttr OnTouchstart _ = unsafeAttribute $ This
+instance Attr everything OnTouchstart  Unit  where
+  attr OnTouchstart _ = unsafeAttribute $ This
     { key: "touchstart", value: unset' }
-  unpureAttr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything OnTouchstart (Event.Event  Unit ) where
+  attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "touchstart", value: unset' }

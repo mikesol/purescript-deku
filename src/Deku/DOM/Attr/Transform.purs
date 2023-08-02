@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Transform where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -49,380 +50,464 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Transform = Transform
 
-instance Attr Circle_ Transform String where
+instance Attr Circle_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Circle_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr ClipPath_ Transform String where
+instance Attr ClipPath_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr ClipPath_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ClipPath_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Defs_ Transform String where
+instance Attr Defs_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Defs_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Defs_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Ellipse_ Transform String where
+instance Attr Ellipse_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Ellipse_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeBlend_ Transform String where
+instance Attr FeBlend_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeBlend_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeColorMatrix_ Transform String where
+instance Attr FeColorMatrix_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeComponentTransfer_ Transform String where
+instance Attr FeComponentTransfer_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeComposite_ Transform String where
+instance Attr FeComposite_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeComposite_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Transform String where
+instance Attr FeConvolveMatrix_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Transform String where
+instance Attr FeDiffuseLighting_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeDisplacementMap_ Transform String where
+instance Attr FeDisplacementMap_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeFlood_ Transform String where
+instance Attr FeFlood_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeFlood_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeGaussianBlur_ Transform String where
+instance Attr FeGaussianBlur_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeImage_ Transform String where
+instance Attr FeImage_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeImage_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeMerge_ Transform String where
+instance Attr FeMerge_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeMerge_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeMorphology_ Transform String where
+instance Attr FeMorphology_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeMorphology_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeOffset_ Transform String where
+instance Attr FeOffset_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeOffset_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeSpecularLighting_ Transform String where
+instance Attr FeSpecularLighting_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeTile_ Transform String where
+instance Attr FeTile_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeTile_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr FeTurbulence_ Transform String where
+instance Attr FeTurbulence_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Filter_ Transform String where
+instance Attr Filter_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Filter_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr ForeignObject_ Transform String where
+instance Attr ForeignObject_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr ForeignObject_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr G_ Transform String where
+instance Attr G_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr G_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Image_ Transform String where
+instance Attr Image_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Image_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Line_ Transform String where
+instance Attr Line_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Line_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr LinearGradient_ Transform String where
+instance Attr LinearGradient_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr LinearGradient_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr LinearGradient_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Marker_ Transform String where
+instance Attr Marker_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Marker_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Mask_ Transform String where
+instance Attr Mask_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Mask_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mask_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Path_ Transform String where
+instance Attr Path_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Path_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Pattern_ Transform String where
+instance Attr Pattern_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Pattern_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pattern_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Polygon_ Transform String where
+instance Attr Polygon_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Polygon_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Polyline_ Transform String where
+instance Attr Polyline_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Polyline_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr RadialGradient_ Transform String where
+instance Attr RadialGradient_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr RadialGradient_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr RadialGradient_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Rect_ Transform String where
+instance Attr Rect_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Rect_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Svg_ Transform String where
+instance Attr Svg_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Svg_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Switch_ Transform String where
+instance Attr Switch_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Switch_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Symbol_ Transform String where
+instance Attr Symbol_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Symbol_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Text_ Transform String where
+instance Attr Text_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Text_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr TextPath_ Transform String where
+instance Attr TextPath_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr TextPath_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Tspan_ Transform String where
+instance Attr Tspan_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Tspan_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr Use_ Transform String where
+instance Attr Use_ Transform (NonEmpty.NonEmpty Event.Event  String ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transform", value: prop' value })
-  pureAttr Transform value = unsafeAttribute $ This
+instance Attr Use_ Transform  String  where
+  attr Transform value = unsafeAttribute $ This
     { key: "transform", value: prop' value }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ Transform (Event.Event  String ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "transform", value: prop' value }
 
-instance Attr everything Transform Unit where
+instance Attr everything Transform (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Transform bothValues = unsafeAttribute $ Both
     { key: "transform", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "transform", value: unset' })
-  pureAttr Transform _ = unsafeAttribute $ This
+instance Attr everything Transform  Unit  where
+  attr Transform _ = unsafeAttribute $ This
     { key: "transform", value: unset' }
-  unpureAttr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything Transform (Event.Event  Unit ) where
+  attr Transform eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "transform", value: unset' }

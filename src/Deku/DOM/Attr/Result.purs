@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Result where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.FeTurbulence (FeTurbulence_)
@@ -25,163 +26,199 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Result = Result
 
-instance Attr FeBlend_ Result String where
+instance Attr FeBlend_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeBlend_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeColorMatrix_ Result String where
+instance Attr FeColorMatrix_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeComponentTransfer_ Result String where
+instance Attr FeComponentTransfer_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeComposite_ Result String where
+instance Attr FeComposite_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeComposite_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Result String where
+instance Attr FeConvolveMatrix_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Result String where
+instance Attr FeDiffuseLighting_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDisplacementMap_ Result String where
+instance Attr FeDisplacementMap_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDropShadow_ Result String where
+instance Attr FeDropShadow_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeDropShadow_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDropShadow_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeFlood_ Result String where
+instance Attr FeFlood_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeFlood_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeGaussianBlur_ Result String where
+instance Attr FeGaussianBlur_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeImage_ Result String where
+instance Attr FeImage_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeImage_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeMerge_ Result String where
+instance Attr FeMerge_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeMerge_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeMorphology_ Result String where
+instance Attr FeMorphology_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeMorphology_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeOffset_ Result String where
+instance Attr FeOffset_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeOffset_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeSpecularLighting_ Result String where
+instance Attr FeSpecularLighting_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeTile_ Result String where
+instance Attr FeTile_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeTile_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeTurbulence_ Result String where
+instance Attr FeTurbulence_ Result (NonEmpty.NonEmpty Event.Event  String ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-  pureAttr Result value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Result  String  where
+  attr Result value = unsafeAttribute $ This
     { key: "result", value: prop' value }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ Result (Event.Event  String ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr everything Result Unit where
+instance Attr everything Result (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Result bothValues = unsafeAttribute $ Both
     { key: "result", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "result", value: unset' })
-  pureAttr Result _ = unsafeAttribute $ This { key: "result", value: unset' }
-  unpureAttr Result eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Result  Unit  where
+  attr Result _ = unsafeAttribute $ This { key: "result", value: unset' }
+instance Attr everything Result (Event.Event  Unit ) where
+  attr Result eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "result", value: unset' }

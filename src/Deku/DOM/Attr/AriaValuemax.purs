@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaValuemax where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,164 +26,200 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaValuemax = AriaValuemax
 
-instance Attr Circle_ AriaValuemax String where
+instance Attr Circle_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Circle_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Ellipse_ AriaValuemax String where
+instance Attr Ellipse_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr ForeignObject_ AriaValuemax String where
+instance Attr ForeignObject_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr G_ AriaValuemax String where
+instance Attr G_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr G_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Line_ AriaValuemax String where
+instance Attr Line_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Line_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Marker_ AriaValuemax String where
+instance Attr Marker_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Marker_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Path_ AriaValuemax String where
+instance Attr Path_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Path_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Polygon_ AriaValuemax String where
+instance Attr Polygon_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Polygon_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Polyline_ AriaValuemax String where
+instance Attr Polyline_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Polyline_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Rect_ AriaValuemax String where
+instance Attr Rect_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Rect_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Svg_ AriaValuemax String where
+instance Attr Svg_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Svg_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Symbol_ AriaValuemax String where
+instance Attr Symbol_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Symbol_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Text_ AriaValuemax String where
+instance Attr Text_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Text_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr TextPath_ AriaValuemax String where
+instance Attr TextPath_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr TextPath_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Tspan_ AriaValuemax String where
+instance Attr Tspan_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Tspan_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr Use_ AriaValuemax String where
+instance Attr Use_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr Use_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr View_ AriaValuemax String where
+instance Attr View_ AriaValuemax (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemax", value: prop' value })
-  pureAttr AriaValuemax value = unsafeAttribute $ This
+instance Attr View_ AriaValuemax  String  where
+  attr AriaValuemax value = unsafeAttribute $ This
     { key: "aria-valuemax", value: prop' value }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr View_ AriaValuemax (Event.Event  String ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-valuemax", value: prop' value }
 
-instance Attr everything AriaValuemax Unit where
+instance Attr everything AriaValuemax (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaValuemax bothValues = unsafeAttribute $ Both
     { key: "aria-valuemax", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-valuemax", value: unset' })
-  pureAttr AriaValuemax _ = unsafeAttribute $ This
+instance Attr everything AriaValuemax  Unit  where
+  attr AriaValuemax _ = unsafeAttribute $ This
     { key: "aria-valuemax", value: unset' }
-  unpureAttr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything AriaValuemax (Event.Event  Unit ) where
+  attr AriaValuemax eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "aria-valuemax", value: unset' }

@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaColspan where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,164 +26,200 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaColspan = AriaColspan
 
-instance Attr Circle_ AriaColspan String where
+instance Attr Circle_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Circle_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Ellipse_ AriaColspan String where
+instance Attr Ellipse_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr ForeignObject_ AriaColspan String where
+instance Attr ForeignObject_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr G_ AriaColspan String where
+instance Attr G_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr G_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Line_ AriaColspan String where
+instance Attr Line_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Line_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Marker_ AriaColspan String where
+instance Attr Marker_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Marker_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Path_ AriaColspan String where
+instance Attr Path_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Path_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Polygon_ AriaColspan String where
+instance Attr Polygon_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Polygon_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Polyline_ AriaColspan String where
+instance Attr Polyline_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Polyline_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Rect_ AriaColspan String where
+instance Attr Rect_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Rect_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Svg_ AriaColspan String where
+instance Attr Svg_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Svg_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Symbol_ AriaColspan String where
+instance Attr Symbol_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Symbol_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Text_ AriaColspan String where
+instance Attr Text_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Text_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr TextPath_ AriaColspan String where
+instance Attr TextPath_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr TextPath_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Tspan_ AriaColspan String where
+instance Attr Tspan_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Tspan_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr Use_ AriaColspan String where
+instance Attr Use_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr Use_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr View_ AriaColspan String where
+instance Attr View_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
-  pureAttr AriaColspan value = unsafeAttribute $ This
+instance Attr View_ AriaColspan  String  where
+  attr AriaColspan value = unsafeAttribute $ This
     { key: "aria-colspan", value: prop' value }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr View_ AriaColspan (Event.Event  String ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-colspan", value: prop' value }
 
-instance Attr everything AriaColspan Unit where
+instance Attr everything AriaColspan (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaColspan bothValues = unsafeAttribute $ Both
     { key: "aria-colspan", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-colspan", value: unset' })
-  pureAttr AriaColspan _ = unsafeAttribute $ This
+instance Attr everything AriaColspan  Unit  where
+  attr AriaColspan _ = unsafeAttribute $ This
     { key: "aria-colspan", value: unset' }
-  unpureAttr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything AriaColspan (Event.Event  Unit ) where
+  attr AriaColspan eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "aria-colspan", value: unset' }

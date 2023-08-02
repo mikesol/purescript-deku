@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Dir where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
@@ -130,985 +131,1231 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Dir = Dir
 
-instance Attr A_ Dir String where
+instance Attr A_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr A_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr A_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Abbr_ Dir String where
+instance Attr Abbr_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Abbr_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Abbr_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Acronym_ Dir String where
+instance Attr Acronym_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Acronym_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Acronym_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Address_ Dir String where
+instance Attr Address_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Address_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Address_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Applet_ Dir String where
+instance Attr Applet_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Applet_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Applet_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Area_ Dir String where
+instance Attr Area_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Area_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Area_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Article_ Dir String where
+instance Attr Article_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Article_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Article_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Aside_ Dir String where
+instance Attr Aside_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Aside_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Aside_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Audio_ Dir String where
+instance Attr Audio_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Audio_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Audio_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr B_ Dir String where
+instance Attr B_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr B_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr B_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Base_ Dir String where
+instance Attr Base_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Base_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Base_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Basefont_ Dir String where
+instance Attr Basefont_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Basefont_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Basefont_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Bdi_ Dir String where
+instance Attr Bdi_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdi_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Bdi_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Bdo_ Dir String where
+instance Attr Bdo_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdo_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Bdo_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Big_ Dir String where
+instance Attr Big_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Big_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Big_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Blockquote_ Dir String where
+instance Attr Blockquote_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Blockquote_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Blockquote_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Body_ Dir String where
+instance Attr Body_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Body_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Body_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Br_ Dir String where
+instance Attr Br_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Br_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Br_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Button_ Dir String where
+instance Attr Button_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Button_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Button_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Canvas_ Dir String where
+instance Attr Canvas_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Canvas_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Canvas_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Caption_ Dir String where
+instance Attr Caption_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Caption_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Caption_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Center_ Dir String where
+instance Attr Center_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Center_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Center_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Cite_ Dir String where
+instance Attr Cite_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Cite_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Cite_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Code_ Dir String where
+instance Attr Code_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Code_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Code_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Col_ Dir String where
+instance Attr Col_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Col_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Col_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Colgroup_ Dir String where
+instance Attr Colgroup_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Colgroup_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Colgroup_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Xdata_ Dir String where
+instance Attr Xdata_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Xdata_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Xdata_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Datalist_ Dir String where
+instance Attr Datalist_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Datalist_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Datalist_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dd_ Dir String where
+instance Attr Dd_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dd_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dd_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Del_ Dir String where
+instance Attr Del_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Del_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Del_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Details_ Dir String where
+instance Attr Details_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Details_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Details_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dfn_ Dir String where
+instance Attr Dfn_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dfn_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dfn_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dialog_ Dir String where
+instance Attr Dialog_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dialog_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dialog_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dir_ Dir String where
+instance Attr Dir_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dir_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dir_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Div_ Dir String where
+instance Attr Div_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Div_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Div_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dl_ Dir String where
+instance Attr Dl_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dl_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dl_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Dt_ Dir String where
+instance Attr Dt_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dt_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Dt_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Em_ Dir String where
+instance Attr Em_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Em_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Em_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Embed_ Dir String where
+instance Attr Embed_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Embed_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Embed_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Fieldset_ Dir String where
+instance Attr Fieldset_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Fieldset_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Fieldset_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Figcaption_ Dir String where
+instance Attr Figcaption_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figcaption_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Figcaption_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Figure_ Dir String where
+instance Attr Figure_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figure_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Figure_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Font_ Dir String where
+instance Attr Font_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Font_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Font_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Footer_ Dir String where
+instance Attr Footer_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Footer_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Footer_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Form_ Dir String where
+instance Attr Form_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Form_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Form_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Frame_ Dir String where
+instance Attr Frame_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frame_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Frame_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Frameset_ Dir String where
+instance Attr Frameset_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frameset_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Frameset_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H1_ Dir String where
+instance Attr H1_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H1_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H1_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H2_ Dir String where
+instance Attr H2_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H2_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H2_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H3_ Dir String where
+instance Attr H3_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H3_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H3_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H4_ Dir String where
+instance Attr H4_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H4_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H4_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H5_ Dir String where
+instance Attr H5_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H5_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H5_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr H6_ Dir String where
+instance Attr H6_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H6_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr H6_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Head_ Dir String where
+instance Attr Head_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Head_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Head_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Header_ Dir String where
+instance Attr Header_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Header_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Header_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Hr_ Dir String where
+instance Attr Hr_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Hr_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Hr_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Html_ Dir String where
+instance Attr Html_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Html_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Html_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr I_ Dir String where
+instance Attr I_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr I_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr I_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Iframe_ Dir String where
+instance Attr Iframe_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Iframe_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Iframe_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Img_ Dir String where
+instance Attr Img_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Img_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Img_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Input_ Dir String where
+instance Attr Input_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Input_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Input_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Ins_ Dir String where
+instance Attr Ins_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ins_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Ins_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Kbd_ Dir String where
+instance Attr Kbd_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Kbd_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Kbd_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Label_ Dir String where
+instance Attr Label_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Label_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Label_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Legend_ Dir String where
+instance Attr Legend_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Legend_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Legend_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Li_ Dir String where
+instance Attr Li_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Li_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Li_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Link_ Dir String where
+instance Attr Link_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Link_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Link_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Main_ Dir String where
+instance Attr Main_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Main_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Main_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Map_ Dir String where
+instance Attr Map_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Map_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Map_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Mark_ Dir String where
+instance Attr Mark_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Mark_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Mark_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Meta_ Dir String where
+instance Attr Meta_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meta_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Meta_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Meter_ Dir String where
+instance Attr Meter_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meter_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Meter_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Nav_ Dir String where
+instance Attr Nav_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Nav_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Nav_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Noframes_ Dir String where
+instance Attr Noframes_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noframes_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Noframes_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Noscript_ Dir String where
+instance Attr Noscript_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noscript_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Noscript_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Object_ Dir String where
+instance Attr Object_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Object_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Object_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Ol_ Dir String where
+instance Attr Ol_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ol_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Ol_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Optgroup_ Dir String where
+instance Attr Optgroup_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Optgroup_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Optgroup_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Option_ Dir String where
+instance Attr Option_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Option_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Option_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Output_ Dir String where
+instance Attr Output_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Output_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Output_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr P_ Dir String where
+instance Attr P_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr P_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr P_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Param_ Dir String where
+instance Attr Param_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Param_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Param_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Picture_ Dir String where
+instance Attr Picture_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Picture_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Picture_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Pre_ Dir String where
+instance Attr Pre_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Pre_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Pre_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Progress_ Dir String where
+instance Attr Progress_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Progress_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Progress_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Q_ Dir String where
+instance Attr Q_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Q_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Q_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Rp_ Dir String where
+instance Attr Rp_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rp_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Rp_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Rt_ Dir String where
+instance Attr Rt_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rt_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Rt_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Ruby_ Dir String where
+instance Attr Ruby_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ruby_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Ruby_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr S_ Dir String where
+instance Attr S_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr S_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr S_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Samp_ Dir String where
+instance Attr Samp_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Samp_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Samp_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Script_ Dir String where
+instance Attr Script_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Script_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Script_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Section_ Dir String where
+instance Attr Section_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Section_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Section_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Select_ Dir String where
+instance Attr Select_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Select_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Select_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Small_ Dir String where
+instance Attr Small_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Small_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Small_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Source_ Dir String where
+instance Attr Source_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Source_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Source_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Span_ Dir String where
+instance Attr Span_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Span_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Span_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Strike_ Dir String where
+instance Attr Strike_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strike_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Strike_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Strong_ Dir String where
+instance Attr Strong_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strong_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Strong_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Style_ Dir String where
+instance Attr Style_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Style_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Style_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Sub_ Dir String where
+instance Attr Sub_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sub_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Sub_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Summary_ Dir String where
+instance Attr Summary_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Summary_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Summary_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Sup_ Dir String where
+instance Attr Sup_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sup_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Sup_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Svg_ Dir String where
+instance Attr Svg_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Svg_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Svg_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Table_ Dir String where
+instance Attr Table_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Table_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Table_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Tbody_ Dir String where
+instance Attr Tbody_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tbody_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Tbody_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Td_ Dir String where
+instance Attr Td_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Td_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Td_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Template_ Dir String where
+instance Attr Template_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Template_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Template_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Textarea_ Dir String where
+instance Attr Textarea_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Textarea_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Textarea_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Tfoot_ Dir String where
+instance Attr Tfoot_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tfoot_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Tfoot_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Th_ Dir String where
+instance Attr Th_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Th_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Th_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Thead_ Dir String where
+instance Attr Thead_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Thead_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Thead_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Time_ Dir String where
+instance Attr Time_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Time_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Time_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Title_ Dir String where
+instance Attr Title_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Title_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Title_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Tr_ Dir String where
+instance Attr Tr_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tr_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Tr_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Track_ Dir String where
+instance Attr Track_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Track_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Track_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Tt_ Dir String where
+instance Attr Tt_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tt_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Tt_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr U_ Dir String where
+instance Attr U_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr U_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr U_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Ul_ Dir String where
+instance Attr Ul_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ul_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Ul_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Var_ Dir String where
+instance Attr Var_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Var_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Var_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Video_ Dir String where
+instance Attr Video_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Video_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Video_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr Wbr_ Dir String where
+instance Attr Wbr_ Dir (NonEmpty.NonEmpty Event.Event  String ) where
   attr Dir bothValues = unsafeAttribute $ Both
     { key: "dir", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dir", value: prop' value })
-  pureAttr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Wbr_ Dir  String  where
+  attr Dir value = unsafeAttribute $ This { key: "dir", value: prop' value }
+instance Attr Wbr_ Dir (Event.Event  String ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dir", value: prop' value }
 
-instance Attr everything Dir Unit where
+instance Attr everything Dir (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Dir bothValues = unsafeAttribute $ Both { key: "dir", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dir", value: unset' })
-  pureAttr Dir _ = unsafeAttribute $ This { key: "dir", value: unset' }
-  unpureAttr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Dir  Unit  where
+  attr Dir _ = unsafeAttribute $ This { key: "dir", value: unset' }
+instance Attr everything Dir (Event.Event  Unit ) where
+  attr Dir eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "dir", value: unset' }

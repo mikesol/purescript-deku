@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Autocomplete where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Form (Form_)
@@ -12,47 +13,57 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Autocomplete = Autocomplete
 
-instance Attr Form_ Autocomplete String where
+instance Attr Form_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
-  pureAttr Autocomplete value = unsafeAttribute $ This
+instance Attr Form_ Autocomplete  String  where
+  attr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
-  unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Form_ Autocomplete (Event.Event  String ) where
+  attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autocomplete", value: prop' value }
 
-instance Attr Input_ Autocomplete String where
+instance Attr Input_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
-  pureAttr Autocomplete value = unsafeAttribute $ This
+instance Attr Input_ Autocomplete  String  where
+  attr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
-  unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Input_ Autocomplete (Event.Event  String ) where
+  attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autocomplete", value: prop' value }
 
-instance Attr Select_ Autocomplete String where
+instance Attr Select_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
-  pureAttr Autocomplete value = unsafeAttribute $ This
+instance Attr Select_ Autocomplete  String  where
+  attr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
-  unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Select_ Autocomplete (Event.Event  String ) where
+  attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autocomplete", value: prop' value }
 
-instance Attr Textarea_ Autocomplete String where
+instance Attr Textarea_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
-  pureAttr Autocomplete value = unsafeAttribute $ This
+instance Attr Textarea_ Autocomplete  String  where
+  attr Autocomplete value = unsafeAttribute $ This
     { key: "autocomplete", value: prop' value }
-  unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Textarea_ Autocomplete (Event.Event  String ) where
+  attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autocomplete", value: prop' value }
 
-instance Attr everything Autocomplete Unit where
+instance Attr everything Autocomplete (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Autocomplete bothValues = unsafeAttribute $ Both
     { key: "autocomplete", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "autocomplete", value: unset' })
-  pureAttr Autocomplete _ = unsafeAttribute $ This
+instance Attr everything Autocomplete  Unit  where
+  attr Autocomplete _ = unsafeAttribute $ This
     { key: "autocomplete", value: unset' }
-  unpureAttr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything Autocomplete (Event.Event  Unit ) where
+  attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "autocomplete", value: unset' }

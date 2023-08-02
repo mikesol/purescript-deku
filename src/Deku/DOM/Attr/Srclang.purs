@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Srclang where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Track (Track_)
@@ -9,19 +10,23 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Srclang = Srclang
 
-instance Attr Track_ Srclang String where
+instance Attr Track_ Srclang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Srclang bothValues = unsafeAttribute $ Both
     { key: "srclang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "srclang", value: prop' value })
-  pureAttr Srclang value = unsafeAttribute $ This
+instance Attr Track_ Srclang  String  where
+  attr Srclang value = unsafeAttribute $ This
     { key: "srclang", value: prop' value }
-  unpureAttr Srclang eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Track_ Srclang (Event.Event  String ) where
+  attr Srclang eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "srclang", value: prop' value }
 
-instance Attr everything Srclang Unit where
+instance Attr everything Srclang (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Srclang bothValues = unsafeAttribute $ Both
     { key: "srclang", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "srclang", value: unset' })
-  pureAttr Srclang _ = unsafeAttribute $ This { key: "srclang", value: unset' }
-  unpureAttr Srclang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Srclang  Unit  where
+  attr Srclang _ = unsafeAttribute $ This { key: "srclang", value: unset' }
+instance Attr everything Srclang (Event.Event  Unit ) where
+  attr Srclang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srclang", value: unset' }

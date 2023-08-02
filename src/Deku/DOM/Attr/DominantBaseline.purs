@@ -2,6 +2,7 @@ module Deku.DOM.Attr.DominantBaseline where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -29,242 +30,286 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data DominantBaseline = DominantBaseline
 
-instance Attr FeBlend_ DominantBaseline String where
+instance Attr FeBlend_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeBlend_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeBlend_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeColorMatrix_ DominantBaseline String where
+instance Attr FeColorMatrix_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeColorMatrix_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeComponentTransfer_ DominantBaseline String where
+instance Attr FeComponentTransfer_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeComponentTransfer_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeComposite_ DominantBaseline String where
+instance Attr FeComposite_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeComposite_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeComposite_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeConvolveMatrix_ DominantBaseline String where
+instance Attr FeConvolveMatrix_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeConvolveMatrix_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeDiffuseLighting_ DominantBaseline String where
+instance Attr FeDiffuseLighting_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeDiffuseLighting_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeDisplacementMap_ DominantBaseline String where
+instance Attr FeDisplacementMap_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeDisplacementMap_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeFlood_ DominantBaseline String where
+instance Attr FeFlood_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeFlood_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeFlood_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeGaussianBlur_ DominantBaseline String where
+instance Attr FeGaussianBlur_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeGaussianBlur_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeImage_ DominantBaseline String where
+instance Attr FeImage_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeImage_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeImage_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeMerge_ DominantBaseline String where
+instance Attr FeMerge_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeMerge_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeMerge_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeMorphology_ DominantBaseline String where
+instance Attr FeMorphology_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeMorphology_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeMorphology_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeOffset_ DominantBaseline String where
+instance Attr FeOffset_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeOffset_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeOffset_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeSpecularLighting_ DominantBaseline String where
+instance Attr FeSpecularLighting_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeSpecularLighting_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeTile_ DominantBaseline String where
+instance Attr FeTile_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeTile_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeTile_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr FeTurbulence_ DominantBaseline String where
+instance Attr FeTurbulence_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr FeTurbulence_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeTurbulence_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr Filter_ DominantBaseline String where
+instance Attr Filter_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr Filter_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Filter_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr Image_ DominantBaseline String where
+instance Attr Image_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr Image_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Image_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr Switch_ DominantBaseline String where
+instance Attr Switch_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr Switch_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Switch_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr Text_ DominantBaseline String where
+instance Attr Text_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr Text_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Text_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr Tspan_ DominantBaseline String where
+instance Attr Tspan_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dominant-baseline", value: prop' value }
     )
-  pureAttr DominantBaseline value = unsafeAttribute $ This
+instance Attr Tspan_ DominantBaseline  String  where
+  attr DominantBaseline value = unsafeAttribute $ This
     { key: "dominant-baseline", value: prop' value }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Tspan_ DominantBaseline (Event.Event  String ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "dominant-baseline", value: prop' value }
 
-instance Attr everything DominantBaseline Unit where
+instance Attr everything DominantBaseline (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr DominantBaseline bothValues = unsafeAttribute $ Both
     { key: "dominant-baseline", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dominant-baseline", value: unset' })
-  pureAttr DominantBaseline _ = unsafeAttribute $ This
+instance Attr everything DominantBaseline  Unit  where
+  attr DominantBaseline _ = unsafeAttribute $ This
     { key: "dominant-baseline", value: unset' }
-  unpureAttr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
+instance Attr everything DominantBaseline (Event.Event  Unit ) where
+  attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
     <#> \_ -> { key: "dominant-baseline", value: unset' }

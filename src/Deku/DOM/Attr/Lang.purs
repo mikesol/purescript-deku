@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Lang where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -163,1404 +164,1716 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Lang = Lang
 
-instance Attr A_ Lang String where
+instance Attr A_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr A_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr A_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Abbr_ Lang String where
+instance Attr Abbr_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Abbr_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Abbr_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Acronym_ Lang String where
+instance Attr Acronym_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Acronym_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Acronym_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Address_ Lang String where
+instance Attr Address_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Address_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Address_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Applet_ Lang String where
+instance Attr Applet_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Applet_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Applet_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Area_ Lang String where
+instance Attr Area_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Area_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Area_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Article_ Lang String where
+instance Attr Article_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Article_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Article_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Aside_ Lang String where
+instance Attr Aside_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Aside_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Aside_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Audio_ Lang String where
+instance Attr Audio_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Audio_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Audio_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr B_ Lang String where
+instance Attr B_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr B_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr B_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Base_ Lang String where
+instance Attr Base_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Base_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Base_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Basefont_ Lang String where
+instance Attr Basefont_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Basefont_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Basefont_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Bdi_ Lang String where
+instance Attr Bdi_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Bdi_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdi_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Bdo_ Lang String where
+instance Attr Bdo_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Bdo_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdo_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Big_ Lang String where
+instance Attr Big_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Big_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Big_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Blockquote_ Lang String where
+instance Attr Blockquote_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Blockquote_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Blockquote_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Body_ Lang String where
+instance Attr Body_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Body_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Body_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Br_ Lang String where
+instance Attr Br_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Br_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Br_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Button_ Lang String where
+instance Attr Button_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Button_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Button_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Canvas_ Lang String where
+instance Attr Canvas_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Canvas_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Canvas_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Caption_ Lang String where
+instance Attr Caption_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Caption_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Caption_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Center_ Lang String where
+instance Attr Center_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Center_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Center_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Cite_ Lang String where
+instance Attr Cite_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Cite_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Cite_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Code_ Lang String where
+instance Attr Code_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Code_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Code_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Col_ Lang String where
+instance Attr Col_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Col_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Col_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Colgroup_ Lang String where
+instance Attr Colgroup_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Colgroup_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Colgroup_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Xdata_ Lang String where
+instance Attr Xdata_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Xdata_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Xdata_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Datalist_ Lang String where
+instance Attr Datalist_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Datalist_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Datalist_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dd_ Lang String where
+instance Attr Dd_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dd_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dd_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Del_ Lang String where
+instance Attr Del_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Del_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Del_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Details_ Lang String where
+instance Attr Details_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Details_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Details_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dfn_ Lang String where
+instance Attr Dfn_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dfn_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dfn_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dialog_ Lang String where
+instance Attr Dialog_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dialog_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dialog_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dir_ Lang String where
+instance Attr Dir_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dir_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dir_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Div_ Lang String where
+instance Attr Div_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Div_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Div_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dl_ Lang String where
+instance Attr Dl_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dl_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dl_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Dt_ Lang String where
+instance Attr Dt_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Dt_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dt_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Em_ Lang String where
+instance Attr Em_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Em_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Em_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Embed_ Lang String where
+instance Attr Embed_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Embed_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Embed_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Fieldset_ Lang String where
+instance Attr Fieldset_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Fieldset_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Fieldset_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Figcaption_ Lang String where
+instance Attr Figcaption_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Figcaption_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figcaption_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Figure_ Lang String where
+instance Attr Figure_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Figure_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figure_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Font_ Lang String where
+instance Attr Font_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Font_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Font_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Footer_ Lang String where
+instance Attr Footer_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Footer_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Footer_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Form_ Lang String where
+instance Attr Form_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Form_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Form_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Frame_ Lang String where
+instance Attr Frame_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Frame_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frame_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Frameset_ Lang String where
+instance Attr Frameset_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Frameset_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frameset_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H1_ Lang String where
+instance Attr H1_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H1_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H1_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H2_ Lang String where
+instance Attr H2_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H2_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H2_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H3_ Lang String where
+instance Attr H3_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H3_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H3_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H4_ Lang String where
+instance Attr H4_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H4_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H4_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H5_ Lang String where
+instance Attr H5_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H5_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H5_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr H6_ Lang String where
+instance Attr H6_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr H6_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H6_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Head_ Lang String where
+instance Attr Head_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Head_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Head_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Header_ Lang String where
+instance Attr Header_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Header_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Header_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Hr_ Lang String where
+instance Attr Hr_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Hr_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Hr_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Html_ Lang String where
+instance Attr Html_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Html_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Html_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr I_ Lang String where
+instance Attr I_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr I_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr I_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Iframe_ Lang String where
+instance Attr Iframe_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Iframe_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Iframe_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Img_ Lang String where
+instance Attr Img_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Img_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Img_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Input_ Lang String where
+instance Attr Input_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Input_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Input_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Ins_ Lang String where
+instance Attr Ins_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Ins_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ins_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Kbd_ Lang String where
+instance Attr Kbd_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Kbd_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Kbd_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Label_ Lang String where
+instance Attr Label_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Label_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Label_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Legend_ Lang String where
+instance Attr Legend_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Legend_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Legend_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Li_ Lang String where
+instance Attr Li_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Li_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Li_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Link_ Lang String where
+instance Attr Link_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Link_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Link_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Main_ Lang String where
+instance Attr Main_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Main_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Main_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Map_ Lang String where
+instance Attr Map_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Map_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Map_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Mark_ Lang String where
+instance Attr Mark_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Mark_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Mark_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Meta_ Lang String where
+instance Attr Meta_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Meta_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meta_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Meter_ Lang String where
+instance Attr Meter_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Meter_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meter_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Nav_ Lang String where
+instance Attr Nav_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Nav_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Nav_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Noframes_ Lang String where
+instance Attr Noframes_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Noframes_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noframes_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Noscript_ Lang String where
+instance Attr Noscript_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Noscript_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noscript_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Object_ Lang String where
+instance Attr Object_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Object_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Object_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Ol_ Lang String where
+instance Attr Ol_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Ol_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ol_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Optgroup_ Lang String where
+instance Attr Optgroup_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Optgroup_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Optgroup_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Option_ Lang String where
+instance Attr Option_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Option_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Option_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Output_ Lang String where
+instance Attr Output_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Output_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Output_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr P_ Lang String where
+instance Attr P_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr P_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr P_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Param_ Lang String where
+instance Attr Param_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Param_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Param_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Picture_ Lang String where
+instance Attr Picture_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Picture_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Picture_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Pre_ Lang String where
+instance Attr Pre_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Pre_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Pre_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Progress_ Lang String where
+instance Attr Progress_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Progress_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Progress_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Q_ Lang String where
+instance Attr Q_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Q_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Q_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Rp_ Lang String where
+instance Attr Rp_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Rp_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rp_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Rt_ Lang String where
+instance Attr Rt_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Rt_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rt_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Ruby_ Lang String where
+instance Attr Ruby_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Ruby_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ruby_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr S_ Lang String where
+instance Attr S_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr S_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr S_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Samp_ Lang String where
+instance Attr Samp_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Samp_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Samp_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Script_ Lang String where
+instance Attr Script_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Script_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Script_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Section_ Lang String where
+instance Attr Section_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Section_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Section_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Select_ Lang String where
+instance Attr Select_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Select_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Select_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Small_ Lang String where
+instance Attr Small_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Small_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Small_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Source_ Lang String where
+instance Attr Source_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Source_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Source_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Span_ Lang String where
+instance Attr Span_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Span_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Span_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Strike_ Lang String where
+instance Attr Strike_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Strike_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strike_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Strong_ Lang String where
+instance Attr Strong_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Strong_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strong_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Style_ Lang String where
+instance Attr Style_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Style_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Style_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Sub_ Lang String where
+instance Attr Sub_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Sub_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sub_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Summary_ Lang String where
+instance Attr Summary_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Summary_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Summary_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Sup_ Lang String where
+instance Attr Sup_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Sup_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sup_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Svg_ Lang String where
+instance Attr Svg_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Svg_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Svg_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Table_ Lang String where
+instance Attr Table_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Table_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Table_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Tbody_ Lang String where
+instance Attr Tbody_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Tbody_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tbody_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Td_ Lang String where
+instance Attr Td_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Td_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Td_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Template_ Lang String where
+instance Attr Template_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Template_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Template_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Textarea_ Lang String where
+instance Attr Textarea_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Textarea_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Textarea_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Tfoot_ Lang String where
+instance Attr Tfoot_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Tfoot_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tfoot_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Th_ Lang String where
+instance Attr Th_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Th_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Th_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Thead_ Lang String where
+instance Attr Thead_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Thead_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Thead_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Time_ Lang String where
+instance Attr Time_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Time_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Time_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Title_ Lang String where
+instance Attr Title_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Title_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Title_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Tr_ Lang String where
+instance Attr Tr_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Tr_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tr_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Track_ Lang String where
+instance Attr Track_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Track_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Track_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Tt_ Lang String where
+instance Attr Tt_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Tt_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tt_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr U_ Lang String where
+instance Attr U_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr U_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr U_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Ul_ Lang String where
+instance Attr Ul_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Ul_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ul_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Var_ Lang String where
+instance Attr Var_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Var_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Var_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Video_ Lang String where
+instance Attr Video_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Video_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Video_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Wbr_ Lang String where
+instance Attr Wbr_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Wbr_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Wbr_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr AnimateTransform_ Lang String where
+instance Attr AnimateTransform_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr AnimateTransform_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr AnimateTransform_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Defs_ Lang String where
+instance Attr Defs_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Defs_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Defs_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Discard_ Lang String where
+instance Attr Discard_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Discard_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Discard_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeBlend_ Lang String where
+instance Attr FeBlend_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeBlend_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeBlend_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeColorMatrix_ Lang String where
+instance Attr FeColorMatrix_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeColorMatrix_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeComponentTransfer_ Lang String where
+instance Attr FeComponentTransfer_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeComponentTransfer_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeComposite_ Lang String where
+instance Attr FeComposite_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeComposite_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeComposite_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Lang String where
+instance Attr FeConvolveMatrix_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeConvolveMatrix_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Lang String where
+instance Attr FeDiffuseLighting_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeDiffuseLighting_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeDisplacementMap_ Lang String where
+instance Attr FeDisplacementMap_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeDisplacementMap_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeDistantLight_ Lang String where
+instance Attr FeDistantLight_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeDistantLight_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeDistantLight_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeFlood_ Lang String where
+instance Attr FeFlood_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeFlood_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFlood_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeFuncA_ Lang String where
+instance Attr FeFuncA_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeFuncA_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFuncA_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeFuncB_ Lang String where
+instance Attr FeFuncB_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeFuncB_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFuncB_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeFuncG_ Lang String where
+instance Attr FeFuncG_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeFuncG_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFuncG_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeFuncR_ Lang String where
+instance Attr FeFuncR_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeFuncR_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFuncR_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeGaussianBlur_ Lang String where
+instance Attr FeGaussianBlur_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeGaussianBlur_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeImage_ Lang String where
+instance Attr FeImage_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeImage_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeImage_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeMerge_ Lang String where
+instance Attr FeMerge_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeMerge_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeMerge_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeMergeNode_ Lang String where
+instance Attr FeMergeNode_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeMergeNode_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeMergeNode_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeMorphology_ Lang String where
+instance Attr FeMorphology_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeMorphology_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeMorphology_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeOffset_ Lang String where
+instance Attr FeOffset_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeOffset_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeOffset_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FePointLight_ Lang String where
+instance Attr FePointLight_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FePointLight_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FePointLight_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeSpecularLighting_ Lang String where
+instance Attr FeSpecularLighting_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeSpecularLighting_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeSpotLight_ Lang String where
+instance Attr FeSpotLight_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeSpotLight_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeSpotLight_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeTile_ Lang String where
+instance Attr FeTile_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeTile_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeTile_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr FeTurbulence_ Lang String where
+instance Attr FeTurbulence_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeTurbulence_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Filter_ Lang String where
+instance Attr Filter_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Filter_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Filter_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Image_ Lang String where
+instance Attr Image_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Image_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Image_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Metadata_ Lang String where
+instance Attr Metadata_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Metadata_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Metadata_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Mpath_ Lang String where
+instance Attr Mpath_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Mpath_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Mpath_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr Switch_ Lang String where
+instance Attr Switch_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr Switch_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Switch_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr View_ Lang String where
+instance Attr View_ Lang (NonEmpty.NonEmpty Event.Event  String ) where
   attr Lang bothValues = unsafeAttribute $ Both
     { key: "lang", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lang", value: prop' value })
-  pureAttr Lang value = unsafeAttribute $ This
+instance Attr View_ Lang  String  where
+  attr Lang value = unsafeAttribute $ This
     { key: "lang", value: prop' value }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr View_ Lang (Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "lang", value: prop' value }
 
-instance Attr everything Lang Unit where
+instance Attr everything Lang (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Lang bothValues = unsafeAttribute $ Both { key: "lang", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "lang", value: unset' })
-  pureAttr Lang _ = unsafeAttribute $ This { key: "lang", value: unset' }
-  unpureAttr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Lang  Unit  where
+  attr Lang _ = unsafeAttribute $ This { key: "lang", value: unset' }
+instance Attr everything Lang (Event.Event  Unit ) where
+  attr Lang eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "lang", value: unset' }

@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Color where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -52,405 +53,495 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Color = Color
 
-instance Attr Font_ Color String where
+instance Attr Font_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Font_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Font_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Hr_ Color String where
+instance Attr Hr_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Hr_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Hr_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Circle_ Color String where
+instance Attr Circle_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Circle_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr ClipPath_ Color String where
+instance Attr ClipPath_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr ClipPath_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ClipPath_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Defs_ Color String where
+instance Attr Defs_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Defs_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Defs_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Ellipse_ Color String where
+instance Attr Ellipse_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Ellipse_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeBlend_ Color String where
+instance Attr FeBlend_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeBlend_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeColorMatrix_ Color String where
+instance Attr FeColorMatrix_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeComponentTransfer_ Color String where
+instance Attr FeComponentTransfer_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeComposite_ Color String where
+instance Attr FeComposite_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeComposite_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Color String where
+instance Attr FeConvolveMatrix_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Color String where
+instance Attr FeDiffuseLighting_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeDisplacementMap_ Color String where
+instance Attr FeDisplacementMap_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeFlood_ Color String where
+instance Attr FeFlood_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeFlood_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeGaussianBlur_ Color String where
+instance Attr FeGaussianBlur_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeImage_ Color String where
+instance Attr FeImage_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeImage_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeMerge_ Color String where
+instance Attr FeMerge_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeMerge_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeMorphology_ Color String where
+instance Attr FeMorphology_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeMorphology_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeOffset_ Color String where
+instance Attr FeOffset_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeOffset_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeSpecularLighting_ Color String where
+instance Attr FeSpecularLighting_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeTile_ Color String where
+instance Attr FeTile_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeTile_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr FeTurbulence_ Color String where
+instance Attr FeTurbulence_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Filter_ Color String where
+instance Attr Filter_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Filter_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr ForeignObject_ Color String where
+instance Attr ForeignObject_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr ForeignObject_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr G_ Color String where
+instance Attr G_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr G_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Image_ Color String where
+instance Attr Image_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Image_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Line_ Color String where
+instance Attr Line_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Line_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr LinearGradient_ Color String where
+instance Attr LinearGradient_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr LinearGradient_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr LinearGradient_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Marker_ Color String where
+instance Attr Marker_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Marker_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Mask_ Color String where
+instance Attr Mask_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Mask_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mask_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Path_ Color String where
+instance Attr Path_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Path_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Pattern_ Color String where
+instance Attr Pattern_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Pattern_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pattern_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Polygon_ Color String where
+instance Attr Polygon_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Polygon_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Polyline_ Color String where
+instance Attr Polyline_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Polyline_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr RadialGradient_ Color String where
+instance Attr RadialGradient_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr RadialGradient_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr RadialGradient_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Rect_ Color String where
+instance Attr Rect_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Rect_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Stop_ Color String where
+instance Attr Stop_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Stop_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Stop_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Svg_ Color String where
+instance Attr Svg_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Svg_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Switch_ Color String where
+instance Attr Switch_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Switch_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Symbol_ Color String where
+instance Attr Symbol_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Symbol_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Text_ Color String where
+instance Attr Text_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Text_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr TextPath_ Color String where
+instance Attr TextPath_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr TextPath_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Tspan_ Color String where
+instance Attr Tspan_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Tspan_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr Use_ Color String where
+instance Attr Use_ Color (NonEmpty.NonEmpty Event.Event  String ) where
   attr Color bothValues = unsafeAttribute $ Both
     { key: "color", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color", value: prop' value })
-  pureAttr Color value = unsafeAttribute $ This
+instance Attr Use_ Color  String  where
+  attr Color value = unsafeAttribute $ This
     { key: "color", value: prop' value }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ Color (Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color", value: prop' value }
 
-instance Attr everything Color Unit where
+instance Attr everything Color (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Color bothValues = unsafeAttribute $ Both { key: "color", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "color", value: unset' })
-  pureAttr Color _ = unsafeAttribute $ This { key: "color", value: unset' }
-  unpureAttr Color eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Color  Unit  where
+  attr Color _ = unsafeAttribute $ This { key: "color", value: unset' }
+instance Attr everything Color (Event.Event  Unit ) where
+  attr Color eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "color", value: unset' }

@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Autofocus where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Button (Button_)
@@ -12,47 +13,57 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Autofocus = Autofocus
 
-instance Attr Button_ Autofocus String where
+instance Attr Button_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
-  pureAttr Autofocus value = unsafeAttribute $ This
+instance Attr Button_ Autofocus  String  where
+  attr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
-  unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Button_ Autofocus (Event.Event  String ) where
+  attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autofocus", value: prop' value }
 
-instance Attr Input_ Autofocus String where
+instance Attr Input_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
-  pureAttr Autofocus value = unsafeAttribute $ This
+instance Attr Input_ Autofocus  String  where
+  attr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
-  unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Input_ Autofocus (Event.Event  String ) where
+  attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autofocus", value: prop' value }
 
-instance Attr Select_ Autofocus String where
+instance Attr Select_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
-  pureAttr Autofocus value = unsafeAttribute $ This
+instance Attr Select_ Autofocus  String  where
+  attr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
-  unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Select_ Autofocus (Event.Event  String ) where
+  attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autofocus", value: prop' value }
 
-instance Attr Textarea_ Autofocus String where
+instance Attr Textarea_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
-  pureAttr Autofocus value = unsafeAttribute $ This
+instance Attr Textarea_ Autofocus  String  where
+  attr Autofocus value = unsafeAttribute $ This
     { key: "autofocus", value: prop' value }
-  unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Textarea_ Autofocus (Event.Event  String ) where
+  attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "autofocus", value: prop' value }
 
-instance Attr everything Autofocus Unit where
+instance Attr everything Autofocus (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Autofocus bothValues = unsafeAttribute $ Both
     { key: "autofocus", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "autofocus", value: unset' })
-  pureAttr Autofocus _ = unsafeAttribute $ This
+instance Attr everything Autofocus  Unit  where
+  attr Autofocus _ = unsafeAttribute $ This
     { key: "autofocus", value: unset' }
-  unpureAttr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything Autofocus (Event.Event  Unit ) where
+  attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "autofocus", value: unset' }

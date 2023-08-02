@@ -2,6 +2,7 @@ module Deku.DOM.Attr.StrokeDashoffset where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -49,462 +50,546 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data StrokeDashoffset = StrokeDashoffset
 
-instance Attr Circle_ StrokeDashoffset String where
+instance Attr Circle_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Circle_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Circle_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr ClipPath_ StrokeDashoffset String where
+instance Attr ClipPath_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr ClipPath_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr ClipPath_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Defs_ StrokeDashoffset String where
+instance Attr Defs_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Defs_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Defs_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Ellipse_ StrokeDashoffset String where
+instance Attr Ellipse_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Ellipse_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Ellipse_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeBlend_ StrokeDashoffset String where
+instance Attr FeBlend_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeBlend_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeBlend_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeColorMatrix_ StrokeDashoffset String where
+instance Attr FeColorMatrix_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeColorMatrix_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeComponentTransfer_ StrokeDashoffset String where
+instance Attr FeComponentTransfer_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeComponentTransfer_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeComposite_ StrokeDashoffset String where
+instance Attr FeComposite_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeComposite_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeComposite_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeConvolveMatrix_ StrokeDashoffset String where
+instance Attr FeConvolveMatrix_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeConvolveMatrix_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeDiffuseLighting_ StrokeDashoffset String where
+instance Attr FeDiffuseLighting_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeDiffuseLighting_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeDisplacementMap_ StrokeDashoffset String where
+instance Attr FeDisplacementMap_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeDisplacementMap_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeFlood_ StrokeDashoffset String where
+instance Attr FeFlood_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeFlood_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeFlood_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeGaussianBlur_ StrokeDashoffset String where
+instance Attr FeGaussianBlur_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeGaussianBlur_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeImage_ StrokeDashoffset String where
+instance Attr FeImage_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeImage_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeImage_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeMerge_ StrokeDashoffset String where
+instance Attr FeMerge_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeMerge_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeMerge_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeMorphology_ StrokeDashoffset String where
+instance Attr FeMorphology_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeMorphology_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeMorphology_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeOffset_ StrokeDashoffset String where
+instance Attr FeOffset_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeOffset_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeOffset_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeSpecularLighting_ StrokeDashoffset String where
+instance Attr FeSpecularLighting_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeSpecularLighting_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeTile_ StrokeDashoffset String where
+instance Attr FeTile_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeTile_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeTile_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr FeTurbulence_ StrokeDashoffset String where
+instance Attr FeTurbulence_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr FeTurbulence_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr FeTurbulence_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Filter_ StrokeDashoffset String where
+instance Attr Filter_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Filter_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Filter_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr ForeignObject_ StrokeDashoffset String where
+instance Attr ForeignObject_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr ForeignObject_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr ForeignObject_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr G_ StrokeDashoffset String where
+instance Attr G_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr G_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr G_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Image_ StrokeDashoffset String where
+instance Attr Image_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Image_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Image_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Line_ StrokeDashoffset String where
+instance Attr Line_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Line_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Line_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr LinearGradient_ StrokeDashoffset String where
+instance Attr LinearGradient_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr LinearGradient_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr LinearGradient_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Marker_ StrokeDashoffset String where
+instance Attr Marker_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Marker_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Marker_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Mask_ StrokeDashoffset String where
+instance Attr Mask_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Mask_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Mask_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Path_ StrokeDashoffset String where
+instance Attr Path_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Path_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Path_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Pattern_ StrokeDashoffset String where
+instance Attr Pattern_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Pattern_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Pattern_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Polygon_ StrokeDashoffset String where
+instance Attr Polygon_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Polygon_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polygon_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Polyline_ StrokeDashoffset String where
+instance Attr Polyline_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Polyline_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polyline_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr RadialGradient_ StrokeDashoffset String where
+instance Attr RadialGradient_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr RadialGradient_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr RadialGradient_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Rect_ StrokeDashoffset String where
+instance Attr Rect_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Rect_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Rect_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Svg_ StrokeDashoffset String where
+instance Attr Svg_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Svg_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Svg_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Switch_ StrokeDashoffset String where
+instance Attr Switch_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Switch_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Switch_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Symbol_ StrokeDashoffset String where
+instance Attr Symbol_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Symbol_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Symbol_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Text_ StrokeDashoffset String where
+instance Attr Text_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Text_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Text_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr TextPath_ StrokeDashoffset String where
+instance Attr TextPath_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr TextPath_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr TextPath_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Tspan_ StrokeDashoffset String where
+instance Attr Tspan_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Tspan_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Tspan_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr Use_ StrokeDashoffset String where
+instance Attr Use_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
-  pureAttr StrokeDashoffset value = unsafeAttribute $ This
+instance Attr Use_ StrokeDashoffset  String  where
+  attr StrokeDashoffset value = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: prop' value }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Use_ StrokeDashoffset (Event.Event  String ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
-instance Attr everything StrokeDashoffset Unit where
+instance Attr everything StrokeDashoffset (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr StrokeDashoffset bothValues = unsafeAttribute $ Both
     { key: "stroke-dashoffset", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-dashoffset", value: unset' })
-  pureAttr StrokeDashoffset _ = unsafeAttribute $ This
+instance Attr everything StrokeDashoffset  Unit  where
+  attr StrokeDashoffset _ = unsafeAttribute $ This
     { key: "stroke-dashoffset", value: unset' }
-  unpureAttr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
+instance Attr everything StrokeDashoffset (Event.Event  Unit ) where
+  attr StrokeDashoffset eventValue = unsafeAttribute $ That $ eventValue
     <#> \_ -> { key: "stroke-dashoffset", value: unset' }

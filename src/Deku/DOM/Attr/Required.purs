@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Required where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Input (Input_)
@@ -11,38 +12,46 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Required = Required
 
-instance Attr Input_ Required String where
+instance Attr Input_ Required (NonEmpty.NonEmpty Event.Event  String ) where
   attr Required bothValues = unsafeAttribute $ Both
     { key: "required", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
-  pureAttr Required value = unsafeAttribute $ This
+instance Attr Input_ Required  String  where
+  attr Required value = unsafeAttribute $ This
     { key: "required", value: prop' value }
-  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Input_ Required (Event.Event  String ) where
+  attr Required eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "required", value: prop' value }
 
-instance Attr Select_ Required String where
+instance Attr Select_ Required (NonEmpty.NonEmpty Event.Event  String ) where
   attr Required bothValues = unsafeAttribute $ Both
     { key: "required", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
-  pureAttr Required value = unsafeAttribute $ This
+instance Attr Select_ Required  String  where
+  attr Required value = unsafeAttribute $ This
     { key: "required", value: prop' value }
-  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Select_ Required (Event.Event  String ) where
+  attr Required eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "required", value: prop' value }
 
-instance Attr Textarea_ Required String where
+instance Attr Textarea_ Required (NonEmpty.NonEmpty Event.Event  String ) where
   attr Required bothValues = unsafeAttribute $ Both
     { key: "required", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
-  pureAttr Required value = unsafeAttribute $ This
+instance Attr Textarea_ Required  String  where
+  attr Required value = unsafeAttribute $ This
     { key: "required", value: prop' value }
-  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Textarea_ Required (Event.Event  String ) where
+  attr Required eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "required", value: prop' value }
 
-instance Attr everything Required Unit where
+instance Attr everything Required (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Required bothValues = unsafeAttribute $ Both
     { key: "required", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "required", value: unset' })
-  pureAttr Required _ = unsafeAttribute $ This
+instance Attr everything Required  Unit  where
+  attr Required _ = unsafeAttribute $ This
     { key: "required", value: unset' }
-  unpureAttr Required eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Required (Event.Event  Unit ) where
+  attr Required eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "required", value: unset' }

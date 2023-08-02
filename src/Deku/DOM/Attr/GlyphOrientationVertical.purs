@@ -2,6 +2,7 @@ module Deku.DOM.Attr.GlyphOrientationVertical where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
@@ -27,241 +28,281 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data GlyphOrientationVertical = GlyphOrientationVertical
 
-instance Attr FeBlend_ GlyphOrientationVertical String where
+instance Attr FeBlend_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeBlend_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeBlend_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeColorMatrix_ GlyphOrientationVertical String where
+instance Attr FeColorMatrix_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeColorMatrix_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeComponentTransfer_ GlyphOrientationVertical String where
+instance Attr FeComponentTransfer_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeComponentTransfer_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeComposite_ GlyphOrientationVertical String where
+instance Attr FeComposite_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeComposite_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeComposite_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeConvolveMatrix_ GlyphOrientationVertical String where
+instance Attr FeConvolveMatrix_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeConvolveMatrix_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeDiffuseLighting_ GlyphOrientationVertical String where
+instance Attr FeDiffuseLighting_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeDiffuseLighting_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeDisplacementMap_ GlyphOrientationVertical String where
+instance Attr FeDisplacementMap_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeDisplacementMap_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeFlood_ GlyphOrientationVertical String where
+instance Attr FeFlood_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeFlood_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeFlood_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeGaussianBlur_ GlyphOrientationVertical String where
+instance Attr FeGaussianBlur_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeGaussianBlur_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeImage_ GlyphOrientationVertical String where
+instance Attr FeImage_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeImage_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeImage_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeMerge_ GlyphOrientationVertical String where
+instance Attr FeMerge_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeMerge_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeMerge_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeMorphology_ GlyphOrientationVertical String where
+instance Attr FeMorphology_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeMorphology_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeMorphology_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeOffset_ GlyphOrientationVertical String where
+instance Attr FeOffset_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeOffset_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeOffset_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeSpecularLighting_ GlyphOrientationVertical String where
+instance Attr FeSpecularLighting_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeSpecularLighting_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeTile_ GlyphOrientationVertical String where
+instance Attr FeTile_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeTile_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeTile_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr FeTurbulence_ GlyphOrientationVertical String where
+instance Attr FeTurbulence_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr FeTurbulence_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr FeTurbulence_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr Filter_ GlyphOrientationVertical String where
+instance Attr Filter_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr Filter_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr Filter_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr Image_ GlyphOrientationVertical String where
+instance Attr Image_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr Image_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr Image_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr Switch_ GlyphOrientationVertical String where
+instance Attr Switch_ GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-vertical", value: prop' value }
     )
-  pureAttr GlyphOrientationVertical value = unsafeAttribute $ This
+instance Attr Switch_ GlyphOrientationVertical  String  where
+  attr GlyphOrientationVertical value = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: prop' value }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr Switch_ GlyphOrientationVertical (Event.Event  String ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \value ->
       { key: "glyph-orientation-vertical", value: prop' value }
 
-instance Attr everything GlyphOrientationVertical Unit where
+instance Attr everything GlyphOrientationVertical (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr GlyphOrientationVertical bothValues = unsafeAttribute $ Both
     { key: "glyph-orientation-vertical", value: unset' }
     ( NonEmpty.tail bothValues <#> \_ ->
         { key: "glyph-orientation-vertical", value: unset' }
     )
-  pureAttr GlyphOrientationVertical _ = unsafeAttribute $ This
+instance Attr everything GlyphOrientationVertical  Unit  where
+  attr GlyphOrientationVertical _ = unsafeAttribute $ This
     { key: "glyph-orientation-vertical", value: unset' }
-  unpureAttr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
+instance Attr everything GlyphOrientationVertical (Event.Event  Unit ) where
+  attr GlyphOrientationVertical eventValue = unsafeAttribute $ That $
     eventValue <#> \_ -> { key: "glyph-orientation-vertical", value: unset' }

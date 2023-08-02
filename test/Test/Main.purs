@@ -12,15 +12,15 @@ import Data.Maybe (Maybe(..))
 import Data.NonEmpty ((:|))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute ((!:=))
-import Deku.Attributes (id_, style, style')
+import Deku.Attribute ((:=))
+import Deku.Attributes (id, style)
 import Deku.Control (globalPortal1, portal1, text, text', textShow', text_)
 import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useMemoized, useRef, useState, useState', (<##~>))
 import Deku.Interpret (FFIDOMSnapshot)
-import Deku.Listeners (click_)
+import Deku.Listeners (click)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
@@ -49,7 +49,7 @@ ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
 
 sanityCheck :: Nut
-sanityCheck = D.span [ id_ "hello" ] [ text_ "Hello" ]
+sanityCheck = D.span [ id "hello" ] [ text_ "Hello" ]
 
 elementsInCorrectOrder :: Nut
 elementsInCorrectOrder = do
@@ -59,18 +59,18 @@ elementsInCorrectOrder = do
       | otherwise =
           [ do
               let x = "span" <> show n <> "-0"
-              D.span [ id_ x ] [ text_ (x <> "A") ]
+              D.span [ id x ] [ text_ (x <> "A") ]
           , do
               let x = "span" <> show n <> "-1"
-              D.span [ id_ x ] [ text_ (x <> "B") ]
+              D.span [ id x ] [ text_ (x <> "B") ]
           , do
               let x = "div" <> show n <> "-2"
-              D.span [ id_ x ] (l (n + 1))
+              D.span [ id x ] (l (n + 1))
           , do
               let x = "span" <> show n <> "-3"
-              D.span [ id_ x ] [ text_ (x <> "D") ]
+              D.span [ id x ] [ text_ (x <> "D") ]
           ]
-  D.div [ id_ "div0-0" ] (l 1)
+  D.div [ id "div0-0" ] (l 1)
 
 dynAppearsCorrectlyAtBeginning :: Nut
 dynAppearsCorrectlyAtBeginning = Deku.do
@@ -78,13 +78,13 @@ dynAppearsCorrectlyAtBeginning = Deku.do
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <- useDynAtBeginning_ (counter item)
-        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
-    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
+        D.span [ id ("dyn" <> show i) ] [ text_ (show i) ]
+    , D.button [ id "incr", click (setItem unit) ] [ text_ "incr" ]
     ]
 
 dynAppearsCorrectlyAtEnd :: Nut
@@ -93,13 +93,13 @@ dynAppearsCorrectlyAtEnd = Deku.do
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <- useDynAtEnd_ (counter item)
-        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
-    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
+        D.span [ id ("dyn" <> show i) ] [ text_ (show i) ]
+    , D.button [ id "incr", click (setItem unit) ] [ text_ "incr" ]
     ]
 
 deeplyNestedPreservesOrder :: Nut
@@ -115,14 +115,14 @@ deeplyNestedPreservesOrder = Deku.do
         [ Deku.do
             { value: i } <- useDynAtEnd_ (counter item)
             if i == 1 then mydyn (n + 1)
-            else D.span [ id_ ("dyn" <> sn <> "-" <> show i) ]
+            else D.span [ id ("dyn" <> sn <> "-" <> show i) ]
               [ text_ (sn <> "-" <> show i) ]
-        , D.button [ id_ $ "incr-" <> sn, click_ (setItem unit) ]
+        , D.button [ id $ "incr-" <> sn, click (setItem unit) ]
             [ text_ $ "incr-" <> sn ]
         ]
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , mydyn 0
     ]
 
@@ -133,42 +133,42 @@ isAMonoid = intercalate mempty $ map text_ [ "m", "o", "n", "o", "i", "d" ]
 sendsToPosition :: Nut
 sendsToPosition = Deku.do
   setPosIdx /\ posIdx <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <-
           useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
-        D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
-    , D.button [ id_ "pos", click_ (setPosIdx 1) ]
+        D.span [ id ("dyn" <> show i) ] [ text_ (show i) ]
+    , D.button [ id "pos", click (setPosIdx 1) ]
         [ text_ "send to pos" ]
     ]
 
 sendsToPositionFixed :: Nut
 sendsToPositionFixed = Deku.do
   setPosIdx /\ posIdx <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , Deku.do
         { value: i } <-
           useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         fixed
-          [ D.span [ id_ ("dyn" <> show i <> "a") ]
+          [ D.span [ id ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "a") ]
-          , D.span [ id_ ("dyn" <> show i <> "a") ]
+          , D.span [ id ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "b") ]
           ]
-    , D.button [ id_ "pos", click_ (setPosIdx 1) ]
+    , D.button [ id "pos", click (setPosIdx 1) ]
         [ text_ "send to pos" ]
     ]
 
 insertsAtCorrectPositions :: Nut
-insertsAtCorrectPositions = D.div [ id_ "div0" ]
+insertsAtCorrectPositions = D.div [ id "div0" ]
   [ text_ "foo"
-  , D.span [ id_ "div1" ] [ text_ "bar" ]
+  , D.span [ id "div1" ] [ text_ "bar" ]
   , Deku.do
       -- if we just used insert_ here, it would go in
       -- linear order
@@ -176,7 +176,7 @@ insertsAtCorrectPositions = D.div [ id_ "div0" ]
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
       { value: i } <- useDyn ((Tuple <*> identity) <$> [ 3, 0, 4, 2, 1 ]) empty
-      D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
+      D.span [ id ("dyn" <> show i) ] [ text_ (show i) ]
   ]
 
 switcherWorksForCompositionalElements :: Nut
@@ -185,26 +185,26 @@ switcherWorksForCompositionalElements = Deku.do
     counter :: forall a. Event a -> Event Int
     counter event = fold (\a _ -> 1 + a) 0 event
   setItem /\ item <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
-    , D.span [ id_ "div1" ] [ text_ "bar" ]
+    , D.span [ id "div1" ] [ text_ "bar" ]
     , 0 :| counter item <##~> \i -> fixed
-        ( [ 0, 1, 2 ] <#> \j -> D.span [ id_ $ "id" <> show j ]
+        ( [ 0, 1, 2 ] <#> \j -> D.span [ id $ "id" <> show j ]
             [ text_ (show i <> "-" <> show j) ]
         )
-    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "incr" ]
+    , D.button [ id "incr", click (setItem unit) ] [ text_ "incr" ]
     ]
 
 tabbedNavigationWithPursx :: Nut
 tabbedNavigationWithPursx = Deku.do
   setItem /\ item <- useState 0
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ D.div_
-        [ D.button [ id_ "home-btn", click_ (setItem 0) ]
+        [ D.button [ id "home-btn", click (setItem 0) ]
             [ text_ "home" ]
-        , D.button [ id_ "about-btn", click_ (setItem 1) ]
+        , D.button [ id "about-btn", click (setItem 1) ]
             [ text_ "about" ]
-        , D.button [ id_ "contact-btn", click_ (setItem 2) ]
+        , D.button [ id "contact-btn", click (setItem 2) ]
             [ text_ "contact" ]
         ]
     , item <##~> case _ of
@@ -225,14 +225,14 @@ switchersCompose = Deku.do
     counter event = fold (\a _ -> a + 1) 0 event
   setItem /\ item' <- useState'
   item <- useMemoized (counter item')
-  D.div [ id_ "maindiv" ]
-    [ D.div [ id_ "div0" ] [ text_ "d0" ]
+  D.div [ id "maindiv" ]
+    [ D.div [ id "div0" ] [ text_ "d0" ]
     , 0 :| item <##~> (_ `mod` 2) >>> case _ of
-        0 -> D.div [ id_ "div1a" ] [ text_ "d1a" ]
-        _ -> D.div [ id_ "div1b" ] [ text_ "d1b" ]
+        0 -> D.div [ id "div1a" ] [ text_ "d1a" ]
+        _ -> D.div [ id "div1b" ] [ text_ "d1b" ]
 
-    , D.div [ id_ "div2" ] [ text_ "d2" ]
-    , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "click" ]
+    , D.div [ id "div2" ] [ text_ "d2" ]
+    , D.button [ id "incr", click (setItem unit) ] [ text_ "click" ]
     ]
 
 portalsCompose :: Nut
@@ -250,14 +250,14 @@ portalsCompose = Deku.do
             | i == n -> e
             | otherwise -> mempty
 
-      D.div [ id_ "maindiv" ]
+      D.div [ id "maindiv" ]
         [ D.div_ [ text_ "d0" ]
         , switchMe 0
         , D.div_ [ text_ "d1" ]
         , switchMe 1
         , D.div_ [ text_ "d2" ]
         , switchMe 2
-        , D.button [ id_ "incr", click_ (setItem unit) ]
+        , D.button [ id "incr", click (setItem unit) ]
             [ text_ "incr" ]
         ]
 
@@ -274,7 +274,7 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
   setPortedNut /\ portedNut <- useState'
   let noDice = D.div_ [ text_ "no dice!" ]
   D.div_
-    [ D.div [ id_ "outer-scope" ]
+    [ D.div [ id "outer-scope" ]
         [ noDice :|
             limitTo 1
               ( (\tf p -> if not tf then p else noDice) <$> portalInContext <*>
@@ -285,9 +285,9 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
     , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
           Deku.do
             D.div_
-              [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+              [ D.button [ id "push-ported-nut", click (setPortedNut e) ]
                   [ text_ "push ported nut" ]
-              , D.div [ id_ "inner-scope" ]
+              , D.div [ id "inner-scope" ]
                   [ e :|
                       ( ( \tf p ->
                             if tf then p else noDice
@@ -298,8 +298,8 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
               ]
       )
     , D.button
-        [ id_ "portal-btn"
-        , click_ do
+        [ id "portal-btn"
+        , click do
             portalInContextRef <#> not >>= setPortalInContext
         ]
 
@@ -319,7 +319,7 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
   portalInContextRef <- useRef true portalInContext
   let noDice = D.div_ [ text_ "no dice!" ]
   D.div_
-    [ D.div [ id_ "outer-scope" ]
+    [ D.div [ id "outer-scope" ]
         [ noDice :|
             limitTo 1
               ( (\tf p -> if not tf then p else noDice) <$> portalInContext <*>
@@ -330,9 +330,9 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
     , portal1 (D.div_ [ text_ "foo" ]) \e ->
         Deku.do
           D.div_
-            [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+            [ D.button [ id "push-ported-nut", click (setPortedNut e) ]
                 [ text_ "push ported nut" ]
-            , D.div [ id_ "inner-scope" ]
+            , D.div [ id "inner-scope" ]
                 [ e :|
                     ( ( \tf p ->
                           if tf then p else noDice
@@ -342,15 +342,15 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
                 ]
             ]
     , D.button
-        [ id_ "portal-btn"
-        , click_ do portalInContextRef <#> not >>= setPortalInContext
+        [ id "portal-btn"
+        , click do portalInContextRef <#> not >>= setPortalInContext
         ]
         [ text_ "switch" ]
     ]
 
 pursXComposes :: Nut
 pursXComposes = Deku.do
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ (Proxy :: _ "<h1 id=\"px\">début ~me~ fin</h1>") ~~
         { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
     ]
@@ -365,16 +365,16 @@ switcherSwitches = Deku.do
       i <- iref
       when (i == 2) do
         setGoodbyeC (Just unit)
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ D.div_
-        [ D.button [ id_ "home-btn", click_ $ gc *> setItem 0 ]
+        [ D.button [ id "home-btn", click $ gc *> setItem 0 ]
             [ text_ "home" ]
-        , D.button [ id_ "about-btn", click_ $ gc *> setItem 1 ]
+        , D.button [ id "about-btn", click $ gc *> setItem 1 ]
             [ text_ "about" ]
-        , D.button [ id_ "contact-btn", click_ $ gc *> setItem 2 ]
+        , D.button [ id "contact-btn", click $ gc *> setItem 2 ]
             [ text_ "contact" ]
         ]
-    , D.span [ D.Id !:= "hack" ]
+    , D.span [ D.Id := "hack" ]
         [ text $ merge
             [ filter (_ == 1) item $> "hello", compact goodbyeC $> "goodbye" ]
         ]
@@ -388,15 +388,15 @@ unsetUnsets :: Nut
 unsetUnsets = Deku.do
   let initialAtt = "color:red;"
   setAttIsPresent /\ attIsPresent <- useState'
-  D.div [ id_ "div0" ]
+  D.div [ id "div0" ]
     [ text_ "foo"
     , D.span
-        [ id_ "span1"
-        , style' initialAtt (filter identity attIsPresent $> initialAtt)
+        [ id "span1"
+        , style (initialAtt :| (filter identity attIsPresent $> initialAtt))
         , style (filter not attIsPresent $> unit)
         ]
         [ text_ "bar" ]
-    , D.button [ id_ "unsetter", click_ (setAttIsPresent false) ]
+    , D.button [ id "unsetter", click (setAttIsPresent false) ]
         [ text_ "unset" ]
     ]
 
@@ -410,9 +410,9 @@ useRefWorks = Deku.do
   cref <- useRef startsAt counter
   D.div_
     [ D.button
-        [ click_ do
+        [ click do
             cref <#> add 1 >>= setCounter
-        , id_ "counter"
+        , id "counter"
         ]
 
         [ text_ "Increment" ]
@@ -420,8 +420,8 @@ useRefWorks = Deku.do
         ( 0 .. 9 <#> \i -> Deku.do
             setButtonTxt /\ buttonTxt <- useState'
             D.button
-              [ click_ $ cref >>= setButtonTxt
-              , id_ $ "b" <> show i
+              [ click $ cref >>= setButtonTxt
+              , id $ "b" <> show i
               ]
 
               [ text (show <$> buttonTxt) ]
@@ -436,12 +436,12 @@ useEffectWorks = Deku.do
   cref <- useRef startsAt counter'
   D.div_
     [ D.button
-        [ click_ do
+        [ click do
             cref <#> add 1 >>= setCounter
-        , id_ "counter"
+        , id "counter"
         ]
         [ text_ "Increment" ]
-    , D.div [ id_ "mydiv" ] [ text' (show <$> (startsAt :| counter')) ]
+    , D.div [ id "mydiv" ] [ text' (show <$> (startsAt :| counter')) ]
     ]
 
 customHooksDoTheirThing :: Nut
@@ -453,12 +453,12 @@ customHooksDoTheirThing = Deku.do
   e1 /\ e2 <- myHook useMemoized map counter
   D.div_
     [ D.button
-        [ click_ $ cref <#> add 1 >>= setCounter
-        , id_ "counter"
+        [ click $ cref <#> add 1 >>= setCounter
+        , id "counter"
         ]
         [ text_ "Increment" ]
-    , D.div [ id_ "mydiv1" ] [ textShow' (e1' :| e1) ]
-    , D.div [ id_ "mydiv2" ] [ textShow' (e2' :| e2) ]
+    , D.div [ id "mydiv1" ] [ textShow' (e1' :| e1) ]
+    , D.div [ id "mydiv2" ] [ textShow' (e2' :| e2) ]
     ]
   where
   myHook

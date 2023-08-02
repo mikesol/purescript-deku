@@ -108,7 +108,6 @@ class Attr e a b where
   -- | aka `D.Style := "color: red;"` is a valid attribute or listener for any element.
   attr :: a -> b -> Attribute e
 
-
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
 xdata k v = unsafeAttribute $ This { key: "data-" <> k, value: Prop' v }

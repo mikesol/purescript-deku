@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaRelevant where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,164 +26,200 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaRelevant = AriaRelevant
 
-instance Attr Circle_ AriaRelevant String where
+instance Attr Circle_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Circle_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Ellipse_ AriaRelevant String where
+instance Attr Ellipse_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr ForeignObject_ AriaRelevant String where
+instance Attr ForeignObject_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr G_ AriaRelevant String where
+instance Attr G_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr G_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Line_ AriaRelevant String where
+instance Attr Line_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Line_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Marker_ AriaRelevant String where
+instance Attr Marker_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Marker_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Path_ AriaRelevant String where
+instance Attr Path_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Path_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Polygon_ AriaRelevant String where
+instance Attr Polygon_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Polygon_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Polyline_ AriaRelevant String where
+instance Attr Polyline_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Polyline_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Rect_ AriaRelevant String where
+instance Attr Rect_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Rect_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Svg_ AriaRelevant String where
+instance Attr Svg_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Svg_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Symbol_ AriaRelevant String where
+instance Attr Symbol_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Symbol_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Text_ AriaRelevant String where
+instance Attr Text_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Text_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr TextPath_ AriaRelevant String where
+instance Attr TextPath_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr TextPath_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Tspan_ AriaRelevant String where
+instance Attr Tspan_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Tspan_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr Use_ AriaRelevant String where
+instance Attr Use_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr Use_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr View_ AriaRelevant String where
+instance Attr View_ AriaRelevant (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-relevant", value: prop' value })
-  pureAttr AriaRelevant value = unsafeAttribute $ This
+instance Attr View_ AriaRelevant  String  where
+  attr AriaRelevant value = unsafeAttribute $ This
     { key: "aria-relevant", value: prop' value }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr View_ AriaRelevant (Event.Event  String ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-relevant", value: prop' value }
 
-instance Attr everything AriaRelevant Unit where
+instance Attr everything AriaRelevant (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaRelevant bothValues = unsafeAttribute $ Both
     { key: "aria-relevant", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-relevant", value: unset' })
-  pureAttr AriaRelevant _ = unsafeAttribute $ This
+instance Attr everything AriaRelevant  Unit  where
+  attr AriaRelevant _ = unsafeAttribute $ This
     { key: "aria-relevant", value: unset' }
-  unpureAttr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything AriaRelevant (Event.Event  Unit ) where
+  attr AriaRelevant eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "aria-relevant", value: unset' }

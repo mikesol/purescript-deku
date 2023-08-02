@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaRowcount where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,164 +26,200 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaRowcount = AriaRowcount
 
-instance Attr Circle_ AriaRowcount String where
+instance Attr Circle_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Circle_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Ellipse_ AriaRowcount String where
+instance Attr Ellipse_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr ForeignObject_ AriaRowcount String where
+instance Attr ForeignObject_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr G_ AriaRowcount String where
+instance Attr G_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr G_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Line_ AriaRowcount String where
+instance Attr Line_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Line_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Marker_ AriaRowcount String where
+instance Attr Marker_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Marker_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Path_ AriaRowcount String where
+instance Attr Path_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Path_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Polygon_ AriaRowcount String where
+instance Attr Polygon_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Polygon_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Polyline_ AriaRowcount String where
+instance Attr Polyline_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Polyline_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Rect_ AriaRowcount String where
+instance Attr Rect_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Rect_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Svg_ AriaRowcount String where
+instance Attr Svg_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Svg_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Symbol_ AriaRowcount String where
+instance Attr Symbol_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Symbol_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Text_ AriaRowcount String where
+instance Attr Text_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Text_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr TextPath_ AriaRowcount String where
+instance Attr TextPath_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr TextPath_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Tspan_ AriaRowcount String where
+instance Attr Tspan_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Tspan_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr Use_ AriaRowcount String where
+instance Attr Use_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr Use_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr View_ AriaRowcount String where
+instance Attr View_ AriaRowcount (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowcount", value: prop' value })
-  pureAttr AriaRowcount value = unsafeAttribute $ This
+instance Attr View_ AriaRowcount  String  where
+  attr AriaRowcount value = unsafeAttribute $ This
     { key: "aria-rowcount", value: prop' value }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr View_ AriaRowcount (Event.Event  String ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-rowcount", value: prop' value }
 
-instance Attr everything AriaRowcount Unit where
+instance Attr everything AriaRowcount (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaRowcount bothValues = unsafeAttribute $ Both
     { key: "aria-rowcount", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-rowcount", value: unset' })
-  pureAttr AriaRowcount _ = unsafeAttribute $ This
+instance Attr everything AriaRowcount  Unit  where
+  attr AriaRowcount _ = unsafeAttribute $ This
     { key: "aria-rowcount", value: unset' }
-  unpureAttr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything AriaRowcount (Event.Event  Unit ) where
+  attr AriaRowcount eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "aria-rowcount", value: unset' }

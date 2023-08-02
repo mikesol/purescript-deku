@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaOrientation where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,198 +26,234 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaOrientation = AriaOrientation
 
-instance Attr Circle_ AriaOrientation String where
+instance Attr Circle_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Circle_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Circle_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Ellipse_ AriaOrientation String where
+instance Attr Ellipse_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Ellipse_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr ForeignObject_ AriaOrientation String where
+instance Attr ForeignObject_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr ForeignObject_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr G_ AriaOrientation String where
+instance Attr G_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr G_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr G_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Line_ AriaOrientation String where
+instance Attr Line_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Line_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Line_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Marker_ AriaOrientation String where
+instance Attr Marker_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Marker_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Marker_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Path_ AriaOrientation String where
+instance Attr Path_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Path_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Path_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Polygon_ AriaOrientation String where
+instance Attr Polygon_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Polygon_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polygon_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Polyline_ AriaOrientation String where
+instance Attr Polyline_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Polyline_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polyline_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Rect_ AriaOrientation String where
+instance Attr Rect_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Rect_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Rect_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Svg_ AriaOrientation String where
+instance Attr Svg_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Svg_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Svg_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Symbol_ AriaOrientation String where
+instance Attr Symbol_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Symbol_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Symbol_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Text_ AriaOrientation String where
+instance Attr Text_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Text_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Text_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr TextPath_ AriaOrientation String where
+instance Attr TextPath_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr TextPath_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr TextPath_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Tspan_ AriaOrientation String where
+instance Attr Tspan_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Tspan_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Tspan_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr Use_ AriaOrientation String where
+instance Attr Use_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr Use_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Use_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr View_ AriaOrientation String where
+instance Attr View_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
-  pureAttr AriaOrientation value = unsafeAttribute $ This
+instance Attr View_ AriaOrientation  String  where
+  attr AriaOrientation value = unsafeAttribute $ This
     { key: "aria-orientation", value: prop' value }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr View_ AriaOrientation (Event.Event  String ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
-instance Attr everything AriaOrientation Unit where
+instance Attr everything AriaOrientation (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaOrientation bothValues = unsafeAttribute $ Both
     { key: "aria-orientation", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
-  pureAttr AriaOrientation _ = unsafeAttribute $ This
+instance Attr everything AriaOrientation  Unit  where
+  attr AriaOrientation _ = unsafeAttribute $ This
     { key: "aria-orientation", value: unset' }
-  unpureAttr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
+instance Attr everything AriaOrientation (Event.Event  Unit ) where
+  attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
     <#> \_ -> { key: "aria-orientation", value: unset' }

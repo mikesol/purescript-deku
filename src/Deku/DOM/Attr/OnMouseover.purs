@@ -2,6 +2,7 @@ module Deku.DOM.Attr.OnMouseover where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
@@ -9,35 +10,41 @@ import FRP.Event (Event)
 
 data OnMouseover = OnMouseover
 
-instance Attr anything OnMouseover Cb where
+instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  Cb ) where
   attr OnMouseover bothValues = unsafeAttribute $ Both
     { key: "mouseover", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseover", value: cb' value })
-  pureAttr OnMouseover value = unsafeAttribute $ This
+instance Attr anything OnMouseover  Cb  where
+  attr OnMouseover value = unsafeAttribute $ This
     { key: "mouseover", value: cb' value }
-  unpureAttr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnMouseover (Event.Event  Cb ) where
+  attr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "mouseover", value: cb' value }
 
-instance Attr anything OnMouseover (Effect Unit) where
+instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnMouseover bothValues = unsafeAttribute $ Both
     { key: "mouseover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseover", value: cb' (Cb (const (value $> true))) }
     )
-  pureAttr OnMouseover value = unsafeAttribute $ This
+instance Attr anything OnMouseover  (Effect Unit)  where
+  attr OnMouseover value = unsafeAttribute $ This
     { key: "mouseover", value: cb' (Cb (const (value $> true))) }
-  unpureAttr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnMouseover (Event.Event  (Effect Unit) ) where
+  attr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "mouseover", value: cb' (Cb (const (value $> true))) }
 
-instance Attr anything OnMouseover (Effect Boolean) where
+instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
   attr OnMouseover bothValues = unsafeAttribute $ Both
     { key: "mouseover", value: cb' (Cb (const (NonEmpty.head bothValues))) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseover", value: cb' (Cb (const value)) }
     )
-  pureAttr OnMouseover value = unsafeAttribute $ This
+instance Attr anything OnMouseover  (Effect Boolean)  where
+  attr OnMouseover value = unsafeAttribute $ This
     { key: "mouseover", value: cb' (Cb (const value)) }
-  unpureAttr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr anything OnMouseover (Event.Event  (Effect Boolean) ) where
+  attr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "mouseover", value: cb' (Cb (const value)) }
 
 type OnMouseoverEffect =
@@ -45,11 +52,13 @@ type OnMouseoverEffect =
    . Attr element OnMouseover (Effect Unit)
   => Event (Attribute element)
 
-instance Attr everything OnMouseover Unit where
+instance Attr everything OnMouseover (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnMouseover bothValues = unsafeAttribute $ Both
     { key: "mouseover", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseover", value: unset' })
-  pureAttr OnMouseover _ = unsafeAttribute $ This
+instance Attr everything OnMouseover  Unit  where
+  attr OnMouseover _ = unsafeAttribute $ This
     { key: "mouseover", value: unset' }
-  unpureAttr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything OnMouseover (Event.Event  Unit ) where
+  attr OnMouseover eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "mouseover", value: unset' }

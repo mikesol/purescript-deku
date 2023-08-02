@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Itemprop where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
@@ -130,1109 +131,1355 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Itemprop = Itemprop
 
-instance Attr A_ Itemprop String where
+instance Attr A_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr A_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr A_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Abbr_ Itemprop String where
+instance Attr Abbr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Abbr_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Abbr_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Acronym_ Itemprop String where
+instance Attr Acronym_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Acronym_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Acronym_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Address_ Itemprop String where
+instance Attr Address_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Address_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Address_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Applet_ Itemprop String where
+instance Attr Applet_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Applet_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Applet_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Area_ Itemprop String where
+instance Attr Area_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Area_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Area_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Article_ Itemprop String where
+instance Attr Article_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Article_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Article_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Aside_ Itemprop String where
+instance Attr Aside_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Aside_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Aside_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Audio_ Itemprop String where
+instance Attr Audio_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Audio_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Audio_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr B_ Itemprop String where
+instance Attr B_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr B_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr B_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Base_ Itemprop String where
+instance Attr Base_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Base_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Base_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Basefont_ Itemprop String where
+instance Attr Basefont_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Basefont_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Basefont_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdi_ Itemprop String where
+instance Attr Bdi_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Bdi_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Bdi_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdo_ Itemprop String where
+instance Attr Bdo_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Bdo_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Bdo_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Big_ Itemprop String where
+instance Attr Big_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Big_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Big_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Blockquote_ Itemprop String where
+instance Attr Blockquote_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Blockquote_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Blockquote_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Body_ Itemprop String where
+instance Attr Body_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Body_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Body_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Br_ Itemprop String where
+instance Attr Br_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Br_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Br_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Button_ Itemprop String where
+instance Attr Button_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Button_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Button_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Canvas_ Itemprop String where
+instance Attr Canvas_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Canvas_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Canvas_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Caption_ Itemprop String where
+instance Attr Caption_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Caption_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Caption_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Center_ Itemprop String where
+instance Attr Center_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Center_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Center_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Cite_ Itemprop String where
+instance Attr Cite_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Cite_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Cite_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Code_ Itemprop String where
+instance Attr Code_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Code_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Code_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Col_ Itemprop String where
+instance Attr Col_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Col_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Col_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Colgroup_ Itemprop String where
+instance Attr Colgroup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Colgroup_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Colgroup_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Xdata_ Itemprop String where
+instance Attr Xdata_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Xdata_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Xdata_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Datalist_ Itemprop String where
+instance Attr Datalist_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Datalist_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Datalist_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dd_ Itemprop String where
+instance Attr Dd_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dd_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dd_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Del_ Itemprop String where
+instance Attr Del_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Del_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Del_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Details_ Itemprop String where
+instance Attr Details_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Details_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Details_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dfn_ Itemprop String where
+instance Attr Dfn_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dfn_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dfn_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dialog_ Itemprop String where
+instance Attr Dialog_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dialog_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dialog_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dir_ Itemprop String where
+instance Attr Dir_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dir_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dir_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Div_ Itemprop String where
+instance Attr Div_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Div_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Div_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dl_ Itemprop String where
+instance Attr Dl_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dl_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dl_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dt_ Itemprop String where
+instance Attr Dt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Dt_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dt_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Em_ Itemprop String where
+instance Attr Em_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Em_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Em_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Embed_ Itemprop String where
+instance Attr Embed_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Embed_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Embed_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Fieldset_ Itemprop String where
+instance Attr Fieldset_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Fieldset_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Fieldset_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figcaption_ Itemprop String where
+instance Attr Figcaption_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Figcaption_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Figcaption_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figure_ Itemprop String where
+instance Attr Figure_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Figure_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Figure_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Font_ Itemprop String where
+instance Attr Font_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Font_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Font_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Footer_ Itemprop String where
+instance Attr Footer_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Footer_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Footer_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Form_ Itemprop String where
+instance Attr Form_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Form_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Form_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frame_ Itemprop String where
+instance Attr Frame_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Frame_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Frame_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frameset_ Itemprop String where
+instance Attr Frameset_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Frameset_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Frameset_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H1_ Itemprop String where
+instance Attr H1_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H1_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H1_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H2_ Itemprop String where
+instance Attr H2_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H2_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H2_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H3_ Itemprop String where
+instance Attr H3_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H3_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H3_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H4_ Itemprop String where
+instance Attr H4_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H4_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H4_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H5_ Itemprop String where
+instance Attr H5_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H5_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H5_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H6_ Itemprop String where
+instance Attr H6_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr H6_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H6_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Head_ Itemprop String where
+instance Attr Head_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Head_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Head_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Header_ Itemprop String where
+instance Attr Header_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Header_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Header_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Hr_ Itemprop String where
+instance Attr Hr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Hr_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Hr_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Html_ Itemprop String where
+instance Attr Html_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Html_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Html_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr I_ Itemprop String where
+instance Attr I_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr I_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr I_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Iframe_ Itemprop String where
+instance Attr Iframe_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Iframe_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Iframe_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Img_ Itemprop String where
+instance Attr Img_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Img_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Img_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Input_ Itemprop String where
+instance Attr Input_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Input_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Input_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ins_ Itemprop String where
+instance Attr Ins_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Ins_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ins_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Kbd_ Itemprop String where
+instance Attr Kbd_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Kbd_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Kbd_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Label_ Itemprop String where
+instance Attr Label_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Label_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Label_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Legend_ Itemprop String where
+instance Attr Legend_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Legend_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Legend_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Li_ Itemprop String where
+instance Attr Li_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Li_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Li_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Link_ Itemprop String where
+instance Attr Link_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Link_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Link_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Main_ Itemprop String where
+instance Attr Main_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Main_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Main_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Map_ Itemprop String where
+instance Attr Map_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Map_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Map_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Mark_ Itemprop String where
+instance Attr Mark_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Mark_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mark_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meta_ Itemprop String where
+instance Attr Meta_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Meta_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Meta_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meter_ Itemprop String where
+instance Attr Meter_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Meter_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Meter_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Nav_ Itemprop String where
+instance Attr Nav_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Nav_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Nav_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noframes_ Itemprop String where
+instance Attr Noframes_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Noframes_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Noframes_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noscript_ Itemprop String where
+instance Attr Noscript_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Noscript_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Noscript_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Object_ Itemprop String where
+instance Attr Object_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Object_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Object_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ol_ Itemprop String where
+instance Attr Ol_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Ol_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ol_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Optgroup_ Itemprop String where
+instance Attr Optgroup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Optgroup_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Optgroup_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Option_ Itemprop String where
+instance Attr Option_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Option_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Option_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Output_ Itemprop String where
+instance Attr Output_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Output_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Output_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr P_ Itemprop String where
+instance Attr P_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr P_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr P_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Param_ Itemprop String where
+instance Attr Param_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Param_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Param_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Picture_ Itemprop String where
+instance Attr Picture_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Picture_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Picture_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Pre_ Itemprop String where
+instance Attr Pre_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Pre_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pre_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Progress_ Itemprop String where
+instance Attr Progress_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Progress_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Progress_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Q_ Itemprop String where
+instance Attr Q_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Q_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Q_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rp_ Itemprop String where
+instance Attr Rp_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Rp_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rp_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rt_ Itemprop String where
+instance Attr Rt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Rt_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rt_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ruby_ Itemprop String where
+instance Attr Ruby_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Ruby_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ruby_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr S_ Itemprop String where
+instance Attr S_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr S_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr S_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Samp_ Itemprop String where
+instance Attr Samp_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Samp_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Samp_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Script_ Itemprop String where
+instance Attr Script_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Script_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Script_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Section_ Itemprop String where
+instance Attr Section_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Section_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Section_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Select_ Itemprop String where
+instance Attr Select_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Select_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Select_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Small_ Itemprop String where
+instance Attr Small_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Small_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Small_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Source_ Itemprop String where
+instance Attr Source_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Source_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Source_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Span_ Itemprop String where
+instance Attr Span_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Span_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Span_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strike_ Itemprop String where
+instance Attr Strike_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Strike_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Strike_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strong_ Itemprop String where
+instance Attr Strong_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Strong_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Strong_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Style_ Itemprop String where
+instance Attr Style_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Style_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Style_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sub_ Itemprop String where
+instance Attr Sub_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Sub_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Sub_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Summary_ Itemprop String where
+instance Attr Summary_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Summary_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Summary_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sup_ Itemprop String where
+instance Attr Sup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Sup_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Sup_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Svg_ Itemprop String where
+instance Attr Svg_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Svg_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Table_ Itemprop String where
+instance Attr Table_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Table_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Table_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tbody_ Itemprop String where
+instance Attr Tbody_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Tbody_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tbody_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Td_ Itemprop String where
+instance Attr Td_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Td_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Td_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Template_ Itemprop String where
+instance Attr Template_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Template_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Template_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Textarea_ Itemprop String where
+instance Attr Textarea_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Textarea_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Textarea_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tfoot_ Itemprop String where
+instance Attr Tfoot_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Tfoot_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tfoot_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Th_ Itemprop String where
+instance Attr Th_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Th_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Th_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Thead_ Itemprop String where
+instance Attr Thead_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Thead_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Thead_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Time_ Itemprop String where
+instance Attr Time_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Time_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Time_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Title_ Itemprop String where
+instance Attr Title_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Title_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Title_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tr_ Itemprop String where
+instance Attr Tr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Tr_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tr_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Track_ Itemprop String where
+instance Attr Track_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Track_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Track_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tt_ Itemprop String where
+instance Attr Tt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Tt_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tt_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr U_ Itemprop String where
+instance Attr U_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr U_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr U_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ul_ Itemprop String where
+instance Attr Ul_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Ul_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ul_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Var_ Itemprop String where
+instance Attr Var_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Var_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Var_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Video_ Itemprop String where
+instance Attr Video_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Video_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Video_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Wbr_ Itemprop String where
+instance Attr Wbr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-  pureAttr Itemprop value = unsafeAttribute $ This
+instance Attr Wbr_ Itemprop  String  where
+  attr Itemprop value = unsafeAttribute $ This
     { key: "itemprop", value: prop' value }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Wbr_ Itemprop (Event.Event  String ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr everything Itemprop Unit where
+instance Attr everything Itemprop (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Itemprop bothValues = unsafeAttribute $ Both
     { key: "itemprop", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "itemprop", value: unset' })
-  pureAttr Itemprop _ = unsafeAttribute $ This
+instance Attr everything Itemprop  Unit  where
+  attr Itemprop _ = unsafeAttribute $ This
     { key: "itemprop", value: unset' }
-  unpureAttr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Itemprop (Event.Event  Unit ) where
+  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "itemprop", value: unset' }

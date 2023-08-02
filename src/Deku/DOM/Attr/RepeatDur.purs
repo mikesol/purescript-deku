@@ -2,6 +2,7 @@ module Deku.DOM.Attr.RepeatDur where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Set (Set_)
@@ -12,47 +13,57 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data RepeatDur = RepeatDur
 
-instance Attr Animate_ RepeatDur String where
+instance Attr Animate_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
   attr RepeatDur bothValues = unsafeAttribute $ Both
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
-  pureAttr RepeatDur value = unsafeAttribute $ This
+instance Attr Animate_ RepeatDur  String  where
+  attr RepeatDur value = unsafeAttribute $ This
     { key: "repeatDur", value: prop' value }
-  unpureAttr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Animate_ RepeatDur (Event.Event  String ) where
+  attr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "repeatDur", value: prop' value }
 
-instance Attr AnimateMotion_ RepeatDur String where
+instance Attr AnimateMotion_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
   attr RepeatDur bothValues = unsafeAttribute $ Both
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
-  pureAttr RepeatDur value = unsafeAttribute $ This
+instance Attr AnimateMotion_ RepeatDur  String  where
+  attr RepeatDur value = unsafeAttribute $ This
     { key: "repeatDur", value: prop' value }
-  unpureAttr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr AnimateMotion_ RepeatDur (Event.Event  String ) where
+  attr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "repeatDur", value: prop' value }
 
-instance Attr AnimateTransform_ RepeatDur String where
+instance Attr AnimateTransform_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
   attr RepeatDur bothValues = unsafeAttribute $ Both
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
-  pureAttr RepeatDur value = unsafeAttribute $ This
+instance Attr AnimateTransform_ RepeatDur  String  where
+  attr RepeatDur value = unsafeAttribute $ This
     { key: "repeatDur", value: prop' value }
-  unpureAttr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr AnimateTransform_ RepeatDur (Event.Event  String ) where
+  attr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "repeatDur", value: prop' value }
 
-instance Attr Set_ RepeatDur String where
+instance Attr Set_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
   attr RepeatDur bothValues = unsafeAttribute $ Both
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
-  pureAttr RepeatDur value = unsafeAttribute $ This
+instance Attr Set_ RepeatDur  String  where
+  attr RepeatDur value = unsafeAttribute $ This
     { key: "repeatDur", value: prop' value }
-  unpureAttr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Set_ RepeatDur (Event.Event  String ) where
+  attr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "repeatDur", value: prop' value }
 
-instance Attr everything RepeatDur Unit where
+instance Attr everything RepeatDur (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr RepeatDur bothValues = unsafeAttribute $ Both
     { key: "repeatDur", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "repeatDur", value: unset' })
-  pureAttr RepeatDur _ = unsafeAttribute $ This
+instance Attr everything RepeatDur  Unit  where
+  attr RepeatDur _ = unsafeAttribute $ This
     { key: "repeatDur", value: unset' }
-  unpureAttr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything RepeatDur (Event.Event  Unit ) where
+  attr RepeatDur eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "repeatDur", value: unset' }

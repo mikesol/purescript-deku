@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Muted where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Audio (Audio_)
@@ -10,27 +11,33 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Muted = Muted
 
-instance Attr Audio_ Muted String where
+instance Attr Audio_ Muted (NonEmpty.NonEmpty Event.Event  String ) where
   attr Muted bothValues = unsafeAttribute $ Both
     { key: "muted", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "muted", value: prop' value })
-  pureAttr Muted value = unsafeAttribute $ This
+instance Attr Audio_ Muted  String  where
+  attr Muted value = unsafeAttribute $ This
     { key: "muted", value: prop' value }
-  unpureAttr Muted eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Audio_ Muted (Event.Event  String ) where
+  attr Muted eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "muted", value: prop' value }
 
-instance Attr Video_ Muted String where
+instance Attr Video_ Muted (NonEmpty.NonEmpty Event.Event  String ) where
   attr Muted bothValues = unsafeAttribute $ Both
     { key: "muted", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "muted", value: prop' value })
-  pureAttr Muted value = unsafeAttribute $ This
+instance Attr Video_ Muted  String  where
+  attr Muted value = unsafeAttribute $ This
     { key: "muted", value: prop' value }
-  unpureAttr Muted eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Video_ Muted (Event.Event  String ) where
+  attr Muted eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "muted", value: prop' value }
 
-instance Attr everything Muted Unit where
+instance Attr everything Muted (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Muted bothValues = unsafeAttribute $ Both { key: "muted", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "muted", value: unset' })
-  pureAttr Muted _ = unsafeAttribute $ This { key: "muted", value: unset' }
-  unpureAttr Muted eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Muted  Unit  where
+  attr Muted _ = unsafeAttribute $ This { key: "muted", value: unset' }
+instance Attr everything Muted (Event.Event  Unit ) where
+  attr Muted eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "muted", value: unset' }

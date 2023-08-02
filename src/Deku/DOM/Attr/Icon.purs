@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Icon where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
@@ -130,1107 +131,1353 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Icon = Icon
 
-instance Attr A_ Icon String where
+instance Attr A_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr A_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr A_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Abbr_ Icon String where
+instance Attr Abbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Abbr_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Abbr_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Acronym_ Icon String where
+instance Attr Acronym_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Acronym_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Acronym_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Address_ Icon String where
+instance Attr Address_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Address_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Address_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Applet_ Icon String where
+instance Attr Applet_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Applet_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Applet_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Area_ Icon String where
+instance Attr Area_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Area_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Area_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Article_ Icon String where
+instance Attr Article_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Article_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Article_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Aside_ Icon String where
+instance Attr Aside_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Aside_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Aside_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Audio_ Icon String where
+instance Attr Audio_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Audio_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Audio_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr B_ Icon String where
+instance Attr B_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr B_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr B_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Base_ Icon String where
+instance Attr Base_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Base_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Base_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Basefont_ Icon String where
+instance Attr Basefont_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Basefont_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Basefont_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Bdi_ Icon String where
+instance Attr Bdi_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Bdi_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdi_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Bdo_ Icon String where
+instance Attr Bdo_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Bdo_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Bdo_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Big_ Icon String where
+instance Attr Big_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Big_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Big_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Blockquote_ Icon String where
+instance Attr Blockquote_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Blockquote_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Blockquote_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Body_ Icon String where
+instance Attr Body_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Body_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Body_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Br_ Icon String where
+instance Attr Br_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Br_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Br_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Button_ Icon String where
+instance Attr Button_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Button_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Button_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Canvas_ Icon String where
+instance Attr Canvas_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Canvas_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Canvas_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Caption_ Icon String where
+instance Attr Caption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Caption_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Caption_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Center_ Icon String where
+instance Attr Center_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Center_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Center_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Cite_ Icon String where
+instance Attr Cite_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Cite_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Cite_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Code_ Icon String where
+instance Attr Code_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Code_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Code_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Col_ Icon String where
+instance Attr Col_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Col_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Col_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Colgroup_ Icon String where
+instance Attr Colgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Colgroup_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Colgroup_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Xdata_ Icon String where
+instance Attr Xdata_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Xdata_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Xdata_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Datalist_ Icon String where
+instance Attr Datalist_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Datalist_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Datalist_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dd_ Icon String where
+instance Attr Dd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dd_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dd_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Del_ Icon String where
+instance Attr Del_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Del_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Del_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Details_ Icon String where
+instance Attr Details_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Details_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Details_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dfn_ Icon String where
+instance Attr Dfn_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dfn_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dfn_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dialog_ Icon String where
+instance Attr Dialog_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dialog_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dialog_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dir_ Icon String where
+instance Attr Dir_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dir_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dir_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Div_ Icon String where
+instance Attr Div_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Div_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Div_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dl_ Icon String where
+instance Attr Dl_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dl_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dl_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Dt_ Icon String where
+instance Attr Dt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Dt_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Dt_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Em_ Icon String where
+instance Attr Em_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Em_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Em_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Embed_ Icon String where
+instance Attr Embed_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Embed_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Embed_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Fieldset_ Icon String where
+instance Attr Fieldset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Fieldset_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Fieldset_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Figcaption_ Icon String where
+instance Attr Figcaption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Figcaption_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figcaption_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Figure_ Icon String where
+instance Attr Figure_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Figure_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Figure_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Font_ Icon String where
+instance Attr Font_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Font_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Font_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Footer_ Icon String where
+instance Attr Footer_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Footer_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Footer_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Form_ Icon String where
+instance Attr Form_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Form_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Form_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Frame_ Icon String where
+instance Attr Frame_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Frame_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frame_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Frameset_ Icon String where
+instance Attr Frameset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Frameset_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Frameset_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H1_ Icon String where
+instance Attr H1_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H1_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H1_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H2_ Icon String where
+instance Attr H2_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H2_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H2_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H3_ Icon String where
+instance Attr H3_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H3_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H3_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H4_ Icon String where
+instance Attr H4_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H4_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H4_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H5_ Icon String where
+instance Attr H5_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H5_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H5_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr H6_ Icon String where
+instance Attr H6_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr H6_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr H6_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Head_ Icon String where
+instance Attr Head_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Head_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Head_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Header_ Icon String where
+instance Attr Header_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Header_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Header_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Hr_ Icon String where
+instance Attr Hr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Hr_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Hr_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Html_ Icon String where
+instance Attr Html_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Html_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Html_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr I_ Icon String where
+instance Attr I_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr I_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr I_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Iframe_ Icon String where
+instance Attr Iframe_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Iframe_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Iframe_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Img_ Icon String where
+instance Attr Img_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Img_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Img_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Input_ Icon String where
+instance Attr Input_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Input_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Input_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Ins_ Icon String where
+instance Attr Ins_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Ins_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ins_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Kbd_ Icon String where
+instance Attr Kbd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Kbd_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Kbd_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Label_ Icon String where
+instance Attr Label_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Label_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Label_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Legend_ Icon String where
+instance Attr Legend_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Legend_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Legend_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Li_ Icon String where
+instance Attr Li_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Li_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Li_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Link_ Icon String where
+instance Attr Link_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Link_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Link_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Main_ Icon String where
+instance Attr Main_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Main_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Main_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Map_ Icon String where
+instance Attr Map_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Map_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Map_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Mark_ Icon String where
+instance Attr Mark_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Mark_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Mark_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Meta_ Icon String where
+instance Attr Meta_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Meta_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meta_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Meter_ Icon String where
+instance Attr Meter_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Meter_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Meter_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Nav_ Icon String where
+instance Attr Nav_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Nav_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Nav_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Noframes_ Icon String where
+instance Attr Noframes_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Noframes_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noframes_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Noscript_ Icon String where
+instance Attr Noscript_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Noscript_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Noscript_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Object_ Icon String where
+instance Attr Object_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Object_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Object_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Ol_ Icon String where
+instance Attr Ol_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Ol_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ol_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Optgroup_ Icon String where
+instance Attr Optgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Optgroup_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Optgroup_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Option_ Icon String where
+instance Attr Option_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Option_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Option_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Output_ Icon String where
+instance Attr Output_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Output_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Output_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr P_ Icon String where
+instance Attr P_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr P_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr P_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Param_ Icon String where
+instance Attr Param_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Param_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Param_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Picture_ Icon String where
+instance Attr Picture_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Picture_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Picture_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Pre_ Icon String where
+instance Attr Pre_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Pre_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Pre_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Progress_ Icon String where
+instance Attr Progress_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Progress_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Progress_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Q_ Icon String where
+instance Attr Q_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Q_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Q_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Rp_ Icon String where
+instance Attr Rp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Rp_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rp_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Rt_ Icon String where
+instance Attr Rt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Rt_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rt_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Ruby_ Icon String where
+instance Attr Ruby_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Ruby_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ruby_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr S_ Icon String where
+instance Attr S_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr S_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr S_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Samp_ Icon String where
+instance Attr Samp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Samp_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Samp_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Script_ Icon String where
+instance Attr Script_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Script_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Script_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Section_ Icon String where
+instance Attr Section_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Section_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Section_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Select_ Icon String where
+instance Attr Select_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Select_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Select_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Small_ Icon String where
+instance Attr Small_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Small_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Small_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Source_ Icon String where
+instance Attr Source_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Source_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Source_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Span_ Icon String where
+instance Attr Span_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Span_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Span_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Strike_ Icon String where
+instance Attr Strike_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Strike_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strike_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Strong_ Icon String where
+instance Attr Strong_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Strong_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Strong_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Style_ Icon String where
+instance Attr Style_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Style_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Style_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Sub_ Icon String where
+instance Attr Sub_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Sub_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sub_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Summary_ Icon String where
+instance Attr Summary_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Summary_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Summary_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Sup_ Icon String where
+instance Attr Sup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Sup_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Sup_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Svg_ Icon String where
+instance Attr Svg_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Svg_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Svg_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Table_ Icon String where
+instance Attr Table_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Table_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Table_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Tbody_ Icon String where
+instance Attr Tbody_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Tbody_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tbody_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Td_ Icon String where
+instance Attr Td_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Td_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Td_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Template_ Icon String where
+instance Attr Template_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Template_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Template_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Textarea_ Icon String where
+instance Attr Textarea_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Textarea_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Textarea_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Tfoot_ Icon String where
+instance Attr Tfoot_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Tfoot_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tfoot_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Th_ Icon String where
+instance Attr Th_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Th_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Th_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Thead_ Icon String where
+instance Attr Thead_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Thead_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Thead_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Time_ Icon String where
+instance Attr Time_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Time_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Time_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Title_ Icon String where
+instance Attr Title_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Title_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Title_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Tr_ Icon String where
+instance Attr Tr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Tr_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tr_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Track_ Icon String where
+instance Attr Track_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Track_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Track_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Tt_ Icon String where
+instance Attr Tt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Tt_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tt_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr U_ Icon String where
+instance Attr U_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr U_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr U_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Ul_ Icon String where
+instance Attr Ul_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Ul_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ul_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Var_ Icon String where
+instance Attr Var_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Var_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Var_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Video_ Icon String where
+instance Attr Video_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Video_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Video_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr Wbr_ Icon String where
+instance Attr Wbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
   attr Icon bothValues = unsafeAttribute $ Both
     { key: "icon", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
-  pureAttr Icon value = unsafeAttribute $ This
+instance Attr Wbr_ Icon  String  where
+  attr Icon value = unsafeAttribute $ This
     { key: "icon", value: prop' value }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Wbr_ Icon (Event.Event  String ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
-instance Attr everything Icon Unit where
+instance Attr everything Icon (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Icon bothValues = unsafeAttribute $ Both { key: "icon", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "icon", value: unset' })
-  pureAttr Icon _ = unsafeAttribute $ This { key: "icon", value: unset' }
-  unpureAttr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Icon  Unit  where
+  attr Icon _ = unsafeAttribute $ This { key: "icon", value: unset' }
+instance Attr everything Icon (Event.Event  Unit ) where
+  attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "icon", value: unset' }

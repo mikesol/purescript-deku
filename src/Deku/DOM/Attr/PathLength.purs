@@ -2,6 +2,7 @@ module Deku.DOM.Attr.PathLength where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Rect (Rect_)
@@ -15,74 +16,90 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PathLength = PathLength
 
-instance Attr Circle_ PathLength String where
+instance Attr Circle_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Circle_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Ellipse_ PathLength String where
+instance Attr Ellipse_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Ellipse_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Line_ PathLength String where
+instance Attr Line_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Line_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Path_ PathLength String where
+instance Attr Path_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Path_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Polygon_ PathLength String where
+instance Attr Polygon_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Polygon_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Polyline_ PathLength String where
+instance Attr Polyline_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Polyline_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr Rect_ PathLength String where
+instance Attr Rect_ PathLength (NonEmpty.NonEmpty Event.Event  String ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pathLength", value: prop' value })
-  pureAttr PathLength value = unsafeAttribute $ This
+instance Attr Rect_ PathLength  String  where
+  attr PathLength value = unsafeAttribute $ This
     { key: "pathLength", value: prop' value }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ PathLength (Event.Event  String ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "pathLength", value: prop' value }
 
-instance Attr everything PathLength Unit where
+instance Attr everything PathLength (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr PathLength bothValues = unsafeAttribute $ Both
     { key: "pathLength", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pathLength", value: unset' })
-  pureAttr PathLength _ = unsafeAttribute $ This
+instance Attr everything PathLength  Unit  where
+  attr PathLength _ = unsafeAttribute $ This
     { key: "pathLength", value: unset' }
-  unpureAttr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything PathLength (Event.Event  Unit ) where
+  attr PathLength eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "pathLength", value: unset' }

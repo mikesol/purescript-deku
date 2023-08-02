@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Keytype where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.A (A_)
@@ -130,1108 +131,1354 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Keytype = Keytype
 
-instance Attr A_ Keytype String where
+instance Attr A_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr A_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr A_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Abbr_ Keytype String where
+instance Attr Abbr_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Abbr_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Abbr_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Acronym_ Keytype String where
+instance Attr Acronym_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Acronym_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Acronym_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Address_ Keytype String where
+instance Attr Address_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Address_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Address_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Applet_ Keytype String where
+instance Attr Applet_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Applet_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Applet_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Area_ Keytype String where
+instance Attr Area_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Area_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Area_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Article_ Keytype String where
+instance Attr Article_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Article_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Article_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Aside_ Keytype String where
+instance Attr Aside_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Aside_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Aside_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Audio_ Keytype String where
+instance Attr Audio_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Audio_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Audio_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr B_ Keytype String where
+instance Attr B_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr B_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr B_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Base_ Keytype String where
+instance Attr Base_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Base_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Base_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Basefont_ Keytype String where
+instance Attr Basefont_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Basefont_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Basefont_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Bdi_ Keytype String where
+instance Attr Bdi_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Bdi_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Bdi_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Bdo_ Keytype String where
+instance Attr Bdo_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Bdo_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Bdo_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Big_ Keytype String where
+instance Attr Big_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Big_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Big_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Blockquote_ Keytype String where
+instance Attr Blockquote_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Blockquote_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Blockquote_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Body_ Keytype String where
+instance Attr Body_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Body_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Body_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Br_ Keytype String where
+instance Attr Br_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Br_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Br_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Button_ Keytype String where
+instance Attr Button_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Button_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Button_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Canvas_ Keytype String where
+instance Attr Canvas_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Canvas_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Canvas_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Caption_ Keytype String where
+instance Attr Caption_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Caption_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Caption_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Center_ Keytype String where
+instance Attr Center_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Center_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Center_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Cite_ Keytype String where
+instance Attr Cite_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Cite_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Cite_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Code_ Keytype String where
+instance Attr Code_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Code_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Code_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Col_ Keytype String where
+instance Attr Col_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Col_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Col_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Colgroup_ Keytype String where
+instance Attr Colgroup_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Colgroup_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Colgroup_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Xdata_ Keytype String where
+instance Attr Xdata_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Xdata_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Xdata_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Datalist_ Keytype String where
+instance Attr Datalist_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Datalist_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Datalist_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dd_ Keytype String where
+instance Attr Dd_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dd_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dd_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Del_ Keytype String where
+instance Attr Del_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Del_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Del_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Details_ Keytype String where
+instance Attr Details_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Details_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Details_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dfn_ Keytype String where
+instance Attr Dfn_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dfn_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dfn_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dialog_ Keytype String where
+instance Attr Dialog_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dialog_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dialog_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dir_ Keytype String where
+instance Attr Dir_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dir_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dir_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Div_ Keytype String where
+instance Attr Div_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Div_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Div_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dl_ Keytype String where
+instance Attr Dl_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dl_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dl_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Dt_ Keytype String where
+instance Attr Dt_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Dt_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Dt_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Em_ Keytype String where
+instance Attr Em_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Em_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Em_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Embed_ Keytype String where
+instance Attr Embed_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Embed_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Embed_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Fieldset_ Keytype String where
+instance Attr Fieldset_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Fieldset_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Fieldset_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Figcaption_ Keytype String where
+instance Attr Figcaption_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Figcaption_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Figcaption_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Figure_ Keytype String where
+instance Attr Figure_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Figure_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Figure_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Font_ Keytype String where
+instance Attr Font_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Font_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Font_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Footer_ Keytype String where
+instance Attr Footer_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Footer_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Footer_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Form_ Keytype String where
+instance Attr Form_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Form_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Form_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Frame_ Keytype String where
+instance Attr Frame_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Frame_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Frame_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Frameset_ Keytype String where
+instance Attr Frameset_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Frameset_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Frameset_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H1_ Keytype String where
+instance Attr H1_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H1_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H1_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H2_ Keytype String where
+instance Attr H2_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H2_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H2_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H3_ Keytype String where
+instance Attr H3_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H3_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H3_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H4_ Keytype String where
+instance Attr H4_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H4_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H4_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H5_ Keytype String where
+instance Attr H5_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H5_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H5_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr H6_ Keytype String where
+instance Attr H6_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr H6_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr H6_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Head_ Keytype String where
+instance Attr Head_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Head_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Head_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Header_ Keytype String where
+instance Attr Header_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Header_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Header_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Hr_ Keytype String where
+instance Attr Hr_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Hr_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Hr_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Html_ Keytype String where
+instance Attr Html_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Html_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Html_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr I_ Keytype String where
+instance Attr I_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr I_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr I_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Iframe_ Keytype String where
+instance Attr Iframe_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Iframe_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Iframe_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Img_ Keytype String where
+instance Attr Img_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Img_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Img_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Input_ Keytype String where
+instance Attr Input_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Input_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Input_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Ins_ Keytype String where
+instance Attr Ins_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Ins_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ins_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Kbd_ Keytype String where
+instance Attr Kbd_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Kbd_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Kbd_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Label_ Keytype String where
+instance Attr Label_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Label_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Label_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Legend_ Keytype String where
+instance Attr Legend_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Legend_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Legend_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Li_ Keytype String where
+instance Attr Li_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Li_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Li_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Link_ Keytype String where
+instance Attr Link_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Link_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Link_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Main_ Keytype String where
+instance Attr Main_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Main_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Main_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Map_ Keytype String where
+instance Attr Map_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Map_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Map_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Mark_ Keytype String where
+instance Attr Mark_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Mark_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mark_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Meta_ Keytype String where
+instance Attr Meta_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Meta_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Meta_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Meter_ Keytype String where
+instance Attr Meter_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Meter_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Meter_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Nav_ Keytype String where
+instance Attr Nav_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Nav_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Nav_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Noframes_ Keytype String where
+instance Attr Noframes_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Noframes_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Noframes_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Noscript_ Keytype String where
+instance Attr Noscript_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Noscript_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Noscript_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Object_ Keytype String where
+instance Attr Object_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Object_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Object_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Ol_ Keytype String where
+instance Attr Ol_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Ol_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ol_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Optgroup_ Keytype String where
+instance Attr Optgroup_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Optgroup_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Optgroup_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Option_ Keytype String where
+instance Attr Option_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Option_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Option_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Output_ Keytype String where
+instance Attr Output_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Output_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Output_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr P_ Keytype String where
+instance Attr P_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr P_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr P_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Param_ Keytype String where
+instance Attr Param_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Param_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Param_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Picture_ Keytype String where
+instance Attr Picture_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Picture_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Picture_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Pre_ Keytype String where
+instance Attr Pre_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Pre_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pre_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Progress_ Keytype String where
+instance Attr Progress_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Progress_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Progress_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Q_ Keytype String where
+instance Attr Q_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Q_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Q_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Rp_ Keytype String where
+instance Attr Rp_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Rp_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rp_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Rt_ Keytype String where
+instance Attr Rt_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Rt_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rt_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Ruby_ Keytype String where
+instance Attr Ruby_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Ruby_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ruby_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr S_ Keytype String where
+instance Attr S_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr S_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr S_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Samp_ Keytype String where
+instance Attr Samp_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Samp_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Samp_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Script_ Keytype String where
+instance Attr Script_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Script_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Script_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Section_ Keytype String where
+instance Attr Section_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Section_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Section_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Select_ Keytype String where
+instance Attr Select_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Select_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Select_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Small_ Keytype String where
+instance Attr Small_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Small_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Small_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Source_ Keytype String where
+instance Attr Source_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Source_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Source_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Span_ Keytype String where
+instance Attr Span_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Span_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Span_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Strike_ Keytype String where
+instance Attr Strike_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Strike_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Strike_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Strong_ Keytype String where
+instance Attr Strong_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Strong_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Strong_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Style_ Keytype String where
+instance Attr Style_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Style_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Style_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Sub_ Keytype String where
+instance Attr Sub_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Sub_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Sub_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Summary_ Keytype String where
+instance Attr Summary_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Summary_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Summary_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Sup_ Keytype String where
+instance Attr Sup_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Sup_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Sup_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Svg_ Keytype String where
+instance Attr Svg_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Svg_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Table_ Keytype String where
+instance Attr Table_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Table_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Table_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Tbody_ Keytype String where
+instance Attr Tbody_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Tbody_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tbody_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Td_ Keytype String where
+instance Attr Td_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Td_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Td_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Template_ Keytype String where
+instance Attr Template_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Template_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Template_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Textarea_ Keytype String where
+instance Attr Textarea_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Textarea_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Textarea_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Tfoot_ Keytype String where
+instance Attr Tfoot_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Tfoot_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tfoot_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Th_ Keytype String where
+instance Attr Th_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Th_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Th_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Thead_ Keytype String where
+instance Attr Thead_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Thead_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Thead_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Time_ Keytype String where
+instance Attr Time_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Time_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Time_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Title_ Keytype String where
+instance Attr Title_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Title_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Title_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Tr_ Keytype String where
+instance Attr Tr_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Tr_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tr_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Track_ Keytype String where
+instance Attr Track_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Track_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Track_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Tt_ Keytype String where
+instance Attr Tt_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Tt_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tt_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr U_ Keytype String where
+instance Attr U_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr U_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr U_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Ul_ Keytype String where
+instance Attr Ul_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Ul_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ul_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Var_ Keytype String where
+instance Attr Var_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Var_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Var_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Video_ Keytype String where
+instance Attr Video_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Video_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Video_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr Wbr_ Keytype String where
+instance Attr Wbr_ Keytype (NonEmpty.NonEmpty Event.Event  String ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keytype", value: prop' value })
-  pureAttr Keytype value = unsafeAttribute $ This
+instance Attr Wbr_ Keytype  String  where
+  attr Keytype value = unsafeAttribute $ This
     { key: "keytype", value: prop' value }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Wbr_ Keytype (Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "keytype", value: prop' value }
 
-instance Attr everything Keytype Unit where
+instance Attr everything Keytype (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Keytype bothValues = unsafeAttribute $ Both
     { key: "keytype", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "keytype", value: unset' })
-  pureAttr Keytype _ = unsafeAttribute $ This { key: "keytype", value: unset' }
-  unpureAttr Keytype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Keytype  Unit  where
+  attr Keytype _ = unsafeAttribute $ This { key: "keytype", value: unset' }
+instance Attr everything Keytype (Event.Event  Unit ) where
+  attr Keytype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "keytype", value: unset' }

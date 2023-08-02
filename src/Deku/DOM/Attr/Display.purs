@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Display where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -50,388 +51,474 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Display = Display
 
-instance Attr Circle_ Display String where
+instance Attr Circle_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Circle_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr ClipPath_ Display String where
+instance Attr ClipPath_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr ClipPath_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ClipPath_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Defs_ Display String where
+instance Attr Defs_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Defs_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Defs_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Ellipse_ Display String where
+instance Attr Ellipse_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Ellipse_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeBlend_ Display String where
+instance Attr FeBlend_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeBlend_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeColorMatrix_ Display String where
+instance Attr FeColorMatrix_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeComponentTransfer_ Display String where
+instance Attr FeComponentTransfer_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeComposite_ Display String where
+instance Attr FeComposite_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeComposite_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Display String where
+instance Attr FeConvolveMatrix_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Display String where
+instance Attr FeDiffuseLighting_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeDisplacementMap_ Display String where
+instance Attr FeDisplacementMap_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeFlood_ Display String where
+instance Attr FeFlood_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeFlood_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeGaussianBlur_ Display String where
+instance Attr FeGaussianBlur_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeImage_ Display String where
+instance Attr FeImage_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeImage_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeMerge_ Display String where
+instance Attr FeMerge_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeMerge_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeMorphology_ Display String where
+instance Attr FeMorphology_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeMorphology_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeOffset_ Display String where
+instance Attr FeOffset_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeOffset_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeSpecularLighting_ Display String where
+instance Attr FeSpecularLighting_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeTile_ Display String where
+instance Attr FeTile_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeTile_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr FeTurbulence_ Display String where
+instance Attr FeTurbulence_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Filter_ Display String where
+instance Attr Filter_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Filter_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr ForeignObject_ Display String where
+instance Attr ForeignObject_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr ForeignObject_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr G_ Display String where
+instance Attr G_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr G_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Image_ Display String where
+instance Attr Image_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Image_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Line_ Display String where
+instance Attr Line_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Line_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr LinearGradient_ Display String where
+instance Attr LinearGradient_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr LinearGradient_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr LinearGradient_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Marker_ Display String where
+instance Attr Marker_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Marker_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Mask_ Display String where
+instance Attr Mask_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Mask_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mask_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Path_ Display String where
+instance Attr Path_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Path_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Pattern_ Display String where
+instance Attr Pattern_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Pattern_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pattern_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Polygon_ Display String where
+instance Attr Polygon_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Polygon_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Polyline_ Display String where
+instance Attr Polyline_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Polyline_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr RadialGradient_ Display String where
+instance Attr RadialGradient_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr RadialGradient_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr RadialGradient_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Rect_ Display String where
+instance Attr Rect_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Rect_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Stop_ Display String where
+instance Attr Stop_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Stop_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Stop_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Svg_ Display String where
+instance Attr Svg_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Svg_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Switch_ Display String where
+instance Attr Switch_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Switch_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Symbol_ Display String where
+instance Attr Symbol_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Symbol_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Text_ Display String where
+instance Attr Text_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Text_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr TextPath_ Display String where
+instance Attr TextPath_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr TextPath_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Tspan_ Display String where
+instance Attr Tspan_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Tspan_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr Use_ Display String where
+instance Attr Use_ Display (NonEmpty.NonEmpty Event.Event  String ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "display", value: prop' value })
-  pureAttr Display value = unsafeAttribute $ This
+instance Attr Use_ Display  String  where
+  attr Display value = unsafeAttribute $ This
     { key: "display", value: prop' value }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ Display (Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "display", value: prop' value }
 
-instance Attr everything Display Unit where
+instance Attr everything Display (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Display bothValues = unsafeAttribute $ Both
     { key: "display", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "display", value: unset' })
-  pureAttr Display _ = unsafeAttribute $ This { key: "display", value: unset' }
-  unpureAttr Display eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Display  Unit  where
+  attr Display _ = unsafeAttribute $ This { key: "display", value: unset' }
+instance Attr everything Display (Event.Event  Unit ) where
+  attr Display eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "display", value: unset' }

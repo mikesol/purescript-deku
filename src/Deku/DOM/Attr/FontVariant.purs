@@ -2,6 +2,7 @@ module Deku.DOM.Attr.FontVariant where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -29,200 +30,244 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data FontVariant = FontVariant
 
-instance Attr FeBlend_ FontVariant String where
+instance Attr FeBlend_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeBlend_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeColorMatrix_ FontVariant String where
+instance Attr FeColorMatrix_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeComponentTransfer_ FontVariant String where
+instance Attr FeComponentTransfer_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeComposite_ FontVariant String where
+instance Attr FeComposite_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeComposite_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeConvolveMatrix_ FontVariant String where
+instance Attr FeConvolveMatrix_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeDiffuseLighting_ FontVariant String where
+instance Attr FeDiffuseLighting_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeDisplacementMap_ FontVariant String where
+instance Attr FeDisplacementMap_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeFlood_ FontVariant String where
+instance Attr FeFlood_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeFlood_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeGaussianBlur_ FontVariant String where
+instance Attr FeGaussianBlur_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeImage_ FontVariant String where
+instance Attr FeImage_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeImage_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeMerge_ FontVariant String where
+instance Attr FeMerge_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeMerge_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeMorphology_ FontVariant String where
+instance Attr FeMorphology_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeMorphology_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeOffset_ FontVariant String where
+instance Attr FeOffset_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeOffset_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeSpecularLighting_ FontVariant String where
+instance Attr FeSpecularLighting_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeTile_ FontVariant String where
+instance Attr FeTile_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeTile_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr FeTurbulence_ FontVariant String where
+instance Attr FeTurbulence_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr FeTurbulence_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr Filter_ FontVariant String where
+instance Attr Filter_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr Filter_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr Image_ FontVariant String where
+instance Attr Image_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr Image_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr Switch_ FontVariant String where
+instance Attr Switch_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr Switch_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr Text_ FontVariant String where
+instance Attr Text_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr Text_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr Tspan_ FontVariant String where
+instance Attr Tspan_ FontVariant (NonEmpty.NonEmpty Event.Event  String ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-variant", value: prop' value })
-  pureAttr FontVariant value = unsafeAttribute $ This
+instance Attr Tspan_ FontVariant  String  where
+  attr FontVariant value = unsafeAttribute $ This
     { key: "font-variant", value: prop' value }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ FontVariant (Event.Event  String ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "font-variant", value: prop' value }
 
-instance Attr everything FontVariant Unit where
+instance Attr everything FontVariant (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr FontVariant bothValues = unsafeAttribute $ Both
     { key: "font-variant", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "font-variant", value: unset' })
-  pureAttr FontVariant _ = unsafeAttribute $ This
+instance Attr everything FontVariant  Unit  where
+  attr FontVariant _ = unsafeAttribute $ This
     { key: "font-variant", value: unset' }
-  unpureAttr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything FontVariant (Event.Event  Unit ) where
+  attr FontVariant eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "font-variant", value: unset' }

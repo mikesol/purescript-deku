@@ -2,6 +2,7 @@ module Deku.DOM.Attr.ClipRule where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -49,380 +50,464 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data ClipRule = ClipRule
 
-instance Attr Circle_ ClipRule String where
+instance Attr Circle_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Circle_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr ClipPath_ ClipRule String where
+instance Attr ClipPath_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr ClipPath_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ClipPath_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Defs_ ClipRule String where
+instance Attr Defs_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Defs_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Defs_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Ellipse_ ClipRule String where
+instance Attr Ellipse_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Ellipse_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeBlend_ ClipRule String where
+instance Attr FeBlend_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeBlend_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeColorMatrix_ ClipRule String where
+instance Attr FeColorMatrix_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeComponentTransfer_ ClipRule String where
+instance Attr FeComponentTransfer_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeComposite_ ClipRule String where
+instance Attr FeComposite_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeComposite_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeConvolveMatrix_ ClipRule String where
+instance Attr FeConvolveMatrix_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeDiffuseLighting_ ClipRule String where
+instance Attr FeDiffuseLighting_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeDisplacementMap_ ClipRule String where
+instance Attr FeDisplacementMap_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeFlood_ ClipRule String where
+instance Attr FeFlood_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeFlood_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeGaussianBlur_ ClipRule String where
+instance Attr FeGaussianBlur_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeImage_ ClipRule String where
+instance Attr FeImage_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeImage_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeMerge_ ClipRule String where
+instance Attr FeMerge_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeMerge_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeMorphology_ ClipRule String where
+instance Attr FeMorphology_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeMorphology_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeOffset_ ClipRule String where
+instance Attr FeOffset_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeOffset_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeSpecularLighting_ ClipRule String where
+instance Attr FeSpecularLighting_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeTile_ ClipRule String where
+instance Attr FeTile_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeTile_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr FeTurbulence_ ClipRule String where
+instance Attr FeTurbulence_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr FeTurbulence_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Filter_ ClipRule String where
+instance Attr Filter_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Filter_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr ForeignObject_ ClipRule String where
+instance Attr ForeignObject_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr ForeignObject_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr G_ ClipRule String where
+instance Attr G_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr G_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Image_ ClipRule String where
+instance Attr Image_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Image_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Line_ ClipRule String where
+instance Attr Line_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Line_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr LinearGradient_ ClipRule String where
+instance Attr LinearGradient_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr LinearGradient_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr LinearGradient_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Marker_ ClipRule String where
+instance Attr Marker_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Marker_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Mask_ ClipRule String where
+instance Attr Mask_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Mask_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mask_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Path_ ClipRule String where
+instance Attr Path_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Path_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Pattern_ ClipRule String where
+instance Attr Pattern_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Pattern_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pattern_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Polygon_ ClipRule String where
+instance Attr Polygon_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Polygon_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Polyline_ ClipRule String where
+instance Attr Polyline_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Polyline_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr RadialGradient_ ClipRule String where
+instance Attr RadialGradient_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr RadialGradient_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr RadialGradient_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Rect_ ClipRule String where
+instance Attr Rect_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Rect_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Svg_ ClipRule String where
+instance Attr Svg_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Svg_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Switch_ ClipRule String where
+instance Attr Switch_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Switch_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Symbol_ ClipRule String where
+instance Attr Symbol_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Symbol_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Text_ ClipRule String where
+instance Attr Text_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Text_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr TextPath_ ClipRule String where
+instance Attr TextPath_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr TextPath_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Tspan_ ClipRule String where
+instance Attr Tspan_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Tspan_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr Use_ ClipRule String where
+instance Attr Use_ ClipRule (NonEmpty.NonEmpty Event.Event  String ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clip-rule", value: prop' value })
-  pureAttr ClipRule value = unsafeAttribute $ This
+instance Attr Use_ ClipRule  String  where
+  attr ClipRule value = unsafeAttribute $ This
     { key: "clip-rule", value: prop' value }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ ClipRule (Event.Event  String ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "clip-rule", value: prop' value }
 
-instance Attr everything ClipRule Unit where
+instance Attr everything ClipRule (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr ClipRule bothValues = unsafeAttribute $ Both
     { key: "clip-rule", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "clip-rule", value: unset' })
-  pureAttr ClipRule _ = unsafeAttribute $ This
+instance Attr everything ClipRule  Unit  where
+  attr ClipRule _ = unsafeAttribute $ This
     { key: "clip-rule", value: unset' }
-  unpureAttr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything ClipRule (Event.Event  Unit ) where
+  attr ClipRule eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "clip-rule", value: unset' }

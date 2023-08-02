@@ -106,7 +106,9 @@ hydrate' children = do
     di
   (unwrap di).makeRoot { id: me, root } List.Nil ffi
   for_ sub executor
-  u <- liftST $ subscribe (map ((unwrap di).redecorateDeferredPayload (pure headRedecorator)) evt) executor
+  u <- liftST $ subscribe
+    (map ((unwrap di).redecorateDeferredPayload (pure headRedecorator)) evt)
+    executor
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
     for_ unsub executor

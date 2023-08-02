@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Crossorigin where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Image (Image_)
@@ -14,65 +15,79 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Crossorigin = Crossorigin
 
-instance Attr Audio_ Crossorigin String where
+instance Attr Audio_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Audio_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Audio_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr Img_ Crossorigin String where
+instance Attr Img_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Img_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Img_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr Link_ Crossorigin String where
+instance Attr Link_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Link_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Link_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr Script_ Crossorigin String where
+instance Attr Script_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Script_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Script_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr Video_ Crossorigin String where
+instance Attr Video_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Video_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Video_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr Image_ Crossorigin String where
+instance Attr Image_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
-  pureAttr Crossorigin value = unsafeAttribute $ This
+instance Attr Image_ Crossorigin  String  where
+  attr Crossorigin value = unsafeAttribute $ This
     { key: "crossorigin", value: prop' value }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ Crossorigin (Event.Event  String ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "crossorigin", value: prop' value }
 
-instance Attr everything Crossorigin Unit where
+instance Attr everything Crossorigin (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Crossorigin bothValues = unsafeAttribute $ Both
     { key: "crossorigin", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "crossorigin", value: unset' })
-  pureAttr Crossorigin _ = unsafeAttribute $ This
+instance Attr everything Crossorigin  Unit  where
+  attr Crossorigin _ = unsafeAttribute $ This
     { key: "crossorigin", value: unset' }
-  unpureAttr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything Crossorigin (Event.Event  Unit ) where
+  attr Crossorigin eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "crossorigin", value: unset' }

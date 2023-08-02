@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Fill where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -53,414 +54,506 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Fill = Fill
 
-instance Attr Animate_ Fill String where
+instance Attr Animate_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Animate_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Animate_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr AnimateMotion_ Fill String where
+instance Attr AnimateMotion_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr AnimateMotion_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr AnimateMotion_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr AnimateTransform_ Fill String where
+instance Attr AnimateTransform_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr AnimateTransform_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr AnimateTransform_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Circle_ Fill String where
+instance Attr Circle_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Circle_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Circle_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr ClipPath_ Fill String where
+instance Attr ClipPath_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr ClipPath_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr ClipPath_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Defs_ Fill String where
+instance Attr Defs_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Defs_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Defs_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Ellipse_ Fill String where
+instance Attr Ellipse_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Ellipse_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Ellipse_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeBlend_ Fill String where
+instance Attr FeBlend_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeBlend_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeBlend_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeColorMatrix_ Fill String where
+instance Attr FeColorMatrix_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeColorMatrix_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeComponentTransfer_ Fill String where
+instance Attr FeComponentTransfer_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeComponentTransfer_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeComposite_ Fill String where
+instance Attr FeComposite_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeComposite_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeComposite_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Fill String where
+instance Attr FeConvolveMatrix_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeConvolveMatrix_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Fill String where
+instance Attr FeDiffuseLighting_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeDiffuseLighting_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeDisplacementMap_ Fill String where
+instance Attr FeDisplacementMap_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeDisplacementMap_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeFlood_ Fill String where
+instance Attr FeFlood_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeFlood_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeFlood_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeGaussianBlur_ Fill String where
+instance Attr FeGaussianBlur_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeGaussianBlur_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeImage_ Fill String where
+instance Attr FeImage_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeImage_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeImage_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeMerge_ Fill String where
+instance Attr FeMerge_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeMerge_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeMerge_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeMorphology_ Fill String where
+instance Attr FeMorphology_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeMorphology_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeMorphology_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeOffset_ Fill String where
+instance Attr FeOffset_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeOffset_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeOffset_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeSpecularLighting_ Fill String where
+instance Attr FeSpecularLighting_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeSpecularLighting_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeTile_ Fill String where
+instance Attr FeTile_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeTile_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeTile_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr FeTurbulence_ Fill String where
+instance Attr FeTurbulence_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr FeTurbulence_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Filter_ Fill String where
+instance Attr Filter_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Filter_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Filter_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr ForeignObject_ Fill String where
+instance Attr ForeignObject_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr ForeignObject_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr ForeignObject_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr G_ Fill String where
+instance Attr G_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr G_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr G_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Image_ Fill String where
+instance Attr Image_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Image_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Image_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Line_ Fill String where
+instance Attr Line_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Line_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Line_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr LinearGradient_ Fill String where
+instance Attr LinearGradient_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr LinearGradient_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr LinearGradient_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Marker_ Fill String where
+instance Attr Marker_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Marker_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Marker_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Mask_ Fill String where
+instance Attr Mask_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Mask_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Mask_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Path_ Fill String where
+instance Attr Path_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Path_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Path_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Pattern_ Fill String where
+instance Attr Pattern_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Pattern_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Pattern_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Polygon_ Fill String where
+instance Attr Polygon_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Polygon_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Polygon_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Polyline_ Fill String where
+instance Attr Polyline_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Polyline_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Polyline_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr RadialGradient_ Fill String where
+instance Attr RadialGradient_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr RadialGradient_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr RadialGradient_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Rect_ Fill String where
+instance Attr Rect_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Rect_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Rect_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Set_ Fill String where
+instance Attr Set_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Set_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Set_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Svg_ Fill String where
+instance Attr Svg_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Svg_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Svg_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Switch_ Fill String where
+instance Attr Switch_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Switch_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Switch_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Symbol_ Fill String where
+instance Attr Symbol_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Symbol_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Symbol_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Text_ Fill String where
+instance Attr Text_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Text_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Text_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr TextPath_ Fill String where
+instance Attr TextPath_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr TextPath_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr TextPath_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Tspan_ Fill String where
+instance Attr Tspan_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Tspan_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Tspan_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr Use_ Fill String where
+instance Attr Use_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
   attr Fill bothValues = unsafeAttribute $ Both
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
-  pureAttr Fill value = unsafeAttribute $ This
+instance Attr Use_ Fill  String  where
+  attr Fill value = unsafeAttribute $ This
     { key: "fill", value: prop' value }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+instance Attr Use_ Fill (Event.Event  String ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "fill", value: prop' value }
 
-instance Attr everything Fill Unit where
+instance Attr everything Fill (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Fill bothValues = unsafeAttribute $ Both { key: "fill", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "fill", value: unset' })
-  pureAttr Fill _ = unsafeAttribute $ This { key: "fill", value: unset' }
-  unpureAttr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Fill  Unit  where
+  attr Fill _ = unsafeAttribute $ This { key: "fill", value: unset' }
+instance Attr everything Fill (Event.Event  Unit ) where
+  attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "fill", value: unset' }

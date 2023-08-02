@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaErrormessage where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,198 +26,234 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaErrormessage = AriaErrormessage
 
-instance Attr Circle_ AriaErrormessage String where
+instance Attr Circle_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Circle_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Circle_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Ellipse_ AriaErrormessage String where
+instance Attr Ellipse_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Ellipse_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr ForeignObject_ AriaErrormessage String where
+instance Attr ForeignObject_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr ForeignObject_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr G_ AriaErrormessage String where
+instance Attr G_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr G_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr G_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Line_ AriaErrormessage String where
+instance Attr Line_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Line_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Line_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Marker_ AriaErrormessage String where
+instance Attr Marker_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Marker_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Marker_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Path_ AriaErrormessage String where
+instance Attr Path_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Path_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Path_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Polygon_ AriaErrormessage String where
+instance Attr Polygon_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Polygon_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polygon_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Polyline_ AriaErrormessage String where
+instance Attr Polyline_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Polyline_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Polyline_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Rect_ AriaErrormessage String where
+instance Attr Rect_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Rect_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Rect_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Svg_ AriaErrormessage String where
+instance Attr Svg_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Svg_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Svg_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Symbol_ AriaErrormessage String where
+instance Attr Symbol_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Symbol_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Symbol_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Text_ AriaErrormessage String where
+instance Attr Text_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Text_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Text_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr TextPath_ AriaErrormessage String where
+instance Attr TextPath_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr TextPath_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr TextPath_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Tspan_ AriaErrormessage String where
+instance Attr Tspan_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Tspan_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Tspan_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr Use_ AriaErrormessage String where
+instance Attr Use_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr Use_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr Use_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr View_ AriaErrormessage String where
+instance Attr View_ AriaErrormessage (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: prop' (NonEmpty.head bothValues) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-errormessage", value: prop' value }
     )
-  pureAttr AriaErrormessage value = unsafeAttribute $ This
+instance Attr View_ AriaErrormessage  String  where
+  attr AriaErrormessage value = unsafeAttribute $ This
     { key: "aria-errormessage", value: prop' value }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr View_ AriaErrormessage (Event.Event  String ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "aria-errormessage", value: prop' value }
 
-instance Attr everything AriaErrormessage Unit where
+instance Attr everything AriaErrormessage (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaErrormessage bothValues = unsafeAttribute $ Both
     { key: "aria-errormessage", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-errormessage", value: unset' })
-  pureAttr AriaErrormessage _ = unsafeAttribute $ This
+instance Attr everything AriaErrormessage  Unit  where
+  attr AriaErrormessage _ = unsafeAttribute $ This
     { key: "aria-errormessage", value: unset' }
-  unpureAttr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
+instance Attr everything AriaErrormessage (Event.Event  Unit ) where
+  attr AriaErrormessage eventValue = unsafeAttribute $ That $ eventValue
     <#> \_ -> { key: "aria-errormessage", value: unset' }

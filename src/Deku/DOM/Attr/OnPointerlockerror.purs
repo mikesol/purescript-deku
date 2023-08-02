@@ -2,6 +2,7 @@ module Deku.DOM.Attr.OnPointerlockerror where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 import Effect (Effect)
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
@@ -9,16 +10,18 @@ import FRP.Event (Event)
 
 data OnPointerlockerror = OnPointerlockerror
 
-instance Attr anything OnPointerlockerror Cb where
+instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  Cb ) where
   attr OnPointerlockerror bothValues = unsafeAttribute $ Both
     { key: "pointerlockerror", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerlockerror", value: cb' value })
-  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+instance Attr anything OnPointerlockerror  Cb  where
+  attr OnPointerlockerror value = unsafeAttribute $ This
     { key: "pointerlockerror", value: cb' value }
-  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+instance Attr anything OnPointerlockerror (Event.Event  Cb ) where
+  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "pointerlockerror", value: cb' value }
 
-instance Attr anything OnPointerlockerror (Effect Unit) where
+instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnPointerlockerror bothValues = unsafeAttribute $ Both
     { key: "pointerlockerror"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
@@ -26,21 +29,25 @@ instance Attr anything OnPointerlockerror (Effect Unit) where
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
     )
-  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+instance Attr anything OnPointerlockerror  (Effect Unit)  where
+  attr OnPointerlockerror value = unsafeAttribute $ This
     { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
-  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+instance Attr anything OnPointerlockerror (Event.Event  (Effect Unit) ) where
+  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
     <#> \value ->
       { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
 
-instance Attr anything OnPointerlockerror (Effect Boolean) where
+instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
   attr OnPointerlockerror bothValues = unsafeAttribute $ Both
     { key: "pointerlockerror", value: cb' (Cb (const (NonEmpty.head bothValues))) }
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockerror", value: cb' (Cb (const value)) }
     )
-  pureAttr OnPointerlockerror value = unsafeAttribute $ This
+instance Attr anything OnPointerlockerror  (Effect Boolean)  where
+  attr OnPointerlockerror value = unsafeAttribute $ This
     { key: "pointerlockerror", value: cb' (Cb (const value)) }
-  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+instance Attr anything OnPointerlockerror (Event.Event  (Effect Boolean) ) where
+  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "pointerlockerror", value: cb' (Cb (const value)) }
 
 type OnPointerlockerrorEffect =
@@ -48,11 +55,13 @@ type OnPointerlockerrorEffect =
    . Attr element OnPointerlockerror (Effect Unit)
   => Event (Attribute element)
 
-instance Attr everything OnPointerlockerror Unit where
+instance Attr everything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnPointerlockerror bothValues = unsafeAttribute $ Both
     { key: "pointerlockerror", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockerror", value: unset' })
-  pureAttr OnPointerlockerror _ = unsafeAttribute $ This
+instance Attr everything OnPointerlockerror  Unit  where
+  attr OnPointerlockerror _ = unsafeAttribute $ This
     { key: "pointerlockerror", value: unset' }
-  unpureAttr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+instance Attr everything OnPointerlockerror (Event.Event  Unit ) where
+  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
     <#> \_ -> { key: "pointerlockerror", value: unset' }

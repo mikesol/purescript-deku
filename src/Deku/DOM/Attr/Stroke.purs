@@ -2,6 +2,7 @@ module Deku.DOM.Attr.Stroke where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Use (Use_)
@@ -49,379 +50,463 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Stroke = Stroke
 
-instance Attr Circle_ Stroke String where
+instance Attr Circle_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Circle_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr ClipPath_ Stroke String where
+instance Attr ClipPath_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr ClipPath_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ClipPath_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Defs_ Stroke String where
+instance Attr Defs_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Defs_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Defs_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Ellipse_ Stroke String where
+instance Attr Ellipse_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Ellipse_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeBlend_ Stroke String where
+instance Attr FeBlend_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeBlend_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeColorMatrix_ Stroke String where
+instance Attr FeColorMatrix_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeComponentTransfer_ Stroke String where
+instance Attr FeComponentTransfer_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeComposite_ Stroke String where
+instance Attr FeComposite_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeComposite_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Stroke String where
+instance Attr FeConvolveMatrix_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Stroke String where
+instance Attr FeDiffuseLighting_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeDisplacementMap_ Stroke String where
+instance Attr FeDisplacementMap_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeFlood_ Stroke String where
+instance Attr FeFlood_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeFlood_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeGaussianBlur_ Stroke String where
+instance Attr FeGaussianBlur_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeImage_ Stroke String where
+instance Attr FeImage_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeImage_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeMerge_ Stroke String where
+instance Attr FeMerge_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeMerge_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeMorphology_ Stroke String where
+instance Attr FeMorphology_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeMorphology_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeOffset_ Stroke String where
+instance Attr FeOffset_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeOffset_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeSpecularLighting_ Stroke String where
+instance Attr FeSpecularLighting_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeTile_ Stroke String where
+instance Attr FeTile_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeTile_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr FeTurbulence_ Stroke String where
+instance Attr FeTurbulence_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr FeTurbulence_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Filter_ Stroke String where
+instance Attr Filter_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Filter_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr ForeignObject_ Stroke String where
+instance Attr ForeignObject_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr ForeignObject_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr G_ Stroke String where
+instance Attr G_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr G_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Image_ Stroke String where
+instance Attr Image_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Image_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Line_ Stroke String where
+instance Attr Line_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Line_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr LinearGradient_ Stroke String where
+instance Attr LinearGradient_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr LinearGradient_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr LinearGradient_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Marker_ Stroke String where
+instance Attr Marker_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Marker_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Mask_ Stroke String where
+instance Attr Mask_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Mask_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Mask_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Path_ Stroke String where
+instance Attr Path_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Path_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Pattern_ Stroke String where
+instance Attr Pattern_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Pattern_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Pattern_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Polygon_ Stroke String where
+instance Attr Polygon_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Polygon_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Polyline_ Stroke String where
+instance Attr Polyline_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Polyline_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr RadialGradient_ Stroke String where
+instance Attr RadialGradient_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr RadialGradient_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr RadialGradient_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Rect_ Stroke String where
+instance Attr Rect_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Rect_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Svg_ Stroke String where
+instance Attr Svg_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Svg_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Switch_ Stroke String where
+instance Attr Switch_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Switch_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Symbol_ Stroke String where
+instance Attr Symbol_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Symbol_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Text_ Stroke String where
+instance Attr Text_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Text_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr TextPath_ Stroke String where
+instance Attr TextPath_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr TextPath_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Tspan_ Stroke String where
+instance Attr Tspan_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Tspan_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr Use_ Stroke String where
+instance Attr Use_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
-  pureAttr Stroke value = unsafeAttribute $ This
+instance Attr Use_ Stroke  String  where
+  attr Stroke value = unsafeAttribute $ This
     { key: "stroke", value: prop' value }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ Stroke (Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "stroke", value: prop' value }
 
-instance Attr everything Stroke Unit where
+instance Attr everything Stroke (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Stroke bothValues = unsafeAttribute $ Both
     { key: "stroke", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke", value: unset' })
-  pureAttr Stroke _ = unsafeAttribute $ This { key: "stroke", value: unset' }
-  unpureAttr Stroke eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+instance Attr everything Stroke  Unit  where
+  attr Stroke _ = unsafeAttribute $ This { key: "stroke", value: unset' }
+instance Attr everything Stroke (Event.Event  Unit ) where
+  attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "stroke", value: unset' }

@@ -2,6 +2,7 @@ module Deku.DOM.Attr.BaselineShift where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.Switch (Switch_)
@@ -27,182 +28,222 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data BaselineShift = BaselineShift
 
-instance Attr FeBlend_ BaselineShift String where
+instance Attr FeBlend_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeBlend_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeBlend_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeColorMatrix_ BaselineShift String where
+instance Attr FeColorMatrix_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeColorMatrix_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeColorMatrix_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeComponentTransfer_ BaselineShift String where
+instance Attr FeComponentTransfer_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeComponentTransfer_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComponentTransfer_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeComposite_ BaselineShift String where
+instance Attr FeComposite_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeComposite_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeComposite_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeConvolveMatrix_ BaselineShift String where
+instance Attr FeConvolveMatrix_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeConvolveMatrix_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeConvolveMatrix_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeDiffuseLighting_ BaselineShift String where
+instance Attr FeDiffuseLighting_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeDiffuseLighting_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDiffuseLighting_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeDisplacementMap_ BaselineShift String where
+instance Attr FeDisplacementMap_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeDisplacementMap_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeDisplacementMap_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeFlood_ BaselineShift String where
+instance Attr FeFlood_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeFlood_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeFlood_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeGaussianBlur_ BaselineShift String where
+instance Attr FeGaussianBlur_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeGaussianBlur_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeGaussianBlur_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeImage_ BaselineShift String where
+instance Attr FeImage_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeImage_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeImage_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeMerge_ BaselineShift String where
+instance Attr FeMerge_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeMerge_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMerge_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeMorphology_ BaselineShift String where
+instance Attr FeMorphology_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeMorphology_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeMorphology_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeOffset_ BaselineShift String where
+instance Attr FeOffset_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeOffset_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeOffset_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeSpecularLighting_ BaselineShift String where
+instance Attr FeSpecularLighting_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeSpecularLighting_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeSpecularLighting_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeTile_ BaselineShift String where
+instance Attr FeTile_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeTile_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTile_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr FeTurbulence_ BaselineShift String where
+instance Attr FeTurbulence_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr FeTurbulence_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr FeTurbulence_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr Filter_ BaselineShift String where
+instance Attr Filter_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr Filter_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Filter_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr Image_ BaselineShift String where
+instance Attr Image_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr Image_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Image_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr Switch_ BaselineShift String where
+instance Attr Switch_ BaselineShift (NonEmpty.NonEmpty Event.Event  String ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseline-shift", value: prop' value })
-  pureAttr BaselineShift value = unsafeAttribute $ This
+instance Attr Switch_ BaselineShift  String  where
+  attr BaselineShift value = unsafeAttribute $ This
     { key: "baseline-shift", value: prop' value }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Switch_ BaselineShift (Event.Event  String ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "baseline-shift", value: prop' value }
 
-instance Attr everything BaselineShift Unit where
+instance Attr everything BaselineShift (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr BaselineShift bothValues = unsafeAttribute $ Both
     { key: "baseline-shift", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseline-shift", value: unset' })
-  pureAttr BaselineShift _ = unsafeAttribute $ This
+instance Attr everything BaselineShift  Unit  where
+  attr BaselineShift _ = unsafeAttribute $ This
     { key: "baseline-shift", value: unset' }
-  unpureAttr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything BaselineShift (Event.Event  Unit ) where
+  attr BaselineShift eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "baseline-shift", value: unset' }

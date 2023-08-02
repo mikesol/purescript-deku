@@ -2,6 +2,7 @@ module Deku.DOM.Attr.AriaSelected where
 
 import Prelude
 import Data.These (These(..))
+import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
 import Deku.DOM.Elt.View (View_)
@@ -25,164 +26,200 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaSelected = AriaSelected
 
-instance Attr Circle_ AriaSelected String where
+instance Attr Circle_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Circle_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Circle_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Ellipse_ AriaSelected String where
+instance Attr Ellipse_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Ellipse_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Ellipse_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr ForeignObject_ AriaSelected String where
+instance Attr ForeignObject_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr ForeignObject_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr ForeignObject_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr G_ AriaSelected String where
+instance Attr G_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr G_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr G_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Line_ AriaSelected String where
+instance Attr Line_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Line_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Line_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Marker_ AriaSelected String where
+instance Attr Marker_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Marker_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Marker_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Path_ AriaSelected String where
+instance Attr Path_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Path_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Path_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polygon_ AriaSelected String where
+instance Attr Polygon_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Polygon_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polygon_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polyline_ AriaSelected String where
+instance Attr Polyline_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Polyline_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Polyline_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Rect_ AriaSelected String where
+instance Attr Rect_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Rect_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Rect_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Svg_ AriaSelected String where
+instance Attr Svg_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Svg_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Svg_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Symbol_ AriaSelected String where
+instance Attr Symbol_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Symbol_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Symbol_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Text_ AriaSelected String where
+instance Attr Text_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Text_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Text_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr TextPath_ AriaSelected String where
+instance Attr TextPath_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr TextPath_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr TextPath_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Tspan_ AriaSelected String where
+instance Attr Tspan_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Tspan_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Tspan_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Use_ AriaSelected String where
+instance Attr Use_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr Use_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr Use_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr View_ AriaSelected String where
+instance Attr View_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-  pureAttr AriaSelected value = unsafeAttribute $ This
+instance Attr View_ AriaSelected  String  where
+  attr AriaSelected value = unsafeAttribute $ This
     { key: "aria-selected", value: prop' value }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr View_ AriaSelected (Event.Event  String ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr everything AriaSelected Unit where
+instance Attr everything AriaSelected (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr AriaSelected bothValues = unsafeAttribute $ Both
     { key: "aria-selected", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-selected", value: unset' })
-  pureAttr AriaSelected _ = unsafeAttribute $ This
+instance Attr everything AriaSelected  Unit  where
+  attr AriaSelected _ = unsafeAttribute $ This
     { key: "aria-selected", value: unset' }
-  unpureAttr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+instance Attr everything AriaSelected (Event.Event  Unit ) where
+  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
     \_ -> { key: "aria-selected", value: unset' }
