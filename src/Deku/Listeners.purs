@@ -21,11 +21,13 @@ module Deku.Listeners
 import Prelude
 
 import Data.Foldable (for_)
+import Data.NonEmpty (NonEmpty)
 import Deku.Attribute (class Attr, Attribute, Cb, attr, cb, (:=))
 import Deku.DOM as D
 import Effect (Effect)
 import Effect.Aff (launchAff_, delay, Milliseconds(..))
 import Effect.Class (liftEffect)
+import FRP.Event (Event)
 import Web.DOM (Element)
 import Web.Event.Event (target)
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
@@ -43,7 +45,9 @@ click = attr D.OnClick
 class Applier a b | a -> b where
   applier :: a -> b
 
-instance Functor f => Applier (f a) ((a -> b) -> f a -> f b) where
+instance Applier (Event a) ((a -> b) -> Event a -> Event b) where
+  applier _ = map
+else instance Applier (NonEmpty Event a) ((a -> b) -> NonEmpty Event a -> NonEmpty Event b) where
   applier _ = map
 else instance Applier a ((a -> b) -> a -> b) where
   applier _ = identity
