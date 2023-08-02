@@ -13,6 +13,7 @@
 module Deku.Hooks
   ( (<#~>)
   , (<$~>)
+  , guard
   , dynOptions
   , class Switcher
   , switcher
@@ -116,6 +117,9 @@ useState a f = Nut go'
     { event, push } <- create
     let Nut nf = f (push /\ NonEmpty a event)
     __internalDekuFlatten nf i di
+
+guard :: forall f. Switcher f => f Boolean -> Nut -> Nut
+guard b e = switcher (if _ then e else mempty) b
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
 useMemoized
