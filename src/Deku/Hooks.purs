@@ -38,6 +38,8 @@ module Deku.Hooks
   , useMemoized'
   , useRef
   , useRefNE
+  , useRefST
+  , useRefSTNE
   , useState
   , useState'
   , useStateWithRef
@@ -52,6 +54,8 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Bolson.Core as BCore
 import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Array as Array
@@ -199,21 +203,27 @@ useMemoized' f0 makeHook = Deku.do
   m <- useMemoized (f0 e)
   makeHook (push /\ m)
 
-useRefNE
+useRef ∷ ∀ a. a → Event a → Hook (Effect a)
+useRef a b f = useRefST a b \x -> f $ liftST x
+
+useRefNE ∷ ∀ a. NonEmpty Event a → Hook (Effect a)
+useRefNE a f = useRefSTNE a \x -> f $ liftST x
+
+useRefSTNE
   :: forall a
    . NonEmpty Event a
-  -> Hook (Effect a)
-useRefNE (NonEmpty x y) = useRef x y
+  -> Hook (ST Global a)
+useRefSTNE (NonEmpty x y) = useRefST x y
 
 -- | A hook that takes an initial value and an event and produces
 -- | a reference to the value that can be used in listeners. While the value
 -- | itself is mutable, it cannot be changed by the consumer of the ref.
-useRef
+useRefST
   :: forall a
    . a
   -> Event a
-  -> Hook (Effect a)
-useRef a e makeHook = Nut go'
+  -> Hook (ST Global a)
+useRefST a e makeHook = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -223,7 +233,7 @@ useRef a e makeHook = Nut go'
      . Node' payload
   go i di = do
     rf <- STRef.new a
-    let Nut nf = makeHook (liftST $ STRef.read rf)
+    let Nut nf = makeHook (STRef.read rf)
     Tuple sub (Tuple unsub evt) <- __internalDekuFlatten nf i di
     pure $ Tuple sub $ Tuple unsub $ makeEvent \k -> do
       u0 <- subscribe e \x -> do
