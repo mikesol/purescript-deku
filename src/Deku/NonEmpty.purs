@@ -53,10 +53,10 @@ apne (a' :| as') (b' :| bs') = a' b' :| (as' <*> bs')
 infixl 4 apne as <**>
 
 filterMapAttribute
-  :: forall e a
-   . Attr e a (Event a)
-  => Attr e a (NonEmpty Event a)
-  => a
+  :: forall e at a
+   . Attr e at  (Event a)
+  => Attr e at (NonEmpty Event a)
+  => at
   -> (a -> Maybe a)
   -> NonEmpty Event a
   -> Attribute e
@@ -65,10 +65,10 @@ filterMapAttribute a f ne = case filterMap f ne of
   Right y -> a := y
 
 filterAttribute
-  :: forall e a
-   . Attr e a (Event a)
-  => Attr e a (NonEmpty Event a)
-  => a
+  :: forall e at a
+   . Attr e at (Event a)
+  => Attr e at (NonEmpty Event a)
+  => at
   -> (a -> Boolean)
   -> NonEmpty Event a
   -> Attribute e
