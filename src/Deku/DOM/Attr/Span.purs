@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Span = Span
 
 instance Attr Col_ Span (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Span bothValues = unsafeAttribute $ Both
-    { key: "span", value: prop' (NonEmpty.head bothValues) }
+  attr Span bothValues = unsafeAttribute $ Both (pure 
+    { key: "span", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "span", value: prop' value })
 instance Attr Col_ Span  String  where
   attr Span value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Col_ Span (Event.Event  String ) where
     { key: "span", value: prop' value }
 
 instance Attr Colgroup_ Span (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Span bothValues = unsafeAttribute $ Both
-    { key: "span", value: prop' (NonEmpty.head bothValues) }
+  attr Span bothValues = unsafeAttribute $ Both (pure 
+    { key: "span", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "span", value: prop' value })
 instance Attr Colgroup_ Span  String  where
   attr Span value = unsafeAttribute $ This $ pure $
@@ -34,7 +34,7 @@ instance Attr Colgroup_ Span (Event.Event  String ) where
     { key: "span", value: prop' value }
 
 instance Attr everything Span (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Span bothValues = unsafeAttribute $ Both { key: "span", value: unset' }
+  attr Span bothValues = unsafeAttribute $ Both (pure  { key: "span", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "span", value: unset' })
 instance Attr everything Span  Unit  where
   attr Span _ = unsafeAttribute $ This $ pure $ { key: "span", value: unset' }

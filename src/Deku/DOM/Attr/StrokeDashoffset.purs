@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeDashoffset = StrokeDashoffset
 
 instance Attr Circle_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -64,8 +64,8 @@ instance Attr Circle_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr ClipPath_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -77,8 +77,8 @@ instance Attr ClipPath_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Defs_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -90,8 +90,8 @@ instance Attr Defs_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Ellipse_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -103,8 +103,8 @@ instance Attr Ellipse_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeBlend_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -116,8 +116,8 @@ instance Attr FeBlend_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -129,8 +129,8 @@ instance Attr FeColorMatrix_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -142,8 +142,8 @@ instance Attr FeComponentTransfer_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeComposite_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeComposite_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -168,8 +168,8 @@ instance Attr FeConvolveMatrix_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr FeDiffuseLighting_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -194,8 +194,8 @@ instance Attr FeDisplacementMap_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeFlood_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -207,8 +207,8 @@ instance Attr FeFlood_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -220,8 +220,8 @@ instance Attr FeGaussianBlur_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeImage_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -233,8 +233,8 @@ instance Attr FeImage_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeMerge_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -246,8 +246,8 @@ instance Attr FeMerge_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeMorphology_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -259,8 +259,8 @@ instance Attr FeMorphology_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeOffset_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -272,8 +272,8 @@ instance Attr FeOffset_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -285,8 +285,8 @@ instance Attr FeSpecularLighting_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeTile_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -298,8 +298,8 @@ instance Attr FeTile_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -311,8 +311,8 @@ instance Attr FeTurbulence_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Filter_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -324,8 +324,8 @@ instance Attr Filter_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr ForeignObject_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -337,8 +337,8 @@ instance Attr ForeignObject_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr G_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -350,8 +350,8 @@ instance Attr G_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Image_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -363,8 +363,8 @@ instance Attr Image_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Line_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -376,8 +376,8 @@ instance Attr Line_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr LinearGradient_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -389,8 +389,8 @@ instance Attr LinearGradient_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Marker_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -402,8 +402,8 @@ instance Attr Marker_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Mask_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -415,8 +415,8 @@ instance Attr Mask_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Path_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -428,8 +428,8 @@ instance Attr Path_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Pattern_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -441,8 +441,8 @@ instance Attr Pattern_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Polygon_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -454,8 +454,8 @@ instance Attr Polygon_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Polyline_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -467,8 +467,8 @@ instance Attr Polyline_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr RadialGradient_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -480,8 +480,8 @@ instance Attr RadialGradient_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Rect_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -493,8 +493,8 @@ instance Attr Rect_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Svg_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -506,8 +506,8 @@ instance Attr Svg_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Switch_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -519,8 +519,8 @@ instance Attr Switch_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Symbol_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -532,8 +532,8 @@ instance Attr Symbol_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Text_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -545,8 +545,8 @@ instance Attr Text_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr TextPath_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -558,8 +558,8 @@ instance Attr TextPath_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Tspan_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -571,8 +571,8 @@ instance Attr Tspan_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr Use_ StrokeDashoffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dashoffset", value: prop' value }
     )
@@ -584,8 +584,8 @@ instance Attr Use_ StrokeDashoffset (Event.Event  String ) where
     <#> \value -> { key: "stroke-dashoffset", value: prop' value }
 
 instance Attr everything StrokeDashoffset (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StrokeDashoffset bothValues = unsafeAttribute $ Both
-    { key: "stroke-dashoffset", value: unset' }
+  attr StrokeDashoffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dashoffset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-dashoffset", value: unset' })
 instance Attr everything StrokeDashoffset  Unit  where
   attr StrokeDashoffset _ = unsafeAttribute $ This $ pure $

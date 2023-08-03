@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data GradientTransform = GradientTransform
 
 instance Attr LinearGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  String ) where
-  attr GradientTransform bothValues = unsafeAttribute $ Both
-    { key: "gradientTransform", value: prop' (NonEmpty.head bothValues) }
+  attr GradientTransform bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientTransform", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "gradientTransform", value: prop' value }
     )
@@ -25,8 +25,8 @@ instance Attr LinearGradient_ GradientTransform (Event.Event  String ) where
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr RadialGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  String ) where
-  attr GradientTransform bothValues = unsafeAttribute $ Both
-    { key: "gradientTransform", value: prop' (NonEmpty.head bothValues) }
+  attr GradientTransform bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientTransform", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "gradientTransform", value: prop' value }
     )
@@ -38,8 +38,8 @@ instance Attr RadialGradient_ GradientTransform (Event.Event  String ) where
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr everything GradientTransform (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr GradientTransform bothValues = unsafeAttribute $ Both
-    { key: "gradientTransform", value: unset' }
+  attr GradientTransform bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientTransform", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "gradientTransform", value: unset' })
 instance Attr everything GradientTransform  Unit  where
   attr GradientTransform _ = unsafeAttribute $ This $ pure $

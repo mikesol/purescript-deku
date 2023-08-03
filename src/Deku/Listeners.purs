@@ -47,7 +47,8 @@ class Applier a b | a -> b where
 
 instance Applier (Event a) ((a -> b) -> Event a -> Event b) where
   applier _ = map
-else instance Applier (NonEmpty Event a) ((a -> b) -> NonEmpty Event a -> NonEmpty Event b) where
+else instance
+  Applier (NonEmpty Event a) ((a -> b) -> NonEmpty Event a -> NonEmpty Event b) where
   applier _ = map
 else instance Applier a ((a -> b) -> a -> b) where
   applier _ = identity

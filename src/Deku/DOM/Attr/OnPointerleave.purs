@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointerleave = OnPointerleave
 
 instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointerleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerleave", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerleave", value: cb' value })
 instance Attr anything OnPointerleave  Cb  where
   attr OnPointerleave value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointerleave (Event.Event  Cb ) where
     \value -> { key: "pointerleave", value: cb' value }
 
 instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointerleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPointerleave (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointerleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerleave", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerleave", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPointerleaveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerleave (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerleave bothValues = unsafeAttribute $ Both
-    { key: "pointerleave", value: unset' }
+  attr OnPointerleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerleave", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerleave", value: unset' })
 instance Attr everything OnPointerleave  Unit  where
   attr OnPointerleave _ = unsafeAttribute $ This $ pure $

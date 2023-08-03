@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Preload = Preload
 
 instance Attr Audio_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Preload bothValues = unsafeAttribute $ Both
-    { key: "preload", value: prop' (NonEmpty.head bothValues) }
+  attr Preload bothValues = unsafeAttribute $ Both (pure 
+    { key: "preload", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Audio_ Preload  String  where
   attr Preload value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Audio_ Preload (Event.Event  String ) where
     \value -> { key: "preload", value: prop' value }
 
 instance Attr Video_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Preload bothValues = unsafeAttribute $ Both
-    { key: "preload", value: prop' (NonEmpty.head bothValues) }
+  attr Preload bothValues = unsafeAttribute $ Both (pure 
+    { key: "preload", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Video_ Preload  String  where
   attr Preload value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Video_ Preload (Event.Event  String ) where
     \value -> { key: "preload", value: prop' value }
 
 instance Attr everything Preload (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Preload bothValues = unsafeAttribute $ Both
-    { key: "preload", value: unset' }
+  attr Preload bothValues = unsafeAttribute $ Both (pure 
+    { key: "preload", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "preload", value: unset' })
 instance Attr everything Preload  Unit  where
   attr Preload _ = unsafeAttribute $ This $ pure $ { key: "preload", value: unset' }

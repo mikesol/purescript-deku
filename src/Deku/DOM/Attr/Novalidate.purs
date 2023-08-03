@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Novalidate = Novalidate
 
 instance Attr Form_ Novalidate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Novalidate bothValues = unsafeAttribute $ Both
-    { key: "novalidate", value: prop' (NonEmpty.head bothValues) }
+  attr Novalidate bothValues = unsafeAttribute $ Both (pure 
+    { key: "novalidate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "novalidate", value: prop' value })
 instance Attr Form_ Novalidate  String  where
   attr Novalidate value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Form_ Novalidate (Event.Event  String ) where
     \value -> { key: "novalidate", value: prop' value }
 
 instance Attr everything Novalidate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Novalidate bothValues = unsafeAttribute $ Both
-    { key: "novalidate", value: unset' }
+  attr Novalidate bothValues = unsafeAttribute $ Both (pure 
+    { key: "novalidate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "novalidate", value: unset' })
 instance Attr everything Novalidate  Unit  where
   attr Novalidate _ = unsafeAttribute $ This $ pure $

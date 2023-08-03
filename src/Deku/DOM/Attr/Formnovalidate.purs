@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Formnovalidate = Formnovalidate
 
 instance Attr Button_ Formnovalidate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formnovalidate bothValues = unsafeAttribute $ Both
-    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
+  attr Formnovalidate bothValues = unsafeAttribute $ Both (pure 
+    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
 instance Attr Button_ Formnovalidate  String  where
   attr Formnovalidate value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Button_ Formnovalidate (Event.Event  String ) where
     \value -> { key: "formnovalidate", value: prop' value }
 
 instance Attr Input_ Formnovalidate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formnovalidate bothValues = unsafeAttribute $ Both
-    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
+  attr Formnovalidate bothValues = unsafeAttribute $ Both (pure 
+    { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
 instance Attr Input_ Formnovalidate  String  where
   attr Formnovalidate value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Input_ Formnovalidate (Event.Event  String ) where
     \value -> { key: "formnovalidate", value: prop' value }
 
 instance Attr everything Formnovalidate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Formnovalidate bothValues = unsafeAttribute $ Both
-    { key: "formnovalidate", value: unset' }
+  attr Formnovalidate bothValues = unsafeAttribute $ Both (pure 
+    { key: "formnovalidate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formnovalidate", value: unset' })
 instance Attr everything Formnovalidate  Unit  where
   attr Formnovalidate _ = unsafeAttribute $ This $ pure $

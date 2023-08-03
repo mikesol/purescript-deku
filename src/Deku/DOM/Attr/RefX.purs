@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data RefX = RefX
 
 instance Attr Marker_ RefX (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RefX bothValues = unsafeAttribute $ Both
-    { key: "refX", value: prop' (NonEmpty.head bothValues) }
+  attr RefX bothValues = unsafeAttribute $ Both (pure 
+    { key: "refX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Marker_ RefX  String  where
   attr RefX value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Marker_ RefX (Event.Event  String ) where
     { key: "refX", value: prop' value }
 
 instance Attr Symbol_ RefX (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RefX bothValues = unsafeAttribute $ Both
-    { key: "refX", value: prop' (NonEmpty.head bothValues) }
+  attr RefX bothValues = unsafeAttribute $ Both (pure 
+    { key: "refX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Symbol_ RefX  String  where
   attr RefX value = unsafeAttribute $ This $ pure $
@@ -34,7 +34,7 @@ instance Attr Symbol_ RefX (Event.Event  String ) where
     { key: "refX", value: prop' value }
 
 instance Attr everything RefX (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr RefX bothValues = unsafeAttribute $ Both { key: "refX", value: unset' }
+  attr RefX bothValues = unsafeAttribute $ Both (pure  { key: "refX", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "refX", value: unset' })
 instance Attr everything RefX  Unit  where
   attr RefX _ = unsafeAttribute $ This $ pure $ { key: "refX", value: unset' }

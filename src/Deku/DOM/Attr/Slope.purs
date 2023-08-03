@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Slope = Slope
 
 instance Attr FeFuncA_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Slope bothValues = unsafeAttribute $ Both
-    { key: "slope", value: prop' (NonEmpty.head bothValues) }
+  attr Slope bothValues = unsafeAttribute $ Both (pure 
+    { key: "slope", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncA_ Slope  String  where
   attr Slope value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr FeFuncA_ Slope (Event.Event  String ) where
     \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncB_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Slope bothValues = unsafeAttribute $ Both
-    { key: "slope", value: prop' (NonEmpty.head bothValues) }
+  attr Slope bothValues = unsafeAttribute $ Both (pure 
+    { key: "slope", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncB_ Slope  String  where
   attr Slope value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr FeFuncB_ Slope (Event.Event  String ) where
     \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncG_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Slope bothValues = unsafeAttribute $ Both
-    { key: "slope", value: prop' (NonEmpty.head bothValues) }
+  attr Slope bothValues = unsafeAttribute $ Both (pure 
+    { key: "slope", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncG_ Slope  String  where
   attr Slope value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr FeFuncG_ Slope (Event.Event  String ) where
     \value -> { key: "slope", value: prop' value }
 
 instance Attr FeFuncR_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Slope bothValues = unsafeAttribute $ Both
-    { key: "slope", value: prop' (NonEmpty.head bothValues) }
+  attr Slope bothValues = unsafeAttribute $ Both (pure 
+    { key: "slope", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncR_ Slope  String  where
   attr Slope value = unsafeAttribute $ This $ pure $
@@ -58,7 +58,7 @@ instance Attr FeFuncR_ Slope (Event.Event  String ) where
     \value -> { key: "slope", value: prop' value }
 
 instance Attr everything Slope (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Slope bothValues = unsafeAttribute $ Both { key: "slope", value: unset' }
+  attr Slope bothValues = unsafeAttribute $ Both (pure  { key: "slope", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "slope", value: unset' })
 instance Attr everything Slope  Unit  where
   attr Slope _ = unsafeAttribute $ This $ pure $ { key: "slope", value: unset' }

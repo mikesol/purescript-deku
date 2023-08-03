@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointercancel = OnPointercancel
 
 instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointercancel bothValues = unsafeAttribute $ Both
-    { key: "pointercancel", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointercancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointercancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointercancel", value: cb' value })
 instance Attr anything OnPointercancel  Cb  where
   attr OnPointercancel value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointercancel (Event.Event  Cb ) where
     <#> \value -> { key: "pointercancel", value: cb' value }
 
 instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointercancel bothValues = unsafeAttribute $ Both
-    { key: "pointercancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointercancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointercancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
     )
@@ -36,8 +36,8 @@ instance Attr anything OnPointercancel (Event.Event  (Effect Unit) ) where
       { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointercancel bothValues = unsafeAttribute $ Both
-    { key: "pointercancel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointercancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointercancel", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointercancel", value: cb' (Cb (const value)) }
     )
@@ -54,8 +54,8 @@ type OnPointercancelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointercancel (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointercancel bothValues = unsafeAttribute $ Both
-    { key: "pointercancel", value: unset' }
+  attr OnPointercancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointercancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointercancel", value: unset' })
 instance Attr everything OnPointercancel  Unit  where
   attr OnPointercancel _ = unsafeAttribute $ This $ pure $

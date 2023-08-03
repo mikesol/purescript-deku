@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnWaiting = OnWaiting
 
 instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnWaiting bothValues = unsafeAttribute $ Both
-    { key: "waiting", value: cb' (NonEmpty.head bothValues) }
+  attr OnWaiting bothValues = unsafeAttribute $ Both (pure 
+    { key: "waiting", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "waiting", value: cb' value })
 instance Attr anything OnWaiting  Cb  where
   attr OnWaiting value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnWaiting (Event.Event  Cb ) where
     \value -> { key: "waiting", value: cb' value }
 
 instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnWaiting bothValues = unsafeAttribute $ Both
-    { key: "waiting", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnWaiting bothValues = unsafeAttribute $ Both (pure 
+    { key: "waiting", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "waiting", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnWaiting (Event.Event  (Effect Unit) ) where
     \value -> { key: "waiting", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnWaiting bothValues = unsafeAttribute $ Both
-    { key: "waiting", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnWaiting bothValues = unsafeAttribute $ Both (pure 
+    { key: "waiting", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "waiting", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnWaitingEffect =
   => Event (Attribute element)
 
 instance Attr everything OnWaiting (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnWaiting bothValues = unsafeAttribute $ Both
-    { key: "waiting", value: unset' }
+  attr OnWaiting bothValues = unsafeAttribute $ Both (pure 
+    { key: "waiting", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "waiting", value: unset' })
 instance Attr everything OnWaiting  Unit  where
   attr OnWaiting _ = unsafeAttribute $ This $ pure $

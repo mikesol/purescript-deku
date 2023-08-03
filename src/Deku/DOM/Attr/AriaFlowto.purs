@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaFlowto = AriaFlowto
 
 instance Attr Circle_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Circle_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Ellipse_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Ellipse_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr ForeignObject_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr ForeignObject_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr G_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr G_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Line_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Line_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Marker_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Marker_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Path_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Path_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Polygon_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Polygon_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Polyline_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Polyline_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Rect_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Rect_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Svg_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Svg_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Symbol_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Symbol_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Text_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Text_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr TextPath_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr TextPath_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Tspan_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Tspan_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr Use_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr Use_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr View_ AriaFlowto (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-flowto", value: prop' value })
 instance Attr View_ AriaFlowto  String  where
   attr AriaFlowto value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaFlowto (Event.Event  String ) where
     \value -> { key: "aria-flowto", value: prop' value }
 
 instance Attr everything AriaFlowto (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaFlowto bothValues = unsafeAttribute $ Both
-    { key: "aria-flowto", value: unset' }
+  attr AriaFlowto bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-flowto", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-flowto", value: unset' })
 instance Attr everything AriaFlowto  Unit  where
   attr AriaFlowto _ = unsafeAttribute $ This $ pure $

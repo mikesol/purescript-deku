@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPlaying = OnPlaying
 
 instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (NonEmpty.head bothValues) }
+  attr OnPlaying bothValues = unsafeAttribute $ Both (pure 
+    { key: "playing", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "playing", value: cb' value })
 instance Attr anything OnPlaying  Cb  where
   attr OnPlaying value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPlaying (Event.Event  Cb ) where
     \value -> { key: "playing", value: cb' value }
 
 instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPlaying bothValues = unsafeAttribute $ Both (pure 
+    { key: "playing", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "playing", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPlaying (Event.Event  (Effect Unit) ) where
     \value -> { key: "playing", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPlaying bothValues = unsafeAttribute $ Both (pure 
+    { key: "playing", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "playing", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPlayingEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPlaying (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPlaying bothValues = unsafeAttribute $ Both
-    { key: "playing", value: unset' }
+  attr OnPlaying bothValues = unsafeAttribute $ Both (pure 
+    { key: "playing", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "playing", value: unset' })
 instance Attr everything OnPlaying  Unit  where
   attr OnPlaying _ = unsafeAttribute $ This $ pure $

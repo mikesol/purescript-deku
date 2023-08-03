@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaRowindex = AriaRowindex
 
 instance Attr Circle_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Circle_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Ellipse_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Ellipse_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr ForeignObject_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr ForeignObject_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr G_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr G_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Line_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Line_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Marker_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Marker_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Path_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Path_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Polygon_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Polygon_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Polyline_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Polyline_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Rect_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Rect_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Svg_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Svg_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Symbol_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Symbol_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Text_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Text_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr TextPath_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr TextPath_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Tspan_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Tspan_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr Use_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr Use_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr View_ AriaRowindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-rowindex", value: prop' value })
 instance Attr View_ AriaRowindex  String  where
   attr AriaRowindex value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaRowindex (Event.Event  String ) where
     \value -> { key: "aria-rowindex", value: prop' value }
 
 instance Attr everything AriaRowindex (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaRowindex bothValues = unsafeAttribute $ Both
-    { key: "aria-rowindex", value: unset' }
+  attr AriaRowindex bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-rowindex", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-rowindex", value: unset' })
 instance Attr everything AriaRowindex  Unit  where
   attr AriaRowindex _ = unsafeAttribute $ This $ pure $

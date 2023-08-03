@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ClipPathUnits = ClipPathUnits
 
 instance Attr ClipPath_ ClipPathUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPathUnits bothValues = unsafeAttribute $ Both
-    { key: "clipPathUnits", value: prop' (NonEmpty.head bothValues) }
+  attr ClipPathUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "clipPathUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "clipPathUnits", value: prop' value })
 instance Attr ClipPath_ ClipPathUnits  String  where
   attr ClipPathUnits value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr ClipPath_ ClipPathUnits (Event.Event  String ) where
     \value -> { key: "clipPathUnits", value: prop' value }
 
 instance Attr everything ClipPathUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ClipPathUnits bothValues = unsafeAttribute $ Both
-    { key: "clipPathUnits", value: unset' }
+  attr ClipPathUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "clipPathUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "clipPathUnits", value: unset' })
 instance Attr everything ClipPathUnits  Unit  where
   attr ClipPathUnits _ = unsafeAttribute $ This $ pure $

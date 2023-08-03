@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data From = From
 
 instance Attr Animate_ From (NonEmpty.NonEmpty Event.Event  String ) where
-  attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (NonEmpty.head bothValues) }
+  attr From bothValues = unsafeAttribute $ Both (pure 
+    { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr Animate_ From  String  where
   attr From value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Animate_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr AnimateMotion_ From (NonEmpty.NonEmpty Event.Event  String ) where
-  attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (NonEmpty.head bothValues) }
+  attr From bothValues = unsafeAttribute $ Both (pure 
+    { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateMotion_ From  String  where
   attr From value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr AnimateMotion_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr AnimateTransform_ From (NonEmpty.NonEmpty Event.Event  String ) where
-  attr From bothValues = unsafeAttribute $ Both
-    { key: "from", value: prop' (NonEmpty.head bothValues) }
+  attr From bothValues = unsafeAttribute $ Both (pure 
+    { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateTransform_ From  String  where
   attr From value = unsafeAttribute $ This $ pure $
@@ -46,7 +46,7 @@ instance Attr AnimateTransform_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr everything From (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr From bothValues = unsafeAttribute $ Both { key: "from", value: unset' }
+  attr From bothValues = unsafeAttribute $ Both (pure  { key: "from", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "from", value: unset' })
 instance Attr everything From  Unit  where
   attr From _ = unsafeAttribute $ This $ pure $ { key: "from", value: unset' }

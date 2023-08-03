@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Z = Z
 
 instance Attr FePointLight_ Z (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Z bothValues = unsafeAttribute $ Both
-    { key: "z", value: prop' (NonEmpty.head bothValues) }
+  attr Z bothValues = unsafeAttribute $ Both (pure 
+    { key: "z", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "z", value: prop' value })
 instance Attr FePointLight_ Z  String  where
   attr Z value = unsafeAttribute $ This $ pure $ { key: "z", value: prop' value }
@@ -22,8 +22,8 @@ instance Attr FePointLight_ Z (Event.Event  String ) where
     { key: "z", value: prop' value }
 
 instance Attr FeSpotLight_ Z (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Z bothValues = unsafeAttribute $ Both
-    { key: "z", value: prop' (NonEmpty.head bothValues) }
+  attr Z bothValues = unsafeAttribute $ Both (pure 
+    { key: "z", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "z", value: prop' value })
 instance Attr FeSpotLight_ Z  String  where
   attr Z value = unsafeAttribute $ This $ pure $ { key: "z", value: prop' value }
@@ -32,7 +32,7 @@ instance Attr FeSpotLight_ Z (Event.Event  String ) where
     { key: "z", value: prop' value }
 
 instance Attr everything Z (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Z bothValues = unsafeAttribute $ Both { key: "z", value: unset' }
+  attr Z bothValues = unsafeAttribute $ Both (pure  { key: "z", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "z", value: unset' })
 instance Attr everything Z  Unit  where
   attr Z _ = unsafeAttribute $ This $ pure $ { key: "z", value: unset' }

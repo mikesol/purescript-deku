@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointerover = OnPointerover
 
 instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerover bothValues = unsafeAttribute $ Both
-    { key: "pointerover", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointerover bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerover", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerover", value: cb' value })
 instance Attr anything OnPointerover  Cb  where
   attr OnPointerover value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointerover (Event.Event  Cb ) where
     \value -> { key: "pointerover", value: cb' value }
 
 instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerover bothValues = unsafeAttribute $ Both
-    { key: "pointerover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointerover bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerover", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPointerover (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointerover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerover bothValues = unsafeAttribute $ Both
-    { key: "pointerover", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointerover bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerover", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerover", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPointeroverEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerover (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerover bothValues = unsafeAttribute $ Both
-    { key: "pointerover", value: unset' }
+  attr OnPointerover bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerover", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerover", value: unset' })
 instance Attr everything OnPointerover  Unit  where
   attr OnPointerover _ = unsafeAttribute $ This $ pure $

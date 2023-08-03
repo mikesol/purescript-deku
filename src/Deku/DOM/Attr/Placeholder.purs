@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Placeholder = Placeholder
 
 instance Attr Input_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Placeholder bothValues = unsafeAttribute $ Both
-    { key: "placeholder", value: prop' (NonEmpty.head bothValues) }
+  attr Placeholder bothValues = unsafeAttribute $ Both (pure 
+    { key: "placeholder", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Input_ Placeholder  String  where
   attr Placeholder value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Input_ Placeholder (Event.Event  String ) where
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr Textarea_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Placeholder bothValues = unsafeAttribute $ Both
-    { key: "placeholder", value: prop' (NonEmpty.head bothValues) }
+  attr Placeholder bothValues = unsafeAttribute $ Both (pure 
+    { key: "placeholder", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Textarea_ Placeholder  String  where
   attr Placeholder value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Textarea_ Placeholder (Event.Event  String ) where
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr everything Placeholder (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Placeholder bothValues = unsafeAttribute $ Both
-    { key: "placeholder", value: unset' }
+  attr Placeholder bothValues = unsafeAttribute $ Both (pure 
+    { key: "placeholder", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "placeholder", value: unset' })
 instance Attr everything Placeholder  Unit  where
   attr Placeholder _ = unsafeAttribute $ This $ pure $

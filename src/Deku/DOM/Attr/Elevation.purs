@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Elevation = Elevation
 
 instance Attr FeDistantLight_ Elevation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Elevation bothValues = unsafeAttribute $ Both
-    { key: "elevation", value: prop' (NonEmpty.head bothValues) }
+  attr Elevation bothValues = unsafeAttribute $ Both (pure 
+    { key: "elevation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "elevation", value: prop' value })
 instance Attr FeDistantLight_ Elevation  String  where
   attr Elevation value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeDistantLight_ Elevation (Event.Event  String ) where
     \value -> { key: "elevation", value: prop' value }
 
 instance Attr everything Elevation (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Elevation bothValues = unsafeAttribute $ Both
-    { key: "elevation", value: unset' }
+  attr Elevation bothValues = unsafeAttribute $ Both (pure 
+    { key: "elevation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "elevation", value: unset' })
 instance Attr everything Elevation  Unit  where
   attr Elevation _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnTimeupdate = OnTimeupdate
 
 instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnTimeupdate bothValues = unsafeAttribute $ Both
-    { key: "timeupdate", value: cb' (NonEmpty.head bothValues) }
+  attr OnTimeupdate bothValues = unsafeAttribute $ Both (pure 
+    { key: "timeupdate", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "timeupdate", value: cb' value })
 instance Attr anything OnTimeupdate  Cb  where
   attr OnTimeupdate value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnTimeupdate (Event.Event  Cb ) where
     \value -> { key: "timeupdate", value: cb' value }
 
 instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnTimeupdate bothValues = unsafeAttribute $ Both
-    { key: "timeupdate", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnTimeupdate bothValues = unsafeAttribute $ Both (pure 
+    { key: "timeupdate", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnTimeupdate (Event.Event  (Effect Unit) ) where
     \value -> { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnTimeupdate bothValues = unsafeAttribute $ Both
-    { key: "timeupdate", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnTimeupdate bothValues = unsafeAttribute $ Both (pure 
+    { key: "timeupdate", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "timeupdate", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnTimeupdateEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnTimeupdate bothValues = unsafeAttribute $ Both
-    { key: "timeupdate", value: unset' }
+  attr OnTimeupdate bothValues = unsafeAttribute $ Both (pure 
+    { key: "timeupdate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "timeupdate", value: unset' })
 instance Attr everything OnTimeupdate  Unit  where
   attr OnTimeupdate _ = unsafeAttribute $ This $ pure $

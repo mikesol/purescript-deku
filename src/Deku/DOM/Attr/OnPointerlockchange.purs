@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointerlockchange = OnPointerlockchange
 
 instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerlockchange bothValues = unsafeAttribute $ Both
-    { key: "pointerlockchange", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointerlockchange bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerlockchange", value: cb' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' value }
     )
@@ -24,10 +24,10 @@ instance Attr anything OnPointerlockchange (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "pointerlockchange", value: cb' value }
 
 instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerlockchange bothValues = unsafeAttribute $ Both
+  attr OnPointerlockchange bothValues = unsafeAttribute $ Both (pure 
     { key: "pointerlockchange"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
     )
@@ -40,8 +40,8 @@ instance Attr anything OnPointerlockchange (Event.Event  (Effect Unit) ) where
       { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerlockchange bothValues = unsafeAttribute $ Both
-    { key: "pointerlockchange", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointerlockchange bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerlockchange", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' (Cb (const value)) }
     )
@@ -59,8 +59,8 @@ type OnPointerlockchangeEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerlockchange bothValues = unsafeAttribute $ Both
-    { key: "pointerlockchange", value: unset' }
+  attr OnPointerlockchange bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerlockchange", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
 instance Attr everything OnPointerlockchange  Unit  where
   attr OnPointerlockchange _ = unsafeAttribute $ This $ pure $

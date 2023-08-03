@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnCanplaythrough = OnCanplaythrough
 
 instance Attr anything OnCanplaythrough (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnCanplaythrough bothValues = unsafeAttribute $ Both
-    { key: "canplaythrough", value: cb' (NonEmpty.head bothValues) }
+  attr OnCanplaythrough bothValues = unsafeAttribute $ Both (pure 
+    { key: "canplaythrough", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "canplaythrough", value: cb' value })
 instance Attr anything OnCanplaythrough  Cb  where
   attr OnCanplaythrough value = unsafeAttribute $ This $ pure $
@@ -22,10 +22,10 @@ instance Attr anything OnCanplaythrough (Event.Event  Cb ) where
     <#> \value -> { key: "canplaythrough", value: cb' value }
 
 instance Attr anything OnCanplaythrough (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnCanplaythrough bothValues = unsafeAttribute $ Both
+  attr OnCanplaythrough bothValues = unsafeAttribute $ Both (pure 
     { key: "canplaythrough"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
     )
@@ -38,8 +38,8 @@ instance Attr anything OnCanplaythrough (Event.Event  (Effect Unit) ) where
       { key: "canplaythrough", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCanplaythrough (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnCanplaythrough bothValues = unsafeAttribute $ Both
-    { key: "canplaythrough", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnCanplaythrough bothValues = unsafeAttribute $ Both (pure 
+    { key: "canplaythrough", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "canplaythrough", value: cb' (Cb (const value)) }
     )
@@ -56,8 +56,8 @@ type OnCanplaythroughEffect =
   => Event (Attribute element)
 
 instance Attr everything OnCanplaythrough (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnCanplaythrough bothValues = unsafeAttribute $ Both
-    { key: "canplaythrough", value: unset' }
+  attr OnCanplaythrough bothValues = unsafeAttribute $ Both (pure 
+    { key: "canplaythrough", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "canplaythrough", value: unset' })
 instance Attr everything OnCanplaythrough  Unit  where
   attr OnCanplaythrough _ = unsafeAttribute $ This $ pure $

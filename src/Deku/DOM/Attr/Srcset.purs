@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Srcset = Srcset
 
 instance Attr Img_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Srcset bothValues = unsafeAttribute $ Both
-    { key: "srcset", value: prop' (NonEmpty.head bothValues) }
+  attr Srcset bothValues = unsafeAttribute $ Both (pure 
+    { key: "srcset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Img_ Srcset  String  where
   attr Srcset value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Img_ Srcset (Event.Event  String ) where
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr Source_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Srcset bothValues = unsafeAttribute $ Both
-    { key: "srcset", value: prop' (NonEmpty.head bothValues) }
+  attr Srcset bothValues = unsafeAttribute $ Both (pure 
+    { key: "srcset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Source_ Srcset  String  where
   attr Srcset value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Source_ Srcset (Event.Event  String ) where
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr everything Srcset (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Srcset bothValues = unsafeAttribute $ Both
-    { key: "srcset", value: unset' }
+  attr Srcset bothValues = unsafeAttribute $ Both (pure 
+    { key: "srcset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "srcset", value: unset' })
 instance Attr everything Srcset  Unit  where
   attr Srcset _ = unsafeAttribute $ This $ pure $ { key: "srcset", value: unset' }

@@ -2459,7 +2459,7 @@ instance pursxToElementConsInsert ::
                       di
                     pure $ Tuple (subscr0 <> subscr1) $ Tuple
                       ( unsub0 <> unsub1 <>
-                          [ deleteFromCache
+                          [ pure $ deleteFromCache
                               { id: reflectType pxk <> "@!%" <> pxScope }
                           ]
                       )
@@ -2500,8 +2500,10 @@ else instance pursxToElementConsAttr ::
         pure
           $ Tuple
               ( subscr <> map
-                  ( unsafeSetAttribute di
-                      (reflectType pxk <> "@!%" <> pxScope)
+                  ( map
+                      ( unsafeSetAttribute di
+                          (reflectType pxk <> "@!%" <> pxScope)
+                      )
                   )
                   left
               )
@@ -2584,7 +2586,7 @@ makePursx' verb html r = Nut ee
       Tuple subsc (Tuple unsub evt) <- element z di
       pure
         $ Tuple
-            ( [ mpx
+            ( [ pure $ mpx
                   { id: me
                   , parent
                   , cache
@@ -2597,13 +2599,13 @@ makePursx' verb html r = Nut ee
                   }
               ] <> subsc <> maybe []
                 ( \p ->
-                    [ attributeParent
+                    [ pure $ attributeParent
                         { id: me, parent: p, pos, dynFamily, ez: false }
                     ]
                 )
                 parent
             )
-        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
+        $ Tuple ([ pure $ deleteFromCache { id: me } ] <> unsub) evt
 
 unsafeMakePursx
   :: forall r rl
@@ -2644,7 +2646,7 @@ unsafeMakePursx' verb html r = Nut ee
       Tuple subsc (Tuple unsub evt) <- element z di
       pure
         $ Tuple
-            ( [ mpx
+            ( [ pure $ mpx
                   { id: me
                   , parent
                   , cache
@@ -2657,13 +2659,13 @@ unsafeMakePursx' verb html r = Nut ee
                   }
               ] <> subsc <> maybe []
                 ( \p ->
-                    [ attributeParent
+                    [ pure $ attributeParent
                         { id: me, parent: p, pos, dynFamily, ez: false }
                     ]
                 )
                 parent
             )
-        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
+        $ Tuple ([ pure $ deleteFromCache { id: me } ] <> unsub) evt
 
 __internalDekuFlatten
   :: forall payload
@@ -2673,3 +2675,4 @@ __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
+

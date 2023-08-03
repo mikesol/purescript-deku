@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Importance = Importance
 
 instance Attr Iframe_ Importance (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+  attr Importance bothValues = unsafeAttribute $ Both (pure 
+    { key: "importance", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
 instance Attr Iframe_ Importance  String  where
   attr Importance value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr Iframe_ Importance (Event.Event  String ) where
     \value -> { key: "importance", value: prop' value }
 
 instance Attr Img_ Importance (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+  attr Importance bothValues = unsafeAttribute $ Both (pure 
+    { key: "importance", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
 instance Attr Img_ Importance  String  where
   attr Importance value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr Img_ Importance (Event.Event  String ) where
     \value -> { key: "importance", value: prop' value }
 
 instance Attr Link_ Importance (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+  attr Importance bothValues = unsafeAttribute $ Both (pure 
+    { key: "importance", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
 instance Attr Link_ Importance  String  where
   attr Importance value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr Link_ Importance (Event.Event  String ) where
     \value -> { key: "importance", value: prop' value }
 
 instance Attr Script_ Importance (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: prop' (NonEmpty.head bothValues) }
+  attr Importance bothValues = unsafeAttribute $ Both (pure 
+    { key: "importance", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "importance", value: prop' value })
 instance Attr Script_ Importance  String  where
   attr Importance value = unsafeAttribute $ This $ pure $
@@ -58,8 +58,8 @@ instance Attr Script_ Importance (Event.Event  String ) where
     \value -> { key: "importance", value: prop' value }
 
 instance Attr everything Importance (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Importance bothValues = unsafeAttribute $ Both
-    { key: "importance", value: unset' }
+  attr Importance bothValues = unsafeAttribute $ Both (pure 
+    { key: "importance", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "importance", value: unset' })
 instance Attr everything Importance  Unit  where
   attr Importance _ = unsafeAttribute $ This $ pure $

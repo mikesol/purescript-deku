@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnEmptied = OnEmptied
 
 instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (NonEmpty.head bothValues) }
+  attr OnEmptied bothValues = unsafeAttribute $ Both (pure 
+    { key: "emptied", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "emptied", value: cb' value })
 instance Attr anything OnEmptied  Cb  where
   attr OnEmptied value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnEmptied (Event.Event  Cb ) where
     \value -> { key: "emptied", value: cb' value }
 
 instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnEmptied bothValues = unsafeAttribute $ Both (pure 
+    { key: "emptied", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnEmptied (Event.Event  (Effect Unit) ) where
     \value -> { key: "emptied", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnEmptied bothValues = unsafeAttribute $ Both (pure 
+    { key: "emptied", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnEmptiedEffect =
   => Event (Attribute element)
 
 instance Attr everything OnEmptied (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnEmptied bothValues = unsafeAttribute $ Both
-    { key: "emptied", value: unset' }
+  attr OnEmptied bothValues = unsafeAttribute $ Both (pure 
+    { key: "emptied", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "emptied", value: unset' })
 instance Attr everything OnEmptied  Unit  where
   attr OnEmptied _ = unsafeAttribute $ This $ pure $

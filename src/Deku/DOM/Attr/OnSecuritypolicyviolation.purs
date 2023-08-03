@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnSecuritypolicyviolation = OnSecuritypolicyviolation
 
 instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both
-    { key: "securitypolicyviolation", value: cb' (NonEmpty.head bothValues) }
+  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both (pure 
+    { key: "securitypolicyviolation", value: cb' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "securitypolicyviolation", value: cb' value }
     )
@@ -25,10 +25,10 @@ instance Attr anything OnSecuritypolicyviolation (Event.Event  Cb ) where
       { key: "securitypolicyviolation", value: cb' value }
 
 instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both
+  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both (pure 
     { key: "securitypolicyviolation"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "securitypolicyviolation"
         , value: cb' (Cb (const (value $> true)))
@@ -45,8 +45,8 @@ instance Attr anything OnSecuritypolicyviolation (Event.Event  (Effect Unit) ) w
       }
 
 instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both
-    { key: "securitypolicyviolation", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both (pure 
+    { key: "securitypolicyviolation", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
     )
@@ -64,8 +64,8 @@ type OnSecuritypolicyviolationEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both
-    { key: "securitypolicyviolation", value: unset' }
+  attr OnSecuritypolicyviolation bothValues = unsafeAttribute $ Both (pure 
+    { key: "securitypolicyviolation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "securitypolicyviolation", value: unset' })
 instance Attr everything OnSecuritypolicyviolation  Unit  where
   attr OnSecuritypolicyviolation _ = unsafeAttribute $ This $ pure $

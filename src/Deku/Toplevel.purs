@@ -52,9 +52,9 @@ runInElement' elt eee = do
   Tuple sub (Tuple unsub evt) <- liftST $ deku elt eee
     (fullDOMInterpret seed cache executor)
   u <- liftST $ subscribe evt executor
-  for_ sub executor
+  for_ sub $ liftST >=> executor
   pure do
-    for_ unsub executor
+    for_ unsub $ liftST >=> executor
     liftST u
     pure ffi
 
@@ -105,13 +105,13 @@ hydrate' children = do
     }
     di
   (unwrap di).makeRoot { id: me, root } List.Nil ffi
-  for_ sub executor
+  for_ sub $ liftST >=> executor
   u <- liftST $ subscribe
     (map ((unwrap di).redecorateDeferredPayload (pure headRedecorator)) evt)
     executor
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
-    for_ unsub executor
+    for_ unsub $ liftST >=> executor
     (unwrap di).forcePayload (pure headRedecorator) List.Nil ffi
     (unwrap di).deleteFromCache { id: me } List.Nil ffi
     liftST $ u
@@ -155,7 +155,7 @@ runSSR' topTag = go
       , dynFamily: Nothing
       }
       di
-    for_ subscr (\f -> f List.Nil instr)
+    for_ subscr $ liftST >=> (\f -> f List.Nil instr)
     RRef.read instr
 
 __internalDekuFlatten

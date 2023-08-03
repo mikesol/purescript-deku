@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Usemap = Usemap
 
 instance Attr Img_ Usemap (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Usemap bothValues = unsafeAttribute $ Both
-    { key: "usemap", value: prop' (NonEmpty.head bothValues) }
+  attr Usemap bothValues = unsafeAttribute $ Both (pure 
+    { key: "usemap", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "usemap", value: prop' value })
 instance Attr Img_ Usemap  String  where
   attr Usemap value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Img_ Usemap (Event.Event  String ) where
     \value -> { key: "usemap", value: prop' value }
 
 instance Attr Input_ Usemap (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Usemap bothValues = unsafeAttribute $ Both
-    { key: "usemap", value: prop' (NonEmpty.head bothValues) }
+  attr Usemap bothValues = unsafeAttribute $ Both (pure 
+    { key: "usemap", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "usemap", value: prop' value })
 instance Attr Input_ Usemap  String  where
   attr Usemap value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Input_ Usemap (Event.Event  String ) where
     \value -> { key: "usemap", value: prop' value }
 
 instance Attr Object_ Usemap (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Usemap bothValues = unsafeAttribute $ Both
-    { key: "usemap", value: prop' (NonEmpty.head bothValues) }
+  attr Usemap bothValues = unsafeAttribute $ Both (pure 
+    { key: "usemap", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "usemap", value: prop' value })
 instance Attr Object_ Usemap  String  where
   attr Usemap value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr Object_ Usemap (Event.Event  String ) where
     \value -> { key: "usemap", value: prop' value }
 
 instance Attr everything Usemap (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Usemap bothValues = unsafeAttribute $ Both
-    { key: "usemap", value: unset' }
+  attr Usemap bothValues = unsafeAttribute $ Both (pure 
+    { key: "usemap", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "usemap", value: unset' })
 instance Attr everything Usemap  Unit  where
   attr Usemap _ = unsafeAttribute $ This $ pure $ { key: "usemap", value: unset' }

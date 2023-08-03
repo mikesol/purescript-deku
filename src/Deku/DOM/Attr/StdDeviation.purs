@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StdDeviation = StdDeviation
 
 instance Attr FeDropShadow_ StdDeviation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StdDeviation bothValues = unsafeAttribute $ Both
-    { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) }
+  attr StdDeviation bothValues = unsafeAttribute $ Both (pure 
+    { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeDropShadow_ StdDeviation  String  where
   attr StdDeviation value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr FeDropShadow_ StdDeviation (Event.Event  String ) where
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr FeGaussianBlur_ StdDeviation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StdDeviation bothValues = unsafeAttribute $ Both
-    { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) }
+  attr StdDeviation bothValues = unsafeAttribute $ Both (pure 
+    { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeGaussianBlur_ StdDeviation  String  where
   attr StdDeviation value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr FeGaussianBlur_ StdDeviation (Event.Event  String ) where
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr everything StdDeviation (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StdDeviation bothValues = unsafeAttribute $ Both
-    { key: "stdDeviation", value: unset' }
+  attr StdDeviation bothValues = unsafeAttribute $ Both (pure 
+    { key: "stdDeviation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stdDeviation", value: unset' })
 instance Attr everything StdDeviation  Unit  where
   attr StdDeviation _ = unsafeAttribute $ This $ pure $

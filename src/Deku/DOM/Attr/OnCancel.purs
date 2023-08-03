@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnCancel = OnCancel
 
 instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnCancel bothValues = unsafeAttribute $ Both
-    { key: "cancel", value: cb' (NonEmpty.head bothValues) }
+  attr OnCancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "cancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "cancel", value: cb' value })
 instance Attr anything OnCancel  Cb  where
   attr OnCancel value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnCancel (Event.Event  Cb ) where
     \value -> { key: "cancel", value: cb' value }
 
 instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnCancel bothValues = unsafeAttribute $ Both
-    { key: "cancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnCancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "cancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "cancel", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnCancel (Event.Event  (Effect Unit) ) where
     \value -> { key: "cancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnCancel bothValues = unsafeAttribute $ Both
-    { key: "cancel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnCancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "cancel", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "cancel", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnCancelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnCancel (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnCancel bothValues = unsafeAttribute $ Both
-    { key: "cancel", value: unset' }
+  attr OnCancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "cancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "cancel", value: unset' })
 instance Attr everything OnCancel  Unit  where
   attr OnCancel _ = unsafeAttribute $ This $ pure $ { key: "cancel", value: unset' }

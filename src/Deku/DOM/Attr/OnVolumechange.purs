@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnVolumechange = OnVolumechange
 
 instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnVolumechange bothValues = unsafeAttribute $ Both
-    { key: "volumechange", value: cb' (NonEmpty.head bothValues) }
+  attr OnVolumechange bothValues = unsafeAttribute $ Both (pure 
+    { key: "volumechange", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "volumechange", value: cb' value })
 instance Attr anything OnVolumechange  Cb  where
   attr OnVolumechange value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnVolumechange (Event.Event  Cb ) where
     \value -> { key: "volumechange", value: cb' value }
 
 instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnVolumechange bothValues = unsafeAttribute $ Both
-    { key: "volumechange", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnVolumechange bothValues = unsafeAttribute $ Both (pure 
+    { key: "volumechange", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "volumechange", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnVolumechange (Event.Event  (Effect Unit) ) where
     \value -> { key: "volumechange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnVolumechange bothValues = unsafeAttribute $ Both
-    { key: "volumechange", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnVolumechange bothValues = unsafeAttribute $ Both (pure 
+    { key: "volumechange", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "volumechange", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnVolumechangeEffect =
   => Event (Attribute element)
 
 instance Attr everything OnVolumechange (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnVolumechange bothValues = unsafeAttribute $ Both
-    { key: "volumechange", value: unset' }
+  attr OnVolumechange bothValues = unsafeAttribute $ Both (pure 
+    { key: "volumechange", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "volumechange", value: unset' })
 instance Attr everything OnVolumechange  Unit  where
   attr OnVolumechange _ = unsafeAttribute $ This $ pure $

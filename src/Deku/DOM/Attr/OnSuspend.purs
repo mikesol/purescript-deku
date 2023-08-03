@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnSuspend = OnSuspend
 
 instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnSuspend bothValues = unsafeAttribute $ Both
-    { key: "suspend", value: cb' (NonEmpty.head bothValues) }
+  attr OnSuspend bothValues = unsafeAttribute $ Both (pure 
+    { key: "suspend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "suspend", value: cb' value })
 instance Attr anything OnSuspend  Cb  where
   attr OnSuspend value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnSuspend (Event.Event  Cb ) where
     \value -> { key: "suspend", value: cb' value }
 
 instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnSuspend bothValues = unsafeAttribute $ Both
-    { key: "suspend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnSuspend bothValues = unsafeAttribute $ Both (pure 
+    { key: "suspend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "suspend", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnSuspend (Event.Event  (Effect Unit) ) where
     \value -> { key: "suspend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnSuspend bothValues = unsafeAttribute $ Both
-    { key: "suspend", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnSuspend bothValues = unsafeAttribute $ Both (pure 
+    { key: "suspend", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "suspend", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnSuspendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSuspend (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnSuspend bothValues = unsafeAttribute $ Both
-    { key: "suspend", value: unset' }
+  attr OnSuspend bothValues = unsafeAttribute $ Both (pure 
+    { key: "suspend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "suspend", value: unset' })
 instance Attr everything OnSuspend  Unit  where
   attr OnSuspend _ = unsafeAttribute $ This $ pure $

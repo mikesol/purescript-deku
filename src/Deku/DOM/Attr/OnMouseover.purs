@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMouseover = OnMouseover
 
 instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMouseover bothValues = unsafeAttribute $ Both
-    { key: "mouseover", value: cb' (NonEmpty.head bothValues) }
+  attr OnMouseover bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseover", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseover", value: cb' value })
 instance Attr anything OnMouseover  Cb  where
   attr OnMouseover value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMouseover (Event.Event  Cb ) where
     \value -> { key: "mouseover", value: cb' value }
 
 instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMouseover bothValues = unsafeAttribute $ Both
-    { key: "mouseover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMouseover bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseover", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseover", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMouseover (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseover (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMouseover bothValues = unsafeAttribute $ Both
-    { key: "mouseover", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMouseover bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseover", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseover", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMouseoverEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseover (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMouseover bothValues = unsafeAttribute $ Both
-    { key: "mouseover", value: unset' }
+  attr OnMouseover bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseover", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseover", value: unset' })
 instance Attr everything OnMouseover  Unit  where
   attr OnMouseover _ = unsafeAttribute $ This $ pure $

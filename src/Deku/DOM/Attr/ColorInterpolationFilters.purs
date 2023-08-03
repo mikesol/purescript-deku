@@ -29,8 +29,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ColorInterpolationFilters = ColorInterpolationFilters
 
 instance Attr FeBlend_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -43,8 +43,8 @@ instance Attr FeBlend_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -57,8 +57,8 @@ instance Attr FeColorMatrix_ ColorInterpolationFilters (Event.Event  String ) wh
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -71,8 +71,8 @@ instance Attr FeComponentTransfer_ ColorInterpolationFilters (Event.Event  Strin
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComposite_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -85,8 +85,8 @@ instance Attr FeComposite_ ColorInterpolationFilters (Event.Event  String ) wher
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -99,8 +99,8 @@ instance Attr FeConvolveMatrix_ ColorInterpolationFilters (Event.Event  String )
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -113,8 +113,8 @@ instance Attr FeDiffuseLighting_ ColorInterpolationFilters (Event.Event  String 
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -127,8 +127,8 @@ instance Attr FeDisplacementMap_ ColorInterpolationFilters (Event.Event  String 
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeFlood_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -141,8 +141,8 @@ instance Attr FeFlood_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeGaussianBlur_ ColorInterpolationFilters (Event.Event  String ) w
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeImage_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -169,8 +169,8 @@ instance Attr FeImage_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMerge_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr FeMerge_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMorphology_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -197,8 +197,8 @@ instance Attr FeMorphology_ ColorInterpolationFilters (Event.Event  String ) whe
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeOffset_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -211,8 +211,8 @@ instance Attr FeOffset_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -225,8 +225,8 @@ instance Attr FeSpecularLighting_ ColorInterpolationFilters (Event.Event  String
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTile_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -239,8 +239,8 @@ instance Attr FeTile_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTurbulence_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -253,8 +253,8 @@ instance Attr FeTurbulence_ ColorInterpolationFilters (Event.Event  String ) whe
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Filter_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -267,8 +267,8 @@ instance Attr Filter_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Image_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -281,8 +281,8 @@ instance Attr Image_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Switch_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
     )
@@ -295,8 +295,8 @@ instance Attr Switch_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr everything ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both
-    { key: "color-interpolation-filters", value: unset' }
+  attr ColorInterpolationFilters bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-interpolation-filters", value: unset' })
     ( NonEmpty.tail bothValues <#> \_ ->
         { key: "color-interpolation-filters", value: unset' }
     )

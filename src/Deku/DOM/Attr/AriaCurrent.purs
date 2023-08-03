@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaCurrent = AriaCurrent
 
 instance Attr Circle_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Circle_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Ellipse_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Ellipse_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr ForeignObject_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr ForeignObject_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr G_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr G_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Line_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Line_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Marker_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Marker_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Path_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Path_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Polygon_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Polygon_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Polyline_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Polyline_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Rect_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Rect_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Svg_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Svg_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Symbol_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Symbol_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Text_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Text_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr TextPath_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr TextPath_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Tspan_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Tspan_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr Use_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr Use_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr View_ AriaCurrent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: prop' (NonEmpty.head bothValues) }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-current", value: prop' value })
 instance Attr View_ AriaCurrent  String  where
   attr AriaCurrent value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaCurrent (Event.Event  String ) where
     \value -> { key: "aria-current", value: prop' value }
 
 instance Attr everything AriaCurrent (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaCurrent bothValues = unsafeAttribute $ Both
-    { key: "aria-current", value: unset' }
+  attr AriaCurrent bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-current", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-current", value: unset' })
 instance Attr everything AriaCurrent  Unit  where
   attr AriaCurrent _ = unsafeAttribute $ This $ pure $

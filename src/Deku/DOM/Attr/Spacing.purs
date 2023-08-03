@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Spacing = Spacing
 
 instance Attr TextPath_ Spacing (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Spacing bothValues = unsafeAttribute $ Both
-    { key: "spacing", value: prop' (NonEmpty.head bothValues) }
+  attr Spacing bothValues = unsafeAttribute $ Both (pure 
+    { key: "spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spacing", value: prop' value })
 instance Attr TextPath_ Spacing  String  where
   attr Spacing value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr TextPath_ Spacing (Event.Event  String ) where
     \value -> { key: "spacing", value: prop' value }
 
 instance Attr everything Spacing (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Spacing bothValues = unsafeAttribute $ Both
-    { key: "spacing", value: unset' }
+  attr Spacing bothValues = unsafeAttribute $ Both (pure 
+    { key: "spacing", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "spacing", value: unset' })
 instance Attr everything Spacing  Unit  where
   attr Spacing _ = unsafeAttribute $ This $ pure $ { key: "spacing", value: unset' }

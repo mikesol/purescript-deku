@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointermove = OnPointermove
 
 instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointermove bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointermove", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointermove", value: cb' value })
 instance Attr anything OnPointermove  Cb  where
   attr OnPointermove value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointermove (Event.Event  Cb ) where
     \value -> { key: "pointermove", value: cb' value }
 
 instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointermove bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointermove", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointermove", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPointermove (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointermove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointermove bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointermove", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointermove", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPointermoveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointermove (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointermove bothValues = unsafeAttribute $ Both
-    { key: "pointermove", value: unset' }
+  attr OnPointermove bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointermove", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointermove", value: unset' })
 instance Attr everything OnPointermove  Unit  where
   attr OnPointermove _ = unsafeAttribute $ This $ pure $

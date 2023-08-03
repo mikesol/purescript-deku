@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnDrop = OnDrop
 
 instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (NonEmpty.head bothValues) }
+  attr OnDrop bothValues = unsafeAttribute $ Both (pure 
+    { key: "drop", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "drop", value: cb' value })
 instance Attr anything OnDrop  Cb  where
   attr OnDrop value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnDrop (Event.Event  Cb ) where
     \value -> { key: "drop", value: cb' value }
 
 instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnDrop bothValues = unsafeAttribute $ Both (pure 
+    { key: "drop", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnDrop (Event.Event  (Effect Unit) ) where
     \value -> { key: "drop", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnDrop bothValues = unsafeAttribute $ Both
-    { key: "drop", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnDrop bothValues = unsafeAttribute $ Both (pure 
+    { key: "drop", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const value)) }
     )
@@ -51,7 +51,7 @@ type OnDropEffect =
   forall element. Attr element OnDrop (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnDrop (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnDrop bothValues = unsafeAttribute $ Both { key: "drop", value: unset' }
+  attr OnDrop bothValues = unsafeAttribute $ Both (pure  { key: "drop", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "drop", value: unset' })
 instance Attr everything OnDrop  Unit  where
   attr OnDrop _ = unsafeAttribute $ This $ pure $ { key: "drop", value: unset' }

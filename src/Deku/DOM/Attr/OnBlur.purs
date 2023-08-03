@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnBlur = OnBlur
 
 instance Attr anything OnBlur (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnBlur bothValues = unsafeAttribute $ Both
-    { key: "blur", value: cb' (NonEmpty.head bothValues) }
+  attr OnBlur bothValues = unsafeAttribute $ Both (pure 
+    { key: "blur", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "blur", value: cb' value })
 instance Attr anything OnBlur  Cb  where
   attr OnBlur value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnBlur (Event.Event  Cb ) where
     \value -> { key: "blur", value: cb' value }
 
 instance Attr anything OnBlur (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnBlur bothValues = unsafeAttribute $ Both
-    { key: "blur", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnBlur bothValues = unsafeAttribute $ Both (pure 
+    { key: "blur", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "blur", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnBlur (Event.Event  (Effect Unit) ) where
     \value -> { key: "blur", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnBlur (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnBlur bothValues = unsafeAttribute $ Both
-    { key: "blur", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnBlur bothValues = unsafeAttribute $ Both (pure 
+    { key: "blur", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "blur", value: cb' (Cb (const value)) }
     )
@@ -51,7 +51,7 @@ type OnBlurEffect =
   forall element. Attr element OnBlur (Effect Unit) => Event (Attribute element)
 
 instance Attr everything OnBlur (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnBlur bothValues = unsafeAttribute $ Both { key: "blur", value: unset' }
+  attr OnBlur bothValues = unsafeAttribute $ Both (pure  { key: "blur", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "blur", value: unset' })
 instance Attr everything OnBlur  Unit  where
   attr OnBlur _ = unsafeAttribute $ This $ pure $ { key: "blur", value: unset' }

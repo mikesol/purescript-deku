@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Manifest = Manifest
 
 instance Attr Html_ Manifest (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Manifest bothValues = unsafeAttribute $ Both
-    { key: "manifest", value: prop' (NonEmpty.head bothValues) }
+  attr Manifest bothValues = unsafeAttribute $ Both (pure 
+    { key: "manifest", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "manifest", value: prop' value })
 instance Attr Html_ Manifest  String  where
   attr Manifest value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Html_ Manifest (Event.Event  String ) where
     \value -> { key: "manifest", value: prop' value }
 
 instance Attr everything Manifest (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Manifest bothValues = unsafeAttribute $ Both
-    { key: "manifest", value: unset' }
+  attr Manifest bothValues = unsafeAttribute $ Both (pure 
+    { key: "manifest", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "manifest", value: unset' })
 instance Attr everything Manifest  Unit  where
   attr Manifest _ = unsafeAttribute $ This $ pure $

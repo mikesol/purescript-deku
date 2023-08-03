@@ -49,8 +49,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ColorRendering = ColorRendering
 
 instance Attr Circle_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -62,8 +62,8 @@ instance Attr Circle_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Defs_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -75,8 +75,8 @@ instance Attr Defs_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Ellipse_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -88,8 +88,8 @@ instance Attr Ellipse_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeBlend_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -101,8 +101,8 @@ instance Attr FeBlend_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -114,8 +114,8 @@ instance Attr FeColorMatrix_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -127,8 +127,8 @@ instance Attr FeComponentTransfer_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeComposite_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -140,8 +140,8 @@ instance Attr FeComposite_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -153,8 +153,8 @@ instance Attr FeConvolveMatrix_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -166,8 +166,8 @@ instance Attr FeDiffuseLighting_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -179,8 +179,8 @@ instance Attr FeDisplacementMap_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeFlood_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -192,8 +192,8 @@ instance Attr FeFlood_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -205,8 +205,8 @@ instance Attr FeGaussianBlur_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeImage_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -218,8 +218,8 @@ instance Attr FeImage_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeMerge_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -231,8 +231,8 @@ instance Attr FeMerge_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -244,8 +244,8 @@ instance Attr FeMorphology_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeOffset_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -257,8 +257,8 @@ instance Attr FeOffset_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -270,8 +270,8 @@ instance Attr FeSpecularLighting_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeTile_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -283,8 +283,8 @@ instance Attr FeTile_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -296,8 +296,8 @@ instance Attr FeTurbulence_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Filter_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -309,8 +309,8 @@ instance Attr Filter_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr ForeignObject_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -322,8 +322,8 @@ instance Attr ForeignObject_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr G_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -335,8 +335,8 @@ instance Attr G_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Image_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -348,8 +348,8 @@ instance Attr Image_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Line_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -361,8 +361,8 @@ instance Attr Line_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr LinearGradient_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -374,8 +374,8 @@ instance Attr LinearGradient_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Marker_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -387,8 +387,8 @@ instance Attr Marker_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Path_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -400,8 +400,8 @@ instance Attr Path_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Pattern_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -413,8 +413,8 @@ instance Attr Pattern_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Polygon_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -426,8 +426,8 @@ instance Attr Polygon_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Polyline_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -439,8 +439,8 @@ instance Attr Polyline_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr RadialGradient_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -452,8 +452,8 @@ instance Attr RadialGradient_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Rect_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -465,8 +465,8 @@ instance Attr Rect_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Svg_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -478,8 +478,8 @@ instance Attr Svg_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Switch_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -491,8 +491,8 @@ instance Attr Switch_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Symbol_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -504,8 +504,8 @@ instance Attr Symbol_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Text_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -517,8 +517,8 @@ instance Attr Text_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr TextPath_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -530,8 +530,8 @@ instance Attr TextPath_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Tspan_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -543,8 +543,8 @@ instance Attr Tspan_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr Use_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
@@ -556,8 +556,8 @@ instance Attr Use_ ColorRendering (Event.Event  String ) where
     \value -> { key: "color-rendering", value: prop' value }
 
 instance Attr everything ColorRendering (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ColorRendering bothValues = unsafeAttribute $ Both
-    { key: "color-rendering", value: unset' }
+  attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "color-rendering", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "color-rendering", value: unset' })
 instance Attr everything ColorRendering  Unit  where
   attr ColorRendering _ = unsafeAttribute $ This $ pure $

@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Hreflang = Hreflang
 
 instance Attr A_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Hreflang bothValues = unsafeAttribute $ Both
-    { key: "hreflang", value: prop' (NonEmpty.head bothValues) }
+  attr Hreflang bothValues = unsafeAttribute $ Both (pure 
+    { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr A_ Hreflang  String  where
   attr Hreflang value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr A_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Area_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Hreflang bothValues = unsafeAttribute $ Both
-    { key: "hreflang", value: prop' (NonEmpty.head bothValues) }
+  attr Hreflang bothValues = unsafeAttribute $ Both (pure 
+    { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Area_ Hreflang  String  where
   attr Hreflang value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Area_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Link_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Hreflang bothValues = unsafeAttribute $ Both
-    { key: "hreflang", value: prop' (NonEmpty.head bothValues) }
+  attr Hreflang bothValues = unsafeAttribute $ Both (pure 
+    { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Link_ Hreflang  String  where
   attr Hreflang value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr Link_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr everything Hreflang (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Hreflang bothValues = unsafeAttribute $ Both
-    { key: "hreflang", value: unset' }
+  attr Hreflang bothValues = unsafeAttribute $ Both (pure 
+    { key: "hreflang", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "hreflang", value: unset' })
 instance Attr everything Hreflang  Unit  where
   attr Hreflang _ = unsafeAttribute $ This $ pure $

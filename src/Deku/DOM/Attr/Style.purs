@@ -178,8 +178,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Style = Style
 
 instance Attr A_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr A_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -189,8 +189,8 @@ instance Attr A_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Abbr_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Abbr_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -200,8 +200,8 @@ instance Attr Abbr_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Acronym_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Acronym_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -211,8 +211,8 @@ instance Attr Acronym_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Address_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Address_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -222,8 +222,8 @@ instance Attr Address_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Applet_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Applet_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -233,8 +233,8 @@ instance Attr Applet_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Area_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Area_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -244,8 +244,8 @@ instance Attr Area_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Article_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Article_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -255,8 +255,8 @@ instance Attr Article_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Aside_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Aside_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -266,8 +266,8 @@ instance Attr Aside_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Audio_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Audio_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -277,8 +277,8 @@ instance Attr Audio_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr B_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr B_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -288,8 +288,8 @@ instance Attr B_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Base_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Base_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -299,8 +299,8 @@ instance Attr Base_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Basefont_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Basefont_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -310,8 +310,8 @@ instance Attr Basefont_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Bdi_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Bdi_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -321,8 +321,8 @@ instance Attr Bdi_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Bdo_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Bdo_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -332,8 +332,8 @@ instance Attr Bdo_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Big_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Big_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -343,8 +343,8 @@ instance Attr Big_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Blockquote_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Blockquote_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -354,8 +354,8 @@ instance Attr Blockquote_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Body_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Body_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -365,8 +365,8 @@ instance Attr Body_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Br_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Br_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -376,8 +376,8 @@ instance Attr Br_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Button_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Button_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -387,8 +387,8 @@ instance Attr Button_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Canvas_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Canvas_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -398,8 +398,8 @@ instance Attr Canvas_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Caption_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Caption_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -409,8 +409,8 @@ instance Attr Caption_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Center_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Center_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -420,8 +420,8 @@ instance Attr Center_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Cite_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Cite_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -431,8 +431,8 @@ instance Attr Cite_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Code_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Code_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -442,8 +442,8 @@ instance Attr Code_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Col_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Col_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -453,8 +453,8 @@ instance Attr Col_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Colgroup_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Colgroup_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -464,8 +464,8 @@ instance Attr Colgroup_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Xdata_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Xdata_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -475,8 +475,8 @@ instance Attr Xdata_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Datalist_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Datalist_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -486,8 +486,8 @@ instance Attr Datalist_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dd_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dd_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -497,8 +497,8 @@ instance Attr Dd_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Del_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Del_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -508,8 +508,8 @@ instance Attr Del_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Details_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Details_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -519,8 +519,8 @@ instance Attr Details_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dfn_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dfn_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -530,8 +530,8 @@ instance Attr Dfn_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dialog_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dialog_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -541,8 +541,8 @@ instance Attr Dialog_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dir_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dir_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -552,8 +552,8 @@ instance Attr Dir_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Div_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Div_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -563,8 +563,8 @@ instance Attr Div_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dl_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dl_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -574,8 +574,8 @@ instance Attr Dl_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Dt_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Dt_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -585,8 +585,8 @@ instance Attr Dt_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Em_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Em_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -596,8 +596,8 @@ instance Attr Em_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Embed_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Embed_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -607,8 +607,8 @@ instance Attr Embed_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Fieldset_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Fieldset_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -618,8 +618,8 @@ instance Attr Fieldset_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Figcaption_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Figcaption_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -629,8 +629,8 @@ instance Attr Figcaption_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Figure_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Figure_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -640,8 +640,8 @@ instance Attr Figure_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Font_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Font_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -651,8 +651,8 @@ instance Attr Font_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Footer_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Footer_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -662,8 +662,8 @@ instance Attr Footer_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Form_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Form_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -673,8 +673,8 @@ instance Attr Form_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Frame_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Frame_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -684,8 +684,8 @@ instance Attr Frame_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Frameset_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Frameset_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -695,8 +695,8 @@ instance Attr Frameset_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H1_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H1_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -706,8 +706,8 @@ instance Attr H1_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H2_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H2_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -717,8 +717,8 @@ instance Attr H2_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H3_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H3_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -728,8 +728,8 @@ instance Attr H3_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H4_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H4_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -739,8 +739,8 @@ instance Attr H4_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H5_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H5_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -750,8 +750,8 @@ instance Attr H5_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr H6_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr H6_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -761,8 +761,8 @@ instance Attr H6_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Head_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Head_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -772,8 +772,8 @@ instance Attr Head_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Header_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Header_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -783,8 +783,8 @@ instance Attr Header_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Hr_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Hr_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -794,8 +794,8 @@ instance Attr Hr_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Html_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Html_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -805,8 +805,8 @@ instance Attr Html_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr I_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr I_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -816,8 +816,8 @@ instance Attr I_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Iframe_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Iframe_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -827,8 +827,8 @@ instance Attr Iframe_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Img_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Img_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -838,8 +838,8 @@ instance Attr Img_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Input_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Input_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -849,8 +849,8 @@ instance Attr Input_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Ins_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Ins_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -860,8 +860,8 @@ instance Attr Ins_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Kbd_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Kbd_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -871,8 +871,8 @@ instance Attr Kbd_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Label_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Label_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -882,8 +882,8 @@ instance Attr Label_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Legend_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Legend_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -893,8 +893,8 @@ instance Attr Legend_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Li_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Li_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -904,8 +904,8 @@ instance Attr Li_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Link_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Link_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -915,8 +915,8 @@ instance Attr Link_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Main_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Main_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -926,8 +926,8 @@ instance Attr Main_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Map_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Map_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -937,8 +937,8 @@ instance Attr Map_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Mark_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Mark_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -948,8 +948,8 @@ instance Attr Mark_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Meta_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Meta_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -959,8 +959,8 @@ instance Attr Meta_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Meter_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Meter_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -970,8 +970,8 @@ instance Attr Meter_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Nav_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Nav_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -981,8 +981,8 @@ instance Attr Nav_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Noframes_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Noframes_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -992,8 +992,8 @@ instance Attr Noframes_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Noscript_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Noscript_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1003,8 +1003,8 @@ instance Attr Noscript_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Object_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Object_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1014,8 +1014,8 @@ instance Attr Object_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Ol_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Ol_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1025,8 +1025,8 @@ instance Attr Ol_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Optgroup_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Optgroup_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1036,8 +1036,8 @@ instance Attr Optgroup_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Option_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Option_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1047,8 +1047,8 @@ instance Attr Option_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Output_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Output_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1058,8 +1058,8 @@ instance Attr Output_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr P_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr P_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1069,8 +1069,8 @@ instance Attr P_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Param_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Param_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1080,8 +1080,8 @@ instance Attr Param_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Picture_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Picture_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1091,8 +1091,8 @@ instance Attr Picture_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Pre_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Pre_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1102,8 +1102,8 @@ instance Attr Pre_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Progress_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Progress_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1113,8 +1113,8 @@ instance Attr Progress_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Q_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Q_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1124,8 +1124,8 @@ instance Attr Q_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Rp_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Rp_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1135,8 +1135,8 @@ instance Attr Rp_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Rt_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Rt_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1146,8 +1146,8 @@ instance Attr Rt_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Ruby_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Ruby_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1157,8 +1157,8 @@ instance Attr Ruby_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr S_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr S_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1168,8 +1168,8 @@ instance Attr S_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Samp_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Samp_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1179,8 +1179,8 @@ instance Attr Samp_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Script_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Script_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1190,8 +1190,8 @@ instance Attr Script_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Section_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Section_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1201,8 +1201,8 @@ instance Attr Section_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Select_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Select_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1212,8 +1212,8 @@ instance Attr Select_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Small_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Small_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1223,8 +1223,8 @@ instance Attr Small_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Source_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Source_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1234,8 +1234,8 @@ instance Attr Source_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Span_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Span_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1245,8 +1245,8 @@ instance Attr Span_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Strike_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Strike_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1256,8 +1256,8 @@ instance Attr Strike_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Strong_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Strong_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1267,8 +1267,8 @@ instance Attr Strong_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Style_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Style_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1278,8 +1278,8 @@ instance Attr Style_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Sub_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Sub_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1289,8 +1289,8 @@ instance Attr Sub_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Summary_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Summary_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1300,8 +1300,8 @@ instance Attr Summary_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Sup_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Sup_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1311,8 +1311,8 @@ instance Attr Sup_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Svg_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Svg_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1322,8 +1322,8 @@ instance Attr Svg_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Table_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Table_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1333,8 +1333,8 @@ instance Attr Table_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Tbody_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Tbody_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1344,8 +1344,8 @@ instance Attr Tbody_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Td_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Td_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1355,8 +1355,8 @@ instance Attr Td_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Template_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Template_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1366,8 +1366,8 @@ instance Attr Template_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Textarea_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Textarea_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1377,8 +1377,8 @@ instance Attr Textarea_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Tfoot_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Tfoot_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1388,8 +1388,8 @@ instance Attr Tfoot_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Th_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Th_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1399,8 +1399,8 @@ instance Attr Th_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Thead_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Thead_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1410,8 +1410,8 @@ instance Attr Thead_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Time_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Time_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1421,8 +1421,8 @@ instance Attr Time_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Title_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Title_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1432,8 +1432,8 @@ instance Attr Title_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Tr_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Tr_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1443,8 +1443,8 @@ instance Attr Tr_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Track_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Track_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1454,8 +1454,8 @@ instance Attr Track_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Tt_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Tt_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1465,8 +1465,8 @@ instance Attr Tt_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr U_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr U_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1476,8 +1476,8 @@ instance Attr U_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Ul_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Ul_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1487,8 +1487,8 @@ instance Attr Ul_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Var_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Var_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1498,8 +1498,8 @@ instance Attr Var_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Video_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Video_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1509,8 +1509,8 @@ instance Attr Video_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Wbr_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Wbr_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1520,8 +1520,8 @@ instance Attr Wbr_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Animate_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Animate_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1531,8 +1531,8 @@ instance Attr Animate_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr AnimateMotion_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr AnimateMotion_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1542,8 +1542,8 @@ instance Attr AnimateMotion_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Circle_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Circle_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1553,8 +1553,8 @@ instance Attr Circle_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr ClipPath_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr ClipPath_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1564,8 +1564,8 @@ instance Attr ClipPath_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Defs_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Defs_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1575,8 +1575,8 @@ instance Attr Defs_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Desc_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Desc_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1586,8 +1586,8 @@ instance Attr Desc_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Ellipse_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Ellipse_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1597,8 +1597,8 @@ instance Attr Ellipse_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeBlend_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeBlend_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1608,8 +1608,8 @@ instance Attr FeBlend_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeColorMatrix_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeColorMatrix_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1619,8 +1619,8 @@ instance Attr FeColorMatrix_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeComponentTransfer_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeComponentTransfer_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1630,8 +1630,8 @@ instance Attr FeComponentTransfer_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeComposite_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeComposite_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1641,8 +1641,8 @@ instance Attr FeComposite_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeConvolveMatrix_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1652,8 +1652,8 @@ instance Attr FeConvolveMatrix_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeDiffuseLighting_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1663,8 +1663,8 @@ instance Attr FeDiffuseLighting_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeDisplacementMap_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeDisplacementMap_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1674,8 +1674,8 @@ instance Attr FeDisplacementMap_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeDropShadow_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeDropShadow_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1685,8 +1685,8 @@ instance Attr FeDropShadow_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeFlood_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeFlood_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1696,8 +1696,8 @@ instance Attr FeFlood_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeGaussianBlur_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeGaussianBlur_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1707,8 +1707,8 @@ instance Attr FeGaussianBlur_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeImage_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeImage_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1718,8 +1718,8 @@ instance Attr FeImage_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeMerge_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeMerge_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1729,8 +1729,8 @@ instance Attr FeMerge_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeMorphology_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeMorphology_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1740,8 +1740,8 @@ instance Attr FeMorphology_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeOffset_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeOffset_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1751,8 +1751,8 @@ instance Attr FeOffset_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeSpecularLighting_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeSpecularLighting_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1762,8 +1762,8 @@ instance Attr FeSpecularLighting_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeTile_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeTile_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1773,8 +1773,8 @@ instance Attr FeTile_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr FeTurbulence_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr FeTurbulence_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1784,8 +1784,8 @@ instance Attr FeTurbulence_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Filter_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Filter_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1795,8 +1795,8 @@ instance Attr Filter_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr ForeignObject_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr ForeignObject_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1806,8 +1806,8 @@ instance Attr ForeignObject_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr G_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr G_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1817,8 +1817,8 @@ instance Attr G_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Image_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Image_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1828,8 +1828,8 @@ instance Attr Image_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Line_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Line_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1839,8 +1839,8 @@ instance Attr Line_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr LinearGradient_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr LinearGradient_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1850,8 +1850,8 @@ instance Attr LinearGradient_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Marker_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Marker_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1861,8 +1861,8 @@ instance Attr Marker_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Mask_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Mask_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1872,8 +1872,8 @@ instance Attr Mask_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Path_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Path_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1883,8 +1883,8 @@ instance Attr Path_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Pattern_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Pattern_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1894,8 +1894,8 @@ instance Attr Pattern_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Polygon_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Polygon_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1905,8 +1905,8 @@ instance Attr Polygon_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Polyline_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Polyline_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1916,8 +1916,8 @@ instance Attr Polyline_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr RadialGradient_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr RadialGradient_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1927,8 +1927,8 @@ instance Attr RadialGradient_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Rect_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Rect_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1938,8 +1938,8 @@ instance Attr Rect_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Set_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Set_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1949,8 +1949,8 @@ instance Attr Set_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Stop_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Stop_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1960,8 +1960,8 @@ instance Attr Stop_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Switch_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Switch_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1971,8 +1971,8 @@ instance Attr Switch_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Symbol_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Symbol_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1982,8 +1982,8 @@ instance Attr Symbol_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Text_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Text_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -1993,8 +1993,8 @@ instance Attr Text_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr TextPath_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr TextPath_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -2004,8 +2004,8 @@ instance Attr TextPath_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Tspan_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Tspan_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -2015,8 +2015,8 @@ instance Attr Tspan_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr Use_ Style (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Style bothValues = unsafeAttribute $ Both
-    { key: "style", value: prop' (NonEmpty.head bothValues) }
+  attr Style bothValues = unsafeAttribute $ Both (pure 
+    { key: "style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "style", value: prop' value })
 instance Attr Use_ Style  String  where
   attr Style value = unsafeAttribute $ This $ pure $
@@ -2026,7 +2026,7 @@ instance Attr Use_ Style (Event.Event  String ) where
     \value -> { key: "style", value: prop' value }
 
 instance Attr everything Style (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Style bothValues = unsafeAttribute $ Both { key: "style", value: unset' }
+  attr Style bothValues = unsafeAttribute $ Both (pure  { key: "style", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "style", value: unset' })
 instance Attr everything Style  Unit  where
   attr Style _ = unsafeAttribute $ This $ pure $ { key: "style", value: unset' }

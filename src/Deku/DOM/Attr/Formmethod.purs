@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Formmethod = Formmethod
 
 instance Attr Button_ Formmethod (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formmethod bothValues = unsafeAttribute $ Both
-    { key: "formmethod", value: prop' (NonEmpty.head bothValues) }
+  attr Formmethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "formmethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formmethod", value: prop' value })
 instance Attr Button_ Formmethod  String  where
   attr Formmethod value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Button_ Formmethod (Event.Event  String ) where
     \value -> { key: "formmethod", value: prop' value }
 
 instance Attr Input_ Formmethod (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formmethod bothValues = unsafeAttribute $ Both
-    { key: "formmethod", value: prop' (NonEmpty.head bothValues) }
+  attr Formmethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "formmethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formmethod", value: prop' value })
 instance Attr Input_ Formmethod  String  where
   attr Formmethod value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Input_ Formmethod (Event.Event  String ) where
     \value -> { key: "formmethod", value: prop' value }
 
 instance Attr everything Formmethod (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Formmethod bothValues = unsafeAttribute $ Both
-    { key: "formmethod", value: unset' }
+  attr Formmethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "formmethod", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formmethod", value: unset' })
 instance Attr everything Formmethod  Unit  where
   attr Formmethod _ = unsafeAttribute $ This $ pure $

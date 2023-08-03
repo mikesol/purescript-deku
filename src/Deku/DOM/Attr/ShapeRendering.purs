@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ShapeRendering = ShapeRendering
 
 instance Attr Circle_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -64,8 +64,8 @@ instance Attr Circle_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ClipPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -77,8 +77,8 @@ instance Attr ClipPath_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Defs_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -90,8 +90,8 @@ instance Attr Defs_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Ellipse_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -103,8 +103,8 @@ instance Attr Ellipse_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeBlend_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -116,8 +116,8 @@ instance Attr FeBlend_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -129,8 +129,8 @@ instance Attr FeColorMatrix_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -142,8 +142,8 @@ instance Attr FeComponentTransfer_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComposite_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeComposite_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -168,8 +168,8 @@ instance Attr FeConvolveMatrix_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr FeDiffuseLighting_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -194,8 +194,8 @@ instance Attr FeDisplacementMap_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeFlood_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -207,8 +207,8 @@ instance Attr FeFlood_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -220,8 +220,8 @@ instance Attr FeGaussianBlur_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeImage_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -233,8 +233,8 @@ instance Attr FeImage_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMerge_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -246,8 +246,8 @@ instance Attr FeMerge_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -259,8 +259,8 @@ instance Attr FeMorphology_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeOffset_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -272,8 +272,8 @@ instance Attr FeOffset_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -285,8 +285,8 @@ instance Attr FeSpecularLighting_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTile_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -298,8 +298,8 @@ instance Attr FeTile_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -311,8 +311,8 @@ instance Attr FeTurbulence_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Filter_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -324,8 +324,8 @@ instance Attr Filter_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ForeignObject_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -337,8 +337,8 @@ instance Attr ForeignObject_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr G_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -350,8 +350,8 @@ instance Attr G_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Image_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -363,8 +363,8 @@ instance Attr Image_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Line_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -376,8 +376,8 @@ instance Attr Line_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr LinearGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -389,8 +389,8 @@ instance Attr LinearGradient_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Marker_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -402,8 +402,8 @@ instance Attr Marker_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Mask_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -415,8 +415,8 @@ instance Attr Mask_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Path_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -428,8 +428,8 @@ instance Attr Path_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Pattern_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -441,8 +441,8 @@ instance Attr Pattern_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polygon_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -454,8 +454,8 @@ instance Attr Polygon_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polyline_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -467,8 +467,8 @@ instance Attr Polyline_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr RadialGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -480,8 +480,8 @@ instance Attr RadialGradient_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Rect_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -493,8 +493,8 @@ instance Attr Rect_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Svg_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -506,8 +506,8 @@ instance Attr Svg_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Switch_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -519,8 +519,8 @@ instance Attr Switch_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Symbol_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -532,8 +532,8 @@ instance Attr Symbol_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Text_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -545,8 +545,8 @@ instance Attr Text_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr TextPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -558,8 +558,8 @@ instance Attr TextPath_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Tspan_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -571,8 +571,8 @@ instance Attr Tspan_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Use_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
     )
@@ -584,8 +584,8 @@ instance Attr Use_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr everything ShapeRendering (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ShapeRendering bothValues = unsafeAttribute $ Both
-    { key: "shape-rendering", value: unset' }
+  attr ShapeRendering bothValues = unsafeAttribute $ Both (pure 
+    { key: "shape-rendering", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "shape-rendering", value: unset' })
 instance Attr everything ShapeRendering  Unit  where
   attr ShapeRendering _ = unsafeAttribute $ This $ pure $

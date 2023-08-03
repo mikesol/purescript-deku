@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PatternContentUnits = PatternContentUnits
 
 instance Attr Pattern_ PatternContentUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr PatternContentUnits bothValues = unsafeAttribute $ Both
-    { key: "patternContentUnits", value: prop' (NonEmpty.head bothValues) }
+  attr PatternContentUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "patternContentUnits", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "patternContentUnits", value: prop' value }
     )
@@ -24,8 +24,8 @@ instance Attr Pattern_ PatternContentUnits (Event.Event  String ) where
     eventValue <#> \value -> { key: "patternContentUnits", value: prop' value }
 
 instance Attr everything PatternContentUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr PatternContentUnits bothValues = unsafeAttribute $ Both
-    { key: "patternContentUnits", value: unset' }
+  attr PatternContentUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "patternContentUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "patternContentUnits", value: unset' })
 instance Attr everything PatternContentUnits  Unit  where
   attr PatternContentUnits _ = unsafeAttribute $ This $ pure $

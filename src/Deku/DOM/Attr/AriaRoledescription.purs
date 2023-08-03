@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaRoledescription = AriaRoledescription
 
 instance Attr Circle_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Ellipse_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr ForeignObject_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr G_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Line_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Marker_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Path_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Polygon_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Polyline_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Rect_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Svg_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Symbol_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Text_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr TextPath_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Tspan_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr Use_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr View_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-roledescription", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaRoledescription (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-roledescription", value: prop' value }
 
 instance Attr everything AriaRoledescription (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaRoledescription bothValues = unsafeAttribute $ Both
-    { key: "aria-roledescription", value: unset' }
+  attr AriaRoledescription bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-roledescription", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-roledescription", value: unset' })
 instance Attr everything AriaRoledescription  Unit  where
   attr AriaRoledescription _ = unsafeAttribute $ This $ pure $

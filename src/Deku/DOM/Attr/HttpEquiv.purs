@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data HttpEquiv = HttpEquiv
 
 instance Attr Meta_ HttpEquiv (NonEmpty.NonEmpty Event.Event  String ) where
-  attr HttpEquiv bothValues = unsafeAttribute $ Both
-    { key: "http-equiv", value: prop' (NonEmpty.head bothValues) }
+  attr HttpEquiv bothValues = unsafeAttribute $ Both (pure 
+    { key: "http-equiv", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "http-equiv", value: prop' value })
 instance Attr Meta_ HttpEquiv  String  where
   attr HttpEquiv value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Meta_ HttpEquiv (Event.Event  String ) where
     \value -> { key: "http-equiv", value: prop' value }
 
 instance Attr everything HttpEquiv (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr HttpEquiv bothValues = unsafeAttribute $ Both
-    { key: "http-equiv", value: unset' }
+  attr HttpEquiv bothValues = unsafeAttribute $ Both (pure 
+    { key: "http-equiv", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "http-equiv", value: unset' })
 instance Attr everything HttpEquiv  Unit  where
   attr HttpEquiv _ = unsafeAttribute $ This $ pure $

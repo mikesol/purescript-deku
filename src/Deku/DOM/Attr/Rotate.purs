@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Rotate = Rotate
 
 instance Attr AnimateMotion_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Rotate bothValues = unsafeAttribute $ Both
-    { key: "rotate", value: prop' (NonEmpty.head bothValues) }
+  attr Rotate bothValues = unsafeAttribute $ Both (pure 
+    { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr AnimateMotion_ Rotate  String  where
   attr Rotate value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr AnimateMotion_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Text_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Rotate bothValues = unsafeAttribute $ Both
-    { key: "rotate", value: prop' (NonEmpty.head bothValues) }
+  attr Rotate bothValues = unsafeAttribute $ Both (pure 
+    { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Text_ Rotate  String  where
   attr Rotate value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Text_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Tspan_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Rotate bothValues = unsafeAttribute $ Both
-    { key: "rotate", value: prop' (NonEmpty.head bothValues) }
+  attr Rotate bothValues = unsafeAttribute $ Both (pure 
+    { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Tspan_ Rotate  String  where
   attr Rotate value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr Tspan_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr everything Rotate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Rotate bothValues = unsafeAttribute $ Both
-    { key: "rotate", value: unset' }
+  attr Rotate bothValues = unsafeAttribute $ Both (pure 
+    { key: "rotate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "rotate", value: unset' })
 instance Attr everything Rotate  Unit  where
   attr Rotate _ = unsafeAttribute $ This $ pure $ { key: "rotate", value: unset' }

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointerout = OnPointerout
 
 instance Attr anything OnPointerout (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerout bothValues = unsafeAttribute $ Both
-    { key: "pointerout", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointerout bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerout", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerout", value: cb' value })
 instance Attr anything OnPointerout  Cb  where
   attr OnPointerout value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointerout (Event.Event  Cb ) where
     \value -> { key: "pointerout", value: cb' value }
 
 instance Attr anything OnPointerout (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerout bothValues = unsafeAttribute $ Both
-    { key: "pointerout", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointerout bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerout", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerout", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPointerout (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointerout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerout (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerout bothValues = unsafeAttribute $ Both
-    { key: "pointerout", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointerout bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerout", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerout", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPointeroutEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerout (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerout bothValues = unsafeAttribute $ Both
-    { key: "pointerout", value: unset' }
+  attr OnPointerout bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerout", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerout", value: unset' })
 instance Attr everything OnPointerout  Unit  where
   attr OnPointerout _ = unsafeAttribute $ This $ pure $

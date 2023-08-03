@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnTransitionend = OnTransitionend
 
 instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnTransitionend bothValues = unsafeAttribute $ Both
-    { key: "transitionend", value: cb' (NonEmpty.head bothValues) }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both (pure 
+    { key: "transitionend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "transitionend", value: cb' value })
 instance Attr anything OnTransitionend  Cb  where
   attr OnTransitionend value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnTransitionend (Event.Event  Cb ) where
     <#> \value -> { key: "transitionend", value: cb' value }
 
 instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnTransitionend bothValues = unsafeAttribute $ Both
-    { key: "transitionend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both (pure 
+    { key: "transitionend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transitionend", value: cb' (Cb (const (value $> true))) }
     )
@@ -36,8 +36,8 @@ instance Attr anything OnTransitionend (Event.Event  (Effect Unit) ) where
       { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnTransitionend bothValues = unsafeAttribute $ Both
-    { key: "transitionend", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both (pure 
+    { key: "transitionend", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transitionend", value: cb' (Cb (const value)) }
     )
@@ -54,8 +54,8 @@ type OnTransitionendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTransitionend (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnTransitionend bothValues = unsafeAttribute $ Both
-    { key: "transitionend", value: unset' }
+  attr OnTransitionend bothValues = unsafeAttribute $ Both (pure 
+    { key: "transitionend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "transitionend", value: unset' })
 instance Attr everything OnTransitionend  Unit  where
   attr OnTransitionend _ = unsafeAttribute $ This $ pure $

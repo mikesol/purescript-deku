@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Autoplay = Autoplay
 
 instance Attr Audio_ Autoplay (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autoplay bothValues = unsafeAttribute $ Both
-    { key: "autoplay", value: prop' (NonEmpty.head bothValues) }
+  attr Autoplay bothValues = unsafeAttribute $ Both (pure 
+    { key: "autoplay", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Audio_ Autoplay  String  where
   attr Autoplay value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Audio_ Autoplay (Event.Event  String ) where
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr Video_ Autoplay (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autoplay bothValues = unsafeAttribute $ Both
-    { key: "autoplay", value: prop' (NonEmpty.head bothValues) }
+  attr Autoplay bothValues = unsafeAttribute $ Both (pure 
+    { key: "autoplay", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Video_ Autoplay  String  where
   attr Autoplay value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Video_ Autoplay (Event.Event  String ) where
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr everything Autoplay (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Autoplay bothValues = unsafeAttribute $ Both
-    { key: "autoplay", value: unset' }
+  attr Autoplay bothValues = unsafeAttribute $ Both (pure 
+    { key: "autoplay", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "autoplay", value: unset' })
 instance Attr everything Autoplay  Unit  where
   attr Autoplay _ = unsafeAttribute $ This $ pure $

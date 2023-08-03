@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data K2 = K2
 
 instance Attr FeComposite_ K2 (NonEmpty.NonEmpty Event.Event  String ) where
-  attr K2 bothValues = unsafeAttribute $ Both
-    { key: "k2", value: prop' (NonEmpty.head bothValues) }
+  attr K2 bothValues = unsafeAttribute $ Both (pure 
+    { key: "k2", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "k2", value: prop' value })
 instance Attr FeComposite_ K2  String  where
   attr K2 value = unsafeAttribute $ This $ pure $ { key: "k2", value: prop' value }
@@ -21,7 +21,7 @@ instance Attr FeComposite_ K2 (Event.Event  String ) where
     { key: "k2", value: prop' value }
 
 instance Attr everything K2 (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr K2 bothValues = unsafeAttribute $ Both { key: "k2", value: unset' }
+  attr K2 bothValues = unsafeAttribute $ Both (pure  { key: "k2", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "k2", value: unset' })
 instance Attr everything K2  Unit  where
   attr K2 _ = unsafeAttribute $ This $ pure $ { key: "k2", value: unset' }

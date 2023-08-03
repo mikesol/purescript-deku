@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data MaskUnits = MaskUnits
 
 instance Attr Mask_ MaskUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr MaskUnits bothValues = unsafeAttribute $ Both
-    { key: "maskUnits", value: prop' (NonEmpty.head bothValues) }
+  attr MaskUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "maskUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "maskUnits", value: prop' value })
 instance Attr Mask_ MaskUnits  String  where
   attr MaskUnits value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Mask_ MaskUnits (Event.Event  String ) where
     \value -> { key: "maskUnits", value: prop' value }
 
 instance Attr everything MaskUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr MaskUnits bothValues = unsafeAttribute $ Both
-    { key: "maskUnits", value: unset' }
+  attr MaskUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "maskUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "maskUnits", value: unset' })
 instance Attr everything MaskUnits  Unit  where
   attr MaskUnits _ = unsafeAttribute $ This $ pure $

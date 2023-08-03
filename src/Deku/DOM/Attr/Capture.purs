@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Capture = Capture
 
 instance Attr Input_ Capture (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Capture bothValues = unsafeAttribute $ Both
-    { key: "capture", value: prop' (NonEmpty.head bothValues) }
+  attr Capture bothValues = unsafeAttribute $ Both (pure 
+    { key: "capture", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "capture", value: prop' value })
 instance Attr Input_ Capture  String  where
   attr Capture value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Input_ Capture (Event.Event  String ) where
     \value -> { key: "capture", value: prop' value }
 
 instance Attr everything Capture (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Capture bothValues = unsafeAttribute $ Both
-    { key: "capture", value: unset' }
+  attr Capture bothValues = unsafeAttribute $ Both (pure 
+    { key: "capture", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "capture", value: unset' })
 instance Attr everything Capture  Unit  where
   attr Capture _ = unsafeAttribute $ This $ pure $ { key: "capture", value: unset' }

@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Summary = Summary
 
 instance Attr Table_ Summary (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Summary bothValues = unsafeAttribute $ Both
-    { key: "summary", value: prop' (NonEmpty.head bothValues) }
+  attr Summary bothValues = unsafeAttribute $ Both (pure 
+    { key: "summary", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "summary", value: prop' value })
 instance Attr Table_ Summary  String  where
   attr Summary value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Table_ Summary (Event.Event  String ) where
     \value -> { key: "summary", value: prop' value }
 
 instance Attr everything Summary (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Summary bothValues = unsafeAttribute $ Both
-    { key: "summary", value: unset' }
+  attr Summary bothValues = unsafeAttribute $ Both (pure 
+    { key: "summary", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "summary", value: unset' })
 instance Attr everything Summary  Unit  where
   attr Summary _ = unsafeAttribute $ This $ pure $ { key: "summary", value: unset' }

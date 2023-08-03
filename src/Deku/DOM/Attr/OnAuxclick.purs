@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnAuxclick = OnAuxclick
 
 instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnAuxclick bothValues = unsafeAttribute $ Both
-    { key: "auxclick", value: cb' (NonEmpty.head bothValues) }
+  attr OnAuxclick bothValues = unsafeAttribute $ Both (pure 
+    { key: "auxclick", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "auxclick", value: cb' value })
 instance Attr anything OnAuxclick  Cb  where
   attr OnAuxclick value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnAuxclick (Event.Event  Cb ) where
     \value -> { key: "auxclick", value: cb' value }
 
 instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnAuxclick bothValues = unsafeAttribute $ Both
-    { key: "auxclick", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnAuxclick bothValues = unsafeAttribute $ Both (pure 
+    { key: "auxclick", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "auxclick", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnAuxclick (Event.Event  (Effect Unit) ) where
     \value -> { key: "auxclick", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnAuxclick bothValues = unsafeAttribute $ Both
-    { key: "auxclick", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnAuxclick bothValues = unsafeAttribute $ Both (pure 
+    { key: "auxclick", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "auxclick", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnAuxclickEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAuxclick (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnAuxclick bothValues = unsafeAttribute $ Both
-    { key: "auxclick", value: unset' }
+  attr OnAuxclick bothValues = unsafeAttribute $ Both (pure 
+    { key: "auxclick", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "auxclick", value: unset' })
 instance Attr everything OnAuxclick  Unit  where
   attr OnAuxclick _ = unsafeAttribute $ This $ pure $

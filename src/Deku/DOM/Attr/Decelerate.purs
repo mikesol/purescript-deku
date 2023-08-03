@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Decelerate = Decelerate
 
 instance Attr AnimateTransform_ Decelerate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Decelerate bothValues = unsafeAttribute $ Both
-    { key: "decelerate", value: prop' (NonEmpty.head bothValues) }
+  attr Decelerate bothValues = unsafeAttribute $ Both (pure 
+    { key: "decelerate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "decelerate", value: prop' value })
 instance Attr AnimateTransform_ Decelerate  String  where
   attr Decelerate value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr AnimateTransform_ Decelerate (Event.Event  String ) where
     \value -> { key: "decelerate", value: prop' value }
 
 instance Attr everything Decelerate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Decelerate bothValues = unsafeAttribute $ Both
-    { key: "decelerate", value: unset' }
+  attr Decelerate bothValues = unsafeAttribute $ Both (pure 
+    { key: "decelerate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "decelerate", value: unset' })
 instance Attr everything Decelerate  Unit  where
   attr Decelerate _ = unsafeAttribute $ This $ pure $

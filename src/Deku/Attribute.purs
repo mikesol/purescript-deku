@@ -94,12 +94,16 @@ newtype Attribute (e :: Type) = Attribute
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
-  :: forall e. Attribute e -> These (ST Global Attribute') (FRP.Event Attribute')
+  :: forall e
+   . Attribute e
+  -> These (ST Global Attribute') (FRP.Event Attribute')
 unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e. These (ST Global Attribute') (FRP.Event Attribute') -> Attribute e
+  :: forall e
+   . These (ST Global Attribute') (FRP.Event Attribute')
+  -> Attribute e
 unsafeAttribute = Attribute
 
 -- | Guarantees type-safe creation of attribute `a` with type `b` for element `e`.

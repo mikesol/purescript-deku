@@ -132,8 +132,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accesskey = Accesskey
 
 instance Attr A_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr A_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -143,8 +143,8 @@ instance Attr A_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Abbr_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Abbr_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -154,8 +154,8 @@ instance Attr Abbr_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Acronym_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Acronym_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -165,8 +165,8 @@ instance Attr Acronym_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Address_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Address_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -176,8 +176,8 @@ instance Attr Address_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Applet_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Applet_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -187,8 +187,8 @@ instance Attr Applet_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Area_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Area_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -198,8 +198,8 @@ instance Attr Area_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Article_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Article_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -209,8 +209,8 @@ instance Attr Article_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Aside_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Aside_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -220,8 +220,8 @@ instance Attr Aside_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Audio_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Audio_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -231,8 +231,8 @@ instance Attr Audio_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr B_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr B_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -242,8 +242,8 @@ instance Attr B_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Base_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Base_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -253,8 +253,8 @@ instance Attr Base_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Basefont_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Basefont_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -264,8 +264,8 @@ instance Attr Basefont_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Bdi_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Bdi_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -275,8 +275,8 @@ instance Attr Bdi_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Bdo_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Bdo_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -286,8 +286,8 @@ instance Attr Bdo_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Big_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Big_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -297,8 +297,8 @@ instance Attr Big_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Blockquote_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Blockquote_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -308,8 +308,8 @@ instance Attr Blockquote_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Body_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Body_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -319,8 +319,8 @@ instance Attr Body_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Br_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Br_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -330,8 +330,8 @@ instance Attr Br_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Button_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Button_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -341,8 +341,8 @@ instance Attr Button_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Canvas_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Canvas_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -352,8 +352,8 @@ instance Attr Canvas_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Caption_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Caption_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -363,8 +363,8 @@ instance Attr Caption_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Center_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Center_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -374,8 +374,8 @@ instance Attr Center_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Cite_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Cite_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -385,8 +385,8 @@ instance Attr Cite_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Code_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Code_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -396,8 +396,8 @@ instance Attr Code_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Col_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Col_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -407,8 +407,8 @@ instance Attr Col_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Colgroup_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Colgroup_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -418,8 +418,8 @@ instance Attr Colgroup_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Xdata_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Xdata_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -429,8 +429,8 @@ instance Attr Xdata_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Datalist_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Datalist_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -440,8 +440,8 @@ instance Attr Datalist_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dd_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dd_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -451,8 +451,8 @@ instance Attr Dd_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Del_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Del_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -462,8 +462,8 @@ instance Attr Del_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Details_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Details_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -473,8 +473,8 @@ instance Attr Details_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dfn_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dfn_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -484,8 +484,8 @@ instance Attr Dfn_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dialog_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dialog_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -495,8 +495,8 @@ instance Attr Dialog_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dir_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dir_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -506,8 +506,8 @@ instance Attr Dir_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Div_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Div_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -517,8 +517,8 @@ instance Attr Div_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dl_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dl_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -528,8 +528,8 @@ instance Attr Dl_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Dt_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Dt_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -539,8 +539,8 @@ instance Attr Dt_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Em_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Em_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -550,8 +550,8 @@ instance Attr Em_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Embed_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Embed_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -561,8 +561,8 @@ instance Attr Embed_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Fieldset_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Fieldset_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -572,8 +572,8 @@ instance Attr Fieldset_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Figcaption_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Figcaption_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -583,8 +583,8 @@ instance Attr Figcaption_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Figure_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Figure_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -594,8 +594,8 @@ instance Attr Figure_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Font_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Font_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -605,8 +605,8 @@ instance Attr Font_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Footer_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Footer_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -616,8 +616,8 @@ instance Attr Footer_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Form_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Form_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -627,8 +627,8 @@ instance Attr Form_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Frame_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Frame_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -638,8 +638,8 @@ instance Attr Frame_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Frameset_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Frameset_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -649,8 +649,8 @@ instance Attr Frameset_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H1_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H1_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -660,8 +660,8 @@ instance Attr H1_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H2_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H2_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -671,8 +671,8 @@ instance Attr H2_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H3_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H3_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -682,8 +682,8 @@ instance Attr H3_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H4_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H4_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -693,8 +693,8 @@ instance Attr H4_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H5_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H5_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -704,8 +704,8 @@ instance Attr H5_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr H6_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr H6_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -715,8 +715,8 @@ instance Attr H6_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Head_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Head_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -726,8 +726,8 @@ instance Attr Head_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Header_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Header_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -737,8 +737,8 @@ instance Attr Header_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Hr_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Hr_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -748,8 +748,8 @@ instance Attr Hr_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Html_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Html_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -759,8 +759,8 @@ instance Attr Html_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr I_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr I_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -770,8 +770,8 @@ instance Attr I_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Iframe_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Iframe_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -781,8 +781,8 @@ instance Attr Iframe_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Img_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Img_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -792,8 +792,8 @@ instance Attr Img_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Input_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Input_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -803,8 +803,8 @@ instance Attr Input_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ins_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Ins_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -814,8 +814,8 @@ instance Attr Ins_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Kbd_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Kbd_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -825,8 +825,8 @@ instance Attr Kbd_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Label_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Label_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -836,8 +836,8 @@ instance Attr Label_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Legend_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Legend_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -847,8 +847,8 @@ instance Attr Legend_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Li_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Li_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -858,8 +858,8 @@ instance Attr Li_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Link_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Link_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -869,8 +869,8 @@ instance Attr Link_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Main_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Main_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -880,8 +880,8 @@ instance Attr Main_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Map_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Map_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -891,8 +891,8 @@ instance Attr Map_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Mark_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Mark_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -902,8 +902,8 @@ instance Attr Mark_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Meta_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Meta_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -913,8 +913,8 @@ instance Attr Meta_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Meter_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Meter_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -924,8 +924,8 @@ instance Attr Meter_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Nav_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Nav_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -935,8 +935,8 @@ instance Attr Nav_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Noframes_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Noframes_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -946,8 +946,8 @@ instance Attr Noframes_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Noscript_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Noscript_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -957,8 +957,8 @@ instance Attr Noscript_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Object_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Object_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -968,8 +968,8 @@ instance Attr Object_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ol_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Ol_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -979,8 +979,8 @@ instance Attr Ol_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Optgroup_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Optgroup_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -990,8 +990,8 @@ instance Attr Optgroup_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Option_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Option_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1001,8 +1001,8 @@ instance Attr Option_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Output_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Output_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1012,8 +1012,8 @@ instance Attr Output_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr P_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr P_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1023,8 +1023,8 @@ instance Attr P_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Param_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Param_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1034,8 +1034,8 @@ instance Attr Param_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Picture_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Picture_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1045,8 +1045,8 @@ instance Attr Picture_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Pre_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Pre_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1056,8 +1056,8 @@ instance Attr Pre_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Progress_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Progress_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1067,8 +1067,8 @@ instance Attr Progress_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Q_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Q_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1078,8 +1078,8 @@ instance Attr Q_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Rp_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Rp_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1089,8 +1089,8 @@ instance Attr Rp_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Rt_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Rt_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1100,8 +1100,8 @@ instance Attr Rt_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ruby_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Ruby_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1111,8 +1111,8 @@ instance Attr Ruby_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr S_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr S_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1122,8 +1122,8 @@ instance Attr S_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Samp_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Samp_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1133,8 +1133,8 @@ instance Attr Samp_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Script_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Script_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1144,8 +1144,8 @@ instance Attr Script_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Section_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Section_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1155,8 +1155,8 @@ instance Attr Section_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Select_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Select_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1166,8 +1166,8 @@ instance Attr Select_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Small_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Small_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1177,8 +1177,8 @@ instance Attr Small_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Source_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Source_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1188,8 +1188,8 @@ instance Attr Source_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Span_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Span_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1199,8 +1199,8 @@ instance Attr Span_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Strike_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Strike_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1210,8 +1210,8 @@ instance Attr Strike_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Strong_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Strong_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1221,8 +1221,8 @@ instance Attr Strong_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Style_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Style_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1232,8 +1232,8 @@ instance Attr Style_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Sub_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Sub_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1243,8 +1243,8 @@ instance Attr Sub_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Summary_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Summary_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1254,8 +1254,8 @@ instance Attr Summary_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Sup_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Sup_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1265,8 +1265,8 @@ instance Attr Sup_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Svg_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Svg_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1276,8 +1276,8 @@ instance Attr Svg_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Table_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Table_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1287,8 +1287,8 @@ instance Attr Table_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tbody_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Tbody_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1298,8 +1298,8 @@ instance Attr Tbody_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Td_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Td_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1309,8 +1309,8 @@ instance Attr Td_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Template_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Template_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1320,8 +1320,8 @@ instance Attr Template_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Textarea_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Textarea_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1331,8 +1331,8 @@ instance Attr Textarea_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tfoot_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Tfoot_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1342,8 +1342,8 @@ instance Attr Tfoot_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Th_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Th_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1353,8 +1353,8 @@ instance Attr Th_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Thead_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Thead_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1364,8 +1364,8 @@ instance Attr Thead_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Time_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Time_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1375,8 +1375,8 @@ instance Attr Time_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Title_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Title_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1386,8 +1386,8 @@ instance Attr Title_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tr_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Tr_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1397,8 +1397,8 @@ instance Attr Tr_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Track_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Track_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1408,8 +1408,8 @@ instance Attr Track_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Tt_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Tt_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1419,8 +1419,8 @@ instance Attr Tt_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr U_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr U_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1430,8 +1430,8 @@ instance Attr U_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Ul_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Ul_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1441,8 +1441,8 @@ instance Attr Ul_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Var_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Var_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1452,8 +1452,8 @@ instance Attr Var_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Video_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Video_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1463,8 +1463,8 @@ instance Attr Video_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr Wbr_ Accesskey (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: prop' (NonEmpty.head bothValues) }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accesskey", value: prop' value })
 instance Attr Wbr_ Accesskey  String  where
   attr Accesskey value = unsafeAttribute $ This $ pure $
@@ -1474,8 +1474,8 @@ instance Attr Wbr_ Accesskey (Event.Event  String ) where
     \value -> { key: "accesskey", value: prop' value }
 
 instance Attr everything Accesskey (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Accesskey bothValues = unsafeAttribute $ Both
-    { key: "accesskey", value: unset' }
+  attr Accesskey bothValues = unsafeAttribute $ Both (pure 
+    { key: "accesskey", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accesskey", value: unset' })
 instance Attr everything Accesskey  Unit  where
   attr Accesskey _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMouseout = OnMouseout
 
 instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMouseout bothValues = unsafeAttribute $ Both
-    { key: "mouseout", value: cb' (NonEmpty.head bothValues) }
+  attr OnMouseout bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseout", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseout", value: cb' value })
 instance Attr anything OnMouseout  Cb  where
   attr OnMouseout value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMouseout (Event.Event  Cb ) where
     \value -> { key: "mouseout", value: cb' value }
 
 instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMouseout bothValues = unsafeAttribute $ Both
-    { key: "mouseout", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMouseout bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseout", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseout", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMouseout (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMouseout bothValues = unsafeAttribute $ Both
-    { key: "mouseout", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMouseout bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseout", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseout", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMouseoutEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseout (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMouseout bothValues = unsafeAttribute $ Both
-    { key: "mouseout", value: unset' }
+  attr OnMouseout bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseout", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseout", value: unset' })
 instance Attr everything OnMouseout  Unit  where
   attr OnMouseout _ = unsafeAttribute $ This $ pure $

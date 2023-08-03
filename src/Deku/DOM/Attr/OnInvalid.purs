@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnInvalid = OnInvalid
 
 instance Attr anything OnInvalid (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnInvalid bothValues = unsafeAttribute $ Both
-    { key: "invalid", value: cb' (NonEmpty.head bothValues) }
+  attr OnInvalid bothValues = unsafeAttribute $ Both (pure 
+    { key: "invalid", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "invalid", value: cb' value })
 instance Attr anything OnInvalid  Cb  where
   attr OnInvalid value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnInvalid (Event.Event  Cb ) where
     \value -> { key: "invalid", value: cb' value }
 
 instance Attr anything OnInvalid (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnInvalid bothValues = unsafeAttribute $ Both
-    { key: "invalid", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnInvalid bothValues = unsafeAttribute $ Both (pure 
+    { key: "invalid", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "invalid", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnInvalid (Event.Event  (Effect Unit) ) where
     \value -> { key: "invalid", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnInvalid (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnInvalid bothValues = unsafeAttribute $ Both
-    { key: "invalid", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnInvalid bothValues = unsafeAttribute $ Both (pure 
+    { key: "invalid", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "invalid", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnInvalidEffect =
   => Event (Attribute element)
 
 instance Attr everything OnInvalid (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnInvalid bothValues = unsafeAttribute $ Both
-    { key: "invalid", value: unset' }
+  attr OnInvalid bothValues = unsafeAttribute $ Both (pure 
+    { key: "invalid", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "invalid", value: unset' })
 instance Attr everything OnInvalid  Unit  where
   attr OnInvalid _ = unsafeAttribute $ This $ pure $

@@ -1632,7 +1632,7 @@ import Deku.DOM.Attr.Enterkeyhint (Enterkeyhint(..))
 import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 
 import Effect (Effect)
-import Prelude (Unit, ($), ($>), (<#>))
+import Prelude (Unit, ($), ($>), (<#>), pure)
 import Data.NonEmpty as NonEmpty
 import FRP.Event as Event
 import Data.These (These(..))
@@ -1912,7 +1912,11 @@ instance
     Self
     (NonEmpty.NonEmpty Event.Event (DOM.Element -> Effect Unit)) where
   attr Self bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -1937,7 +1941,11 @@ instance
     SelfT
     (NonEmpty.NonEmpty Event.Event (DOM.Element -> Effect Unit)) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -1956,7 +1964,11 @@ instance Attr anything SelfT (Event.Event (Effect Unit)) where
 
 instance Attr anything SelfT (NonEmpty.NonEmpty Event.Event (Effect Unit)) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@"
         , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
@@ -1970,7 +1982,11 @@ instance
         (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -1993,7 +2009,11 @@ instance
         (HTMLAreaElement.HTMLAreaElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2016,7 +2036,11 @@ instance
         (HTMLAudioElement.HTMLAudioElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2039,7 +2063,11 @@ instance
         (HTMLBaseElement.HTMLBaseElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2062,7 +2090,11 @@ instance
         (HTMLBodyElement.HTMLBodyElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2083,7 +2115,11 @@ instance
     SelfT
     (NonEmpty.NonEmpty Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2104,7 +2140,11 @@ instance
         (HTMLButtonElement.HTMLButtonElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2127,7 +2167,11 @@ instance
         (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2150,7 +2194,11 @@ instance
         (HTMLDivElement.HTMLDivElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2171,7 +2219,11 @@ instance
         (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2194,7 +2246,11 @@ instance
         (HTMLFormElement.HTMLFormElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2217,7 +2273,11 @@ instance
         (HTMLHeadElement.HTMLHeadElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2238,7 +2298,11 @@ instance
     SelfT
     (NonEmpty.NonEmpty Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2259,7 +2323,11 @@ instance
         (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2282,7 +2350,11 @@ instance
         (HTMLInputElement.HTMLInputElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2305,7 +2377,11 @@ instance
         (HTMLLabelElement.HTMLLabelElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2328,7 +2404,11 @@ instance
         (HTMLLegendElement.HTMLLegendElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2351,7 +2431,11 @@ instance
         (HTMLLinkElement.HTMLLinkElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2374,7 +2458,11 @@ instance
         (HTMLMapElement.HTMLMapElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2395,7 +2483,11 @@ instance
         (HTMLMetaElement.HTMLMetaElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2418,7 +2510,11 @@ instance
         (HTMLMeterElement.HTMLMeterElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2441,7 +2537,11 @@ instance
         (HTMLObjectElement.HTMLObjectElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2464,7 +2564,11 @@ instance
         (HTMLOptionElement.HTMLOptionElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2487,7 +2591,11 @@ instance
         (HTMLOutputElement.HTMLOutputElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2510,7 +2618,11 @@ instance
         (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2534,7 +2646,11 @@ instance
         (HTMLParamElement.HTMLParamElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2557,7 +2673,11 @@ instance
         (HTMLPreElement.HTMLPreElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2578,7 +2698,11 @@ instance
         (HTMLProgressElement.HTMLProgressElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2602,7 +2726,11 @@ instance
         (HTMLScriptElement.HTMLScriptElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2625,7 +2753,11 @@ instance
         (HTMLSelectElement.HTMLSelectElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2648,7 +2780,11 @@ instance
         (HTMLSourceElement.HTMLSourceElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2671,7 +2807,11 @@ instance
         (HTMLSpanElement.HTMLSpanElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2694,7 +2834,11 @@ instance
         (HTMLStyleElement.HTMLStyleElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2717,7 +2861,11 @@ instance
         (HTMLTableElement.HTMLTableElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2740,7 +2888,11 @@ instance
         (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2768,7 +2920,11 @@ instance
         (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2792,7 +2948,11 @@ instance
         (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2816,7 +2976,11 @@ instance
         (HTMLTimeElement.HTMLTimeElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2839,7 +3003,11 @@ instance
         (HTMLTitleElement.HTMLTitleElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2862,7 +3030,11 @@ instance
         (HTMLTrackElement.HTMLTrackElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )
@@ -2885,7 +3057,11 @@ instance
         (HTMLVideoElement.HTMLVideoElement -> Effect Unit)
     ) where
   attr SelfT bothValues = unsafeAttribute $ Both
-    { key: "@self@", value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues))) }
+    ( pure
+        { key: "@self@"
+        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
+        }
+    )
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
     )

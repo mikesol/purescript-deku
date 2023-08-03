@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Opacity = Opacity
 
 instance Attr Circle_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Circle_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -62,8 +62,8 @@ instance Attr Circle_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr ClipPath_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr ClipPath_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -73,8 +73,8 @@ instance Attr ClipPath_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Defs_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Defs_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -84,8 +84,8 @@ instance Attr Defs_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Ellipse_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Ellipse_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -95,8 +95,8 @@ instance Attr Ellipse_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeBlend_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeBlend_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -106,8 +106,8 @@ instance Attr FeBlend_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeColorMatrix_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeColorMatrix_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeComponentTransfer_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeComponentTransfer_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeComposite_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeComposite_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -139,8 +139,8 @@ instance Attr FeComposite_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeConvolveMatrix_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeDiffuseLighting_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeDisplacementMap_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeDisplacementMap_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeFlood_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeFlood_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -183,8 +183,8 @@ instance Attr FeFlood_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeGaussianBlur_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeGaussianBlur_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeImage_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeImage_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -205,8 +205,8 @@ instance Attr FeImage_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeMerge_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeMerge_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -216,8 +216,8 @@ instance Attr FeMerge_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeMorphology_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeMorphology_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeOffset_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeOffset_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -238,8 +238,8 @@ instance Attr FeOffset_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeSpecularLighting_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeSpecularLighting_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeTile_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeTile_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -260,8 +260,8 @@ instance Attr FeTile_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr FeTurbulence_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeTurbulence_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Filter_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Filter_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -282,8 +282,8 @@ instance Attr Filter_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr ForeignObject_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr ForeignObject_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr G_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr G_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -304,8 +304,8 @@ instance Attr G_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Image_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Image_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -315,8 +315,8 @@ instance Attr Image_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Line_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Line_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -326,8 +326,8 @@ instance Attr Line_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr LinearGradient_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr LinearGradient_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Marker_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Marker_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -348,8 +348,8 @@ instance Attr Marker_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Mask_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Mask_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -359,8 +359,8 @@ instance Attr Mask_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Path_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Path_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -370,8 +370,8 @@ instance Attr Path_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Pattern_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Pattern_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -381,8 +381,8 @@ instance Attr Pattern_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Polygon_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Polygon_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -392,8 +392,8 @@ instance Attr Polygon_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Polyline_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Polyline_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -403,8 +403,8 @@ instance Attr Polyline_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr RadialGradient_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr RadialGradient_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Rect_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Rect_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -425,8 +425,8 @@ instance Attr Rect_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Svg_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Svg_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -436,8 +436,8 @@ instance Attr Svg_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Switch_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Switch_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -447,8 +447,8 @@ instance Attr Switch_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Symbol_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Symbol_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -458,8 +458,8 @@ instance Attr Symbol_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Text_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Text_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -469,8 +469,8 @@ instance Attr Text_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr TextPath_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr TextPath_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -480,8 +480,8 @@ instance Attr TextPath_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Tspan_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Tspan_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -491,8 +491,8 @@ instance Attr Tspan_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr Use_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: prop' (NonEmpty.head bothValues) }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Use_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
@@ -502,8 +502,8 @@ instance Attr Use_ Opacity (Event.Event  String ) where
     \value -> { key: "opacity", value: prop' value }
 
 instance Attr everything Opacity (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Opacity bothValues = unsafeAttribute $ Both
-    { key: "opacity", value: unset' }
+  attr Opacity bothValues = unsafeAttribute $ Both (pure 
+    { key: "opacity", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "opacity", value: unset' })
 instance Attr everything Opacity  Unit  where
   attr Opacity _ = unsafeAttribute $ This $ pure $ { key: "opacity", value: unset' }

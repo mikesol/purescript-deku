@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaMultiselectable = AriaMultiselectable
 
 instance Attr Circle_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Ellipse_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr ForeignObject_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr G_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Line_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Marker_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Path_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Polygon_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Polyline_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Rect_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Svg_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Symbol_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Text_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr TextPath_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Tspan_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr Use_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr View_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-multiselectable", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaMultiselectable (Event.Event  String ) where
     eventValue <#> \value -> { key: "aria-multiselectable", value: prop' value }
 
 instance Attr everything AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaMultiselectable bothValues = unsafeAttribute $ Both
-    { key: "aria-multiselectable", value: unset' }
+  attr AriaMultiselectable bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-multiselectable", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-multiselectable", value: unset' })
 instance Attr everything AriaMultiselectable  Unit  where
   attr AriaMultiselectable _ = unsafeAttribute $ This $ pure $

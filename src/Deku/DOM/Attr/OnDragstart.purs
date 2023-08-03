@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnDragstart = OnDragstart
 
 instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnDragstart bothValues = unsafeAttribute $ Both
-    { key: "dragstart", value: cb' (NonEmpty.head bothValues) }
+  attr OnDragstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragstart", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragstart", value: cb' value })
 instance Attr anything OnDragstart  Cb  where
   attr OnDragstart value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnDragstart (Event.Event  Cb ) where
     \value -> { key: "dragstart", value: cb' value }
 
 instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnDragstart bothValues = unsafeAttribute $ Both
-    { key: "dragstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnDragstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragstart", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnDragstart (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnDragstart bothValues = unsafeAttribute $ Both
-    { key: "dragstart", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnDragstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragstart", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragstart", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnDragstartEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragstart (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnDragstart bothValues = unsafeAttribute $ Both
-    { key: "dragstart", value: unset' }
+  attr OnDragstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragstart", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragstart", value: unset' })
 instance Attr everything OnDragstart  Unit  where
   attr OnDragstart _ = unsafeAttribute $ This $ pure $

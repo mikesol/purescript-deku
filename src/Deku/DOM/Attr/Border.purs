@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Border = Border
 
 instance Attr Img_ Border (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Border bothValues = unsafeAttribute $ Both
-    { key: "border", value: prop' (NonEmpty.head bothValues) }
+  attr Border bothValues = unsafeAttribute $ Both (pure 
+    { key: "border", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Img_ Border  String  where
   attr Border value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Img_ Border (Event.Event  String ) where
     \value -> { key: "border", value: prop' value }
 
 instance Attr Object_ Border (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Border bothValues = unsafeAttribute $ Both
-    { key: "border", value: prop' (NonEmpty.head bothValues) }
+  attr Border bothValues = unsafeAttribute $ Both (pure 
+    { key: "border", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Object_ Border  String  where
   attr Border value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Object_ Border (Event.Event  String ) where
     \value -> { key: "border", value: prop' value }
 
 instance Attr Table_ Border (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Border bothValues = unsafeAttribute $ Both
-    { key: "border", value: prop' (NonEmpty.head bothValues) }
+  attr Border bothValues = unsafeAttribute $ Both (pure 
+    { key: "border", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Table_ Border  String  where
   attr Border value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr Table_ Border (Event.Event  String ) where
     \value -> { key: "border", value: prop' value }
 
 instance Attr everything Border (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Border bothValues = unsafeAttribute $ Both
-    { key: "border", value: unset' }
+  attr Border bothValues = unsafeAttribute $ Both (pure 
+    { key: "border", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "border", value: unset' })
 instance Attr everything Border  Unit  where
   attr Border _ = unsafeAttribute $ This $ pure $ { key: "border", value: unset' }

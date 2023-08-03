@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnClose = OnClose
 
 instance Attr anything OnClose (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnClose bothValues = unsafeAttribute $ Both
-    { key: "close", value: cb' (NonEmpty.head bothValues) }
+  attr OnClose bothValues = unsafeAttribute $ Both (pure 
+    { key: "close", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "close", value: cb' value })
 instance Attr anything OnClose  Cb  where
   attr OnClose value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnClose (Event.Event  Cb ) where
     \value -> { key: "close", value: cb' value }
 
 instance Attr anything OnClose (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnClose bothValues = unsafeAttribute $ Both
-    { key: "close", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnClose bothValues = unsafeAttribute $ Both (pure 
+    { key: "close", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "close", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnClose (Event.Event  (Effect Unit) ) where
     \value -> { key: "close", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnClose (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnClose bothValues = unsafeAttribute $ Both
-    { key: "close", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnClose bothValues = unsafeAttribute $ Both (pure 
+    { key: "close", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "close", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnCloseEffect =
   => Event (Attribute element)
 
 instance Attr everything OnClose (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnClose bothValues = unsafeAttribute $ Both
-    { key: "close", value: unset' }
+  attr OnClose bothValues = unsafeAttribute $ Both (pure 
+    { key: "close", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "close", value: unset' })
 instance Attr everything OnClose  Unit  where
   attr OnClose _ = unsafeAttribute $ This $ pure $ { key: "close", value: unset' }

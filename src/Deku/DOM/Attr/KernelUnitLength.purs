@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data KernelUnitLength = KernelUnitLength
 
 instance Attr FeConvolveMatrix_ KernelUnitLength (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KernelUnitLength bothValues = unsafeAttribute $ Both
-    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) }
+  attr KernelUnitLength bothValues = unsafeAttribute $ Both (pure 
+    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
     )
@@ -26,8 +26,8 @@ instance Attr FeConvolveMatrix_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeDiffuseLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KernelUnitLength bothValues = unsafeAttribute $ Both
-    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) }
+  attr KernelUnitLength bothValues = unsafeAttribute $ Both (pure 
+    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
     )
@@ -39,8 +39,8 @@ instance Attr FeDiffuseLighting_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeSpecularLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KernelUnitLength bothValues = unsafeAttribute $ Both
-    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) }
+  attr KernelUnitLength bothValues = unsafeAttribute $ Both (pure 
+    { key: "kernelUnitLength", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
     )
@@ -52,8 +52,8 @@ instance Attr FeSpecularLighting_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr everything KernelUnitLength (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr KernelUnitLength bothValues = unsafeAttribute $ Both
-    { key: "kernelUnitLength", value: unset' }
+  attr KernelUnitLength bothValues = unsafeAttribute $ Both (pure 
+    { key: "kernelUnitLength", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "kernelUnitLength", value: unset' })
 instance Attr everything KernelUnitLength  Unit  where
   attr KernelUnitLength _ = unsafeAttribute $ This $ pure $

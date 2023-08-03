@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StitchTiles = StitchTiles
 
 instance Attr FeTurbulence_ StitchTiles (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StitchTiles bothValues = unsafeAttribute $ Both
-    { key: "stitchTiles", value: prop' (NonEmpty.head bothValues) }
+  attr StitchTiles bothValues = unsafeAttribute $ Both (pure 
+    { key: "stitchTiles", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stitchTiles", value: prop' value })
 instance Attr FeTurbulence_ StitchTiles  String  where
   attr StitchTiles value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeTurbulence_ StitchTiles (Event.Event  String ) where
     \value -> { key: "stitchTiles", value: prop' value }
 
 instance Attr everything StitchTiles (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StitchTiles bothValues = unsafeAttribute $ Both
-    { key: "stitchTiles", value: unset' }
+  attr StitchTiles bothValues = unsafeAttribute $ Both (pure 
+    { key: "stitchTiles", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stitchTiles", value: unset' })
 instance Attr everything StitchTiles  Unit  where
   attr StitchTiles _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnChange = OnChange
 
 instance Attr anything OnChange (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (NonEmpty.head bothValues) }
+  attr OnChange bothValues = unsafeAttribute $ Both (pure 
+    { key: "change", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "change", value: cb' value })
 instance Attr anything OnChange  Cb  where
   attr OnChange value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnChange (Event.Event  Cb ) where
     \value -> { key: "change", value: cb' value }
 
 instance Attr anything OnChange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnChange bothValues = unsafeAttribute $ Both (pure 
+    { key: "change", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "change", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnChange (Event.Event  (Effect Unit) ) where
     \value -> { key: "change", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnChange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnChange bothValues = unsafeAttribute $ Both (pure 
+    { key: "change", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "change", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnChangeEffect =
   => Event (Attribute element)
 
 instance Attr everything OnChange (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnChange bothValues = unsafeAttribute $ Both
-    { key: "change", value: unset' }
+  attr OnChange bothValues = unsafeAttribute $ Both (pure 
+    { key: "change", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "change", value: unset' })
 instance Attr everything OnChange  Unit  where
   attr OnChange _ = unsafeAttribute $ This $ pure $ { key: "change", value: unset' }

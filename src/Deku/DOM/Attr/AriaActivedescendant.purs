@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaActivedescendant = AriaActivedescendant
 
 instance Attr Circle_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -41,8 +41,8 @@ instance Attr Circle_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Ellipse_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -55,8 +55,8 @@ instance Attr Ellipse_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr ForeignObject_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -69,8 +69,8 @@ instance Attr ForeignObject_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr G_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -83,8 +83,8 @@ instance Attr G_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Line_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -97,8 +97,8 @@ instance Attr Line_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Marker_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -111,8 +111,8 @@ instance Attr Marker_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Path_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -125,8 +125,8 @@ instance Attr Path_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polygon_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -139,8 +139,8 @@ instance Attr Polygon_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polyline_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -153,8 +153,8 @@ instance Attr Polyline_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Rect_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -167,8 +167,8 @@ instance Attr Rect_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Svg_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr Svg_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Symbol_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -195,8 +195,8 @@ instance Attr Symbol_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Text_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr Text_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr TextPath_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -223,8 +223,8 @@ instance Attr TextPath_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Tspan_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -237,8 +237,8 @@ instance Attr Tspan_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Use_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -251,8 +251,8 @@ instance Attr Use_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr View_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
     )
@@ -265,8 +265,8 @@ instance Attr View_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr everything AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaActivedescendant bothValues = unsafeAttribute $ Both
-    { key: "aria-activedescendant", value: unset' }
+  attr AriaActivedescendant bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-activedescendant", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-activedescendant", value: unset' })
 instance Attr everything AriaActivedescendant  Unit  where
   attr AriaActivedescendant _ = unsafeAttribute $ This $ pure $

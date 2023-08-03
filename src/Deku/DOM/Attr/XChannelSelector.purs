@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XChannelSelector = XChannelSelector
 
 instance Attr FeDisplacementMap_ XChannelSelector (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XChannelSelector bothValues = unsafeAttribute $ Both
-    { key: "xChannelSelector", value: prop' (NonEmpty.head bothValues) }
+  attr XChannelSelector bothValues = unsafeAttribute $ Both (pure 
+    { key: "xChannelSelector", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "xChannelSelector", value: prop' value }
     )
@@ -24,8 +24,8 @@ instance Attr FeDisplacementMap_ XChannelSelector (Event.Event  String ) where
     <#> \value -> { key: "xChannelSelector", value: prop' value }
 
 instance Attr everything XChannelSelector (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr XChannelSelector bothValues = unsafeAttribute $ Both
-    { key: "xChannelSelector", value: unset' }
+  attr XChannelSelector bothValues = unsafeAttribute $ Both (pure 
+    { key: "xChannelSelector", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xChannelSelector", value: unset' })
 instance Attr everything XChannelSelector  Unit  where
   attr XChannelSelector _ = unsafeAttribute $ This $ pure $

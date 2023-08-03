@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaSelected = AriaSelected
 
 instance Attr Circle_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Circle_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Ellipse_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Ellipse_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr ForeignObject_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr ForeignObject_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr G_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr G_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Line_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Line_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Marker_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Marker_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Path_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Path_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Polygon_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Polygon_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Polyline_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Polyline_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Rect_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Rect_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Svg_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Svg_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Symbol_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Symbol_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Text_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Text_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr TextPath_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr TextPath_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Tspan_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Tspan_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr Use_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Use_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr View_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr View_ AriaSelected  String  where
   attr AriaSelected value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaSelected (Event.Event  String ) where
     \value -> { key: "aria-selected", value: prop' value }
 
 instance Attr everything AriaSelected (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both
-    { key: "aria-selected", value: unset' }
+  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-selected", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-selected", value: unset' })
 instance Attr everything AriaSelected  Unit  where
   attr AriaSelected _ = unsafeAttribute $ This $ pure $

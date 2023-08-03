@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnTouchcancel = OnTouchcancel
 
 instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (NonEmpty.head bothValues) }
+  attr OnTouchcancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchcancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "touchcancel", value: cb' value })
 instance Attr anything OnTouchcancel  Cb  where
   attr OnTouchcancel value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnTouchcancel (Event.Event  Cb ) where
     \value -> { key: "touchcancel", value: cb' value }
 
 instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnTouchcancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchcancel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnTouchcancel (Event.Event  (Effect Unit) ) where
     \value -> { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnTouchcancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchcancel", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnTouchcancelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTouchcancel (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnTouchcancel bothValues = unsafeAttribute $ Both
-    { key: "touchcancel", value: unset' }
+  attr OnTouchcancel bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchcancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchcancel", value: unset' })
 instance Attr everything OnTouchcancel  Unit  where
   attr OnTouchcancel _ = unsafeAttribute $ This $ pure $

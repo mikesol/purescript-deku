@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnError = OnError
 
 instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnError bothValues = unsafeAttribute $ Both
-    { key: "error", value: cb' (NonEmpty.head bothValues) }
+  attr OnError bothValues = unsafeAttribute $ Both (pure 
+    { key: "error", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "error", value: cb' value })
 instance Attr anything OnError  Cb  where
   attr OnError value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnError (Event.Event  Cb ) where
     \value -> { key: "error", value: cb' value }
 
 instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnError bothValues = unsafeAttribute $ Both
-    { key: "error", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnError bothValues = unsafeAttribute $ Both (pure 
+    { key: "error", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "error", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnError (Event.Event  (Effect Unit) ) where
     \value -> { key: "error", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnError bothValues = unsafeAttribute $ Both
-    { key: "error", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnError bothValues = unsafeAttribute $ Both (pure 
+    { key: "error", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "error", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnErrorEffect =
   => Event (Attribute element)
 
 instance Attr everything OnError (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnError bothValues = unsafeAttribute $ Both
-    { key: "error", value: unset' }
+  attr OnError bothValues = unsafeAttribute $ Both (pure 
+    { key: "error", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "error", value: unset' })
 instance Attr everything OnError  Unit  where
   attr OnError _ = unsafeAttribute $ This $ pure $ { key: "error", value: unset' }

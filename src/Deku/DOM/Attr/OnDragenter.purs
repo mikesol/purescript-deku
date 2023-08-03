@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnDragenter = OnDragenter
 
 instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnDragenter bothValues = unsafeAttribute $ Both
-    { key: "dragenter", value: cb' (NonEmpty.head bothValues) }
+  attr OnDragenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragenter", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragenter", value: cb' value })
 instance Attr anything OnDragenter  Cb  where
   attr OnDragenter value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnDragenter (Event.Event  Cb ) where
     \value -> { key: "dragenter", value: cb' value }
 
 instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnDragenter bothValues = unsafeAttribute $ Both
-    { key: "dragenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnDragenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragenter", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnDragenter (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnDragenter bothValues = unsafeAttribute $ Both
-    { key: "dragenter", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnDragenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragenter", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragenter", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnDragenterEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragenter (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnDragenter bothValues = unsafeAttribute $ Both
-    { key: "dragenter", value: unset' }
+  attr OnDragenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragenter", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragenter", value: unset' })
 instance Attr everything OnDragenter  Unit  where
   attr OnDragenter _ = unsafeAttribute $ This $ pure $

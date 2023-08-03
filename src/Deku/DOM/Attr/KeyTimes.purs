@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data KeyTimes = KeyTimes
 
 instance Attr Animate_ KeyTimes (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KeyTimes bothValues = unsafeAttribute $ Both
-    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
+  attr KeyTimes bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr Animate_ KeyTimes  String  where
   attr KeyTimes value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Animate_ KeyTimes (Event.Event  String ) where
     \value -> { key: "keyTimes", value: prop' value }
 
 instance Attr AnimateMotion_ KeyTimes (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KeyTimes bothValues = unsafeAttribute $ Both
-    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
+  attr KeyTimes bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr AnimateMotion_ KeyTimes  String  where
   attr KeyTimes value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr AnimateMotion_ KeyTimes (Event.Event  String ) where
     \value -> { key: "keyTimes", value: prop' value }
 
 instance Attr AnimateTransform_ KeyTimes (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KeyTimes bothValues = unsafeAttribute $ Both
-    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
+  attr KeyTimes bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyTimes", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr AnimateTransform_ KeyTimes  String  where
   attr KeyTimes value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr AnimateTransform_ KeyTimes (Event.Event  String ) where
     \value -> { key: "keyTimes", value: prop' value }
 
 instance Attr everything KeyTimes (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr KeyTimes bothValues = unsafeAttribute $ Both
-    { key: "keyTimes", value: unset' }
+  attr KeyTimes bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyTimes", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyTimes", value: unset' })
 instance Attr everything KeyTimes  Unit  where
   attr KeyTimes _ = unsafeAttribute $ This $ pure $

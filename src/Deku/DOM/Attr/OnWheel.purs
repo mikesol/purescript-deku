@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnWheel = OnWheel
 
 instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (NonEmpty.head bothValues) }
+  attr OnWheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "wheel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "wheel", value: cb' value })
 instance Attr anything OnWheel  Cb  where
   attr OnWheel value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnWheel (Event.Event  Cb ) where
     \value -> { key: "wheel", value: cb' value }
 
 instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnWheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "wheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnWheel (Event.Event  (Effect Unit) ) where
     \value -> { key: "wheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnWheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "wheel", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnWheelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnWheel (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnWheel bothValues = unsafeAttribute $ Both
-    { key: "wheel", value: unset' }
+  attr OnWheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "wheel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "wheel", value: unset' })
 instance Attr everything OnWheel  Unit  where
   attr OnWheel _ = unsafeAttribute $ This $ pure $ { key: "wheel", value: unset' }

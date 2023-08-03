@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PrimitiveUnits = PrimitiveUnits
 
 instance Attr Filter_ PrimitiveUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr PrimitiveUnits bothValues = unsafeAttribute $ Both
-    { key: "primitiveUnits", value: prop' (NonEmpty.head bothValues) }
+  attr PrimitiveUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "primitiveUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "primitiveUnits", value: prop' value })
 instance Attr Filter_ PrimitiveUnits  String  where
   attr PrimitiveUnits value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Filter_ PrimitiveUnits (Event.Event  String ) where
     \value -> { key: "primitiveUnits", value: prop' value }
 
 instance Attr everything PrimitiveUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr PrimitiveUnits bothValues = unsafeAttribute $ Both
-    { key: "primitiveUnits", value: unset' }
+  attr PrimitiveUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "primitiveUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "primitiveUnits", value: unset' })
 instance Attr everything PrimitiveUnits  Unit  where
   attr PrimitiveUnits _ = unsafeAttribute $ This $ pure $

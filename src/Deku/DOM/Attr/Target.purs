@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Target = Target
 
 instance Attr A_ Target (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (NonEmpty.head bothValues) }
+  attr Target bothValues = unsafeAttribute $ Both (pure 
+    { key: "target", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr A_ Target  String  where
   attr Target value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr A_ Target (Event.Event  String ) where
     \value -> { key: "target", value: prop' value }
 
 instance Attr Area_ Target (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (NonEmpty.head bothValues) }
+  attr Target bothValues = unsafeAttribute $ Both (pure 
+    { key: "target", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Area_ Target  String  where
   attr Target value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr Area_ Target (Event.Event  String ) where
     \value -> { key: "target", value: prop' value }
 
 instance Attr Base_ Target (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (NonEmpty.head bothValues) }
+  attr Target bothValues = unsafeAttribute $ Both (pure 
+    { key: "target", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Base_ Target  String  where
   attr Target value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr Base_ Target (Event.Event  String ) where
     \value -> { key: "target", value: prop' value }
 
 instance Attr Form_ Target (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: prop' (NonEmpty.head bothValues) }
+  attr Target bothValues = unsafeAttribute $ Both (pure 
+    { key: "target", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Form_ Target  String  where
   attr Target value = unsafeAttribute $ This $ pure $
@@ -58,8 +58,8 @@ instance Attr Form_ Target (Event.Event  String ) where
     \value -> { key: "target", value: prop' value }
 
 instance Attr everything Target (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Target bothValues = unsafeAttribute $ Both
-    { key: "target", value: unset' }
+  attr Target bothValues = unsafeAttribute $ Both (pure 
+    { key: "target", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "target", value: unset' })
 instance Attr everything Target  Unit  where
   attr Target _ = unsafeAttribute $ This $ pure $ { key: "target", value: unset' }

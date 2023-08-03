@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Maxlength = Maxlength
 
 instance Attr Input_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Maxlength bothValues = unsafeAttribute $ Both
-    { key: "maxlength", value: prop' (NonEmpty.head bothValues) }
+  attr Maxlength bothValues = unsafeAttribute $ Both (pure 
+    { key: "maxlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Input_ Maxlength  String  where
   attr Maxlength value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Input_ Maxlength (Event.Event  String ) where
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr Textarea_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Maxlength bothValues = unsafeAttribute $ Both
-    { key: "maxlength", value: prop' (NonEmpty.head bothValues) }
+  attr Maxlength bothValues = unsafeAttribute $ Both (pure 
+    { key: "maxlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Textarea_ Maxlength  String  where
   attr Maxlength value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Textarea_ Maxlength (Event.Event  String ) where
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr everything Maxlength (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Maxlength bothValues = unsafeAttribute $ Both
-    { key: "maxlength", value: unset' }
+  attr Maxlength bothValues = unsafeAttribute $ Both (pure 
+    { key: "maxlength", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "maxlength", value: unset' })
 instance Attr everything Maxlength  Unit  where
   attr Maxlength _ = unsafeAttribute $ This $ pure $

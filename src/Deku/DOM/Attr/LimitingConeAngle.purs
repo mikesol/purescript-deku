@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data LimitingConeAngle = LimitingConeAngle
 
 instance Attr FeSpotLight_ LimitingConeAngle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr LimitingConeAngle bothValues = unsafeAttribute $ Both
-    { key: "limitingConeAngle", value: prop' (NonEmpty.head bothValues) }
+  attr LimitingConeAngle bothValues = unsafeAttribute $ Both (pure 
+    { key: "limitingConeAngle", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "limitingConeAngle", value: prop' value }
     )
@@ -24,8 +24,8 @@ instance Attr FeSpotLight_ LimitingConeAngle (Event.Event  String ) where
     <#> \value -> { key: "limitingConeAngle", value: prop' value }
 
 instance Attr everything LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr LimitingConeAngle bothValues = unsafeAttribute $ Both
-    { key: "limitingConeAngle", value: unset' }
+  attr LimitingConeAngle bothValues = unsafeAttribute $ Both (pure 
+    { key: "limitingConeAngle", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
 instance Attr everything LimitingConeAngle  Unit  where
   attr LimitingConeAngle _ = unsafeAttribute $ This $ pure $

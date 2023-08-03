@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnLoadedmetadata = OnLoadedmetadata
 
 instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
-    { key: "loadedmetadata", value: cb' (NonEmpty.head bothValues) }
+  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadedmetadata", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "loadedmetadata", value: cb' value })
 instance Attr anything OnLoadedmetadata  Cb  where
   attr OnLoadedmetadata value = unsafeAttribute $ This $ pure $
@@ -22,10 +22,10 @@ instance Attr anything OnLoadedmetadata (Event.Event  Cb ) where
     <#> \value -> { key: "loadedmetadata", value: cb' value }
 
 instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
+  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both (pure 
     { key: "loadedmetadata"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
     )
@@ -38,8 +38,8 @@ instance Attr anything OnLoadedmetadata (Event.Event  (Effect Unit) ) where
       { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
-    { key: "loadedmetadata", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadedmetadata", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadedmetadata", value: cb' (Cb (const value)) }
     )
@@ -56,8 +56,8 @@ type OnLoadedmetadataEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both
-    { key: "loadedmetadata", value: unset' }
+  attr OnLoadedmetadata bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadedmetadata", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "loadedmetadata", value: unset' })
 instance Attr everything OnLoadedmetadata  Unit  where
   attr OnLoadedmetadata _ = unsafeAttribute $ This $ pure $

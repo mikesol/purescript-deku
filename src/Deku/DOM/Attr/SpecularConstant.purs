@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data SpecularConstant = SpecularConstant
 
 instance Attr FeSpecularLighting_ SpecularConstant (NonEmpty.NonEmpty Event.Event  String ) where
-  attr SpecularConstant bothValues = unsafeAttribute $ Both
-    { key: "specularConstant", value: prop' (NonEmpty.head bothValues) }
+  attr SpecularConstant bothValues = unsafeAttribute $ Both (pure 
+    { key: "specularConstant", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "specularConstant", value: prop' value }
     )
@@ -24,8 +24,8 @@ instance Attr FeSpecularLighting_ SpecularConstant (Event.Event  String ) where
     <#> \value -> { key: "specularConstant", value: prop' value }
 
 instance Attr everything SpecularConstant (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr SpecularConstant bothValues = unsafeAttribute $ Both
-    { key: "specularConstant", value: unset' }
+  attr SpecularConstant bothValues = unsafeAttribute $ Both (pure 
+    { key: "specularConstant", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "specularConstant", value: unset' })
 instance Attr everything SpecularConstant  Unit  where
   attr SpecularConstant _ = unsafeAttribute $ This $ pure $

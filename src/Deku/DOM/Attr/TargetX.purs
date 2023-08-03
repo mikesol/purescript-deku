@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data TargetX = TargetX
 
 instance Attr FeConvolveMatrix_ TargetX (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TargetX bothValues = unsafeAttribute $ Both
-    { key: "targetX", value: prop' (NonEmpty.head bothValues) }
+  attr TargetX bothValues = unsafeAttribute $ Both (pure 
+    { key: "targetX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "targetX", value: prop' value })
 instance Attr FeConvolveMatrix_ TargetX  String  where
   attr TargetX value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeConvolveMatrix_ TargetX (Event.Event  String ) where
     \value -> { key: "targetX", value: prop' value }
 
 instance Attr everything TargetX (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr TargetX bothValues = unsafeAttribute $ Both
-    { key: "targetX", value: unset' }
+  attr TargetX bothValues = unsafeAttribute $ Both (pure 
+    { key: "targetX", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "targetX", value: unset' })
 instance Attr everything TargetX  Unit  where
   attr TargetX _ = unsafeAttribute $ This $ pure $ { key: "targetX", value: unset' }

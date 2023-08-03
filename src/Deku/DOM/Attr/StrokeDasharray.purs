@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeDasharray = StrokeDasharray
 
 instance Attr Circle_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -64,8 +64,8 @@ instance Attr Circle_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr ClipPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -77,8 +77,8 @@ instance Attr ClipPath_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Defs_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -90,8 +90,8 @@ instance Attr Defs_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Ellipse_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -103,8 +103,8 @@ instance Attr Ellipse_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeBlend_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -116,8 +116,8 @@ instance Attr FeBlend_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -129,8 +129,8 @@ instance Attr FeColorMatrix_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -142,8 +142,8 @@ instance Attr FeComponentTransfer_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeComposite_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeComposite_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -168,8 +168,8 @@ instance Attr FeConvolveMatrix_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr FeDiffuseLighting_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -194,8 +194,8 @@ instance Attr FeDisplacementMap_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeFlood_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -207,8 +207,8 @@ instance Attr FeFlood_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -220,8 +220,8 @@ instance Attr FeGaussianBlur_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeImage_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -233,8 +233,8 @@ instance Attr FeImage_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeMerge_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -246,8 +246,8 @@ instance Attr FeMerge_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeMorphology_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -259,8 +259,8 @@ instance Attr FeMorphology_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeOffset_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -272,8 +272,8 @@ instance Attr FeOffset_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -285,8 +285,8 @@ instance Attr FeSpecularLighting_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeTile_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -298,8 +298,8 @@ instance Attr FeTile_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -311,8 +311,8 @@ instance Attr FeTurbulence_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Filter_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -324,8 +324,8 @@ instance Attr Filter_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr ForeignObject_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -337,8 +337,8 @@ instance Attr ForeignObject_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr G_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -350,8 +350,8 @@ instance Attr G_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Image_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -363,8 +363,8 @@ instance Attr Image_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Line_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -376,8 +376,8 @@ instance Attr Line_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr LinearGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -389,8 +389,8 @@ instance Attr LinearGradient_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Marker_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -402,8 +402,8 @@ instance Attr Marker_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Mask_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -415,8 +415,8 @@ instance Attr Mask_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Path_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -428,8 +428,8 @@ instance Attr Path_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Pattern_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -441,8 +441,8 @@ instance Attr Pattern_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Polygon_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -454,8 +454,8 @@ instance Attr Polygon_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Polyline_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -467,8 +467,8 @@ instance Attr Polyline_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr RadialGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -480,8 +480,8 @@ instance Attr RadialGradient_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Rect_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -493,8 +493,8 @@ instance Attr Rect_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Svg_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -506,8 +506,8 @@ instance Attr Svg_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Switch_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -519,8 +519,8 @@ instance Attr Switch_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Symbol_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -532,8 +532,8 @@ instance Attr Symbol_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Text_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -545,8 +545,8 @@ instance Attr Text_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr TextPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -558,8 +558,8 @@ instance Attr TextPath_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Tspan_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -571,8 +571,8 @@ instance Attr Tspan_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr Use_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
@@ -584,8 +584,8 @@ instance Attr Use_ StrokeDasharray (Event.Event  String ) where
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
 instance Attr everything StrokeDasharray (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StrokeDasharray bothValues = unsafeAttribute $ Both
-    { key: "stroke-dasharray", value: unset' }
+  attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-dasharray", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-dasharray", value: unset' })
 instance Attr everything StrokeDasharray  Unit  where
   attr StrokeDasharray _ = unsafeAttribute $ This $ pure $

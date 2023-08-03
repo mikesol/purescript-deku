@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaChecked = AriaChecked
 
 instance Attr Circle_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Circle_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Ellipse_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Ellipse_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr ForeignObject_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr ForeignObject_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr G_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr G_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Line_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Line_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Marker_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Marker_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Path_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Path_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polygon_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polygon_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polyline_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polyline_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Rect_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Rect_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Svg_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Svg_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Symbol_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Symbol_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Text_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Text_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr TextPath_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr TextPath_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Tspan_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Tspan_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Use_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Use_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr View_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr View_ AriaChecked  String  where
   attr AriaChecked value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr everything AriaChecked (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaChecked bothValues = unsafeAttribute $ Both
-    { key: "aria-checked", value: unset' }
+  attr AriaChecked bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-checked", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-checked", value: unset' })
 instance Attr everything AriaChecked  Unit  where
   attr AriaChecked _ = unsafeAttribute $ This $ pure $

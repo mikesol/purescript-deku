@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnEnded = OnEnded
 
 instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnEnded bothValues = unsafeAttribute $ Both
-    { key: "ended", value: cb' (NonEmpty.head bothValues) }
+  attr OnEnded bothValues = unsafeAttribute $ Both (pure 
+    { key: "ended", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "ended", value: cb' value })
 instance Attr anything OnEnded  Cb  where
   attr OnEnded value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnEnded (Event.Event  Cb ) where
     \value -> { key: "ended", value: cb' value }
 
 instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnEnded bothValues = unsafeAttribute $ Both
-    { key: "ended", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnEnded bothValues = unsafeAttribute $ Both (pure 
+    { key: "ended", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "ended", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnEnded (Event.Event  (Effect Unit) ) where
     \value -> { key: "ended", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnEnded bothValues = unsafeAttribute $ Both
-    { key: "ended", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnEnded bothValues = unsafeAttribute $ Both (pure 
+    { key: "ended", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "ended", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnEndedEffect =
   => Event (Attribute element)
 
 instance Attr everything OnEnded (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnEnded bothValues = unsafeAttribute $ Both
-    { key: "ended", value: unset' }
+  attr OnEnded bothValues = unsafeAttribute $ Both (pure 
+    { key: "ended", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "ended", value: unset' })
 instance Attr everything OnEnded  Unit  where
   attr OnEnded _ = unsafeAttribute $ This $ pure $ { key: "ended", value: unset' }

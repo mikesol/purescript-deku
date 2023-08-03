@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnSeeking = OnSeeking
 
 instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnSeeking bothValues = unsafeAttribute $ Both
-    { key: "seeking", value: cb' (NonEmpty.head bothValues) }
+  attr OnSeeking bothValues = unsafeAttribute $ Both (pure 
+    { key: "seeking", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "seeking", value: cb' value })
 instance Attr anything OnSeeking  Cb  where
   attr OnSeeking value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnSeeking (Event.Event  Cb ) where
     \value -> { key: "seeking", value: cb' value }
 
 instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnSeeking bothValues = unsafeAttribute $ Both
-    { key: "seeking", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnSeeking bothValues = unsafeAttribute $ Both (pure 
+    { key: "seeking", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "seeking", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnSeeking (Event.Event  (Effect Unit) ) where
     \value -> { key: "seeking", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnSeeking bothValues = unsafeAttribute $ Both
-    { key: "seeking", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnSeeking bothValues = unsafeAttribute $ Both (pure 
+    { key: "seeking", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "seeking", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnSeekingEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSeeking (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnSeeking bothValues = unsafeAttribute $ Both
-    { key: "seeking", value: unset' }
+  attr OnSeeking bothValues = unsafeAttribute $ Both (pure 
+    { key: "seeking", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "seeking", value: unset' })
 instance Attr everything OnSeeking  Unit  where
   attr OnSeeking _ = unsafeAttribute $ This $ pure $

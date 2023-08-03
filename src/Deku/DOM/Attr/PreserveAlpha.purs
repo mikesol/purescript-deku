@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PreserveAlpha = PreserveAlpha
 
 instance Attr FeConvolveMatrix_ PreserveAlpha (NonEmpty.NonEmpty Event.Event  String ) where
-  attr PreserveAlpha bothValues = unsafeAttribute $ Both
-    { key: "preserveAlpha", value: prop' (NonEmpty.head bothValues) }
+  attr PreserveAlpha bothValues = unsafeAttribute $ Both (pure 
+    { key: "preserveAlpha", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preserveAlpha", value: prop' value })
 instance Attr FeConvolveMatrix_ PreserveAlpha  String  where
   attr PreserveAlpha value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeConvolveMatrix_ PreserveAlpha (Event.Event  String ) where
     \value -> { key: "preserveAlpha", value: prop' value }
 
 instance Attr everything PreserveAlpha (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr PreserveAlpha bothValues = unsafeAttribute $ Both
-    { key: "preserveAlpha", value: unset' }
+  attr PreserveAlpha bothValues = unsafeAttribute $ Both (pure 
+    { key: "preserveAlpha", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "preserveAlpha", value: unset' })
 instance Attr everything PreserveAlpha  Unit  where
   attr PreserveAlpha _ = unsafeAttribute $ This $ pure $

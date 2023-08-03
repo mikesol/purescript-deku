@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Dx = Dx
 
 instance Attr FeDropShadow_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dx bothValues = unsafeAttribute $ Both
-    { key: "dx", value: prop' (NonEmpty.head bothValues) }
+  attr Dx bothValues = unsafeAttribute $ Both (pure 
+    { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeDropShadow_ Dx  String  where
   attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
@@ -24,8 +24,8 @@ instance Attr FeDropShadow_ Dx (Event.Event  String ) where
     { key: "dx", value: prop' value }
 
 instance Attr FeOffset_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dx bothValues = unsafeAttribute $ Both
-    { key: "dx", value: prop' (NonEmpty.head bothValues) }
+  attr Dx bothValues = unsafeAttribute $ Both (pure 
+    { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeOffset_ Dx  String  where
   attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
@@ -34,8 +34,8 @@ instance Attr FeOffset_ Dx (Event.Event  String ) where
     { key: "dx", value: prop' value }
 
 instance Attr Text_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dx bothValues = unsafeAttribute $ Both
-    { key: "dx", value: prop' (NonEmpty.head bothValues) }
+  attr Dx bothValues = unsafeAttribute $ Both (pure 
+    { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Text_ Dx  String  where
   attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
@@ -44,8 +44,8 @@ instance Attr Text_ Dx (Event.Event  String ) where
     { key: "dx", value: prop' value }
 
 instance Attr Tspan_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dx bothValues = unsafeAttribute $ Both
-    { key: "dx", value: prop' (NonEmpty.head bothValues) }
+  attr Dx bothValues = unsafeAttribute $ Both (pure 
+    { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Tspan_ Dx  String  where
   attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
@@ -54,7 +54,7 @@ instance Attr Tspan_ Dx (Event.Event  String ) where
     { key: "dx", value: prop' value }
 
 instance Attr everything Dx (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Dx bothValues = unsafeAttribute $ Both { key: "dx", value: unset' }
+  attr Dx bothValues = unsafeAttribute $ Both (pure  { key: "dx", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dx", value: unset' })
 instance Attr everything Dx  Unit  where
   attr Dx _ = unsafeAttribute $ This $ pure $ { key: "dx", value: unset' }

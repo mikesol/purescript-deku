@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Reversed = Reversed
 
 instance Attr Ol_ Reversed (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Reversed bothValues = unsafeAttribute $ Both
-    { key: "reversed", value: prop' (NonEmpty.head bothValues) }
+  attr Reversed bothValues = unsafeAttribute $ Both (pure 
+    { key: "reversed", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "reversed", value: prop' value })
 instance Attr Ol_ Reversed  String  where
   attr Reversed value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Ol_ Reversed (Event.Event  String ) where
     \value -> { key: "reversed", value: prop' value }
 
 instance Attr everything Reversed (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Reversed bothValues = unsafeAttribute $ Both
-    { key: "reversed", value: unset' }
+  attr Reversed bothValues = unsafeAttribute $ Both (pure 
+    { key: "reversed", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "reversed", value: unset' })
 instance Attr everything Reversed  Unit  where
   attr Reversed _ = unsafeAttribute $ This $ pure $

@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data GradientUnits = GradientUnits
 
 instance Attr LinearGradient_ GradientUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr GradientUnits bothValues = unsafeAttribute $ Both
-    { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) }
+  attr GradientUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "gradientUnits", value: prop' value })
 instance Attr LinearGradient_ GradientUnits  String  where
   attr GradientUnits value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr LinearGradient_ GradientUnits (Event.Event  String ) where
     \value -> { key: "gradientUnits", value: prop' value }
 
 instance Attr RadialGradient_ GradientUnits (NonEmpty.NonEmpty Event.Event  String ) where
-  attr GradientUnits bothValues = unsafeAttribute $ Both
-    { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) }
+  attr GradientUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "gradientUnits", value: prop' value })
 instance Attr RadialGradient_ GradientUnits  String  where
   attr GradientUnits value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr RadialGradient_ GradientUnits (Event.Event  String ) where
     \value -> { key: "gradientUnits", value: prop' value }
 
 instance Attr everything GradientUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr GradientUnits bothValues = unsafeAttribute $ Both
-    { key: "gradientUnits", value: unset' }
+  attr GradientUnits bothValues = unsafeAttribute $ Both (pure 
+    { key: "gradientUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "gradientUnits", value: unset' })
 instance Attr everything GradientUnits  Unit  where
   attr GradientUnits _ = unsafeAttribute $ This $ pure $

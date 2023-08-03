@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnSelect = OnSelect
 
 instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnSelect bothValues = unsafeAttribute $ Both
-    { key: "select", value: cb' (NonEmpty.head bothValues) }
+  attr OnSelect bothValues = unsafeAttribute $ Both (pure 
+    { key: "select", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "select", value: cb' value })
 instance Attr anything OnSelect  Cb  where
   attr OnSelect value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnSelect (Event.Event  Cb ) where
     \value -> { key: "select", value: cb' value }
 
 instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnSelect bothValues = unsafeAttribute $ Both
-    { key: "select", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnSelect bothValues = unsafeAttribute $ Both (pure 
+    { key: "select", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "select", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnSelect (Event.Event  (Effect Unit) ) where
     \value -> { key: "select", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnSelect bothValues = unsafeAttribute $ Both
-    { key: "select", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnSelect bothValues = unsafeAttribute $ Both (pure 
+    { key: "select", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "select", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnSelectEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSelect (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnSelect bothValues = unsafeAttribute $ Both
-    { key: "select", value: unset' }
+  attr OnSelect bothValues = unsafeAttribute $ Both (pure 
+    { key: "select", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "select", value: unset' })
 instance Attr everything OnSelect  Unit  where
   attr OnSelect _ = unsafeAttribute $ This $ pure $ { key: "select", value: unset' }

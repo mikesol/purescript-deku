@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accept = Accept
 
 instance Attr Form_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accept bothValues = unsafeAttribute $ Both
-    { key: "accept", value: prop' (NonEmpty.head bothValues) }
+  attr Accept bothValues = unsafeAttribute $ Both (pure 
+    { key: "accept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Form_ Accept  String  where
   attr Accept value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Form_ Accept (Event.Event  String ) where
     \value -> { key: "accept", value: prop' value }
 
 instance Attr Input_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accept bothValues = unsafeAttribute $ Both
-    { key: "accept", value: prop' (NonEmpty.head bothValues) }
+  attr Accept bothValues = unsafeAttribute $ Both (pure 
+    { key: "accept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Input_ Accept  String  where
   attr Accept value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Input_ Accept (Event.Event  String ) where
     \value -> { key: "accept", value: prop' value }
 
 instance Attr everything Accept (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Accept bothValues = unsafeAttribute $ Both
-    { key: "accept", value: unset' }
+  attr Accept bothValues = unsafeAttribute $ Both (pure 
+    { key: "accept", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accept", value: unset' })
 instance Attr everything Accept  Unit  where
   attr Accept _ = unsafeAttribute $ This $ pure $ { key: "accept", value: unset' }

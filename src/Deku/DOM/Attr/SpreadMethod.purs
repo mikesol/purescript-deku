@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data SpreadMethod = SpreadMethod
 
 instance Attr LinearGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  String ) where
-  attr SpreadMethod bothValues = unsafeAttribute $ Both
-    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
+  attr SpreadMethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr LinearGradient_ SpreadMethod  String  where
   attr SpreadMethod value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr LinearGradient_ SpreadMethod (Event.Event  String ) where
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr RadialGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  String ) where
-  attr SpreadMethod bothValues = unsafeAttribute $ Both
-    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
+  attr SpreadMethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr RadialGradient_ SpreadMethod  String  where
   attr SpreadMethod value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr RadialGradient_ SpreadMethod (Event.Event  String ) where
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr everything SpreadMethod (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr SpreadMethod bothValues = unsafeAttribute $ Both
-    { key: "spreadMethod", value: unset' }
+  attr SpreadMethod bothValues = unsafeAttribute $ Both (pure 
+    { key: "spreadMethod", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
 instance Attr everything SpreadMethod  Unit  where
   attr SpreadMethod _ = unsafeAttribute $ This $ pure $

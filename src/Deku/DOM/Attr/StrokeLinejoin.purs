@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeLinejoin = StrokeLinejoin
 
 instance Attr Circle_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -64,8 +64,8 @@ instance Attr Circle_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ClipPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -77,8 +77,8 @@ instance Attr ClipPath_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Defs_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -90,8 +90,8 @@ instance Attr Defs_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Ellipse_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -103,8 +103,8 @@ instance Attr Ellipse_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeBlend_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -116,8 +116,8 @@ instance Attr FeBlend_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -129,8 +129,8 @@ instance Attr FeColorMatrix_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -142,8 +142,8 @@ instance Attr FeComponentTransfer_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComposite_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeComposite_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -168,8 +168,8 @@ instance Attr FeConvolveMatrix_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr FeDiffuseLighting_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -194,8 +194,8 @@ instance Attr FeDisplacementMap_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeFlood_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -207,8 +207,8 @@ instance Attr FeFlood_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -220,8 +220,8 @@ instance Attr FeGaussianBlur_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeImage_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -233,8 +233,8 @@ instance Attr FeImage_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMerge_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -246,8 +246,8 @@ instance Attr FeMerge_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMorphology_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -259,8 +259,8 @@ instance Attr FeMorphology_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeOffset_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -272,8 +272,8 @@ instance Attr FeOffset_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -285,8 +285,8 @@ instance Attr FeSpecularLighting_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTile_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -298,8 +298,8 @@ instance Attr FeTile_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -311,8 +311,8 @@ instance Attr FeTurbulence_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Filter_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -324,8 +324,8 @@ instance Attr Filter_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ForeignObject_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -337,8 +337,8 @@ instance Attr ForeignObject_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr G_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -350,8 +350,8 @@ instance Attr G_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Image_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -363,8 +363,8 @@ instance Attr Image_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Line_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -376,8 +376,8 @@ instance Attr Line_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr LinearGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -389,8 +389,8 @@ instance Attr LinearGradient_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Marker_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -402,8 +402,8 @@ instance Attr Marker_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Mask_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -415,8 +415,8 @@ instance Attr Mask_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Path_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -428,8 +428,8 @@ instance Attr Path_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Pattern_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -441,8 +441,8 @@ instance Attr Pattern_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polygon_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -454,8 +454,8 @@ instance Attr Polygon_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polyline_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -467,8 +467,8 @@ instance Attr Polyline_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr RadialGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -480,8 +480,8 @@ instance Attr RadialGradient_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Rect_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -493,8 +493,8 @@ instance Attr Rect_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Svg_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -506,8 +506,8 @@ instance Attr Svg_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Switch_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -519,8 +519,8 @@ instance Attr Switch_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Symbol_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -532,8 +532,8 @@ instance Attr Symbol_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Text_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -545,8 +545,8 @@ instance Attr Text_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr TextPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -558,8 +558,8 @@ instance Attr TextPath_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Tspan_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -571,8 +571,8 @@ instance Attr Tspan_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Use_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
     )
@@ -584,8 +584,8 @@ instance Attr Use_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr everything StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StrokeLinejoin bothValues = unsafeAttribute $ Both
-    { key: "stroke-linejoin", value: unset' }
+  attr StrokeLinejoin bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-linejoin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-linejoin", value: unset' })
 instance Attr everything StrokeLinejoin  Unit  where
   attr StrokeLinejoin _ = unsafeAttribute $ This $ pure $

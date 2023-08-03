@@ -16,8 +16,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Crossorigin = Crossorigin
 
 instance Attr Audio_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Audio_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -27,8 +27,8 @@ instance Attr Audio_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Img_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Img_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Img_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Link_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Link_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Link_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Script_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Script_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr Script_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Video_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Video_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr Video_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Image_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Image_ Crossorigin  String  where
   attr Crossorigin value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Image_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr everything Crossorigin (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Crossorigin bothValues = unsafeAttribute $ Both
-    { key: "crossorigin", value: unset' }
+  attr Crossorigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "crossorigin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "crossorigin", value: unset' })
 instance Attr everything Crossorigin  Unit  where
   attr Crossorigin _ = unsafeAttribute $ This $ pure $

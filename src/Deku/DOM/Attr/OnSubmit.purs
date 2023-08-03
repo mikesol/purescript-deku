@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnSubmit = OnSubmit
 
 instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnSubmit bothValues = unsafeAttribute $ Both
-    { key: "submit", value: cb' (NonEmpty.head bothValues) }
+  attr OnSubmit bothValues = unsafeAttribute $ Both (pure 
+    { key: "submit", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "submit", value: cb' value })
 instance Attr anything OnSubmit  Cb  where
   attr OnSubmit value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnSubmit (Event.Event  Cb ) where
     \value -> { key: "submit", value: cb' value }
 
 instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnSubmit bothValues = unsafeAttribute $ Both
-    { key: "submit", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnSubmit bothValues = unsafeAttribute $ Both (pure 
+    { key: "submit", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "submit", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnSubmit (Event.Event  (Effect Unit) ) where
     \value -> { key: "submit", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnSubmit bothValues = unsafeAttribute $ Both
-    { key: "submit", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnSubmit bothValues = unsafeAttribute $ Both (pure 
+    { key: "submit", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "submit", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnSubmitEffect =
   => Event (Attribute element)
 
 instance Attr everything OnSubmit (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnSubmit bothValues = unsafeAttribute $ Both
-    { key: "submit", value: unset' }
+  attr OnSubmit bothValues = unsafeAttribute $ Both (pure 
+    { key: "submit", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "submit", value: unset' })
 instance Attr everything OnSubmit  Unit  where
   attr OnSubmit _ = unsafeAttribute $ This $ pure $ { key: "submit", value: unset' }

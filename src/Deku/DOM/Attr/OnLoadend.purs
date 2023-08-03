@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnLoadend = OnLoadend
 
 instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnLoadend bothValues = unsafeAttribute $ Both
-    { key: "loadend", value: cb' (NonEmpty.head bothValues) }
+  attr OnLoadend bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "loadend", value: cb' value })
 instance Attr anything OnLoadend  Cb  where
   attr OnLoadend value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnLoadend (Event.Event  Cb ) where
     \value -> { key: "loadend", value: cb' value }
 
 instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnLoadend bothValues = unsafeAttribute $ Both
-    { key: "loadend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnLoadend bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadend", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnLoadend (Event.Event  (Effect Unit) ) where
     \value -> { key: "loadend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnLoadend bothValues = unsafeAttribute $ Both
-    { key: "loadend", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnLoadend bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadend", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "loadend", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnLoadendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnLoadend (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnLoadend bothValues = unsafeAttribute $ Both
-    { key: "loadend", value: unset' }
+  attr OnLoadend bothValues = unsafeAttribute $ Both (pure 
+    { key: "loadend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "loadend", value: unset' })
 instance Attr everything OnLoadend  Unit  where
   attr OnLoadend _ = unsafeAttribute $ This $ pure $

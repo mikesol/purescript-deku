@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Operator = Operator
 
 instance Attr FeComposite_ Operator (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Operator bothValues = unsafeAttribute $ Both
-    { key: "operator", value: prop' (NonEmpty.head bothValues) }
+  attr Operator bothValues = unsafeAttribute $ Both (pure 
+    { key: "operator", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeComposite_ Operator  String  where
   attr Operator value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr FeComposite_ Operator (Event.Event  String ) where
     \value -> { key: "operator", value: prop' value }
 
 instance Attr FeMorphology_ Operator (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Operator bothValues = unsafeAttribute $ Both
-    { key: "operator", value: prop' (NonEmpty.head bothValues) }
+  attr Operator bothValues = unsafeAttribute $ Both (pure 
+    { key: "operator", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeMorphology_ Operator  String  where
   attr Operator value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr FeMorphology_ Operator (Event.Event  String ) where
     \value -> { key: "operator", value: prop' value }
 
 instance Attr everything Operator (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Operator bothValues = unsafeAttribute $ Both
-    { key: "operator", value: unset' }
+  attr Operator bothValues = unsafeAttribute $ Both (pure 
+    { key: "operator", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "operator", value: unset' })
 instance Attr everything Operator  Unit  where
   attr Operator _ = unsafeAttribute $ This $ pure $

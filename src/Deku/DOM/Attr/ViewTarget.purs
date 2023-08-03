@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ViewTarget = ViewTarget
 
 instance Attr View_ ViewTarget (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ViewTarget bothValues = unsafeAttribute $ Both
-    { key: "viewTarget", value: prop' (NonEmpty.head bothValues) }
+  attr ViewTarget bothValues = unsafeAttribute $ Both (pure 
+    { key: "viewTarget", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "viewTarget", value: prop' value })
 instance Attr View_ ViewTarget  String  where
   attr ViewTarget value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr View_ ViewTarget (Event.Event  String ) where
     \value -> { key: "viewTarget", value: prop' value }
 
 instance Attr everything ViewTarget (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ViewTarget bothValues = unsafeAttribute $ Both
-    { key: "viewTarget", value: unset' }
+  attr ViewTarget bothValues = unsafeAttribute $ Both (pure 
+    { key: "viewTarget", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "viewTarget", value: unset' })
 instance Attr everything ViewTarget  Unit  where
   attr ViewTarget _ = unsafeAttribute $ This $ pure $

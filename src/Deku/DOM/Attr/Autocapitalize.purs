@@ -132,8 +132,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Autocapitalize = Autocapitalize
 
 instance Attr A_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr A_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -143,8 +143,8 @@ instance Attr A_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Abbr_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Abbr_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -154,8 +154,8 @@ instance Attr Abbr_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Acronym_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Acronym_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -165,8 +165,8 @@ instance Attr Acronym_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Address_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Address_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -176,8 +176,8 @@ instance Attr Address_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Applet_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Applet_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -187,8 +187,8 @@ instance Attr Applet_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Area_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Area_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -198,8 +198,8 @@ instance Attr Area_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Article_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Article_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -209,8 +209,8 @@ instance Attr Article_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Aside_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Aside_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -220,8 +220,8 @@ instance Attr Aside_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Audio_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Audio_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -231,8 +231,8 @@ instance Attr Audio_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr B_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr B_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -242,8 +242,8 @@ instance Attr B_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Base_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Base_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -253,8 +253,8 @@ instance Attr Base_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Basefont_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Basefont_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -264,8 +264,8 @@ instance Attr Basefont_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Bdi_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Bdi_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -275,8 +275,8 @@ instance Attr Bdi_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Bdo_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Bdo_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -286,8 +286,8 @@ instance Attr Bdo_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Big_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Big_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -297,8 +297,8 @@ instance Attr Big_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Blockquote_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Blockquote_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -308,8 +308,8 @@ instance Attr Blockquote_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Body_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Body_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -319,8 +319,8 @@ instance Attr Body_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Br_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Br_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -330,8 +330,8 @@ instance Attr Br_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Button_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Button_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -341,8 +341,8 @@ instance Attr Button_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Canvas_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Canvas_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -352,8 +352,8 @@ instance Attr Canvas_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Caption_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Caption_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -363,8 +363,8 @@ instance Attr Caption_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Center_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Center_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -374,8 +374,8 @@ instance Attr Center_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Cite_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Cite_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -385,8 +385,8 @@ instance Attr Cite_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Code_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Code_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -396,8 +396,8 @@ instance Attr Code_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Col_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Col_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -407,8 +407,8 @@ instance Attr Col_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Colgroup_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Colgroup_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -418,8 +418,8 @@ instance Attr Colgroup_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Xdata_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Xdata_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -429,8 +429,8 @@ instance Attr Xdata_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Datalist_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Datalist_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -440,8 +440,8 @@ instance Attr Datalist_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dd_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dd_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -451,8 +451,8 @@ instance Attr Dd_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Del_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Del_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -462,8 +462,8 @@ instance Attr Del_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Details_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Details_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -473,8 +473,8 @@ instance Attr Details_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dfn_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dfn_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -484,8 +484,8 @@ instance Attr Dfn_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dialog_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dialog_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -495,8 +495,8 @@ instance Attr Dialog_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dir_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dir_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -506,8 +506,8 @@ instance Attr Dir_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Div_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Div_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -517,8 +517,8 @@ instance Attr Div_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dl_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dl_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -528,8 +528,8 @@ instance Attr Dl_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Dt_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Dt_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -539,8 +539,8 @@ instance Attr Dt_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Em_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Em_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -550,8 +550,8 @@ instance Attr Em_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Embed_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Embed_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -561,8 +561,8 @@ instance Attr Embed_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Fieldset_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Fieldset_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -572,8 +572,8 @@ instance Attr Fieldset_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Figcaption_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Figcaption_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -583,8 +583,8 @@ instance Attr Figcaption_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Figure_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Figure_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -594,8 +594,8 @@ instance Attr Figure_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Font_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Font_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -605,8 +605,8 @@ instance Attr Font_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Footer_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Footer_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -616,8 +616,8 @@ instance Attr Footer_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Form_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Form_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -627,8 +627,8 @@ instance Attr Form_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Frame_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Frame_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -638,8 +638,8 @@ instance Attr Frame_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Frameset_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Frameset_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -649,8 +649,8 @@ instance Attr Frameset_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H1_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H1_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -660,8 +660,8 @@ instance Attr H1_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H2_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H2_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -671,8 +671,8 @@ instance Attr H2_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H3_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H3_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -682,8 +682,8 @@ instance Attr H3_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H4_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H4_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -693,8 +693,8 @@ instance Attr H4_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H5_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H5_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -704,8 +704,8 @@ instance Attr H5_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr H6_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr H6_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -715,8 +715,8 @@ instance Attr H6_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Head_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Head_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -726,8 +726,8 @@ instance Attr Head_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Header_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Header_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -737,8 +737,8 @@ instance Attr Header_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Hr_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Hr_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -748,8 +748,8 @@ instance Attr Hr_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Html_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Html_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -759,8 +759,8 @@ instance Attr Html_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr I_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr I_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -770,8 +770,8 @@ instance Attr I_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Iframe_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Iframe_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -781,8 +781,8 @@ instance Attr Iframe_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Img_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Img_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -792,8 +792,8 @@ instance Attr Img_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Input_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Input_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -803,8 +803,8 @@ instance Attr Input_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Ins_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Ins_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -814,8 +814,8 @@ instance Attr Ins_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Kbd_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Kbd_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -825,8 +825,8 @@ instance Attr Kbd_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Label_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Label_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -836,8 +836,8 @@ instance Attr Label_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Legend_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Legend_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -847,8 +847,8 @@ instance Attr Legend_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Li_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Li_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -858,8 +858,8 @@ instance Attr Li_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Link_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Link_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -869,8 +869,8 @@ instance Attr Link_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Main_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Main_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -880,8 +880,8 @@ instance Attr Main_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Map_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Map_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -891,8 +891,8 @@ instance Attr Map_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Mark_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Mark_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -902,8 +902,8 @@ instance Attr Mark_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Meta_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Meta_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -913,8 +913,8 @@ instance Attr Meta_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Meter_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Meter_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -924,8 +924,8 @@ instance Attr Meter_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Nav_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Nav_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -935,8 +935,8 @@ instance Attr Nav_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Noframes_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Noframes_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -946,8 +946,8 @@ instance Attr Noframes_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Noscript_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Noscript_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -957,8 +957,8 @@ instance Attr Noscript_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Object_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Object_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -968,8 +968,8 @@ instance Attr Object_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Ol_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Ol_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -979,8 +979,8 @@ instance Attr Ol_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Optgroup_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Optgroup_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -990,8 +990,8 @@ instance Attr Optgroup_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Option_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Option_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1001,8 +1001,8 @@ instance Attr Option_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Output_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Output_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1012,8 +1012,8 @@ instance Attr Output_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr P_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr P_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1023,8 +1023,8 @@ instance Attr P_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Param_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Param_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1034,8 +1034,8 @@ instance Attr Param_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Picture_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Picture_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1045,8 +1045,8 @@ instance Attr Picture_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Pre_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Pre_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1056,8 +1056,8 @@ instance Attr Pre_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Progress_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Progress_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1067,8 +1067,8 @@ instance Attr Progress_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Q_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Q_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1078,8 +1078,8 @@ instance Attr Q_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Rp_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Rp_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1089,8 +1089,8 @@ instance Attr Rp_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Rt_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Rt_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1100,8 +1100,8 @@ instance Attr Rt_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Ruby_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Ruby_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1111,8 +1111,8 @@ instance Attr Ruby_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr S_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr S_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1122,8 +1122,8 @@ instance Attr S_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Samp_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Samp_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1133,8 +1133,8 @@ instance Attr Samp_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Script_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Script_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1144,8 +1144,8 @@ instance Attr Script_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Section_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Section_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1155,8 +1155,8 @@ instance Attr Section_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Select_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Select_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1166,8 +1166,8 @@ instance Attr Select_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Small_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Small_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1177,8 +1177,8 @@ instance Attr Small_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Source_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Source_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1188,8 +1188,8 @@ instance Attr Source_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Span_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Span_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1199,8 +1199,8 @@ instance Attr Span_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Strike_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Strike_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1210,8 +1210,8 @@ instance Attr Strike_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Strong_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Strong_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1221,8 +1221,8 @@ instance Attr Strong_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Style_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Style_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1232,8 +1232,8 @@ instance Attr Style_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Sub_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Sub_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1243,8 +1243,8 @@ instance Attr Sub_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Summary_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Summary_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1254,8 +1254,8 @@ instance Attr Summary_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Sup_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Sup_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1265,8 +1265,8 @@ instance Attr Sup_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Svg_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Svg_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1276,8 +1276,8 @@ instance Attr Svg_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Table_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Table_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1287,8 +1287,8 @@ instance Attr Table_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Tbody_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Tbody_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1298,8 +1298,8 @@ instance Attr Tbody_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Td_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Td_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1309,8 +1309,8 @@ instance Attr Td_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Template_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Template_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1320,8 +1320,8 @@ instance Attr Template_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Textarea_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Textarea_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1331,8 +1331,8 @@ instance Attr Textarea_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Tfoot_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Tfoot_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1342,8 +1342,8 @@ instance Attr Tfoot_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Th_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Th_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1353,8 +1353,8 @@ instance Attr Th_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Thead_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Thead_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1364,8 +1364,8 @@ instance Attr Thead_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Time_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Time_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1375,8 +1375,8 @@ instance Attr Time_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Title_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Title_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1386,8 +1386,8 @@ instance Attr Title_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Tr_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Tr_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1397,8 +1397,8 @@ instance Attr Tr_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Track_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Track_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1408,8 +1408,8 @@ instance Attr Track_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Tt_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Tt_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1419,8 +1419,8 @@ instance Attr Tt_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr U_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr U_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1430,8 +1430,8 @@ instance Attr U_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Ul_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Ul_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1441,8 +1441,8 @@ instance Attr Ul_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Var_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Var_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1452,8 +1452,8 @@ instance Attr Var_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Video_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Video_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1463,8 +1463,8 @@ instance Attr Video_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr Wbr_ Autocapitalize (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocapitalize", value: prop' value })
 instance Attr Wbr_ Autocapitalize  String  where
   attr Autocapitalize value = unsafeAttribute $ This $ pure $
@@ -1474,8 +1474,8 @@ instance Attr Wbr_ Autocapitalize (Event.Event  String ) where
     \value -> { key: "autocapitalize", value: prop' value }
 
 instance Attr everything Autocapitalize (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Autocapitalize bothValues = unsafeAttribute $ Both
-    { key: "autocapitalize", value: unset' }
+  attr Autocapitalize bothValues = unsafeAttribute $ Both (pure 
+    { key: "autocapitalize", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "autocapitalize", value: unset' })
 instance Attr everything Autocapitalize  Unit  where
   attr Autocapitalize _ = unsafeAttribute $ This $ pure $

@@ -29,8 +29,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Kerning = Kerning
 
 instance Attr FeBlend_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeBlend_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -40,8 +40,8 @@ instance Attr FeBlend_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeColorMatrix_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeColorMatrix_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -51,8 +51,8 @@ instance Attr FeColorMatrix_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeComponentTransfer_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeComponentTransfer_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -62,8 +62,8 @@ instance Attr FeComponentTransfer_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeComposite_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeComposite_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -73,8 +73,8 @@ instance Attr FeComposite_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeConvolveMatrix_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -84,8 +84,8 @@ instance Attr FeConvolveMatrix_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeDiffuseLighting_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -95,8 +95,8 @@ instance Attr FeDiffuseLighting_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeDisplacementMap_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeDisplacementMap_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -106,8 +106,8 @@ instance Attr FeDisplacementMap_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeFlood_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeFlood_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -117,8 +117,8 @@ instance Attr FeFlood_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeGaussianBlur_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeGaussianBlur_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -128,8 +128,8 @@ instance Attr FeGaussianBlur_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeImage_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeImage_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -139,8 +139,8 @@ instance Attr FeImage_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeMerge_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeMerge_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -150,8 +150,8 @@ instance Attr FeMerge_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeMorphology_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeMorphology_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -161,8 +161,8 @@ instance Attr FeMorphology_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeOffset_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeOffset_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -172,8 +172,8 @@ instance Attr FeOffset_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeSpecularLighting_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeSpecularLighting_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -183,8 +183,8 @@ instance Attr FeSpecularLighting_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeTile_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeTile_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -194,8 +194,8 @@ instance Attr FeTile_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr FeTurbulence_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr FeTurbulence_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -205,8 +205,8 @@ instance Attr FeTurbulence_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr Filter_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr Filter_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -216,8 +216,8 @@ instance Attr Filter_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr Image_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr Image_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -227,8 +227,8 @@ instance Attr Image_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr Switch_ Kerning (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: prop' (NonEmpty.head bothValues) }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kerning", value: prop' value })
 instance Attr Switch_ Kerning  String  where
   attr Kerning value = unsafeAttribute $ This $ pure $
@@ -238,8 +238,8 @@ instance Attr Switch_ Kerning (Event.Event  String ) where
     \value -> { key: "kerning", value: prop' value }
 
 instance Attr everything Kerning (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Kerning bothValues = unsafeAttribute $ Both
-    { key: "kerning", value: unset' }
+  attr Kerning bothValues = unsafeAttribute $ Both (pure 
+    { key: "kerning", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "kerning", value: unset' })
 instance Attr everything Kerning  Unit  where
   attr Kerning _ = unsafeAttribute $ This $ pure $ { key: "kerning", value: unset' }

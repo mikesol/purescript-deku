@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnContextmenu = OnContextmenu
 
 instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnContextmenu bothValues = unsafeAttribute $ Both
-    { key: "contextmenu", value: cb' (NonEmpty.head bothValues) }
+  attr OnContextmenu bothValues = unsafeAttribute $ Both (pure 
+    { key: "contextmenu", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "contextmenu", value: cb' value })
 instance Attr anything OnContextmenu  Cb  where
   attr OnContextmenu value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnContextmenu (Event.Event  Cb ) where
     \value -> { key: "contextmenu", value: cb' value }
 
 instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnContextmenu bothValues = unsafeAttribute $ Both
-    { key: "contextmenu", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnContextmenu bothValues = unsafeAttribute $ Both (pure 
+    { key: "contextmenu", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnContextmenu (Event.Event  (Effect Unit) ) where
     \value -> { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnContextmenu bothValues = unsafeAttribute $ Both
-    { key: "contextmenu", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnContextmenu bothValues = unsafeAttribute $ Both (pure 
+    { key: "contextmenu", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contextmenu", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnContextmenuEffect =
   => Event (Attribute element)
 
 instance Attr everything OnContextmenu (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnContextmenu bothValues = unsafeAttribute $ Both
-    { key: "contextmenu", value: unset' }
+  attr OnContextmenu bothValues = unsafeAttribute $ Both (pure 
+    { key: "contextmenu", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "contextmenu", value: unset' })
 instance Attr everything OnContextmenu  Unit  where
   attr OnContextmenu _ = unsafeAttribute $ This $ pure $

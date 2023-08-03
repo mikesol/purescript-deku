@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Label = Label
 
 instance Attr Optgroup_ Label (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Label bothValues = unsafeAttribute $ Both
-    { key: "label", value: prop' (NonEmpty.head bothValues) }
+  attr Label bothValues = unsafeAttribute $ Both (pure 
+    { key: "label", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "label", value: prop' value })
 instance Attr Optgroup_ Label  String  where
   attr Label value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Optgroup_ Label (Event.Event  String ) where
     \value -> { key: "label", value: prop' value }
 
 instance Attr Option_ Label (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Label bothValues = unsafeAttribute $ Both
-    { key: "label", value: prop' (NonEmpty.head bothValues) }
+  attr Label bothValues = unsafeAttribute $ Both (pure 
+    { key: "label", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "label", value: prop' value })
 instance Attr Option_ Label  String  where
   attr Label value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Option_ Label (Event.Event  String ) where
     \value -> { key: "label", value: prop' value }
 
 instance Attr Track_ Label (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Label bothValues = unsafeAttribute $ Both
-    { key: "label", value: prop' (NonEmpty.head bothValues) }
+  attr Label bothValues = unsafeAttribute $ Both (pure 
+    { key: "label", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "label", value: prop' value })
 instance Attr Track_ Label  String  where
   attr Label value = unsafeAttribute $ This $ pure $
@@ -46,7 +46,7 @@ instance Attr Track_ Label (Event.Event  String ) where
     \value -> { key: "label", value: prop' value }
 
 instance Attr everything Label (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Label bothValues = unsafeAttribute $ Both { key: "label", value: unset' }
+  attr Label bothValues = unsafeAttribute $ Both (pure  { key: "label", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "label", value: unset' })
 instance Attr everything Label  Unit  where
   attr Label _ = unsafeAttribute $ This $ pure $ { key: "label", value: unset' }

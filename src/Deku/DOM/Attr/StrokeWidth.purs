@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeWidth = StrokeWidth
 
 instance Attr Circle_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Circle_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -62,8 +62,8 @@ instance Attr Circle_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr ClipPath_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr ClipPath_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -73,8 +73,8 @@ instance Attr ClipPath_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Defs_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Defs_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -84,8 +84,8 @@ instance Attr Defs_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Ellipse_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Ellipse_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -95,8 +95,8 @@ instance Attr Ellipse_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeBlend_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeBlend_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -106,8 +106,8 @@ instance Attr FeBlend_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeColorMatrix_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeComponentTransfer_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeComposite_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeComposite_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -139,8 +139,8 @@ instance Attr FeComposite_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeConvolveMatrix_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeDiffuseLighting_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeDisplacementMap_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeFlood_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeFlood_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -183,8 +183,8 @@ instance Attr FeFlood_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeGaussianBlur_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeImage_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeImage_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -205,8 +205,8 @@ instance Attr FeImage_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeMerge_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeMerge_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -216,8 +216,8 @@ instance Attr FeMerge_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeMorphology_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeMorphology_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeOffset_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeOffset_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -238,8 +238,8 @@ instance Attr FeOffset_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeSpecularLighting_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeTile_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeTile_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -260,8 +260,8 @@ instance Attr FeTile_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr FeTurbulence_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Filter_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Filter_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -282,8 +282,8 @@ instance Attr Filter_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr ForeignObject_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr ForeignObject_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr G_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr G_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -304,8 +304,8 @@ instance Attr G_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Image_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Image_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -315,8 +315,8 @@ instance Attr Image_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Line_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Line_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -326,8 +326,8 @@ instance Attr Line_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr LinearGradient_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr LinearGradient_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Marker_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Marker_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -348,8 +348,8 @@ instance Attr Marker_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Mask_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Mask_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -359,8 +359,8 @@ instance Attr Mask_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Path_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Path_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -370,8 +370,8 @@ instance Attr Path_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Pattern_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Pattern_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -381,8 +381,8 @@ instance Attr Pattern_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Polygon_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Polygon_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -392,8 +392,8 @@ instance Attr Polygon_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Polyline_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Polyline_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -403,8 +403,8 @@ instance Attr Polyline_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr RadialGradient_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr RadialGradient_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Rect_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Rect_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -425,8 +425,8 @@ instance Attr Rect_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Svg_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Svg_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -436,8 +436,8 @@ instance Attr Svg_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Switch_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Switch_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -447,8 +447,8 @@ instance Attr Switch_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Symbol_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Symbol_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -458,8 +458,8 @@ instance Attr Symbol_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Text_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Text_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -469,8 +469,8 @@ instance Attr Text_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr TextPath_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr TextPath_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -480,8 +480,8 @@ instance Attr TextPath_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Tspan_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Tspan_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -491,8 +491,8 @@ instance Attr Tspan_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr Use_ StrokeWidth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke-width", value: prop' value })
 instance Attr Use_ StrokeWidth  String  where
   attr StrokeWidth value = unsafeAttribute $ This $ pure $
@@ -502,8 +502,8 @@ instance Attr Use_ StrokeWidth (Event.Event  String ) where
     \value -> { key: "stroke-width", value: prop' value }
 
 instance Attr everything StrokeWidth (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StrokeWidth bothValues = unsafeAttribute $ Both
-    { key: "stroke-width", value: unset' }
+  attr StrokeWidth bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-width", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-width", value: unset' })
 instance Attr everything StrokeWidth  Unit  where
   attr StrokeWidth _ = unsafeAttribute $ This $ pure $

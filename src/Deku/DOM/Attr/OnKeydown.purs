@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnKeydown = OnKeydown
 
 instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnKeydown bothValues = unsafeAttribute $ Both
-    { key: "keydown", value: cb' (NonEmpty.head bothValues) }
+  attr OnKeydown bothValues = unsafeAttribute $ Both (pure 
+    { key: "keydown", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keydown", value: cb' value })
 instance Attr anything OnKeydown  Cb  where
   attr OnKeydown value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnKeydown (Event.Event  Cb ) where
     \value -> { key: "keydown", value: cb' value }
 
 instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnKeydown bothValues = unsafeAttribute $ Both
-    { key: "keydown", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnKeydown bothValues = unsafeAttribute $ Both (pure 
+    { key: "keydown", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "keydown", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnKeydown (Event.Event  (Effect Unit) ) where
     \value -> { key: "keydown", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnKeydown bothValues = unsafeAttribute $ Both
-    { key: "keydown", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnKeydown bothValues = unsafeAttribute $ Both (pure 
+    { key: "keydown", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "keydown", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnKeydownEffect =
   => Event (Attribute element)
 
 instance Attr everything OnKeydown (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnKeydown bothValues = unsafeAttribute $ Both
-    { key: "keydown", value: unset' }
+  attr OnKeydown bothValues = unsafeAttribute $ Both (pure 
+    { key: "keydown", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keydown", value: unset' })
 instance Attr everything OnKeydown  Unit  where
   attr OnKeydown _ = unsafeAttribute $ This $ pure $

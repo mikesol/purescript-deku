@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data VectorEffect = VectorEffect
 
 instance Attr Circle_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Circle_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -62,8 +62,8 @@ instance Attr Circle_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr ClipPath_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr ClipPath_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -73,8 +73,8 @@ instance Attr ClipPath_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Defs_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Defs_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -84,8 +84,8 @@ instance Attr Defs_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Ellipse_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Ellipse_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -95,8 +95,8 @@ instance Attr Ellipse_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeBlend_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeBlend_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -106,8 +106,8 @@ instance Attr FeBlend_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeColorMatrix_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeColorMatrix_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeComponentTransfer_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeComponentTransfer_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeComposite_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeComposite_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -139,8 +139,8 @@ instance Attr FeComposite_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeConvolveMatrix_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeConvolveMatrix_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeDiffuseLighting_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeDiffuseLighting_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeDisplacementMap_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeDisplacementMap_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeFlood_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeFlood_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -183,8 +183,8 @@ instance Attr FeFlood_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeGaussianBlur_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeGaussianBlur_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeImage_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeImage_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -205,8 +205,8 @@ instance Attr FeImage_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeMerge_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeMerge_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -216,8 +216,8 @@ instance Attr FeMerge_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeMorphology_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeMorphology_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeOffset_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeOffset_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -238,8 +238,8 @@ instance Attr FeOffset_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeSpecularLighting_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeSpecularLighting_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeTile_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeTile_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -260,8 +260,8 @@ instance Attr FeTile_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr FeTurbulence_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr FeTurbulence_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Filter_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Filter_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -282,8 +282,8 @@ instance Attr Filter_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr ForeignObject_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr ForeignObject_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr G_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr G_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -304,8 +304,8 @@ instance Attr G_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Image_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Image_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -315,8 +315,8 @@ instance Attr Image_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Line_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Line_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -326,8 +326,8 @@ instance Attr Line_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr LinearGradient_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr LinearGradient_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Marker_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Marker_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -348,8 +348,8 @@ instance Attr Marker_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Mask_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Mask_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -359,8 +359,8 @@ instance Attr Mask_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Path_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Path_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -370,8 +370,8 @@ instance Attr Path_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Pattern_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Pattern_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -381,8 +381,8 @@ instance Attr Pattern_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Polygon_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Polygon_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -392,8 +392,8 @@ instance Attr Polygon_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Polyline_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Polyline_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -403,8 +403,8 @@ instance Attr Polyline_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr RadialGradient_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr RadialGradient_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Rect_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Rect_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -425,8 +425,8 @@ instance Attr Rect_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Svg_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Svg_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -436,8 +436,8 @@ instance Attr Svg_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Switch_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Switch_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -447,8 +447,8 @@ instance Attr Switch_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Symbol_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Symbol_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -458,8 +458,8 @@ instance Attr Symbol_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Text_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Text_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -469,8 +469,8 @@ instance Attr Text_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr TextPath_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr TextPath_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -480,8 +480,8 @@ instance Attr TextPath_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Tspan_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Tspan_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -491,8 +491,8 @@ instance Attr Tspan_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr Use_ VectorEffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "vector-effect", value: prop' value })
 instance Attr Use_ VectorEffect  String  where
   attr VectorEffect value = unsafeAttribute $ This $ pure $
@@ -502,8 +502,8 @@ instance Attr Use_ VectorEffect (Event.Event  String ) where
     \value -> { key: "vector-effect", value: prop' value }
 
 instance Attr everything VectorEffect (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr VectorEffect bothValues = unsafeAttribute $ Both
-    { key: "vector-effect", value: unset' }
+  attr VectorEffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "vector-effect", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "vector-effect", value: unset' })
 instance Attr everything VectorEffect  Unit  where
   attr VectorEffect _ = unsafeAttribute $ This $ pure $

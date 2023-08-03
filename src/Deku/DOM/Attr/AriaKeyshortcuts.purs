@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaKeyshortcuts = AriaKeyshortcuts
 
 instance Attr Circle_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Ellipse_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr ForeignObject_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr G_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Line_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Marker_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Path_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Polygon_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Polyline_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Rect_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Svg_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Symbol_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Text_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr TextPath_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Tspan_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr Use_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr View_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-keyshortcuts", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaKeyshortcuts (Event.Event  String ) where
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 instance Attr everything AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both
-    { key: "aria-keyshortcuts", value: unset' }
+  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-keyshortcuts", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-keyshortcuts", value: unset' })
 instance Attr everything AriaKeyshortcuts  Unit  where
   attr AriaKeyshortcuts _ = unsafeAttribute $ This $ pure $

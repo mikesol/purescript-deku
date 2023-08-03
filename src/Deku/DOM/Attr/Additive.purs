@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Additive = Additive
 
 instance Attr Animate_ Additive (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Additive bothValues = unsafeAttribute $ Both
-    { key: "additive", value: prop' (NonEmpty.head bothValues) }
+  attr Additive bothValues = unsafeAttribute $ Both (pure 
+    { key: "additive", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "additive", value: prop' value })
 instance Attr Animate_ Additive  String  where
   attr Additive value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Animate_ Additive (Event.Event  String ) where
     \value -> { key: "additive", value: prop' value }
 
 instance Attr AnimateMotion_ Additive (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Additive bothValues = unsafeAttribute $ Both
-    { key: "additive", value: prop' (NonEmpty.head bothValues) }
+  attr Additive bothValues = unsafeAttribute $ Both (pure 
+    { key: "additive", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "additive", value: prop' value })
 instance Attr AnimateMotion_ Additive  String  where
   attr Additive value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr AnimateMotion_ Additive (Event.Event  String ) where
     \value -> { key: "additive", value: prop' value }
 
 instance Attr AnimateTransform_ Additive (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Additive bothValues = unsafeAttribute $ Both
-    { key: "additive", value: prop' (NonEmpty.head bothValues) }
+  attr Additive bothValues = unsafeAttribute $ Both (pure 
+    { key: "additive", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "additive", value: prop' value })
 instance Attr AnimateTransform_ Additive  String  where
   attr Additive value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr AnimateTransform_ Additive (Event.Event  String ) where
     \value -> { key: "additive", value: prop' value }
 
 instance Attr everything Additive (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Additive bothValues = unsafeAttribute $ Both
-    { key: "additive", value: unset' }
+  attr Additive bothValues = unsafeAttribute $ Both (pure 
+    { key: "additive", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "additive", value: unset' })
 instance Attr everything Additive  Unit  where
   attr Additive _ = unsafeAttribute $ This $ pure $

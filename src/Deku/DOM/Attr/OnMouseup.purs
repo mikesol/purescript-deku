@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMouseup = OnMouseup
 
 instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMouseup bothValues = unsafeAttribute $ Both
-    { key: "mouseup", value: cb' (NonEmpty.head bothValues) }
+  attr OnMouseup bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseup", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseup", value: cb' value })
 instance Attr anything OnMouseup  Cb  where
   attr OnMouseup value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMouseup (Event.Event  Cb ) where
     \value -> { key: "mouseup", value: cb' value }
 
 instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMouseup bothValues = unsafeAttribute $ Both
-    { key: "mouseup", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMouseup bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseup", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseup", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMouseup (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMouseup bothValues = unsafeAttribute $ Both
-    { key: "mouseup", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMouseup bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseup", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseup", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMouseupEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseup (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMouseup bothValues = unsafeAttribute $ Both
-    { key: "mouseup", value: unset' }
+  attr OnMouseup bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseup", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseup", value: unset' })
 instance Attr everything OnMouseup  Unit  where
   attr OnMouseup _ = unsafeAttribute $ This $ pure $

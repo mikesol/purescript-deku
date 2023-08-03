@@ -30,8 +30,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data RequiredFeatures = RequiredFeatures
 
 instance Attr AnimateTransform_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -43,8 +43,8 @@ instance Attr AnimateTransform_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Discard_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -56,8 +56,8 @@ instance Attr Discard_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Ellipse_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -69,8 +69,8 @@ instance Attr Ellipse_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr ForeignObject_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -82,8 +82,8 @@ instance Attr ForeignObject_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr G_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -95,8 +95,8 @@ instance Attr G_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Image_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -108,8 +108,8 @@ instance Attr Image_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Line_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -121,8 +121,8 @@ instance Attr Line_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Marker_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -134,8 +134,8 @@ instance Attr Marker_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Mask_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -147,8 +147,8 @@ instance Attr Mask_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Path_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -160,8 +160,8 @@ instance Attr Path_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Pattern_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -173,8 +173,8 @@ instance Attr Pattern_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polygon_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -186,8 +186,8 @@ instance Attr Polygon_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polyline_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -199,8 +199,8 @@ instance Attr Polyline_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Rect_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -212,8 +212,8 @@ instance Attr Rect_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Svg_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -225,8 +225,8 @@ instance Attr Svg_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Switch_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -238,8 +238,8 @@ instance Attr Switch_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Text_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -251,8 +251,8 @@ instance Attr Text_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr TextPath_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -264,8 +264,8 @@ instance Attr TextPath_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Tspan_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -277,8 +277,8 @@ instance Attr Tspan_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Use_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
     )
@@ -290,8 +290,8 @@ instance Attr Use_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr everything RequiredFeatures (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr RequiredFeatures bothValues = unsafeAttribute $ Both
-    { key: "requiredFeatures", value: unset' }
+  attr RequiredFeatures bothValues = unsafeAttribute $ Both (pure 
+    { key: "requiredFeatures", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "requiredFeatures", value: unset' })
 instance Attr everything RequiredFeatures  Unit  where
   attr RequiredFeatures _ = unsafeAttribute $ This $ pure $

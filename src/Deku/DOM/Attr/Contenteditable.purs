@@ -132,8 +132,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Contenteditable = Contenteditable
 
 instance Attr A_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -145,8 +145,8 @@ instance Attr A_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Abbr_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -158,8 +158,8 @@ instance Attr Abbr_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Acronym_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -171,8 +171,8 @@ instance Attr Acronym_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Address_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -184,8 +184,8 @@ instance Attr Address_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Applet_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -197,8 +197,8 @@ instance Attr Applet_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Area_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -210,8 +210,8 @@ instance Attr Area_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Article_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -223,8 +223,8 @@ instance Attr Article_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Aside_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -236,8 +236,8 @@ instance Attr Aside_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Audio_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -249,8 +249,8 @@ instance Attr Audio_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr B_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -262,8 +262,8 @@ instance Attr B_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Base_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -275,8 +275,8 @@ instance Attr Base_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Basefont_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -288,8 +288,8 @@ instance Attr Basefont_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Bdi_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -301,8 +301,8 @@ instance Attr Bdi_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Bdo_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -314,8 +314,8 @@ instance Attr Bdo_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Big_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -327,8 +327,8 @@ instance Attr Big_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Blockquote_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -340,8 +340,8 @@ instance Attr Blockquote_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Body_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -353,8 +353,8 @@ instance Attr Body_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Br_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -366,8 +366,8 @@ instance Attr Br_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Button_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -379,8 +379,8 @@ instance Attr Button_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Canvas_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -392,8 +392,8 @@ instance Attr Canvas_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Caption_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -405,8 +405,8 @@ instance Attr Caption_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Center_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -418,8 +418,8 @@ instance Attr Center_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Cite_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -431,8 +431,8 @@ instance Attr Cite_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Code_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -444,8 +444,8 @@ instance Attr Code_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Col_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -457,8 +457,8 @@ instance Attr Col_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Colgroup_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -470,8 +470,8 @@ instance Attr Colgroup_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Xdata_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -483,8 +483,8 @@ instance Attr Xdata_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Datalist_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -496,8 +496,8 @@ instance Attr Datalist_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dd_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -509,8 +509,8 @@ instance Attr Dd_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Del_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -522,8 +522,8 @@ instance Attr Del_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Details_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -535,8 +535,8 @@ instance Attr Details_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dfn_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -548,8 +548,8 @@ instance Attr Dfn_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dialog_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -561,8 +561,8 @@ instance Attr Dialog_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dir_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -574,8 +574,8 @@ instance Attr Dir_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Div_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -587,8 +587,8 @@ instance Attr Div_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dl_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -600,8 +600,8 @@ instance Attr Dl_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Dt_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -613,8 +613,8 @@ instance Attr Dt_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Em_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -626,8 +626,8 @@ instance Attr Em_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Embed_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -639,8 +639,8 @@ instance Attr Embed_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Fieldset_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -652,8 +652,8 @@ instance Attr Fieldset_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Figcaption_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -665,8 +665,8 @@ instance Attr Figcaption_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Figure_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -678,8 +678,8 @@ instance Attr Figure_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Font_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -691,8 +691,8 @@ instance Attr Font_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Footer_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -704,8 +704,8 @@ instance Attr Footer_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Form_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -717,8 +717,8 @@ instance Attr Form_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Frame_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -730,8 +730,8 @@ instance Attr Frame_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Frameset_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -743,8 +743,8 @@ instance Attr Frameset_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H1_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -756,8 +756,8 @@ instance Attr H1_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H2_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -769,8 +769,8 @@ instance Attr H2_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H3_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -782,8 +782,8 @@ instance Attr H3_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H4_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -795,8 +795,8 @@ instance Attr H4_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H5_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -808,8 +808,8 @@ instance Attr H5_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr H6_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -821,8 +821,8 @@ instance Attr H6_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Head_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -834,8 +834,8 @@ instance Attr Head_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Header_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -847,8 +847,8 @@ instance Attr Header_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Hr_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -860,8 +860,8 @@ instance Attr Hr_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Html_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -873,8 +873,8 @@ instance Attr Html_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr I_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -886,8 +886,8 @@ instance Attr I_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Iframe_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -899,8 +899,8 @@ instance Attr Iframe_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Img_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -912,8 +912,8 @@ instance Attr Img_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Input_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -925,8 +925,8 @@ instance Attr Input_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ins_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -938,8 +938,8 @@ instance Attr Ins_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Kbd_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -951,8 +951,8 @@ instance Attr Kbd_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Label_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -964,8 +964,8 @@ instance Attr Label_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Legend_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -977,8 +977,8 @@ instance Attr Legend_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Li_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -990,8 +990,8 @@ instance Attr Li_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Link_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1003,8 +1003,8 @@ instance Attr Link_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Main_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1016,8 +1016,8 @@ instance Attr Main_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Map_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1029,8 +1029,8 @@ instance Attr Map_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Mark_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1042,8 +1042,8 @@ instance Attr Mark_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Meta_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1055,8 +1055,8 @@ instance Attr Meta_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Meter_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1068,8 +1068,8 @@ instance Attr Meter_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Nav_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1081,8 +1081,8 @@ instance Attr Nav_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Noframes_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1094,8 +1094,8 @@ instance Attr Noframes_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Noscript_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1107,8 +1107,8 @@ instance Attr Noscript_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Object_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1120,8 +1120,8 @@ instance Attr Object_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ol_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1133,8 +1133,8 @@ instance Attr Ol_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Optgroup_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1146,8 +1146,8 @@ instance Attr Optgroup_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Option_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1159,8 +1159,8 @@ instance Attr Option_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Output_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1172,8 +1172,8 @@ instance Attr Output_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr P_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1185,8 +1185,8 @@ instance Attr P_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Param_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1198,8 +1198,8 @@ instance Attr Param_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Picture_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1211,8 +1211,8 @@ instance Attr Picture_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Pre_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1224,8 +1224,8 @@ instance Attr Pre_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Progress_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1237,8 +1237,8 @@ instance Attr Progress_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Q_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1250,8 +1250,8 @@ instance Attr Q_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Rp_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1263,8 +1263,8 @@ instance Attr Rp_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Rt_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1276,8 +1276,8 @@ instance Attr Rt_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ruby_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1289,8 +1289,8 @@ instance Attr Ruby_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr S_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1302,8 +1302,8 @@ instance Attr S_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Samp_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1315,8 +1315,8 @@ instance Attr Samp_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Script_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1328,8 +1328,8 @@ instance Attr Script_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Section_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1341,8 +1341,8 @@ instance Attr Section_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Select_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1354,8 +1354,8 @@ instance Attr Select_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Small_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1367,8 +1367,8 @@ instance Attr Small_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Source_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1380,8 +1380,8 @@ instance Attr Source_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Span_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1393,8 +1393,8 @@ instance Attr Span_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Strike_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1406,8 +1406,8 @@ instance Attr Strike_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Strong_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1419,8 +1419,8 @@ instance Attr Strong_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Style_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1432,8 +1432,8 @@ instance Attr Style_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Sub_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1445,8 +1445,8 @@ instance Attr Sub_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Summary_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1458,8 +1458,8 @@ instance Attr Summary_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Sup_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1471,8 +1471,8 @@ instance Attr Sup_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Svg_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1484,8 +1484,8 @@ instance Attr Svg_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Table_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1497,8 +1497,8 @@ instance Attr Table_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tbody_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1510,8 +1510,8 @@ instance Attr Tbody_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Td_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1523,8 +1523,8 @@ instance Attr Td_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Template_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1536,8 +1536,8 @@ instance Attr Template_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Textarea_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1549,8 +1549,8 @@ instance Attr Textarea_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tfoot_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1562,8 +1562,8 @@ instance Attr Tfoot_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Th_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1575,8 +1575,8 @@ instance Attr Th_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Thead_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1588,8 +1588,8 @@ instance Attr Thead_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Time_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1601,8 +1601,8 @@ instance Attr Time_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Title_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1614,8 +1614,8 @@ instance Attr Title_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tr_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1627,8 +1627,8 @@ instance Attr Tr_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Track_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1640,8 +1640,8 @@ instance Attr Track_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Tt_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1653,8 +1653,8 @@ instance Attr Tt_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr U_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1666,8 +1666,8 @@ instance Attr U_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Ul_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1679,8 +1679,8 @@ instance Attr Ul_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Var_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1692,8 +1692,8 @@ instance Attr Var_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Video_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1705,8 +1705,8 @@ instance Attr Video_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr Wbr_ Contenteditable (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contenteditable", value: prop' value }
     )
@@ -1718,8 +1718,8 @@ instance Attr Wbr_ Contenteditable (Event.Event  String ) where
     <#> \value -> { key: "contenteditable", value: prop' value }
 
 instance Attr everything Contenteditable (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Contenteditable bothValues = unsafeAttribute $ Both
-    { key: "contenteditable", value: unset' }
+  attr Contenteditable bothValues = unsafeAttribute $ Both (pure 
+    { key: "contenteditable", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "contenteditable", value: unset' })
 instance Attr everything Contenteditable  Unit  where
   attr Contenteditable _ = unsafeAttribute $ This $ pure $

@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data End = End
 
 instance Attr Animate_ End (NonEmpty.NonEmpty Event.Event  String ) where
-  attr End bothValues = unsafeAttribute $ Both
-    { key: "end", value: prop' (NonEmpty.head bothValues) }
+  attr End bothValues = unsafeAttribute $ Both (pure 
+    { key: "end", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "end", value: prop' value })
 instance Attr Animate_ End  String  where
   attr End value = unsafeAttribute $ This $ pure $ { key: "end", value: prop' value }
@@ -24,8 +24,8 @@ instance Attr Animate_ End (Event.Event  String ) where
     { key: "end", value: prop' value }
 
 instance Attr AnimateMotion_ End (NonEmpty.NonEmpty Event.Event  String ) where
-  attr End bothValues = unsafeAttribute $ Both
-    { key: "end", value: prop' (NonEmpty.head bothValues) }
+  attr End bothValues = unsafeAttribute $ Both (pure 
+    { key: "end", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "end", value: prop' value })
 instance Attr AnimateMotion_ End  String  where
   attr End value = unsafeAttribute $ This $ pure $ { key: "end", value: prop' value }
@@ -34,8 +34,8 @@ instance Attr AnimateMotion_ End (Event.Event  String ) where
     { key: "end", value: prop' value }
 
 instance Attr AnimateTransform_ End (NonEmpty.NonEmpty Event.Event  String ) where
-  attr End bothValues = unsafeAttribute $ Both
-    { key: "end", value: prop' (NonEmpty.head bothValues) }
+  attr End bothValues = unsafeAttribute $ Both (pure 
+    { key: "end", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "end", value: prop' value })
 instance Attr AnimateTransform_ End  String  where
   attr End value = unsafeAttribute $ This $ pure $ { key: "end", value: prop' value }
@@ -44,8 +44,8 @@ instance Attr AnimateTransform_ End (Event.Event  String ) where
     { key: "end", value: prop' value }
 
 instance Attr Set_ End (NonEmpty.NonEmpty Event.Event  String ) where
-  attr End bothValues = unsafeAttribute $ Both
-    { key: "end", value: prop' (NonEmpty.head bothValues) }
+  attr End bothValues = unsafeAttribute $ Both (pure 
+    { key: "end", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "end", value: prop' value })
 instance Attr Set_ End  String  where
   attr End value = unsafeAttribute $ This $ pure $ { key: "end", value: prop' value }
@@ -54,7 +54,7 @@ instance Attr Set_ End (Event.Event  String ) where
     { key: "end", value: prop' value }
 
 instance Attr everything End (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr End bothValues = unsafeAttribute $ Both { key: "end", value: unset' }
+  attr End bothValues = unsafeAttribute $ Both (pure  { key: "end", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "end", value: unset' })
 instance Attr everything End  Unit  where
   attr End _ = unsafeAttribute $ This $ pure $ { key: "end", value: unset' }

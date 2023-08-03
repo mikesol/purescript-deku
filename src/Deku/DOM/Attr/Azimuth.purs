@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Azimuth = Azimuth
 
 instance Attr FeDistantLight_ Azimuth (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Azimuth bothValues = unsafeAttribute $ Both
-    { key: "azimuth", value: prop' (NonEmpty.head bothValues) }
+  attr Azimuth bothValues = unsafeAttribute $ Both (pure 
+    { key: "azimuth", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "azimuth", value: prop' value })
 instance Attr FeDistantLight_ Azimuth  String  where
   attr Azimuth value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeDistantLight_ Azimuth (Event.Event  String ) where
     \value -> { key: "azimuth", value: prop' value }
 
 instance Attr everything Azimuth (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Azimuth bothValues = unsafeAttribute $ Both
-    { key: "azimuth", value: unset' }
+  attr Azimuth bothValues = unsafeAttribute $ Both (pure 
+    { key: "azimuth", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "azimuth", value: unset' })
 instance Attr everything Azimuth  Unit  where
   attr Azimuth _ = unsafeAttribute $ This $ pure $ { key: "azimuth", value: unset' }

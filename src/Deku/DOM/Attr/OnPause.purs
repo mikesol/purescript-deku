@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPause = OnPause
 
 instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (NonEmpty.head bothValues) }
+  attr OnPause bothValues = unsafeAttribute $ Both (pure 
+    { key: "pause", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pause", value: cb' value })
 instance Attr anything OnPause  Cb  where
   attr OnPause value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPause (Event.Event  Cb ) where
     \value -> { key: "pause", value: cb' value }
 
 instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPause bothValues = unsafeAttribute $ Both (pure 
+    { key: "pause", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pause", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPause (Event.Event  (Effect Unit) ) where
     \value -> { key: "pause", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPause bothValues = unsafeAttribute $ Both (pure 
+    { key: "pause", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pause", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPauseEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPause (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPause bothValues = unsafeAttribute $ Both
-    { key: "pause", value: unset' }
+  attr OnPause bothValues = unsafeAttribute $ Both (pure 
+    { key: "pause", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pause", value: unset' })
 instance Attr everything OnPause  Unit  where
   attr OnPause _ = unsafeAttribute $ This $ pure $ { key: "pause", value: unset' }

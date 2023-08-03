@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnAbort = OnAbort
 
 instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (NonEmpty.head bothValues) }
+  attr OnAbort bothValues = unsafeAttribute $ Both (pure 
+    { key: "abort", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "abort", value: cb' value })
 instance Attr anything OnAbort  Cb  where
   attr OnAbort value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnAbort (Event.Event  Cb ) where
     \value -> { key: "abort", value: cb' value }
 
 instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnAbort bothValues = unsafeAttribute $ Both (pure 
+    { key: "abort", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "abort", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnAbort (Event.Event  (Effect Unit) ) where
     \value -> { key: "abort", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnAbort bothValues = unsafeAttribute $ Both (pure 
+    { key: "abort", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "abort", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnAbortEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAbort (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnAbort bothValues = unsafeAttribute $ Both
-    { key: "abort", value: unset' }
+  attr OnAbort bothValues = unsafeAttribute $ Both (pure 
+    { key: "abort", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "abort", value: unset' })
 instance Attr everything OnAbort  Unit  where
   attr OnAbort _ = unsafeAttribute $ This $ pure $ { key: "abort", value: unset' }

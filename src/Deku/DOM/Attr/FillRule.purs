@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FillRule = FillRule
 
 instance Attr Circle_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Circle_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -62,8 +62,8 @@ instance Attr Circle_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ClipPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ClipPath_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -73,8 +73,8 @@ instance Attr ClipPath_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Defs_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Defs_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -84,8 +84,8 @@ instance Attr Defs_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Ellipse_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Ellipse_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -95,8 +95,8 @@ instance Attr Ellipse_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeBlend_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeBlend_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -106,8 +106,8 @@ instance Attr FeBlend_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeColorMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeColorMatrix_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -117,8 +117,8 @@ instance Attr FeColorMatrix_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComponentTransfer_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComponentTransfer_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -128,8 +128,8 @@ instance Attr FeComponentTransfer_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComposite_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComposite_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -139,8 +139,8 @@ instance Attr FeComposite_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeConvolveMatrix_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -150,8 +150,8 @@ instance Attr FeConvolveMatrix_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDiffuseLighting_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -161,8 +161,8 @@ instance Attr FeDiffuseLighting_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDisplacementMap_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDisplacementMap_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -172,8 +172,8 @@ instance Attr FeDisplacementMap_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeFlood_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeFlood_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -183,8 +183,8 @@ instance Attr FeFlood_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeGaussianBlur_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeGaussianBlur_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -194,8 +194,8 @@ instance Attr FeGaussianBlur_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeImage_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeImage_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -205,8 +205,8 @@ instance Attr FeImage_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMerge_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMerge_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -216,8 +216,8 @@ instance Attr FeMerge_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMorphology_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMorphology_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -227,8 +227,8 @@ instance Attr FeMorphology_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeOffset_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeOffset_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -238,8 +238,8 @@ instance Attr FeOffset_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeSpecularLighting_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeSpecularLighting_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -249,8 +249,8 @@ instance Attr FeSpecularLighting_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTile_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTile_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -260,8 +260,8 @@ instance Attr FeTile_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTurbulence_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTurbulence_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -271,8 +271,8 @@ instance Attr FeTurbulence_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Filter_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Filter_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -282,8 +282,8 @@ instance Attr Filter_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ForeignObject_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ForeignObject_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -293,8 +293,8 @@ instance Attr ForeignObject_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr G_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr G_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -304,8 +304,8 @@ instance Attr G_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Image_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Image_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -315,8 +315,8 @@ instance Attr Image_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Line_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Line_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -326,8 +326,8 @@ instance Attr Line_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr LinearGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr LinearGradient_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -337,8 +337,8 @@ instance Attr LinearGradient_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Marker_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Marker_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -348,8 +348,8 @@ instance Attr Marker_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Mask_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Mask_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -359,8 +359,8 @@ instance Attr Mask_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Path_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Path_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -370,8 +370,8 @@ instance Attr Path_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Pattern_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Pattern_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -381,8 +381,8 @@ instance Attr Pattern_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polygon_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polygon_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -392,8 +392,8 @@ instance Attr Polygon_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polyline_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polyline_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -403,8 +403,8 @@ instance Attr Polyline_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr RadialGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr RadialGradient_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -414,8 +414,8 @@ instance Attr RadialGradient_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Rect_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Rect_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -425,8 +425,8 @@ instance Attr Rect_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Svg_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Svg_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -436,8 +436,8 @@ instance Attr Svg_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Switch_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Switch_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -447,8 +447,8 @@ instance Attr Switch_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Symbol_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Symbol_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -458,8 +458,8 @@ instance Attr Symbol_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Text_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Text_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -469,8 +469,8 @@ instance Attr Text_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr TextPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr TextPath_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -480,8 +480,8 @@ instance Attr TextPath_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Tspan_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Tspan_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -491,8 +491,8 @@ instance Attr Tspan_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Use_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Use_ FillRule  String  where
   attr FillRule value = unsafeAttribute $ This $ pure $
@@ -502,8 +502,8 @@ instance Attr Use_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr everything FillRule (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr FillRule bothValues = unsafeAttribute $ Both
-    { key: "fill-rule", value: unset' }
+  attr FillRule bothValues = unsafeAttribute $ Both (pure 
+    { key: "fill-rule", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "fill-rule", value: unset' })
 instance Attr everything FillRule  Unit  where
   attr FillRule _ = unsafeAttribute $ This $ pure $

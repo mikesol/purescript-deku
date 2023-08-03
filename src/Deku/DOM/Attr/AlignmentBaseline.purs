@@ -29,8 +29,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AlignmentBaseline = AlignmentBaseline
 
 instance Attr FeBlend_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -42,8 +42,8 @@ instance Attr FeBlend_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeColorMatrix_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -55,8 +55,8 @@ instance Attr FeColorMatrix_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeComponentTransfer_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -68,8 +68,8 @@ instance Attr FeComponentTransfer_ AlignmentBaseline (Event.Event  String ) wher
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeComposite_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -81,8 +81,8 @@ instance Attr FeComposite_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeConvolveMatrix_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -94,8 +94,8 @@ instance Attr FeConvolveMatrix_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeDiffuseLighting_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -107,8 +107,8 @@ instance Attr FeDiffuseLighting_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeDisplacementMap_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -120,8 +120,8 @@ instance Attr FeDisplacementMap_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeFlood_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -133,8 +133,8 @@ instance Attr FeFlood_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeGaussianBlur_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -146,8 +146,8 @@ instance Attr FeGaussianBlur_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeImage_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -159,8 +159,8 @@ instance Attr FeImage_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeMerge_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -172,8 +172,8 @@ instance Attr FeMerge_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeMorphology_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -185,8 +185,8 @@ instance Attr FeMorphology_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeOffset_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -198,8 +198,8 @@ instance Attr FeOffset_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeSpecularLighting_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -211,8 +211,8 @@ instance Attr FeSpecularLighting_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeTile_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -224,8 +224,8 @@ instance Attr FeTile_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr FeTurbulence_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -237,8 +237,8 @@ instance Attr FeTurbulence_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Filter_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -250,8 +250,8 @@ instance Attr Filter_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Image_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -263,8 +263,8 @@ instance Attr Image_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr Switch_ AlignmentBaseline (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "alignment-baseline", value: prop' value }
     )
@@ -276,8 +276,8 @@ instance Attr Switch_ AlignmentBaseline (Event.Event  String ) where
     <#> \value -> { key: "alignment-baseline", value: prop' value }
 
 instance Attr everything AlignmentBaseline (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AlignmentBaseline bothValues = unsafeAttribute $ Both
-    { key: "alignment-baseline", value: unset' }
+  attr AlignmentBaseline bothValues = unsafeAttribute $ Both (pure 
+    { key: "alignment-baseline", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "alignment-baseline", value: unset' })
 instance Attr everything AlignmentBaseline  Unit  where
   attr AlignmentBaseline _ = unsafeAttribute $ This $ pure $

@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data TableValues = TableValues
 
 instance Attr FeFuncA_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TableValues bothValues = unsafeAttribute $ Both
-    { key: "tableValues", value: prop' (NonEmpty.head bothValues) }
+  attr TableValues bothValues = unsafeAttribute $ Both (pure 
+    { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncA_ TableValues  String  where
   attr TableValues value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr FeFuncA_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncB_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TableValues bothValues = unsafeAttribute $ Both
-    { key: "tableValues", value: prop' (NonEmpty.head bothValues) }
+  attr TableValues bothValues = unsafeAttribute $ Both (pure 
+    { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncB_ TableValues  String  where
   attr TableValues value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr FeFuncB_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncG_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TableValues bothValues = unsafeAttribute $ Both
-    { key: "tableValues", value: prop' (NonEmpty.head bothValues) }
+  attr TableValues bothValues = unsafeAttribute $ Both (pure 
+    { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncG_ TableValues  String  where
   attr TableValues value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr FeFuncG_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncR_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TableValues bothValues = unsafeAttribute $ Both
-    { key: "tableValues", value: prop' (NonEmpty.head bothValues) }
+  attr TableValues bothValues = unsafeAttribute $ Both (pure 
+    { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncR_ TableValues  String  where
   attr TableValues value = unsafeAttribute $ This $ pure $
@@ -58,8 +58,8 @@ instance Attr FeFuncR_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr everything TableValues (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr TableValues bothValues = unsafeAttribute $ Both
-    { key: "tableValues", value: unset' }
+  attr TableValues bothValues = unsafeAttribute $ Both (pure 
+    { key: "tableValues", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "tableValues", value: unset' })
 instance Attr everything TableValues  Unit  where
   attr TableValues _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StartOffset = StartOffset
 
 instance Attr TextPath_ StartOffset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StartOffset bothValues = unsafeAttribute $ Both
-    { key: "startOffset", value: prop' (NonEmpty.head bothValues) }
+  attr StartOffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "startOffset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "startOffset", value: prop' value })
 instance Attr TextPath_ StartOffset  String  where
   attr StartOffset value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr TextPath_ StartOffset (Event.Event  String ) where
     \value -> { key: "startOffset", value: prop' value }
 
 instance Attr everything StartOffset (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StartOffset bothValues = unsafeAttribute $ Both
-    { key: "startOffset", value: unset' }
+  attr StartOffset bothValues = unsafeAttribute $ Both (pure 
+    { key: "startOffset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "startOffset", value: unset' })
 instance Attr everything StartOffset  Unit  where
   attr StartOffset _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMousewheel = OnMousewheel
 
 instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (NonEmpty.head bothValues) }
+  attr OnMousewheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "mousewheel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mousewheel", value: cb' value })
 instance Attr anything OnMousewheel  Cb  where
   attr OnMousewheel value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMousewheel (Event.Event  Cb ) where
     \value -> { key: "mousewheel", value: cb' value }
 
 instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMousewheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "mousewheel", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMousewheel (Event.Event  (Effect Unit) ) where
     \value -> { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMousewheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "mousewheel", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mousewheel", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMousewheelEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMousewheel (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMousewheel bothValues = unsafeAttribute $ Both
-    { key: "mousewheel", value: unset' }
+  attr OnMousewheel bothValues = unsafeAttribute $ Both (pure 
+    { key: "mousewheel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mousewheel", value: unset' })
 instance Attr everything OnMousewheel  Unit  where
   attr OnMousewheel _ = unsafeAttribute $ This $ pure $

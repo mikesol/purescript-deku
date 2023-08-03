@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Codebase = Codebase
 
 instance Attr Applet_ Codebase (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Codebase bothValues = unsafeAttribute $ Both
-    { key: "codebase", value: prop' (NonEmpty.head bothValues) }
+  attr Codebase bothValues = unsafeAttribute $ Both (pure 
+    { key: "codebase", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "codebase", value: prop' value })
 instance Attr Applet_ Codebase  String  where
   attr Codebase value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Applet_ Codebase (Event.Event  String ) where
     \value -> { key: "codebase", value: prop' value }
 
 instance Attr everything Codebase (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Codebase bothValues = unsafeAttribute $ Both
-    { key: "codebase", value: unset' }
+  attr Codebase bothValues = unsafeAttribute $ Both (pure 
+    { key: "codebase", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "codebase", value: unset' })
 instance Attr everything Codebase  Unit  where
   attr Codebase _ = unsafeAttribute $ This $ pure $

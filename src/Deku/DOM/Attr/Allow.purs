@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Allow = Allow
 
 instance Attr Iframe_ Allow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Allow bothValues = unsafeAttribute $ Both
-    { key: "allow", value: prop' (NonEmpty.head bothValues) }
+  attr Allow bothValues = unsafeAttribute $ Both (pure 
+    { key: "allow", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "allow", value: prop' value })
 instance Attr Iframe_ Allow  String  where
   attr Allow value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr Iframe_ Allow (Event.Event  String ) where
     \value -> { key: "allow", value: prop' value }
 
 instance Attr everything Allow (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Allow bothValues = unsafeAttribute $ Both { key: "allow", value: unset' }
+  attr Allow bothValues = unsafeAttribute $ Both (pure  { key: "allow", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "allow", value: unset' })
 instance Attr everything Allow  Unit  where
   attr Allow _ = unsafeAttribute $ This $ pure $ { key: "allow", value: unset' }

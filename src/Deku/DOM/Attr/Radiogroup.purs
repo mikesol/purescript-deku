@@ -132,8 +132,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Radiogroup = Radiogroup
 
 instance Attr A_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr A_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -143,8 +143,8 @@ instance Attr A_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Abbr_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Abbr_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -154,8 +154,8 @@ instance Attr Abbr_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Acronym_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Acronym_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -165,8 +165,8 @@ instance Attr Acronym_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Address_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Address_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -176,8 +176,8 @@ instance Attr Address_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Applet_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Applet_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -187,8 +187,8 @@ instance Attr Applet_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Area_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Area_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -198,8 +198,8 @@ instance Attr Area_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Article_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Article_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -209,8 +209,8 @@ instance Attr Article_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Aside_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Aside_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -220,8 +220,8 @@ instance Attr Aside_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Audio_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Audio_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -231,8 +231,8 @@ instance Attr Audio_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr B_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr B_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -242,8 +242,8 @@ instance Attr B_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Base_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Base_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -253,8 +253,8 @@ instance Attr Base_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Basefont_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Basefont_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -264,8 +264,8 @@ instance Attr Basefont_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Bdi_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Bdi_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -275,8 +275,8 @@ instance Attr Bdi_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Bdo_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Bdo_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -286,8 +286,8 @@ instance Attr Bdo_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Big_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Big_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -297,8 +297,8 @@ instance Attr Big_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Blockquote_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Blockquote_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -308,8 +308,8 @@ instance Attr Blockquote_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Body_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Body_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -319,8 +319,8 @@ instance Attr Body_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Br_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Br_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -330,8 +330,8 @@ instance Attr Br_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Button_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Button_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -341,8 +341,8 @@ instance Attr Button_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Canvas_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Canvas_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -352,8 +352,8 @@ instance Attr Canvas_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Caption_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Caption_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -363,8 +363,8 @@ instance Attr Caption_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Center_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Center_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -374,8 +374,8 @@ instance Attr Center_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Cite_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Cite_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -385,8 +385,8 @@ instance Attr Cite_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Code_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Code_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -396,8 +396,8 @@ instance Attr Code_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Col_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Col_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -407,8 +407,8 @@ instance Attr Col_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Colgroup_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Colgroup_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -418,8 +418,8 @@ instance Attr Colgroup_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Xdata_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Xdata_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -429,8 +429,8 @@ instance Attr Xdata_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Datalist_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Datalist_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -440,8 +440,8 @@ instance Attr Datalist_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dd_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dd_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -451,8 +451,8 @@ instance Attr Dd_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Del_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Del_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -462,8 +462,8 @@ instance Attr Del_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Details_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Details_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -473,8 +473,8 @@ instance Attr Details_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dfn_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dfn_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -484,8 +484,8 @@ instance Attr Dfn_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dialog_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dialog_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -495,8 +495,8 @@ instance Attr Dialog_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dir_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dir_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -506,8 +506,8 @@ instance Attr Dir_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Div_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Div_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -517,8 +517,8 @@ instance Attr Div_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dl_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dl_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -528,8 +528,8 @@ instance Attr Dl_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Dt_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Dt_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -539,8 +539,8 @@ instance Attr Dt_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Em_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Em_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -550,8 +550,8 @@ instance Attr Em_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Embed_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Embed_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -561,8 +561,8 @@ instance Attr Embed_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Fieldset_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Fieldset_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -572,8 +572,8 @@ instance Attr Fieldset_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Figcaption_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Figcaption_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -583,8 +583,8 @@ instance Attr Figcaption_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Figure_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Figure_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -594,8 +594,8 @@ instance Attr Figure_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Font_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Font_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -605,8 +605,8 @@ instance Attr Font_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Footer_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Footer_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -616,8 +616,8 @@ instance Attr Footer_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Form_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Form_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -627,8 +627,8 @@ instance Attr Form_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Frame_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Frame_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -638,8 +638,8 @@ instance Attr Frame_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Frameset_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Frameset_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -649,8 +649,8 @@ instance Attr Frameset_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H1_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H1_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -660,8 +660,8 @@ instance Attr H1_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H2_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H2_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -671,8 +671,8 @@ instance Attr H2_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H3_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H3_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -682,8 +682,8 @@ instance Attr H3_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H4_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H4_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -693,8 +693,8 @@ instance Attr H4_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H5_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H5_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -704,8 +704,8 @@ instance Attr H5_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr H6_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr H6_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -715,8 +715,8 @@ instance Attr H6_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Head_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Head_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -726,8 +726,8 @@ instance Attr Head_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Header_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Header_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -737,8 +737,8 @@ instance Attr Header_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Hr_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Hr_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -748,8 +748,8 @@ instance Attr Hr_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Html_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Html_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -759,8 +759,8 @@ instance Attr Html_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr I_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr I_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -770,8 +770,8 @@ instance Attr I_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Iframe_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Iframe_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -781,8 +781,8 @@ instance Attr Iframe_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Img_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Img_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -792,8 +792,8 @@ instance Attr Img_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Input_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Input_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -803,8 +803,8 @@ instance Attr Input_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ins_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Ins_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -814,8 +814,8 @@ instance Attr Ins_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Kbd_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Kbd_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -825,8 +825,8 @@ instance Attr Kbd_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Label_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Label_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -836,8 +836,8 @@ instance Attr Label_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Legend_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Legend_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -847,8 +847,8 @@ instance Attr Legend_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Li_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Li_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -858,8 +858,8 @@ instance Attr Li_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Link_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Link_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -869,8 +869,8 @@ instance Attr Link_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Main_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Main_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -880,8 +880,8 @@ instance Attr Main_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Map_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Map_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -891,8 +891,8 @@ instance Attr Map_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Mark_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Mark_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -902,8 +902,8 @@ instance Attr Mark_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Meta_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Meta_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -913,8 +913,8 @@ instance Attr Meta_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Meter_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Meter_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -924,8 +924,8 @@ instance Attr Meter_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Nav_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Nav_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -935,8 +935,8 @@ instance Attr Nav_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Noframes_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Noframes_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -946,8 +946,8 @@ instance Attr Noframes_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Noscript_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Noscript_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -957,8 +957,8 @@ instance Attr Noscript_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Object_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Object_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -968,8 +968,8 @@ instance Attr Object_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ol_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Ol_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -979,8 +979,8 @@ instance Attr Ol_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Optgroup_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Optgroup_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -990,8 +990,8 @@ instance Attr Optgroup_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Option_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Option_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1001,8 +1001,8 @@ instance Attr Option_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Output_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Output_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1012,8 +1012,8 @@ instance Attr Output_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr P_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr P_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1023,8 +1023,8 @@ instance Attr P_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Param_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Param_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1034,8 +1034,8 @@ instance Attr Param_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Picture_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Picture_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1045,8 +1045,8 @@ instance Attr Picture_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Pre_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Pre_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1056,8 +1056,8 @@ instance Attr Pre_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Progress_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Progress_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1067,8 +1067,8 @@ instance Attr Progress_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Q_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Q_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1078,8 +1078,8 @@ instance Attr Q_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Rp_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Rp_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1089,8 +1089,8 @@ instance Attr Rp_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Rt_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Rt_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1100,8 +1100,8 @@ instance Attr Rt_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ruby_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Ruby_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1111,8 +1111,8 @@ instance Attr Ruby_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr S_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr S_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1122,8 +1122,8 @@ instance Attr S_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Samp_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Samp_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1133,8 +1133,8 @@ instance Attr Samp_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Script_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Script_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1144,8 +1144,8 @@ instance Attr Script_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Section_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Section_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1155,8 +1155,8 @@ instance Attr Section_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Select_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Select_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1166,8 +1166,8 @@ instance Attr Select_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Small_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Small_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1177,8 +1177,8 @@ instance Attr Small_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Source_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Source_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1188,8 +1188,8 @@ instance Attr Source_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Span_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Span_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1199,8 +1199,8 @@ instance Attr Span_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Strike_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Strike_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1210,8 +1210,8 @@ instance Attr Strike_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Strong_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Strong_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1221,8 +1221,8 @@ instance Attr Strong_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Style_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Style_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1232,8 +1232,8 @@ instance Attr Style_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Sub_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Sub_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1243,8 +1243,8 @@ instance Attr Sub_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Summary_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Summary_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1254,8 +1254,8 @@ instance Attr Summary_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Sup_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Sup_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1265,8 +1265,8 @@ instance Attr Sup_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Svg_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Svg_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1276,8 +1276,8 @@ instance Attr Svg_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Table_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Table_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1287,8 +1287,8 @@ instance Attr Table_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tbody_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Tbody_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1298,8 +1298,8 @@ instance Attr Tbody_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Td_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Td_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1309,8 +1309,8 @@ instance Attr Td_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Template_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Template_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1320,8 +1320,8 @@ instance Attr Template_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Textarea_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Textarea_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1331,8 +1331,8 @@ instance Attr Textarea_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tfoot_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Tfoot_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1342,8 +1342,8 @@ instance Attr Tfoot_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Th_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Th_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1353,8 +1353,8 @@ instance Attr Th_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Thead_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Thead_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1364,8 +1364,8 @@ instance Attr Thead_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Time_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Time_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1375,8 +1375,8 @@ instance Attr Time_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Title_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Title_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1386,8 +1386,8 @@ instance Attr Title_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tr_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Tr_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1397,8 +1397,8 @@ instance Attr Tr_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Track_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Track_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1408,8 +1408,8 @@ instance Attr Track_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Tt_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Tt_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1419,8 +1419,8 @@ instance Attr Tt_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr U_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr U_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1430,8 +1430,8 @@ instance Attr U_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Ul_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Ul_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1441,8 +1441,8 @@ instance Attr Ul_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Var_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Var_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1452,8 +1452,8 @@ instance Attr Var_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Video_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Video_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1463,8 +1463,8 @@ instance Attr Video_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr Wbr_ Radiogroup (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radiogroup", value: prop' value })
 instance Attr Wbr_ Radiogroup  String  where
   attr Radiogroup value = unsafeAttribute $ This $ pure $
@@ -1474,8 +1474,8 @@ instance Attr Wbr_ Radiogroup (Event.Event  String ) where
     \value -> { key: "radiogroup", value: prop' value }
 
 instance Attr everything Radiogroup (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Radiogroup bothValues = unsafeAttribute $ Both
-    { key: "radiogroup", value: unset' }
+  attr Radiogroup bothValues = unsafeAttribute $ Both (pure 
+    { key: "radiogroup", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "radiogroup", value: unset' })
 instance Attr everything Radiogroup  Unit  where
   attr Radiogroup _ = unsafeAttribute $ This $ pure $

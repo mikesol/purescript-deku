@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Optimum = Optimum
 
 instance Attr Meter_ Optimum (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Optimum bothValues = unsafeAttribute $ Both
-    { key: "optimum", value: prop' (NonEmpty.head bothValues) }
+  attr Optimum bothValues = unsafeAttribute $ Both (pure 
+    { key: "optimum", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "optimum", value: prop' value })
 instance Attr Meter_ Optimum  String  where
   attr Optimum value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Meter_ Optimum (Event.Event  String ) where
     \value -> { key: "optimum", value: prop' value }
 
 instance Attr everything Optimum (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Optimum bothValues = unsafeAttribute $ Both
-    { key: "optimum", value: unset' }
+  attr Optimum bothValues = unsafeAttribute $ Both (pure 
+    { key: "optimum", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "optimum", value: unset' })
 instance Attr everything Optimum  Unit  where
   attr Optimum _ = unsafeAttribute $ This $ pure $ { key: "optimum", value: unset' }

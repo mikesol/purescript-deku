@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data KeyPoints = KeyPoints
 
 instance Attr AnimateMotion_ KeyPoints (NonEmpty.NonEmpty Event.Event  String ) where
-  attr KeyPoints bothValues = unsafeAttribute $ Both
-    { key: "keyPoints", value: prop' (NonEmpty.head bothValues) }
+  attr KeyPoints bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyPoints", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyPoints", value: prop' value })
 instance Attr AnimateMotion_ KeyPoints  String  where
   attr KeyPoints value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr AnimateMotion_ KeyPoints (Event.Event  String ) where
     \value -> { key: "keyPoints", value: prop' value }
 
 instance Attr everything KeyPoints (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr KeyPoints bothValues = unsafeAttribute $ Both
-    { key: "keyPoints", value: unset' }
+  attr KeyPoints bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyPoints", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyPoints", value: unset' })
 instance Attr everything KeyPoints  Unit  where
   attr KeyPoints _ = unsafeAttribute $ This $ pure $

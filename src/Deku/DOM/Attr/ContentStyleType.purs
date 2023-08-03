@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ContentStyleType = ContentStyleType
 
 instance Attr Svg_ ContentStyleType (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ContentStyleType bothValues = unsafeAttribute $ Both
-    { key: "contentStyleType", value: prop' (NonEmpty.head bothValues) }
+  attr ContentStyleType bothValues = unsafeAttribute $ Both (pure 
+    { key: "contentStyleType", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "contentStyleType", value: prop' value }
     )
@@ -24,8 +24,8 @@ instance Attr Svg_ ContentStyleType (Event.Event  String ) where
     <#> \value -> { key: "contentStyleType", value: prop' value }
 
 instance Attr everything ContentStyleType (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ContentStyleType bothValues = unsafeAttribute $ Both
-    { key: "contentStyleType", value: unset' }
+  attr ContentStyleType bothValues = unsafeAttribute $ Both (pure 
+    { key: "contentStyleType", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "contentStyleType", value: unset' })
 instance Attr everything ContentStyleType  Unit  where
   attr ContentStyleType _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Side = Side
 
 instance Attr TextPath_ Side (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Side bothValues = unsafeAttribute $ Both
-    { key: "side", value: prop' (NonEmpty.head bothValues) }
+  attr Side bothValues = unsafeAttribute $ Both (pure 
+    { key: "side", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "side", value: prop' value })
 instance Attr TextPath_ Side  String  where
   attr Side value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr TextPath_ Side (Event.Event  String ) where
     { key: "side", value: prop' value }
 
 instance Attr everything Side (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Side bothValues = unsafeAttribute $ Both { key: "side", value: unset' }
+  attr Side bothValues = unsafeAttribute $ Both (pure  { key: "side", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "side", value: unset' })
 instance Attr everything Side  Unit  where
   attr Side _ = unsafeAttribute $ This $ pure $ { key: "side", value: unset' }

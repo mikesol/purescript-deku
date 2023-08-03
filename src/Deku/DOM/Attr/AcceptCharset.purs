@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AcceptCharset = AcceptCharset
 
 instance Attr Form_ AcceptCharset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AcceptCharset bothValues = unsafeAttribute $ Both
-    { key: "accept-charset", value: prop' (NonEmpty.head bothValues) }
+  attr AcceptCharset bothValues = unsafeAttribute $ Both (pure 
+    { key: "accept-charset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept-charset", value: prop' value })
 instance Attr Form_ AcceptCharset  String  where
   attr AcceptCharset value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Form_ AcceptCharset (Event.Event  String ) where
     \value -> { key: "accept-charset", value: prop' value }
 
 instance Attr everything AcceptCharset (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AcceptCharset bothValues = unsafeAttribute $ Both
-    { key: "accept-charset", value: unset' }
+  attr AcceptCharset bothValues = unsafeAttribute $ Both (pure 
+    { key: "accept-charset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accept-charset", value: unset' })
 instance Attr everything AcceptCharset  Unit  where
   attr AcceptCharset _ = unsafeAttribute $ This $ pure $

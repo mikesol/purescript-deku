@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Language = Language
 
 instance Attr Script_ Language (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Language bothValues = unsafeAttribute $ Both
-    { key: "language", value: prop' (NonEmpty.head bothValues) }
+  attr Language bothValues = unsafeAttribute $ Both (pure 
+    { key: "language", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "language", value: prop' value })
 instance Attr Script_ Language  String  where
   attr Language value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Script_ Language (Event.Event  String ) where
     \value -> { key: "language", value: prop' value }
 
 instance Attr everything Language (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Language bothValues = unsafeAttribute $ Both
-    { key: "language", value: unset' }
+  attr Language bothValues = unsafeAttribute $ Both (pure 
+    { key: "language", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "language", value: unset' })
 instance Attr everything Language  Unit  where
   attr Language _ = unsafeAttribute $ This $ pure $

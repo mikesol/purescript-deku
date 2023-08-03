@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMouseleave = OnMouseleave
 
 instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMouseleave bothValues = unsafeAttribute $ Both
-    { key: "mouseleave", value: cb' (NonEmpty.head bothValues) }
+  attr OnMouseleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseleave", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseleave", value: cb' value })
 instance Attr anything OnMouseleave  Cb  where
   attr OnMouseleave value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMouseleave (Event.Event  Cb ) where
     \value -> { key: "mouseleave", value: cb' value }
 
 instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMouseleave bothValues = unsafeAttribute $ Both
-    { key: "mouseleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMouseleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMouseleave (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMouseleave bothValues = unsafeAttribute $ Both
-    { key: "mouseleave", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMouseleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseleave", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseleave", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMouseleaveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseleave (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMouseleave bothValues = unsafeAttribute $ Both
-    { key: "mouseleave", value: unset' }
+  attr OnMouseleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseleave", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseleave", value: unset' })
 instance Attr everything OnMouseleave  Unit  where
   attr OnMouseleave _ = unsafeAttribute $ This $ pure $

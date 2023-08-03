@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data PointsAtY = PointsAtY
 
 instance Attr FeSpotLight_ PointsAtY (NonEmpty.NonEmpty Event.Event  String ) where
-  attr PointsAtY bothValues = unsafeAttribute $ Both
-    { key: "pointsAtY", value: prop' (NonEmpty.head bothValues) }
+  attr PointsAtY bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointsAtY", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointsAtY", value: prop' value })
 instance Attr FeSpotLight_ PointsAtY  String  where
   attr PointsAtY value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeSpotLight_ PointsAtY (Event.Event  String ) where
     \value -> { key: "pointsAtY", value: prop' value }
 
 instance Attr everything PointsAtY (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr PointsAtY bothValues = unsafeAttribute $ Both
-    { key: "pointsAtY", value: unset' }
+  attr PointsAtY bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointsAtY", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointsAtY", value: unset' })
 instance Attr everything PointsAtY  Unit  where
   attr PointsAtY _ = unsafeAttribute $ This $ pure $

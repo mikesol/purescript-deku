@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Decoding = Decoding
 
 instance Attr Img_ Decoding (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Decoding bothValues = unsafeAttribute $ Both
-    { key: "decoding", value: prop' (NonEmpty.head bothValues) }
+  attr Decoding bothValues = unsafeAttribute $ Both (pure 
+    { key: "decoding", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "decoding", value: prop' value })
 instance Attr Img_ Decoding  String  where
   attr Decoding value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Img_ Decoding (Event.Event  String ) where
     \value -> { key: "decoding", value: prop' value }
 
 instance Attr everything Decoding (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Decoding bothValues = unsafeAttribute $ Both
-    { key: "decoding", value: unset' }
+  attr Decoding bothValues = unsafeAttribute $ Both (pure 
+    { key: "decoding", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "decoding", value: unset' })
 instance Attr everything Decoding  Unit  where
   attr Decoding _ = unsafeAttribute $ This $ pure $

@@ -51,8 +51,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeMiterlimit = StrokeMiterlimit
 
 instance Attr Circle_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -64,8 +64,8 @@ instance Attr Circle_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ClipPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -77,8 +77,8 @@ instance Attr ClipPath_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Defs_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -90,8 +90,8 @@ instance Attr Defs_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Ellipse_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -103,8 +103,8 @@ instance Attr Ellipse_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeBlend_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -116,8 +116,8 @@ instance Attr FeBlend_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -129,8 +129,8 @@ instance Attr FeColorMatrix_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -142,8 +142,8 @@ instance Attr FeComponentTransfer_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComposite_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -155,8 +155,8 @@ instance Attr FeComposite_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -168,8 +168,8 @@ instance Attr FeConvolveMatrix_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -181,8 +181,8 @@ instance Attr FeDiffuseLighting_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -194,8 +194,8 @@ instance Attr FeDisplacementMap_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeFlood_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -207,8 +207,8 @@ instance Attr FeFlood_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -220,8 +220,8 @@ instance Attr FeGaussianBlur_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeImage_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -233,8 +233,8 @@ instance Attr FeImage_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMerge_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -246,8 +246,8 @@ instance Attr FeMerge_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMorphology_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -259,8 +259,8 @@ instance Attr FeMorphology_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeOffset_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -272,8 +272,8 @@ instance Attr FeOffset_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -285,8 +285,8 @@ instance Attr FeSpecularLighting_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTile_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -298,8 +298,8 @@ instance Attr FeTile_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -311,8 +311,8 @@ instance Attr FeTurbulence_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Filter_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -324,8 +324,8 @@ instance Attr Filter_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ForeignObject_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -337,8 +337,8 @@ instance Attr ForeignObject_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr G_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -350,8 +350,8 @@ instance Attr G_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Image_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -363,8 +363,8 @@ instance Attr Image_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Line_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -376,8 +376,8 @@ instance Attr Line_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr LinearGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -389,8 +389,8 @@ instance Attr LinearGradient_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Marker_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -402,8 +402,8 @@ instance Attr Marker_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Mask_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -415,8 +415,8 @@ instance Attr Mask_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Path_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -428,8 +428,8 @@ instance Attr Path_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Pattern_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -441,8 +441,8 @@ instance Attr Pattern_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polygon_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -454,8 +454,8 @@ instance Attr Polygon_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polyline_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -467,8 +467,8 @@ instance Attr Polyline_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr RadialGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -480,8 +480,8 @@ instance Attr RadialGradient_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Rect_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -493,8 +493,8 @@ instance Attr Rect_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Svg_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -506,8 +506,8 @@ instance Attr Svg_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Switch_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -519,8 +519,8 @@ instance Attr Switch_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Symbol_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -532,8 +532,8 @@ instance Attr Symbol_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Text_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -545,8 +545,8 @@ instance Attr Text_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr TextPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -558,8 +558,8 @@ instance Attr TextPath_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Tspan_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -571,8 +571,8 @@ instance Attr Tspan_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Use_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
     )
@@ -584,8 +584,8 @@ instance Attr Use_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr everything StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both
-    { key: "stroke-miterlimit", value: unset' }
+  attr StrokeMiterlimit bothValues = unsafeAttribute $ Both (pure 
+    { key: "stroke-miterlimit", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
 instance Attr everything StrokeMiterlimit  Unit  where
   attr StrokeMiterlimit _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnFormdata = OnFormdata
 
 instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (NonEmpty.head bothValues) }
+  attr OnFormdata bothValues = unsafeAttribute $ Both (pure 
+    { key: "formdata", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formdata", value: cb' value })
 instance Attr anything OnFormdata  Cb  where
   attr OnFormdata value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnFormdata (Event.Event  Cb ) where
     \value -> { key: "formdata", value: cb' value }
 
 instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnFormdata bothValues = unsafeAttribute $ Both (pure 
+    { key: "formdata", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnFormdata (Event.Event  (Effect Unit) ) where
     \value -> { key: "formdata", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnFormdata bothValues = unsafeAttribute $ Both (pure 
+    { key: "formdata", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnFormdataEffect =
   => Event (Attribute element)
 
 instance Attr everything OnFormdata (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnFormdata bothValues = unsafeAttribute $ Both
-    { key: "formdata", value: unset' }
+  attr OnFormdata bothValues = unsafeAttribute $ Both (pure 
+    { key: "formdata", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formdata", value: unset' })
 instance Attr everything OnFormdata  Unit  where
   attr OnFormdata _ = unsafeAttribute $ This $ pure $

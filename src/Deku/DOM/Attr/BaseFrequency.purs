@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data BaseFrequency = BaseFrequency
 
 instance Attr FeTurbulence_ BaseFrequency (NonEmpty.NonEmpty Event.Event  String ) where
-  attr BaseFrequency bothValues = unsafeAttribute $ Both
-    { key: "baseFrequency", value: prop' (NonEmpty.head bothValues) }
+  attr BaseFrequency bothValues = unsafeAttribute $ Both (pure 
+    { key: "baseFrequency", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "baseFrequency", value: prop' value })
 instance Attr FeTurbulence_ BaseFrequency  String  where
   attr BaseFrequency value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeTurbulence_ BaseFrequency (Event.Event  String ) where
     \value -> { key: "baseFrequency", value: prop' value }
 
 instance Attr everything BaseFrequency (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr BaseFrequency bothValues = unsafeAttribute $ Both
-    { key: "baseFrequency", value: unset' }
+  attr BaseFrequency bothValues = unsafeAttribute $ Both (pure 
+    { key: "baseFrequency", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseFrequency", value: unset' })
 instance Attr everything BaseFrequency  Unit  where
   attr BaseFrequency _ = unsafeAttribute $ This $ pure $

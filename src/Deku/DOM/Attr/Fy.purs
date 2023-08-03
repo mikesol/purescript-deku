@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Fy = Fy
 
 instance Attr RadialGradient_ Fy (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Fy bothValues = unsafeAttribute $ Both
-    { key: "fy", value: prop' (NonEmpty.head bothValues) }
+  attr Fy bothValues = unsafeAttribute $ Both (pure 
+    { key: "fy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fy", value: prop' value })
 instance Attr RadialGradient_ Fy  String  where
   attr Fy value = unsafeAttribute $ This $ pure $ { key: "fy", value: prop' value }
@@ -21,7 +21,7 @@ instance Attr RadialGradient_ Fy (Event.Event  String ) where
     { key: "fy", value: prop' value }
 
 instance Attr everything Fy (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Fy bothValues = unsafeAttribute $ Both { key: "fy", value: unset' }
+  attr Fy bothValues = unsafeAttribute $ Both (pure  { key: "fy", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "fy", value: unset' })
 instance Attr everything Fy  Unit  where
   attr Fy _ = unsafeAttribute $ This $ pure $ { key: "fy", value: unset' }

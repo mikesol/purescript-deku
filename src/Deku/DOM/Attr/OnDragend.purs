@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnDragend = OnDragend
 
 instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnDragend bothValues = unsafeAttribute $ Both
-    { key: "dragend", value: cb' (NonEmpty.head bothValues) }
+  attr OnDragend bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragend", value: cb' value })
 instance Attr anything OnDragend  Cb  where
   attr OnDragend value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnDragend (Event.Event  Cb ) where
     \value -> { key: "dragend", value: cb' value }
 
 instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnDragend bothValues = unsafeAttribute $ Both
-    { key: "dragend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnDragend bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragend", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnDragend (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnDragend bothValues = unsafeAttribute $ Both
-    { key: "dragend", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnDragend bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragend", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragend", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnDragendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragend (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnDragend bothValues = unsafeAttribute $ Both
-    { key: "dragend", value: unset' }
+  attr OnDragend bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragend", value: unset' })
 instance Attr everything OnDragend  Unit  where
   attr OnDragend _ = unsafeAttribute $ This $ pure $

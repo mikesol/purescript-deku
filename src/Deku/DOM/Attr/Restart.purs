@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Restart = Restart
 
 instance Attr Animate_ Restart (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+  attr Restart bothValues = unsafeAttribute $ Both (pure 
+    { key: "restart", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
 instance Attr Animate_ Restart  String  where
   attr Restart value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr Animate_ Restart (Event.Event  String ) where
     \value -> { key: "restart", value: prop' value }
 
 instance Attr AnimateMotion_ Restart (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+  attr Restart bothValues = unsafeAttribute $ Both (pure 
+    { key: "restart", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
 instance Attr AnimateMotion_ Restart  String  where
   attr Restart value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr AnimateMotion_ Restart (Event.Event  String ) where
     \value -> { key: "restart", value: prop' value }
 
 instance Attr AnimateTransform_ Restart (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+  attr Restart bothValues = unsafeAttribute $ Both (pure 
+    { key: "restart", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
 instance Attr AnimateTransform_ Restart  String  where
   attr Restart value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr AnimateTransform_ Restart (Event.Event  String ) where
     \value -> { key: "restart", value: prop' value }
 
 instance Attr Set_ Restart (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: prop' (NonEmpty.head bothValues) }
+  attr Restart bothValues = unsafeAttribute $ Both (pure 
+    { key: "restart", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "restart", value: prop' value })
 instance Attr Set_ Restart  String  where
   attr Restart value = unsafeAttribute $ This $ pure $
@@ -58,8 +58,8 @@ instance Attr Set_ Restart (Event.Event  String ) where
     \value -> { key: "restart", value: prop' value }
 
 instance Attr everything Restart (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Restart bothValues = unsafeAttribute $ Both
-    { key: "restart", value: unset' }
+  attr Restart bothValues = unsafeAttribute $ Both (pure 
+    { key: "restart", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "restart", value: unset' })
 instance Attr everything Restart  Unit  where
   attr Restart _ = unsafeAttribute $ This $ pure $ { key: "restart", value: unset' }

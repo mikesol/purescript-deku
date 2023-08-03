@@ -42,8 +42,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XmlSpace = XmlSpace
 
 instance Attr AnimateTransform_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr AnimateTransform_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -53,8 +53,8 @@ instance Attr AnimateTransform_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Discard_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Discard_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -64,8 +64,8 @@ instance Attr Discard_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeBlend_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeBlend_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -75,8 +75,8 @@ instance Attr FeBlend_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeColorMatrix_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeColorMatrix_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -86,8 +86,8 @@ instance Attr FeColorMatrix_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeComponentTransfer_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeComponentTransfer_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -97,8 +97,8 @@ instance Attr FeComponentTransfer_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeComposite_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeComposite_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -108,8 +108,8 @@ instance Attr FeComposite_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeConvolveMatrix_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeConvolveMatrix_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -119,8 +119,8 @@ instance Attr FeConvolveMatrix_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeDiffuseLighting_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeDiffuseLighting_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -130,8 +130,8 @@ instance Attr FeDiffuseLighting_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeDisplacementMap_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeDisplacementMap_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -141,8 +141,8 @@ instance Attr FeDisplacementMap_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeDistantLight_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeDistantLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -152,8 +152,8 @@ instance Attr FeDistantLight_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeFlood_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeFlood_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -163,8 +163,8 @@ instance Attr FeFlood_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeFuncA_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeFuncA_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -174,8 +174,8 @@ instance Attr FeFuncA_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeFuncB_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeFuncB_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -185,8 +185,8 @@ instance Attr FeFuncB_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeFuncG_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeFuncG_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -196,8 +196,8 @@ instance Attr FeFuncG_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeFuncR_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeFuncR_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -207,8 +207,8 @@ instance Attr FeFuncR_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeGaussianBlur_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeGaussianBlur_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -218,8 +218,8 @@ instance Attr FeGaussianBlur_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeImage_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeImage_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -229,8 +229,8 @@ instance Attr FeImage_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeMerge_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeMerge_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -240,8 +240,8 @@ instance Attr FeMerge_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeMergeNode_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeMergeNode_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -251,8 +251,8 @@ instance Attr FeMergeNode_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeMorphology_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeMorphology_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -262,8 +262,8 @@ instance Attr FeMorphology_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeOffset_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeOffset_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -273,8 +273,8 @@ instance Attr FeOffset_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FePointLight_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FePointLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -284,8 +284,8 @@ instance Attr FePointLight_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeSpecularLighting_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeSpecularLighting_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -295,8 +295,8 @@ instance Attr FeSpecularLighting_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeSpotLight_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeSpotLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -306,8 +306,8 @@ instance Attr FeSpotLight_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeTile_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeTile_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -317,8 +317,8 @@ instance Attr FeTile_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr FeTurbulence_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr FeTurbulence_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -328,8 +328,8 @@ instance Attr FeTurbulence_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Filter_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Filter_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -339,8 +339,8 @@ instance Attr Filter_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Image_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Image_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -350,8 +350,8 @@ instance Attr Image_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Metadata_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Metadata_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -361,8 +361,8 @@ instance Attr Metadata_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Mpath_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Mpath_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -372,8 +372,8 @@ instance Attr Mpath_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr Switch_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr Switch_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -383,8 +383,8 @@ instance Attr Switch_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr View_ XmlSpace (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: prop' (NonEmpty.head bothValues) }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:space", value: prop' value })
 instance Attr View_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute $ This $ pure $
@@ -394,8 +394,8 @@ instance Attr View_ XmlSpace (Event.Event  String ) where
     \value -> { key: "xml:space", value: prop' value }
 
 instance Attr everything XmlSpace (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr XmlSpace bothValues = unsafeAttribute $ Both
-    { key: "xml:space", value: unset' }
+  attr XmlSpace bothValues = unsafeAttribute $ Both (pure 
+    { key: "xml:space", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xml:space", value: unset' })
 instance Attr everything XmlSpace  Unit  where
   attr XmlSpace _ = unsafeAttribute $ This $ pure $

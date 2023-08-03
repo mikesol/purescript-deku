@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Divisor = Divisor
 
 instance Attr FeConvolveMatrix_ Divisor (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Divisor bothValues = unsafeAttribute $ Both
-    { key: "divisor", value: prop' (NonEmpty.head bothValues) }
+  attr Divisor bothValues = unsafeAttribute $ Both (pure 
+    { key: "divisor", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "divisor", value: prop' value })
 instance Attr FeConvolveMatrix_ Divisor  String  where
   attr Divisor value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr FeConvolveMatrix_ Divisor (Event.Event  String ) where
     \value -> { key: "divisor", value: prop' value }
 
 instance Attr everything Divisor (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Divisor bothValues = unsafeAttribute $ Both
-    { key: "divisor", value: unset' }
+  attr Divisor bothValues = unsafeAttribute $ Both (pure 
+    { key: "divisor", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "divisor", value: unset' })
 instance Attr everything Divisor  Unit  where
   attr Divisor _ = unsafeAttribute $ This $ pure $ { key: "divisor", value: unset' }

@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Enterkeyhint = Enterkeyhint
 
 instance Attr Textarea_ Enterkeyhint (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Enterkeyhint bothValues = unsafeAttribute $ Both
-    { key: "enterkeyhint", value: prop' (NonEmpty.head bothValues) }
+  attr Enterkeyhint bothValues = unsafeAttribute $ Both (pure 
+    { key: "enterkeyhint", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "enterkeyhint", value: prop' value })
 instance Attr Textarea_ Enterkeyhint  String  where
   attr Enterkeyhint value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Textarea_ Enterkeyhint (Event.Event  String ) where
     \value -> { key: "enterkeyhint", value: prop' value }
 
 instance Attr everything Enterkeyhint (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Enterkeyhint bothValues = unsafeAttribute $ Both
-    { key: "enterkeyhint", value: unset' }
+  attr Enterkeyhint bothValues = unsafeAttribute $ Both (pure 
+    { key: "enterkeyhint", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "enterkeyhint", value: unset' })
 instance Attr everything Enterkeyhint  Unit  where
   attr Enterkeyhint _ = unsafeAttribute $ This $ pure $

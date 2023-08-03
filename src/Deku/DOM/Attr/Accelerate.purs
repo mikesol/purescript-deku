@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accelerate = Accelerate
 
 instance Attr AnimateTransform_ Accelerate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accelerate bothValues = unsafeAttribute $ Both
-    { key: "accelerate", value: prop' (NonEmpty.head bothValues) }
+  attr Accelerate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accelerate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accelerate", value: prop' value })
 instance Attr AnimateTransform_ Accelerate  String  where
   attr Accelerate value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr AnimateTransform_ Accelerate (Event.Event  String ) where
     \value -> { key: "accelerate", value: prop' value }
 
 instance Attr everything Accelerate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Accelerate bothValues = unsafeAttribute $ Both
-    { key: "accelerate", value: unset' }
+  attr Accelerate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accelerate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accelerate", value: unset' })
 instance Attr everything Accelerate  Unit  where
   attr Accelerate _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnTouchstart = OnTouchstart
 
 instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnTouchstart bothValues = unsafeAttribute $ Both
-    { key: "touchstart", value: cb' (NonEmpty.head bothValues) }
+  attr OnTouchstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchstart", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "touchstart", value: cb' value })
 instance Attr anything OnTouchstart  Cb  where
   attr OnTouchstart value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnTouchstart (Event.Event  Cb ) where
     \value -> { key: "touchstart", value: cb' value }
 
 instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnTouchstart bothValues = unsafeAttribute $ Both
-    { key: "touchstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnTouchstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchstart", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchstart", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnTouchstart (Event.Event  (Effect Unit) ) where
     \value -> { key: "touchstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnTouchstart bothValues = unsafeAttribute $ Both
-    { key: "touchstart", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnTouchstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchstart", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchstart", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnTouchstartEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTouchstart (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnTouchstart bothValues = unsafeAttribute $ Both
-    { key: "touchstart", value: unset' }
+  attr OnTouchstart bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchstart", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchstart", value: unset' })
 instance Attr everything OnTouchstart  Unit  where
   attr OnTouchstart _ = unsafeAttribute $ This $ pure $

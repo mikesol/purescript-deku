@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnTouchend = OnTouchend
 
 instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnTouchend bothValues = unsafeAttribute $ Both
-    { key: "touchend", value: cb' (NonEmpty.head bothValues) }
+  attr OnTouchend bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "touchend", value: cb' value })
 instance Attr anything OnTouchend  Cb  where
   attr OnTouchend value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnTouchend (Event.Event  Cb ) where
     \value -> { key: "touchend", value: cb' value }
 
 instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnTouchend bothValues = unsafeAttribute $ Both
-    { key: "touchend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnTouchend bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchend", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchend", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnTouchend (Event.Event  (Effect Unit) ) where
     \value -> { key: "touchend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnTouchend bothValues = unsafeAttribute $ Both
-    { key: "touchend", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnTouchend bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchend", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "touchend", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnTouchendEffect =
   => Event (Attribute element)
 
 instance Attr everything OnTouchend (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnTouchend bothValues = unsafeAttribute $ Both
-    { key: "touchend", value: unset' }
+  attr OnTouchend bothValues = unsafeAttribute $ Both (pure 
+    { key: "touchend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchend", value: unset' })
 instance Attr everything OnTouchend  Unit  where
   attr OnTouchend _ = unsafeAttribute $ This $ pure $

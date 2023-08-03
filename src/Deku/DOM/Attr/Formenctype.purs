@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Formenctype = Formenctype
 
 instance Attr Button_ Formenctype (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formenctype bothValues = unsafeAttribute $ Both
-    { key: "formenctype", value: prop' (NonEmpty.head bothValues) }
+  attr Formenctype bothValues = unsafeAttribute $ Both (pure 
+    { key: "formenctype", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formenctype", value: prop' value })
 instance Attr Button_ Formenctype  String  where
   attr Formenctype value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Button_ Formenctype (Event.Event  String ) where
     \value -> { key: "formenctype", value: prop' value }
 
 instance Attr Input_ Formenctype (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Formenctype bothValues = unsafeAttribute $ Both
-    { key: "formenctype", value: prop' (NonEmpty.head bothValues) }
+  attr Formenctype bothValues = unsafeAttribute $ Both (pure 
+    { key: "formenctype", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formenctype", value: prop' value })
 instance Attr Input_ Formenctype  String  where
   attr Formenctype value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Input_ Formenctype (Event.Event  String ) where
     \value -> { key: "formenctype", value: prop' value }
 
 instance Attr everything Formenctype (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Formenctype bothValues = unsafeAttribute $ Both
-    { key: "formenctype", value: unset' }
+  attr Formenctype bothValues = unsafeAttribute $ Both (pure 
+    { key: "formenctype", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formenctype", value: unset' })
 instance Attr everything Formenctype  Unit  where
   attr Formenctype _ = unsafeAttribute $ This $ pure $

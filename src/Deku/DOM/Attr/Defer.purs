@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Defer = Defer
 
 instance Attr Script_ Defer (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Defer bothValues = unsafeAttribute $ Both
-    { key: "defer", value: prop' (NonEmpty.head bothValues) }
+  attr Defer bothValues = unsafeAttribute $ Both (pure 
+    { key: "defer", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "defer", value: prop' value })
 instance Attr Script_ Defer  String  where
   attr Defer value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr Script_ Defer (Event.Event  String ) where
     \value -> { key: "defer", value: prop' value }
 
 instance Attr everything Defer (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Defer bothValues = unsafeAttribute $ Both { key: "defer", value: unset' }
+  attr Defer bothValues = unsafeAttribute $ Both (pure  { key: "defer", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "defer", value: unset' })
 instance Attr everything Defer  Unit  where
   attr Defer _ = unsafeAttribute $ This $ pure $ { key: "defer", value: unset' }

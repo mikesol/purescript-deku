@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Enctype = Enctype
 
 instance Attr Form_ Enctype (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Enctype bothValues = unsafeAttribute $ Both
-    { key: "enctype", value: prop' (NonEmpty.head bothValues) }
+  attr Enctype bothValues = unsafeAttribute $ Both (pure 
+    { key: "enctype", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "enctype", value: prop' value })
 instance Attr Form_ Enctype  String  where
   attr Enctype value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr Form_ Enctype (Event.Event  String ) where
     \value -> { key: "enctype", value: prop' value }
 
 instance Attr everything Enctype (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Enctype bothValues = unsafeAttribute $ Both
-    { key: "enctype", value: unset' }
+  attr Enctype bothValues = unsafeAttribute $ Both (pure 
+    { key: "enctype", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "enctype", value: unset' })
 instance Attr everything Enctype  Unit  where
   attr Enctype _ = unsafeAttribute $ This $ pure $ { key: "enctype", value: unset' }

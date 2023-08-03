@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Bias = Bias
 
 instance Attr FeConvolveMatrix_ Bias (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Bias bothValues = unsafeAttribute $ Both
-    { key: "bias", value: prop' (NonEmpty.head bothValues) }
+  attr Bias bothValues = unsafeAttribute $ Both (pure 
+    { key: "bias", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "bias", value: prop' value })
 instance Attr FeConvolveMatrix_ Bias  String  where
   attr Bias value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr FeConvolveMatrix_ Bias (Event.Event  String ) where
     { key: "bias", value: prop' value }
 
 instance Attr everything Bias (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Bias bothValues = unsafeAttribute $ Both { key: "bias", value: unset' }
+  attr Bias bothValues = unsafeAttribute $ Both (pure  { key: "bias", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "bias", value: unset' })
 instance Attr everything Bias  Unit  where
   attr Bias _ = unsafeAttribute $ This $ pure $ { key: "bias", value: unset' }

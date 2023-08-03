@@ -15,8 +15,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XlinkShow = XlinkShow
 
 instance Attr AnimateTransform_ XlinkShow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:show", value: prop' value })
 instance Attr AnimateTransform_ XlinkShow  String  where
   attr XlinkShow value = unsafeAttribute $ This $ pure $
@@ -26,8 +26,8 @@ instance Attr AnimateTransform_ XlinkShow (Event.Event  String ) where
     \value -> { key: "xlink:show", value: prop' value }
 
 instance Attr FeImage_ XlinkShow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:show", value: prop' value })
 instance Attr FeImage_ XlinkShow  String  where
   attr XlinkShow value = unsafeAttribute $ This $ pure $
@@ -37,8 +37,8 @@ instance Attr FeImage_ XlinkShow (Event.Event  String ) where
     \value -> { key: "xlink:show", value: prop' value }
 
 instance Attr Filter_ XlinkShow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:show", value: prop' value })
 instance Attr Filter_ XlinkShow  String  where
   attr XlinkShow value = unsafeAttribute $ This $ pure $
@@ -48,8 +48,8 @@ instance Attr Filter_ XlinkShow (Event.Event  String ) where
     \value -> { key: "xlink:show", value: prop' value }
 
 instance Attr Image_ XlinkShow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:show", value: prop' value })
 instance Attr Image_ XlinkShow  String  where
   attr XlinkShow value = unsafeAttribute $ This $ pure $
@@ -59,8 +59,8 @@ instance Attr Image_ XlinkShow (Event.Event  String ) where
     \value -> { key: "xlink:show", value: prop' value }
 
 instance Attr Mpath_ XlinkShow (NonEmpty.NonEmpty Event.Event  String ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:show", value: prop' value })
 instance Attr Mpath_ XlinkShow  String  where
   attr XlinkShow value = unsafeAttribute $ This $ pure $
@@ -70,8 +70,8 @@ instance Attr Mpath_ XlinkShow (Event.Event  String ) where
     \value -> { key: "xlink:show", value: prop' value }
 
 instance Attr everything XlinkShow (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr XlinkShow bothValues = unsafeAttribute $ Both
-    { key: "xlink:show", value: unset' }
+  attr XlinkShow bothValues = unsafeAttribute $ Both (pure 
+    { key: "xlink:show", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:show", value: unset' })
 instance Attr everything XlinkShow  Unit  where
   attr XlinkShow _ = unsafeAttribute $ This $ pure $

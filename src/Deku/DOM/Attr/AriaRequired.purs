@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaRequired = AriaRequired
 
 instance Attr Circle_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Circle_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Ellipse_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Ellipse_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr ForeignObject_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr ForeignObject_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr G_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr G_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Line_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Line_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Marker_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Marker_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Path_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Path_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Polygon_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Polygon_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Polyline_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Polyline_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Rect_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Rect_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Svg_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Svg_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Symbol_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Symbol_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Text_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Text_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr TextPath_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr TextPath_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Tspan_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Tspan_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr Use_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr Use_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr View_ AriaRequired (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: prop' (NonEmpty.head bothValues) }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-required", value: prop' value })
 instance Attr View_ AriaRequired  String  where
   attr AriaRequired value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaRequired (Event.Event  String ) where
     \value -> { key: "aria-required", value: prop' value }
 
 instance Attr everything AriaRequired (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaRequired bothValues = unsafeAttribute $ Both
-    { key: "aria-required", value: unset' }
+  attr AriaRequired bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-required", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-required", value: unset' })
 instance Attr everything AriaRequired  Unit  where
   attr AriaRequired _ = unsafeAttribute $ This $ pure $

@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Datetime = Datetime
 
 instance Attr Del_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Datetime bothValues = unsafeAttribute $ Both
-    { key: "datetime", value: prop' (NonEmpty.head bothValues) }
+  attr Datetime bothValues = unsafeAttribute $ Both (pure 
+    { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Del_ Datetime  String  where
   attr Datetime value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Del_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Ins_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Datetime bothValues = unsafeAttribute $ Both
-    { key: "datetime", value: prop' (NonEmpty.head bothValues) }
+  attr Datetime bothValues = unsafeAttribute $ Both (pure 
+    { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Ins_ Datetime  String  where
   attr Datetime value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr Ins_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Time_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Datetime bothValues = unsafeAttribute $ Both
-    { key: "datetime", value: prop' (NonEmpty.head bothValues) }
+  attr Datetime bothValues = unsafeAttribute $ Both (pure 
+    { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Time_ Datetime  String  where
   attr Datetime value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr Time_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr everything Datetime (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Datetime bothValues = unsafeAttribute $ Both
-    { key: "datetime", value: unset' }
+  attr Datetime bothValues = unsafeAttribute $ Both (pure 
+    { key: "datetime", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "datetime", value: unset' })
 instance Attr everything Datetime  Unit  where
   attr Datetime _ = unsafeAttribute $ This $ pure $

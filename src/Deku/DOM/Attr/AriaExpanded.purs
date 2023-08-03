@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaExpanded = AriaExpanded
 
 instance Attr Circle_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Circle_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Ellipse_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Ellipse_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr ForeignObject_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr ForeignObject_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr G_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr G_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Line_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Line_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Marker_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Marker_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Path_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Path_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Polygon_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Polygon_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Polyline_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Polyline_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Rect_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Rect_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Svg_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Svg_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Symbol_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Symbol_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Text_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Text_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr TextPath_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr TextPath_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Tspan_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Tspan_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr Use_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr Use_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr View_ AriaExpanded (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-expanded", value: prop' value })
 instance Attr View_ AriaExpanded  String  where
   attr AriaExpanded value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaExpanded (Event.Event  String ) where
     \value -> { key: "aria-expanded", value: prop' value }
 
 instance Attr everything AriaExpanded (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaExpanded bothValues = unsafeAttribute $ Both
-    { key: "aria-expanded", value: unset' }
+  attr AriaExpanded bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-expanded", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-expanded", value: unset' })
 instance Attr everything AriaExpanded  Unit  where
   attr AriaExpanded _ = unsafeAttribute $ This $ pure $

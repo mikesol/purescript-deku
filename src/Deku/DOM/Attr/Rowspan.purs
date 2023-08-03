@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Rowspan = Rowspan
 
 instance Attr Td_ Rowspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Rowspan bothValues = unsafeAttribute $ Both
-    { key: "rowspan", value: prop' (NonEmpty.head bothValues) }
+  attr Rowspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "rowspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rowspan", value: prop' value })
 instance Attr Td_ Rowspan  String  where
   attr Rowspan value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Td_ Rowspan (Event.Event  String ) where
     \value -> { key: "rowspan", value: prop' value }
 
 instance Attr Th_ Rowspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Rowspan bothValues = unsafeAttribute $ Both
-    { key: "rowspan", value: prop' (NonEmpty.head bothValues) }
+  attr Rowspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "rowspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rowspan", value: prop' value })
 instance Attr Th_ Rowspan  String  where
   attr Rowspan value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Th_ Rowspan (Event.Event  String ) where
     \value -> { key: "rowspan", value: prop' value }
 
 instance Attr everything Rowspan (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Rowspan bothValues = unsafeAttribute $ Both
-    { key: "rowspan", value: unset' }
+  attr Rowspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "rowspan", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "rowspan", value: unset' })
 instance Attr everything Rowspan  Unit  where
   attr Rowspan _ = unsafeAttribute $ This $ pure $ { key: "rowspan", value: unset' }

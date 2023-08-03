@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Csp = Csp
 
 instance Attr Iframe_ Csp (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Csp bothValues = unsafeAttribute $ Both
-    { key: "csp", value: prop' (NonEmpty.head bothValues) }
+  attr Csp bothValues = unsafeAttribute $ Both (pure 
+    { key: "csp", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "csp", value: prop' value })
 instance Attr Iframe_ Csp  String  where
   attr Csp value = unsafeAttribute $ This $ pure $ { key: "csp", value: prop' value }
@@ -21,7 +21,7 @@ instance Attr Iframe_ Csp (Event.Event  String ) where
     { key: "csp", value: prop' value }
 
 instance Attr everything Csp (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Csp bothValues = unsafeAttribute $ Both { key: "csp", value: unset' }
+  attr Csp bothValues = unsafeAttribute $ Both (pure  { key: "csp", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "csp", value: unset' })
 instance Attr everything Csp  Unit  where
   attr Csp _ = unsafeAttribute $ This $ pure $ { key: "csp", value: unset' }

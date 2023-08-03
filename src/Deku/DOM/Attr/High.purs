@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data High = High
 
 instance Attr Meter_ High (NonEmpty.NonEmpty Event.Event  String ) where
-  attr High bothValues = unsafeAttribute $ Both
-    { key: "high", value: prop' (NonEmpty.head bothValues) }
+  attr High bothValues = unsafeAttribute $ Both (pure 
+    { key: "high", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "high", value: prop' value })
 instance Attr Meter_ High  String  where
   attr High value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr Meter_ High (Event.Event  String ) where
     { key: "high", value: prop' value }
 
 instance Attr everything High (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr High bothValues = unsafeAttribute $ Both { key: "high", value: unset' }
+  attr High bothValues = unsafeAttribute $ Both (pure  { key: "high", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "high", value: unset' })
 instance Attr everything High  Unit  where
   attr High _ = unsafeAttribute $ This $ pure $ { key: "high", value: unset' }

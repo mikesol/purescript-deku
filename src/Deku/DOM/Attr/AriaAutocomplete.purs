@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaAutocomplete = AriaAutocomplete
 
 instance Attr Circle_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Ellipse_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr ForeignObject_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr G_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Line_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Marker_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Path_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polygon_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polyline_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Rect_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Svg_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Symbol_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Text_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr TextPath_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Tspan_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Use_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr View_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr everything AriaAutocomplete (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaAutocomplete bothValues = unsafeAttribute $ Both
-    { key: "aria-autocomplete", value: unset' }
+  attr AriaAutocomplete bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-autocomplete", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-autocomplete", value: unset' })
 instance Attr everything AriaAutocomplete  Unit  where
   attr AriaAutocomplete _ = unsafeAttribute $ This $ pure $

@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Start = Start
 
 instance Attr Ol_ Start (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Start bothValues = unsafeAttribute $ Both
-    { key: "start", value: prop' (NonEmpty.head bothValues) }
+  attr Start bothValues = unsafeAttribute $ Both (pure 
+    { key: "start", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "start", value: prop' value })
 instance Attr Ol_ Start  String  where
   attr Start value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr Ol_ Start (Event.Event  String ) where
     \value -> { key: "start", value: prop' value }
 
 instance Attr everything Start (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Start bothValues = unsafeAttribute $ Both { key: "start", value: unset' }
+  attr Start bothValues = unsafeAttribute $ Both (pure  { key: "start", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "start", value: unset' })
 instance Attr everything Start  Unit  where
   attr Start _ = unsafeAttribute $ This $ pure $ { key: "start", value: unset' }

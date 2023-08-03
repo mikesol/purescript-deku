@@ -14,8 +14,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Exponent = Exponent
 
 instance Attr FeFuncA_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Exponent bothValues = unsafeAttribute $ Both
-    { key: "exponent", value: prop' (NonEmpty.head bothValues) }
+  attr Exponent bothValues = unsafeAttribute $ Both (pure 
+    { key: "exponent", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncA_ Exponent  String  where
   attr Exponent value = unsafeAttribute $ This $ pure $
@@ -25,8 +25,8 @@ instance Attr FeFuncA_ Exponent (Event.Event  String ) where
     \value -> { key: "exponent", value: prop' value }
 
 instance Attr FeFuncB_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Exponent bothValues = unsafeAttribute $ Both
-    { key: "exponent", value: prop' (NonEmpty.head bothValues) }
+  attr Exponent bothValues = unsafeAttribute $ Both (pure 
+    { key: "exponent", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncB_ Exponent  String  where
   attr Exponent value = unsafeAttribute $ This $ pure $
@@ -36,8 +36,8 @@ instance Attr FeFuncB_ Exponent (Event.Event  String ) where
     \value -> { key: "exponent", value: prop' value }
 
 instance Attr FeFuncG_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Exponent bothValues = unsafeAttribute $ Both
-    { key: "exponent", value: prop' (NonEmpty.head bothValues) }
+  attr Exponent bothValues = unsafeAttribute $ Both (pure 
+    { key: "exponent", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncG_ Exponent  String  where
   attr Exponent value = unsafeAttribute $ This $ pure $
@@ -47,8 +47,8 @@ instance Attr FeFuncG_ Exponent (Event.Event  String ) where
     \value -> { key: "exponent", value: prop' value }
 
 instance Attr FeFuncR_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Exponent bothValues = unsafeAttribute $ Both
-    { key: "exponent", value: prop' (NonEmpty.head bothValues) }
+  attr Exponent bothValues = unsafeAttribute $ Both (pure 
+    { key: "exponent", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncR_ Exponent  String  where
   attr Exponent value = unsafeAttribute $ This $ pure $
@@ -58,8 +58,8 @@ instance Attr FeFuncR_ Exponent (Event.Event  String ) where
     \value -> { key: "exponent", value: prop' value }
 
 instance Attr everything Exponent (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Exponent bothValues = unsafeAttribute $ Both
-    { key: "exponent", value: unset' }
+  attr Exponent bothValues = unsafeAttribute $ Both (pure 
+    { key: "exponent", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "exponent", value: unset' })
 instance Attr everything Exponent  Unit  where
   attr Exponent _ = unsafeAttribute $ This $ pure $

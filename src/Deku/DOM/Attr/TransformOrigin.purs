@@ -29,8 +29,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data TransformOrigin = TransformOrigin
 
 instance Attr FeBlend_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -42,8 +42,8 @@ instance Attr FeBlend_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeColorMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -55,8 +55,8 @@ instance Attr FeColorMatrix_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComponentTransfer_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -68,8 +68,8 @@ instance Attr FeComponentTransfer_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComposite_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -81,8 +81,8 @@ instance Attr FeComposite_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -94,8 +94,8 @@ instance Attr FeConvolveMatrix_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -107,8 +107,8 @@ instance Attr FeDiffuseLighting_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDisplacementMap_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -120,8 +120,8 @@ instance Attr FeDisplacementMap_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeFlood_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -133,8 +133,8 @@ instance Attr FeFlood_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeGaussianBlur_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -146,8 +146,8 @@ instance Attr FeGaussianBlur_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeImage_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -159,8 +159,8 @@ instance Attr FeImage_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMerge_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -172,8 +172,8 @@ instance Attr FeMerge_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMorphology_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -185,8 +185,8 @@ instance Attr FeMorphology_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeOffset_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -198,8 +198,8 @@ instance Attr FeOffset_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeSpecularLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -211,8 +211,8 @@ instance Attr FeSpecularLighting_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTile_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -224,8 +224,8 @@ instance Attr FeTile_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTurbulence_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -237,8 +237,8 @@ instance Attr FeTurbulence_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Filter_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -250,8 +250,8 @@ instance Attr Filter_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Image_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -263,8 +263,8 @@ instance Attr Image_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Switch_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
     )
@@ -276,8 +276,8 @@ instance Attr Switch_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr everything TransformOrigin (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr TransformOrigin bothValues = unsafeAttribute $ Both
-    { key: "transform-origin", value: unset' }
+  attr TransformOrigin bothValues = unsafeAttribute $ Both (pure 
+    { key: "transform-origin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "transform-origin", value: unset' })
 instance Attr everything TransformOrigin  Unit  where
   attr TransformOrigin _ = unsafeAttribute $ This $ pure $

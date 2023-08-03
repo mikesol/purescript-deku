@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Seed = Seed
 
 instance Attr FeTurbulence_ Seed (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Seed bothValues = unsafeAttribute $ Both
-    { key: "seed", value: prop' (NonEmpty.head bothValues) }
+  attr Seed bothValues = unsafeAttribute $ Both (pure 
+    { key: "seed", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "seed", value: prop' value })
 instance Attr FeTurbulence_ Seed  String  where
   attr Seed value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr FeTurbulence_ Seed (Event.Event  String ) where
     { key: "seed", value: prop' value }
 
 instance Attr everything Seed (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Seed bothValues = unsafeAttribute $ Both { key: "seed", value: unset' }
+  attr Seed bothValues = unsafeAttribute $ Both (pure  { key: "seed", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "seed", value: unset' })
 instance Attr everything Seed  Unit  where
   attr Seed _ = unsafeAttribute $ This $ pure $ { key: "seed", value: unset' }

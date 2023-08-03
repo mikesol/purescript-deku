@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnClick = OnClick
 
 instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnClick bothValues = unsafeAttribute $ Both
-    { key: "click", value: cb' (NonEmpty.head bothValues) }
+  attr OnClick bothValues = unsafeAttribute $ Both (pure 
+    { key: "click", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "click", value: cb' value })
 instance Attr anything OnClick  Cb  where
   attr OnClick value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnClick (Event.Event  Cb ) where
     \value -> { key: "click", value: cb' value }
 
 instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnClick bothValues = unsafeAttribute $ Both
-    { key: "click", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnClick bothValues = unsafeAttribute $ Both (pure 
+    { key: "click", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "click", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnClick (Event.Event  (Effect Unit) ) where
     \value -> { key: "click", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnClick bothValues = unsafeAttribute $ Both
-    { key: "click", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnClick bothValues = unsafeAttribute $ Both (pure 
+    { key: "click", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "click", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnClickEffect =
   => Event (Attribute element)
 
 instance Attr everything OnClick (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnClick bothValues = unsafeAttribute $ Both
-    { key: "click", value: unset' }
+  attr OnClick bothValues = unsafeAttribute $ Both (pure 
+    { key: "click", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "click", value: unset' })
 instance Attr everything OnClick  Unit  where
   attr OnClick _ = unsafeAttribute $ This $ pure $ { key: "click", value: unset' }

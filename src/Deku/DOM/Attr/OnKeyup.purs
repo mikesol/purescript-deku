@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnKeyup = OnKeyup
 
 instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnKeyup bothValues = unsafeAttribute $ Both
-    { key: "keyup", value: cb' (NonEmpty.head bothValues) }
+  attr OnKeyup bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyup", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyup", value: cb' value })
 instance Attr anything OnKeyup  Cb  where
   attr OnKeyup value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnKeyup (Event.Event  Cb ) where
     \value -> { key: "keyup", value: cb' value }
 
 instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnKeyup bothValues = unsafeAttribute $ Both
-    { key: "keyup", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnKeyup bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyup", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "keyup", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnKeyup (Event.Event  (Effect Unit) ) where
     \value -> { key: "keyup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnKeyup bothValues = unsafeAttribute $ Both
-    { key: "keyup", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnKeyup bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyup", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "keyup", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnKeyupEffect =
   => Event (Attribute element)
 
 instance Attr everything OnKeyup (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnKeyup bothValues = unsafeAttribute $ Both
-    { key: "keyup", value: unset' }
+  attr OnKeyup bothValues = unsafeAttribute $ Both (pure 
+    { key: "keyup", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyup", value: unset' })
 instance Attr everything OnKeyup  Unit  where
   attr OnKeyup _ = unsafeAttribute $ This $ pure $ { key: "keyup", value: unset' }

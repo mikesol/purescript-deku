@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Dirname = Dirname
 
 instance Attr Input_ Dirname (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dirname bothValues = unsafeAttribute $ Both
-    { key: "dirname", value: prop' (NonEmpty.head bothValues) }
+  attr Dirname bothValues = unsafeAttribute $ Both (pure 
+    { key: "dirname", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Input_ Dirname  String  where
   attr Dirname value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Input_ Dirname (Event.Event  String ) where
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr Textarea_ Dirname (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Dirname bothValues = unsafeAttribute $ Both
-    { key: "dirname", value: prop' (NonEmpty.head bothValues) }
+  attr Dirname bothValues = unsafeAttribute $ Both (pure 
+    { key: "dirname", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Textarea_ Dirname  String  where
   attr Dirname value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Textarea_ Dirname (Event.Event  String ) where
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr everything Dirname (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Dirname bothValues = unsafeAttribute $ Both
-    { key: "dirname", value: unset' }
+  attr Dirname bothValues = unsafeAttribute $ Both (pure 
+    { key: "dirname", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dirname", value: unset' })
 instance Attr everything Dirname  Unit  where
   attr Dirname _ = unsafeAttribute $ This $ pure $ { key: "dirname", value: unset' }

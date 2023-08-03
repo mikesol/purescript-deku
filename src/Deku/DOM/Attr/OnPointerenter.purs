@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnPointerenter = OnPointerenter
 
 instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerenter bothValues = unsafeAttribute $ Both
-    { key: "pointerenter", value: cb' (NonEmpty.head bothValues) }
+  attr OnPointerenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerenter", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerenter", value: cb' value })
 instance Attr anything OnPointerenter  Cb  where
   attr OnPointerenter value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnPointerenter (Event.Event  Cb ) where
     \value -> { key: "pointerenter", value: cb' value }
 
 instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerenter bothValues = unsafeAttribute $ Both
-    { key: "pointerenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnPointerenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnPointerenter (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerenter bothValues = unsafeAttribute $ Both
-    { key: "pointerenter", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnPointerenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerenter", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "pointerenter", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnPointerenterEffect =
   => Event (Attribute element)
 
 instance Attr everything OnPointerenter (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerenter bothValues = unsafeAttribute $ Both
-    { key: "pointerenter", value: unset' }
+  attr OnPointerenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "pointerenter", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerenter", value: unset' })
 instance Attr everything OnPointerenter  Unit  where
   attr OnPointerenter _ = unsafeAttribute $ This $ pure $

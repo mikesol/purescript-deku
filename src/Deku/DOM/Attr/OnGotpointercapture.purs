@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnGotpointercapture = OnGotpointercapture
 
 instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnGotpointercapture bothValues = unsafeAttribute $ Both
-    { key: "gotpointercapture", value: cb' (NonEmpty.head bothValues) }
+  attr OnGotpointercapture bothValues = unsafeAttribute $ Both (pure 
+    { key: "gotpointercapture", value: cb' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "gotpointercapture", value: cb' value }
     )
@@ -24,10 +24,10 @@ instance Attr anything OnGotpointercapture (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "gotpointercapture", value: cb' value }
 
 instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnGotpointercapture bothValues = unsafeAttribute $ Both
+  attr OnGotpointercapture bothValues = unsafeAttribute $ Both (pure 
     { key: "gotpointercapture"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
     )
@@ -40,8 +40,8 @@ instance Attr anything OnGotpointercapture (Event.Event  (Effect Unit) ) where
       { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnGotpointercapture bothValues = unsafeAttribute $ Both
-    { key: "gotpointercapture", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnGotpointercapture bothValues = unsafeAttribute $ Both (pure 
+    { key: "gotpointercapture", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "gotpointercapture", value: cb' (Cb (const value)) }
     )
@@ -59,8 +59,8 @@ type OnGotpointercaptureEffect =
   => Event (Attribute element)
 
 instance Attr everything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnGotpointercapture bothValues = unsafeAttribute $ Both
-    { key: "gotpointercapture", value: unset' }
+  attr OnGotpointercapture bothValues = unsafeAttribute $ Both (pure 
+    { key: "gotpointercapture", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "gotpointercapture", value: unset' })
 instance Attr everything OnGotpointercapture  Unit  where
   attr OnGotpointercapture _ = unsafeAttribute $ This $ pure $

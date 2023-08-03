@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Headers = Headers
 
 instance Attr Td_ Headers (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Headers bothValues = unsafeAttribute $ Both
-    { key: "headers", value: prop' (NonEmpty.head bothValues) }
+  attr Headers bothValues = unsafeAttribute $ Both (pure 
+    { key: "headers", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "headers", value: prop' value })
 instance Attr Td_ Headers  String  where
   attr Headers value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Td_ Headers (Event.Event  String ) where
     \value -> { key: "headers", value: prop' value }
 
 instance Attr Th_ Headers (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Headers bothValues = unsafeAttribute $ Both
-    { key: "headers", value: prop' (NonEmpty.head bothValues) }
+  attr Headers bothValues = unsafeAttribute $ Both (pure 
+    { key: "headers", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "headers", value: prop' value })
 instance Attr Th_ Headers  String  where
   attr Headers value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Th_ Headers (Event.Event  String ) where
     \value -> { key: "headers", value: prop' value }
 
 instance Attr everything Headers (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Headers bothValues = unsafeAttribute $ Both
-    { key: "headers", value: unset' }
+  attr Headers bothValues = unsafeAttribute $ Both (pure 
+    { key: "headers", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "headers", value: unset' })
 instance Attr everything Headers  Unit  where
   attr Headers _ = unsafeAttribute $ This $ pure $ { key: "headers", value: unset' }

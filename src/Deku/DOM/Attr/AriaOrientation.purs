@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaOrientation = AriaOrientation
 
 instance Attr Circle_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Ellipse_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr ForeignObject_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr G_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Line_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Marker_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Path_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polygon_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polyline_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Rect_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Svg_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Symbol_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Text_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr TextPath_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Tspan_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Use_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr View_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr everything AriaOrientation (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaOrientation bothValues = unsafeAttribute $ Both
-    { key: "aria-orientation", value: unset' }
+  attr AriaOrientation bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-orientation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
 instance Attr everything AriaOrientation  Unit  where
   attr AriaOrientation _ = unsafeAttribute $ This $ pure $

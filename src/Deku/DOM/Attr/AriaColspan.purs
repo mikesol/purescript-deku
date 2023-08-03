@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaColspan = AriaColspan
 
 instance Attr Circle_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Circle_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Ellipse_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Ellipse_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr ForeignObject_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr ForeignObject_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr G_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr G_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Line_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Line_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Marker_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Marker_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Path_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Path_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Polygon_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Polygon_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Polyline_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Polyline_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Rect_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Rect_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Svg_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Svg_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Symbol_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Symbol_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Text_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Text_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr TextPath_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr TextPath_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Tspan_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Tspan_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr Use_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr Use_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr View_ AriaColspan (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-colspan", value: prop' value })
 instance Attr View_ AriaColspan  String  where
   attr AriaColspan value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaColspan (Event.Event  String ) where
     \value -> { key: "aria-colspan", value: prop' value }
 
 instance Attr everything AriaColspan (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaColspan bothValues = unsafeAttribute $ Both
-    { key: "aria-colspan", value: unset' }
+  attr AriaColspan bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-colspan", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-colspan", value: unset' })
 instance Attr everything AriaColspan  Unit  where
   attr AriaColspan _ = unsafeAttribute $ This $ pure $

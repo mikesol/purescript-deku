@@ -12,8 +12,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Controls = Controls
 
 instance Attr Audio_ Controls (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Controls bothValues = unsafeAttribute $ Both
-    { key: "controls", value: prop' (NonEmpty.head bothValues) }
+  attr Controls bothValues = unsafeAttribute $ Both (pure 
+    { key: "controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "controls", value: prop' value })
 instance Attr Audio_ Controls  String  where
   attr Controls value = unsafeAttribute $ This $ pure $
@@ -23,8 +23,8 @@ instance Attr Audio_ Controls (Event.Event  String ) where
     \value -> { key: "controls", value: prop' value }
 
 instance Attr Video_ Controls (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Controls bothValues = unsafeAttribute $ Both
-    { key: "controls", value: prop' (NonEmpty.head bothValues) }
+  attr Controls bothValues = unsafeAttribute $ Both (pure 
+    { key: "controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "controls", value: prop' value })
 instance Attr Video_ Controls  String  where
   attr Controls value = unsafeAttribute $ This $ pure $
@@ -34,8 +34,8 @@ instance Attr Video_ Controls (Event.Event  String ) where
     \value -> { key: "controls", value: prop' value }
 
 instance Attr everything Controls (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Controls bothValues = unsafeAttribute $ Both
-    { key: "controls", value: unset' }
+  attr Controls bothValues = unsafeAttribute $ Both (pure 
+    { key: "controls", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "controls", value: unset' })
 instance Attr everything Controls  Unit  where
   attr Controls _ = unsafeAttribute $ This $ pure $

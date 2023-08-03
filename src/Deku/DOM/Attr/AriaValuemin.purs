@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaValuemin = AriaValuemin
 
 instance Attr Circle_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Circle_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -38,8 +38,8 @@ instance Attr Circle_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Ellipse_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Ellipse_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -49,8 +49,8 @@ instance Attr Ellipse_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr ForeignObject_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr ForeignObject_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -60,8 +60,8 @@ instance Attr ForeignObject_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr G_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr G_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -71,8 +71,8 @@ instance Attr G_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Line_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Line_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -82,8 +82,8 @@ instance Attr Line_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Marker_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Marker_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -93,8 +93,8 @@ instance Attr Marker_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Path_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Path_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -104,8 +104,8 @@ instance Attr Path_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Polygon_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Polygon_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -115,8 +115,8 @@ instance Attr Polygon_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Polyline_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Polyline_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -126,8 +126,8 @@ instance Attr Polyline_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Rect_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Rect_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -137,8 +137,8 @@ instance Attr Rect_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Svg_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Svg_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -148,8 +148,8 @@ instance Attr Svg_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Symbol_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Symbol_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -159,8 +159,8 @@ instance Attr Symbol_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Text_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Text_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -170,8 +170,8 @@ instance Attr Text_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr TextPath_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr TextPath_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -181,8 +181,8 @@ instance Attr TextPath_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Tspan_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Tspan_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -192,8 +192,8 @@ instance Attr Tspan_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr Use_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr Use_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -203,8 +203,8 @@ instance Attr Use_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr View_ AriaValuemin (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-valuemin", value: prop' value })
 instance Attr View_ AriaValuemin  String  where
   attr AriaValuemin value = unsafeAttribute $ This $ pure $
@@ -214,8 +214,8 @@ instance Attr View_ AriaValuemin (Event.Event  String ) where
     \value -> { key: "aria-valuemin", value: prop' value }
 
 instance Attr everything AriaValuemin (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaValuemin bothValues = unsafeAttribute $ Both
-    { key: "aria-valuemin", value: unset' }
+  attr AriaValuemin bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-valuemin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-valuemin", value: unset' })
 instance Attr everything AriaValuemin  Unit  where
   attr AriaValuemin _ = unsafeAttribute $ This $ pure $

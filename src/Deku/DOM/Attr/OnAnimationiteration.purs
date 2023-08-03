@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnAnimationiteration = OnAnimationiteration
 
 instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnAnimationiteration bothValues = unsafeAttribute $ Both
-    { key: "animationiteration", value: cb' (NonEmpty.head bothValues) }
+  attr OnAnimationiteration bothValues = unsafeAttribute $ Both (pure 
+    { key: "animationiteration", value: cb' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "animationiteration", value: cb' value }
     )
@@ -24,10 +24,10 @@ instance Attr anything OnAnimationiteration (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "animationiteration", value: cb' value }
 
 instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnAnimationiteration bothValues = unsafeAttribute $ Both
+  attr OnAnimationiteration bothValues = unsafeAttribute $ Both (pure 
     { key: "animationiteration"
     , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    }
+    })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "animationiteration", value: cb' (Cb (const (value $> true))) }
     )
@@ -40,8 +40,8 @@ instance Attr anything OnAnimationiteration (Event.Event  (Effect Unit) ) where
       { key: "animationiteration", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnAnimationiteration bothValues = unsafeAttribute $ Both
-    { key: "animationiteration", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnAnimationiteration bothValues = unsafeAttribute $ Both (pure 
+    { key: "animationiteration", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "animationiteration", value: cb' (Cb (const value)) }
     )
@@ -59,8 +59,8 @@ type OnAnimationiterationEffect =
   => Event (Attribute element)
 
 instance Attr everything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnAnimationiteration bothValues = unsafeAttribute $ Both
-    { key: "animationiteration", value: unset' }
+  attr OnAnimationiteration bothValues = unsafeAttribute $ Both (pure 
+    { key: "animationiteration", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "animationiteration", value: unset' })
 instance Attr everything OnAnimationiteration  Unit  where
   attr OnAnimationiteration _ = unsafeAttribute $ This $ pure $

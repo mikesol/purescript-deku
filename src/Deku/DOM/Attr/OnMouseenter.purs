@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnMouseenter = OnMouseenter
 
 instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnMouseenter bothValues = unsafeAttribute $ Both
-    { key: "mouseenter", value: cb' (NonEmpty.head bothValues) }
+  attr OnMouseenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseenter", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseenter", value: cb' value })
 instance Attr anything OnMouseenter  Cb  where
   attr OnMouseenter value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnMouseenter (Event.Event  Cb ) where
     \value -> { key: "mouseenter", value: cb' value }
 
 instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnMouseenter bothValues = unsafeAttribute $ Both
-    { key: "mouseenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnMouseenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseenter", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnMouseenter (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnMouseenter bothValues = unsafeAttribute $ Both
-    { key: "mouseenter", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnMouseenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseenter", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "mouseenter", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnMouseenterEffect =
   => Event (Attribute element)
 
 instance Attr everything OnMouseenter (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnMouseenter bothValues = unsafeAttribute $ Both
-    { key: "mouseenter", value: unset' }
+  attr OnMouseenter bothValues = unsafeAttribute $ Both (pure 
+    { key: "mouseenter", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseenter", value: unset' })
 instance Attr everything OnMouseenter  Unit  where
   attr OnMouseenter _ = unsafeAttribute $ This $ pure $

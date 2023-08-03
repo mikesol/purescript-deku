@@ -27,8 +27,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaDropeffect = AriaDropeffect
 
 instance Attr Circle_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -40,8 +40,8 @@ instance Attr Circle_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Ellipse_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -53,8 +53,8 @@ instance Attr Ellipse_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr ForeignObject_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -66,8 +66,8 @@ instance Attr ForeignObject_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr G_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -79,8 +79,8 @@ instance Attr G_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Line_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -92,8 +92,8 @@ instance Attr Line_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Marker_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -105,8 +105,8 @@ instance Attr Marker_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Path_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -118,8 +118,8 @@ instance Attr Path_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Polygon_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -131,8 +131,8 @@ instance Attr Polygon_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Polyline_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -144,8 +144,8 @@ instance Attr Polyline_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Rect_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -157,8 +157,8 @@ instance Attr Rect_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Svg_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -170,8 +170,8 @@ instance Attr Svg_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Symbol_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -183,8 +183,8 @@ instance Attr Symbol_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Text_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -196,8 +196,8 @@ instance Attr Text_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr TextPath_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -209,8 +209,8 @@ instance Attr TextPath_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Tspan_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -222,8 +222,8 @@ instance Attr Tspan_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr Use_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -235,8 +235,8 @@ instance Attr Use_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr View_ AriaDropeffect (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "aria-dropeffect", value: prop' value }
     )
@@ -248,8 +248,8 @@ instance Attr View_ AriaDropeffect (Event.Event  String ) where
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 instance Attr everything AriaDropeffect (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaDropeffect bothValues = unsafeAttribute $ Both
-    { key: "aria-dropeffect", value: unset' }
+  attr AriaDropeffect bothValues = unsafeAttribute $ Both (pure 
+    { key: "aria-dropeffect", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-dropeffect", value: unset' })
 instance Attr everything AriaDropeffect  Unit  where
   attr AriaDropeffect _ = unsafeAttribute $ This $ pure $

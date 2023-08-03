@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Mode = Mode
 
 instance Attr FeBlend_ Mode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Mode bothValues = unsafeAttribute $ Both
-    { key: "mode", value: prop' (NonEmpty.head bothValues) }
+  attr Mode bothValues = unsafeAttribute $ Both (pure 
+    { key: "mode", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mode", value: prop' value })
 instance Attr FeBlend_ Mode  String  where
   attr Mode value = unsafeAttribute $ This $ pure $
@@ -22,7 +22,7 @@ instance Attr FeBlend_ Mode (Event.Event  String ) where
     { key: "mode", value: prop' value }
 
 instance Attr everything Mode (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Mode bothValues = unsafeAttribute $ Both { key: "mode", value: unset' }
+  attr Mode bothValues = unsafeAttribute $ Both (pure  { key: "mode", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mode", value: unset' })
 instance Attr everything Mode  Unit  where
   attr Mode _ = unsafeAttribute $ This $ pure $ { key: "mode", value: unset' }

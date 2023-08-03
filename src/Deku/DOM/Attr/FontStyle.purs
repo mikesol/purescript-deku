@@ -31,8 +31,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data FontStyle = FontStyle
 
 instance Attr FeBlend_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeBlend_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -42,8 +42,8 @@ instance Attr FeBlend_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeColorMatrix_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeColorMatrix_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -53,8 +53,8 @@ instance Attr FeColorMatrix_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeComponentTransfer_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeComponentTransfer_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -64,8 +64,8 @@ instance Attr FeComponentTransfer_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeComposite_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeComposite_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -75,8 +75,8 @@ instance Attr FeComposite_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeConvolveMatrix_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -86,8 +86,8 @@ instance Attr FeConvolveMatrix_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeDiffuseLighting_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -97,8 +97,8 @@ instance Attr FeDiffuseLighting_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeDisplacementMap_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeDisplacementMap_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -108,8 +108,8 @@ instance Attr FeDisplacementMap_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeFlood_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeFlood_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -119,8 +119,8 @@ instance Attr FeFlood_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeGaussianBlur_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeGaussianBlur_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -130,8 +130,8 @@ instance Attr FeGaussianBlur_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeImage_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeImage_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -141,8 +141,8 @@ instance Attr FeImage_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeMerge_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeMerge_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -152,8 +152,8 @@ instance Attr FeMerge_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeMorphology_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeMorphology_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -163,8 +163,8 @@ instance Attr FeMorphology_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeOffset_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeOffset_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -174,8 +174,8 @@ instance Attr FeOffset_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeSpecularLighting_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeSpecularLighting_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -185,8 +185,8 @@ instance Attr FeSpecularLighting_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeTile_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeTile_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -196,8 +196,8 @@ instance Attr FeTile_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr FeTurbulence_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr FeTurbulence_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -207,8 +207,8 @@ instance Attr FeTurbulence_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr Filter_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr Filter_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -218,8 +218,8 @@ instance Attr Filter_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr Image_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr Image_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -229,8 +229,8 @@ instance Attr Image_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr Switch_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr Switch_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -240,8 +240,8 @@ instance Attr Switch_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr Text_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr Text_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -251,8 +251,8 @@ instance Attr Text_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr Tspan_ FontStyle (NonEmpty.NonEmpty Event.Event  String ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: prop' (NonEmpty.head bothValues) }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "font-style", value: prop' value })
 instance Attr Tspan_ FontStyle  String  where
   attr FontStyle value = unsafeAttribute $ This $ pure $
@@ -262,8 +262,8 @@ instance Attr Tspan_ FontStyle (Event.Event  String ) where
     \value -> { key: "font-style", value: prop' value }
 
 instance Attr everything FontStyle (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr FontStyle bothValues = unsafeAttribute $ Both
-    { key: "font-style", value: unset' }
+  attr FontStyle bothValues = unsafeAttribute $ Both (pure 
+    { key: "font-style", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "font-style", value: unset' })
 instance Attr everything FontStyle  Unit  where
   attr FontStyle _ = unsafeAttribute $ This $ pure $

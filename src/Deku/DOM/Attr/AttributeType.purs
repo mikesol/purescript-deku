@@ -11,8 +11,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AttributeType = AttributeType
 
 instance Attr AnimateTransform_ AttributeType (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AttributeType bothValues = unsafeAttribute $ Both
-    { key: "attributeType", value: prop' (NonEmpty.head bothValues) }
+  attr AttributeType bothValues = unsafeAttribute $ Both (pure 
+    { key: "attributeType", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeType", value: prop' value })
 instance Attr AnimateTransform_ AttributeType  String  where
   attr AttributeType value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr AnimateTransform_ AttributeType (Event.Event  String ) where
     \value -> { key: "attributeType", value: prop' value }
 
 instance Attr everything AttributeType (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AttributeType bothValues = unsafeAttribute $ Both
-    { key: "attributeType", value: unset' }
+  attr AttributeType bothValues = unsafeAttribute $ Both (pure 
+    { key: "attributeType", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "attributeType", value: unset' })
 instance Attr everything AttributeType  Unit  where
   attr AttributeType _ = unsafeAttribute $ This $ pure $

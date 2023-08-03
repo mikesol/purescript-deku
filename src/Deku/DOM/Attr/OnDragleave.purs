@@ -11,8 +11,8 @@ import FRP.Event (Event)
 data OnDragleave = OnDragleave
 
 instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (NonEmpty.head bothValues) }
+  attr OnDragleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragleave", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragleave", value: cb' value })
 instance Attr anything OnDragleave  Cb  where
   attr OnDragleave value = unsafeAttribute $ This $ pure $
@@ -22,8 +22,8 @@ instance Attr anything OnDragleave (Event.Event  Cb ) where
     \value -> { key: "dragleave", value: cb' value }
 
 instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) }
+  attr OnDragleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragleave", value: cb' (Cb (const ((NonEmpty.head bothValues) $> true))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const (value $> true))) }
     )
@@ -35,8 +35,8 @@ instance Attr anything OnDragleave (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: cb' (Cb (const (NonEmpty.head bothValues))) }
+  attr OnDragleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragleave", value: cb' (Cb (const (NonEmpty.head bothValues))) })
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const value)) }
     )
@@ -53,8 +53,8 @@ type OnDragleaveEffect =
   => Event (Attribute element)
 
 instance Attr everything OnDragleave (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnDragleave bothValues = unsafeAttribute $ Both
-    { key: "dragleave", value: unset' }
+  attr OnDragleave bothValues = unsafeAttribute $ Both (pure 
+    { key: "dragleave", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragleave", value: unset' })
 instance Attr everything OnDragleave  Unit  where
   attr OnDragleave _ = unsafeAttribute $ This $ pure $

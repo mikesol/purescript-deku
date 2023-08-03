@@ -13,8 +13,8 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accumulate = Accumulate
 
 instance Attr Animate_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accumulate bothValues = unsafeAttribute $ Both
-    { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
+  attr Accumulate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr Animate_ Accumulate  String  where
   attr Accumulate value = unsafeAttribute $ This $ pure $
@@ -24,8 +24,8 @@ instance Attr Animate_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateMotion_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accumulate bothValues = unsafeAttribute $ Both
-    { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
+  attr Accumulate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateMotion_ Accumulate  String  where
   attr Accumulate value = unsafeAttribute $ This $ pure $
@@ -35,8 +35,8 @@ instance Attr AnimateMotion_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateTransform_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Accumulate bothValues = unsafeAttribute $ Both
-    { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
+  attr Accumulate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateTransform_ Accumulate  String  where
   attr Accumulate value = unsafeAttribute $ This $ pure $
@@ -46,8 +46,8 @@ instance Attr AnimateTransform_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr everything Accumulate (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Accumulate bothValues = unsafeAttribute $ Both
-    { key: "accumulate", value: unset' }
+  attr Accumulate bothValues = unsafeAttribute $ Both (pure 
+    { key: "accumulate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accumulate", value: unset' })
 instance Attr everything Accumulate  Unit  where
   attr Accumulate _ = unsafeAttribute $ This $ pure $
