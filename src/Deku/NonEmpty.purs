@@ -17,11 +17,11 @@ retail :: forall f a. f a -> NonEmpty f a -> NonEmpty f a
 retail tn (h :| _) = h :| tn
 
 filterMap
-  :: forall f a
+  :: forall f a b
    . Filterable.Filterable f
-  => (a -> Maybe a)
+  => (a -> Maybe b)
   -> NonEmpty f a
-  -> Either (f a) (NonEmpty f a)
+  -> Either (f b) (NonEmpty f b)
 filterMap f (h :| t) =
   let
     tn = Filterable.filterMap f t
@@ -53,11 +53,11 @@ apne (a' :| as') (b' :| bs') = a' b' :| (as' <*> bs')
 infixl 4 apne as <**>
 
 filterMapAttribute
-  :: forall e at a
-   . Attr e at  (Event a)
-  => Attr e at (NonEmpty Event a)
+  :: forall e at a b
+   . Attr e at (Event b)
+  => Attr e at (NonEmpty Event b)
   => at
-  -> (a -> Maybe a)
+  -> (a -> Maybe b)
   -> NonEmpty Event a
   -> Attribute e
 filterMapAttribute a f ne = case filterMap f ne of
