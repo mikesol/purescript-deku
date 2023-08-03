@@ -2,8 +2,6 @@ module Deku.DOM.Attr.Y where
 
 import Prelude
 
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
 import Data.NonEmpty as NonEmpty
 import Data.These (These(..))
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -47,9 +45,6 @@ instance Attr FeBlend_ Y (NonEmpty.NonEmpty Event.Event  String ) where
     (NonEmpty.tail bothValues <#> \value -> { key: "y", value: prop' value })
 instance Attr FeBlend_ Y  String  where
   attr Y value = unsafeAttribute $ This $ pure $ { key: "y", value: prop' value }
-instance Attr FeBlend_ Y (ST.ST Global.Global  String ) where
-  attr Y eventValue = unsafeAttribute $ This $ eventValue <#> \value ->
-    { key: "y", value: prop' value }
 instance Attr FeBlend_ Y (Event.Event  String ) where
   attr Y eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "y", value: prop' value }
