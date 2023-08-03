@@ -33,6 +33,7 @@ module Deku.Hooks
   , useDynWith_
   , useDyn_
   , useMailboxed
+  , class UseMemoized
   , useMemoized
   , useMemoized'
   , useRef
@@ -55,7 +56,7 @@ import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
-import Data.NonEmpty (NonEmpty(..), tail)
+import Data.NonEmpty (NonEmpty(..), tail, (:|))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
@@ -127,35 +128,43 @@ guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
 
--- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
-useMemoized
-  :: forall a
-   . Event a
-  -> Hook (Event a)
-useMemoized e f = Nut go'
-  where
-  go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node (Element go)))
+class UseMemoized a where
+  -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
+  useMemoized :: a -> Hook a
 
-  go
-    :: forall payload
-     . Node' payload
-  go i di = do
-    { event, push } <- create
-    u <- subscribe e push
-    let Nut nf = f event
-    Tuple sub (Tuple unsub evt) <- __internalDekuFlatten nf i di
-    pure $ Tuple sub $ Tuple unsub $ makeEvent \k -> do
-      o <- subscribe evt k
-      pure do
-        u
-        o
+instance UseMemoized (NonEmpty Event a) where
+  useMemoized (h :| t) f = Deku.do
+    tn <- useMemoized t
+    f (h :| tn)
+
+instance UseMemoized (Event a) where
+  useMemoized e f = Nut go'
+    where
+    go' :: forall payload. NutF payload
+    go' = NutF (Element' (Node (Element go)))
+
+    go
+      :: forall payload
+       . Node' payload
+    go i di = do
+      { event, push } <- create
+      u <- subscribe e push
+      let Nut nf = f event
+      Tuple sub (Tuple unsub evt) <- __internalDekuFlatten nf i di
+      pure $ Tuple sub $ Tuple unsub $ makeEvent \k -> do
+        o <- subscribe evt k
+        pure do
+          u
+          o
 
 -- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
+
 useMemoized'
-  :: forall a b
-   . (Event a -> Event b)
-  -> Hook ((a -> Effect Unit) /\ Event b)
+  :: forall t a
+   . UseMemoized a
+  => (Event t -> a)
+  -> (Tuple (t -> Effect Unit) a -> Nut)
+  -> Nut
 useMemoized' f0 makeHook = Deku.do
   push /\ e <- useState'
   m <- useMemoized (f0 e)
