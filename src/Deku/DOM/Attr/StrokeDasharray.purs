@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.StrokeDasharray where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -56,6 +60,12 @@ instance Attr Circle_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
+instance Attr Circle_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
 instance Attr Circle_ StrokeDasharray  String  where
   attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
@@ -63,10 +73,20 @@ instance Attr Circle_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Circle_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr ClipPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr ClipPath_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr ClipPath_ StrokeDasharray  String  where
@@ -76,10 +96,20 @@ instance Attr ClipPath_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr ClipPath_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Defs_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Defs_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Defs_ StrokeDasharray  String  where
@@ -89,10 +119,20 @@ instance Attr Defs_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Defs_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Ellipse_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Ellipse_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Ellipse_ StrokeDasharray  String  where
@@ -102,10 +142,20 @@ instance Attr Ellipse_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Ellipse_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeBlend_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeBlend_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeBlend_ StrokeDasharray  String  where
@@ -115,10 +165,20 @@ instance Attr FeBlend_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeBlend_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeColorMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeColorMatrix_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeDasharray  String  where
@@ -128,10 +188,20 @@ instance Attr FeColorMatrix_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeColorMatrix_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeComponentTransfer_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeComponentTransfer_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeDasharray  String  where
@@ -141,10 +211,20 @@ instance Attr FeComponentTransfer_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeComponentTransfer_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeComposite_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeComposite_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeComposite_ StrokeDasharray  String  where
@@ -154,10 +234,20 @@ instance Attr FeComposite_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeComposite_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeConvolveMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeConvolveMatrix_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeDasharray  String  where
@@ -167,10 +257,20 @@ instance Attr FeConvolveMatrix_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeConvolveMatrix_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeDiffuseLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeDiffuseLighting_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeDasharray  String  where
@@ -180,10 +280,20 @@ instance Attr FeDiffuseLighting_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeDiffuseLighting_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeDisplacementMap_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeDisplacementMap_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeDasharray  String  where
@@ -193,10 +303,20 @@ instance Attr FeDisplacementMap_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeDisplacementMap_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeFlood_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeFlood_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeFlood_ StrokeDasharray  String  where
@@ -206,10 +326,20 @@ instance Attr FeFlood_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeFlood_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeGaussianBlur_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeGaussianBlur_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeDasharray  String  where
@@ -219,10 +349,20 @@ instance Attr FeGaussianBlur_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeGaussianBlur_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeImage_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeImage_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeImage_ StrokeDasharray  String  where
@@ -232,10 +372,20 @@ instance Attr FeImage_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeImage_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeMerge_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeMerge_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeMerge_ StrokeDasharray  String  where
@@ -245,10 +395,20 @@ instance Attr FeMerge_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeMerge_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeMorphology_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeMorphology_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeDasharray  String  where
@@ -258,10 +418,20 @@ instance Attr FeMorphology_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeMorphology_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeOffset_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeOffset_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeOffset_ StrokeDasharray  String  where
@@ -271,10 +441,20 @@ instance Attr FeOffset_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeOffset_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeSpecularLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeSpecularLighting_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeDasharray  String  where
@@ -284,10 +464,20 @@ instance Attr FeSpecularLighting_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeSpecularLighting_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeTile_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeTile_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeTile_ StrokeDasharray  String  where
@@ -297,10 +487,20 @@ instance Attr FeTile_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeTile_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr FeTurbulence_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr FeTurbulence_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeDasharray  String  where
@@ -310,10 +510,20 @@ instance Attr FeTurbulence_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr FeTurbulence_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Filter_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Filter_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Filter_ StrokeDasharray  String  where
@@ -323,10 +533,20 @@ instance Attr Filter_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Filter_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr ForeignObject_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr ForeignObject_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeDasharray  String  where
@@ -336,10 +556,20 @@ instance Attr ForeignObject_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr ForeignObject_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr G_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr G_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr G_ StrokeDasharray  String  where
@@ -349,10 +579,20 @@ instance Attr G_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr G_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Image_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Image_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Image_ StrokeDasharray  String  where
@@ -362,10 +602,20 @@ instance Attr Image_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Image_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Line_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Line_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Line_ StrokeDasharray  String  where
@@ -375,10 +625,20 @@ instance Attr Line_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Line_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr LinearGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr LinearGradient_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeDasharray  String  where
@@ -388,10 +648,20 @@ instance Attr LinearGradient_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr LinearGradient_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Marker_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Marker_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Marker_ StrokeDasharray  String  where
@@ -401,10 +671,20 @@ instance Attr Marker_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Marker_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Mask_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Mask_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Mask_ StrokeDasharray  String  where
@@ -414,10 +694,20 @@ instance Attr Mask_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Mask_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Path_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Path_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Path_ StrokeDasharray  String  where
@@ -427,10 +717,20 @@ instance Attr Path_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Path_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Pattern_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Pattern_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Pattern_ StrokeDasharray  String  where
@@ -440,10 +740,20 @@ instance Attr Pattern_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Pattern_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Polygon_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Polygon_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Polygon_ StrokeDasharray  String  where
@@ -453,10 +763,20 @@ instance Attr Polygon_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Polygon_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Polyline_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Polyline_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Polyline_ StrokeDasharray  String  where
@@ -466,10 +786,20 @@ instance Attr Polyline_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Polyline_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr RadialGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr RadialGradient_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeDasharray  String  where
@@ -479,10 +809,20 @@ instance Attr RadialGradient_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr RadialGradient_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Rect_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Rect_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Rect_ StrokeDasharray  String  where
@@ -492,10 +832,20 @@ instance Attr Rect_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Rect_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Svg_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Svg_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Svg_ StrokeDasharray  String  where
@@ -505,10 +855,20 @@ instance Attr Svg_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Svg_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Switch_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Switch_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Switch_ StrokeDasharray  String  where
@@ -518,10 +878,20 @@ instance Attr Switch_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Switch_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Symbol_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Symbol_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Symbol_ StrokeDasharray  String  where
@@ -531,10 +901,20 @@ instance Attr Symbol_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Symbol_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Text_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Text_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Text_ StrokeDasharray  String  where
@@ -544,10 +924,20 @@ instance Attr Text_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Text_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr TextPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr TextPath_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr TextPath_ StrokeDasharray  String  where
@@ -557,10 +947,20 @@ instance Attr TextPath_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr TextPath_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Tspan_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Tspan_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Tspan_ StrokeDasharray  String  where
@@ -570,10 +970,20 @@ instance Attr Tspan_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Tspan_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr Use_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "stroke-dasharray", value: prop' value }
+    )
+instance Attr Use_ StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "stroke-dasharray", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Use_ StrokeDasharray  String  where
@@ -583,13 +993,25 @@ instance Attr Use_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "stroke-dasharray", value: prop' value }
 
+instance Attr Use_ StrokeDasharray (ST.ST Global.Global  String ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "stroke-dasharray", value: prop' value }
+
 instance Attr everything StrokeDasharray (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr StrokeDasharray bothValues = unsafeAttribute $ Both (pure 
     { key: "stroke-dasharray", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-dasharray", value: unset' })
+instance Attr everything StrokeDasharray (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr StrokeDasharray (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "stroke-dasharray", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "stroke-dasharray", value: unset' })
 instance Attr everything StrokeDasharray  Unit  where
   attr StrokeDasharray _ = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: unset' }
 instance Attr everything StrokeDasharray (Event.Event  Unit ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "stroke-dasharray", value: unset' }
+
+instance Attr everything StrokeDasharray (ST.ST Global.Global  Unit ) where
+  attr StrokeDasharray stValue = unsafeAttribute $ This $ stValue
     <#> \_ -> { key: "stroke-dasharray", value: unset' }

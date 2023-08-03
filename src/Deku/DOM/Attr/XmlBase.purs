@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.XmlBase where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -45,6 +49,10 @@ instance Attr AnimateTransform_ XmlBase (NonEmpty.NonEmpty Event.Event  String )
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr AnimateTransform_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr AnimateTransform_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -52,10 +60,18 @@ instance Attr AnimateTransform_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr AnimateTransform_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Discard_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Discard_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Discard_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -63,10 +79,18 @@ instance Attr Discard_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Discard_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeBlend_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeBlend_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeBlend_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -74,10 +98,18 @@ instance Attr FeBlend_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeBlend_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeColorMatrix_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeColorMatrix_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeColorMatrix_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -85,10 +117,18 @@ instance Attr FeColorMatrix_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeColorMatrix_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeComponentTransfer_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeComponentTransfer_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeComponentTransfer_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -96,10 +136,18 @@ instance Attr FeComponentTransfer_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeComponentTransfer_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeComposite_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeComposite_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeComposite_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -107,10 +155,18 @@ instance Attr FeComposite_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeComposite_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeConvolveMatrix_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeConvolveMatrix_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeConvolveMatrix_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -118,10 +174,18 @@ instance Attr FeConvolveMatrix_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeConvolveMatrix_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeDiffuseLighting_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeDiffuseLighting_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeDiffuseLighting_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -129,10 +193,18 @@ instance Attr FeDiffuseLighting_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeDiffuseLighting_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeDisplacementMap_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeDisplacementMap_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeDisplacementMap_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -140,10 +212,18 @@ instance Attr FeDisplacementMap_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeDisplacementMap_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeDistantLight_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeDistantLight_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeDistantLight_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -151,10 +231,18 @@ instance Attr FeDistantLight_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeDistantLight_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeFlood_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeFlood_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeFlood_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -162,10 +250,18 @@ instance Attr FeFlood_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeFlood_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeFuncA_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeFuncA_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeFuncA_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -173,10 +269,18 @@ instance Attr FeFuncA_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeFuncA_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeFuncB_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeFuncB_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeFuncB_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -184,10 +288,18 @@ instance Attr FeFuncB_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeFuncB_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeFuncG_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeFuncG_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeFuncG_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -195,10 +307,18 @@ instance Attr FeFuncG_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeFuncG_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeFuncR_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeFuncR_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeFuncR_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -206,10 +326,18 @@ instance Attr FeFuncR_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeFuncR_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeGaussianBlur_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeGaussianBlur_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeGaussianBlur_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -217,10 +345,18 @@ instance Attr FeGaussianBlur_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeGaussianBlur_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeImage_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeImage_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeImage_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -228,10 +364,18 @@ instance Attr FeImage_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeImage_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeMerge_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeMerge_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeMerge_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -239,10 +383,18 @@ instance Attr FeMerge_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeMerge_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeMergeNode_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeMergeNode_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeMergeNode_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -250,10 +402,18 @@ instance Attr FeMergeNode_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeMergeNode_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeMorphology_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeMorphology_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeMorphology_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -261,10 +421,18 @@ instance Attr FeMorphology_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeMorphology_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeOffset_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeOffset_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeOffset_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -272,10 +440,18 @@ instance Attr FeOffset_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeOffset_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FePointLight_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FePointLight_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FePointLight_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -283,10 +459,18 @@ instance Attr FePointLight_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FePointLight_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeSpecularLighting_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeSpecularLighting_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeSpecularLighting_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -294,10 +478,18 @@ instance Attr FeSpecularLighting_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeSpecularLighting_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeSpotLight_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeSpotLight_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeSpotLight_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -305,10 +497,18 @@ instance Attr FeSpotLight_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeSpotLight_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeTile_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeTile_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeTile_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -316,10 +516,18 @@ instance Attr FeTile_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeTile_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr FeTurbulence_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr FeTurbulence_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr FeTurbulence_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -327,10 +535,18 @@ instance Attr FeTurbulence_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr FeTurbulence_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Filter_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Filter_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Filter_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -338,10 +554,18 @@ instance Attr Filter_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Filter_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Image_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Image_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Image_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -349,10 +573,18 @@ instance Attr Image_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Image_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Metadata_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Metadata_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Metadata_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -360,10 +592,18 @@ instance Attr Metadata_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Metadata_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Mpath_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Mpath_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Mpath_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -371,10 +611,18 @@ instance Attr Mpath_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Mpath_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr Switch_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr Switch_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr Switch_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -382,10 +630,18 @@ instance Attr Switch_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr Switch_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr View_ XmlBase (NonEmpty.NonEmpty Event.Event  String ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xml:base", value: prop' value })
+instance Attr View_ XmlBase (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "xml:base", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "xml:base", value: prop' value })
 instance Attr View_ XmlBase  String  where
   attr XmlBase value = unsafeAttribute $ This $ pure $
     { key: "xml:base", value: prop' value }
@@ -393,12 +649,24 @@ instance Attr View_ XmlBase (Event.Event  String ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
+instance Attr View_ XmlBase (ST.ST Global.Global  String ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "xml:base", value: prop' value }
+
 instance Attr everything XmlBase (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr XmlBase bothValues = unsafeAttribute $ Both (pure 
     { key: "xml:base", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xml:base", value: unset' })
+instance Attr everything XmlBase (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr XmlBase (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "xml:base", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "xml:base", value: unset' })
 instance Attr everything XmlBase  Unit  where
   attr XmlBase _ = unsafeAttribute $ This $ pure $ { key: "xml:base", value: unset' }
 instance Attr everything XmlBase (Event.Event  Unit ) where
   attr XmlBase eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "xml:base", value: unset' }
+
+instance Attr everything XmlBase (ST.ST Global.Global  Unit ) where
+  attr XmlBase stValue = unsafeAttribute $ This $ stValue <#> \_ ->
     { key: "xml:base", value: unset' }

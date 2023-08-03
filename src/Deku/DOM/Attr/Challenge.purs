@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.Challenge where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -135,6 +139,10 @@ instance Attr A_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr A_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr A_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -142,10 +150,18 @@ instance Attr A_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr A_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Abbr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Abbr_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Abbr_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -153,10 +169,18 @@ instance Attr Abbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Abbr_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Acronym_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Acronym_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Acronym_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -164,10 +188,18 @@ instance Attr Acronym_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Acronym_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Address_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Address_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Address_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -175,10 +207,18 @@ instance Attr Address_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Address_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Applet_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Applet_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Applet_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -186,10 +226,18 @@ instance Attr Applet_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Applet_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Area_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Area_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Area_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -197,10 +245,18 @@ instance Attr Area_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Area_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Article_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Article_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Article_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -208,10 +264,18 @@ instance Attr Article_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Article_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Aside_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Aside_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Aside_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -219,10 +283,18 @@ instance Attr Aside_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Aside_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Audio_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Audio_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Audio_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -230,10 +302,18 @@ instance Attr Audio_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Audio_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr B_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr B_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr B_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -241,10 +321,18 @@ instance Attr B_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr B_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Base_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Base_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Base_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -252,10 +340,18 @@ instance Attr Base_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Base_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Basefont_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Basefont_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Basefont_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -263,10 +359,18 @@ instance Attr Basefont_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Basefont_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Bdi_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Bdi_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Bdi_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -274,10 +378,18 @@ instance Attr Bdi_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Bdi_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Bdo_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Bdo_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Bdo_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -285,10 +397,18 @@ instance Attr Bdo_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Bdo_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Big_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Big_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Big_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -296,10 +416,18 @@ instance Attr Big_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Big_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Blockquote_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Blockquote_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Blockquote_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -307,10 +435,18 @@ instance Attr Blockquote_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Blockquote_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Body_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Body_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Body_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -318,10 +454,18 @@ instance Attr Body_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Body_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Br_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Br_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Br_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -329,10 +473,18 @@ instance Attr Br_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Br_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Button_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Button_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Button_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -340,10 +492,18 @@ instance Attr Button_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Button_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Canvas_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Canvas_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Canvas_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -351,10 +511,18 @@ instance Attr Canvas_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Canvas_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Caption_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Caption_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Caption_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -362,10 +530,18 @@ instance Attr Caption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Caption_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Center_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Center_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Center_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -373,10 +549,18 @@ instance Attr Center_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Center_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Cite_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Cite_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Cite_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -384,10 +568,18 @@ instance Attr Cite_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Cite_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Code_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Code_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Code_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -395,10 +587,18 @@ instance Attr Code_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Code_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Col_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Col_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Col_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -406,10 +606,18 @@ instance Attr Col_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Col_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Colgroup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Colgroup_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Colgroup_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -417,10 +625,18 @@ instance Attr Colgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Colgroup_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Xdata_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Xdata_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Xdata_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -428,10 +644,18 @@ instance Attr Xdata_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Xdata_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Datalist_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Datalist_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Datalist_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -439,10 +663,18 @@ instance Attr Datalist_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Datalist_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dd_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dd_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dd_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -450,10 +682,18 @@ instance Attr Dd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dd_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Del_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Del_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Del_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -461,10 +701,18 @@ instance Attr Del_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Del_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Details_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Details_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Details_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -472,10 +720,18 @@ instance Attr Details_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Details_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dfn_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dfn_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dfn_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -483,10 +739,18 @@ instance Attr Dfn_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dfn_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dialog_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dialog_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dialog_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -494,10 +758,18 @@ instance Attr Dialog_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dialog_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dir_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dir_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dir_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -505,10 +777,18 @@ instance Attr Dir_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dir_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Div_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Div_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Div_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -516,10 +796,18 @@ instance Attr Div_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Div_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dl_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dl_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dl_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -527,10 +815,18 @@ instance Attr Dl_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dl_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Dt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Dt_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dt_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -538,10 +834,18 @@ instance Attr Dt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Dt_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Em_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Em_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Em_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -549,10 +853,18 @@ instance Attr Em_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Em_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Embed_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Embed_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Embed_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -560,10 +872,18 @@ instance Attr Embed_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Embed_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Fieldset_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Fieldset_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Fieldset_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -571,10 +891,18 @@ instance Attr Fieldset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Fieldset_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Figcaption_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Figcaption_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Figcaption_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -582,10 +910,18 @@ instance Attr Figcaption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Figcaption_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Figure_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Figure_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Figure_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -593,10 +929,18 @@ instance Attr Figure_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Figure_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Font_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Font_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Font_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -604,10 +948,18 @@ instance Attr Font_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Font_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Footer_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Footer_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Footer_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -615,10 +967,18 @@ instance Attr Footer_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Footer_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Form_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Form_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Form_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -626,10 +986,18 @@ instance Attr Form_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Form_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Frame_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Frame_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Frame_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -637,10 +1005,18 @@ instance Attr Frame_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Frame_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Frameset_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Frameset_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Frameset_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -648,10 +1024,18 @@ instance Attr Frameset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Frameset_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H1_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H1_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H1_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -659,10 +1043,18 @@ instance Attr H1_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H1_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H2_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H2_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H2_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -670,10 +1062,18 @@ instance Attr H2_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H2_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H3_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H3_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H3_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -681,10 +1081,18 @@ instance Attr H3_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H3_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H4_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H4_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H4_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -692,10 +1100,18 @@ instance Attr H4_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H4_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H5_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H5_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H5_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -703,10 +1119,18 @@ instance Attr H5_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H5_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr H6_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr H6_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H6_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -714,10 +1138,18 @@ instance Attr H6_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr H6_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Head_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Head_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Head_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -725,10 +1157,18 @@ instance Attr Head_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Head_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Header_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Header_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Header_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -736,10 +1176,18 @@ instance Attr Header_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Header_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Hr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Hr_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Hr_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -747,10 +1195,18 @@ instance Attr Hr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Hr_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Html_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Html_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Html_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -758,10 +1214,18 @@ instance Attr Html_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Html_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr I_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr I_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr I_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -769,10 +1233,18 @@ instance Attr I_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr I_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Iframe_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Iframe_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Iframe_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -780,10 +1252,18 @@ instance Attr Iframe_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Iframe_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Img_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Img_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Img_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -791,10 +1271,18 @@ instance Attr Img_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Img_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Input_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Input_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Input_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -802,10 +1290,18 @@ instance Attr Input_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Input_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Ins_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Ins_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ins_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -813,10 +1309,18 @@ instance Attr Ins_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Ins_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Kbd_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Kbd_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Kbd_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -824,10 +1328,18 @@ instance Attr Kbd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Kbd_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Label_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Label_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Label_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -835,10 +1347,18 @@ instance Attr Label_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Label_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Legend_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Legend_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Legend_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -846,10 +1366,18 @@ instance Attr Legend_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Legend_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Li_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Li_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Li_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -857,10 +1385,18 @@ instance Attr Li_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Li_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Link_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Link_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Link_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -868,10 +1404,18 @@ instance Attr Link_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Link_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Main_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Main_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Main_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -879,10 +1423,18 @@ instance Attr Main_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Main_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Map_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Map_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Map_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -890,10 +1442,18 @@ instance Attr Map_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Map_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Mark_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Mark_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Mark_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -901,10 +1461,18 @@ instance Attr Mark_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Mark_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Meta_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Meta_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Meta_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -912,10 +1480,18 @@ instance Attr Meta_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Meta_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Meter_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Meter_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Meter_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -923,10 +1499,18 @@ instance Attr Meter_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Meter_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Nav_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Nav_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Nav_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -934,10 +1518,18 @@ instance Attr Nav_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Nav_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Noframes_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Noframes_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Noframes_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -945,10 +1537,18 @@ instance Attr Noframes_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Noframes_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Noscript_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Noscript_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Noscript_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -956,10 +1556,18 @@ instance Attr Noscript_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Noscript_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Object_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Object_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Object_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -967,10 +1575,18 @@ instance Attr Object_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Object_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Ol_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Ol_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ol_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -978,10 +1594,18 @@ instance Attr Ol_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Ol_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Optgroup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Optgroup_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Optgroup_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -989,10 +1613,18 @@ instance Attr Optgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Optgroup_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Option_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Option_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Option_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1000,10 +1632,18 @@ instance Attr Option_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Option_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Output_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Output_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Output_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1011,10 +1651,18 @@ instance Attr Output_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Output_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr P_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr P_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr P_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1022,10 +1670,18 @@ instance Attr P_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr P_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Param_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Param_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Param_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1033,10 +1689,18 @@ instance Attr Param_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Param_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Picture_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Picture_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Picture_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1044,10 +1708,18 @@ instance Attr Picture_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Picture_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Pre_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Pre_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Pre_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1055,10 +1727,18 @@ instance Attr Pre_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Pre_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Progress_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Progress_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Progress_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1066,10 +1746,18 @@ instance Attr Progress_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Progress_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Q_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Q_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Q_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1077,10 +1765,18 @@ instance Attr Q_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Q_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Rp_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Rp_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Rp_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1088,10 +1784,18 @@ instance Attr Rp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Rp_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Rt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Rt_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Rt_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1099,10 +1803,18 @@ instance Attr Rt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Rt_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Ruby_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Ruby_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ruby_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1110,10 +1822,18 @@ instance Attr Ruby_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Ruby_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr S_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr S_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr S_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1121,10 +1841,18 @@ instance Attr S_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr S_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Samp_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Samp_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Samp_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1132,10 +1860,18 @@ instance Attr Samp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Samp_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Script_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Script_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Script_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1143,10 +1879,18 @@ instance Attr Script_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Script_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Section_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Section_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Section_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1154,10 +1898,18 @@ instance Attr Section_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Section_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Select_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Select_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Select_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1165,10 +1917,18 @@ instance Attr Select_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Select_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Small_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Small_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Small_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1176,10 +1936,18 @@ instance Attr Small_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Small_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Source_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Source_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Source_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1187,10 +1955,18 @@ instance Attr Source_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Source_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Span_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Span_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Span_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1198,10 +1974,18 @@ instance Attr Span_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Span_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Strike_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Strike_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Strike_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1209,10 +1993,18 @@ instance Attr Strike_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Strike_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Strong_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Strong_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Strong_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1220,10 +2012,18 @@ instance Attr Strong_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Strong_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Style_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Style_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Style_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1231,10 +2031,18 @@ instance Attr Style_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Style_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Sub_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Sub_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Sub_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1242,10 +2050,18 @@ instance Attr Sub_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Sub_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Summary_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Summary_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Summary_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1253,10 +2069,18 @@ instance Attr Summary_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Summary_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Sup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Sup_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Sup_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1264,10 +2088,18 @@ instance Attr Sup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Sup_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Svg_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Svg_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Svg_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1275,10 +2107,18 @@ instance Attr Svg_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Svg_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Table_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Table_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Table_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1286,10 +2126,18 @@ instance Attr Table_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Table_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Tbody_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Tbody_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tbody_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1297,10 +2145,18 @@ instance Attr Tbody_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Tbody_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Td_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Td_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Td_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1308,10 +2164,18 @@ instance Attr Td_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Td_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Template_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Template_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Template_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1319,10 +2183,18 @@ instance Attr Template_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Template_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Textarea_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Textarea_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Textarea_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1330,10 +2202,18 @@ instance Attr Textarea_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Textarea_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Tfoot_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Tfoot_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tfoot_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1341,10 +2221,18 @@ instance Attr Tfoot_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Tfoot_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Th_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Th_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Th_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1352,10 +2240,18 @@ instance Attr Th_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Th_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Thead_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Thead_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Thead_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1363,10 +2259,18 @@ instance Attr Thead_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Thead_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Time_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Time_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Time_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1374,10 +2278,18 @@ instance Attr Time_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Time_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Title_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Title_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Title_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1385,10 +2297,18 @@ instance Attr Title_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Title_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Tr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Tr_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tr_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1396,10 +2316,18 @@ instance Attr Tr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Tr_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Track_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Track_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Track_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1407,10 +2335,18 @@ instance Attr Track_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Track_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Tt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Tt_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tt_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1418,10 +2354,18 @@ instance Attr Tt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Tt_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr U_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr U_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr U_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1429,10 +2373,18 @@ instance Attr U_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr U_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Ul_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Ul_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ul_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1440,10 +2392,18 @@ instance Attr Ul_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Ul_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Var_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Var_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Var_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1451,10 +2411,18 @@ instance Attr Var_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Var_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Video_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Video_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Video_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1462,10 +2430,18 @@ instance Attr Video_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Video_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr Wbr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
+instance Attr Wbr_ Challenge (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "challenge", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Wbr_ Challenge  String  where
   attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
@@ -1473,13 +2449,25 @@ instance Attr Wbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "challenge", value: prop' value }
 
+instance Attr Wbr_ Challenge (ST.ST Global.Global  String ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "challenge", value: prop' value }
+
 instance Attr everything Challenge (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Challenge bothValues = unsafeAttribute $ Both (pure 
     { key: "challenge", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "challenge", value: unset' })
+instance Attr everything Challenge (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr Challenge (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "challenge", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "challenge", value: unset' })
 instance Attr everything Challenge  Unit  where
   attr Challenge _ = unsafeAttribute $ This $ pure $
     { key: "challenge", value: unset' }
 instance Attr everything Challenge (Event.Event  Unit ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "challenge", value: unset' }
+
+instance Attr everything Challenge (ST.ST Global.Global  Unit ) where
+  attr Challenge stValue = unsafeAttribute $ This $ stValue <#>
     \_ -> { key: "challenge", value: unset' }

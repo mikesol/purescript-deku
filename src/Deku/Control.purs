@@ -19,9 +19,12 @@ import Prelude
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
+import Control.Monad.ST (ST)
+import Control.Monad.ST.Global (Global)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Foldable (foldl)
+import Data.Functor.Product (Product(..))
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
@@ -298,7 +301,7 @@ portal v' c' =
     )
 
 text_'
-  :: Maybe (String)
+  :: Maybe (ST Global String)
   -> Maybe (Event String)
   -> Nut
 text_' t1 t2 = Nut go'
@@ -324,7 +327,7 @@ text_' t1 t2 = Nut go'
                     ]
                 )
                 parent
-              <> maybe [] (\t -> [ pure $ unsafeSetText di (show me) t ]) t1
+              <> maybe [] (\t -> [ unsafeSetText di (show me) <$> t ]) t1
 
           )
       $ Tuple [ pure $ deleteFromCache { id: show me } ]
@@ -340,10 +343,16 @@ instance Textable (Event String) where
   text = text_' Nothing <<< Just
 
 instance Textable String where
-  text txt = text_' (Just txt) Nothing
+  text txt = text_' (Just (pure txt)) Nothing
 
 instance Textable (NonEmpty Event String) where
-  text (NonEmpty txt e) = text_' (Just txt) (Just e)
+  text (NonEmpty txt e) = text_' (Just (pure txt)) (Just e)
+
+instance Textable (ST Global String) where
+  text txt = text_' (Just txt) Nothing
+
+instance Textable (Product (ST Global) Event String) where
+  text (Product (Tuple txt e)) = text_' (Just txt) (Just e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

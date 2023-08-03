@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.RequiredExtensions where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -37,6 +41,12 @@ instance Attr AnimateTransform_ RequiredExtensions (NonEmpty.NonEmpty Event.Even
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
+instance Attr AnimateTransform_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
 instance Attr AnimateTransform_ RequiredExtensions  String  where
   attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
@@ -44,10 +54,20 @@ instance Attr AnimateTransform_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr AnimateTransform_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Circle_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Circle_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Circle_ RequiredExtensions  String  where
@@ -57,10 +77,20 @@ instance Attr Circle_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Circle_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr ClipPath_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr ClipPath_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr ClipPath_ RequiredExtensions  String  where
@@ -70,10 +100,20 @@ instance Attr ClipPath_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr ClipPath_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Discard_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Discard_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Discard_ RequiredExtensions  String  where
@@ -83,10 +123,20 @@ instance Attr Discard_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Discard_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Ellipse_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Ellipse_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Ellipse_ RequiredExtensions  String  where
@@ -96,10 +146,20 @@ instance Attr Ellipse_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Ellipse_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr ForeignObject_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr ForeignObject_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr ForeignObject_ RequiredExtensions  String  where
@@ -109,10 +169,20 @@ instance Attr ForeignObject_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr ForeignObject_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr G_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr G_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr G_ RequiredExtensions  String  where
@@ -122,10 +192,20 @@ instance Attr G_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr G_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Image_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Image_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Image_ RequiredExtensions  String  where
@@ -135,10 +215,20 @@ instance Attr Image_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Image_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Line_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Line_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Line_ RequiredExtensions  String  where
@@ -148,10 +238,20 @@ instance Attr Line_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Line_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Marker_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Marker_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Marker_ RequiredExtensions  String  where
@@ -161,10 +261,20 @@ instance Attr Marker_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Marker_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Mask_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Mask_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Mask_ RequiredExtensions  String  where
@@ -174,10 +284,20 @@ instance Attr Mask_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Mask_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Path_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Path_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Path_ RequiredExtensions  String  where
@@ -187,10 +307,20 @@ instance Attr Path_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Path_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Pattern_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Pattern_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Pattern_ RequiredExtensions  String  where
@@ -200,10 +330,20 @@ instance Attr Pattern_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Pattern_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Polygon_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Polygon_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Polygon_ RequiredExtensions  String  where
@@ -213,10 +353,20 @@ instance Attr Polygon_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Polygon_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Polyline_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Polyline_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Polyline_ RequiredExtensions  String  where
@@ -226,10 +376,20 @@ instance Attr Polyline_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Polyline_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Rect_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Rect_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Rect_ RequiredExtensions  String  where
@@ -239,10 +399,20 @@ instance Attr Rect_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Rect_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Svg_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Svg_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Svg_ RequiredExtensions  String  where
@@ -252,10 +422,20 @@ instance Attr Svg_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Svg_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Switch_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Switch_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Switch_ RequiredExtensions  String  where
@@ -265,10 +445,20 @@ instance Attr Switch_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Switch_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Text_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Text_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Text_ RequiredExtensions  String  where
@@ -278,10 +468,20 @@ instance Attr Text_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Text_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr TextPath_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr TextPath_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr TextPath_ RequiredExtensions  String  where
@@ -291,10 +491,20 @@ instance Attr TextPath_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr TextPath_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Tspan_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Tspan_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Tspan_ RequiredExtensions  String  where
@@ -304,10 +514,20 @@ instance Attr Tspan_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Tspan_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr Use_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "requiredExtensions", value: prop' value }
+    )
+instance Attr Use_ RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "requiredExtensions", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Use_ RequiredExtensions  String  where
@@ -317,13 +537,25 @@ instance Attr Use_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
     <#> \value -> { key: "requiredExtensions", value: prop' value }
 
+instance Attr Use_ RequiredExtensions (ST.ST Global.Global  String ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
+    <#> \value -> { key: "requiredExtensions", value: prop' value }
+
 instance Attr everything RequiredExtensions (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr RequiredExtensions bothValues = unsafeAttribute $ Both (pure 
     { key: "requiredExtensions", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
+instance Attr everything RequiredExtensions (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr RequiredExtensions (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "requiredExtensions", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
 instance Attr everything RequiredExtensions  Unit  where
   attr RequiredExtensions _ = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: unset' }
 instance Attr everything RequiredExtensions (Event.Event  Unit ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
+    <#> \_ -> { key: "requiredExtensions", value: unset' }
+
+instance Attr everything RequiredExtensions (ST.ST Global.Global  Unit ) where
+  attr RequiredExtensions stValue = unsafeAttribute $ This $ stValue
     <#> \_ -> { key: "requiredExtensions", value: unset' }

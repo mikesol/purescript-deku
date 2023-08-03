@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.Opacity where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -54,6 +58,10 @@ instance Attr Circle_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Circle_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Circle_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -61,10 +69,18 @@ instance Attr Circle_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Circle_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr ClipPath_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr ClipPath_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr ClipPath_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -72,10 +88,18 @@ instance Attr ClipPath_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr ClipPath_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Defs_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Defs_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Defs_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -83,10 +107,18 @@ instance Attr Defs_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Defs_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Ellipse_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Ellipse_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Ellipse_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -94,10 +126,18 @@ instance Attr Ellipse_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Ellipse_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeBlend_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeBlend_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeBlend_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -105,10 +145,18 @@ instance Attr FeBlend_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeBlend_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeColorMatrix_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeColorMatrix_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeColorMatrix_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -116,10 +164,18 @@ instance Attr FeColorMatrix_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeColorMatrix_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeComponentTransfer_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeComponentTransfer_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeComponentTransfer_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -127,10 +183,18 @@ instance Attr FeComponentTransfer_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeComponentTransfer_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeComposite_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeComposite_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeComposite_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -138,10 +202,18 @@ instance Attr FeComposite_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeComposite_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeConvolveMatrix_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeConvolveMatrix_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeConvolveMatrix_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -149,10 +221,18 @@ instance Attr FeConvolveMatrix_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeConvolveMatrix_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeDiffuseLighting_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeDiffuseLighting_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeDiffuseLighting_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -160,10 +240,18 @@ instance Attr FeDiffuseLighting_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeDiffuseLighting_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeDisplacementMap_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeDisplacementMap_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeDisplacementMap_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -171,10 +259,18 @@ instance Attr FeDisplacementMap_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeDisplacementMap_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeFlood_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeFlood_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeFlood_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -182,10 +278,18 @@ instance Attr FeFlood_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeFlood_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeGaussianBlur_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeGaussianBlur_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeGaussianBlur_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -193,10 +297,18 @@ instance Attr FeGaussianBlur_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeGaussianBlur_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeImage_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeImage_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeImage_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -204,10 +316,18 @@ instance Attr FeImage_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeImage_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeMerge_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeMerge_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeMerge_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -215,10 +335,18 @@ instance Attr FeMerge_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeMerge_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeMorphology_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeMorphology_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeMorphology_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -226,10 +354,18 @@ instance Attr FeMorphology_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeMorphology_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeOffset_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeOffset_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeOffset_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -237,10 +373,18 @@ instance Attr FeOffset_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeOffset_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeSpecularLighting_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeSpecularLighting_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeSpecularLighting_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -248,10 +392,18 @@ instance Attr FeSpecularLighting_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeSpecularLighting_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeTile_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeTile_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeTile_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -259,10 +411,18 @@ instance Attr FeTile_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeTile_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr FeTurbulence_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr FeTurbulence_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr FeTurbulence_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -270,10 +430,18 @@ instance Attr FeTurbulence_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr FeTurbulence_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Filter_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Filter_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Filter_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -281,10 +449,18 @@ instance Attr Filter_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Filter_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr ForeignObject_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr ForeignObject_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr ForeignObject_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -292,10 +468,18 @@ instance Attr ForeignObject_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr ForeignObject_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr G_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr G_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr G_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -303,10 +487,18 @@ instance Attr G_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr G_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Image_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Image_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Image_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -314,10 +506,18 @@ instance Attr Image_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Image_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Line_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Line_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Line_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -325,10 +525,18 @@ instance Attr Line_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Line_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr LinearGradient_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr LinearGradient_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr LinearGradient_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -336,10 +544,18 @@ instance Attr LinearGradient_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr LinearGradient_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Marker_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Marker_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Marker_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -347,10 +563,18 @@ instance Attr Marker_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Marker_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Mask_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Mask_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Mask_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -358,10 +582,18 @@ instance Attr Mask_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Mask_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Path_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Path_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Path_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -369,10 +601,18 @@ instance Attr Path_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Path_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Pattern_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Pattern_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Pattern_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -380,10 +620,18 @@ instance Attr Pattern_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Pattern_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Polygon_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Polygon_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Polygon_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -391,10 +639,18 @@ instance Attr Polygon_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Polygon_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Polyline_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Polyline_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Polyline_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -402,10 +658,18 @@ instance Attr Polyline_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Polyline_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr RadialGradient_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr RadialGradient_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr RadialGradient_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -413,10 +677,18 @@ instance Attr RadialGradient_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr RadialGradient_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Rect_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Rect_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Rect_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -424,10 +696,18 @@ instance Attr Rect_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Rect_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Svg_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Svg_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Svg_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -435,10 +715,18 @@ instance Attr Svg_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Svg_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Switch_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Switch_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Switch_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -446,10 +734,18 @@ instance Attr Switch_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Switch_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Symbol_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Symbol_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Symbol_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -457,10 +753,18 @@ instance Attr Symbol_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Symbol_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Text_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Text_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Text_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -468,10 +772,18 @@ instance Attr Text_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Text_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr TextPath_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr TextPath_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr TextPath_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -479,10 +791,18 @@ instance Attr TextPath_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr TextPath_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Tspan_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Tspan_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Tspan_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -490,10 +810,18 @@ instance Attr Tspan_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Tspan_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr Use_ Opacity (NonEmpty.NonEmpty Event.Event  String ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "opacity", value: prop' value })
+instance Attr Use_ Opacity (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "opacity", value: prop' (value) })
+    (Tuple.snd bothValues <#> \value -> { key: "opacity", value: prop' value })
 instance Attr Use_ Opacity  String  where
   attr Opacity value = unsafeAttribute $ This $ pure $
     { key: "opacity", value: prop' value }
@@ -501,12 +829,24 @@ instance Attr Use_ Opacity (Event.Event  String ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
+instance Attr Use_ Opacity (ST.ST Global.Global  String ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "opacity", value: prop' value }
+
 instance Attr everything Opacity (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Opacity bothValues = unsafeAttribute $ Both (pure 
     { key: "opacity", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "opacity", value: unset' })
+instance Attr everything Opacity (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr Opacity (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "opacity", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "opacity", value: unset' })
 instance Attr everything Opacity  Unit  where
   attr Opacity _ = unsafeAttribute $ This $ pure $ { key: "opacity", value: unset' }
 instance Attr everything Opacity (Event.Event  Unit ) where
   attr Opacity eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
+    { key: "opacity", value: unset' }
+
+instance Attr everything Opacity (ST.ST Global.Global  Unit ) where
+  attr Opacity stValue = unsafeAttribute $ This $ stValue <#> \_ ->
     { key: "opacity", value: unset' }

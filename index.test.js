@@ -385,6 +385,22 @@ describe("deku", () => {
     expect($('#myspan').text()).toBe('bar');
   }));
 
+  doTest('useHot works', (f) => f(tests.useHotWorks, () => {
+    const $ = require('jquery');
+    // first, set the label to "bar"
+    $('#setlabel').trigger('click');
+    // then, click a bunch of stuff
+    $('#button0').trigger('click');
+    $('#button1').trigger('click');
+    $('#button2').trigger('click');
+    $('#button3').trigger('click');
+    $('#button4').trigger('click');
+    $('#button5').trigger('click');
+    $('#button6').trigger('click');
+    // as the behavior is hot, we get the most recent value
+    expect($('#myspan').text()).toBe('bar');
+  }));
+
   doTest('useEffect has correct behavior', (f) => f(tests.useEffectWorks, () => {
     const $ = require('jquery');
     expect($('#mydiv').text()).toBe('0');

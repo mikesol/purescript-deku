@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.GlyphOrientationHorizontal where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -34,6 +38,12 @@ instance Attr FeBlend_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
+instance Attr FeBlend_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
 instance Attr FeBlend_ GlyphOrientationHorizontal  String  where
   attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
@@ -42,10 +52,21 @@ instance Attr FeBlend_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeBlend_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeColorMatrix_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal  String  where
@@ -56,10 +77,21 @@ instance Attr FeColorMatrix_ GlyphOrientationHorizontal (Event.Event  String ) w
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeColorMatrix_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal  String  where
@@ -70,10 +102,21 @@ instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (Event.Event  Stri
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeComposite_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeComposite_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeComposite_ GlyphOrientationHorizontal  String  where
@@ -84,10 +127,21 @@ instance Attr FeComposite_ GlyphOrientationHorizontal (Event.Event  String ) whe
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeComposite_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal  String  where
@@ -98,10 +152,21 @@ instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (Event.Event  String 
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal  String  where
@@ -112,10 +177,21 @@ instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (Event.Event  String
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal  String  where
@@ -126,10 +202,21 @@ instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (Event.Event  String
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeFlood_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeFlood_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeFlood_ GlyphOrientationHorizontal  String  where
@@ -140,10 +227,21 @@ instance Attr FeFlood_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeFlood_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal  String  where
@@ -154,10 +252,21 @@ instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (Event.Event  String ) 
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeImage_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeImage_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeImage_ GlyphOrientationHorizontal  String  where
@@ -168,10 +277,21 @@ instance Attr FeImage_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeImage_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeMerge_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeMerge_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeMerge_ GlyphOrientationHorizontal  String  where
@@ -182,10 +302,21 @@ instance Attr FeMerge_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeMerge_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeMorphology_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeMorphology_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeMorphology_ GlyphOrientationHorizontal  String  where
@@ -196,10 +327,21 @@ instance Attr FeMorphology_ GlyphOrientationHorizontal (Event.Event  String ) wh
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeMorphology_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeOffset_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeOffset_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeOffset_ GlyphOrientationHorizontal  String  where
@@ -210,10 +352,21 @@ instance Attr FeOffset_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeOffset_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal  String  where
@@ -224,10 +377,21 @@ instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (Event.Event  Strin
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeTile_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeTile_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeTile_ GlyphOrientationHorizontal  String  where
@@ -238,10 +402,21 @@ instance Attr FeTile_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeTile_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr FeTurbulence_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr FeTurbulence_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeTurbulence_ GlyphOrientationHorizontal  String  where
@@ -252,10 +427,21 @@ instance Attr FeTurbulence_ GlyphOrientationHorizontal (Event.Event  String ) wh
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr FeTurbulence_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Filter_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr Filter_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Filter_ GlyphOrientationHorizontal  String  where
@@ -266,10 +452,21 @@ instance Attr Filter_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr Filter_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Image_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr Image_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Image_ GlyphOrientationHorizontal  String  where
@@ -280,10 +477,21 @@ instance Attr Image_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr Image_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr Switch_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  String ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "glyph-orientation-horizontal", value: prop' value }
+    )
+instance Attr Switch_ GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "glyph-orientation-horizontal", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Switch_ GlyphOrientationHorizontal  String  where
@@ -294,10 +502,21 @@ instance Attr Switch_ GlyphOrientationHorizontal (Event.Event  String ) where
     eventValue <#> \value ->
       { key: "glyph-orientation-horizontal", value: prop' value }
 
+instance Attr Switch_ GlyphOrientationHorizontal (ST.ST Global.Global  String ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \value ->
+      { key: "glyph-orientation-horizontal", value: prop' value }
+
 instance Attr everything GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr GlyphOrientationHorizontal bothValues = unsafeAttribute $ Both (pure 
     { key: "glyph-orientation-horizontal", value: unset' })
     ( NonEmpty.tail bothValues <#> \_ ->
+        { key: "glyph-orientation-horizontal", value: unset' }
+    )
+instance Attr everything GlyphOrientationHorizontal (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr GlyphOrientationHorizontal (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "glyph-orientation-horizontal", value: unset' })
+    ( Tuple.snd bothValues <#> \_ ->
         { key: "glyph-orientation-horizontal", value: unset' }
     )
 instance Attr everything GlyphOrientationHorizontal  Unit  where
@@ -306,3 +525,7 @@ instance Attr everything GlyphOrientationHorizontal  Unit  where
 instance Attr everything GlyphOrientationHorizontal (Event.Event  Unit ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
     eventValue <#> \_ -> { key: "glyph-orientation-horizontal", value: unset' }
+
+instance Attr everything GlyphOrientationHorizontal (ST.ST Global.Global  Unit ) where
+  attr GlyphOrientationHorizontal stValue = unsafeAttribute $ This $
+    stValue <#> \_ -> { key: "glyph-orientation-horizontal", value: unset' }

@@ -20,7 +20,7 @@ import Deku.Control (globalPortal1, portal1, text)
 import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useEffect, useMemoized, useRef, useRefNE, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useEffect, useHot, useMemoized, useRef, useRefNE, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click)
 import Deku.Pursx ((~~))
@@ -141,7 +141,7 @@ sendsToPosition = Deku.do
     , D.span [ id "div1" ] [ text "bar" ]
     , Deku.do
         { value: i } <-
-          useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
+          useDynAtEndWith (map pure [ 0, 1, 2, 3, 4 ]) empty
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         D.span [ id ("dyn" <> show i) ] [ text (show i) ]
     , D.button [ id "pos", click (setPosIdx 1) ]
@@ -156,7 +156,7 @@ sendsToPositionFixed = Deku.do
     , D.span [ id "div1" ] [ text "bar" ]
     , Deku.do
         { value: i } <-
-          useDynAtEndWith [ 0, 1, 2, 3, 4 ] empty
+          useDynAtEndWith (map pure [ 0, 1, 2, 3, 4 ]) empty
             $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         fixed
           [ D.span [ id ("dyn" <> show i <> "a") ]
@@ -178,7 +178,8 @@ insertsAtCorrectPositions = D.div [ id "div0" ]
       -- here, we scramble the order and make sure that the dyns
       -- are inserted in the scrambled order so that they read
       -- 0-1-2-3-4 from top to bottom
-      { value: i } <- useDyn ((Tuple <*> identity) <$> [ 3, 0, 4, 2, 1 ]) empty
+      { value: i } <- useDyn ((\i -> Tuple i (pure i)) <$> [ 3, 0, 4, 2, 1 ])
+        empty
       D.span [ id ("dyn" <> show i) ] [ text (show i) ]
   ]
 
@@ -444,6 +445,31 @@ refToHot = Deku.do
                     (Alt.guard <$> reveal)
                 )
                 text
+            ]
+        ]
+  D.div_
+    [ nest (nest (nest (nest (nest (nest elt))))) 0
+    , D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
+    ]
+
+useHotWorks :: Nut
+useHotWorks = Deku.do
+  setLabel /\ label <- useHot "foo"
+  let
+    nest f n = Deku.do
+      setReveal /\ reveal <- useState'
+      D.div_
+        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
+            [ text "reveal" ]
+        , guard reveal $ f (n + 1)
+        ]
+    elt n = Deku.do
+      setReveal /\ reveal <- useState'
+      D.div_
+        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
+            [ text "reveal" ]
+        , D.span [ id "myspan" ]
+            [ guard reveal $ text label
             ]
         ]
   D.div_

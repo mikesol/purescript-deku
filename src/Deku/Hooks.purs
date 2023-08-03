@@ -13,13 +13,16 @@
 module Deku.Hooks
   ( (<#~>)
   , (<$~>)
+  , class Switcher
+  , class UseEffect
+  , class UseMemoized
+  , useHot
+  , cycle
+  , dynOptions
   , guard
   , guardWith
-  , dynOptions
-  , class Switcher
   , switcher
   , switcherFlipped
-  , cycle
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
@@ -32,8 +35,8 @@ module Deku.Hooks
   , useDynWith
   , useDynWith_
   , useDyn_
+  , useEffect
   , useMailboxed
-  , class UseMemoized
   , useMemoized
   , useMemoized'
   , useRef
@@ -43,8 +46,6 @@ module Deku.Hooks
   , useState
   , useState'
   , useStateWithRef
-  , class UseEffect
-  , useEffect
   ) where
 
 import Prelude
@@ -59,10 +60,12 @@ import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Array as Array
+import Data.Functor.Product (Product(..))
 import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..), tail, (:|))
+import Data.Traversable (sequence, traverse)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
@@ -126,6 +129,16 @@ useState a f = Nut go'
     let Nut nf = f (push /\ NonEmpty a event)
     __internalDekuFlatten nf i di
 
+-- | A hot state hook.
+useHot
+  :: forall a
+   . a
+  -> Hook ((a -> Effect Unit) /\ Product (ST Global) Event a)
+useHot a f = Deku.do
+  push /\ event <- useState'
+  ref <- useRefST a event
+  f (Tuple push (Product (Tuple ref event)))
+
 guard :: forall f. Switcher f => f Boolean -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b
 
@@ -134,7 +147,11 @@ guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
 
-useEffect' :: Maybe (Effect Unit) -> Event (Effect Unit) -> (Unit -> Nut) -> Nut
+useEffect'
+  :: Maybe (ST Global (Effect Unit))
+  -> Event (Effect Unit)
+  -> (Unit -> Nut)
+  -> Nut
 useEffect' mm e f = Nut go'
   where
   go' :: forall payload. NutF payload
@@ -149,7 +166,9 @@ useEffect' mm e f = Nut go'
     pure
       ( Tuple
           ( sub <> maybe empty
-              (pure <<< pure <<< oneOffEffect <<< { effect: _ })
+              ( pure <<< pure <<< oneOffEffect <<< { effect: _ } <<< join <<<
+                  liftST
+              )
               mm
           )
           (Tuple unsub $ merge [ ev, e <#> \effect -> oneOffEffect { effect } ])
@@ -160,7 +179,10 @@ class UseEffect f where
   useEffect :: f (Effect Unit) -> Hook Unit
 
 instance UseEffect (NonEmpty Event) where
-  useEffect (h :| t) = useEffect' (Just h) t
+  useEffect (h :| t) = useEffect' (Just (pure h)) t
+
+instance UseEffect (Product (ST Global) Event) where
+  useEffect (Product (Tuple h t)) = useEffect' (Just h) t
 
 instance UseEffect Event where
   useEffect = useEffect' Nothing
@@ -173,6 +195,11 @@ instance UseMemoized (NonEmpty Event a) where
   useMemoized (h :| t) f = Deku.do
     tn <- useMemoized t
     f (h :| tn)
+
+instance UseMemoized (Product (ST Global) Event a) where
+  useMemoized (Product (Tuple h t)) f = Deku.do
+    tn <- useMemoized t
+    f (Product (Tuple h tn))
 
 instance UseMemoized (Event a) where
   useMemoized e f = Nut go'
@@ -285,7 +312,7 @@ dynOptions = { sendTo: const empty, remove: const empty }
 
 useDyn
   :: forall value
-   . Array (Tuple Int value)
+   . Array (Tuple Int (ST Global value))
   -> Event (Tuple Int value)
   -> Hook
        { value :: value
@@ -296,7 +323,7 @@ useDyn x y = useDynWith x y dynOptions
 
 useDynWith
   :: forall value
-   . Array (Tuple Int value)
+   . Array (Tuple Int (ST Global value))
   -> Event (Tuple Int value)
   -> DynOptions value
   -> Hook
@@ -304,7 +331,7 @@ useDynWith
        , remove :: Effect Unit
        , sendTo :: Int -> Effect Unit
        }
-useDynWith arr e opts f = Nut go'
+useDynWith arr' e opts f = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -327,6 +354,7 @@ useDynWith arr e opts f = Nut go'
             , sendTo: cx.push <<< sendToPos
             }
         )
+    arr <- traverse sequence arr'
     c0 <- create
     c1 <- create
     let
@@ -335,7 +363,7 @@ useDynWith arr e opts f = Nut go'
 
 useDynAtBeginningWith
   :: forall value
-   . Array value
+   . Array (ST Global value)
   -> Event value
   -> DynOptions value
   -> Hook
@@ -344,7 +372,7 @@ useDynAtBeginningWith a e = useDynWith ((0 /\ _) <$> a) ((0 /\ _) <$> e)
 
 useDynAtBeginning
   :: forall value
-   . Array value
+   . Array (ST Global value)
   -> Event value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
@@ -352,7 +380,7 @@ useDynAtBeginning a b = useDynAtBeginningWith a b dynOptions
 
 useDynAtEndWith
   :: forall value
-   . Array value
+   . Array (ST Global value)
   -> Event value
   -> DynOptions value
   -> Hook
@@ -362,7 +390,7 @@ useDynAtEndWith arr e = useDynWith (mapWithIndex Tuple arr)
 
 useDynAtEnd
   :: forall value
-   . Array value
+   . Array (ST Global value)
   -> Event value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
@@ -394,7 +422,22 @@ instance Switcher Event where
 instance Switcher (NonEmpty Event) where
   switcher f (NonEmpty h event) = Deku.do
     ctr <- useMemoized (counter event)
-    { value } <- useDynAtBeginningWith [ Tuple 0 h ] ctr $
+    { value } <- useDynAtBeginningWith [ pure (Tuple 0 h) ] ctr $
+      dynOptions
+        { remove = \(Tuple oldV _) -> filterMap
+            (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+            ctr
+        }
+    f (snd value)
+    where
+    counter = mapAccum fn 1
+      where
+      fn a b = (a + 1) /\ (a /\ b)
+
+instance Switcher (Product (ST Global) Event) where
+  switcher f (Product (Tuple h event)) = Deku.do
+    ctr <- useMemoized (counter event)
+    { value } <- useDynAtBeginningWith [ Tuple 0 <$> h ] ctr $
       dynOptions
         { remove = \(Tuple oldV _) -> filterMap
             (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)

@@ -1,5 +1,9 @@
 module Deku.DOM.Attr.ColorRendering where
 
+import Data.Tuple as Tuple
+import Control.Monad.ST as ST
+import Control.Monad.ST.Global as Global
+import Data.Functor.Product as Product
 import Prelude
 import Data.These (These(..))
 import FRP.Event as Event
@@ -54,6 +58,12 @@ instance Attr Circle_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) wh
     ( NonEmpty.tail bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
+instance Attr Circle_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
 instance Attr Circle_ ColorRendering  String  where
   attr ColorRendering value = unsafeAttribute $ This $ pure $
     { key: "color-rendering", value: prop' value }
@@ -61,10 +71,20 @@ instance Attr Circle_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Circle_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Defs_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Defs_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Defs_ ColorRendering  String  where
@@ -74,10 +94,20 @@ instance Attr Defs_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Defs_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Ellipse_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Ellipse_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Ellipse_ ColorRendering  String  where
@@ -87,10 +117,20 @@ instance Attr Ellipse_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Ellipse_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeBlend_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeBlend_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeBlend_ ColorRendering  String  where
@@ -100,10 +140,20 @@ instance Attr FeBlend_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeBlend_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeColorMatrix_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeColorMatrix_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeColorMatrix_ ColorRendering  String  where
@@ -113,10 +163,20 @@ instance Attr FeColorMatrix_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeColorMatrix_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeComponentTransfer_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeComponentTransfer_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ColorRendering  String  where
@@ -126,10 +186,20 @@ instance Attr FeComponentTransfer_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeComponentTransfer_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeComposite_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeComposite_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeComposite_ ColorRendering  String  where
@@ -139,10 +209,20 @@ instance Attr FeComposite_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeComposite_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeConvolveMatrix_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeConvolveMatrix_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ColorRendering  String  where
@@ -152,10 +232,20 @@ instance Attr FeConvolveMatrix_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeConvolveMatrix_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeDiffuseLighting_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeDiffuseLighting_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ColorRendering  String  where
@@ -165,10 +255,20 @@ instance Attr FeDiffuseLighting_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeDiffuseLighting_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeDisplacementMap_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeDisplacementMap_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ColorRendering  String  where
@@ -178,10 +278,20 @@ instance Attr FeDisplacementMap_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeDisplacementMap_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeFlood_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeFlood_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeFlood_ ColorRendering  String  where
@@ -191,10 +301,20 @@ instance Attr FeFlood_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeFlood_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeGaussianBlur_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeGaussianBlur_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ColorRendering  String  where
@@ -204,10 +324,20 @@ instance Attr FeGaussianBlur_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeGaussianBlur_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeImage_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeImage_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeImage_ ColorRendering  String  where
@@ -217,10 +347,20 @@ instance Attr FeImage_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeImage_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeMerge_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeMerge_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeMerge_ ColorRendering  String  where
@@ -230,10 +370,20 @@ instance Attr FeMerge_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeMerge_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeMorphology_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeMorphology_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeMorphology_ ColorRendering  String  where
@@ -243,10 +393,20 @@ instance Attr FeMorphology_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeMorphology_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeOffset_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeOffset_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeOffset_ ColorRendering  String  where
@@ -256,10 +416,20 @@ instance Attr FeOffset_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeOffset_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeSpecularLighting_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeSpecularLighting_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ColorRendering  String  where
@@ -269,10 +439,20 @@ instance Attr FeSpecularLighting_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeSpecularLighting_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeTile_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeTile_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeTile_ ColorRendering  String  where
@@ -282,10 +462,20 @@ instance Attr FeTile_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeTile_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr FeTurbulence_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr FeTurbulence_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr FeTurbulence_ ColorRendering  String  where
@@ -295,10 +485,20 @@ instance Attr FeTurbulence_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr FeTurbulence_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Filter_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Filter_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Filter_ ColorRendering  String  where
@@ -308,10 +508,20 @@ instance Attr Filter_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Filter_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr ForeignObject_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr ForeignObject_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr ForeignObject_ ColorRendering  String  where
@@ -321,10 +531,20 @@ instance Attr ForeignObject_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr ForeignObject_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr G_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr G_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr G_ ColorRendering  String  where
@@ -334,10 +554,20 @@ instance Attr G_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr G_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Image_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Image_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Image_ ColorRendering  String  where
@@ -347,10 +577,20 @@ instance Attr Image_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Image_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Line_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Line_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Line_ ColorRendering  String  where
@@ -360,10 +600,20 @@ instance Attr Line_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Line_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr LinearGradient_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr LinearGradient_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr LinearGradient_ ColorRendering  String  where
@@ -373,10 +623,20 @@ instance Attr LinearGradient_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr LinearGradient_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Marker_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Marker_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Marker_ ColorRendering  String  where
@@ -386,10 +646,20 @@ instance Attr Marker_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Marker_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Path_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Path_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Path_ ColorRendering  String  where
@@ -399,10 +669,20 @@ instance Attr Path_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Path_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Pattern_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Pattern_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Pattern_ ColorRendering  String  where
@@ -412,10 +692,20 @@ instance Attr Pattern_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Pattern_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Polygon_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Polygon_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Polygon_ ColorRendering  String  where
@@ -425,10 +715,20 @@ instance Attr Polygon_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Polygon_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Polyline_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Polyline_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Polyline_ ColorRendering  String  where
@@ -438,10 +738,20 @@ instance Attr Polyline_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Polyline_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr RadialGradient_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr RadialGradient_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr RadialGradient_ ColorRendering  String  where
@@ -451,10 +761,20 @@ instance Attr RadialGradient_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr RadialGradient_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Rect_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Rect_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Rect_ ColorRendering  String  where
@@ -464,10 +784,20 @@ instance Attr Rect_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Rect_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Svg_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Svg_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Svg_ ColorRendering  String  where
@@ -477,10 +807,20 @@ instance Attr Svg_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Svg_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Switch_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Switch_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Switch_ ColorRendering  String  where
@@ -490,10 +830,20 @@ instance Attr Switch_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Switch_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Symbol_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Symbol_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Symbol_ ColorRendering  String  where
@@ -503,10 +853,20 @@ instance Attr Symbol_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Symbol_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Text_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Text_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Text_ ColorRendering  String  where
@@ -516,10 +876,20 @@ instance Attr Text_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Text_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr TextPath_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr TextPath_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr TextPath_ ColorRendering  String  where
@@ -529,10 +899,20 @@ instance Attr TextPath_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr TextPath_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Tspan_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Tspan_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Tspan_ ColorRendering  String  where
@@ -542,10 +922,20 @@ instance Attr Tspan_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Tspan_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr Use_ ColorRendering (NonEmpty.NonEmpty Event.Event  String ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: prop' (NonEmpty.head bothValues) })
     ( NonEmpty.tail bothValues <#> \value ->
+        { key: "color-rendering", value: prop' value }
+    )
+instance Attr Use_ ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+    { key: "color-rendering", value: prop' (value) })
+    ( Tuple.snd bothValues <#> \value ->
         { key: "color-rendering", value: prop' value }
     )
 instance Attr Use_ ColorRendering  String  where
@@ -555,13 +945,25 @@ instance Attr Use_ ColorRendering (Event.Event  String ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
     \value -> { key: "color-rendering", value: prop' value }
 
+instance Attr Use_ ColorRendering (ST.ST Global.Global  String ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
+    \value -> { key: "color-rendering", value: prop' value }
+
 instance Attr everything ColorRendering (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr ColorRendering bothValues = unsafeAttribute $ Both (pure 
     { key: "color-rendering", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "color-rendering", value: unset' })
+instance Attr everything ColorRendering (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
+  attr ColorRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+    { key: "color-rendering", value: unset' })
+    (Tuple.snd bothValues <#> \_ -> { key: "color-rendering", value: unset' })
 instance Attr everything ColorRendering  Unit  where
   attr ColorRendering _ = unsafeAttribute $ This $ pure $
     { key: "color-rendering", value: unset' }
 instance Attr everything ColorRendering (Event.Event  Unit ) where
   attr ColorRendering eventValue = unsafeAttribute $ That $ eventValue <#>
+    \_ -> { key: "color-rendering", value: unset' }
+
+instance Attr everything ColorRendering (ST.ST Global.Global  Unit ) where
+  attr ColorRendering stValue = unsafeAttribute $ This $ stValue <#>
     \_ -> { key: "color-rendering", value: unset' }
