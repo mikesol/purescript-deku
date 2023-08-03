@@ -9,7 +9,7 @@ import Data.Array ((..))
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate)
 import Data.Maybe (Maybe(..))
-import Data.NonEmpty ((:|))
+import Data.NonEmpty (tail, (:|))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute ((:=))
@@ -18,7 +18,7 @@ import Deku.Control (globalPortal1, portal1, text)
 import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useMemoized, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useEffect, useMemoized, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click)
 import Deku.Pursx ((~~))
@@ -403,6 +403,21 @@ unsetUnsets = Deku.do
 emptyTextIsSet :: Nut
 emptyTextIsSet = text (empty :: Event String)
 
+useEffectWorks :: Nut
+useEffectWorks = Deku.do
+  let startsAt = 0
+  setCounter /\ counter <- useState startsAt
+  let filt i = i `mod` 4 == 1
+  useEffect $ filter filt (tail counter) <#> setCounter <<< add 1
+  D.div_
+    [ D.button
+        [ click $ counter <#> add 1 >>> setCounter
+        , id "counter"
+        ]
+        [ text "Increment" ]
+    , D.div [ id "mydiv" ] [ text (show <$> counter) ]
+    ]
+
 useRefWorks :: Nut
 useRefWorks = Deku.do
   let startsAt = 0
@@ -428,8 +443,8 @@ useRefWorks = Deku.do
         )
     ]
 
-useEffectWorks :: Nut
-useEffectWorks = Deku.do
+useEffectWorksWithRef :: Nut
+useEffectWorksWithRef = Deku.do
   let startsAt = 0
   setCounter /\ counter <- useState'
   let counter' = counter <#> \i -> if i `mod` 4 == 1 then i + 1 else i

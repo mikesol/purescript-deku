@@ -10,6 +10,7 @@ module Deku.Core
   , DOMInterpret(..)
   , DekuExtra
   , DeleteFromCache
+  , OneOffEffect
   , DisconnectElement
   , GiveNewParent
   , MakeElement
@@ -59,6 +60,7 @@ import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb)
+import Effect (Effect)
 import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
@@ -215,6 +217,8 @@ type UnsetAttribute =
   , key :: String
   }
 
+type OneOffEffect = { effect :: Effect Unit }
+
 -- | Type used by Deku backends to set an attribute. For internal use only unless you're writing a custom backend.
 type SetProp =
   { id :: String
@@ -273,8 +277,9 @@ newtype DOMInterpret payload = DOMInterpret
   { ids :: ST Global Int
   , deferPayload :: List Int -> payload -> payload
   , forcePayload :: List Int -> payload
-  , associateWithUnsubscribe :: AssociateWithUnsubscribe -> payload
   , redecorateDeferredPayload :: List Int -> payload -> payload
+  , associateWithUnsubscribe :: AssociateWithUnsubscribe -> payload
+  , oneOffEffect :: OneOffEffect -> payload
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , makeDynBeacon :: MakeDynBeacon -> payload

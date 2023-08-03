@@ -242,6 +242,7 @@ fullDOMInterpret seed deferredCache executor =
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
       , redecorateDeferredPayload: redecorateDeferredPayloadE
       , deferPayload: deferPayloadE deferredCache
+      , oneOffEffect: execute \{ effect } _ -> effect
       , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $ makeElement_ runOnJust false
       , makeDynBeacon: execute $ makeDynBeacon_ runOnJust false
@@ -470,6 +471,7 @@ ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
   , associateWithUnsubscribe: execute \_ _ -> pure unit
   , deferPayload: deferPayloadE deferredCache
   , redecorateDeferredPayload: redecorateDeferredPayloadE
+  , oneOffEffect: execute \_ _ -> pure unit
   , forcePayload: execute $ forcePayloadE deferredCache executor
   , makeElement: execute ssrMakeElement
   , attributeParent: execute \_ _ -> pure unit
@@ -522,6 +524,7 @@ hydratingDOMInterpret seed deferredCache executor =
       , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
       , redecorateDeferredPayload: redecorateDeferredPayloadE
       , deferPayload: deferPayloadE deferredCache
+      , oneOffEffect: execute \{ effect } _ -> effect
       , forcePayload: execute $ forcePayloadE deferredCache executor
       , makeElement: execute $ makeElement_ runOnJust true
       , makeDynBeacon: execute $ makeDynBeacon_ runOnJust true

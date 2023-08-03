@@ -41,6 +41,8 @@ module Deku.Hooks
   , useState
   , useState'
   , useStateWithRef
+  , class UseEffect
+  , useEffect
   ) where
 
 import Prelude
@@ -54,7 +56,7 @@ import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Array as Array
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..), tail, (:|))
 import Data.Tuple (Tuple(..), snd)
@@ -127,6 +129,33 @@ guardWith :: forall f a. Switcher f => f (Maybe a) -> (a -> Nut) -> Nut
 guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
+
+useEffect' :: Maybe (Effect Unit) -> Event (Effect Unit) -> (Unit -> Nut) -> Nut
+useEffect' mm e f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di@(DOMInterpret { oneOffEffect }) = do
+    let Nut nf = f unit
+    Tuple sub (Tuple unsub ev) <- __internalDekuFlatten nf i di
+    pure
+      ( Tuple (sub <> maybe empty (pure <<< oneOffEffect <<< { effect: _ }) mm)
+          (Tuple unsub $ merge [ ev, e <#> \effect -> oneOffEffect { effect } ])
+      )
+
+class UseEffect f where
+  -- | A hook to work with effects.
+  useEffect :: f (Effect Unit) -> Hook Unit
+
+instance UseEffect (NonEmpty Event) where
+  useEffect (h :| t) = useEffect' (Just h) t
+
+instance UseEffect Event where
+  useEffect = useEffect' Nothing
 
 class UseMemoized a where
   -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.

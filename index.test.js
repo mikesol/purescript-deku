@@ -369,8 +369,21 @@ describe("deku", () => {
     })
   );
 
-  doTest("useEffect has correct behavior", (f) =>
-    f(tests.useEffectWorks, () => {
+  doTest('useEffect has correct behavior', (f) => f(tests.useEffectWorks, () => {
+    const $ = require('jquery');
+    expect($('#mydiv').text()).toBe('0');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('2');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('3');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('4');
+    $('#counter').trigger('click');
+    expect($('#mydiv').text()).toBe('6');
+  }));
+
+  doTest("useEffect with a ref has correct behavior", (f) =>
+    f(tests.useEffectWorksWithRef, () => {
       const $ = require("jquery");
       expect($("#mydiv").text()).toBe("0");
       $("#counter").trigger("click");
