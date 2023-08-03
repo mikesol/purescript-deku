@@ -14,6 +14,7 @@ module Deku.Hooks
   ( (<#~>)
   , (<$~>)
   , guard
+  , guardWith
   , dynOptions
   , class Switcher
   , switcher
@@ -120,6 +121,11 @@ useState a f = Nut go'
 
 guard :: forall f. Switcher f => f Boolean -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b
+
+guardWith :: forall f a. Switcher f => f (Maybe a) -> (a -> Nut) -> Nut
+guardWith m f = m <#~> case _ of
+  Just x -> f x
+  Nothing -> mempty
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
 useMemoized
