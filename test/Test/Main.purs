@@ -2,12 +2,14 @@ module Test.Main where
 
 import Prelude
 
+import Control.Alternative as Alt
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate)
+import Data.Functor (voidRight)
 import Data.Maybe (Maybe(..))
 import Data.NonEmpty (tail, (:|))
 import Data.Tuple (Tuple(..), snd)
@@ -18,12 +20,13 @@ import Deku.Control (globalPortal1, portal1, text)
 import Deku.Core (Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useEffect, useMemoized, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning_, useDynAtEndWith, useDynAtEnd_, useEffect, useMemoized, useRef, useRefNE, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
+import FRP.Behavior (behavior, sampleBy)
 import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
@@ -416,6 +419,36 @@ useEffectWorks = Deku.do
         ]
         [ text "Increment" ]
     , D.div [ id "mydiv" ] [ text (show <$> counter) ]
+    ]
+
+refToHot :: Nut
+refToHot = Deku.do
+  setLabel /\ label <- useState "foo"
+  cref <- useRefNE label
+  let
+    nest f n = Deku.do
+      setReveal /\ reveal <- useState'
+      D.div_
+        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
+            [ text "reveal" ]
+        , guard reveal $ f (n + 1)
+        ]
+    elt n = Deku.do
+      setReveal /\ reveal <- useState'
+      D.div_
+        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
+            [ text "reveal" ]
+        , D.span [ id "myspan" ]
+            [ guardWith
+                ( sampleBy voidRight (behavior $ pure $ Tuple mempty cref)
+                    (Alt.guard <$> reveal)
+                )
+                text
+            ]
+        ]
+  D.div_
+    [ nest (nest (nest (nest (nest (nest elt))))) 0
+    , D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
     ]
 
 useRefWorks :: Nut
