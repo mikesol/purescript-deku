@@ -15,7 +15,7 @@ instance Attr Script_ Defer (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "defer", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "defer", value: prop' value })
 instance Attr Script_ Defer  String  where
-  attr Defer value = unsafeAttribute $ This
+  attr Defer value = unsafeAttribute $ This $ pure $
     { key: "defer", value: prop' value }
 instance Attr Script_ Defer (Event.Event  String ) where
   attr Defer eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Defer (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Defer bothValues = unsafeAttribute $ Both { key: "defer", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "defer", value: unset' })
 instance Attr everything Defer  Unit  where
-  attr Defer _ = unsafeAttribute $ This { key: "defer", value: unset' }
+  attr Defer _ = unsafeAttribute $ This $ pure $ { key: "defer", value: unset' }
 instance Attr everything Defer (Event.Event  Unit ) where
   attr Defer eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "defer", value: unset' }

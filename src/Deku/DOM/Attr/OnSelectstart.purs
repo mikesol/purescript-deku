@@ -15,7 +15,7 @@ instance Attr anything OnSelectstart (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "selectstart", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "selectstart", value: cb' value })
 instance Attr anything OnSelectstart  Cb  where
-  attr OnSelectstart value = unsafeAttribute $ This
+  attr OnSelectstart value = unsafeAttribute $ This $ pure $
     { key: "selectstart", value: cb' value }
 instance Attr anything OnSelectstart (Event.Event  Cb ) where
   attr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnSelectstart (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "selectstart", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSelectstart  (Effect Unit)  where
-  attr OnSelectstart value = unsafeAttribute $ This
+  attr OnSelectstart value = unsafeAttribute $ This $ pure $
     { key: "selectstart", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnSelectstart (Event.Event  (Effect Unit) ) where
   attr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnSelectstart (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "selectstart", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSelectstart  (Effect Boolean)  where
-  attr OnSelectstart value = unsafeAttribute $ This
+  attr OnSelectstart value = unsafeAttribute $ This $ pure $
     { key: "selectstart", value: cb' (Cb (const value)) }
 instance Attr anything OnSelectstart (Event.Event  (Effect Boolean) ) where
   attr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnSelectstart (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "selectstart", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "selectstart", value: unset' })
 instance Attr everything OnSelectstart  Unit  where
-  attr OnSelectstart _ = unsafeAttribute $ This
+  attr OnSelectstart _ = unsafeAttribute $ This $ pure $
     { key: "selectstart", value: unset' }
 instance Attr everything OnSelectstart (Event.Event  Unit ) where
   attr OnSelectstart eventValue = unsafeAttribute $ That $ eventValue <#>

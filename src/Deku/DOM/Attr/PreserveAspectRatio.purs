@@ -23,7 +23,7 @@ instance Attr FeImage_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  Strin
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr FeImage_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr FeImage_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -36,7 +36,7 @@ instance Attr Image_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  String 
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr Image_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr Image_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -49,7 +49,7 @@ instance Attr Marker_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  String
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr Marker_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr Marker_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -62,7 +62,7 @@ instance Attr Pattern_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  Strin
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr Pattern_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr Pattern_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -75,7 +75,7 @@ instance Attr Svg_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr Svg_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr Svg_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -88,7 +88,7 @@ instance Attr Symbol_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  String
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr Symbol_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr Symbol_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -101,7 +101,7 @@ instance Attr View_ PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  String )
         { key: "preserveAspectRatio", value: prop' value }
     )
 instance Attr View_ PreserveAspectRatio  String  where
-  attr PreserveAspectRatio value = unsafeAttribute $ This
+  attr PreserveAspectRatio value = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: prop' value }
 instance Attr View_ PreserveAspectRatio (Event.Event  String ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $
@@ -112,7 +112,7 @@ instance Attr everything PreserveAspectRatio (NonEmpty.NonEmpty Event.Event  Uni
     { key: "preserveAspectRatio", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "preserveAspectRatio", value: unset' })
 instance Attr everything PreserveAspectRatio  Unit  where
-  attr PreserveAspectRatio _ = unsafeAttribute $ This
+  attr PreserveAspectRatio _ = unsafeAttribute $ This $ pure $
     { key: "preserveAspectRatio", value: unset' }
 instance Attr everything PreserveAspectRatio (Event.Event  Unit ) where
   attr PreserveAspectRatio eventValue = unsafeAttribute $ That $

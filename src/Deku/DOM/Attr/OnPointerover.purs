@@ -15,7 +15,7 @@ instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointerover", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerover", value: cb' value })
 instance Attr anything OnPointerover  Cb  where
-  attr OnPointerover value = unsafeAttribute $ This
+  attr OnPointerover value = unsafeAttribute $ This $ pure $
     { key: "pointerover", value: cb' value }
 instance Attr anything OnPointerover (Event.Event  Cb ) where
   attr OnPointerover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "pointerover", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerover  (Effect Unit)  where
-  attr OnPointerover value = unsafeAttribute $ This
+  attr OnPointerover value = unsafeAttribute $ This $ pure $
     { key: "pointerover", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerover (Event.Event  (Effect Unit) ) where
   attr OnPointerover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPointerover (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "pointerover", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerover  (Effect Boolean)  where
-  attr OnPointerover value = unsafeAttribute $ This
+  attr OnPointerover value = unsafeAttribute $ This $ pure $
     { key: "pointerover", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerover (Event.Event  (Effect Boolean) ) where
   attr OnPointerover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPointerover (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "pointerover", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerover", value: unset' })
 instance Attr everything OnPointerover  Unit  where
-  attr OnPointerover _ = unsafeAttribute $ This
+  attr OnPointerover _ = unsafeAttribute $ This $ pure $
     { key: "pointerover", value: unset' }
 instance Attr everything OnPointerover (Event.Event  Unit ) where
   attr OnPointerover eventValue = unsafeAttribute $ That $ eventValue <#>

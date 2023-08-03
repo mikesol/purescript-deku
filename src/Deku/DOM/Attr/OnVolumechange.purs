@@ -15,7 +15,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "volumechange", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "volumechange", value: cb' value })
 instance Attr anything OnVolumechange  Cb  where
-  attr OnVolumechange value = unsafeAttribute $ This
+  attr OnVolumechange value = unsafeAttribute $ This $ pure $
     { key: "volumechange", value: cb' value }
 instance Attr anything OnVolumechange (Event.Event  Cb ) where
   attr OnVolumechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Un
         { key: "volumechange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnVolumechange  (Effect Unit)  where
-  attr OnVolumechange value = unsafeAttribute $ This
+  attr OnVolumechange value = unsafeAttribute $ This $ pure $
     { key: "volumechange", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnVolumechange (Event.Event  (Effect Unit) ) where
   attr OnVolumechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Bo
         { key: "volumechange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnVolumechange  (Effect Boolean)  where
-  attr OnVolumechange value = unsafeAttribute $ This
+  attr OnVolumechange value = unsafeAttribute $ This $ pure $
     { key: "volumechange", value: cb' (Cb (const value)) }
 instance Attr anything OnVolumechange (Event.Event  (Effect Boolean) ) where
   attr OnVolumechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnVolumechange (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "volumechange", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "volumechange", value: unset' })
 instance Attr everything OnVolumechange  Unit  where
-  attr OnVolumechange _ = unsafeAttribute $ This
+  attr OnVolumechange _ = unsafeAttribute $ This $ pure $
     { key: "volumechange", value: unset' }
 instance Attr everything OnVolumechange (Event.Event  Unit ) where
   attr OnVolumechange eventValue = unsafeAttribute $ That $ eventValue <#>

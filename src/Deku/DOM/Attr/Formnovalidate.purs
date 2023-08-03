@@ -16,7 +16,7 @@ instance Attr Button_ Formnovalidate (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
 instance Attr Button_ Formnovalidate  String  where
-  attr Formnovalidate value = unsafeAttribute $ This
+  attr Formnovalidate value = unsafeAttribute $ This $ pure $
     { key: "formnovalidate", value: prop' value }
 instance Attr Button_ Formnovalidate (Event.Event  String ) where
   attr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Input_ Formnovalidate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "formnovalidate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "formnovalidate", value: prop' value })
 instance Attr Input_ Formnovalidate  String  where
-  attr Formnovalidate value = unsafeAttribute $ This
+  attr Formnovalidate value = unsafeAttribute $ This $ pure $
     { key: "formnovalidate", value: prop' value }
 instance Attr Input_ Formnovalidate (Event.Event  String ) where
   attr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Formnovalidate (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "formnovalidate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "formnovalidate", value: unset' })
 instance Attr everything Formnovalidate  Unit  where
-  attr Formnovalidate _ = unsafeAttribute $ This
+  attr Formnovalidate _ = unsafeAttribute $ This $ pure $
     { key: "formnovalidate", value: unset' }
 instance Attr everything Formnovalidate (Event.Event  Unit ) where
   attr Formnovalidate eventValue = unsafeAttribute $ That $ eventValue <#>

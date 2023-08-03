@@ -55,7 +55,7 @@ instance Attr Circle_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Circle_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Circle_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -66,7 +66,7 @@ instance Attr ClipPath_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr ClipPath_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr ClipPath_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -77,7 +77,7 @@ instance Attr Defs_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Defs_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Defs_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -88,7 +88,7 @@ instance Attr Ellipse_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Ellipse_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Ellipse_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -99,7 +99,7 @@ instance Attr FeBlend_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeBlend_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeBlend_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -110,7 +110,7 @@ instance Attr FeColorMatrix_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeColorMatrix_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeColorMatrix_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -121,7 +121,7 @@ instance Attr FeComponentTransfer_ Mask (NonEmpty.NonEmpty Event.Event  String )
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeComponentTransfer_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeComponentTransfer_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -132,7 +132,7 @@ instance Attr FeComposite_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeComposite_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeComposite_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -143,7 +143,7 @@ instance Attr FeConvolveMatrix_ Mask (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeConvolveMatrix_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeConvolveMatrix_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -154,7 +154,7 @@ instance Attr FeDiffuseLighting_ Mask (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeDiffuseLighting_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeDiffuseLighting_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -165,7 +165,7 @@ instance Attr FeDisplacementMap_ Mask (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeDisplacementMap_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeDisplacementMap_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -176,7 +176,7 @@ instance Attr FeFlood_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeFlood_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeFlood_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -187,7 +187,7 @@ instance Attr FeGaussianBlur_ Mask (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeGaussianBlur_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeGaussianBlur_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -198,7 +198,7 @@ instance Attr FeImage_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeImage_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeImage_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -209,7 +209,7 @@ instance Attr FeMerge_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeMerge_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeMerge_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -220,7 +220,7 @@ instance Attr FeMorphology_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeMorphology_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeMorphology_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -231,7 +231,7 @@ instance Attr FeOffset_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeOffset_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeOffset_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -242,7 +242,7 @@ instance Attr FeSpecularLighting_ Mask (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeSpecularLighting_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeSpecularLighting_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -253,7 +253,7 @@ instance Attr FeTile_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeTile_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeTile_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -264,7 +264,7 @@ instance Attr FeTurbulence_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr FeTurbulence_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr FeTurbulence_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -275,7 +275,7 @@ instance Attr Filter_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Filter_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Filter_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -286,7 +286,7 @@ instance Attr ForeignObject_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr ForeignObject_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr ForeignObject_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -297,7 +297,7 @@ instance Attr G_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr G_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr G_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -308,7 +308,7 @@ instance Attr Image_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Image_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Image_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -319,7 +319,7 @@ instance Attr Line_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Line_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Line_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -330,7 +330,7 @@ instance Attr LinearGradient_ Mask (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr LinearGradient_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr LinearGradient_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -341,7 +341,7 @@ instance Attr Marker_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Marker_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Marker_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -352,7 +352,7 @@ instance Attr Mask_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Mask_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Mask_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -363,7 +363,7 @@ instance Attr Path_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Path_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Path_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -374,7 +374,7 @@ instance Attr Pattern_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Pattern_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Pattern_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -385,7 +385,7 @@ instance Attr Polygon_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Polygon_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Polygon_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -396,7 +396,7 @@ instance Attr Polyline_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Polyline_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Polyline_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -407,7 +407,7 @@ instance Attr RadialGradient_ Mask (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr RadialGradient_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr RadialGradient_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -418,7 +418,7 @@ instance Attr Rect_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Rect_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Rect_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -429,7 +429,7 @@ instance Attr Svg_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Svg_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Svg_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -440,7 +440,7 @@ instance Attr Switch_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Switch_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Switch_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -451,7 +451,7 @@ instance Attr Symbol_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Symbol_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Symbol_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -462,7 +462,7 @@ instance Attr Text_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Text_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Text_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -473,7 +473,7 @@ instance Attr TextPath_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr TextPath_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr TextPath_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -484,7 +484,7 @@ instance Attr Tspan_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Tspan_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Tspan_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -495,7 +495,7 @@ instance Attr Use_ Mask (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "mask", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mask", value: prop' value })
 instance Attr Use_ Mask  String  where
-  attr Mask value = unsafeAttribute $ This
+  attr Mask value = unsafeAttribute $ This $ pure $
     { key: "mask", value: prop' value }
 instance Attr Use_ Mask (Event.Event  String ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -505,7 +505,7 @@ instance Attr everything Mask (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Mask bothValues = unsafeAttribute $ Both { key: "mask", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mask", value: unset' })
 instance Attr everything Mask  Unit  where
-  attr Mask _ = unsafeAttribute $ This { key: "mask", value: unset' }
+  attr Mask _ = unsafeAttribute $ This $ pure $ { key: "mask", value: unset' }
 instance Attr everything Mask (Event.Event  Unit ) where
   attr Mask eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "mask", value: unset' }

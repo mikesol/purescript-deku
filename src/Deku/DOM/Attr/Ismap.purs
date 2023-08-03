@@ -15,7 +15,7 @@ instance Attr Img_ Ismap (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "ismap", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "ismap", value: prop' value })
 instance Attr Img_ Ismap  String  where
-  attr Ismap value = unsafeAttribute $ This
+  attr Ismap value = unsafeAttribute $ This $ pure $
     { key: "ismap", value: prop' value }
 instance Attr Img_ Ismap (Event.Event  String ) where
   attr Ismap eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Ismap (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Ismap bothValues = unsafeAttribute $ Both { key: "ismap", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "ismap", value: unset' })
 instance Attr everything Ismap  Unit  where
-  attr Ismap _ = unsafeAttribute $ This { key: "ismap", value: unset' }
+  attr Ismap _ = unsafeAttribute $ This $ pure $ { key: "ismap", value: unset' }
 instance Attr everything Ismap (Event.Event  Unit ) where
   attr Ismap eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "ismap", value: unset' }

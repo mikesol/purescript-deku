@@ -15,7 +15,7 @@ instance Attr FeDisplacementMap_ Scale (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "scale", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "scale", value: prop' value })
 instance Attr FeDisplacementMap_ Scale  String  where
-  attr Scale value = unsafeAttribute $ This
+  attr Scale value = unsafeAttribute $ This $ pure $
     { key: "scale", value: prop' value }
 instance Attr FeDisplacementMap_ Scale (Event.Event  String ) where
   attr Scale eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Scale (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Scale bothValues = unsafeAttribute $ Both { key: "scale", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "scale", value: unset' })
 instance Attr everything Scale  Unit  where
-  attr Scale _ = unsafeAttribute $ This { key: "scale", value: unset' }
+  attr Scale _ = unsafeAttribute $ This $ pure $ { key: "scale", value: unset' }
 instance Attr everything Scale (Event.Event  Unit ) where
   attr Scale eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "scale", value: unset' }

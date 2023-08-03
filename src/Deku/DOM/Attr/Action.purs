@@ -15,7 +15,7 @@ instance Attr Form_ Action (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "action", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "action", value: prop' value })
 instance Attr Form_ Action  String  where
-  attr Action value = unsafeAttribute $ This
+  attr Action value = unsafeAttribute $ This $ pure $
     { key: "action", value: prop' value }
 instance Attr Form_ Action (Event.Event  String ) where
   attr Action eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Action (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "action", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "action", value: unset' })
 instance Attr everything Action  Unit  where
-  attr Action _ = unsafeAttribute $ This { key: "action", value: unset' }
+  attr Action _ = unsafeAttribute $ This $ pure $ { key: "action", value: unset' }
 instance Attr everything Action (Event.Event  Unit ) where
   attr Action eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "action", value: unset' }

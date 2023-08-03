@@ -15,7 +15,7 @@ instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragenter", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dragenter", value: cb' value })
 instance Attr anything OnDragenter  Cb  where
-  attr OnDragenter value = unsafeAttribute $ This
+  attr OnDragenter value = unsafeAttribute $ This $ pure $
     { key: "dragenter", value: cb' value }
 instance Attr anything OnDragenter (Event.Event  Cb ) where
   attr OnDragenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "dragenter", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragenter  (Effect Unit)  where
-  attr OnDragenter value = unsafeAttribute $ This
+  attr OnDragenter value = unsafeAttribute $ This $ pure $
     { key: "dragenter", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragenter (Event.Event  (Effect Unit) ) where
   attr OnDragenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDragenter (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "dragenter", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragenter  (Effect Boolean)  where
-  attr OnDragenter value = unsafeAttribute $ This
+  attr OnDragenter value = unsafeAttribute $ This $ pure $
     { key: "dragenter", value: cb' (Cb (const value)) }
 instance Attr anything OnDragenter (Event.Event  (Effect Boolean) ) where
   attr OnDragenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDragenter (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "dragenter", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragenter", value: unset' })
 instance Attr everything OnDragenter  Unit  where
-  attr OnDragenter _ = unsafeAttribute $ This
+  attr OnDragenter _ = unsafeAttribute $ This $ pure $
     { key: "dragenter", value: unset' }
 instance Attr everything OnDragenter (Event.Event  Unit ) where
   attr OnDragenter eventValue = unsafeAttribute $ That $ eventValue <#>

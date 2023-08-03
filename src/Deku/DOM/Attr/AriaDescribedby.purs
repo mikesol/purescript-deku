@@ -33,7 +33,7 @@ instance Attr Circle_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Circle_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Circle_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -46,7 +46,7 @@ instance Attr Ellipse_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Ellipse_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Ellipse_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -59,7 +59,7 @@ instance Attr ForeignObject_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr ForeignObject_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr ForeignObject_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -72,7 +72,7 @@ instance Attr G_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr G_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr G_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -85,7 +85,7 @@ instance Attr Line_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Line_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Line_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -98,7 +98,7 @@ instance Attr Marker_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Marker_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Marker_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -111,7 +111,7 @@ instance Attr Path_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Path_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Path_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -124,7 +124,7 @@ instance Attr Polygon_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Polygon_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Polygon_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -137,7 +137,7 @@ instance Attr Polyline_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Polyline_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Polyline_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -150,7 +150,7 @@ instance Attr Rect_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Rect_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Rect_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -163,7 +163,7 @@ instance Attr Svg_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Svg_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Svg_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -176,7 +176,7 @@ instance Attr Symbol_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Symbol_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Symbol_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -189,7 +189,7 @@ instance Attr Text_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Text_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Text_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -202,7 +202,7 @@ instance Attr TextPath_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr TextPath_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr TextPath_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -215,7 +215,7 @@ instance Attr Tspan_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Tspan_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Tspan_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -228,7 +228,7 @@ instance Attr Use_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr Use_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr Use_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -241,7 +241,7 @@ instance Attr View_ AriaDescribedby (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-describedby", value: prop' value }
     )
 instance Attr View_ AriaDescribedby  String  where
-  attr AriaDescribedby value = unsafeAttribute $ This
+  attr AriaDescribedby value = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: prop' value }
 instance Attr View_ AriaDescribedby (Event.Event  String ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue
@@ -252,7 +252,7 @@ instance Attr everything AriaDescribedby (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "aria-describedby", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-describedby", value: unset' })
 instance Attr everything AriaDescribedby  Unit  where
-  attr AriaDescribedby _ = unsafeAttribute $ This
+  attr AriaDescribedby _ = unsafeAttribute $ This $ pure $
     { key: "aria-describedby", value: unset' }
 instance Attr everything AriaDescribedby (Event.Event  Unit ) where
   attr AriaDescribedby eventValue = unsafeAttribute $ That $ eventValue

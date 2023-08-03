@@ -15,7 +15,7 @@ instance Attr anything OnDurationchange (NonEmpty.NonEmpty Event.Event  Cb ) whe
     { key: "durationchange", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "durationchange", value: cb' value })
 instance Attr anything OnDurationchange  Cb  where
-  attr OnDurationchange value = unsafeAttribute $ This
+  attr OnDurationchange value = unsafeAttribute $ This $ pure $
     { key: "durationchange", value: cb' value }
 instance Attr anything OnDurationchange (Event.Event  Cb ) where
   attr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue
@@ -30,7 +30,7 @@ instance Attr anything OnDurationchange (NonEmpty.NonEmpty Event.Event  (Effect 
         { key: "durationchange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDurationchange  (Effect Unit)  where
-  attr OnDurationchange value = unsafeAttribute $ This
+  attr OnDurationchange value = unsafeAttribute $ This $ pure $
     { key: "durationchange", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDurationchange (Event.Event  (Effect Unit) ) where
   attr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue
@@ -44,7 +44,7 @@ instance Attr anything OnDurationchange (NonEmpty.NonEmpty Event.Event  (Effect 
         { key: "durationchange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDurationchange  (Effect Boolean)  where
-  attr OnDurationchange value = unsafeAttribute $ This
+  attr OnDurationchange value = unsafeAttribute $ This $ pure $
     { key: "durationchange", value: cb' (Cb (const value)) }
 instance Attr anything OnDurationchange (Event.Event  (Effect Boolean) ) where
   attr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue
@@ -60,7 +60,7 @@ instance Attr everything OnDurationchange (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "durationchange", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "durationchange", value: unset' })
 instance Attr everything OnDurationchange  Unit  where
-  attr OnDurationchange _ = unsafeAttribute $ This
+  attr OnDurationchange _ = unsafeAttribute $ This $ pure $
     { key: "durationchange", value: unset' }
 instance Attr everything OnDurationchange (Event.Event  Unit ) where
   attr OnDurationchange eventValue = unsafeAttribute $ That $ eventValue

@@ -15,7 +15,7 @@ instance Attr anything OnRatechange (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "ratechange", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "ratechange", value: cb' value })
 instance Attr anything OnRatechange  Cb  where
-  attr OnRatechange value = unsafeAttribute $ This
+  attr OnRatechange value = unsafeAttribute $ This $ pure $
     { key: "ratechange", value: cb' value }
 instance Attr anything OnRatechange (Event.Event  Cb ) where
   attr OnRatechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnRatechange (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "ratechange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnRatechange  (Effect Unit)  where
-  attr OnRatechange value = unsafeAttribute $ This
+  attr OnRatechange value = unsafeAttribute $ This $ pure $
     { key: "ratechange", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnRatechange (Event.Event  (Effect Unit) ) where
   attr OnRatechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnRatechange (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "ratechange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnRatechange  (Effect Boolean)  where
-  attr OnRatechange value = unsafeAttribute $ This
+  attr OnRatechange value = unsafeAttribute $ This $ pure $
     { key: "ratechange", value: cb' (Cb (const value)) }
 instance Attr anything OnRatechange (Event.Event  (Effect Boolean) ) where
   attr OnRatechange eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnRatechange (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "ratechange", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "ratechange", value: unset' })
 instance Attr everything OnRatechange  Unit  where
-  attr OnRatechange _ = unsafeAttribute $ This
+  attr OnRatechange _ = unsafeAttribute $ This $ pure $
     { key: "ratechange", value: unset' }
 instance Attr everything OnRatechange (Event.Event  Unit ) where
   attr OnRatechange eventValue = unsafeAttribute $ That $ eventValue <#>

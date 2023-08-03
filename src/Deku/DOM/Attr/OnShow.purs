@@ -15,7 +15,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "show", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "show", value: cb' value })
 instance Attr anything OnShow  Cb  where
-  attr OnShow value = unsafeAttribute $ This
+  attr OnShow value = unsafeAttribute $ This $ pure $
     { key: "show", value: cb' value }
 instance Attr anything OnShow (Event.Event  Cb ) where
   attr OnShow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) wh
         { key: "show", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnShow  (Effect Unit)  where
-  attr OnShow value = unsafeAttribute $ This
+  attr OnShow value = unsafeAttribute $ This $ pure $
     { key: "show", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnShow (Event.Event  (Effect Unit) ) where
   attr OnShow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Boolean) )
         { key: "show", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnShow  (Effect Boolean)  where
-  attr OnShow value = unsafeAttribute $ This
+  attr OnShow value = unsafeAttribute $ This $ pure $
     { key: "show", value: cb' (Cb (const value)) }
 instance Attr anything OnShow (Event.Event  (Effect Boolean) ) where
   attr OnShow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,7 +54,7 @@ instance Attr everything OnShow (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnShow bothValues = unsafeAttribute $ Both { key: "show", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "show", value: unset' })
 instance Attr everything OnShow  Unit  where
-  attr OnShow _ = unsafeAttribute $ This { key: "show", value: unset' }
+  attr OnShow _ = unsafeAttribute $ This $ pure $ { key: "show", value: unset' }
 instance Attr everything OnShow (Event.Event  Unit ) where
   attr OnShow eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "show", value: unset' }

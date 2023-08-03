@@ -15,7 +15,7 @@ instance Attr FeSpotLight_ PointsAtY (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "pointsAtY", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointsAtY", value: prop' value })
 instance Attr FeSpotLight_ PointsAtY  String  where
-  attr PointsAtY value = unsafeAttribute $ This
+  attr PointsAtY value = unsafeAttribute $ This $ pure $
     { key: "pointsAtY", value: prop' value }
 instance Attr FeSpotLight_ PointsAtY (Event.Event  String ) where
   attr PointsAtY eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything PointsAtY (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "pointsAtY", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointsAtY", value: unset' })
 instance Attr everything PointsAtY  Unit  where
-  attr PointsAtY _ = unsafeAttribute $ This
+  attr PointsAtY _ = unsafeAttribute $ This $ pure $
     { key: "pointsAtY", value: unset' }
 instance Attr everything PointsAtY (Event.Event  Unit ) where
   attr PointsAtY eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "formdata", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "formdata", value: cb' value })
 instance Attr anything OnFormdata  Cb  where
-  attr OnFormdata value = unsafeAttribute $ This
+  attr OnFormdata value = unsafeAttribute $ This $ pure $
     { key: "formdata", value: cb' value }
 instance Attr anything OnFormdata (Event.Event  Cb ) where
   attr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "formdata", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnFormdata  (Effect Unit)  where
-  attr OnFormdata value = unsafeAttribute $ This
+  attr OnFormdata value = unsafeAttribute $ This $ pure $
     { key: "formdata", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnFormdata (Event.Event  (Effect Unit) ) where
   attr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "formdata", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnFormdata  (Effect Boolean)  where
-  attr OnFormdata value = unsafeAttribute $ This
+  attr OnFormdata value = unsafeAttribute $ This $ pure $
     { key: "formdata", value: cb' (Cb (const value)) }
 instance Attr anything OnFormdata (Event.Event  (Effect Boolean) ) where
   attr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnFormdata (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "formdata", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "formdata", value: unset' })
 instance Attr everything OnFormdata  Unit  where
-  attr OnFormdata _ = unsafeAttribute $ This
+  attr OnFormdata _ = unsafeAttribute $ This $ pure $
     { key: "formdata", value: unset' }
 instance Attr everything OnFormdata (Event.Event  Unit ) where
   attr OnFormdata eventValue = unsafeAttribute $ That $ eventValue <#>

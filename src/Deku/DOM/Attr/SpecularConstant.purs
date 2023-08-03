@@ -17,7 +17,7 @@ instance Attr FeSpecularLighting_ SpecularConstant (NonEmpty.NonEmpty Event.Even
         { key: "specularConstant", value: prop' value }
     )
 instance Attr FeSpecularLighting_ SpecularConstant  String  where
-  attr SpecularConstant value = unsafeAttribute $ This
+  attr SpecularConstant value = unsafeAttribute $ This $ pure $
     { key: "specularConstant", value: prop' value }
 instance Attr FeSpecularLighting_ SpecularConstant (Event.Event  String ) where
   attr SpecularConstant eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything SpecularConstant (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "specularConstant", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "specularConstant", value: unset' })
 instance Attr everything SpecularConstant  Unit  where
-  attr SpecularConstant _ = unsafeAttribute $ This
+  attr SpecularConstant _ = unsafeAttribute $ This $ pure $
     { key: "specularConstant", value: unset' }
 instance Attr everything SpecularConstant (Event.Event  Unit ) where
   attr SpecularConstant eventValue = unsafeAttribute $ That $ eventValue

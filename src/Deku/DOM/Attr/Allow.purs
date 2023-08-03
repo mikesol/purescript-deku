@@ -15,7 +15,7 @@ instance Attr Iframe_ Allow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "allow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "allow", value: prop' value })
 instance Attr Iframe_ Allow  String  where
-  attr Allow value = unsafeAttribute $ This
+  attr Allow value = unsafeAttribute $ This $ pure $
     { key: "allow", value: prop' value }
 instance Attr Iframe_ Allow (Event.Event  String ) where
   attr Allow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Allow (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Allow bothValues = unsafeAttribute $ Both { key: "allow", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "allow", value: unset' })
 instance Attr everything Allow  Unit  where
-  attr Allow _ = unsafeAttribute $ This { key: "allow", value: unset' }
+  attr Allow _ = unsafeAttribute $ This $ pure $ { key: "allow", value: unset' }
 instance Attr everything Allow (Event.Event  Unit ) where
   attr Allow eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "allow", value: unset' }

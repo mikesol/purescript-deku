@@ -15,7 +15,7 @@ instance Attr Option_ Selected (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "selected", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "selected", value: prop' value })
 instance Attr Option_ Selected  String  where
-  attr Selected value = unsafeAttribute $ This
+  attr Selected value = unsafeAttribute $ This $ pure $
     { key: "selected", value: prop' value }
 instance Attr Option_ Selected (Event.Event  String ) where
   attr Selected eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Selected (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "selected", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "selected", value: unset' })
 instance Attr everything Selected  Unit  where
-  attr Selected _ = unsafeAttribute $ This
+  attr Selected _ = unsafeAttribute $ This $ pure $
     { key: "selected", value: unset' }
 instance Attr everything Selected (Event.Event  Unit ) where
   attr Selected eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

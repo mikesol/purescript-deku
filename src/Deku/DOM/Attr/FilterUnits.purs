@@ -15,7 +15,7 @@ instance Attr Filter_ FilterUnits (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filterUnits", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "filterUnits", value: prop' value })
 instance Attr Filter_ FilterUnits  String  where
-  attr FilterUnits value = unsafeAttribute $ This
+  attr FilterUnits value = unsafeAttribute $ This $ pure $
     { key: "filterUnits", value: prop' value }
 instance Attr Filter_ FilterUnits (Event.Event  String ) where
   attr FilterUnits eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything FilterUnits (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "filterUnits", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "filterUnits", value: unset' })
 instance Attr everything FilterUnits  Unit  where
-  attr FilterUnits _ = unsafeAttribute $ This
+  attr FilterUnits _ = unsafeAttribute $ This $ pure $
     { key: "filterUnits", value: unset' }
 instance Attr everything FilterUnits (Event.Event  Unit ) where
   attr FilterUnits eventValue = unsafeAttribute $ That $ eventValue <#>

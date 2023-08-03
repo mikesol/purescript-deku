@@ -35,7 +35,7 @@ instance Attr FeBlend_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeBlend_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeBlend_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -48,7 +48,7 @@ instance Attr FeColorMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  Stri
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeColorMatrix_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeColorMatrix_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,7 +61,7 @@ instance Attr FeComponentTransfer_ ImageRendering (NonEmpty.NonEmpty Event.Event
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeComponentTransfer_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr FeComposite_ ImageRendering (NonEmpty.NonEmpty Event.Event  String
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeComposite_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeComposite_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -87,7 +87,7 @@ instance Attr FeConvolveMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  S
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeConvolveMatrix_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -100,7 +100,7 @@ instance Attr FeDiffuseLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event  
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeDiffuseLighting_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -113,7 +113,7 @@ instance Attr FeDisplacementMap_ ImageRendering (NonEmpty.NonEmpty Event.Event  
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeDisplacementMap_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,7 +126,7 @@ instance Attr FeFlood_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeFlood_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeFlood_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -139,7 +139,7 @@ instance Attr FeGaussianBlur_ ImageRendering (NonEmpty.NonEmpty Event.Event  Str
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeGaussianBlur_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr FeImage_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeImage_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeImage_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeMerge_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeMerge_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeMerge_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -178,7 +178,7 @@ instance Attr FeMorphology_ ImageRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeMorphology_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeMorphology_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,7 +191,7 @@ instance Attr FeOffset_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeOffset_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeOffset_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -204,7 +204,7 @@ instance Attr FeSpecularLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event 
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeSpecularLighting_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -217,7 +217,7 @@ instance Attr FeTile_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeTile_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeTile_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -230,7 +230,7 @@ instance Attr FeTurbulence_ ImageRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeTurbulence_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr FeTurbulence_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -243,7 +243,7 @@ instance Attr Filter_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Filter_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr Filter_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -256,7 +256,7 @@ instance Attr Image_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Image_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr Image_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -269,7 +269,7 @@ instance Attr Switch_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Switch_ ImageRendering  String  where
-  attr ImageRendering value = unsafeAttribute $ This
+  attr ImageRendering value = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: prop' value }
 instance Attr Switch_ ImageRendering (Event.Event  String ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -280,7 +280,7 @@ instance Attr everything ImageRendering (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "image-rendering", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "image-rendering", value: unset' })
 instance Attr everything ImageRendering  Unit  where
-  attr ImageRendering _ = unsafeAttribute $ This
+  attr ImageRendering _ = unsafeAttribute $ This $ pure $
     { key: "image-rendering", value: unset' }
 instance Attr everything ImageRendering (Event.Event  Unit ) where
   attr ImageRendering eventValue = unsafeAttribute $ That $ eventValue <#>

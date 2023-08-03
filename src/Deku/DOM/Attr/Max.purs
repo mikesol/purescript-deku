@@ -21,7 +21,7 @@ instance Attr Input_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr Input_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr Input_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -31,7 +31,7 @@ instance Attr Meter_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr Meter_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr Meter_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -41,7 +41,7 @@ instance Attr Progress_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr Progress_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr Progress_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -51,7 +51,7 @@ instance Attr Animate_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr Animate_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr Animate_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -61,7 +61,7 @@ instance Attr AnimateMotion_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr AnimateMotion_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr AnimateMotion_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -71,7 +71,7 @@ instance Attr AnimateTransform_ Max (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr AnimateTransform_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr AnimateTransform_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -81,7 +81,7 @@ instance Attr Set_ Max (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "max", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "max", value: prop' value })
 instance Attr Set_ Max  String  where
-  attr Max value = unsafeAttribute $ This { key: "max", value: prop' value }
+  attr Max value = unsafeAttribute $ This $ pure $ { key: "max", value: prop' value }
 instance Attr Set_ Max (Event.Event  String ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "max", value: prop' value }
@@ -90,7 +90,7 @@ instance Attr everything Max (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Max bothValues = unsafeAttribute $ Both { key: "max", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "max", value: unset' })
 instance Attr everything Max  Unit  where
-  attr Max _ = unsafeAttribute $ This { key: "max", value: unset' }
+  attr Max _ = unsafeAttribute $ This $ pure $ { key: "max", value: unset' }
 instance Attr everything Max (Event.Event  Unit ) where
   attr Max eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "max", value: unset' }

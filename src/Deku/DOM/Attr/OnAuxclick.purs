@@ -15,7 +15,7 @@ instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "auxclick", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "auxclick", value: cb' value })
 instance Attr anything OnAuxclick  Cb  where
-  attr OnAuxclick value = unsafeAttribute $ This
+  attr OnAuxclick value = unsafeAttribute $ This $ pure $
     { key: "auxclick", value: cb' value }
 instance Attr anything OnAuxclick (Event.Event  Cb ) where
   attr OnAuxclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "auxclick", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnAuxclick  (Effect Unit)  where
-  attr OnAuxclick value = unsafeAttribute $ This
+  attr OnAuxclick value = unsafeAttribute $ This $ pure $
     { key: "auxclick", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnAuxclick (Event.Event  (Effect Unit) ) where
   attr OnAuxclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnAuxclick (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "auxclick", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnAuxclick  (Effect Boolean)  where
-  attr OnAuxclick value = unsafeAttribute $ This
+  attr OnAuxclick value = unsafeAttribute $ This $ pure $
     { key: "auxclick", value: cb' (Cb (const value)) }
 instance Attr anything OnAuxclick (Event.Event  (Effect Boolean) ) where
   attr OnAuxclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnAuxclick (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "auxclick", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "auxclick", value: unset' })
 instance Attr everything OnAuxclick  Unit  where
-  attr OnAuxclick _ = unsafeAttribute $ This
+  attr OnAuxclick _ = unsafeAttribute $ This $ pure $
     { key: "auxclick", value: unset' }
 instance Attr everything OnAuxclick (Event.Event  Unit ) where
   attr OnAuxclick eventValue = unsafeAttribute $ That $ eventValue <#>

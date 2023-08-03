@@ -15,7 +15,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "touchend", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "touchend", value: cb' value })
 instance Attr anything OnTouchend  Cb  where
-  attr OnTouchend value = unsafeAttribute $ This
+  attr OnTouchend value = unsafeAttribute $ This $ pure $
     { key: "touchend", value: cb' value }
 instance Attr anything OnTouchend (Event.Event  Cb ) where
   attr OnTouchend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "touchend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTouchend  (Effect Unit)  where
-  attr OnTouchend value = unsafeAttribute $ This
+  attr OnTouchend value = unsafeAttribute $ This $ pure $
     { key: "touchend", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnTouchend (Event.Event  (Effect Unit) ) where
   attr OnTouchend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "touchend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTouchend  (Effect Boolean)  where
-  attr OnTouchend value = unsafeAttribute $ This
+  attr OnTouchend value = unsafeAttribute $ This $ pure $
     { key: "touchend", value: cb' (Cb (const value)) }
 instance Attr anything OnTouchend (Event.Event  (Effect Boolean) ) where
   attr OnTouchend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnTouchend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "touchend", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchend", value: unset' })
 instance Attr everything OnTouchend  Unit  where
-  attr OnTouchend _ = unsafeAttribute $ This
+  attr OnTouchend _ = unsafeAttribute $ This $ pure $
     { key: "touchend", value: unset' }
 instance Attr everything OnTouchend (Event.Event  Unit ) where
   attr OnTouchend eventValue = unsafeAttribute $ That $ eventValue <#>

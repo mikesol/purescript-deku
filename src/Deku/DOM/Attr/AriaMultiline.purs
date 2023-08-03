@@ -31,7 +31,7 @@ instance Attr Circle_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Circle_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Circle_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,7 +42,7 @@ instance Attr Ellipse_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Ellipse_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Ellipse_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,7 +53,7 @@ instance Attr ForeignObject_ AriaMultiline (NonEmpty.NonEmpty Event.Event  Strin
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr ForeignObject_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr ForeignObject_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,7 +64,7 @@ instance Attr G_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr G_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr G_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,7 +75,7 @@ instance Attr Line_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Line_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Line_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,7 +86,7 @@ instance Attr Marker_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Marker_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Marker_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,7 +97,7 @@ instance Attr Path_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Path_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Path_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,7 +108,7 @@ instance Attr Polygon_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polygon_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Polygon_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,7 +119,7 @@ instance Attr Polyline_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polyline_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Polyline_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,7 +130,7 @@ instance Attr Rect_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Rect_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Rect_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,7 +141,7 @@ instance Attr Svg_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Svg_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Svg_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr Symbol_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Symbol_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Symbol_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -163,7 +163,7 @@ instance Attr Text_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Text_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Text_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr TextPath_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr TextPath_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr TextPath_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,7 +185,7 @@ instance Attr Tspan_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Tspan_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Tspan_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,7 +196,7 @@ instance Attr Use_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Use_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr Use_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -207,7 +207,7 @@ instance Attr View_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr View_ AriaMultiline  String  where
-  attr AriaMultiline value = unsafeAttribute $ This
+  attr AriaMultiline value = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: prop' value }
 instance Attr View_ AriaMultiline (Event.Event  String ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -218,7 +218,7 @@ instance Attr everything AriaMultiline (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "aria-multiline", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-multiline", value: unset' })
 instance Attr everything AriaMultiline  Unit  where
-  attr AriaMultiline _ = unsafeAttribute $ This
+  attr AriaMultiline _ = unsafeAttribute $ This $ pure $
     { key: "aria-multiline", value: unset' }
 instance Attr everything AriaMultiline (Event.Event  Unit ) where
   attr AriaMultiline eventValue = unsafeAttribute $ That $ eventValue <#>

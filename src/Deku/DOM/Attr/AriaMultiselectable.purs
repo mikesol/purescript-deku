@@ -33,7 +33,7 @@ instance Attr Circle_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Circle_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Circle_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr Ellipse_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Ellipse_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Ellipse_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -59,7 +59,7 @@ instance Attr ForeignObject_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event 
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr ForeignObject_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr ForeignObject_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -72,7 +72,7 @@ instance Attr G_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr G_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr G_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -85,7 +85,7 @@ instance Attr Line_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Line_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Line_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -98,7 +98,7 @@ instance Attr Marker_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Marker_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Marker_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -111,7 +111,7 @@ instance Attr Path_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Path_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Path_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -124,7 +124,7 @@ instance Attr Polygon_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Polygon_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Polygon_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -137,7 +137,7 @@ instance Attr Polyline_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Polyline_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Polyline_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -150,7 +150,7 @@ instance Attr Rect_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Rect_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Rect_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -163,7 +163,7 @@ instance Attr Svg_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Svg_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Svg_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -176,7 +176,7 @@ instance Attr Symbol_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Symbol_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Symbol_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -189,7 +189,7 @@ instance Attr Text_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Text_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Text_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -202,7 +202,7 @@ instance Attr TextPath_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr TextPath_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr TextPath_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -215,7 +215,7 @@ instance Attr Tspan_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Tspan_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Tspan_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -228,7 +228,7 @@ instance Attr Use_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr Use_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr Use_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -241,7 +241,7 @@ instance Attr View_ AriaMultiselectable (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-multiselectable", value: prop' value }
     )
 instance Attr View_ AriaMultiselectable  String  where
-  attr AriaMultiselectable value = unsafeAttribute $ This
+  attr AriaMultiselectable value = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: prop' value }
 instance Attr View_ AriaMultiselectable (Event.Event  String ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $
@@ -252,7 +252,7 @@ instance Attr everything AriaMultiselectable (NonEmpty.NonEmpty Event.Event  Uni
     { key: "aria-multiselectable", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-multiselectable", value: unset' })
 instance Attr everything AriaMultiselectable  Unit  where
-  attr AriaMultiselectable _ = unsafeAttribute $ This
+  attr AriaMultiselectable _ = unsafeAttribute $ This $ pure $
     { key: "aria-multiselectable", value: unset' }
 instance Attr everything AriaMultiselectable (Event.Event  Unit ) where
   attr AriaMultiselectable eventValue = unsafeAttribute $ That $

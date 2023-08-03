@@ -38,7 +38,7 @@ instance Attr AnimateTransform_ RequiredExtensions (NonEmpty.NonEmpty Event.Even
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr AnimateTransform_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr AnimateTransform_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -51,7 +51,7 @@ instance Attr Circle_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Circle_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Circle_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -64,7 +64,7 @@ instance Attr ClipPath_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  Strin
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr ClipPath_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr ClipPath_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -77,7 +77,7 @@ instance Attr Discard_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Discard_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Discard_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -90,7 +90,7 @@ instance Attr Ellipse_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Ellipse_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Ellipse_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -103,7 +103,7 @@ instance Attr ForeignObject_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr ForeignObject_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr ForeignObject_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -116,7 +116,7 @@ instance Attr G_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr G_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr G_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -129,7 +129,7 @@ instance Attr Image_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Image_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Image_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -142,7 +142,7 @@ instance Attr Line_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Line_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Line_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -155,7 +155,7 @@ instance Attr Marker_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Marker_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Marker_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -168,7 +168,7 @@ instance Attr Mask_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Mask_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Mask_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -181,7 +181,7 @@ instance Attr Path_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Path_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Path_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -194,7 +194,7 @@ instance Attr Pattern_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Pattern_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Pattern_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -207,7 +207,7 @@ instance Attr Polygon_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Polygon_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Polygon_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -220,7 +220,7 @@ instance Attr Polyline_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  Strin
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Polyline_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Polyline_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -233,7 +233,7 @@ instance Attr Rect_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Rect_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Rect_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -246,7 +246,7 @@ instance Attr Svg_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Svg_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Svg_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -259,7 +259,7 @@ instance Attr Switch_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Switch_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Switch_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -272,7 +272,7 @@ instance Attr Text_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Text_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Text_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -285,7 +285,7 @@ instance Attr TextPath_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  Strin
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr TextPath_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr TextPath_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -298,7 +298,7 @@ instance Attr Tspan_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Tspan_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Tspan_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -311,7 +311,7 @@ instance Attr Use_ RequiredExtensions (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "requiredExtensions", value: prop' value }
     )
 instance Attr Use_ RequiredExtensions  String  where
-  attr RequiredExtensions value = unsafeAttribute $ This
+  attr RequiredExtensions value = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: prop' value }
 instance Attr Use_ RequiredExtensions (Event.Event  String ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue
@@ -322,7 +322,7 @@ instance Attr everything RequiredExtensions (NonEmpty.NonEmpty Event.Event  Unit
     { key: "requiredExtensions", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "requiredExtensions", value: unset' })
 instance Attr everything RequiredExtensions  Unit  where
-  attr RequiredExtensions _ = unsafeAttribute $ This
+  attr RequiredExtensions _ = unsafeAttribute $ This $ pure $
     { key: "requiredExtensions", value: unset' }
 instance Attr everything RequiredExtensions (Event.Event  Unit ) where
   attr RequiredExtensions eventValue = unsafeAttribute $ That $ eventValue

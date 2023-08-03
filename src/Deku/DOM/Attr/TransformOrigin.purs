@@ -35,7 +35,7 @@ instance Attr FeBlend_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeBlend_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeBlend_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -48,7 +48,7 @@ instance Attr FeColorMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Str
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeColorMatrix_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeColorMatrix_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -61,7 +61,7 @@ instance Attr FeComponentTransfer_ TransformOrigin (NonEmpty.NonEmpty Event.Even
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeComponentTransfer_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeComponentTransfer_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -74,7 +74,7 @@ instance Attr FeComposite_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeComposite_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeComposite_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -87,7 +87,7 @@ instance Attr FeConvolveMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeConvolveMatrix_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -100,7 +100,7 @@ instance Attr FeDiffuseLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeDiffuseLighting_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -113,7 +113,7 @@ instance Attr FeDisplacementMap_ TransformOrigin (NonEmpty.NonEmpty Event.Event 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeDisplacementMap_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeDisplacementMap_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -126,7 +126,7 @@ instance Attr FeFlood_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeFlood_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeFlood_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -139,7 +139,7 @@ instance Attr FeGaussianBlur_ TransformOrigin (NonEmpty.NonEmpty Event.Event  St
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeGaussianBlur_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeGaussianBlur_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -152,7 +152,7 @@ instance Attr FeImage_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeImage_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeImage_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -165,7 +165,7 @@ instance Attr FeMerge_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeMerge_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeMerge_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -178,7 +178,7 @@ instance Attr FeMorphology_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeMorphology_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeMorphology_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -191,7 +191,7 @@ instance Attr FeOffset_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String )
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeOffset_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeOffset_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -204,7 +204,7 @@ instance Attr FeSpecularLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeSpecularLighting_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeSpecularLighting_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -217,7 +217,7 @@ instance Attr FeTile_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeTile_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeTile_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -230,7 +230,7 @@ instance Attr FeTurbulence_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeTurbulence_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr FeTurbulence_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -243,7 +243,7 @@ instance Attr Filter_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Filter_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr Filter_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -256,7 +256,7 @@ instance Attr Image_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Image_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr Image_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -269,7 +269,7 @@ instance Attr Switch_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Switch_ TransformOrigin  String  where
-  attr TransformOrigin value = unsafeAttribute $ This
+  attr TransformOrigin value = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: prop' value }
 instance Attr Switch_ TransformOrigin (Event.Event  String ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue
@@ -280,7 +280,7 @@ instance Attr everything TransformOrigin (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "transform-origin", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "transform-origin", value: unset' })
 instance Attr everything TransformOrigin  Unit  where
-  attr TransformOrigin _ = unsafeAttribute $ This
+  attr TransformOrigin _ = unsafeAttribute $ This $ pure $
     { key: "transform-origin", value: unset' }
 instance Attr everything TransformOrigin (Event.Event  Unit ) where
   attr TransformOrigin eventValue = unsafeAttribute $ That $ eventValue

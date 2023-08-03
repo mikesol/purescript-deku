@@ -35,7 +35,7 @@ instance Attr FeBlend_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeBlend_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeBlend_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -46,7 +46,7 @@ instance Attr FeColorMatrix_ TextAnchor (NonEmpty.NonEmpty Event.Event  String )
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeColorMatrix_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeColorMatrix_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr FeComponentTransfer_ TextAnchor (NonEmpty.NonEmpty Event.Event  St
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeComponentTransfer_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeComponentTransfer_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -68,7 +68,7 @@ instance Attr FeComposite_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeComposite_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeComposite_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -79,7 +79,7 @@ instance Attr FeConvolveMatrix_ TextAnchor (NonEmpty.NonEmpty Event.Event  Strin
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeConvolveMatrix_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeConvolveMatrix_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,7 +90,7 @@ instance Attr FeDiffuseLighting_ TextAnchor (NonEmpty.NonEmpty Event.Event  Stri
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeDiffuseLighting_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeDiffuseLighting_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,7 +101,7 @@ instance Attr FeDisplacementMap_ TextAnchor (NonEmpty.NonEmpty Event.Event  Stri
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeDisplacementMap_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeDisplacementMap_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -112,7 +112,7 @@ instance Attr FeFlood_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeFlood_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeFlood_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -123,7 +123,7 @@ instance Attr FeGaussianBlur_ TextAnchor (NonEmpty.NonEmpty Event.Event  String 
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeGaussianBlur_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeGaussianBlur_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -134,7 +134,7 @@ instance Attr FeImage_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeImage_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeImage_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -145,7 +145,7 @@ instance Attr FeMerge_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeMerge_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeMerge_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -156,7 +156,7 @@ instance Attr FeMorphology_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeMorphology_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeMorphology_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -167,7 +167,7 @@ instance Attr FeOffset_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeOffset_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeOffset_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -178,7 +178,7 @@ instance Attr FeSpecularLighting_ TextAnchor (NonEmpty.NonEmpty Event.Event  Str
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeSpecularLighting_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeSpecularLighting_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -189,7 +189,7 @@ instance Attr FeTile_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeTile_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeTile_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -200,7 +200,7 @@ instance Attr FeTurbulence_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr FeTurbulence_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr FeTurbulence_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,7 +211,7 @@ instance Attr Filter_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr Filter_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr Filter_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -222,7 +222,7 @@ instance Attr Image_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr Image_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr Image_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -233,7 +233,7 @@ instance Attr Switch_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr Switch_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr Switch_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -244,7 +244,7 @@ instance Attr Text_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr Text_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr Text_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -255,7 +255,7 @@ instance Attr Tspan_ TextAnchor (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "text-anchor", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-anchor", value: prop' value })
 instance Attr Tspan_ TextAnchor  String  where
-  attr TextAnchor value = unsafeAttribute $ This
+  attr TextAnchor value = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: prop' value }
 instance Attr Tspan_ TextAnchor (Event.Event  String ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -266,7 +266,7 @@ instance Attr everything TextAnchor (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "text-anchor", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "text-anchor", value: unset' })
 instance Attr everything TextAnchor  Unit  where
-  attr TextAnchor _ = unsafeAttribute $ This
+  attr TextAnchor _ = unsafeAttribute $ This $ pure $
     { key: "text-anchor", value: unset' }
 instance Attr everything TextAnchor (Event.Event  Unit ) where
   attr TextAnchor eventValue = unsafeAttribute $ That $ eventValue <#>

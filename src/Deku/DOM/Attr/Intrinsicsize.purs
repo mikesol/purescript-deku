@@ -15,7 +15,7 @@ instance Attr Img_ Intrinsicsize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intrinsicsize", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "intrinsicsize", value: prop' value })
 instance Attr Img_ Intrinsicsize  String  where
-  attr Intrinsicsize value = unsafeAttribute $ This
+  attr Intrinsicsize value = unsafeAttribute $ This $ pure $
     { key: "intrinsicsize", value: prop' value }
 instance Attr Img_ Intrinsicsize (Event.Event  String ) where
   attr Intrinsicsize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Intrinsicsize (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "intrinsicsize", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "intrinsicsize", value: unset' })
 instance Attr everything Intrinsicsize  Unit  where
-  attr Intrinsicsize _ = unsafeAttribute $ This
+  attr Intrinsicsize _ = unsafeAttribute $ This $ pure $
     { key: "intrinsicsize", value: unset' }
 instance Attr everything Intrinsicsize (Event.Event  Unit ) where
   attr Intrinsicsize eventValue = unsafeAttribute $ That $ eventValue <#>

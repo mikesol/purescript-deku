@@ -15,7 +15,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "resize", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "resize", value: cb' value })
 instance Attr anything OnResize  Cb  where
-  attr OnResize value = unsafeAttribute $ This
+  attr OnResize value = unsafeAttribute $ This $ pure $
     { key: "resize", value: cb' value }
 instance Attr anything OnResize (Event.Event  Cb ) where
   attr OnResize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "resize", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnResize  (Effect Unit)  where
-  attr OnResize value = unsafeAttribute $ This
+  attr OnResize value = unsafeAttribute $ This $ pure $
     { key: "resize", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnResize (Event.Event  (Effect Unit) ) where
   attr OnResize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "resize", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnResize  (Effect Boolean)  where
-  attr OnResize value = unsafeAttribute $ This
+  attr OnResize value = unsafeAttribute $ This $ pure $
     { key: "resize", value: cb' (Cb (const value)) }
 instance Attr anything OnResize (Event.Event  (Effect Boolean) ) where
   attr OnResize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnResize (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "resize", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "resize", value: unset' })
 instance Attr everything OnResize  Unit  where
-  attr OnResize _ = unsafeAttribute $ This { key: "resize", value: unset' }
+  attr OnResize _ = unsafeAttribute $ This $ pure $ { key: "resize", value: unset' }
 instance Attr everything OnResize (Event.Event  Unit ) where
   attr OnResize eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "resize", value: unset' }

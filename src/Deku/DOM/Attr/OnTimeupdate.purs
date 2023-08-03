@@ -15,7 +15,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "timeupdate", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "timeupdate", value: cb' value })
 instance Attr anything OnTimeupdate  Cb  where
-  attr OnTimeupdate value = unsafeAttribute $ This
+  attr OnTimeupdate value = unsafeAttribute $ This $ pure $
     { key: "timeupdate", value: cb' value }
 instance Attr anything OnTimeupdate (Event.Event  Cb ) where
   attr OnTimeupdate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTimeupdate  (Effect Unit)  where
-  attr OnTimeupdate value = unsafeAttribute $ This
+  attr OnTimeupdate value = unsafeAttribute $ This $ pure $
     { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnTimeupdate (Event.Event  (Effect Unit) ) where
   attr OnTimeupdate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "timeupdate", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTimeupdate  (Effect Boolean)  where
-  attr OnTimeupdate value = unsafeAttribute $ This
+  attr OnTimeupdate value = unsafeAttribute $ This $ pure $
     { key: "timeupdate", value: cb' (Cb (const value)) }
 instance Attr anything OnTimeupdate (Event.Event  (Effect Boolean) ) where
   attr OnTimeupdate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "timeupdate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "timeupdate", value: unset' })
 instance Attr everything OnTimeupdate  Unit  where
-  attr OnTimeupdate _ = unsafeAttribute $ This
+  attr OnTimeupdate _ = unsafeAttribute $ This $ pure $
     { key: "timeupdate", value: unset' }
 instance Attr everything OnTimeupdate (Event.Event  Unit ) where
   attr OnTimeupdate eventValue = unsafeAttribute $ That $ eventValue <#>

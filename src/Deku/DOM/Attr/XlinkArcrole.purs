@@ -19,7 +19,7 @@ instance Attr AnimateTransform_ XlinkArcrole (NonEmpty.NonEmpty Event.Event  Str
     { key: "xlink:arcrole", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:arcrole", value: prop' value })
 instance Attr AnimateTransform_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ This
+  attr XlinkArcrole value = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: prop' value }
 instance Attr AnimateTransform_ XlinkArcrole (Event.Event  String ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -30,7 +30,7 @@ instance Attr FeImage_ XlinkArcrole (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "xlink:arcrole", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:arcrole", value: prop' value })
 instance Attr FeImage_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ This
+  attr XlinkArcrole value = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: prop' value }
 instance Attr FeImage_ XlinkArcrole (Event.Event  String ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr Filter_ XlinkArcrole (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "xlink:arcrole", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:arcrole", value: prop' value })
 instance Attr Filter_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ This
+  attr XlinkArcrole value = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: prop' value }
 instance Attr Filter_ XlinkArcrole (Event.Event  String ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,7 +52,7 @@ instance Attr Image_ XlinkArcrole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:arcrole", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:arcrole", value: prop' value })
 instance Attr Image_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ This
+  attr XlinkArcrole value = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: prop' value }
 instance Attr Image_ XlinkArcrole (Event.Event  String ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,7 +63,7 @@ instance Attr Mpath_ XlinkArcrole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:arcrole", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:arcrole", value: prop' value })
 instance Attr Mpath_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ This
+  attr XlinkArcrole value = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: prop' value }
 instance Attr Mpath_ XlinkArcrole (Event.Event  String ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr everything XlinkArcrole (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "xlink:arcrole", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:arcrole", value: unset' })
 instance Attr everything XlinkArcrole  Unit  where
-  attr XlinkArcrole _ = unsafeAttribute $ This
+  attr XlinkArcrole _ = unsafeAttribute $ This $ pure $
     { key: "xlink:arcrole", value: unset' }
 instance Attr everything XlinkArcrole (Event.Event  Unit ) where
   attr XlinkArcrole eventValue = unsafeAttribute $ That $ eventValue <#>

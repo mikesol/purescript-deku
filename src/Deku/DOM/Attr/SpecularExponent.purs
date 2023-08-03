@@ -18,7 +18,7 @@ instance Attr FeSpecularLighting_ SpecularExponent (NonEmpty.NonEmpty Event.Even
         { key: "specularExponent", value: prop' value }
     )
 instance Attr FeSpecularLighting_ SpecularExponent  String  where
-  attr SpecularExponent value = unsafeAttribute $ This
+  attr SpecularExponent value = unsafeAttribute $ This $ pure $
     { key: "specularExponent", value: prop' value }
 instance Attr FeSpecularLighting_ SpecularExponent (Event.Event  String ) where
   attr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue
@@ -31,7 +31,7 @@ instance Attr FeSpotLight_ SpecularExponent (NonEmpty.NonEmpty Event.Event  Stri
         { key: "specularExponent", value: prop' value }
     )
 instance Attr FeSpotLight_ SpecularExponent  String  where
-  attr SpecularExponent value = unsafeAttribute $ This
+  attr SpecularExponent value = unsafeAttribute $ This $ pure $
     { key: "specularExponent", value: prop' value }
 instance Attr FeSpotLight_ SpecularExponent (Event.Event  String ) where
   attr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue
@@ -42,7 +42,7 @@ instance Attr everything SpecularExponent (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "specularExponent", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "specularExponent", value: unset' })
 instance Attr everything SpecularExponent  Unit  where
-  attr SpecularExponent _ = unsafeAttribute $ This
+  attr SpecularExponent _ = unsafeAttribute $ This $ pure $
     { key: "specularExponent", value: unset' }
 instance Attr everything SpecularExponent (Event.Event  Unit ) where
   attr SpecularExponent eventValue = unsafeAttribute $ That $ eventValue

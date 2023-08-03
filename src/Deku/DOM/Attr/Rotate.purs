@@ -17,7 +17,7 @@ instance Attr AnimateMotion_ Rotate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "rotate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr AnimateMotion_ Rotate  String  where
-  attr Rotate value = unsafeAttribute $ This
+  attr Rotate value = unsafeAttribute $ This $ pure $
     { key: "rotate", value: prop' value }
 instance Attr AnimateMotion_ Rotate (Event.Event  String ) where
   attr Rotate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr Text_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rotate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Text_ Rotate  String  where
-  attr Rotate value = unsafeAttribute $ This
+  attr Rotate value = unsafeAttribute $ This $ pure $
     { key: "rotate", value: prop' value }
 instance Attr Text_ Rotate (Event.Event  String ) where
   attr Rotate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr Tspan_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rotate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Tspan_ Rotate  String  where
-  attr Rotate value = unsafeAttribute $ This
+  attr Rotate value = unsafeAttribute $ This $ pure $
     { key: "rotate", value: prop' value }
 instance Attr Tspan_ Rotate (Event.Event  String ) where
   attr Rotate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything Rotate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "rotate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "rotate", value: unset' })
 instance Attr everything Rotate  Unit  where
-  attr Rotate _ = unsafeAttribute $ This { key: "rotate", value: unset' }
+  attr Rotate _ = unsafeAttribute $ This $ pure $ { key: "rotate", value: unset' }
 instance Attr everything Rotate (Event.Event  Unit ) where
   attr Rotate eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "rotate", value: unset' }

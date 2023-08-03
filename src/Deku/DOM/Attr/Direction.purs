@@ -33,7 +33,7 @@ instance Attr FeBlend_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeBlend_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeBlend_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ Direction (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeColorMatrix_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeColorMatrix_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ Direction (NonEmpty.NonEmpty Event.Event  Str
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeComponentTransfer_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeComponentTransfer_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ Direction (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeComposite_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeComposite_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ Direction (NonEmpty.NonEmpty Event.Event  String
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeConvolveMatrix_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeConvolveMatrix_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ Direction (NonEmpty.NonEmpty Event.Event  Strin
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeDiffuseLighting_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeDiffuseLighting_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ Direction (NonEmpty.NonEmpty Event.Event  Strin
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeDisplacementMap_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeDisplacementMap_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeFlood_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeFlood_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ Direction (NonEmpty.NonEmpty Event.Event  String )
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeGaussianBlur_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeGaussianBlur_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeImage_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeImage_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeMerge_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeMerge_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ Direction (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeMorphology_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeMorphology_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeOffset_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeOffset_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ Direction (NonEmpty.NonEmpty Event.Event  Stri
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeSpecularLighting_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeSpecularLighting_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeTile_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeTile_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ Direction (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr FeTurbulence_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr FeTurbulence_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr Filter_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr Filter_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr Image_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr Image_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ Direction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "direction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "direction", value: prop' value })
 instance Attr Switch_ Direction  String  where
-  attr Direction value = unsafeAttribute $ This
+  attr Direction value = unsafeAttribute $ This $ pure $
     { key: "direction", value: prop' value }
 instance Attr Switch_ Direction (Event.Event  String ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything Direction (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "direction", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "direction", value: unset' })
 instance Attr everything Direction  Unit  where
-  attr Direction _ = unsafeAttribute $ This
+  attr Direction _ = unsafeAttribute $ This $ pure $
     { key: "direction", value: unset' }
 instance Attr everything Direction (Event.Event  Unit ) where
   attr Direction eventValue = unsafeAttribute $ That $ eventValue <#>

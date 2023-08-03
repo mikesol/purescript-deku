@@ -33,7 +33,7 @@ instance Attr Circle_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Circle_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Circle_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr Ellipse_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Ellipse_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Ellipse_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -59,7 +59,7 @@ instance Attr ForeignObject_ AriaRoledescription (NonEmpty.NonEmpty Event.Event 
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr ForeignObject_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr ForeignObject_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -72,7 +72,7 @@ instance Attr G_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr G_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr G_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -85,7 +85,7 @@ instance Attr Line_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Line_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Line_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -98,7 +98,7 @@ instance Attr Marker_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Marker_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Marker_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -111,7 +111,7 @@ instance Attr Path_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Path_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Path_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -124,7 +124,7 @@ instance Attr Polygon_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Polygon_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Polygon_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -137,7 +137,7 @@ instance Attr Polyline_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Polyline_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Polyline_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -150,7 +150,7 @@ instance Attr Rect_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Rect_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Rect_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -163,7 +163,7 @@ instance Attr Svg_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Svg_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Svg_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -176,7 +176,7 @@ instance Attr Symbol_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Symbol_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Symbol_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -189,7 +189,7 @@ instance Attr Text_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Text_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Text_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -202,7 +202,7 @@ instance Attr TextPath_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr TextPath_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr TextPath_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -215,7 +215,7 @@ instance Attr Tspan_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Tspan_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Tspan_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -228,7 +228,7 @@ instance Attr Use_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr Use_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr Use_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -241,7 +241,7 @@ instance Attr View_ AriaRoledescription (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-roledescription", value: prop' value }
     )
 instance Attr View_ AriaRoledescription  String  where
-  attr AriaRoledescription value = unsafeAttribute $ This
+  attr AriaRoledescription value = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: prop' value }
 instance Attr View_ AriaRoledescription (Event.Event  String ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $
@@ -252,7 +252,7 @@ instance Attr everything AriaRoledescription (NonEmpty.NonEmpty Event.Event  Uni
     { key: "aria-roledescription", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-roledescription", value: unset' })
 instance Attr everything AriaRoledescription  Unit  where
-  attr AriaRoledescription _ = unsafeAttribute $ This
+  attr AriaRoledescription _ = unsafeAttribute $ This $ pure $
     { key: "aria-roledescription", value: unset' }
 instance Attr everything AriaRoledescription (Event.Event  Unit ) where
   attr AriaRoledescription eventValue = unsafeAttribute $ That $

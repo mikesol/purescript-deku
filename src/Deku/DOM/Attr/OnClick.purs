@@ -15,7 +15,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "click", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "click", value: cb' value })
 instance Attr anything OnClick  Cb  where
-  attr OnClick value = unsafeAttribute $ This
+  attr OnClick value = unsafeAttribute $ This $ pure $
     { key: "click", value: cb' value }
 instance Attr anything OnClick (Event.Event  Cb ) where
   attr OnClick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "click", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnClick  (Effect Unit)  where
-  attr OnClick value = unsafeAttribute $ This
+  attr OnClick value = unsafeAttribute $ This $ pure $
     { key: "click", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnClick (Event.Event  (Effect Unit) ) where
   attr OnClick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "click", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnClick  (Effect Boolean)  where
-  attr OnClick value = unsafeAttribute $ This
+  attr OnClick value = unsafeAttribute $ This $ pure $
     { key: "click", value: cb' (Cb (const value)) }
 instance Attr anything OnClick (Event.Event  (Effect Boolean) ) where
   attr OnClick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnClick (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "click", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "click", value: unset' })
 instance Attr everything OnClick  Unit  where
-  attr OnClick _ = unsafeAttribute $ This { key: "click", value: unset' }
+  attr OnClick _ = unsafeAttribute $ This $ pure $ { key: "click", value: unset' }
 instance Attr everything OnClick (Event.Event  Unit ) where
   attr OnClick eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "click", value: unset' }

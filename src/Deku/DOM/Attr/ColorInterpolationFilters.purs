@@ -35,7 +35,7 @@ instance Attr FeBlend_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeBlend_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeBlend_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -49,7 +49,7 @@ instance Attr FeColorMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeColorMatrix_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeColorMatrix_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr FeComponentTransfer_ ColorInterpolationFilters (NonEmpty.NonEmpty 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeComponentTransfer_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -77,7 +77,7 @@ instance Attr FeComposite_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeComposite_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeComposite_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -91,7 +91,7 @@ instance Attr FeConvolveMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Eve
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -105,7 +105,7 @@ instance Attr FeDiffuseLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -119,7 +119,7 @@ instance Attr FeDisplacementMap_ ColorInterpolationFilters (NonEmpty.NonEmpty Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeDisplacementMap_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -133,7 +133,7 @@ instance Attr FeFlood_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeFlood_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeFlood_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -147,7 +147,7 @@ instance Attr FeGaussianBlur_ ColorInterpolationFilters (NonEmpty.NonEmpty Event
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeGaussianBlur_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -161,7 +161,7 @@ instance Attr FeImage_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeImage_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeImage_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -175,7 +175,7 @@ instance Attr FeMerge_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeMerge_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeMerge_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -189,7 +189,7 @@ instance Attr FeMorphology_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeMorphology_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeMorphology_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -203,7 +203,7 @@ instance Attr FeOffset_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeOffset_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeOffset_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -217,7 +217,7 @@ instance Attr FeSpecularLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeSpecularLighting_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -231,7 +231,7 @@ instance Attr FeTile_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeTile_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeTile_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -245,7 +245,7 @@ instance Attr FeTurbulence_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeTurbulence_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr FeTurbulence_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -259,7 +259,7 @@ instance Attr Filter_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Filter_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr Filter_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -273,7 +273,7 @@ instance Attr Image_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  S
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Image_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr Image_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -287,7 +287,7 @@ instance Attr Switch_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Switch_ ColorInterpolationFilters  String  where
-  attr ColorInterpolationFilters value = unsafeAttribute $ This
+  attr ColorInterpolationFilters value = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: prop' value }
 instance Attr Switch_ ColorInterpolationFilters (Event.Event  String ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $
@@ -301,7 +301,7 @@ instance Attr everything ColorInterpolationFilters (NonEmpty.NonEmpty Event.Even
         { key: "color-interpolation-filters", value: unset' }
     )
 instance Attr everything ColorInterpolationFilters  Unit  where
-  attr ColorInterpolationFilters _ = unsafeAttribute $ This
+  attr ColorInterpolationFilters _ = unsafeAttribute $ This $ pure $
     { key: "color-interpolation-filters", value: unset' }
 instance Attr everything ColorInterpolationFilters (Event.Event  Unit ) where
   attr ColorInterpolationFilters eventValue = unsafeAttribute $ That $

@@ -19,7 +19,7 @@ instance Attr FeConvolveMatrix_ KernelUnitLength (NonEmpty.NonEmpty Event.Event 
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ KernelUnitLength  String  where
-  attr KernelUnitLength value = unsafeAttribute $ This
+  attr KernelUnitLength value = unsafeAttribute $ This $ pure $
     { key: "kernelUnitLength", value: prop' value }
 instance Attr FeConvolveMatrix_ KernelUnitLength (Event.Event  String ) where
   attr KernelUnitLength eventValue = unsafeAttribute $ That $ eventValue
@@ -32,7 +32,7 @@ instance Attr FeDiffuseLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ KernelUnitLength  String  where
-  attr KernelUnitLength value = unsafeAttribute $ This
+  attr KernelUnitLength value = unsafeAttribute $ This $ pure $
     { key: "kernelUnitLength", value: prop' value }
 instance Attr FeDiffuseLighting_ KernelUnitLength (Event.Event  String ) where
   attr KernelUnitLength eventValue = unsafeAttribute $ That $ eventValue
@@ -45,7 +45,7 @@ instance Attr FeSpecularLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Even
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeSpecularLighting_ KernelUnitLength  String  where
-  attr KernelUnitLength value = unsafeAttribute $ This
+  attr KernelUnitLength value = unsafeAttribute $ This $ pure $
     { key: "kernelUnitLength", value: prop' value }
 instance Attr FeSpecularLighting_ KernelUnitLength (Event.Event  String ) where
   attr KernelUnitLength eventValue = unsafeAttribute $ That $ eventValue
@@ -56,7 +56,7 @@ instance Attr everything KernelUnitLength (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "kernelUnitLength", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "kernelUnitLength", value: unset' })
 instance Attr everything KernelUnitLength  Unit  where
-  attr KernelUnitLength _ = unsafeAttribute $ This
+  attr KernelUnitLength _ = unsafeAttribute $ This $ pure $
     { key: "kernelUnitLength", value: unset' }
 instance Attr everything KernelUnitLength (Event.Event  Unit ) where
   attr KernelUnitLength eventValue = unsafeAttribute $ That $ eventValue

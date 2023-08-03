@@ -136,7 +136,7 @@ instance Attr A_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr A_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr A_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -147,7 +147,7 @@ instance Attr Abbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Abbr_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Abbr_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -158,7 +158,7 @@ instance Attr Acronym_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Acronym_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Acronym_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -169,7 +169,7 @@ instance Attr Address_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Address_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Address_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -180,7 +180,7 @@ instance Attr Applet_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Applet_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Applet_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,7 +191,7 @@ instance Attr Area_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Area_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Area_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -202,7 +202,7 @@ instance Attr Article_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Article_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Article_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -213,7 +213,7 @@ instance Attr Aside_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Aside_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Aside_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -224,7 +224,7 @@ instance Attr Audio_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Audio_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Audio_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -235,7 +235,7 @@ instance Attr B_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr B_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr B_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -246,7 +246,7 @@ instance Attr Base_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Base_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Base_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -257,7 +257,7 @@ instance Attr Basefont_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Basefont_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Basefont_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -268,7 +268,7 @@ instance Attr Bdi_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdi_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Bdi_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -279,7 +279,7 @@ instance Attr Bdo_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdo_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Bdo_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -290,7 +290,7 @@ instance Attr Big_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Big_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Big_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -301,7 +301,7 @@ instance Attr Blockquote_ Translate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Blockquote_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Blockquote_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -312,7 +312,7 @@ instance Attr Body_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Body_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Body_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -323,7 +323,7 @@ instance Attr Br_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Br_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Br_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -334,7 +334,7 @@ instance Attr Button_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Button_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Button_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -345,7 +345,7 @@ instance Attr Canvas_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Canvas_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Canvas_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -356,7 +356,7 @@ instance Attr Caption_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Caption_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Caption_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -367,7 +367,7 @@ instance Attr Center_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Center_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Center_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -378,7 +378,7 @@ instance Attr Cite_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Cite_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Cite_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -389,7 +389,7 @@ instance Attr Code_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Code_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Code_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -400,7 +400,7 @@ instance Attr Col_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Col_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Col_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -411,7 +411,7 @@ instance Attr Colgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Colgroup_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Colgroup_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -422,7 +422,7 @@ instance Attr Xdata_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Xdata_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Xdata_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -433,7 +433,7 @@ instance Attr Datalist_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Datalist_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Datalist_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -444,7 +444,7 @@ instance Attr Dd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dd_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dd_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -455,7 +455,7 @@ instance Attr Del_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Del_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Del_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -466,7 +466,7 @@ instance Attr Details_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Details_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Details_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -477,7 +477,7 @@ instance Attr Dfn_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dfn_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dfn_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -488,7 +488,7 @@ instance Attr Dialog_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dialog_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dialog_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -499,7 +499,7 @@ instance Attr Dir_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dir_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dir_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -510,7 +510,7 @@ instance Attr Div_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Div_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Div_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -521,7 +521,7 @@ instance Attr Dl_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dl_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dl_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -532,7 +532,7 @@ instance Attr Dt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dt_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Dt_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -543,7 +543,7 @@ instance Attr Em_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Em_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Em_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -554,7 +554,7 @@ instance Attr Embed_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Embed_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Embed_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -565,7 +565,7 @@ instance Attr Fieldset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Fieldset_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Fieldset_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -576,7 +576,7 @@ instance Attr Figcaption_ Translate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figcaption_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Figcaption_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -587,7 +587,7 @@ instance Attr Figure_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figure_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Figure_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -598,7 +598,7 @@ instance Attr Font_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Font_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Font_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -609,7 +609,7 @@ instance Attr Footer_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Footer_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Footer_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -620,7 +620,7 @@ instance Attr Form_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Form_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Form_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -631,7 +631,7 @@ instance Attr Frame_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frame_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Frame_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -642,7 +642,7 @@ instance Attr Frameset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frameset_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Frameset_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -653,7 +653,7 @@ instance Attr H1_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H1_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H1_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -664,7 +664,7 @@ instance Attr H2_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H2_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H2_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -675,7 +675,7 @@ instance Attr H3_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H3_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H3_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -686,7 +686,7 @@ instance Attr H4_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H4_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H4_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -697,7 +697,7 @@ instance Attr H5_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H5_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H5_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -708,7 +708,7 @@ instance Attr H6_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H6_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr H6_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -719,7 +719,7 @@ instance Attr Head_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Head_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Head_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -730,7 +730,7 @@ instance Attr Header_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Header_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Header_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -741,7 +741,7 @@ instance Attr Hr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Hr_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Hr_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -752,7 +752,7 @@ instance Attr Html_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Html_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Html_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -763,7 +763,7 @@ instance Attr I_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr I_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr I_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -774,7 +774,7 @@ instance Attr Iframe_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Iframe_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Iframe_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -785,7 +785,7 @@ instance Attr Img_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Img_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Img_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -796,7 +796,7 @@ instance Attr Input_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Input_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Input_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -807,7 +807,7 @@ instance Attr Ins_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ins_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Ins_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -818,7 +818,7 @@ instance Attr Kbd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Kbd_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Kbd_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -829,7 +829,7 @@ instance Attr Label_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Label_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Label_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -840,7 +840,7 @@ instance Attr Legend_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Legend_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Legend_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -851,7 +851,7 @@ instance Attr Li_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Li_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Li_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -862,7 +862,7 @@ instance Attr Link_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Link_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Link_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -873,7 +873,7 @@ instance Attr Main_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Main_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Main_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -884,7 +884,7 @@ instance Attr Map_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Map_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Map_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -895,7 +895,7 @@ instance Attr Mark_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Mark_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Mark_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -906,7 +906,7 @@ instance Attr Meta_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meta_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Meta_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -917,7 +917,7 @@ instance Attr Meter_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meter_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Meter_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -928,7 +928,7 @@ instance Attr Nav_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Nav_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Nav_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -939,7 +939,7 @@ instance Attr Noframes_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noframes_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Noframes_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -950,7 +950,7 @@ instance Attr Noscript_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noscript_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Noscript_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -961,7 +961,7 @@ instance Attr Object_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Object_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Object_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -972,7 +972,7 @@ instance Attr Ol_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ol_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Ol_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -983,7 +983,7 @@ instance Attr Optgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Optgroup_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Optgroup_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -994,7 +994,7 @@ instance Attr Option_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Option_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Option_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1005,7 +1005,7 @@ instance Attr Output_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Output_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Output_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1016,7 +1016,7 @@ instance Attr P_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr P_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr P_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1027,7 +1027,7 @@ instance Attr Param_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Param_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Param_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1038,7 +1038,7 @@ instance Attr Picture_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Picture_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Picture_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1049,7 +1049,7 @@ instance Attr Pre_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Pre_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Pre_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1060,7 +1060,7 @@ instance Attr Progress_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Progress_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Progress_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1071,7 +1071,7 @@ instance Attr Q_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Q_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Q_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1082,7 +1082,7 @@ instance Attr Rp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rp_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Rp_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1093,7 +1093,7 @@ instance Attr Rt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rt_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Rt_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1104,7 +1104,7 @@ instance Attr Ruby_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ruby_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Ruby_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1115,7 +1115,7 @@ instance Attr S_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr S_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr S_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1126,7 +1126,7 @@ instance Attr Samp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Samp_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Samp_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1137,7 +1137,7 @@ instance Attr Script_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Script_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Script_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1148,7 +1148,7 @@ instance Attr Section_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Section_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Section_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1159,7 +1159,7 @@ instance Attr Select_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Select_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Select_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1170,7 +1170,7 @@ instance Attr Small_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Small_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Small_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1181,7 +1181,7 @@ instance Attr Source_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Source_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Source_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1192,7 +1192,7 @@ instance Attr Span_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Span_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Span_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1203,7 +1203,7 @@ instance Attr Strike_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strike_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Strike_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1214,7 +1214,7 @@ instance Attr Strong_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strong_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Strong_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1225,7 +1225,7 @@ instance Attr Style_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Style_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Style_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1236,7 +1236,7 @@ instance Attr Sub_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sub_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Sub_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1247,7 +1247,7 @@ instance Attr Summary_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Summary_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Summary_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1258,7 +1258,7 @@ instance Attr Sup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sup_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Sup_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1269,7 +1269,7 @@ instance Attr Svg_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Svg_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Svg_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1280,7 +1280,7 @@ instance Attr Table_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Table_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Table_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1291,7 +1291,7 @@ instance Attr Tbody_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tbody_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Tbody_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1302,7 +1302,7 @@ instance Attr Td_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Td_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Td_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1313,7 +1313,7 @@ instance Attr Template_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Template_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Template_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1324,7 +1324,7 @@ instance Attr Textarea_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Textarea_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Textarea_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1335,7 +1335,7 @@ instance Attr Tfoot_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tfoot_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Tfoot_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1346,7 +1346,7 @@ instance Attr Th_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Th_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Th_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1357,7 +1357,7 @@ instance Attr Thead_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Thead_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Thead_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1368,7 +1368,7 @@ instance Attr Time_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Time_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Time_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1379,7 +1379,7 @@ instance Attr Title_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Title_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Title_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1390,7 +1390,7 @@ instance Attr Tr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tr_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Tr_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1401,7 +1401,7 @@ instance Attr Track_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Track_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Track_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1412,7 +1412,7 @@ instance Attr Tt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tt_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Tt_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1423,7 +1423,7 @@ instance Attr U_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr U_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr U_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1434,7 +1434,7 @@ instance Attr Ul_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ul_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Ul_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1445,7 +1445,7 @@ instance Attr Var_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Var_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Var_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1456,7 +1456,7 @@ instance Attr Video_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Video_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Video_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1467,7 +1467,7 @@ instance Attr Wbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Wbr_ Translate  String  where
-  attr Translate value = unsafeAttribute $ This
+  attr Translate value = unsafeAttribute $ This $ pure $
     { key: "translate", value: prop' value }
 instance Attr Wbr_ Translate (Event.Event  String ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1478,7 +1478,7 @@ instance Attr everything Translate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "translate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "translate", value: unset' })
 instance Attr everything Translate  Unit  where
-  attr Translate _ = unsafeAttribute $ This
+  attr Translate _ = unsafeAttribute $ This $ pure $
     { key: "translate", value: unset' }
 instance Attr everything Translate (Event.Event  Unit ) where
   attr Translate eventValue = unsafeAttribute $ That $ eventValue <#>

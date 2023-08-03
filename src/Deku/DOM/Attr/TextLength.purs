@@ -17,7 +17,7 @@ instance Attr Text_ TextLength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "textLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "textLength", value: prop' value })
 instance Attr Text_ TextLength  String  where
-  attr TextLength value = unsafeAttribute $ This
+  attr TextLength value = unsafeAttribute $ This $ pure $
     { key: "textLength", value: prop' value }
 instance Attr Text_ TextLength (Event.Event  String ) where
   attr TextLength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr TextPath_ TextLength (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "textLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "textLength", value: prop' value })
 instance Attr TextPath_ TextLength  String  where
-  attr TextLength value = unsafeAttribute $ This
+  attr TextLength value = unsafeAttribute $ This $ pure $
     { key: "textLength", value: prop' value }
 instance Attr TextPath_ TextLength (Event.Event  String ) where
   attr TextLength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr Tspan_ TextLength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "textLength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "textLength", value: prop' value })
 instance Attr Tspan_ TextLength  String  where
-  attr TextLength value = unsafeAttribute $ This
+  attr TextLength value = unsafeAttribute $ This $ pure $
     { key: "textLength", value: prop' value }
 instance Attr Tspan_ TextLength (Event.Event  String ) where
   attr TextLength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything TextLength (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "textLength", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "textLength", value: unset' })
 instance Attr everything TextLength  Unit  where
-  attr TextLength _ = unsafeAttribute $ This
+  attr TextLength _ = unsafeAttribute $ This $ pure $
     { key: "textLength", value: unset' }
 instance Attr everything TextLength (Event.Event  Unit ) where
   attr TextLength eventValue = unsafeAttribute $ That $ eventValue <#>

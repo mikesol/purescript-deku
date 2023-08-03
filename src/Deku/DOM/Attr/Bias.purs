@@ -15,7 +15,7 @@ instance Attr FeConvolveMatrix_ Bias (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "bias", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "bias", value: prop' value })
 instance Attr FeConvolveMatrix_ Bias  String  where
-  attr Bias value = unsafeAttribute $ This
+  attr Bias value = unsafeAttribute $ This $ pure $
     { key: "bias", value: prop' value }
 instance Attr FeConvolveMatrix_ Bias (Event.Event  String ) where
   attr Bias eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -25,7 +25,7 @@ instance Attr everything Bias (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Bias bothValues = unsafeAttribute $ Both { key: "bias", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "bias", value: unset' })
 instance Attr everything Bias  Unit  where
-  attr Bias _ = unsafeAttribute $ This { key: "bias", value: unset' }
+  attr Bias _ = unsafeAttribute $ This $ pure $ { key: "bias", value: unset' }
 instance Attr everything Bias (Event.Event  Unit ) where
   attr Bias eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "bias", value: unset' }

@@ -152,7 +152,7 @@ instance Attr A_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr A_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr A_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -163,7 +163,7 @@ instance Attr Abbr_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Abbr_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Abbr_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -174,7 +174,7 @@ instance Attr Acronym_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Acronym_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Acronym_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -185,7 +185,7 @@ instance Attr Address_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Address_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Address_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -196,7 +196,7 @@ instance Attr Applet_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Applet_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Applet_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -207,7 +207,7 @@ instance Attr Area_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Area_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Area_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -218,7 +218,7 @@ instance Attr Article_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Article_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Article_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -229,7 +229,7 @@ instance Attr Aside_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Aside_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Aside_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -240,7 +240,7 @@ instance Attr Audio_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Audio_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Audio_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -251,7 +251,7 @@ instance Attr B_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr B_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr B_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -262,7 +262,7 @@ instance Attr Base_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Base_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Base_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -273,7 +273,7 @@ instance Attr Basefont_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Basefont_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Basefont_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -284,7 +284,7 @@ instance Attr Bdi_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Bdi_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Bdi_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -295,7 +295,7 @@ instance Attr Bdo_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Bdo_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Bdo_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -306,7 +306,7 @@ instance Attr Big_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Big_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Big_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -317,7 +317,7 @@ instance Attr Blockquote_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Blockquote_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Blockquote_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -328,7 +328,7 @@ instance Attr Body_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Body_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Body_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -339,7 +339,7 @@ instance Attr Br_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Br_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Br_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -350,7 +350,7 @@ instance Attr Button_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Button_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Button_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -361,7 +361,7 @@ instance Attr Canvas_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Canvas_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Canvas_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -372,7 +372,7 @@ instance Attr Caption_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Caption_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Caption_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -383,7 +383,7 @@ instance Attr Center_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Center_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Center_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -394,7 +394,7 @@ instance Attr Cite_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Cite_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Cite_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -405,7 +405,7 @@ instance Attr Code_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Code_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Code_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -416,7 +416,7 @@ instance Attr Col_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Col_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Col_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -427,7 +427,7 @@ instance Attr Colgroup_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Colgroup_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Colgroup_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -438,7 +438,7 @@ instance Attr Xdata_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Xdata_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Xdata_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -449,7 +449,7 @@ instance Attr Datalist_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Datalist_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Datalist_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -460,7 +460,7 @@ instance Attr Dd_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dd_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dd_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -471,7 +471,7 @@ instance Attr Del_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Del_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Del_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -482,7 +482,7 @@ instance Attr Details_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Details_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Details_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -493,7 +493,7 @@ instance Attr Dfn_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dfn_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dfn_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -504,7 +504,7 @@ instance Attr Dialog_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dialog_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dialog_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -515,7 +515,7 @@ instance Attr Dir_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dir_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dir_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -526,7 +526,7 @@ instance Attr Div_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Div_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Div_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -537,7 +537,7 @@ instance Attr Dl_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dl_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dl_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -548,7 +548,7 @@ instance Attr Dt_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Dt_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Dt_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -559,7 +559,7 @@ instance Attr Em_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Em_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Em_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -570,7 +570,7 @@ instance Attr Embed_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Embed_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Embed_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -581,7 +581,7 @@ instance Attr Fieldset_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Fieldset_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Fieldset_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -592,7 +592,7 @@ instance Attr Figcaption_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Figcaption_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Figcaption_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -603,7 +603,7 @@ instance Attr Figure_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Figure_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Figure_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -614,7 +614,7 @@ instance Attr Font_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Font_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Font_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -625,7 +625,7 @@ instance Attr Footer_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Footer_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Footer_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -636,7 +636,7 @@ instance Attr Form_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Form_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Form_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -647,7 +647,7 @@ instance Attr Frame_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Frame_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Frame_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -658,7 +658,7 @@ instance Attr Frameset_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Frameset_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Frameset_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -669,7 +669,7 @@ instance Attr H1_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H1_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H1_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -680,7 +680,7 @@ instance Attr H2_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H2_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H2_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -691,7 +691,7 @@ instance Attr H3_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H3_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H3_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -702,7 +702,7 @@ instance Attr H4_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H4_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H4_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -713,7 +713,7 @@ instance Attr H5_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H5_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H5_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -724,7 +724,7 @@ instance Attr H6_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr H6_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr H6_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -735,7 +735,7 @@ instance Attr Head_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Head_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Head_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -746,7 +746,7 @@ instance Attr Header_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Header_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Header_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -757,7 +757,7 @@ instance Attr Hr_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Hr_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Hr_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -768,7 +768,7 @@ instance Attr Html_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Html_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Html_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -779,7 +779,7 @@ instance Attr I_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr I_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr I_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -790,7 +790,7 @@ instance Attr Iframe_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Iframe_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Iframe_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -801,7 +801,7 @@ instance Attr Img_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Img_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Img_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -812,7 +812,7 @@ instance Attr Input_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Input_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Input_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -823,7 +823,7 @@ instance Attr Ins_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Ins_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Ins_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -834,7 +834,7 @@ instance Attr Kbd_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Kbd_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Kbd_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -845,7 +845,7 @@ instance Attr Label_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Label_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Label_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -856,7 +856,7 @@ instance Attr Legend_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Legend_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Legend_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -867,7 +867,7 @@ instance Attr Li_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Li_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Li_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -878,7 +878,7 @@ instance Attr Link_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Link_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Link_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -889,7 +889,7 @@ instance Attr Main_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Main_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Main_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -900,7 +900,7 @@ instance Attr Map_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Map_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Map_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -911,7 +911,7 @@ instance Attr Mark_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Mark_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Mark_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -922,7 +922,7 @@ instance Attr Meta_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Meta_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Meta_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -933,7 +933,7 @@ instance Attr Meter_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Meter_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Meter_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -944,7 +944,7 @@ instance Attr Nav_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Nav_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Nav_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -955,7 +955,7 @@ instance Attr Noframes_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Noframes_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Noframes_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -966,7 +966,7 @@ instance Attr Noscript_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Noscript_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Noscript_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -977,7 +977,7 @@ instance Attr Object_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Object_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Object_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -988,7 +988,7 @@ instance Attr Ol_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Ol_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Ol_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -999,7 +999,7 @@ instance Attr Optgroup_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Optgroup_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Optgroup_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1010,7 +1010,7 @@ instance Attr Option_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Option_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Option_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1021,7 +1021,7 @@ instance Attr Output_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Output_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Output_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1032,7 +1032,7 @@ instance Attr P_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr P_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr P_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1043,7 +1043,7 @@ instance Attr Param_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Param_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Param_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1054,7 +1054,7 @@ instance Attr Picture_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Picture_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Picture_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1065,7 +1065,7 @@ instance Attr Pre_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Pre_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Pre_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1076,7 +1076,7 @@ instance Attr Progress_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Progress_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Progress_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1087,7 +1087,7 @@ instance Attr Q_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Q_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Q_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1098,7 +1098,7 @@ instance Attr Rp_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Rp_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Rp_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1109,7 +1109,7 @@ instance Attr Rt_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Rt_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Rt_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1120,7 +1120,7 @@ instance Attr Ruby_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Ruby_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Ruby_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1131,7 +1131,7 @@ instance Attr S_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr S_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr S_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1142,7 +1142,7 @@ instance Attr Samp_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Samp_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Samp_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1153,7 +1153,7 @@ instance Attr Script_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Script_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Script_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1164,7 +1164,7 @@ instance Attr Section_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Section_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Section_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1175,7 +1175,7 @@ instance Attr Select_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Select_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Select_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1186,7 +1186,7 @@ instance Attr Small_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Small_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Small_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1197,7 +1197,7 @@ instance Attr Source_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Source_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Source_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1208,7 +1208,7 @@ instance Attr Span_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Span_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Span_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1219,7 +1219,7 @@ instance Attr Strike_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Strike_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Strike_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1230,7 +1230,7 @@ instance Attr Strong_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Strong_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Strong_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1241,7 +1241,7 @@ instance Attr Style_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Style_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Style_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1252,7 +1252,7 @@ instance Attr Sub_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Sub_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Sub_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1263,7 +1263,7 @@ instance Attr Summary_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Summary_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Summary_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1274,7 +1274,7 @@ instance Attr Sup_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Sup_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Sup_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1285,7 +1285,7 @@ instance Attr Svg_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Svg_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Svg_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1296,7 +1296,7 @@ instance Attr Table_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Table_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Table_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1307,7 +1307,7 @@ instance Attr Tbody_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Tbody_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Tbody_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1318,7 +1318,7 @@ instance Attr Td_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Td_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Td_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1329,7 +1329,7 @@ instance Attr Template_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Template_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Template_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1340,7 +1340,7 @@ instance Attr Textarea_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Textarea_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Textarea_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1351,7 +1351,7 @@ instance Attr Tfoot_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Tfoot_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Tfoot_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1362,7 +1362,7 @@ instance Attr Th_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Th_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Th_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1373,7 +1373,7 @@ instance Attr Thead_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Thead_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Thead_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1384,7 +1384,7 @@ instance Attr Time_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Time_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Time_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1395,7 +1395,7 @@ instance Attr Title_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Title_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Title_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1406,7 +1406,7 @@ instance Attr Tr_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Tr_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Tr_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1417,7 +1417,7 @@ instance Attr Track_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Track_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Track_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1428,7 +1428,7 @@ instance Attr Tt_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Tt_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Tt_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1439,7 +1439,7 @@ instance Attr U_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr U_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr U_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1450,7 +1450,7 @@ instance Attr Ul_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Ul_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Ul_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1461,7 +1461,7 @@ instance Attr Var_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Var_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Var_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1472,7 +1472,7 @@ instance Attr Video_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Video_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Video_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1483,7 +1483,7 @@ instance Attr Wbr_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Wbr_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Wbr_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1494,7 +1494,7 @@ instance Attr Circle_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Circle_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Circle_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1505,7 +1505,7 @@ instance Attr Ellipse_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Ellipse_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Ellipse_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1516,7 +1516,7 @@ instance Attr ForeignObject_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr ForeignObject_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr ForeignObject_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1527,7 +1527,7 @@ instance Attr G_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr G_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr G_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1538,7 +1538,7 @@ instance Attr Line_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Line_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Line_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1549,7 +1549,7 @@ instance Attr Marker_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Marker_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Marker_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1560,7 +1560,7 @@ instance Attr Path_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Path_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Path_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1571,7 +1571,7 @@ instance Attr Polygon_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Polygon_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Polygon_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1582,7 +1582,7 @@ instance Attr Polyline_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Polyline_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Polyline_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1593,7 +1593,7 @@ instance Attr Rect_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Rect_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Rect_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1604,7 +1604,7 @@ instance Attr Symbol_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Symbol_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Symbol_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1615,7 +1615,7 @@ instance Attr Text_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Text_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Text_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1626,7 +1626,7 @@ instance Attr TextPath_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr TextPath_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr TextPath_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1637,7 +1637,7 @@ instance Attr Tspan_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Tspan_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Tspan_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1648,7 +1648,7 @@ instance Attr Use_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr Use_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr Use_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1659,7 +1659,7 @@ instance Attr View_ Role (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "role", value: prop' value })
 instance Attr View_ Role  String  where
-  attr Role value = unsafeAttribute $ This
+  attr Role value = unsafeAttribute $ This $ pure $
     { key: "role", value: prop' value }
 instance Attr View_ Role (Event.Event  String ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -1669,7 +1669,7 @@ instance Attr everything Role (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Role bothValues = unsafeAttribute $ Both { key: "role", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "role", value: unset' })
 instance Attr everything Role  Unit  where
-  attr Role _ = unsafeAttribute $ This { key: "role", value: unset' }
+  attr Role _ = unsafeAttribute $ This $ pure $ { key: "role", value: unset' }
 instance Attr everything Role (Event.Event  Unit ) where
   attr Role eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "role", value: unset' }

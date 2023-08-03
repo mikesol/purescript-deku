@@ -15,7 +15,7 @@ instance Attr Iframe_ Sandbox (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "sandbox", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "sandbox", value: prop' value })
 instance Attr Iframe_ Sandbox  String  where
-  attr Sandbox value = unsafeAttribute $ This
+  attr Sandbox value = unsafeAttribute $ This $ pure $
     { key: "sandbox", value: prop' value }
 instance Attr Iframe_ Sandbox (Event.Event  String ) where
   attr Sandbox eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Sandbox (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "sandbox", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "sandbox", value: unset' })
 instance Attr everything Sandbox  Unit  where
-  attr Sandbox _ = unsafeAttribute $ This { key: "sandbox", value: unset' }
+  attr Sandbox _ = unsafeAttribute $ This $ pure $ { key: "sandbox", value: unset' }
 instance Attr everything Sandbox (Event.Event  Unit ) where
   attr Sandbox eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "sandbox", value: unset' }

@@ -37,7 +37,7 @@ instance Attr FeBlend_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String )
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeBlend_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeBlend_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -50,7 +50,7 @@ instance Attr FeColorMatrix_ DominantBaseline (NonEmpty.NonEmpty Event.Event  St
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeColorMatrix_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeColorMatrix_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -63,7 +63,7 @@ instance Attr FeComponentTransfer_ DominantBaseline (NonEmpty.NonEmpty Event.Eve
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeComponentTransfer_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeComponentTransfer_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -76,7 +76,7 @@ instance Attr FeComposite_ DominantBaseline (NonEmpty.NonEmpty Event.Event  Stri
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeComposite_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeComposite_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -89,7 +89,7 @@ instance Attr FeConvolveMatrix_ DominantBaseline (NonEmpty.NonEmpty Event.Event 
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeConvolveMatrix_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -102,7 +102,7 @@ instance Attr FeDiffuseLighting_ DominantBaseline (NonEmpty.NonEmpty Event.Event
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeDiffuseLighting_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -115,7 +115,7 @@ instance Attr FeDisplacementMap_ DominantBaseline (NonEmpty.NonEmpty Event.Event
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeDisplacementMap_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeDisplacementMap_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -128,7 +128,7 @@ instance Attr FeFlood_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String )
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeFlood_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeFlood_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -141,7 +141,7 @@ instance Attr FeGaussianBlur_ DominantBaseline (NonEmpty.NonEmpty Event.Event  S
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeGaussianBlur_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeGaussianBlur_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -154,7 +154,7 @@ instance Attr FeImage_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String )
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeImage_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeImage_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -167,7 +167,7 @@ instance Attr FeMerge_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String )
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeMerge_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeMerge_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -180,7 +180,7 @@ instance Attr FeMorphology_ DominantBaseline (NonEmpty.NonEmpty Event.Event  Str
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeMorphology_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeMorphology_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -193,7 +193,7 @@ instance Attr FeOffset_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String 
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeOffset_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeOffset_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -206,7 +206,7 @@ instance Attr FeSpecularLighting_ DominantBaseline (NonEmpty.NonEmpty Event.Even
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeSpecularLighting_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeSpecularLighting_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -219,7 +219,7 @@ instance Attr FeTile_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeTile_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeTile_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -232,7 +232,7 @@ instance Attr FeTurbulence_ DominantBaseline (NonEmpty.NonEmpty Event.Event  Str
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr FeTurbulence_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr FeTurbulence_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -245,7 +245,7 @@ instance Attr Filter_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr Filter_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr Filter_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -258,7 +258,7 @@ instance Attr Image_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr Image_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr Image_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -271,7 +271,7 @@ instance Attr Switch_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr Switch_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr Switch_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -284,7 +284,7 @@ instance Attr Text_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr Text_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr Text_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -297,7 +297,7 @@ instance Attr Tspan_ DominantBaseline (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "dominant-baseline", value: prop' value }
     )
 instance Attr Tspan_ DominantBaseline  String  where
-  attr DominantBaseline value = unsafeAttribute $ This
+  attr DominantBaseline value = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: prop' value }
 instance Attr Tspan_ DominantBaseline (Event.Event  String ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue
@@ -308,7 +308,7 @@ instance Attr everything DominantBaseline (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "dominant-baseline", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dominant-baseline", value: unset' })
 instance Attr everything DominantBaseline  Unit  where
-  attr DominantBaseline _ = unsafeAttribute $ This
+  attr DominantBaseline _ = unsafeAttribute $ This $ pure $
     { key: "dominant-baseline", value: unset' }
 instance Attr everything DominantBaseline (Event.Event  Unit ) where
   attr DominantBaseline eventValue = unsafeAttribute $ That $ eventValue

@@ -31,7 +31,7 @@ instance Attr Circle_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Circle_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Circle_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,7 +42,7 @@ instance Attr Ellipse_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Ellipse_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Ellipse_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,7 +53,7 @@ instance Attr ForeignObject_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr ForeignObject_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr ForeignObject_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,7 +64,7 @@ instance Attr G_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr G_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr G_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,7 +75,7 @@ instance Attr Line_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Line_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Line_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,7 +86,7 @@ instance Attr Marker_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Marker_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Marker_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,7 +97,7 @@ instance Attr Path_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Path_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Path_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,7 +108,7 @@ instance Attr Polygon_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Polygon_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Polygon_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,7 +119,7 @@ instance Attr Polyline_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Polyline_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Polyline_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,7 +130,7 @@ instance Attr Rect_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Rect_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Rect_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,7 +141,7 @@ instance Attr Svg_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Svg_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Svg_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr Symbol_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Symbol_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Symbol_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -163,7 +163,7 @@ instance Attr Text_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Text_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Text_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr TextPath_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr TextPath_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr TextPath_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,7 +185,7 @@ instance Attr Tspan_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Tspan_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Tspan_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,7 +196,7 @@ instance Attr Use_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr Use_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr Use_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -207,7 +207,7 @@ instance Attr View_ AriaSort (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-sort", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-sort", value: prop' value })
 instance Attr View_ AriaSort  String  where
-  attr AriaSort value = unsafeAttribute $ This
+  attr AriaSort value = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: prop' value }
 instance Attr View_ AriaSort (Event.Event  String ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -218,7 +218,7 @@ instance Attr everything AriaSort (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "aria-sort", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-sort", value: unset' })
 instance Attr everything AriaSort  Unit  where
-  attr AriaSort _ = unsafeAttribute $ This
+  attr AriaSort _ = unsafeAttribute $ This $ pure $
     { key: "aria-sort", value: unset' }
 instance Attr everything AriaSort (Event.Event  Unit ) where
   attr AriaSort eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

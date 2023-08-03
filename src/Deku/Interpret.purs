@@ -181,10 +181,10 @@ giveNewParentOrReconstruct
           , scope
           }
           di
-        for_ sub executor
+        for_ sub (liftST >=> executor)
         deferId <- liftST ids
         let deferredPath = ipl <> pure deferId
-        for_ unsub (executor <<< deferPayload deferredPath)
+        for_ unsub (liftST <<< map (deferPayload deferredPath) >=> executor)
         unsubscribe <- liftST $ subscribe
           (redecorateDeferredPayload deferredPath <$> evt)
           executor

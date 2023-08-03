@@ -16,7 +16,7 @@ instance Attr LinearGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  Strin
     { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr LinearGradient_ SpreadMethod  String  where
-  attr SpreadMethod value = unsafeAttribute $ This
+  attr SpreadMethod value = unsafeAttribute $ This $ pure $
     { key: "spreadMethod", value: prop' value }
 instance Attr LinearGradient_ SpreadMethod (Event.Event  String ) where
   attr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr RadialGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  Strin
     { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr RadialGradient_ SpreadMethod  String  where
-  attr SpreadMethod value = unsafeAttribute $ This
+  attr SpreadMethod value = unsafeAttribute $ This $ pure $
     { key: "spreadMethod", value: prop' value }
 instance Attr RadialGradient_ SpreadMethod (Event.Event  String ) where
   attr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything SpreadMethod (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "spreadMethod", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
 instance Attr everything SpreadMethod  Unit  where
-  attr SpreadMethod _ = unsafeAttribute $ This
+  attr SpreadMethod _ = unsafeAttribute $ This $ pure $
     { key: "spreadMethod", value: unset' }
 instance Attr everything SpreadMethod (Event.Event  Unit ) where
   attr SpreadMethod eventValue = unsafeAttribute $ That $ eventValue <#>

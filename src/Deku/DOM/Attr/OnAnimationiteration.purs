@@ -17,7 +17,7 @@ instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  Cb )
         { key: "animationiteration", value: cb' value }
     )
 instance Attr anything OnAnimationiteration  Cb  where
-  attr OnAnimationiteration value = unsafeAttribute $ This
+  attr OnAnimationiteration value = unsafeAttribute $ This $ pure $
     { key: "animationiteration", value: cb' value }
 instance Attr anything OnAnimationiteration (Event.Event  Cb ) where
   attr OnAnimationiteration eventValue = unsafeAttribute $ That $
@@ -32,7 +32,7 @@ instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "animationiteration", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnAnimationiteration  (Effect Unit)  where
-  attr OnAnimationiteration value = unsafeAttribute $ This
+  attr OnAnimationiteration value = unsafeAttribute $ This $ pure $
     { key: "animationiteration", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnAnimationiteration (Event.Event  (Effect Unit) ) where
   attr OnAnimationiteration eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr anything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "animationiteration", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnAnimationiteration  (Effect Boolean)  where
-  attr OnAnimationiteration value = unsafeAttribute $ This
+  attr OnAnimationiteration value = unsafeAttribute $ This $ pure $
     { key: "animationiteration", value: cb' (Cb (const value)) }
 instance Attr anything OnAnimationiteration (Event.Event  (Effect Boolean) ) where
   attr OnAnimationiteration eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr everything OnAnimationiteration (NonEmpty.NonEmpty Event.Event  Un
     { key: "animationiteration", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "animationiteration", value: unset' })
 instance Attr everything OnAnimationiteration  Unit  where
-  attr OnAnimationiteration _ = unsafeAttribute $ This
+  attr OnAnimationiteration _ = unsafeAttribute $ This $ pure $
     { key: "animationiteration", value: unset' }
 instance Attr everything OnAnimationiteration (Event.Event  Unit ) where
   attr OnAnimationiteration eventValue = unsafeAttribute $ That $

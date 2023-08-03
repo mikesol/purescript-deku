@@ -16,7 +16,7 @@ instance Attr Input_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "placeholder", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Input_ Placeholder  String  where
-  attr Placeholder value = unsafeAttribute $ This
+  attr Placeholder value = unsafeAttribute $ This $ pure $
     { key: "placeholder", value: prop' value }
 instance Attr Input_ Placeholder (Event.Event  String ) where
   attr Placeholder eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Textarea_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "placeholder", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Textarea_ Placeholder  String  where
-  attr Placeholder value = unsafeAttribute $ This
+  attr Placeholder value = unsafeAttribute $ This $ pure $
     { key: "placeholder", value: prop' value }
 instance Attr Textarea_ Placeholder (Event.Event  String ) where
   attr Placeholder eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Placeholder (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "placeholder", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "placeholder", value: unset' })
 instance Attr everything Placeholder  Unit  where
-  attr Placeholder _ = unsafeAttribute $ This
+  attr Placeholder _ = unsafeAttribute $ This $ pure $
     { key: "placeholder", value: unset' }
 instance Attr everything Placeholder (Event.Event  Unit ) where
   attr Placeholder eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -18,7 +18,7 @@ instance Attr FeFuncA_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncA_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ This
+  attr Intercept value = unsafeAttribute $ This $ pure $
     { key: "intercept", value: prop' value }
 instance Attr FeFuncA_ Intercept (Event.Event  String ) where
   attr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr FeFuncB_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncB_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ This
+  attr Intercept value = unsafeAttribute $ This $ pure $
     { key: "intercept", value: prop' value }
 instance Attr FeFuncB_ Intercept (Event.Event  String ) where
   attr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr FeFuncG_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncG_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ This
+  attr Intercept value = unsafeAttribute $ This $ pure $
     { key: "intercept", value: prop' value }
 instance Attr FeFuncG_ Intercept (Event.Event  String ) where
   attr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr FeFuncR_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncR_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ This
+  attr Intercept value = unsafeAttribute $ This $ pure $
     { key: "intercept", value: prop' value }
 instance Attr FeFuncR_ Intercept (Event.Event  String ) where
   attr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Intercept (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "intercept", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "intercept", value: unset' })
 instance Attr everything Intercept  Unit  where
-  attr Intercept _ = unsafeAttribute $ This
+  attr Intercept _ = unsafeAttribute $ This $ pure $
     { key: "intercept", value: unset' }
 instance Attr everything Intercept (Event.Event  Unit ) where
   attr Intercept eventValue = unsafeAttribute $ That $ eventValue <#>

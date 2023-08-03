@@ -15,7 +15,7 @@ instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointerleave", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerleave", value: cb' value })
 instance Attr anything OnPointerleave  Cb  where
-  attr OnPointerleave value = unsafeAttribute $ This
+  attr OnPointerleave value = unsafeAttribute $ This $ pure $
     { key: "pointerleave", value: cb' value }
 instance Attr anything OnPointerleave (Event.Event  Cb ) where
   attr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  (Effect Un
         { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerleave  (Effect Unit)  where
-  attr OnPointerleave value = unsafeAttribute $ This
+  attr OnPointerleave value = unsafeAttribute $ This $ pure $
     { key: "pointerleave", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerleave (Event.Event  (Effect Unit) ) where
   attr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPointerleave (NonEmpty.NonEmpty Event.Event  (Effect Bo
         { key: "pointerleave", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerleave  (Effect Boolean)  where
-  attr OnPointerleave value = unsafeAttribute $ This
+  attr OnPointerleave value = unsafeAttribute $ This $ pure $
     { key: "pointerleave", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerleave (Event.Event  (Effect Boolean) ) where
   attr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPointerleave (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "pointerleave", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerleave", value: unset' })
 instance Attr everything OnPointerleave  Unit  where
-  attr OnPointerleave _ = unsafeAttribute $ This
+  attr OnPointerleave _ = unsafeAttribute $ This $ pure $
     { key: "pointerleave", value: unset' }
 instance Attr everything OnPointerleave (Event.Event  Unit ) where
   attr OnPointerleave eventValue = unsafeAttribute $ That $ eventValue <#>

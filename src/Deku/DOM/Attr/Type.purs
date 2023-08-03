@@ -21,7 +21,7 @@ instance Attr AnimateTransform_ Type (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr AnimateTransform_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr AnimateTransform_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -32,7 +32,7 @@ instance Attr FeColorMatrix_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeColorMatrix_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeColorMatrix_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -43,7 +43,7 @@ instance Attr FeFuncA_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeFuncA_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeFuncA_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -54,7 +54,7 @@ instance Attr FeFuncB_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeFuncB_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeFuncB_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -65,7 +65,7 @@ instance Attr FeFuncG_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeFuncG_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeFuncG_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -76,7 +76,7 @@ instance Attr FeFuncR_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeFuncR_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeFuncR_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -87,7 +87,7 @@ instance Attr FeTurbulence_ Type (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "type", value: prop' value })
 instance Attr FeTurbulence_ Type  String  where
-  attr Type value = unsafeAttribute $ This
+  attr Type value = unsafeAttribute $ This $ pure $
     { key: "type", value: prop' value }
 instance Attr FeTurbulence_ Type (Event.Event  String ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -97,7 +97,7 @@ instance Attr everything Type (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Type bothValues = unsafeAttribute $ Both { key: "type", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "type", value: unset' })
 instance Attr everything Type  Unit  where
-  attr Type _ = unsafeAttribute $ This { key: "type", value: unset' }
+  attr Type _ = unsafeAttribute $ This $ pure $ { key: "type", value: unset' }
 instance Attr everything Type (Event.Event  Unit ) where
   attr Type eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "type", value: unset' }

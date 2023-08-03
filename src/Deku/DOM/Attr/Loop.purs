@@ -16,7 +16,7 @@ instance Attr Audio_ Loop (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "loop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "loop", value: prop' value })
 instance Attr Audio_ Loop  String  where
-  attr Loop value = unsafeAttribute $ This
+  attr Loop value = unsafeAttribute $ This $ pure $
     { key: "loop", value: prop' value }
 instance Attr Audio_ Loop (Event.Event  String ) where
   attr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -27,7 +27,7 @@ instance Attr Video_ Loop (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "loop", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "loop", value: prop' value })
 instance Attr Video_ Loop  String  where
-  attr Loop value = unsafeAttribute $ This
+  attr Loop value = unsafeAttribute $ This $ pure $
     { key: "loop", value: prop' value }
 instance Attr Video_ Loop (Event.Event  String ) where
   attr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -37,7 +37,7 @@ instance Attr everything Loop (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Loop bothValues = unsafeAttribute $ Both { key: "loop", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "loop", value: unset' })
 instance Attr everything Loop  Unit  where
-  attr Loop _ = unsafeAttribute $ This { key: "loop", value: unset' }
+  attr Loop _ = unsafeAttribute $ This $ pure $ { key: "loop", value: unset' }
 instance Attr everything Loop (Event.Event  Unit ) where
   attr Loop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "loop", value: unset' }

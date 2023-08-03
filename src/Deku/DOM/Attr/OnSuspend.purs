@@ -15,7 +15,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "suspend", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "suspend", value: cb' value })
 instance Attr anything OnSuspend  Cb  where
-  attr OnSuspend value = unsafeAttribute $ This
+  attr OnSuspend value = unsafeAttribute $ This $ pure $
     { key: "suspend", value: cb' value }
 instance Attr anything OnSuspend (Event.Event  Cb ) where
   attr OnSuspend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "suspend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSuspend  (Effect Unit)  where
-  attr OnSuspend value = unsafeAttribute $ This
+  attr OnSuspend value = unsafeAttribute $ This $ pure $
     { key: "suspend", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnSuspend (Event.Event  (Effect Unit) ) where
   attr OnSuspend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "suspend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSuspend  (Effect Boolean)  where
-  attr OnSuspend value = unsafeAttribute $ This
+  attr OnSuspend value = unsafeAttribute $ This $ pure $
     { key: "suspend", value: cb' (Cb (const value)) }
 instance Attr anything OnSuspend (Event.Event  (Effect Boolean) ) where
   attr OnSuspend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnSuspend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "suspend", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "suspend", value: unset' })
 instance Attr everything OnSuspend  Unit  where
-  attr OnSuspend _ = unsafeAttribute $ This
+  attr OnSuspend _ = unsafeAttribute $ This $ pure $
     { key: "suspend", value: unset' }
 instance Attr everything OnSuspend (Event.Event  Unit ) where
   attr OnSuspend eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr Marker_ MarkerWidth (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "markerWidth", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "markerWidth", value: prop' value })
 instance Attr Marker_ MarkerWidth  String  where
-  attr MarkerWidth value = unsafeAttribute $ This
+  attr MarkerWidth value = unsafeAttribute $ This $ pure $
     { key: "markerWidth", value: prop' value }
 instance Attr Marker_ MarkerWidth (Event.Event  String ) where
   attr MarkerWidth eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything MarkerWidth (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "markerWidth", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "markerWidth", value: unset' })
 instance Attr everything MarkerWidth  Unit  where
-  attr MarkerWidth _ = unsafeAttribute $ This
+  attr MarkerWidth _ = unsafeAttribute $ This $ pure $
     { key: "markerWidth", value: unset' }
 instance Attr everything MarkerWidth (Event.Event  Unit ) where
   attr MarkerWidth eventValue = unsafeAttribute $ That $ eventValue <#>

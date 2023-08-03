@@ -15,7 +15,7 @@ instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mouseenter", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseenter", value: cb' value })
 instance Attr anything OnMouseenter  Cb  where
-  attr OnMouseenter value = unsafeAttribute $ This
+  attr OnMouseenter value = unsafeAttribute $ This $ pure $
     { key: "mouseenter", value: cb' value }
 instance Attr anything OnMouseenter (Event.Event  Cb ) where
   attr OnMouseenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMouseenter  (Effect Unit)  where
-  attr OnMouseenter value = unsafeAttribute $ This
+  attr OnMouseenter value = unsafeAttribute $ This $ pure $
     { key: "mouseenter", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnMouseenter (Event.Event  (Effect Unit) ) where
   attr OnMouseenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnMouseenter (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "mouseenter", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMouseenter  (Effect Boolean)  where
-  attr OnMouseenter value = unsafeAttribute $ This
+  attr OnMouseenter value = unsafeAttribute $ This $ pure $
     { key: "mouseenter", value: cb' (Cb (const value)) }
 instance Attr anything OnMouseenter (Event.Event  (Effect Boolean) ) where
   attr OnMouseenter eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnMouseenter (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "mouseenter", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseenter", value: unset' })
 instance Attr everything OnMouseenter  Unit  where
-  attr OnMouseenter _ = unsafeAttribute $ This
+  attr OnMouseenter _ = unsafeAttribute $ This $ pure $
     { key: "mouseenter", value: unset' }
 instance Attr everything OnMouseenter (Event.Event  Unit ) where
   attr OnMouseenter eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -16,7 +16,7 @@ instance Attr Form_ Method (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "method", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr Form_ Method  String  where
-  attr Method value = unsafeAttribute $ This
+  attr Method value = unsafeAttribute $ This $ pure $
     { key: "method", value: prop' value }
 instance Attr Form_ Method (Event.Event  String ) where
   attr Method eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr TextPath_ Method (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "method", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr TextPath_ Method  String  where
-  attr Method value = unsafeAttribute $ This
+  attr Method value = unsafeAttribute $ This $ pure $
     { key: "method", value: prop' value }
 instance Attr TextPath_ Method (Event.Event  String ) where
   attr Method eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Method (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "method", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "method", value: unset' })
 instance Attr everything Method  Unit  where
-  attr Method _ = unsafeAttribute $ This { key: "method", value: unset' }
+  attr Method _ = unsafeAttribute $ This $ pure $ { key: "method", value: unset' }
 instance Attr everything Method (Event.Event  Unit ) where
   attr Method eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "method", value: unset' }

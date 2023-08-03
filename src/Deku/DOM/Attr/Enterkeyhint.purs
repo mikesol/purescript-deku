@@ -15,7 +15,7 @@ instance Attr Textarea_ Enterkeyhint (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "enterkeyhint", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "enterkeyhint", value: prop' value })
 instance Attr Textarea_ Enterkeyhint  String  where
-  attr Enterkeyhint value = unsafeAttribute $ This
+  attr Enterkeyhint value = unsafeAttribute $ This $ pure $
     { key: "enterkeyhint", value: prop' value }
 instance Attr Textarea_ Enterkeyhint (Event.Event  String ) where
   attr Enterkeyhint eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Enterkeyhint (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "enterkeyhint", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "enterkeyhint", value: unset' })
 instance Attr everything Enterkeyhint  Unit  where
-  attr Enterkeyhint _ = unsafeAttribute $ This
+  attr Enterkeyhint _ = unsafeAttribute $ This $ pure $
     { key: "enterkeyhint", value: unset' }
 instance Attr everything Enterkeyhint (Event.Event  Unit ) where
   attr Enterkeyhint eventValue = unsafeAttribute $ That $ eventValue <#>

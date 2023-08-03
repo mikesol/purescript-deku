@@ -15,7 +15,7 @@ instance Attr AnimateTransform_ Decelerate (NonEmpty.NonEmpty Event.Event  Strin
     { key: "decelerate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "decelerate", value: prop' value })
 instance Attr AnimateTransform_ Decelerate  String  where
-  attr Decelerate value = unsafeAttribute $ This
+  attr Decelerate value = unsafeAttribute $ This $ pure $
     { key: "decelerate", value: prop' value }
 instance Attr AnimateTransform_ Decelerate (Event.Event  String ) where
   attr Decelerate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Decelerate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "decelerate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "decelerate", value: unset' })
 instance Attr everything Decelerate  Unit  where
-  attr Decelerate _ = unsafeAttribute $ This
+  attr Decelerate _ = unsafeAttribute $ This $ pure $
     { key: "decelerate", value: unset' }
 instance Attr everything Decelerate (Event.Event  Unit ) where
   attr Decelerate eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -17,7 +17,7 @@ instance Attr FeDisplacementMap_ YChannelSelector (NonEmpty.NonEmpty Event.Event
         { key: "yChannelSelector", value: prop' value }
     )
 instance Attr FeDisplacementMap_ YChannelSelector  String  where
-  attr YChannelSelector value = unsafeAttribute $ This
+  attr YChannelSelector value = unsafeAttribute $ This $ pure $
     { key: "yChannelSelector", value: prop' value }
 instance Attr FeDisplacementMap_ YChannelSelector (Event.Event  String ) where
   attr YChannelSelector eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything YChannelSelector (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "yChannelSelector", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "yChannelSelector", value: unset' })
 instance Attr everything YChannelSelector  Unit  where
-  attr YChannelSelector _ = unsafeAttribute $ This
+  attr YChannelSelector _ = unsafeAttribute $ This $ pure $
     { key: "yChannelSelector", value: unset' }
 instance Attr everything YChannelSelector (Event.Event  Unit ) where
   attr YChannelSelector eventValue = unsafeAttribute $ That $ eventValue

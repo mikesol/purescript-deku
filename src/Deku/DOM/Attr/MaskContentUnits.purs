@@ -17,7 +17,7 @@ instance Attr Mask_ MaskContentUnits (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "maskContentUnits", value: prop' value }
     )
 instance Attr Mask_ MaskContentUnits  String  where
-  attr MaskContentUnits value = unsafeAttribute $ This
+  attr MaskContentUnits value = unsafeAttribute $ This $ pure $
     { key: "maskContentUnits", value: prop' value }
 instance Attr Mask_ MaskContentUnits (Event.Event  String ) where
   attr MaskContentUnits eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything MaskContentUnits (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "maskContentUnits", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "maskContentUnits", value: unset' })
 instance Attr everything MaskContentUnits  Unit  where
-  attr MaskContentUnits _ = unsafeAttribute $ This
+  attr MaskContentUnits _ = unsafeAttribute $ This $ pure $
     { key: "maskContentUnits", value: unset' }
 instance Attr everything MaskContentUnits (Event.Event  Unit ) where
   attr MaskContentUnits eventValue = unsafeAttribute $ That $ eventValue

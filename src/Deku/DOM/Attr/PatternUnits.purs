@@ -15,7 +15,7 @@ instance Attr Pattern_ PatternUnits (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "patternUnits", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "patternUnits", value: prop' value })
 instance Attr Pattern_ PatternUnits  String  where
-  attr PatternUnits value = unsafeAttribute $ This
+  attr PatternUnits value = unsafeAttribute $ This $ pure $
     { key: "patternUnits", value: prop' value }
 instance Attr Pattern_ PatternUnits (Event.Event  String ) where
   attr PatternUnits eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything PatternUnits (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "patternUnits", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "patternUnits", value: unset' })
 instance Attr everything PatternUnits  Unit  where
-  attr PatternUnits _ = unsafeAttribute $ This
+  attr PatternUnits _ = unsafeAttribute $ This $ pure $
     { key: "patternUnits", value: unset' }
 instance Attr everything PatternUnits (Event.Event  Unit ) where
   attr PatternUnits eventValue = unsafeAttribute $ That $ eventValue <#>

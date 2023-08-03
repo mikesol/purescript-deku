@@ -195,7 +195,7 @@ instance Attr A_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr A_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr A_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -205,7 +205,7 @@ instance Attr Abbr_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Abbr_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Abbr_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -215,7 +215,7 @@ instance Attr Acronym_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Acronym_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Acronym_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -225,7 +225,7 @@ instance Attr Address_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Address_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Address_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -235,7 +235,7 @@ instance Attr Applet_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Applet_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Applet_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -245,7 +245,7 @@ instance Attr Area_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Area_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Area_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -255,7 +255,7 @@ instance Attr Article_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Article_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Article_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -265,7 +265,7 @@ instance Attr Aside_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Aside_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Aside_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -275,7 +275,7 @@ instance Attr Audio_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Audio_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Audio_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -285,7 +285,7 @@ instance Attr B_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr B_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr B_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -295,7 +295,7 @@ instance Attr Base_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Base_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Base_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -305,7 +305,7 @@ instance Attr Basefont_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Basefont_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Basefont_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -315,7 +315,7 @@ instance Attr Bdi_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Bdi_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Bdi_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -325,7 +325,7 @@ instance Attr Bdo_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Bdo_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Bdo_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -335,7 +335,7 @@ instance Attr Big_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Big_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Big_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -345,7 +345,7 @@ instance Attr Blockquote_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Blockquote_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Blockquote_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -355,7 +355,7 @@ instance Attr Body_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Body_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Body_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -365,7 +365,7 @@ instance Attr Br_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Br_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Br_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -375,7 +375,7 @@ instance Attr Button_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Button_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Button_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -385,7 +385,7 @@ instance Attr Canvas_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Canvas_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Canvas_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -395,7 +395,7 @@ instance Attr Caption_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Caption_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Caption_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -405,7 +405,7 @@ instance Attr Center_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Center_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Center_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -415,7 +415,7 @@ instance Attr Cite_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Cite_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Cite_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -425,7 +425,7 @@ instance Attr Code_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Code_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Code_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -435,7 +435,7 @@ instance Attr Col_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Col_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Col_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -445,7 +445,7 @@ instance Attr Colgroup_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Colgroup_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Colgroup_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -455,7 +455,7 @@ instance Attr Xdata_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Xdata_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Xdata_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -465,7 +465,7 @@ instance Attr Datalist_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Datalist_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Datalist_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -475,7 +475,7 @@ instance Attr Dd_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dd_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dd_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -485,7 +485,7 @@ instance Attr Del_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Del_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Del_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -495,7 +495,7 @@ instance Attr Details_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Details_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Details_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -505,7 +505,7 @@ instance Attr Dfn_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dfn_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dfn_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -515,7 +515,7 @@ instance Attr Dialog_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dialog_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dialog_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -525,7 +525,7 @@ instance Attr Dir_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dir_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dir_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -535,7 +535,7 @@ instance Attr Div_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Div_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Div_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -545,7 +545,7 @@ instance Attr Dl_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dl_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dl_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -555,7 +555,7 @@ instance Attr Dt_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Dt_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Dt_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -565,7 +565,7 @@ instance Attr Em_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Em_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Em_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -575,7 +575,7 @@ instance Attr Embed_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Embed_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Embed_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -585,7 +585,7 @@ instance Attr Fieldset_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Fieldset_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Fieldset_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -595,7 +595,7 @@ instance Attr Figcaption_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Figcaption_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Figcaption_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -605,7 +605,7 @@ instance Attr Figure_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Figure_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Figure_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -615,7 +615,7 @@ instance Attr Font_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Font_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Font_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -625,7 +625,7 @@ instance Attr Footer_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Footer_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Footer_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -635,7 +635,7 @@ instance Attr Form_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Form_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Form_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -645,7 +645,7 @@ instance Attr Frame_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Frame_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Frame_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -655,7 +655,7 @@ instance Attr Frameset_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Frameset_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Frameset_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -665,7 +665,7 @@ instance Attr H1_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H1_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H1_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -675,7 +675,7 @@ instance Attr H2_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H2_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H2_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -685,7 +685,7 @@ instance Attr H3_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H3_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H3_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -695,7 +695,7 @@ instance Attr H4_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H4_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H4_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -705,7 +705,7 @@ instance Attr H5_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H5_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H5_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -715,7 +715,7 @@ instance Attr H6_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr H6_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr H6_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -725,7 +725,7 @@ instance Attr Head_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Head_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Head_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -735,7 +735,7 @@ instance Attr Header_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Header_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Header_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -745,7 +745,7 @@ instance Attr Hr_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Hr_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Hr_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -755,7 +755,7 @@ instance Attr Html_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Html_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Html_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -765,7 +765,7 @@ instance Attr I_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr I_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr I_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -775,7 +775,7 @@ instance Attr Iframe_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Iframe_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Iframe_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -785,7 +785,7 @@ instance Attr Img_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Img_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Img_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -795,7 +795,7 @@ instance Attr Input_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Input_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Input_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -805,7 +805,7 @@ instance Attr Ins_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Ins_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Ins_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -815,7 +815,7 @@ instance Attr Kbd_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Kbd_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Kbd_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -825,7 +825,7 @@ instance Attr Label_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Label_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Label_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -835,7 +835,7 @@ instance Attr Legend_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Legend_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Legend_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -845,7 +845,7 @@ instance Attr Li_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Li_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Li_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -855,7 +855,7 @@ instance Attr Link_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Link_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Link_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -865,7 +865,7 @@ instance Attr Main_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Main_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Main_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -875,7 +875,7 @@ instance Attr Map_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Map_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Map_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -885,7 +885,7 @@ instance Attr Mark_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Mark_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Mark_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -895,7 +895,7 @@ instance Attr Meta_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Meta_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Meta_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -905,7 +905,7 @@ instance Attr Meter_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Meter_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Meter_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -915,7 +915,7 @@ instance Attr Nav_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Nav_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Nav_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -925,7 +925,7 @@ instance Attr Noframes_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Noframes_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Noframes_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -935,7 +935,7 @@ instance Attr Noscript_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Noscript_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Noscript_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -945,7 +945,7 @@ instance Attr Object_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Object_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Object_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -955,7 +955,7 @@ instance Attr Ol_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Ol_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Ol_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -965,7 +965,7 @@ instance Attr Optgroup_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Optgroup_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Optgroup_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -975,7 +975,7 @@ instance Attr Option_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Option_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Option_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -985,7 +985,7 @@ instance Attr Output_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Output_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Output_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -995,7 +995,7 @@ instance Attr P_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr P_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr P_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1005,7 +1005,7 @@ instance Attr Param_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Param_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Param_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1015,7 +1015,7 @@ instance Attr Picture_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Picture_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Picture_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1025,7 +1025,7 @@ instance Attr Pre_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Pre_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Pre_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1035,7 +1035,7 @@ instance Attr Progress_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Progress_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Progress_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1045,7 +1045,7 @@ instance Attr Q_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Q_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Q_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1055,7 +1055,7 @@ instance Attr Rp_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Rp_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Rp_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1065,7 +1065,7 @@ instance Attr Rt_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Rt_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Rt_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1075,7 +1075,7 @@ instance Attr Ruby_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Ruby_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Ruby_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1085,7 +1085,7 @@ instance Attr S_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr S_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr S_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1095,7 +1095,7 @@ instance Attr Samp_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Samp_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Samp_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1105,7 +1105,7 @@ instance Attr Script_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Script_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Script_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1115,7 +1115,7 @@ instance Attr Section_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Section_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Section_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1125,7 +1125,7 @@ instance Attr Select_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Select_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Select_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1135,7 +1135,7 @@ instance Attr Small_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Small_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Small_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1145,7 +1145,7 @@ instance Attr Source_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Source_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Source_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1155,7 +1155,7 @@ instance Attr Span_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Span_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Span_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1165,7 +1165,7 @@ instance Attr Strike_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Strike_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Strike_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1175,7 +1175,7 @@ instance Attr Strong_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Strong_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Strong_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1185,7 +1185,7 @@ instance Attr Style_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Style_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Style_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1195,7 +1195,7 @@ instance Attr Sub_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Sub_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Sub_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1205,7 +1205,7 @@ instance Attr Summary_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Summary_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Summary_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1215,7 +1215,7 @@ instance Attr Sup_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Sup_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Sup_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1225,7 +1225,7 @@ instance Attr Svg_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Svg_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Svg_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1235,7 +1235,7 @@ instance Attr Table_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Table_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Table_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1245,7 +1245,7 @@ instance Attr Tbody_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Tbody_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Tbody_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1255,7 +1255,7 @@ instance Attr Td_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Td_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Td_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1265,7 +1265,7 @@ instance Attr Template_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Template_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Template_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1275,7 +1275,7 @@ instance Attr Textarea_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Textarea_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Textarea_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1285,7 +1285,7 @@ instance Attr Tfoot_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Tfoot_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Tfoot_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1295,7 +1295,7 @@ instance Attr Th_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Th_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Th_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1305,7 +1305,7 @@ instance Attr Thead_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Thead_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Thead_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1315,7 +1315,7 @@ instance Attr Time_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Time_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Time_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1325,7 +1325,7 @@ instance Attr Title_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Title_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Title_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1335,7 +1335,7 @@ instance Attr Tr_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Tr_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Tr_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1345,7 +1345,7 @@ instance Attr Track_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Track_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Track_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1355,7 +1355,7 @@ instance Attr Tt_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Tt_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Tt_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1365,7 +1365,7 @@ instance Attr U_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr U_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr U_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1375,7 +1375,7 @@ instance Attr Ul_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Ul_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Ul_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1385,7 +1385,7 @@ instance Attr Var_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Var_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Var_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1395,7 +1395,7 @@ instance Attr Video_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Video_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Video_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1405,7 +1405,7 @@ instance Attr Wbr_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Wbr_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Wbr_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1415,7 +1415,7 @@ instance Attr Animate_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Animate_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Animate_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1425,7 +1425,7 @@ instance Attr AnimateMotion_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr AnimateMotion_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr AnimateMotion_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1435,7 +1435,7 @@ instance Attr AnimateTransform_ Id (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr AnimateTransform_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr AnimateTransform_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1445,7 +1445,7 @@ instance Attr Circle_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Circle_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Circle_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1455,7 +1455,7 @@ instance Attr ClipPath_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr ClipPath_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr ClipPath_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1465,7 +1465,7 @@ instance Attr Defs_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Defs_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Defs_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1475,7 +1475,7 @@ instance Attr Desc_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Desc_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Desc_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1485,7 +1485,7 @@ instance Attr Discard_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Discard_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Discard_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1495,7 +1495,7 @@ instance Attr Ellipse_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Ellipse_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Ellipse_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1505,7 +1505,7 @@ instance Attr FeBlend_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeBlend_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeBlend_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1515,7 +1515,7 @@ instance Attr FeColorMatrix_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeColorMatrix_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeColorMatrix_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1525,7 +1525,7 @@ instance Attr FeComponentTransfer_ Id (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeComponentTransfer_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeComponentTransfer_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1535,7 +1535,7 @@ instance Attr FeComposite_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeComposite_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeComposite_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1545,7 +1545,7 @@ instance Attr FeConvolveMatrix_ Id (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeConvolveMatrix_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeConvolveMatrix_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1555,7 +1555,7 @@ instance Attr FeDiffuseLighting_ Id (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeDiffuseLighting_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeDiffuseLighting_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1565,7 +1565,7 @@ instance Attr FeDisplacementMap_ Id (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeDisplacementMap_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeDisplacementMap_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1575,7 +1575,7 @@ instance Attr FeDistantLight_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeDistantLight_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeDistantLight_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1585,7 +1585,7 @@ instance Attr FeDropShadow_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeDropShadow_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeDropShadow_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1595,7 +1595,7 @@ instance Attr FeFlood_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeFlood_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeFlood_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1605,7 +1605,7 @@ instance Attr FeFuncA_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeFuncA_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeFuncA_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1615,7 +1615,7 @@ instance Attr FeFuncB_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeFuncB_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeFuncB_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1625,7 +1625,7 @@ instance Attr FeFuncG_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeFuncG_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeFuncG_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1635,7 +1635,7 @@ instance Attr FeFuncR_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeFuncR_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeFuncR_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1645,7 +1645,7 @@ instance Attr FeGaussianBlur_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeGaussianBlur_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeGaussianBlur_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1655,7 +1655,7 @@ instance Attr FeImage_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeImage_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeImage_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1665,7 +1665,7 @@ instance Attr FeMerge_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeMerge_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeMerge_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1675,7 +1675,7 @@ instance Attr FeMergeNode_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeMergeNode_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeMergeNode_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1685,7 +1685,7 @@ instance Attr FeMorphology_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeMorphology_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeMorphology_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1695,7 +1695,7 @@ instance Attr FeOffset_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeOffset_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeOffset_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1705,7 +1705,7 @@ instance Attr FePointLight_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FePointLight_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FePointLight_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1715,7 +1715,7 @@ instance Attr FeSpecularLighting_ Id (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeSpecularLighting_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeSpecularLighting_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1725,7 +1725,7 @@ instance Attr FeSpotLight_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeSpotLight_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeSpotLight_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1735,7 +1735,7 @@ instance Attr FeTile_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeTile_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeTile_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1745,7 +1745,7 @@ instance Attr FeTurbulence_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr FeTurbulence_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr FeTurbulence_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1755,7 +1755,7 @@ instance Attr Filter_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Filter_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Filter_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1765,7 +1765,7 @@ instance Attr ForeignObject_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr ForeignObject_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr ForeignObject_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1775,7 +1775,7 @@ instance Attr G_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr G_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr G_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1785,7 +1785,7 @@ instance Attr Image_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Image_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Image_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1795,7 +1795,7 @@ instance Attr Line_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Line_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Line_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1805,7 +1805,7 @@ instance Attr LinearGradient_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr LinearGradient_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr LinearGradient_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1815,7 +1815,7 @@ instance Attr Marker_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Marker_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Marker_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1825,7 +1825,7 @@ instance Attr Mask_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Mask_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Mask_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1835,7 +1835,7 @@ instance Attr Metadata_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Metadata_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Metadata_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1845,7 +1845,7 @@ instance Attr Mpath_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Mpath_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Mpath_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1855,7 +1855,7 @@ instance Attr Path_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Path_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Path_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1865,7 +1865,7 @@ instance Attr Pattern_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Pattern_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Pattern_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1875,7 +1875,7 @@ instance Attr Polygon_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Polygon_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Polygon_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1885,7 +1885,7 @@ instance Attr Polyline_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Polyline_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Polyline_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1895,7 +1895,7 @@ instance Attr RadialGradient_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr RadialGradient_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr RadialGradient_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1905,7 +1905,7 @@ instance Attr Rect_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Rect_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Rect_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1915,7 +1915,7 @@ instance Attr Set_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Set_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Set_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1925,7 +1925,7 @@ instance Attr Stop_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Stop_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Stop_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1935,7 +1935,7 @@ instance Attr Switch_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Switch_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Switch_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1945,7 +1945,7 @@ instance Attr Symbol_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Symbol_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Symbol_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1955,7 +1955,7 @@ instance Attr Text_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Text_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Text_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1965,7 +1965,7 @@ instance Attr TextPath_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr TextPath_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr TextPath_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1975,7 +1975,7 @@ instance Attr Tspan_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Tspan_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Tspan_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1985,7 +1985,7 @@ instance Attr Use_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr Use_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr Use_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -1995,7 +1995,7 @@ instance Attr View_ Id (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "id", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "id", value: prop' value })
 instance Attr View_ Id  String  where
-  attr Id value = unsafeAttribute $ This { key: "id", value: prop' value }
+  attr Id value = unsafeAttribute $ This $ pure $ { key: "id", value: prop' value }
 instance Attr View_ Id (Event.Event  String ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "id", value: prop' value }
@@ -2004,7 +2004,7 @@ instance Attr everything Id (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Id bothValues = unsafeAttribute $ Both { key: "id", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "id", value: unset' })
 instance Attr everything Id  Unit  where
-  attr Id _ = unsafeAttribute $ This { key: "id", value: unset' }
+  attr Id _ = unsafeAttribute $ This $ pure $ { key: "id", value: unset' }
 instance Attr everything Id (Event.Event  Unit ) where
   attr Id eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "id", value: unset' }

@@ -17,7 +17,7 @@ instance Attr Img_ Border (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "border", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Img_ Border  String  where
-  attr Border value = unsafeAttribute $ This
+  attr Border value = unsafeAttribute $ This $ pure $
     { key: "border", value: prop' value }
 instance Attr Img_ Border (Event.Event  String ) where
   attr Border eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr Object_ Border (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "border", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Object_ Border  String  where
-  attr Border value = unsafeAttribute $ This
+  attr Border value = unsafeAttribute $ This $ pure $
     { key: "border", value: prop' value }
 instance Attr Object_ Border (Event.Event  String ) where
   attr Border eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr Table_ Border (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "border", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "border", value: prop' value })
 instance Attr Table_ Border  String  where
-  attr Border value = unsafeAttribute $ This
+  attr Border value = unsafeAttribute $ This $ pure $
     { key: "border", value: prop' value }
 instance Attr Table_ Border (Event.Event  String ) where
   attr Border eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything Border (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "border", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "border", value: unset' })
 instance Attr everything Border  Unit  where
-  attr Border _ = unsafeAttribute $ This { key: "border", value: unset' }
+  attr Border _ = unsafeAttribute $ This $ pure $ { key: "border", value: unset' }
 instance Attr everything Border (Event.Event  Unit ) where
   attr Border eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "border", value: unset' }

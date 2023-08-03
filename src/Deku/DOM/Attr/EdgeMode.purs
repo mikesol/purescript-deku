@@ -16,7 +16,7 @@ instance Attr FeConvolveMatrix_ EdgeMode (NonEmpty.NonEmpty Event.Event  String 
     { key: "edgeMode", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "edgeMode", value: prop' value })
 instance Attr FeConvolveMatrix_ EdgeMode  String  where
-  attr EdgeMode value = unsafeAttribute $ This
+  attr EdgeMode value = unsafeAttribute $ This $ pure $
     { key: "edgeMode", value: prop' value }
 instance Attr FeConvolveMatrix_ EdgeMode (Event.Event  String ) where
   attr EdgeMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr FeGaussianBlur_ EdgeMode (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "edgeMode", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "edgeMode", value: prop' value })
 instance Attr FeGaussianBlur_ EdgeMode  String  where
-  attr EdgeMode value = unsafeAttribute $ This
+  attr EdgeMode value = unsafeAttribute $ This $ pure $
     { key: "edgeMode", value: prop' value }
 instance Attr FeGaussianBlur_ EdgeMode (Event.Event  String ) where
   attr EdgeMode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything EdgeMode (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "edgeMode", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "edgeMode", value: unset' })
 instance Attr everything EdgeMode  Unit  where
-  attr EdgeMode _ = unsafeAttribute $ This
+  attr EdgeMode _ = unsafeAttribute $ This $ pure $
     { key: "edgeMode", value: unset' }
 instance Attr everything EdgeMode (Event.Event  Unit ) where
   attr EdgeMode eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

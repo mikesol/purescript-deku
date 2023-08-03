@@ -15,7 +15,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  Cb ) wh
     { key: "animationcancel", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "animationcancel", value: cb' value })
 instance Attr anything OnAnimationcancel  Cb  where
-  attr OnAnimationcancel value = unsafeAttribute $ This
+  attr OnAnimationcancel value = unsafeAttribute $ This $ pure $
     { key: "animationcancel", value: cb' value }
 instance Attr anything OnAnimationcancel (Event.Event  Cb ) where
   attr OnAnimationcancel eventValue = unsafeAttribute $ That $ eventValue
@@ -30,7 +30,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnAnimationcancel  (Effect Unit)  where
-  attr OnAnimationcancel value = unsafeAttribute $ This
+  attr OnAnimationcancel value = unsafeAttribute $ This $ pure $
     { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnAnimationcancel (Event.Event  (Effect Unit) ) where
   attr OnAnimationcancel eventValue = unsafeAttribute $ That $ eventValue
@@ -44,7 +44,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "animationcancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnAnimationcancel  (Effect Boolean)  where
-  attr OnAnimationcancel value = unsafeAttribute $ This
+  attr OnAnimationcancel value = unsafeAttribute $ This $ pure $
     { key: "animationcancel", value: cb' (Cb (const value)) }
 instance Attr anything OnAnimationcancel (Event.Event  (Effect Boolean) ) where
   attr OnAnimationcancel eventValue = unsafeAttribute $ That $ eventValue
@@ -60,7 +60,7 @@ instance Attr everything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "animationcancel", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "animationcancel", value: unset' })
 instance Attr everything OnAnimationcancel  Unit  where
-  attr OnAnimationcancel _ = unsafeAttribute $ This
+  attr OnAnimationcancel _ = unsafeAttribute $ This $ pure $
     { key: "animationcancel", value: unset' }
 instance Attr everything OnAnimationcancel (Event.Event  Unit ) where
   attr OnAnimationcancel eventValue = unsafeAttribute $ That $ eventValue

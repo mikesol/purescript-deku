@@ -18,7 +18,7 @@ instance Attr Button_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
 instance Attr Button_ Autofocus  String  where
-  attr Autofocus value = unsafeAttribute $ This
+  attr Autofocus value = unsafeAttribute $ This $ pure $
     { key: "autofocus", value: prop' value }
 instance Attr Button_ Autofocus (Event.Event  String ) where
   attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr Input_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
 instance Attr Input_ Autofocus  String  where
-  attr Autofocus value = unsafeAttribute $ This
+  attr Autofocus value = unsafeAttribute $ This $ pure $
     { key: "autofocus", value: prop' value }
 instance Attr Input_ Autofocus (Event.Event  String ) where
   attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr Select_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
 instance Attr Select_ Autofocus  String  where
-  attr Autofocus value = unsafeAttribute $ This
+  attr Autofocus value = unsafeAttribute $ This $ pure $
     { key: "autofocus", value: prop' value }
 instance Attr Select_ Autofocus (Event.Event  String ) where
   attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Textarea_ Autofocus (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autofocus", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autofocus", value: prop' value })
 instance Attr Textarea_ Autofocus  String  where
-  attr Autofocus value = unsafeAttribute $ This
+  attr Autofocus value = unsafeAttribute $ This $ pure $
     { key: "autofocus", value: prop' value }
 instance Attr Textarea_ Autofocus (Event.Event  String ) where
   attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Autofocus (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "autofocus", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "autofocus", value: unset' })
 instance Attr everything Autofocus  Unit  where
-  attr Autofocus _ = unsafeAttribute $ This
+  attr Autofocus _ = unsafeAttribute $ This $ pure $
     { key: "autofocus", value: unset' }
 instance Attr everything Autofocus (Event.Event  Unit ) where
   attr Autofocus eventValue = unsafeAttribute $ That $ eventValue <#>

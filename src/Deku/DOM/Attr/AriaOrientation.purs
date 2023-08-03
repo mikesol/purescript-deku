@@ -33,7 +33,7 @@ instance Attr Circle_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Circle_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Circle_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -46,7 +46,7 @@ instance Attr Ellipse_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Ellipse_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Ellipse_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -59,7 +59,7 @@ instance Attr ForeignObject_ AriaOrientation (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr ForeignObject_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr ForeignObject_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -72,7 +72,7 @@ instance Attr G_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr G_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr G_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -85,7 +85,7 @@ instance Attr Line_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Line_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Line_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -98,7 +98,7 @@ instance Attr Marker_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Marker_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Marker_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -111,7 +111,7 @@ instance Attr Path_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Path_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Path_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -124,7 +124,7 @@ instance Attr Polygon_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Polygon_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Polygon_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -137,7 +137,7 @@ instance Attr Polyline_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Polyline_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Polyline_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -150,7 +150,7 @@ instance Attr Rect_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Rect_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Rect_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -163,7 +163,7 @@ instance Attr Svg_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Svg_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Svg_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -176,7 +176,7 @@ instance Attr Symbol_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Symbol_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Symbol_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -189,7 +189,7 @@ instance Attr Text_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Text_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Text_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -202,7 +202,7 @@ instance Attr TextPath_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr TextPath_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr TextPath_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -215,7 +215,7 @@ instance Attr Tspan_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Tspan_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Tspan_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -228,7 +228,7 @@ instance Attr Use_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Use_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr Use_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -241,7 +241,7 @@ instance Attr View_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr View_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ This
+  attr AriaOrientation value = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: prop' value }
 instance Attr View_ AriaOrientation (Event.Event  String ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue
@@ -252,7 +252,7 @@ instance Attr everything AriaOrientation (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "aria-orientation", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
 instance Attr everything AriaOrientation  Unit  where
-  attr AriaOrientation _ = unsafeAttribute $ This
+  attr AriaOrientation _ = unsafeAttribute $ This $ pure $
     { key: "aria-orientation", value: unset' }
 instance Attr everything AriaOrientation (Event.Event  Unit ) where
   attr AriaOrientation eventValue = unsafeAttribute $ That $ eventValue

@@ -15,7 +15,7 @@ instance Attr anything OnScroll (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "scroll", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "scroll", value: cb' value })
 instance Attr anything OnScroll  Cb  where
-  attr OnScroll value = unsafeAttribute $ This
+  attr OnScroll value = unsafeAttribute $ This $ pure $
     { key: "scroll", value: cb' value }
 instance Attr anything OnScroll (Event.Event  Cb ) where
   attr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnScroll (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "scroll", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnScroll  (Effect Unit)  where
-  attr OnScroll value = unsafeAttribute $ This
+  attr OnScroll value = unsafeAttribute $ This $ pure $
     { key: "scroll", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnScroll (Event.Event  (Effect Unit) ) where
   attr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnScroll (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "scroll", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnScroll  (Effect Boolean)  where
-  attr OnScroll value = unsafeAttribute $ This
+  attr OnScroll value = unsafeAttribute $ This $ pure $
     { key: "scroll", value: cb' (Cb (const value)) }
 instance Attr anything OnScroll (Event.Event  (Effect Boolean) ) where
   attr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnScroll (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "scroll", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "scroll", value: unset' })
 instance Attr everything OnScroll  Unit  where
-  attr OnScroll _ = unsafeAttribute $ This { key: "scroll", value: unset' }
+  attr OnScroll _ = unsafeAttribute $ This $ pure $ { key: "scroll", value: unset' }
 instance Attr everything OnScroll (Event.Event  Unit ) where
   attr OnScroll eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "scroll", value: unset' }

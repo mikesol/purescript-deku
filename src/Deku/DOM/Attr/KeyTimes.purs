@@ -17,7 +17,7 @@ instance Attr Animate_ KeyTimes (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr Animate_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ This
+  attr KeyTimes value = unsafeAttribute $ This $ pure $
     { key: "keyTimes", value: prop' value }
 instance Attr Animate_ KeyTimes (Event.Event  String ) where
   attr KeyTimes eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr AnimateMotion_ KeyTimes (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr AnimateMotion_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ This
+  attr KeyTimes value = unsafeAttribute $ This $ pure $
     { key: "keyTimes", value: prop' value }
 instance Attr AnimateMotion_ KeyTimes (Event.Event  String ) where
   attr KeyTimes eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr AnimateTransform_ KeyTimes (NonEmpty.NonEmpty Event.Event  String 
     { key: "keyTimes", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keyTimes", value: prop' value })
 instance Attr AnimateTransform_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ This
+  attr KeyTimes value = unsafeAttribute $ This $ pure $
     { key: "keyTimes", value: prop' value }
 instance Attr AnimateTransform_ KeyTimes (Event.Event  String ) where
   attr KeyTimes eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything KeyTimes (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keyTimes", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyTimes", value: unset' })
 instance Attr everything KeyTimes  Unit  where
-  attr KeyTimes _ = unsafeAttribute $ This
+  attr KeyTimes _ = unsafeAttribute $ This $ pure $
     { key: "keyTimes", value: unset' }
 instance Attr everything KeyTimes (Event.Event  Unit ) where
   attr KeyTimes eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

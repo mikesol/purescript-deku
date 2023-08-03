@@ -33,7 +33,7 @@ instance Attr FeBlend_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeBlend_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeBlend_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String 
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeColorMatrix_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeColorMatrix_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  S
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeComponentTransfer_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeComponentTransfer_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeComposite_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeComposite_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  Stri
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeConvolveMatrix_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeConvolveMatrix_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  Str
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeDiffuseLighting_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeDiffuseLighting_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  Str
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeDisplacementMap_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeDisplacementMap_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeFlood_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeFlood_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeGaussianBlur_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeGaussianBlur_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeImage_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeImage_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeMerge_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeMerge_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String )
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeMorphology_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeMorphology_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeOffset_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeOffset_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  St
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeSpecularLighting_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeSpecularLighting_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeTile_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeTile_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String )
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr FeTurbulence_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr FeTurbulence_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr Filter_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr Filter_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr Image_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr Image_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ UnicodeBidi (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "unicode-bidi", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "unicode-bidi", value: prop' value })
 instance Attr Switch_ UnicodeBidi  String  where
-  attr UnicodeBidi value = unsafeAttribute $ This
+  attr UnicodeBidi value = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: prop' value }
 instance Attr Switch_ UnicodeBidi (Event.Event  String ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything UnicodeBidi (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "unicode-bidi", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "unicode-bidi", value: unset' })
 instance Attr everything UnicodeBidi  Unit  where
-  attr UnicodeBidi _ = unsafeAttribute $ This
+  attr UnicodeBidi _ = unsafeAttribute $ This $ pure $
     { key: "unicode-bidi", value: unset' }
 instance Attr everything UnicodeBidi (Event.Event  Unit ) where
   attr UnicodeBidi eventValue = unsafeAttribute $ That $ eventValue <#>

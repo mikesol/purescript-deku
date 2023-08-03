@@ -18,7 +18,7 @@ instance Attr Animate_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Animate_ AttributeName  String  where
-  attr AttributeName value = unsafeAttribute $ This
+  attr AttributeName value = unsafeAttribute $ This $ pure $
     { key: "attributeName", value: prop' value }
 instance Attr Animate_ AttributeName (Event.Event  String ) where
   attr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr AnimateMotion_ AttributeName (NonEmpty.NonEmpty Event.Event  Strin
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateMotion_ AttributeName  String  where
-  attr AttributeName value = unsafeAttribute $ This
+  attr AttributeName value = unsafeAttribute $ This $ pure $
     { key: "attributeName", value: prop' value }
 instance Attr AnimateMotion_ AttributeName (Event.Event  String ) where
   attr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr AnimateTransform_ AttributeName (NonEmpty.NonEmpty Event.Event  St
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateTransform_ AttributeName  String  where
-  attr AttributeName value = unsafeAttribute $ This
+  attr AttributeName value = unsafeAttribute $ This $ pure $
     { key: "attributeName", value: prop' value }
 instance Attr AnimateTransform_ AttributeName (Event.Event  String ) where
   attr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Set_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Set_ AttributeName  String  where
-  attr AttributeName value = unsafeAttribute $ This
+  attr AttributeName value = unsafeAttribute $ This $ pure $
     { key: "attributeName", value: prop' value }
 instance Attr Set_ AttributeName (Event.Event  String ) where
   attr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything AttributeName (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "attributeName", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "attributeName", value: unset' })
 instance Attr everything AttributeName  Unit  where
-  attr AttributeName _ = unsafeAttribute $ This
+  attr AttributeName _ = unsafeAttribute $ This $ pure $
     { key: "attributeName", value: unset' }
 instance Attr everything AttributeName (Event.Event  Unit ) where
   attr AttributeName eventValue = unsafeAttribute $ That $ eventValue <#>

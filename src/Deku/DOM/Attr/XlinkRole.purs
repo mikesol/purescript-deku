@@ -19,7 +19,7 @@ instance Attr AnimateTransform_ XlinkRole (NonEmpty.NonEmpty Event.Event  String
     { key: "xlink:role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:role", value: prop' value })
 instance Attr AnimateTransform_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ This
+  attr XlinkRole value = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: prop' value }
 instance Attr AnimateTransform_ XlinkRole (Event.Event  String ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -30,7 +30,7 @@ instance Attr FeImage_ XlinkRole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:role", value: prop' value })
 instance Attr FeImage_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ This
+  attr XlinkRole value = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: prop' value }
 instance Attr FeImage_ XlinkRole (Event.Event  String ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr Filter_ XlinkRole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:role", value: prop' value })
 instance Attr Filter_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ This
+  attr XlinkRole value = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: prop' value }
 instance Attr Filter_ XlinkRole (Event.Event  String ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,7 +52,7 @@ instance Attr Image_ XlinkRole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:role", value: prop' value })
 instance Attr Image_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ This
+  attr XlinkRole value = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: prop' value }
 instance Attr Image_ XlinkRole (Event.Event  String ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,7 +63,7 @@ instance Attr Mpath_ XlinkRole (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:role", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:role", value: prop' value })
 instance Attr Mpath_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ This
+  attr XlinkRole value = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: prop' value }
 instance Attr Mpath_ XlinkRole (Event.Event  String ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr everything XlinkRole (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "xlink:role", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:role", value: unset' })
 instance Attr everything XlinkRole  Unit  where
-  attr XlinkRole _ = unsafeAttribute $ This
+  attr XlinkRole _ = unsafeAttribute $ This $ pure $
     { key: "xlink:role", value: unset' }
 instance Attr everything XlinkRole (Event.Event  Unit ) where
   attr XlinkRole eventValue = unsafeAttribute $ That $ eventValue <#>

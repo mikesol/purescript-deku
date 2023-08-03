@@ -15,7 +15,7 @@ instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "keydown", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keydown", value: cb' value })
 instance Attr anything OnKeydown  Cb  where
-  attr OnKeydown value = unsafeAttribute $ This
+  attr OnKeydown value = unsafeAttribute $ This $ pure $
     { key: "keydown", value: cb' value }
 instance Attr anything OnKeydown (Event.Event  Cb ) where
   attr OnKeydown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "keydown", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnKeydown  (Effect Unit)  where
-  attr OnKeydown value = unsafeAttribute $ This
+  attr OnKeydown value = unsafeAttribute $ This $ pure $
     { key: "keydown", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnKeydown (Event.Event  (Effect Unit) ) where
   attr OnKeydown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnKeydown (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "keydown", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnKeydown  (Effect Boolean)  where
-  attr OnKeydown value = unsafeAttribute $ This
+  attr OnKeydown value = unsafeAttribute $ This $ pure $
     { key: "keydown", value: cb' (Cb (const value)) }
 instance Attr anything OnKeydown (Event.Event  (Effect Boolean) ) where
   attr OnKeydown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnKeydown (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keydown", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "keydown", value: unset' })
 instance Attr everything OnKeydown  Unit  where
-  attr OnKeydown _ = unsafeAttribute $ This
+  attr OnKeydown _ = unsafeAttribute $ This $ pure $
     { key: "keydown", value: unset' }
 instance Attr everything OnKeydown (Event.Event  Unit ) where
   attr OnKeydown eventValue = unsafeAttribute $ That $ eventValue <#>

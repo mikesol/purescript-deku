@@ -136,7 +136,7 @@ instance Attr A_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr A_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr A_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -147,7 +147,7 @@ instance Attr Abbr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Abbr_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Abbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -158,7 +158,7 @@ instance Attr Acronym_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Acronym_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Acronym_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -169,7 +169,7 @@ instance Attr Address_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Address_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Address_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -180,7 +180,7 @@ instance Attr Applet_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Applet_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Applet_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,7 +191,7 @@ instance Attr Area_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Area_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Area_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -202,7 +202,7 @@ instance Attr Article_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Article_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Article_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -213,7 +213,7 @@ instance Attr Aside_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Aside_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Aside_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -224,7 +224,7 @@ instance Attr Audio_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Audio_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Audio_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -235,7 +235,7 @@ instance Attr B_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr B_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr B_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -246,7 +246,7 @@ instance Attr Base_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Base_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Base_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -257,7 +257,7 @@ instance Attr Basefont_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Basefont_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Basefont_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -268,7 +268,7 @@ instance Attr Bdi_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Bdi_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Bdi_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -279,7 +279,7 @@ instance Attr Bdo_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Bdo_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Bdo_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -290,7 +290,7 @@ instance Attr Big_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Big_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Big_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -301,7 +301,7 @@ instance Attr Blockquote_ Challenge (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Blockquote_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Blockquote_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -312,7 +312,7 @@ instance Attr Body_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Body_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Body_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -323,7 +323,7 @@ instance Attr Br_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Br_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Br_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -334,7 +334,7 @@ instance Attr Button_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Button_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Button_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -345,7 +345,7 @@ instance Attr Canvas_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Canvas_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Canvas_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -356,7 +356,7 @@ instance Attr Caption_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Caption_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Caption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -367,7 +367,7 @@ instance Attr Center_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Center_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Center_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -378,7 +378,7 @@ instance Attr Cite_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Cite_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Cite_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -389,7 +389,7 @@ instance Attr Code_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Code_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Code_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -400,7 +400,7 @@ instance Attr Col_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Col_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Col_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -411,7 +411,7 @@ instance Attr Colgroup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Colgroup_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Colgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -422,7 +422,7 @@ instance Attr Xdata_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Xdata_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Xdata_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -433,7 +433,7 @@ instance Attr Datalist_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Datalist_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Datalist_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -444,7 +444,7 @@ instance Attr Dd_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dd_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -455,7 +455,7 @@ instance Attr Del_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Del_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Del_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -466,7 +466,7 @@ instance Attr Details_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Details_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Details_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -477,7 +477,7 @@ instance Attr Dfn_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dfn_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dfn_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -488,7 +488,7 @@ instance Attr Dialog_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dialog_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dialog_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -499,7 +499,7 @@ instance Attr Dir_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dir_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dir_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -510,7 +510,7 @@ instance Attr Div_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Div_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Div_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -521,7 +521,7 @@ instance Attr Dl_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dl_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dl_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -532,7 +532,7 @@ instance Attr Dt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Dt_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Dt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -543,7 +543,7 @@ instance Attr Em_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Em_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Em_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -554,7 +554,7 @@ instance Attr Embed_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Embed_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Embed_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -565,7 +565,7 @@ instance Attr Fieldset_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Fieldset_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Fieldset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -576,7 +576,7 @@ instance Attr Figcaption_ Challenge (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Figcaption_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Figcaption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -587,7 +587,7 @@ instance Attr Figure_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Figure_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Figure_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -598,7 +598,7 @@ instance Attr Font_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Font_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Font_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -609,7 +609,7 @@ instance Attr Footer_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Footer_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Footer_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -620,7 +620,7 @@ instance Attr Form_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Form_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Form_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -631,7 +631,7 @@ instance Attr Frame_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Frame_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Frame_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -642,7 +642,7 @@ instance Attr Frameset_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Frameset_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Frameset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -653,7 +653,7 @@ instance Attr H1_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H1_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H1_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -664,7 +664,7 @@ instance Attr H2_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H2_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H2_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -675,7 +675,7 @@ instance Attr H3_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H3_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H3_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -686,7 +686,7 @@ instance Attr H4_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H4_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H4_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -697,7 +697,7 @@ instance Attr H5_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H5_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H5_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -708,7 +708,7 @@ instance Attr H6_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr H6_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr H6_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -719,7 +719,7 @@ instance Attr Head_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Head_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Head_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -730,7 +730,7 @@ instance Attr Header_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Header_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Header_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -741,7 +741,7 @@ instance Attr Hr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Hr_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Hr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -752,7 +752,7 @@ instance Attr Html_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Html_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Html_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -763,7 +763,7 @@ instance Attr I_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr I_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr I_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -774,7 +774,7 @@ instance Attr Iframe_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Iframe_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Iframe_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -785,7 +785,7 @@ instance Attr Img_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Img_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Img_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -796,7 +796,7 @@ instance Attr Input_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Input_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Input_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -807,7 +807,7 @@ instance Attr Ins_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ins_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Ins_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -818,7 +818,7 @@ instance Attr Kbd_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Kbd_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Kbd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -829,7 +829,7 @@ instance Attr Label_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Label_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Label_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -840,7 +840,7 @@ instance Attr Legend_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Legend_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Legend_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -851,7 +851,7 @@ instance Attr Li_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Li_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Li_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -862,7 +862,7 @@ instance Attr Link_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Link_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Link_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -873,7 +873,7 @@ instance Attr Main_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Main_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Main_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -884,7 +884,7 @@ instance Attr Map_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Map_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Map_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -895,7 +895,7 @@ instance Attr Mark_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Mark_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Mark_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -906,7 +906,7 @@ instance Attr Meta_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Meta_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Meta_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -917,7 +917,7 @@ instance Attr Meter_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Meter_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Meter_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -928,7 +928,7 @@ instance Attr Nav_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Nav_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Nav_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -939,7 +939,7 @@ instance Attr Noframes_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Noframes_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Noframes_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -950,7 +950,7 @@ instance Attr Noscript_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Noscript_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Noscript_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -961,7 +961,7 @@ instance Attr Object_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Object_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Object_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -972,7 +972,7 @@ instance Attr Ol_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ol_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Ol_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -983,7 +983,7 @@ instance Attr Optgroup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Optgroup_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Optgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -994,7 +994,7 @@ instance Attr Option_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Option_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Option_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1005,7 +1005,7 @@ instance Attr Output_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Output_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Output_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1016,7 +1016,7 @@ instance Attr P_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr P_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr P_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1027,7 +1027,7 @@ instance Attr Param_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Param_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Param_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1038,7 +1038,7 @@ instance Attr Picture_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Picture_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Picture_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1049,7 +1049,7 @@ instance Attr Pre_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Pre_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Pre_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1060,7 +1060,7 @@ instance Attr Progress_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Progress_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Progress_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1071,7 +1071,7 @@ instance Attr Q_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Q_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Q_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1082,7 +1082,7 @@ instance Attr Rp_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Rp_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Rp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1093,7 +1093,7 @@ instance Attr Rt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Rt_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Rt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1104,7 +1104,7 @@ instance Attr Ruby_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ruby_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Ruby_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1115,7 +1115,7 @@ instance Attr S_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr S_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr S_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1126,7 +1126,7 @@ instance Attr Samp_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Samp_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Samp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1137,7 +1137,7 @@ instance Attr Script_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Script_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Script_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1148,7 +1148,7 @@ instance Attr Section_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Section_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Section_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1159,7 +1159,7 @@ instance Attr Select_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Select_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Select_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1170,7 +1170,7 @@ instance Attr Small_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Small_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Small_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1181,7 +1181,7 @@ instance Attr Source_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Source_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Source_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1192,7 +1192,7 @@ instance Attr Span_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Span_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Span_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1203,7 +1203,7 @@ instance Attr Strike_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Strike_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Strike_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1214,7 +1214,7 @@ instance Attr Strong_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Strong_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Strong_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1225,7 +1225,7 @@ instance Attr Style_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Style_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Style_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1236,7 +1236,7 @@ instance Attr Sub_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Sub_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Sub_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1247,7 +1247,7 @@ instance Attr Summary_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Summary_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Summary_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1258,7 +1258,7 @@ instance Attr Sup_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Sup_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Sup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1269,7 +1269,7 @@ instance Attr Svg_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Svg_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Svg_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1280,7 +1280,7 @@ instance Attr Table_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Table_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Table_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1291,7 +1291,7 @@ instance Attr Tbody_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tbody_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Tbody_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1302,7 +1302,7 @@ instance Attr Td_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Td_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Td_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1313,7 +1313,7 @@ instance Attr Template_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Template_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Template_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1324,7 +1324,7 @@ instance Attr Textarea_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Textarea_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Textarea_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1335,7 +1335,7 @@ instance Attr Tfoot_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tfoot_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Tfoot_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1346,7 +1346,7 @@ instance Attr Th_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Th_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Th_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1357,7 +1357,7 @@ instance Attr Thead_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Thead_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Thead_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1368,7 +1368,7 @@ instance Attr Time_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Time_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Time_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1379,7 +1379,7 @@ instance Attr Title_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Title_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Title_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1390,7 +1390,7 @@ instance Attr Tr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tr_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Tr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1401,7 +1401,7 @@ instance Attr Track_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Track_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Track_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1412,7 +1412,7 @@ instance Attr Tt_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Tt_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Tt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1423,7 +1423,7 @@ instance Attr U_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr U_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr U_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1434,7 +1434,7 @@ instance Attr Ul_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Ul_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Ul_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1445,7 +1445,7 @@ instance Attr Var_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Var_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Var_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1456,7 +1456,7 @@ instance Attr Video_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Video_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Video_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1467,7 +1467,7 @@ instance Attr Wbr_ Challenge (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "challenge", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "challenge", value: prop' value })
 instance Attr Wbr_ Challenge  String  where
-  attr Challenge value = unsafeAttribute $ This
+  attr Challenge value = unsafeAttribute $ This $ pure $
     { key: "challenge", value: prop' value }
 instance Attr Wbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -1478,7 +1478,7 @@ instance Attr everything Challenge (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "challenge", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "challenge", value: unset' })
 instance Attr everything Challenge  Unit  where
-  attr Challenge _ = unsafeAttribute $ This
+  attr Challenge _ = unsafeAttribute $ This $ pure $
     { key: "challenge", value: unset' }
 instance Attr everything Challenge (Event.Event  Unit ) where
   attr Challenge eventValue = unsafeAttribute $ That $ eventValue <#>

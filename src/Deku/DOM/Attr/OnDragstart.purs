@@ -15,7 +15,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragstart", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dragstart", value: cb' value })
 instance Attr anything OnDragstart  Cb  where
-  attr OnDragstart value = unsafeAttribute $ This
+  attr OnDragstart value = unsafeAttribute $ This $ pure $
     { key: "dragstart", value: cb' value }
 instance Attr anything OnDragstart (Event.Event  Cb ) where
   attr OnDragstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "dragstart", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragstart  (Effect Unit)  where
-  attr OnDragstart value = unsafeAttribute $ This
+  attr OnDragstart value = unsafeAttribute $ This $ pure $
     { key: "dragstart", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragstart (Event.Event  (Effect Unit) ) where
   attr OnDragstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "dragstart", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragstart  (Effect Boolean)  where
-  attr OnDragstart value = unsafeAttribute $ This
+  attr OnDragstart value = unsafeAttribute $ This $ pure $
     { key: "dragstart", value: cb' (Cb (const value)) }
 instance Attr anything OnDragstart (Event.Event  (Effect Boolean) ) where
   attr OnDragstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDragstart (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "dragstart", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragstart", value: unset' })
 instance Attr everything OnDragstart  Unit  where
-  attr OnDragstart _ = unsafeAttribute $ This
+  attr OnDragstart _ = unsafeAttribute $ This $ pure $
     { key: "dragstart", value: unset' }
 instance Attr everything OnDragstart (Event.Event  Unit ) where
   attr OnDragstart eventValue = unsafeAttribute $ That $ eventValue <#>

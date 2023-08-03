@@ -15,7 +15,7 @@ instance Attr Area_ Coords (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "coords", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "coords", value: prop' value })
 instance Attr Area_ Coords  String  where
-  attr Coords value = unsafeAttribute $ This
+  attr Coords value = unsafeAttribute $ This $ pure $
     { key: "coords", value: prop' value }
 instance Attr Area_ Coords (Event.Event  String ) where
   attr Coords eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Coords (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "coords", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "coords", value: unset' })
 instance Attr everything Coords  Unit  where
-  attr Coords _ = unsafeAttribute $ This { key: "coords", value: unset' }
+  attr Coords _ = unsafeAttribute $ This $ pure $ { key: "coords", value: unset' }
 instance Attr everything Coords (Event.Event  Unit ) where
   attr Coords eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "coords", value: unset' }

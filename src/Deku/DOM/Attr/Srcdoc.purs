@@ -15,7 +15,7 @@ instance Attr Iframe_ Srcdoc (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcdoc", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "srcdoc", value: prop' value })
 instance Attr Iframe_ Srcdoc  String  where
-  attr Srcdoc value = unsafeAttribute $ This
+  attr Srcdoc value = unsafeAttribute $ This $ pure $
     { key: "srcdoc", value: prop' value }
 instance Attr Iframe_ Srcdoc (Event.Event  String ) where
   attr Srcdoc eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Srcdoc (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "srcdoc", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "srcdoc", value: unset' })
 instance Attr everything Srcdoc  Unit  where
-  attr Srcdoc _ = unsafeAttribute $ This { key: "srcdoc", value: unset' }
+  attr Srcdoc _ = unsafeAttribute $ This $ pure $ { key: "srcdoc", value: unset' }
 instance Attr everything Srcdoc (Event.Event  Unit ) where
   attr Srcdoc eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srcdoc", value: unset' }

@@ -15,7 +15,7 @@ instance Attr View_ ViewTarget (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "viewTarget", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "viewTarget", value: prop' value })
 instance Attr View_ ViewTarget  String  where
-  attr ViewTarget value = unsafeAttribute $ This
+  attr ViewTarget value = unsafeAttribute $ This $ pure $
     { key: "viewTarget", value: prop' value }
 instance Attr View_ ViewTarget (Event.Event  String ) where
   attr ViewTarget eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything ViewTarget (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "viewTarget", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "viewTarget", value: unset' })
 instance Attr everything ViewTarget  Unit  where
-  attr ViewTarget _ = unsafeAttribute $ This
+  attr ViewTarget _ = unsafeAttribute $ This $ pure $
     { key: "viewTarget", value: unset' }
 instance Attr everything ViewTarget (Event.Event  Unit ) where
   attr ViewTarget eventValue = unsafeAttribute $ That $ eventValue <#>

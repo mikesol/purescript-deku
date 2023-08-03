@@ -18,7 +18,7 @@ instance Attr Form_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Form_ Autocomplete  String  where
-  attr Autocomplete value = unsafeAttribute $ This
+  attr Autocomplete value = unsafeAttribute $ This $ pure $
     { key: "autocomplete", value: prop' value }
 instance Attr Form_ Autocomplete (Event.Event  String ) where
   attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr Input_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Input_ Autocomplete  String  where
-  attr Autocomplete value = unsafeAttribute $ This
+  attr Autocomplete value = unsafeAttribute $ This $ pure $
     { key: "autocomplete", value: prop' value }
 instance Attr Input_ Autocomplete (Event.Event  String ) where
   attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr Select_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Select_ Autocomplete  String  where
-  attr Autocomplete value = unsafeAttribute $ This
+  attr Autocomplete value = unsafeAttribute $ This $ pure $
     { key: "autocomplete", value: prop' value }
 instance Attr Select_ Autocomplete (Event.Event  String ) where
   attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Textarea_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Textarea_ Autocomplete  String  where
-  attr Autocomplete value = unsafeAttribute $ This
+  attr Autocomplete value = unsafeAttribute $ This $ pure $
     { key: "autocomplete", value: prop' value }
 instance Attr Textarea_ Autocomplete (Event.Event  String ) where
   attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Autocomplete (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "autocomplete", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "autocomplete", value: unset' })
 instance Attr everything Autocomplete  Unit  where
-  attr Autocomplete _ = unsafeAttribute $ This
+  attr Autocomplete _ = unsafeAttribute $ This $ pure $
     { key: "autocomplete", value: unset' }
 instance Attr everything Autocomplete (Event.Event  Unit ) where
   attr Autocomplete eventValue = unsafeAttribute $ That $ eventValue <#>

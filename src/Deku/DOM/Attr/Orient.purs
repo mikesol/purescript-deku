@@ -15,7 +15,7 @@ instance Attr Marker_ Orient (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "orient", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "orient", value: prop' value })
 instance Attr Marker_ Orient  String  where
-  attr Orient value = unsafeAttribute $ This
+  attr Orient value = unsafeAttribute $ This $ pure $
     { key: "orient", value: prop' value }
 instance Attr Marker_ Orient (Event.Event  String ) where
   attr Orient eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Orient (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "orient", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "orient", value: unset' })
 instance Attr everything Orient  Unit  where
-  attr Orient _ = unsafeAttribute $ This { key: "orient", value: unset' }
+  attr Orient _ = unsafeAttribute $ This $ pure $ { key: "orient", value: unset' }
 instance Attr everything Orient (Event.Event  Unit ) where
   attr Orient eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "orient", value: unset' }

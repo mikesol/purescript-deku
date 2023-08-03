@@ -15,7 +15,7 @@ instance Attr Meta_ Content (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "content", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "content", value: prop' value })
 instance Attr Meta_ Content  String  where
-  attr Content value = unsafeAttribute $ This
+  attr Content value = unsafeAttribute $ This $ pure $
     { key: "content", value: prop' value }
 instance Attr Meta_ Content (Event.Event  String ) where
   attr Content eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Content (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "content", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "content", value: unset' })
 instance Attr everything Content  Unit  where
-  attr Content _ = unsafeAttribute $ This { key: "content", value: unset' }
+  attr Content _ = unsafeAttribute $ This $ pure $ { key: "content", value: unset' }
 instance Attr everything Content (Event.Event  Unit ) where
   attr Content eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "content", value: unset' }

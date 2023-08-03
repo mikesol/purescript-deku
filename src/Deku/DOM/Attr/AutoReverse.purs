@@ -15,7 +15,7 @@ instance Attr AnimateTransform_ AutoReverse (NonEmpty.NonEmpty Event.Event  Stri
     { key: "autoReverse", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "autoReverse", value: prop' value })
 instance Attr AnimateTransform_ AutoReverse  String  where
-  attr AutoReverse value = unsafeAttribute $ This
+  attr AutoReverse value = unsafeAttribute $ This $ pure $
     { key: "autoReverse", value: prop' value }
 instance Attr AnimateTransform_ AutoReverse (Event.Event  String ) where
   attr AutoReverse eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything AutoReverse (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "autoReverse", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "autoReverse", value: unset' })
 instance Attr everything AutoReverse  Unit  where
-  attr AutoReverse _ = unsafeAttribute $ This
+  attr AutoReverse _ = unsafeAttribute $ This $ pure $
     { key: "autoReverse", value: unset' }
 instance Attr everything AutoReverse (Event.Event  Unit ) where
   attr AutoReverse eventValue = unsafeAttribute $ That $ eventValue <#>

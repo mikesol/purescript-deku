@@ -15,7 +15,7 @@ instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "touchstart", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "touchstart", value: cb' value })
 instance Attr anything OnTouchstart  Cb  where
-  attr OnTouchstart value = unsafeAttribute $ This
+  attr OnTouchstart value = unsafeAttribute $ This $ pure $
     { key: "touchstart", value: cb' value }
 instance Attr anything OnTouchstart (Event.Event  Cb ) where
   attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "touchstart", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTouchstart  (Effect Unit)  where
-  attr OnTouchstart value = unsafeAttribute $ This
+  attr OnTouchstart value = unsafeAttribute $ This $ pure $
     { key: "touchstart", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnTouchstart (Event.Event  (Effect Unit) ) where
   attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnTouchstart (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "touchstart", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTouchstart  (Effect Boolean)  where
-  attr OnTouchstart value = unsafeAttribute $ This
+  attr OnTouchstart value = unsafeAttribute $ This $ pure $
     { key: "touchstart", value: cb' (Cb (const value)) }
 instance Attr anything OnTouchstart (Event.Event  (Effect Boolean) ) where
   attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnTouchstart (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "touchstart", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchstart", value: unset' })
 instance Attr everything OnTouchstart  Unit  where
-  attr OnTouchstart _ = unsafeAttribute $ This
+  attr OnTouchstart _ = unsafeAttribute $ This $ pure $
     { key: "touchstart", value: unset' }
 instance Attr everything OnTouchstart (Event.Event  Unit ) where
   attr OnTouchstart eventValue = unsafeAttribute $ That $ eventValue <#>

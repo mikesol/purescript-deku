@@ -15,7 +15,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragover", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dragover", value: cb' value })
 instance Attr anything OnDragover  Cb  where
-  attr OnDragover value = unsafeAttribute $ This
+  attr OnDragover value = unsafeAttribute $ This $ pure $
     { key: "dragover", value: cb' value }
 instance Attr anything OnDragover (Event.Event  Cb ) where
   attr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "dragover", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragover  (Effect Unit)  where
-  attr OnDragover value = unsafeAttribute $ This
+  attr OnDragover value = unsafeAttribute $ This $ pure $
     { key: "dragover", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragover (Event.Event  (Effect Unit) ) where
   attr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "dragover", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragover  (Effect Boolean)  where
-  attr OnDragover value = unsafeAttribute $ This
+  attr OnDragover value = unsafeAttribute $ This $ pure $
     { key: "dragover", value: cb' (Cb (const value)) }
 instance Attr anything OnDragover (Event.Event  (Effect Boolean) ) where
   attr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDragover (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dragover", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragover", value: unset' })
 instance Attr everything OnDragover  Unit  where
-  attr OnDragover _ = unsafeAttribute $ This
+  attr OnDragover _ = unsafeAttribute $ This $ pure $
     { key: "dragover", value: unset' }
 instance Attr everything OnDragover (Event.Event  Unit ) where
   attr OnDragover eventValue = unsafeAttribute $ That $ eventValue <#>

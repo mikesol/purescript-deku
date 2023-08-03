@@ -17,7 +17,7 @@ instance Attr Svg_ ContentScriptType (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "contentScriptType", value: prop' value }
     )
 instance Attr Svg_ ContentScriptType  String  where
-  attr ContentScriptType value = unsafeAttribute $ This
+  attr ContentScriptType value = unsafeAttribute $ This $ pure $
     { key: "contentScriptType", value: prop' value }
 instance Attr Svg_ ContentScriptType (Event.Event  String ) where
   attr ContentScriptType eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything ContentScriptType (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "contentScriptType", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "contentScriptType", value: unset' })
 instance Attr everything ContentScriptType  Unit  where
-  attr ContentScriptType _ = unsafeAttribute $ This
+  attr ContentScriptType _ = unsafeAttribute $ This $ pure $
     { key: "contentScriptType", value: unset' }
 instance Attr everything ContentScriptType (Event.Event  Unit ) where
   attr ContentScriptType eventValue = unsafeAttribute $ That $ eventValue

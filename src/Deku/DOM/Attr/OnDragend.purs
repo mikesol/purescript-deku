@@ -15,7 +15,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragend", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dragend", value: cb' value })
 instance Attr anything OnDragend  Cb  where
-  attr OnDragend value = unsafeAttribute $ This
+  attr OnDragend value = unsafeAttribute $ This $ pure $
     { key: "dragend", value: cb' value }
 instance Attr anything OnDragend (Event.Event  Cb ) where
   attr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "dragend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragend  (Effect Unit)  where
-  attr OnDragend value = unsafeAttribute $ This
+  attr OnDragend value = unsafeAttribute $ This $ pure $
     { key: "dragend", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragend (Event.Event  (Effect Unit) ) where
   attr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "dragend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragend  (Effect Boolean)  where
-  attr OnDragend value = unsafeAttribute $ This
+  attr OnDragend value = unsafeAttribute $ This $ pure $
     { key: "dragend", value: cb' (Cb (const value)) }
 instance Attr anything OnDragend (Event.Event  (Effect Boolean) ) where
   attr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDragend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dragend", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragend", value: unset' })
 instance Attr everything OnDragend  Unit  where
-  attr OnDragend _ = unsafeAttribute $ This
+  attr OnDragend _ = unsafeAttribute $ This $ pure $
     { key: "dragend", value: unset' }
 instance Attr everything OnDragend (Event.Event  Unit ) where
   attr OnDragend eventValue = unsafeAttribute $ That $ eventValue <#>

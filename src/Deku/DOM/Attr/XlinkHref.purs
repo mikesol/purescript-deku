@@ -23,7 +23,7 @@ instance Attr AnimateTransform_ XlinkHref (NonEmpty.NonEmpty Event.Event  String
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr AnimateTransform_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr AnimateTransform_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -34,7 +34,7 @@ instance Attr FeImage_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr FeImage_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr FeImage_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -45,7 +45,7 @@ instance Attr Filter_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr Filter_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr Filter_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -56,7 +56,7 @@ instance Attr Image_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr Image_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr Image_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -67,7 +67,7 @@ instance Attr LinearGradient_ XlinkHref (NonEmpty.NonEmpty Event.Event  String )
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr LinearGradient_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr LinearGradient_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -78,7 +78,7 @@ instance Attr Mpath_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr Mpath_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr Mpath_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -89,7 +89,7 @@ instance Attr Pattern_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr Pattern_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr Pattern_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -100,7 +100,7 @@ instance Attr RadialGradient_ XlinkHref (NonEmpty.NonEmpty Event.Event  String )
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr RadialGradient_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr RadialGradient_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -111,7 +111,7 @@ instance Attr Use_ XlinkHref (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:href", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:href", value: prop' value })
 instance Attr Use_ XlinkHref  String  where
-  attr XlinkHref value = unsafeAttribute $ This
+  attr XlinkHref value = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: prop' value }
 instance Attr Use_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -122,7 +122,7 @@ instance Attr everything XlinkHref (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "xlink:href", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:href", value: unset' })
 instance Attr everything XlinkHref  Unit  where
-  attr XlinkHref _ = unsafeAttribute $ This
+  attr XlinkHref _ = unsafeAttribute $ This $ pure $
     { key: "xlink:href", value: unset' }
 instance Attr everything XlinkHref (Event.Event  Unit ) where
   attr XlinkHref eventValue = unsafeAttribute $ That $ eventValue <#>

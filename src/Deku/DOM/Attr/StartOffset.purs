@@ -15,7 +15,7 @@ instance Attr TextPath_ StartOffset (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "startOffset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "startOffset", value: prop' value })
 instance Attr TextPath_ StartOffset  String  where
-  attr StartOffset value = unsafeAttribute $ This
+  attr StartOffset value = unsafeAttribute $ This $ pure $
     { key: "startOffset", value: prop' value }
 instance Attr TextPath_ StartOffset (Event.Event  String ) where
   attr StartOffset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything StartOffset (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "startOffset", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "startOffset", value: unset' })
 instance Attr everything StartOffset  Unit  where
-  attr StartOffset _ = unsafeAttribute $ This
+  attr StartOffset _ = unsafeAttribute $ This $ pure $
     { key: "startOffset", value: unset' }
 instance Attr everything StartOffset (Event.Event  Unit ) where
   attr StartOffset eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -59,7 +59,7 @@ instance Attr Animate_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Animate_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Animate_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -70,7 +70,7 @@ instance Attr AnimateMotion_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr AnimateMotion_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr AnimateMotion_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -81,7 +81,7 @@ instance Attr AnimateTransform_ Fill (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr AnimateTransform_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr AnimateTransform_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -92,7 +92,7 @@ instance Attr Circle_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Circle_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Circle_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -103,7 +103,7 @@ instance Attr ClipPath_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr ClipPath_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr ClipPath_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -114,7 +114,7 @@ instance Attr Defs_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Defs_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Defs_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -125,7 +125,7 @@ instance Attr Ellipse_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Ellipse_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Ellipse_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -136,7 +136,7 @@ instance Attr FeBlend_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeBlend_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeBlend_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -147,7 +147,7 @@ instance Attr FeColorMatrix_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeColorMatrix_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeColorMatrix_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -158,7 +158,7 @@ instance Attr FeComponentTransfer_ Fill (NonEmpty.NonEmpty Event.Event  String )
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeComponentTransfer_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeComponentTransfer_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -169,7 +169,7 @@ instance Attr FeComposite_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeComposite_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeComposite_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -180,7 +180,7 @@ instance Attr FeConvolveMatrix_ Fill (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeConvolveMatrix_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeConvolveMatrix_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -191,7 +191,7 @@ instance Attr FeDiffuseLighting_ Fill (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeDiffuseLighting_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeDiffuseLighting_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -202,7 +202,7 @@ instance Attr FeDisplacementMap_ Fill (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeDisplacementMap_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeDisplacementMap_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -213,7 +213,7 @@ instance Attr FeFlood_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeFlood_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeFlood_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -224,7 +224,7 @@ instance Attr FeGaussianBlur_ Fill (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeGaussianBlur_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeGaussianBlur_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -235,7 +235,7 @@ instance Attr FeImage_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeImage_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeImage_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -246,7 +246,7 @@ instance Attr FeMerge_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeMerge_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeMerge_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -257,7 +257,7 @@ instance Attr FeMorphology_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeMorphology_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeMorphology_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -268,7 +268,7 @@ instance Attr FeOffset_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeOffset_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeOffset_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -279,7 +279,7 @@ instance Attr FeSpecularLighting_ Fill (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeSpecularLighting_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeSpecularLighting_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -290,7 +290,7 @@ instance Attr FeTile_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeTile_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeTile_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -301,7 +301,7 @@ instance Attr FeTurbulence_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr FeTurbulence_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr FeTurbulence_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -312,7 +312,7 @@ instance Attr Filter_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Filter_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Filter_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -323,7 +323,7 @@ instance Attr ForeignObject_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr ForeignObject_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr ForeignObject_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -334,7 +334,7 @@ instance Attr G_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr G_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr G_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -345,7 +345,7 @@ instance Attr Image_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Image_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Image_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -356,7 +356,7 @@ instance Attr Line_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Line_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Line_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -367,7 +367,7 @@ instance Attr LinearGradient_ Fill (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr LinearGradient_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr LinearGradient_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -378,7 +378,7 @@ instance Attr Marker_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Marker_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Marker_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -389,7 +389,7 @@ instance Attr Mask_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Mask_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Mask_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -400,7 +400,7 @@ instance Attr Path_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Path_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Path_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -411,7 +411,7 @@ instance Attr Pattern_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Pattern_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Pattern_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -422,7 +422,7 @@ instance Attr Polygon_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Polygon_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Polygon_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -433,7 +433,7 @@ instance Attr Polyline_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Polyline_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Polyline_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -444,7 +444,7 @@ instance Attr RadialGradient_ Fill (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr RadialGradient_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr RadialGradient_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -455,7 +455,7 @@ instance Attr Rect_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Rect_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Rect_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -466,7 +466,7 @@ instance Attr Set_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Set_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Set_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -477,7 +477,7 @@ instance Attr Svg_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Svg_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Svg_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -488,7 +488,7 @@ instance Attr Switch_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Switch_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Switch_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -499,7 +499,7 @@ instance Attr Symbol_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Symbol_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Symbol_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -510,7 +510,7 @@ instance Attr Text_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Text_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Text_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -521,7 +521,7 @@ instance Attr TextPath_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr TextPath_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr TextPath_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -532,7 +532,7 @@ instance Attr Tspan_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Tspan_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Tspan_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -543,7 +543,7 @@ instance Attr Use_ Fill (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "fill", value: prop' value })
 instance Attr Use_ Fill  String  where
-  attr Fill value = unsafeAttribute $ This
+  attr Fill value = unsafeAttribute $ This $ pure $
     { key: "fill", value: prop' value }
 instance Attr Use_ Fill (Event.Event  String ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -553,7 +553,7 @@ instance Attr everything Fill (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Fill bothValues = unsafeAttribute $ Both { key: "fill", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "fill", value: unset' })
 instance Attr everything Fill  Unit  where
-  attr Fill _ = unsafeAttribute $ This { key: "fill", value: unset' }
+  attr Fill _ = unsafeAttribute $ This $ pure $ { key: "fill", value: unset' }
 instance Attr everything Fill (Event.Event  Unit ) where
   attr Fill eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "fill", value: unset' }

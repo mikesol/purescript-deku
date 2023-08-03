@@ -15,7 +15,7 @@ instance Attr Img_ Decoding (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "decoding", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "decoding", value: prop' value })
 instance Attr Img_ Decoding  String  where
-  attr Decoding value = unsafeAttribute $ This
+  attr Decoding value = unsafeAttribute $ This $ pure $
     { key: "decoding", value: prop' value }
 instance Attr Img_ Decoding (Event.Event  String ) where
   attr Decoding eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Decoding (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "decoding", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "decoding", value: unset' })
 instance Attr everything Decoding  Unit  where
-  attr Decoding _ = unsafeAttribute $ This
+  attr Decoding _ = unsafeAttribute $ This $ pure $
     { key: "decoding", value: unset' }
 instance Attr everything Decoding (Event.Event  Unit ) where
   attr Decoding eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

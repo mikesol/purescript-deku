@@ -18,7 +18,7 @@ instance Attr A_ Target (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "target", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr A_ Target  String  where
-  attr Target value = unsafeAttribute $ This
+  attr Target value = unsafeAttribute $ This $ pure $
     { key: "target", value: prop' value }
 instance Attr A_ Target (Event.Event  String ) where
   attr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr Area_ Target (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "target", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Area_ Target  String  where
-  attr Target value = unsafeAttribute $ This
+  attr Target value = unsafeAttribute $ This $ pure $
     { key: "target", value: prop' value }
 instance Attr Area_ Target (Event.Event  String ) where
   attr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr Base_ Target (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "target", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Base_ Target  String  where
-  attr Target value = unsafeAttribute $ This
+  attr Target value = unsafeAttribute $ This $ pure $
     { key: "target", value: prop' value }
 instance Attr Base_ Target (Event.Event  String ) where
   attr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Form_ Target (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "target", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "target", value: prop' value })
 instance Attr Form_ Target  String  where
-  attr Target value = unsafeAttribute $ This
+  attr Target value = unsafeAttribute $ This $ pure $
     { key: "target", value: prop' value }
 instance Attr Form_ Target (Event.Event  String ) where
   attr Target eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Target (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "target", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "target", value: unset' })
 instance Attr everything Target  Unit  where
-  attr Target _ = unsafeAttribute $ This { key: "target", value: unset' }
+  attr Target _ = unsafeAttribute $ This $ pure $ { key: "target", value: unset' }
 instance Attr everything Target (Event.Event  Unit ) where
   attr Target eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "target", value: unset' }

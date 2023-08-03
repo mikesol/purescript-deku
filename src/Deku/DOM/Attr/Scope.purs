@@ -15,7 +15,7 @@ instance Attr Th_ Scope (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "scope", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "scope", value: prop' value })
 instance Attr Th_ Scope  String  where
-  attr Scope value = unsafeAttribute $ This
+  attr Scope value = unsafeAttribute $ This $ pure $
     { key: "scope", value: prop' value }
 instance Attr Th_ Scope (Event.Event  String ) where
   attr Scope eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Scope (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Scope bothValues = unsafeAttribute $ Both { key: "scope", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "scope", value: unset' })
 instance Attr everything Scope  Unit  where
-  attr Scope _ = unsafeAttribute $ This { key: "scope", value: unset' }
+  attr Scope _ = unsafeAttribute $ This $ pure $ { key: "scope", value: unset' }
 instance Attr everything Scope (Event.Event  Unit ) where
   attr Scope eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "scope", value: unset' }

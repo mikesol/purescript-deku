@@ -17,7 +17,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Cb ) 
         { key: "gotpointercapture", value: cb' value }
     )
 instance Attr anything OnGotpointercapture  Cb  where
-  attr OnGotpointercapture value = unsafeAttribute $ This
+  attr OnGotpointercapture value = unsafeAttribute $ This $ pure $
     { key: "gotpointercapture", value: cb' value }
 instance Attr anything OnGotpointercapture (Event.Event  Cb ) where
   attr OnGotpointercapture eventValue = unsafeAttribute $ That $
@@ -32,7 +32,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnGotpointercapture  (Effect Unit)  where
-  attr OnGotpointercapture value = unsafeAttribute $ This
+  attr OnGotpointercapture value = unsafeAttribute $ This $ pure $
     { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnGotpointercapture (Event.Event  (Effect Unit) ) where
   attr OnGotpointercapture eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "gotpointercapture", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnGotpointercapture  (Effect Boolean)  where
-  attr OnGotpointercapture value = unsafeAttribute $ This
+  attr OnGotpointercapture value = unsafeAttribute $ This $ pure $
     { key: "gotpointercapture", value: cb' (Cb (const value)) }
 instance Attr anything OnGotpointercapture (Event.Event  (Effect Boolean) ) where
   attr OnGotpointercapture eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr everything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Uni
     { key: "gotpointercapture", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "gotpointercapture", value: unset' })
 instance Attr everything OnGotpointercapture  Unit  where
-  attr OnGotpointercapture _ = unsafeAttribute $ This
+  attr OnGotpointercapture _ = unsafeAttribute $ This $ pure $
     { key: "gotpointercapture", value: unset' }
 instance Attr everything OnGotpointercapture (Event.Event  Unit ) where
   attr OnGotpointercapture eventValue = unsafeAttribute $ That $

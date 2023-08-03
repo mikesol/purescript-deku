@@ -17,7 +17,7 @@ instance Attr FeSpotLight_ LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Str
         { key: "limitingConeAngle", value: prop' value }
     )
 instance Attr FeSpotLight_ LimitingConeAngle  String  where
-  attr LimitingConeAngle value = unsafeAttribute $ This
+  attr LimitingConeAngle value = unsafeAttribute $ This $ pure $
     { key: "limitingConeAngle", value: prop' value }
 instance Attr FeSpotLight_ LimitingConeAngle (Event.Event  String ) where
   attr LimitingConeAngle eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "limitingConeAngle", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
 instance Attr everything LimitingConeAngle  Unit  where
-  attr LimitingConeAngle _ = unsafeAttribute $ This
+  attr LimitingConeAngle _ = unsafeAttribute $ This $ pure $
     { key: "limitingConeAngle", value: unset' }
 instance Attr everything LimitingConeAngle (Event.Event  Unit ) where
   attr LimitingConeAngle eventValue = unsafeAttribute $ That $ eventValue

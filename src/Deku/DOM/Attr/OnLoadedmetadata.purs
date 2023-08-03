@@ -15,7 +15,7 @@ instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  Cb ) whe
     { key: "loadedmetadata", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "loadedmetadata", value: cb' value })
 instance Attr anything OnLoadedmetadata  Cb  where
-  attr OnLoadedmetadata value = unsafeAttribute $ This
+  attr OnLoadedmetadata value = unsafeAttribute $ This $ pure $
     { key: "loadedmetadata", value: cb' value }
 instance Attr anything OnLoadedmetadata (Event.Event  Cb ) where
   attr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue
@@ -30,7 +30,7 @@ instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  (Effect 
         { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLoadedmetadata  (Effect Unit)  where
-  attr OnLoadedmetadata value = unsafeAttribute $ This
+  attr OnLoadedmetadata value = unsafeAttribute $ This $ pure $
     { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnLoadedmetadata (Event.Event  (Effect Unit) ) where
   attr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue
@@ -44,7 +44,7 @@ instance Attr anything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  (Effect 
         { key: "loadedmetadata", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLoadedmetadata  (Effect Boolean)  where
-  attr OnLoadedmetadata value = unsafeAttribute $ This
+  attr OnLoadedmetadata value = unsafeAttribute $ This $ pure $
     { key: "loadedmetadata", value: cb' (Cb (const value)) }
 instance Attr anything OnLoadedmetadata (Event.Event  (Effect Boolean) ) where
   attr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue
@@ -60,7 +60,7 @@ instance Attr everything OnLoadedmetadata (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "loadedmetadata", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "loadedmetadata", value: unset' })
 instance Attr everything OnLoadedmetadata  Unit  where
-  attr OnLoadedmetadata _ = unsafeAttribute $ This
+  attr OnLoadedmetadata _ = unsafeAttribute $ This $ pure $
     { key: "loadedmetadata", value: unset' }
 instance Attr everything OnLoadedmetadata (Event.Event  Unit ) where
   attr OnLoadedmetadata eventValue = unsafeAttribute $ That $ eventValue

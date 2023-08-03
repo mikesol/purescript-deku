@@ -15,7 +15,7 @@ instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pause", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pause", value: cb' value })
 instance Attr anything OnPause  Cb  where
-  attr OnPause value = unsafeAttribute $ This
+  attr OnPause value = unsafeAttribute $ This $ pure $
     { key: "pause", value: cb' value }
 instance Attr anything OnPause (Event.Event  Cb ) where
   attr OnPause eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "pause", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPause  (Effect Unit)  where
-  attr OnPause value = unsafeAttribute $ This
+  attr OnPause value = unsafeAttribute $ This $ pure $
     { key: "pause", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPause (Event.Event  (Effect Unit) ) where
   attr OnPause eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPause (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "pause", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPause  (Effect Boolean)  where
-  attr OnPause value = unsafeAttribute $ This
+  attr OnPause value = unsafeAttribute $ This $ pure $
     { key: "pause", value: cb' (Cb (const value)) }
 instance Attr anything OnPause (Event.Event  (Effect Boolean) ) where
   attr OnPause eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPause (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "pause", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pause", value: unset' })
 instance Attr everything OnPause  Unit  where
-  attr OnPause _ = unsafeAttribute $ This { key: "pause", value: unset' }
+  attr OnPause _ = unsafeAttribute $ This $ pure $ { key: "pause", value: unset' }
 instance Attr everything OnPause (Event.Event  Unit ) where
   attr OnPause eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "pause", value: unset' }

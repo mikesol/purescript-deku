@@ -15,7 +15,7 @@ instance Attr FeComposite_ K3 (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "k3", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "k3", value: prop' value })
 instance Attr FeComposite_ K3  String  where
-  attr K3 value = unsafeAttribute $ This { key: "k3", value: prop' value }
+  attr K3 value = unsafeAttribute $ This $ pure $ { key: "k3", value: prop' value }
 instance Attr FeComposite_ K3 (Event.Event  String ) where
   attr K3 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "k3", value: prop' value }
@@ -24,7 +24,7 @@ instance Attr everything K3 (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr K3 bothValues = unsafeAttribute $ Both { key: "k3", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "k3", value: unset' })
 instance Attr everything K3  Unit  where
-  attr K3 _ = unsafeAttribute $ This { key: "k3", value: unset' }
+  attr K3 _ = unsafeAttribute $ This $ pure $ { key: "k3", value: unset' }
 instance Attr everything K3 (Event.Event  Unit ) where
   attr K3 eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "k3", value: unset' }

@@ -15,7 +15,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "cancel", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "cancel", value: cb' value })
 instance Attr anything OnCancel  Cb  where
-  attr OnCancel value = unsafeAttribute $ This
+  attr OnCancel value = unsafeAttribute $ This $ pure $
     { key: "cancel", value: cb' value }
 instance Attr anything OnCancel (Event.Event  Cb ) where
   attr OnCancel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "cancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnCancel  (Effect Unit)  where
-  attr OnCancel value = unsafeAttribute $ This
+  attr OnCancel value = unsafeAttribute $ This $ pure $
     { key: "cancel", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnCancel (Event.Event  (Effect Unit) ) where
   attr OnCancel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "cancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnCancel  (Effect Boolean)  where
-  attr OnCancel value = unsafeAttribute $ This
+  attr OnCancel value = unsafeAttribute $ This $ pure $
     { key: "cancel", value: cb' (Cb (const value)) }
 instance Attr anything OnCancel (Event.Event  (Effect Boolean) ) where
   attr OnCancel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnCancel (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "cancel", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "cancel", value: unset' })
 instance Attr everything OnCancel  Unit  where
-  attr OnCancel _ = unsafeAttribute $ This { key: "cancel", value: unset' }
+  attr OnCancel _ = unsafeAttribute $ This $ pure $ { key: "cancel", value: unset' }
 instance Attr everything OnCancel (Event.Event  Unit ) where
   attr OnCancel eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "cancel", value: unset' }

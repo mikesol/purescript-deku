@@ -15,7 +15,7 @@ instance Attr anything OnPointerdown (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointerdown", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerdown", value: cb' value })
 instance Attr anything OnPointerdown  Cb  where
-  attr OnPointerdown value = unsafeAttribute $ This
+  attr OnPointerdown value = unsafeAttribute $ This $ pure $
     { key: "pointerdown", value: cb' value }
 instance Attr anything OnPointerdown (Event.Event  Cb ) where
   attr OnPointerdown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPointerdown (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "pointerdown", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerdown  (Effect Unit)  where
-  attr OnPointerdown value = unsafeAttribute $ This
+  attr OnPointerdown value = unsafeAttribute $ This $ pure $
     { key: "pointerdown", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerdown (Event.Event  (Effect Unit) ) where
   attr OnPointerdown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPointerdown (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "pointerdown", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerdown  (Effect Boolean)  where
-  attr OnPointerdown value = unsafeAttribute $ This
+  attr OnPointerdown value = unsafeAttribute $ This $ pure $
     { key: "pointerdown", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerdown (Event.Event  (Effect Boolean) ) where
   attr OnPointerdown eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPointerdown (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "pointerdown", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerdown", value: unset' })
 instance Attr everything OnPointerdown  Unit  where
-  attr OnPointerdown _ = unsafeAttribute $ This
+  attr OnPointerdown _ = unsafeAttribute $ This $ pure $
     { key: "pointerdown", value: unset' }
 instance Attr everything OnPointerdown (Event.Event  Unit ) where
   attr OnPointerdown eventValue = unsafeAttribute $ That $ eventValue <#>

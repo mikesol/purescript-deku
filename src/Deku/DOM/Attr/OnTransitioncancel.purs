@@ -15,7 +15,7 @@ instance Attr anything OnTransitioncancel (NonEmpty.NonEmpty Event.Event  Cb ) w
     { key: "transitioncancel", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transitioncancel", value: cb' value })
 instance Attr anything OnTransitioncancel  Cb  where
-  attr OnTransitioncancel value = unsafeAttribute $ This
+  attr OnTransitioncancel value = unsafeAttribute $ This $ pure $
     { key: "transitioncancel", value: cb' value }
 instance Attr anything OnTransitioncancel (Event.Event  Cb ) where
   attr OnTransitioncancel eventValue = unsafeAttribute $ That $ eventValue
@@ -30,7 +30,7 @@ instance Attr anything OnTransitioncancel (NonEmpty.NonEmpty Event.Event  (Effec
         { key: "transitioncancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTransitioncancel  (Effect Unit)  where
-  attr OnTransitioncancel value = unsafeAttribute $ This
+  attr OnTransitioncancel value = unsafeAttribute $ This $ pure $
     { key: "transitioncancel", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnTransitioncancel (Event.Event  (Effect Unit) ) where
   attr OnTransitioncancel eventValue = unsafeAttribute $ That $ eventValue
@@ -44,7 +44,7 @@ instance Attr anything OnTransitioncancel (NonEmpty.NonEmpty Event.Event  (Effec
         { key: "transitioncancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTransitioncancel  (Effect Boolean)  where
-  attr OnTransitioncancel value = unsafeAttribute $ This
+  attr OnTransitioncancel value = unsafeAttribute $ This $ pure $
     { key: "transitioncancel", value: cb' (Cb (const value)) }
 instance Attr anything OnTransitioncancel (Event.Event  (Effect Boolean) ) where
   attr OnTransitioncancel eventValue = unsafeAttribute $ That $ eventValue
@@ -60,7 +60,7 @@ instance Attr everything OnTransitioncancel (NonEmpty.NonEmpty Event.Event  Unit
     { key: "transitioncancel", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "transitioncancel", value: unset' })
 instance Attr everything OnTransitioncancel  Unit  where
-  attr OnTransitioncancel _ = unsafeAttribute $ This
+  attr OnTransitioncancel _ = unsafeAttribute $ This $ pure $
     { key: "transitioncancel", value: unset' }
 instance Attr everything OnTransitioncancel (Event.Event  Unit ) where
   attr OnTransitioncancel eventValue = unsafeAttribute $ That $ eventValue

@@ -57,7 +57,7 @@ instance Attr Circle_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Circle_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Circle_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -70,7 +70,7 @@ instance Attr ClipPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr ClipPath_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr ClipPath_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -83,7 +83,7 @@ instance Attr Defs_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Defs_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Defs_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -96,7 +96,7 @@ instance Attr Ellipse_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Ellipse_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Ellipse_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -109,7 +109,7 @@ instance Attr FeBlend_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeBlend_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeBlend_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -122,7 +122,7 @@ instance Attr FeColorMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeColorMatrix_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -135,7 +135,7 @@ instance Attr FeComponentTransfer_ StrokeDasharray (NonEmpty.NonEmpty Event.Even
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeComponentTransfer_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -148,7 +148,7 @@ instance Attr FeComposite_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  Strin
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeComposite_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeComposite_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -161,7 +161,7 @@ instance Attr FeConvolveMatrix_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeConvolveMatrix_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -174,7 +174,7 @@ instance Attr FeDiffuseLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeDiffuseLighting_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -187,7 +187,7 @@ instance Attr FeDisplacementMap_ StrokeDasharray (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeDisplacementMap_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -200,7 +200,7 @@ instance Attr FeFlood_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeFlood_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeFlood_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -213,7 +213,7 @@ instance Attr FeGaussianBlur_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeGaussianBlur_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -226,7 +226,7 @@ instance Attr FeImage_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeImage_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeImage_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -239,7 +239,7 @@ instance Attr FeMerge_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeMerge_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeMerge_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -252,7 +252,7 @@ instance Attr FeMorphology_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeMorphology_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -265,7 +265,7 @@ instance Attr FeOffset_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeOffset_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeOffset_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -278,7 +278,7 @@ instance Attr FeSpecularLighting_ StrokeDasharray (NonEmpty.NonEmpty Event.Event
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeSpecularLighting_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -291,7 +291,7 @@ instance Attr FeTile_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeTile_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeTile_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -304,7 +304,7 @@ instance Attr FeTurbulence_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr FeTurbulence_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -317,7 +317,7 @@ instance Attr Filter_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Filter_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Filter_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -330,7 +330,7 @@ instance Attr ForeignObject_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr ForeignObject_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -343,7 +343,7 @@ instance Attr G_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr G_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr G_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -356,7 +356,7 @@ instance Attr Image_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Image_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Image_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -369,7 +369,7 @@ instance Attr Line_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Line_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Line_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -382,7 +382,7 @@ instance Attr LinearGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr LinearGradient_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -395,7 +395,7 @@ instance Attr Marker_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Marker_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Marker_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -408,7 +408,7 @@ instance Attr Mask_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Mask_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Mask_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -421,7 +421,7 @@ instance Attr Path_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Path_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Path_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -434,7 +434,7 @@ instance Attr Pattern_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Pattern_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Pattern_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -447,7 +447,7 @@ instance Attr Polygon_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Polygon_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Polygon_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -460,7 +460,7 @@ instance Attr Polyline_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Polyline_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Polyline_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -473,7 +473,7 @@ instance Attr RadialGradient_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr RadialGradient_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -486,7 +486,7 @@ instance Attr Rect_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Rect_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Rect_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -499,7 +499,7 @@ instance Attr Svg_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Svg_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Svg_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -512,7 +512,7 @@ instance Attr Switch_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Switch_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Switch_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -525,7 +525,7 @@ instance Attr Symbol_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Symbol_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Symbol_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -538,7 +538,7 @@ instance Attr Text_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Text_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Text_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -551,7 +551,7 @@ instance Attr TextPath_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr TextPath_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr TextPath_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -564,7 +564,7 @@ instance Attr Tspan_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Tspan_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Tspan_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -577,7 +577,7 @@ instance Attr Use_ StrokeDasharray (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-dasharray", value: prop' value }
     )
 instance Attr Use_ StrokeDasharray  String  where
-  attr StrokeDasharray value = unsafeAttribute $ This
+  attr StrokeDasharray value = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: prop' value }
 instance Attr Use_ StrokeDasharray (Event.Event  String ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue
@@ -588,7 +588,7 @@ instance Attr everything StrokeDasharray (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "stroke-dasharray", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-dasharray", value: unset' })
 instance Attr everything StrokeDasharray  Unit  where
-  attr StrokeDasharray _ = unsafeAttribute $ This
+  attr StrokeDasharray _ = unsafeAttribute $ This $ pure $
     { key: "stroke-dasharray", value: unset' }
 instance Attr everything StrokeDasharray (Event.Event  Unit ) where
   attr StrokeDasharray eventValue = unsafeAttribute $ That $ eventValue

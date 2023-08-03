@@ -33,7 +33,7 @@ instance Attr FeBlend_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeBlend_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeBlend_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ TextRendering (NonEmpty.NonEmpty Event.Event  Strin
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeColorMatrix_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeColorMatrix_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ TextRendering (NonEmpty.NonEmpty Event.Event 
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeComponentTransfer_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeComponentTransfer_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ TextRendering (NonEmpty.NonEmpty Event.Event  String 
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeComposite_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeComposite_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ TextRendering (NonEmpty.NonEmpty Event.Event  St
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeConvolveMatrix_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeConvolveMatrix_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ TextRendering (NonEmpty.NonEmpty Event.Event  S
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeDiffuseLighting_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeDiffuseLighting_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ TextRendering (NonEmpty.NonEmpty Event.Event  S
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeDisplacementMap_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeDisplacementMap_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeFlood_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeFlood_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ TextRendering (NonEmpty.NonEmpty Event.Event  Stri
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeGaussianBlur_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeGaussianBlur_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeImage_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeImage_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeMerge_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeMerge_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ TextRendering (NonEmpty.NonEmpty Event.Event  String
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeMorphology_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeMorphology_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeOffset_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeOffset_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ TextRendering (NonEmpty.NonEmpty Event.Event  
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeSpecularLighting_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeSpecularLighting_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeTile_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeTile_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ TextRendering (NonEmpty.NonEmpty Event.Event  String
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr FeTurbulence_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr FeTurbulence_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr Filter_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr Filter_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr Image_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr Image_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ TextRendering (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "text-rendering", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "text-rendering", value: prop' value })
 instance Attr Switch_ TextRendering  String  where
-  attr TextRendering value = unsafeAttribute $ This
+  attr TextRendering value = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: prop' value }
 instance Attr Switch_ TextRendering (Event.Event  String ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything TextRendering (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "text-rendering", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "text-rendering", value: unset' })
 instance Attr everything TextRendering  Unit  where
-  attr TextRendering _ = unsafeAttribute $ This
+  attr TextRendering _ = unsafeAttribute $ This $ pure $
     { key: "text-rendering", value: unset' }
 instance Attr everything TextRendering (Event.Event  Unit ) where
   attr TextRendering eventValue = unsafeAttribute $ That $ eventValue <#>

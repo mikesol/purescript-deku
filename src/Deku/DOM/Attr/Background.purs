@@ -18,7 +18,7 @@ instance Attr Body_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Body_ Background  String  where
-  attr Background value = unsafeAttribute $ This
+  attr Background value = unsafeAttribute $ This $ pure $
     { key: "background", value: prop' value }
 instance Attr Body_ Background (Event.Event  String ) where
   attr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr Table_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Table_ Background  String  where
-  attr Background value = unsafeAttribute $ This
+  attr Background value = unsafeAttribute $ This $ pure $
     { key: "background", value: prop' value }
 instance Attr Table_ Background (Event.Event  String ) where
   attr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr Td_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Td_ Background  String  where
-  attr Background value = unsafeAttribute $ This
+  attr Background value = unsafeAttribute $ This $ pure $
     { key: "background", value: prop' value }
 instance Attr Td_ Background (Event.Event  String ) where
   attr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Th_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Th_ Background  String  where
-  attr Background value = unsafeAttribute $ This
+  attr Background value = unsafeAttribute $ This $ pure $
     { key: "background", value: prop' value }
 instance Attr Th_ Background (Event.Event  String ) where
   attr Background eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Background (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "background", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "background", value: unset' })
 instance Attr everything Background  Unit  where
-  attr Background _ = unsafeAttribute $ This
+  attr Background _ = unsafeAttribute $ This $ pure $
     { key: "background", value: unset' }
 instance Attr everything Background (Event.Event  Unit ) where
   attr Background eventValue = unsafeAttribute $ That $ eventValue <#>

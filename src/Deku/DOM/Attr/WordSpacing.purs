@@ -33,7 +33,7 @@ instance Attr FeBlend_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeBlend_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeBlend_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ WordSpacing (NonEmpty.NonEmpty Event.Event  String 
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeColorMatrix_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeColorMatrix_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ WordSpacing (NonEmpty.NonEmpty Event.Event  S
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeComponentTransfer_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeComponentTransfer_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeComposite_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeComposite_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ WordSpacing (NonEmpty.NonEmpty Event.Event  Stri
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeConvolveMatrix_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeConvolveMatrix_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ WordSpacing (NonEmpty.NonEmpty Event.Event  Str
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeDiffuseLighting_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeDiffuseLighting_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ WordSpacing (NonEmpty.NonEmpty Event.Event  Str
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeDisplacementMap_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeDisplacementMap_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeFlood_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeFlood_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ WordSpacing (NonEmpty.NonEmpty Event.Event  String
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeGaussianBlur_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeGaussianBlur_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeImage_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeImage_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeMerge_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeMerge_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ WordSpacing (NonEmpty.NonEmpty Event.Event  String )
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeMorphology_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeMorphology_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeOffset_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeOffset_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ WordSpacing (NonEmpty.NonEmpty Event.Event  St
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeSpecularLighting_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeSpecularLighting_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeTile_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeTile_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ WordSpacing (NonEmpty.NonEmpty Event.Event  String )
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr FeTurbulence_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr FeTurbulence_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr Filter_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr Filter_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr Image_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr Image_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ WordSpacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "word-spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "word-spacing", value: prop' value })
 instance Attr Switch_ WordSpacing  String  where
-  attr WordSpacing value = unsafeAttribute $ This
+  attr WordSpacing value = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: prop' value }
 instance Attr Switch_ WordSpacing (Event.Event  String ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything WordSpacing (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "word-spacing", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "word-spacing", value: unset' })
 instance Attr everything WordSpacing  Unit  where
-  attr WordSpacing _ = unsafeAttribute $ This
+  attr WordSpacing _ = unsafeAttribute $ This $ pure $
     { key: "word-spacing", value: unset' }
 instance Attr everything WordSpacing (Event.Event  Unit ) where
   attr WordSpacing eventValue = unsafeAttribute $ That $ eventValue <#>

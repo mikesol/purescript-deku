@@ -15,7 +15,7 @@ instance Attr FeTurbulence_ NumOctaves (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "numOctaves", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "numOctaves", value: prop' value })
 instance Attr FeTurbulence_ NumOctaves  String  where
-  attr NumOctaves value = unsafeAttribute $ This
+  attr NumOctaves value = unsafeAttribute $ This $ pure $
     { key: "numOctaves", value: prop' value }
 instance Attr FeTurbulence_ NumOctaves (Event.Event  String ) where
   attr NumOctaves eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything NumOctaves (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "numOctaves", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "numOctaves", value: unset' })
 instance Attr everything NumOctaves  Unit  where
-  attr NumOctaves _ = unsafeAttribute $ This
+  attr NumOctaves _ = unsafeAttribute $ This $ pure $
     { key: "numOctaves", value: unset' }
 instance Attr everything NumOctaves (Event.Event  Unit ) where
   attr NumOctaves eventValue = unsafeAttribute $ That $ eventValue <#>

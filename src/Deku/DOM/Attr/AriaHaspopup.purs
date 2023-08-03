@@ -31,7 +31,7 @@ instance Attr Circle_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Circle_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Circle_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,7 +42,7 @@ instance Attr Ellipse_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Ellipse_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Ellipse_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,7 +53,7 @@ instance Attr ForeignObject_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr ForeignObject_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr ForeignObject_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,7 +64,7 @@ instance Attr G_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr G_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr G_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,7 +75,7 @@ instance Attr Line_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Line_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Line_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,7 +86,7 @@ instance Attr Marker_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Marker_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Marker_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,7 +97,7 @@ instance Attr Path_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Path_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Path_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,7 +108,7 @@ instance Attr Polygon_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Polygon_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Polygon_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,7 +119,7 @@ instance Attr Polyline_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Polyline_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Polyline_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,7 +130,7 @@ instance Attr Rect_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Rect_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Rect_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,7 +141,7 @@ instance Attr Svg_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Svg_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Svg_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr Symbol_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Symbol_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Symbol_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -163,7 +163,7 @@ instance Attr Text_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Text_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Text_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr TextPath_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr TextPath_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr TextPath_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,7 +185,7 @@ instance Attr Tspan_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Tspan_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Tspan_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,7 +196,7 @@ instance Attr Use_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr Use_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr Use_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -207,7 +207,7 @@ instance Attr View_ AriaHaspopup (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-haspopup", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-haspopup", value: prop' value })
 instance Attr View_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute $ This
+  attr AriaHaspopup value = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: prop' value }
 instance Attr View_ AriaHaspopup (Event.Event  String ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -218,7 +218,7 @@ instance Attr everything AriaHaspopup (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "aria-haspopup", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-haspopup", value: unset' })
 instance Attr everything AriaHaspopup  Unit  where
-  attr AriaHaspopup _ = unsafeAttribute $ This
+  attr AriaHaspopup _ = unsafeAttribute $ This $ pure $
     { key: "aria-haspopup", value: unset' }
 instance Attr everything AriaHaspopup (Event.Event  Unit ) where
   attr AriaHaspopup eventValue = unsafeAttribute $ That $ eventValue <#>

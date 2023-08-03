@@ -17,7 +17,7 @@ instance Attr Animate_ By (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "by", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "by", value: prop' value })
 instance Attr Animate_ By  String  where
-  attr By value = unsafeAttribute $ This { key: "by", value: prop' value }
+  attr By value = unsafeAttribute $ This $ pure $ { key: "by", value: prop' value }
 instance Attr Animate_ By (Event.Event  String ) where
   attr By eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "by", value: prop' value }
@@ -27,7 +27,7 @@ instance Attr AnimateMotion_ By (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "by", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "by", value: prop' value })
 instance Attr AnimateMotion_ By  String  where
-  attr By value = unsafeAttribute $ This { key: "by", value: prop' value }
+  attr By value = unsafeAttribute $ This $ pure $ { key: "by", value: prop' value }
 instance Attr AnimateMotion_ By (Event.Event  String ) where
   attr By eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "by", value: prop' value }
@@ -37,7 +37,7 @@ instance Attr AnimateTransform_ By (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "by", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "by", value: prop' value })
 instance Attr AnimateTransform_ By  String  where
-  attr By value = unsafeAttribute $ This { key: "by", value: prop' value }
+  attr By value = unsafeAttribute $ This $ pure $ { key: "by", value: prop' value }
 instance Attr AnimateTransform_ By (Event.Event  String ) where
   attr By eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "by", value: prop' value }
@@ -46,7 +46,7 @@ instance Attr everything By (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr By bothValues = unsafeAttribute $ Both { key: "by", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "by", value: unset' })
 instance Attr everything By  Unit  where
-  attr By _ = unsafeAttribute $ This { key: "by", value: unset' }
+  attr By _ = unsafeAttribute $ This $ pure $ { key: "by", value: unset' }
 instance Attr everything By (Event.Event  Unit ) where
   attr By eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "by", value: unset' }

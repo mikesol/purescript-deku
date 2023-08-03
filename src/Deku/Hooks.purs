@@ -147,7 +147,7 @@ useEffect' mm e f = Nut go'
     let Nut nf = f unit
     Tuple sub (Tuple unsub ev) <- __internalDekuFlatten nf i di
     pure
-      ( Tuple (sub <> maybe empty (pure <<< oneOffEffect <<< { effect: _ }) mm)
+      ( Tuple (sub <> maybe empty (pure <<< pure <<< oneOffEffect <<< { effect: _ }) mm)
           (Tuple unsub $ merge [ ev, e <#> \effect -> oneOffEffect { effect } ])
       )
 

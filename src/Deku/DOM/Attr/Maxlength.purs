@@ -16,7 +16,7 @@ instance Attr Input_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "maxlength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Input_ Maxlength  String  where
-  attr Maxlength value = unsafeAttribute $ This
+  attr Maxlength value = unsafeAttribute $ This $ pure $
     { key: "maxlength", value: prop' value }
 instance Attr Input_ Maxlength (Event.Event  String ) where
   attr Maxlength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Textarea_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "maxlength", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Textarea_ Maxlength  String  where
-  attr Maxlength value = unsafeAttribute $ This
+  attr Maxlength value = unsafeAttribute $ This $ pure $
     { key: "maxlength", value: prop' value }
 instance Attr Textarea_ Maxlength (Event.Event  String ) where
   attr Maxlength eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Maxlength (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "maxlength", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "maxlength", value: unset' })
 instance Attr everything Maxlength  Unit  where
-  attr Maxlength _ = unsafeAttribute $ This
+  attr Maxlength _ = unsafeAttribute $ This $ pure $
     { key: "maxlength", value: unset' }
 instance Attr everything Maxlength (Event.Event  Unit ) where
   attr Maxlength eventValue = unsafeAttribute $ That $ eventValue <#>

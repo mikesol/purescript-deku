@@ -15,7 +15,7 @@ instance Attr FeConvolveMatrix_ TargetY (NonEmpty.NonEmpty Event.Event  String )
     { key: "targetY", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "targetY", value: prop' value })
 instance Attr FeConvolveMatrix_ TargetY  String  where
-  attr TargetY value = unsafeAttribute $ This
+  attr TargetY value = unsafeAttribute $ This $ pure $
     { key: "targetY", value: prop' value }
 instance Attr FeConvolveMatrix_ TargetY (Event.Event  String ) where
   attr TargetY eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything TargetY (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "targetY", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "targetY", value: unset' })
 instance Attr everything TargetY  Unit  where
-  attr TargetY _ = unsafeAttribute $ This { key: "targetY", value: unset' }
+  attr TargetY _ = unsafeAttribute $ This $ pure $ { key: "targetY", value: unset' }
 instance Attr everything TargetY (Event.Event  Unit ) where
   attr TargetY eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "targetY", value: unset' }

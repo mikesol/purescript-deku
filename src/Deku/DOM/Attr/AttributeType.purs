@@ -15,7 +15,7 @@ instance Attr AnimateTransform_ AttributeType (NonEmpty.NonEmpty Event.Event  St
     { key: "attributeType", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeType", value: prop' value })
 instance Attr AnimateTransform_ AttributeType  String  where
-  attr AttributeType value = unsafeAttribute $ This
+  attr AttributeType value = unsafeAttribute $ This $ pure $
     { key: "attributeType", value: prop' value }
 instance Attr AnimateTransform_ AttributeType (Event.Event  String ) where
   attr AttributeType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything AttributeType (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "attributeType", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "attributeType", value: unset' })
 instance Attr everything AttributeType  Unit  where
-  attr AttributeType _ = unsafeAttribute $ This
+  attr AttributeType _ = unsafeAttribute $ This $ pure $
     { key: "attributeType", value: unset' }
 instance Attr everything AttributeType (Event.Event  Unit ) where
   attr AttributeType eventValue = unsafeAttribute $ That $ eventValue <#>

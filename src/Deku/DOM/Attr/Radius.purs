@@ -15,7 +15,7 @@ instance Attr FeMorphology_ Radius (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "radius", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "radius", value: prop' value })
 instance Attr FeMorphology_ Radius  String  where
-  attr Radius value = unsafeAttribute $ This
+  attr Radius value = unsafeAttribute $ This $ pure $
     { key: "radius", value: prop' value }
 instance Attr FeMorphology_ Radius (Event.Event  String ) where
   attr Radius eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Radius (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "radius", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "radius", value: unset' })
 instance Attr everything Radius  Unit  where
-  attr Radius _ = unsafeAttribute $ This { key: "radius", value: unset' }
+  attr Radius _ = unsafeAttribute $ This $ pure $ { key: "radius", value: unset' }
 instance Attr everything Radius (Event.Event  Unit ) where
   attr Radius eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "radius", value: unset' }

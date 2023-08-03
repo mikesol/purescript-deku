@@ -15,7 +15,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mousemove", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mousemove", value: cb' value })
 instance Attr anything OnMousemove  Cb  where
-  attr OnMousemove value = unsafeAttribute $ This
+  attr OnMousemove value = unsafeAttribute $ This $ pure $
     { key: "mousemove", value: cb' value }
 instance Attr anything OnMousemove (Event.Event  Cb ) where
   attr OnMousemove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "mousemove", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMousemove  (Effect Unit)  where
-  attr OnMousemove value = unsafeAttribute $ This
+  attr OnMousemove value = unsafeAttribute $ This $ pure $
     { key: "mousemove", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnMousemove (Event.Event  (Effect Unit) ) where
   attr OnMousemove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "mousemove", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMousemove  (Effect Boolean)  where
-  attr OnMousemove value = unsafeAttribute $ This
+  attr OnMousemove value = unsafeAttribute $ This $ pure $
     { key: "mousemove", value: cb' (Cb (const value)) }
 instance Attr anything OnMousemove (Event.Event  (Effect Boolean) ) where
   attr OnMousemove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnMousemove (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "mousemove", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mousemove", value: unset' })
 instance Attr everything OnMousemove  Unit  where
-  attr OnMousemove _ = unsafeAttribute $ This
+  attr OnMousemove _ = unsafeAttribute $ This $ pure $
     { key: "mousemove", value: unset' }
 instance Attr everything OnMousemove (Event.Event  Unit ) where
   attr OnMousemove eventValue = unsafeAttribute $ That $ eventValue <#>

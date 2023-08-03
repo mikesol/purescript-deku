@@ -18,7 +18,7 @@ instance Attr Animate_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Animate_ RepeatCount  String  where
-  attr RepeatCount value = unsafeAttribute $ This
+  attr RepeatCount value = unsafeAttribute $ This $ pure $
     { key: "repeatCount", value: prop' value }
 instance Attr Animate_ RepeatCount (Event.Event  String ) where
   attr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr AnimateMotion_ RepeatCount (NonEmpty.NonEmpty Event.Event  String 
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateMotion_ RepeatCount  String  where
-  attr RepeatCount value = unsafeAttribute $ This
+  attr RepeatCount value = unsafeAttribute $ This $ pure $
     { key: "repeatCount", value: prop' value }
 instance Attr AnimateMotion_ RepeatCount (Event.Event  String ) where
   attr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr AnimateTransform_ RepeatCount (NonEmpty.NonEmpty Event.Event  Stri
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateTransform_ RepeatCount  String  where
-  attr RepeatCount value = unsafeAttribute $ This
+  attr RepeatCount value = unsafeAttribute $ This $ pure $
     { key: "repeatCount", value: prop' value }
 instance Attr AnimateTransform_ RepeatCount (Event.Event  String ) where
   attr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr Set_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Set_ RepeatCount  String  where
-  attr RepeatCount value = unsafeAttribute $ This
+  attr RepeatCount value = unsafeAttribute $ This $ pure $
     { key: "repeatCount", value: prop' value }
 instance Attr Set_ RepeatCount (Event.Event  String ) where
   attr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything RepeatCount (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "repeatCount", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "repeatCount", value: unset' })
 instance Attr everything RepeatCount  Unit  where
-  attr RepeatCount _ = unsafeAttribute $ This
+  attr RepeatCount _ = unsafeAttribute $ This $ pure $
     { key: "repeatCount", value: unset' }
 instance Attr everything RepeatCount (Event.Event  Unit ) where
   attr RepeatCount eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr Style_ Scoped (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "scoped", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "scoped", value: prop' value })
 instance Attr Style_ Scoped  String  where
-  attr Scoped value = unsafeAttribute $ This
+  attr Scoped value = unsafeAttribute $ This $ pure $
     { key: "scoped", value: prop' value }
 instance Attr Style_ Scoped (Event.Event  String ) where
   attr Scoped eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Scoped (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "scoped", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "scoped", value: unset' })
 instance Attr everything Scoped  Unit  where
-  attr Scoped _ = unsafeAttribute $ This { key: "scoped", value: unset' }
+  attr Scoped _ = unsafeAttribute $ This $ pure $ { key: "scoped", value: unset' }
 instance Attr everything Scoped (Event.Event  Unit ) where
   attr Scoped eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "scoped", value: unset' }

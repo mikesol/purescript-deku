@@ -16,7 +16,7 @@ instance Attr Td_ Headers (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "headers", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "headers", value: prop' value })
 instance Attr Td_ Headers  String  where
-  attr Headers value = unsafeAttribute $ This
+  attr Headers value = unsafeAttribute $ This $ pure $
     { key: "headers", value: prop' value }
 instance Attr Td_ Headers (Event.Event  String ) where
   attr Headers eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Th_ Headers (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "headers", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "headers", value: prop' value })
 instance Attr Th_ Headers  String  where
-  attr Headers value = unsafeAttribute $ This
+  attr Headers value = unsafeAttribute $ This $ pure $
     { key: "headers", value: prop' value }
 instance Attr Th_ Headers (Event.Event  String ) where
   attr Headers eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Headers (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "headers", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "headers", value: unset' })
 instance Attr everything Headers  Unit  where
-  attr Headers _ = unsafeAttribute $ This { key: "headers", value: unset' }
+  attr Headers _ = unsafeAttribute $ This $ pure $ { key: "headers", value: unset' }
 instance Attr everything Headers (Event.Event  Unit ) where
   attr Headers eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "headers", value: unset' }

@@ -15,7 +15,7 @@ instance Attr AnimateMotion_ KeyPoints (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "keyPoints", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keyPoints", value: prop' value })
 instance Attr AnimateMotion_ KeyPoints  String  where
-  attr KeyPoints value = unsafeAttribute $ This
+  attr KeyPoints value = unsafeAttribute $ This $ pure $
     { key: "keyPoints", value: prop' value }
 instance Attr AnimateMotion_ KeyPoints (Event.Event  String ) where
   attr KeyPoints eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything KeyPoints (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keyPoints", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyPoints", value: unset' })
 instance Attr everything KeyPoints  Unit  where
-  attr KeyPoints _ = unsafeAttribute $ This
+  attr KeyPoints _ = unsafeAttribute $ This $ pure $
     { key: "keyPoints", value: unset' }
 instance Attr everything KeyPoints (Event.Event  Unit ) where
   attr KeyPoints eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -17,7 +17,7 @@ instance Attr FeDisplacementMap_ XChannelSelector (NonEmpty.NonEmpty Event.Event
         { key: "xChannelSelector", value: prop' value }
     )
 instance Attr FeDisplacementMap_ XChannelSelector  String  where
-  attr XChannelSelector value = unsafeAttribute $ This
+  attr XChannelSelector value = unsafeAttribute $ This $ pure $
     { key: "xChannelSelector", value: prop' value }
 instance Attr FeDisplacementMap_ XChannelSelector (Event.Event  String ) where
   attr XChannelSelector eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything XChannelSelector (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "xChannelSelector", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xChannelSelector", value: unset' })
 instance Attr everything XChannelSelector  Unit  where
-  attr XChannelSelector _ = unsafeAttribute $ This
+  attr XChannelSelector _ = unsafeAttribute $ This $ pure $
     { key: "xChannelSelector", value: unset' }
 instance Attr everything XChannelSelector (Event.Event  Unit ) where
   attr XChannelSelector eventValue = unsafeAttribute $ That $ eventValue

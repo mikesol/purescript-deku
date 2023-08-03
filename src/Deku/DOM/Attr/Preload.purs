@@ -16,7 +16,7 @@ instance Attr Audio_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "preload", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Audio_ Preload  String  where
-  attr Preload value = unsafeAttribute $ This
+  attr Preload value = unsafeAttribute $ This $ pure $
     { key: "preload", value: prop' value }
 instance Attr Audio_ Preload (Event.Event  String ) where
   attr Preload eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Video_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "preload", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Video_ Preload  String  where
-  attr Preload value = unsafeAttribute $ This
+  attr Preload value = unsafeAttribute $ This $ pure $
     { key: "preload", value: prop' value }
 instance Attr Video_ Preload (Event.Event  String ) where
   attr Preload eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Preload (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "preload", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "preload", value: unset' })
 instance Attr everything Preload  Unit  where
-  attr Preload _ = unsafeAttribute $ This { key: "preload", value: unset' }
+  attr Preload _ = unsafeAttribute $ This $ pure $ { key: "preload", value: unset' }
 instance Attr everything Preload (Event.Event  Unit ) where
   attr Preload eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "preload", value: unset' }

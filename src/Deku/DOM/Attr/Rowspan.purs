@@ -16,7 +16,7 @@ instance Attr Td_ Rowspan (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rowspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "rowspan", value: prop' value })
 instance Attr Td_ Rowspan  String  where
-  attr Rowspan value = unsafeAttribute $ This
+  attr Rowspan value = unsafeAttribute $ This $ pure $
     { key: "rowspan", value: prop' value }
 instance Attr Td_ Rowspan (Event.Event  String ) where
   attr Rowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Th_ Rowspan (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rowspan", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "rowspan", value: prop' value })
 instance Attr Th_ Rowspan  String  where
-  attr Rowspan value = unsafeAttribute $ This
+  attr Rowspan value = unsafeAttribute $ This $ pure $
     { key: "rowspan", value: prop' value }
 instance Attr Th_ Rowspan (Event.Event  String ) where
   attr Rowspan eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Rowspan (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "rowspan", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "rowspan", value: unset' })
 instance Attr everything Rowspan  Unit  where
-  attr Rowspan _ = unsafeAttribute $ This { key: "rowspan", value: unset' }
+  attr Rowspan _ = unsafeAttribute $ This $ pure $ { key: "rowspan", value: unset' }
 instance Attr everything Rowspan (Event.Event  Unit ) where
   attr Rowspan eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "rowspan", value: unset' }

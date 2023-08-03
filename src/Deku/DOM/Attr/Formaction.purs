@@ -16,7 +16,7 @@ instance Attr Input_ Formaction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "formaction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "formaction", value: prop' value })
 instance Attr Input_ Formaction  String  where
-  attr Formaction value = unsafeAttribute $ This
+  attr Formaction value = unsafeAttribute $ This $ pure $
     { key: "formaction", value: prop' value }
 instance Attr Input_ Formaction (Event.Event  String ) where
   attr Formaction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Button_ Formaction (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "formaction", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "formaction", value: prop' value })
 instance Attr Button_ Formaction  String  where
-  attr Formaction value = unsafeAttribute $ This
+  attr Formaction value = unsafeAttribute $ This $ pure $
     { key: "formaction", value: prop' value }
 instance Attr Button_ Formaction (Event.Event  String ) where
   attr Formaction eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Formaction (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "formaction", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "formaction", value: unset' })
 instance Attr everything Formaction  Unit  where
-  attr Formaction _ = unsafeAttribute $ This
+  attr Formaction _ = unsafeAttribute $ This $ pure $
     { key: "formaction", value: unset' }
 instance Attr everything Formaction (Event.Event  Unit ) where
   attr Formaction eventValue = unsafeAttribute $ That $ eventValue <#>

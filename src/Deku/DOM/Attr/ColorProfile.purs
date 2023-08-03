@@ -33,7 +33,7 @@ instance Attr FeBlend_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeBlend_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeBlend_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  String
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeColorMatrix_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeColorMatrix_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ ColorProfile (NonEmpty.NonEmpty Event.Event  
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComponentTransfer_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeComponentTransfer_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ ColorProfile (NonEmpty.NonEmpty Event.Event  String )
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComposite_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeComposite_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  Str
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeConvolveMatrix_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeConvolveMatrix_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  St
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDiffuseLighting_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeDiffuseLighting_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ ColorProfile (NonEmpty.NonEmpty Event.Event  St
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDisplacementMap_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeDisplacementMap_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeFlood_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeFlood_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ ColorProfile (NonEmpty.NonEmpty Event.Event  Strin
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeGaussianBlur_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeGaussianBlur_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeImage_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeImage_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMerge_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeMerge_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ ColorProfile (NonEmpty.NonEmpty Event.Event  String 
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMorphology_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeMorphology_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeOffset_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeOffset_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  S
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeSpecularLighting_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeSpecularLighting_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTile_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeTile_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ ColorProfile (NonEmpty.NonEmpty Event.Event  String 
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTurbulence_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr FeTurbulence_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Filter_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr Filter_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Image_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr Image_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Switch_ ColorProfile  String  where
-  attr ColorProfile value = unsafeAttribute $ This
+  attr ColorProfile value = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: prop' value }
 instance Attr Switch_ ColorProfile (Event.Event  String ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything ColorProfile (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "color-profile", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "color-profile", value: unset' })
 instance Attr everything ColorProfile  Unit  where
-  attr ColorProfile _ = unsafeAttribute $ This
+  attr ColorProfile _ = unsafeAttribute $ This $ pure $
     { key: "color-profile", value: unset' }
 instance Attr everything ColorProfile (Event.Event  Unit ) where
   attr ColorProfile eventValue = unsafeAttribute $ That $ eventValue <#>

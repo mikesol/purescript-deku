@@ -31,7 +31,7 @@ instance Attr Circle_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Circle_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Circle_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,7 +42,7 @@ instance Attr Ellipse_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Ellipse_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Ellipse_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,7 +53,7 @@ instance Attr ForeignObject_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr ForeignObject_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr ForeignObject_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,7 +64,7 @@ instance Attr G_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr G_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr G_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,7 +75,7 @@ instance Attr Line_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Line_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Line_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,7 +86,7 @@ instance Attr Marker_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Marker_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Marker_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,7 +97,7 @@ instance Attr Path_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Path_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Path_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,7 +108,7 @@ instance Attr Polygon_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Polygon_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Polygon_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,7 +119,7 @@ instance Attr Polyline_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Polyline_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Polyline_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,7 +130,7 @@ instance Attr Rect_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Rect_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Rect_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,7 +141,7 @@ instance Attr Svg_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Svg_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Svg_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr Symbol_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Symbol_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Symbol_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -163,7 +163,7 @@ instance Attr Text_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Text_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Text_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr TextPath_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr TextPath_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr TextPath_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,7 +185,7 @@ instance Attr Tspan_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Tspan_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Tspan_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,7 +196,7 @@ instance Attr Use_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr Use_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr Use_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -207,7 +207,7 @@ instance Attr View_ AriaPosinset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-posinset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-posinset", value: prop' value })
 instance Attr View_ AriaPosinset  String  where
-  attr AriaPosinset value = unsafeAttribute $ This
+  attr AriaPosinset value = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: prop' value }
 instance Attr View_ AriaPosinset (Event.Event  String ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -218,7 +218,7 @@ instance Attr everything AriaPosinset (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "aria-posinset", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-posinset", value: unset' })
 instance Attr everything AriaPosinset  Unit  where
-  attr AriaPosinset _ = unsafeAttribute $ This
+  attr AriaPosinset _ = unsafeAttribute $ This $ pure $
     { key: "aria-posinset", value: unset' }
 instance Attr everything AriaPosinset (Event.Event  Unit ) where
   attr AriaPosinset eventValue = unsafeAttribute $ That $ eventValue <#>

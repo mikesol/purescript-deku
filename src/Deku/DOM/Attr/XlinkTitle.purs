@@ -22,7 +22,7 @@ instance Attr AnimateTransform_ XlinkTitle (NonEmpty.NonEmpty Event.Event  Strin
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr AnimateTransform_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr AnimateTransform_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -33,7 +33,7 @@ instance Attr FeImage_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr FeImage_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr FeImage_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr Filter_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr Filter_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr Filter_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr Image_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr Image_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr Image_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr LinearGradient_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String 
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr LinearGradient_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr LinearGradient_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr Mpath_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr Mpath_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr Mpath_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr Pattern_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr Pattern_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr Pattern_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr RadialGradient_ XlinkTitle (NonEmpty.NonEmpty Event.Event  String 
     { key: "xlink:title", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:title", value: prop' value })
 instance Attr RadialGradient_ XlinkTitle  String  where
-  attr XlinkTitle value = unsafeAttribute $ This
+  attr XlinkTitle value = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: prop' value }
 instance Attr RadialGradient_ XlinkTitle (Event.Event  String ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr everything XlinkTitle (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "xlink:title", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:title", value: unset' })
 instance Attr everything XlinkTitle  Unit  where
-  attr XlinkTitle _ = unsafeAttribute $ This
+  attr XlinkTitle _ = unsafeAttribute $ This $ pure $
     { key: "xlink:title", value: unset' }
 instance Attr everything XlinkTitle (Event.Event  Unit ) where
   attr XlinkTitle eventValue = unsafeAttribute $ That $ eventValue <#>

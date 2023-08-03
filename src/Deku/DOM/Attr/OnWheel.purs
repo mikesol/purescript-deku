@@ -15,7 +15,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "wheel", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "wheel", value: cb' value })
 instance Attr anything OnWheel  Cb  where
-  attr OnWheel value = unsafeAttribute $ This
+  attr OnWheel value = unsafeAttribute $ This $ pure $
     { key: "wheel", value: cb' value }
 instance Attr anything OnWheel (Event.Event  Cb ) where
   attr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "wheel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnWheel  (Effect Unit)  where
-  attr OnWheel value = unsafeAttribute $ This
+  attr OnWheel value = unsafeAttribute $ This $ pure $
     { key: "wheel", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnWheel (Event.Event  (Effect Unit) ) where
   attr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "wheel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnWheel  (Effect Boolean)  where
-  attr OnWheel value = unsafeAttribute $ This
+  attr OnWheel value = unsafeAttribute $ This $ pure $
     { key: "wheel", value: cb' (Cb (const value)) }
 instance Attr anything OnWheel (Event.Event  (Effect Boolean) ) where
   attr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnWheel (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "wheel", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "wheel", value: unset' })
 instance Attr everything OnWheel  Unit  where
-  attr OnWheel _ = unsafeAttribute $ This { key: "wheel", value: unset' }
+  attr OnWheel _ = unsafeAttribute $ This $ pure $ { key: "wheel", value: unset' }
 instance Attr everything OnWheel (Event.Event  Unit ) where
   attr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "wheel", value: unset' }

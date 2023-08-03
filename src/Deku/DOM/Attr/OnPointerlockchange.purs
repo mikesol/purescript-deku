@@ -17,7 +17,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Cb ) 
         { key: "pointerlockchange", value: cb' value }
     )
 instance Attr anything OnPointerlockchange  Cb  where
-  attr OnPointerlockchange value = unsafeAttribute $ This
+  attr OnPointerlockchange value = unsafeAttribute $ This $ pure $
     { key: "pointerlockchange", value: cb' value }
 instance Attr anything OnPointerlockchange (Event.Event  Cb ) where
   attr OnPointerlockchange eventValue = unsafeAttribute $ That $
@@ -32,7 +32,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerlockchange  (Effect Unit)  where
-  attr OnPointerlockchange value = unsafeAttribute $ This
+  attr OnPointerlockchange value = unsafeAttribute $ This $ pure $
     { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerlockchange (Event.Event  (Effect Unit) ) where
   attr OnPointerlockchange eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "pointerlockchange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerlockchange  (Effect Boolean)  where
-  attr OnPointerlockchange value = unsafeAttribute $ This
+  attr OnPointerlockchange value = unsafeAttribute $ This $ pure $
     { key: "pointerlockchange", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerlockchange (Event.Event  (Effect Boolean) ) where
   attr OnPointerlockchange eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr everything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Uni
     { key: "pointerlockchange", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
 instance Attr everything OnPointerlockchange  Unit  where
-  attr OnPointerlockchange _ = unsafeAttribute $ This
+  attr OnPointerlockchange _ = unsafeAttribute $ This $ pure $
     { key: "pointerlockchange", value: unset' }
 instance Attr everything OnPointerlockchange (Event.Event  Unit ) where
   attr OnPointerlockchange eventValue = unsafeAttribute $ That $

@@ -17,7 +17,7 @@ instance Attr Animate_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr Animate_ Accumulate  String  where
-  attr Accumulate value = unsafeAttribute $ This
+  attr Accumulate value = unsafeAttribute $ This $ pure $
     { key: "accumulate", value: prop' value }
 instance Attr Animate_ Accumulate (Event.Event  String ) where
   attr Accumulate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr AnimateMotion_ Accumulate (NonEmpty.NonEmpty Event.Event  String )
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateMotion_ Accumulate  String  where
-  attr Accumulate value = unsafeAttribute $ This
+  attr Accumulate value = unsafeAttribute $ This $ pure $
     { key: "accumulate", value: prop' value }
 instance Attr AnimateMotion_ Accumulate (Event.Event  String ) where
   attr Accumulate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr AnimateTransform_ Accumulate (NonEmpty.NonEmpty Event.Event  Strin
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateTransform_ Accumulate  String  where
-  attr Accumulate value = unsafeAttribute $ This
+  attr Accumulate value = unsafeAttribute $ This $ pure $
     { key: "accumulate", value: prop' value }
 instance Attr AnimateTransform_ Accumulate (Event.Event  String ) where
   attr Accumulate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything Accumulate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "accumulate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "accumulate", value: unset' })
 instance Attr everything Accumulate  Unit  where
-  attr Accumulate _ = unsafeAttribute $ This
+  attr Accumulate _ = unsafeAttribute $ This $ pure $
     { key: "accumulate", value: unset' }
 instance Attr everything Accumulate (Event.Event  Unit ) where
   attr Accumulate eventValue = unsafeAttribute $ That $ eventValue <#>

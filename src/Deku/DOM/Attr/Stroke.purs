@@ -55,7 +55,7 @@ instance Attr Circle_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Circle_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Circle_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr ClipPath_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr ClipPath_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr ClipPath_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr Defs_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Defs_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Defs_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr Ellipse_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Ellipse_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Ellipse_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeBlend_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeBlend_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeBlend_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeColorMatrix_ Stroke (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeColorMatrix_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeColorMatrix_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeComponentTransfer_ Stroke (NonEmpty.NonEmpty Event.Event  String
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeComponentTransfer_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeComponentTransfer_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeComposite_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeComposite_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeComposite_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeConvolveMatrix_ Stroke (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeConvolveMatrix_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeConvolveMatrix_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeDiffuseLighting_ Stroke (NonEmpty.NonEmpty Event.Event  String )
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeDiffuseLighting_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeDiffuseLighting_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeDisplacementMap_ Stroke (NonEmpty.NonEmpty Event.Event  String )
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeDisplacementMap_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeDisplacementMap_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeFlood_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeFlood_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeFlood_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeGaussianBlur_ Stroke (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeGaussianBlur_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeGaussianBlur_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeImage_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeImage_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeImage_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr FeMerge_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeMerge_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeMerge_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr FeMorphology_ Stroke (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeMorphology_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeMorphology_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr FeOffset_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeOffset_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeOffset_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr FeSpecularLighting_ Stroke (NonEmpty.NonEmpty Event.Event  String 
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeSpecularLighting_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeSpecularLighting_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -253,7 +253,7 @@ instance Attr FeTile_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeTile_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeTile_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -264,7 +264,7 @@ instance Attr FeTurbulence_ Stroke (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr FeTurbulence_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr FeTurbulence_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -275,7 +275,7 @@ instance Attr Filter_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Filter_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Filter_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -286,7 +286,7 @@ instance Attr ForeignObject_ Stroke (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr ForeignObject_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr ForeignObject_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -297,7 +297,7 @@ instance Attr G_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr G_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr G_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -308,7 +308,7 @@ instance Attr Image_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Image_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Image_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -319,7 +319,7 @@ instance Attr Line_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Line_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Line_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -330,7 +330,7 @@ instance Attr LinearGradient_ Stroke (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr LinearGradient_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr LinearGradient_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -341,7 +341,7 @@ instance Attr Marker_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Marker_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Marker_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -352,7 +352,7 @@ instance Attr Mask_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Mask_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Mask_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -363,7 +363,7 @@ instance Attr Path_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Path_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Path_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -374,7 +374,7 @@ instance Attr Pattern_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Pattern_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Pattern_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -385,7 +385,7 @@ instance Attr Polygon_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Polygon_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Polygon_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -396,7 +396,7 @@ instance Attr Polyline_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Polyline_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Polyline_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -407,7 +407,7 @@ instance Attr RadialGradient_ Stroke (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr RadialGradient_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr RadialGradient_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -418,7 +418,7 @@ instance Attr Rect_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Rect_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Rect_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -429,7 +429,7 @@ instance Attr Svg_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Svg_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Svg_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -440,7 +440,7 @@ instance Attr Switch_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Switch_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Switch_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -451,7 +451,7 @@ instance Attr Symbol_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Symbol_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Symbol_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -462,7 +462,7 @@ instance Attr Text_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Text_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Text_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -473,7 +473,7 @@ instance Attr TextPath_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr TextPath_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr TextPath_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -484,7 +484,7 @@ instance Attr Tspan_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Tspan_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Tspan_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -495,7 +495,7 @@ instance Attr Use_ Stroke (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "stroke", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stroke", value: prop' value })
 instance Attr Use_ Stroke  String  where
-  attr Stroke value = unsafeAttribute $ This
+  attr Stroke value = unsafeAttribute $ This $ pure $
     { key: "stroke", value: prop' value }
 instance Attr Use_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -506,7 +506,7 @@ instance Attr everything Stroke (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "stroke", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke", value: unset' })
 instance Attr everything Stroke  Unit  where
-  attr Stroke _ = unsafeAttribute $ This { key: "stroke", value: unset' }
+  attr Stroke _ = unsafeAttribute $ This $ pure $ { key: "stroke", value: unset' }
 instance Attr everything Stroke (Event.Event  Unit ) where
   attr Stroke eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "stroke", value: unset' }

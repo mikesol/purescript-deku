@@ -15,7 +15,7 @@ instance Attr anything OnPointerup (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointerup", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerup", value: cb' value })
 instance Attr anything OnPointerup  Cb  where
-  attr OnPointerup value = unsafeAttribute $ This
+  attr OnPointerup value = unsafeAttribute $ This $ pure $
     { key: "pointerup", value: cb' value }
 instance Attr anything OnPointerup (Event.Event  Cb ) where
   attr OnPointerup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPointerup (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "pointerup", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerup  (Effect Unit)  where
-  attr OnPointerup value = unsafeAttribute $ This
+  attr OnPointerup value = unsafeAttribute $ This $ pure $
     { key: "pointerup", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerup (Event.Event  (Effect Unit) ) where
   attr OnPointerup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPointerup (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "pointerup", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerup  (Effect Boolean)  where
-  attr OnPointerup value = unsafeAttribute $ This
+  attr OnPointerup value = unsafeAttribute $ This $ pure $
     { key: "pointerup", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerup (Event.Event  (Effect Boolean) ) where
   attr OnPointerup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPointerup (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "pointerup", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerup", value: unset' })
 instance Attr everything OnPointerup  Unit  where
-  attr OnPointerup _ = unsafeAttribute $ This
+  attr OnPointerup _ = unsafeAttribute $ This $ pure $
     { key: "pointerup", value: unset' }
 instance Attr everything OnPointerup (Event.Event  Unit ) where
   attr OnPointerup eventValue = unsafeAttribute $ That $ eventValue <#>

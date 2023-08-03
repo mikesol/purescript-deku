@@ -15,7 +15,7 @@ instance Attr anything OnStalled (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "stalled", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stalled", value: cb' value })
 instance Attr anything OnStalled  Cb  where
-  attr OnStalled value = unsafeAttribute $ This
+  attr OnStalled value = unsafeAttribute $ This $ pure $
     { key: "stalled", value: cb' value }
 instance Attr anything OnStalled (Event.Event  Cb ) where
   attr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnStalled (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "stalled", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnStalled  (Effect Unit)  where
-  attr OnStalled value = unsafeAttribute $ This
+  attr OnStalled value = unsafeAttribute $ This $ pure $
     { key: "stalled", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnStalled (Event.Event  (Effect Unit) ) where
   attr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnStalled (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "stalled", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnStalled  (Effect Boolean)  where
-  attr OnStalled value = unsafeAttribute $ This
+  attr OnStalled value = unsafeAttribute $ This $ pure $
     { key: "stalled", value: cb' (Cb (const value)) }
 instance Attr anything OnStalled (Event.Event  (Effect Boolean) ) where
   attr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnStalled (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "stalled", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stalled", value: unset' })
 instance Attr everything OnStalled  Unit  where
-  attr OnStalled _ = unsafeAttribute $ This
+  attr OnStalled _ = unsafeAttribute $ This $ pure $
     { key: "stalled", value: unset' }
 instance Attr everything OnStalled (Event.Event  Unit ) where
   attr OnStalled eventValue = unsafeAttribute $ That $ eventValue <#>

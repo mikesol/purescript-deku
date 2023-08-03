@@ -31,7 +31,7 @@ instance Attr Circle_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Circle_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Circle_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -42,7 +42,7 @@ instance Attr Ellipse_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Ellipse_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Ellipse_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -53,7 +53,7 @@ instance Attr ForeignObject_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr ForeignObject_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr ForeignObject_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -64,7 +64,7 @@ instance Attr G_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr G_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr G_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -75,7 +75,7 @@ instance Attr Line_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Line_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Line_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -86,7 +86,7 @@ instance Attr Marker_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Marker_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Marker_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -97,7 +97,7 @@ instance Attr Path_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Path_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Path_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -108,7 +108,7 @@ instance Attr Polygon_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Polygon_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Polygon_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -119,7 +119,7 @@ instance Attr Polyline_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Polyline_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Polyline_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -130,7 +130,7 @@ instance Attr Rect_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Rect_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Rect_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -141,7 +141,7 @@ instance Attr Svg_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Svg_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Svg_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr Symbol_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Symbol_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Symbol_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -163,7 +163,7 @@ instance Attr Text_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Text_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Text_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr TextPath_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr TextPath_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr TextPath_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -185,7 +185,7 @@ instance Attr Tspan_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Tspan_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Tspan_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -196,7 +196,7 @@ instance Attr Use_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr Use_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr Use_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -207,7 +207,7 @@ instance Attr View_ AriaOwns (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-owns", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-owns", value: prop' value })
 instance Attr View_ AriaOwns  String  where
-  attr AriaOwns value = unsafeAttribute $ This
+  attr AriaOwns value = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: prop' value }
 instance Attr View_ AriaOwns (Event.Event  String ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -218,7 +218,7 @@ instance Attr everything AriaOwns (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "aria-owns", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-owns", value: unset' })
 instance Attr everything AriaOwns  Unit  where
-  attr AriaOwns _ = unsafeAttribute $ This
+  attr AriaOwns _ = unsafeAttribute $ This $ pure $
     { key: "aria-owns", value: unset' }
 instance Attr everything AriaOwns (Event.Event  Unit ) where
   attr AriaOwns eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

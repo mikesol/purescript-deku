@@ -15,7 +15,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "contextmenu", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "contextmenu", value: cb' value })
 instance Attr anything OnContextmenu  Cb  where
-  attr OnContextmenu value = unsafeAttribute $ This
+  attr OnContextmenu value = unsafeAttribute $ This $ pure $
     { key: "contextmenu", value: cb' value }
 instance Attr anything OnContextmenu (Event.Event  Cb ) where
   attr OnContextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnContextmenu  (Effect Unit)  where
-  attr OnContextmenu value = unsafeAttribute $ This
+  attr OnContextmenu value = unsafeAttribute $ This $ pure $
     { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnContextmenu (Event.Event  (Effect Unit) ) where
   attr OnContextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "contextmenu", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnContextmenu  (Effect Boolean)  where
-  attr OnContextmenu value = unsafeAttribute $ This
+  attr OnContextmenu value = unsafeAttribute $ This $ pure $
     { key: "contextmenu", value: cb' (Cb (const value)) }
 instance Attr anything OnContextmenu (Event.Event  (Effect Boolean) ) where
   attr OnContextmenu eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnContextmenu (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "contextmenu", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "contextmenu", value: unset' })
 instance Attr everything OnContextmenu  Unit  where
-  attr OnContextmenu _ = unsafeAttribute $ This
+  attr OnContextmenu _ = unsafeAttribute $ This $ pure $
     { key: "contextmenu", value: unset' }
 instance Attr everything OnContextmenu (Event.Event  Unit ) where
   attr OnContextmenu eventValue = unsafeAttribute $ That $ eventValue <#>

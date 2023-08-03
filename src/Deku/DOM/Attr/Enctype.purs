@@ -15,7 +15,7 @@ instance Attr Form_ Enctype (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "enctype", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "enctype", value: prop' value })
 instance Attr Form_ Enctype  String  where
-  attr Enctype value = unsafeAttribute $ This
+  attr Enctype value = unsafeAttribute $ This $ pure $
     { key: "enctype", value: prop' value }
 instance Attr Form_ Enctype (Event.Event  String ) where
   attr Enctype eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Enctype (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "enctype", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "enctype", value: unset' })
 instance Attr everything Enctype  Unit  where
-  attr Enctype _ = unsafeAttribute $ This { key: "enctype", value: unset' }
+  attr Enctype _ = unsafeAttribute $ This $ pure $ { key: "enctype", value: unset' }
 instance Attr everything Enctype (Event.Event  Unit ) where
   attr Enctype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "enctype", value: unset' }

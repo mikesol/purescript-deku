@@ -17,7 +17,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  Cb )
         { key: "lostpointercapture", value: cb' value }
     )
 instance Attr anything OnLostpointercapture  Cb  where
-  attr OnLostpointercapture value = unsafeAttribute $ This
+  attr OnLostpointercapture value = unsafeAttribute $ This $ pure $
     { key: "lostpointercapture", value: cb' value }
 instance Attr anything OnLostpointercapture (Event.Event  Cb ) where
   attr OnLostpointercapture eventValue = unsafeAttribute $ That $
@@ -32,7 +32,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLostpointercapture  (Effect Unit)  where
-  attr OnLostpointercapture value = unsafeAttribute $ This
+  attr OnLostpointercapture value = unsafeAttribute $ This $ pure $
     { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnLostpointercapture (Event.Event  (Effect Unit) ) where
   attr OnLostpointercapture eventValue = unsafeAttribute $ That $
@@ -46,7 +46,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "lostpointercapture", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLostpointercapture  (Effect Boolean)  where
-  attr OnLostpointercapture value = unsafeAttribute $ This
+  attr OnLostpointercapture value = unsafeAttribute $ This $ pure $
     { key: "lostpointercapture", value: cb' (Cb (const value)) }
 instance Attr anything OnLostpointercapture (Event.Event  (Effect Boolean) ) where
   attr OnLostpointercapture eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr everything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  Un
     { key: "lostpointercapture", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "lostpointercapture", value: unset' })
 instance Attr everything OnLostpointercapture  Unit  where
-  attr OnLostpointercapture _ = unsafeAttribute $ This
+  attr OnLostpointercapture _ = unsafeAttribute $ This $ pure $
     { key: "lostpointercapture", value: unset' }
 instance Attr everything OnLostpointercapture (Event.Event  Unit ) where
   attr OnLostpointercapture eventValue = unsafeAttribute $ That $

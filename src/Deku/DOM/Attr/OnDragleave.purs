@@ -15,7 +15,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragleave", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dragleave", value: cb' value })
 instance Attr anything OnDragleave  Cb  where
-  attr OnDragleave value = unsafeAttribute $ This
+  attr OnDragleave value = unsafeAttribute $ This $ pure $
     { key: "dragleave", value: cb' value }
 instance Attr anything OnDragleave (Event.Event  Cb ) where
   attr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "dragleave", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragleave  (Effect Unit)  where
-  attr OnDragleave value = unsafeAttribute $ This
+  attr OnDragleave value = unsafeAttribute $ This $ pure $
     { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDragleave (Event.Event  (Effect Unit) ) where
   attr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "dragleave", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragleave  (Effect Boolean)  where
-  attr OnDragleave value = unsafeAttribute $ This
+  attr OnDragleave value = unsafeAttribute $ This $ pure $
     { key: "dragleave", value: cb' (Cb (const value)) }
 instance Attr anything OnDragleave (Event.Event  (Effect Boolean) ) where
   attr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDragleave (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "dragleave", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragleave", value: unset' })
 instance Attr everything OnDragleave  Unit  where
-  attr OnDragleave _ = unsafeAttribute $ This
+  attr OnDragleave _ = unsafeAttribute $ This $ pure $
     { key: "dragleave", value: unset' }
 instance Attr everything OnDragleave (Event.Event  Unit ) where
   attr OnDragleave eventValue = unsafeAttribute $ That $ eventValue <#>

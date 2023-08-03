@@ -57,7 +57,7 @@ instance Attr Circle_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Circle_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Circle_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -70,7 +70,7 @@ instance Attr ClipPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr ClipPath_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr ClipPath_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -83,7 +83,7 @@ instance Attr Defs_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Defs_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Defs_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -96,7 +96,7 @@ instance Attr Ellipse_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Ellipse_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Ellipse_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -109,7 +109,7 @@ instance Attr FeBlend_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeBlend_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeBlend_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -122,7 +122,7 @@ instance Attr FeColorMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeColorMatrix_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -135,7 +135,7 @@ instance Attr FeComponentTransfer_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Eve
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeComponentTransfer_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -148,7 +148,7 @@ instance Attr FeComposite_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeComposite_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeComposite_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -161,7 +161,7 @@ instance Attr FeConvolveMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeConvolveMatrix_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -174,7 +174,7 @@ instance Attr FeDiffuseLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeDiffuseLighting_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -187,7 +187,7 @@ instance Attr FeDisplacementMap_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeDisplacementMap_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -200,7 +200,7 @@ instance Attr FeFlood_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeFlood_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeFlood_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -213,7 +213,7 @@ instance Attr FeGaussianBlur_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeGaussianBlur_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -226,7 +226,7 @@ instance Attr FeImage_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeImage_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeImage_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -239,7 +239,7 @@ instance Attr FeMerge_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeMerge_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeMerge_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -252,7 +252,7 @@ instance Attr FeMorphology_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeMorphology_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -265,7 +265,7 @@ instance Attr FeOffset_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeOffset_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeOffset_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -278,7 +278,7 @@ instance Attr FeSpecularLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Even
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeSpecularLighting_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -291,7 +291,7 @@ instance Attr FeTile_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeTile_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeTile_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -304,7 +304,7 @@ instance Attr FeTurbulence_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr FeTurbulence_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -317,7 +317,7 @@ instance Attr Filter_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Filter_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Filter_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -330,7 +330,7 @@ instance Attr ForeignObject_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr ForeignObject_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -343,7 +343,7 @@ instance Attr G_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr G_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr G_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -356,7 +356,7 @@ instance Attr Image_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Image_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Image_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -369,7 +369,7 @@ instance Attr Line_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Line_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Line_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -382,7 +382,7 @@ instance Attr LinearGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr LinearGradient_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -395,7 +395,7 @@ instance Attr Marker_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Marker_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Marker_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -408,7 +408,7 @@ instance Attr Mask_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Mask_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Mask_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -421,7 +421,7 @@ instance Attr Path_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Path_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Path_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -434,7 +434,7 @@ instance Attr Pattern_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Pattern_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Pattern_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -447,7 +447,7 @@ instance Attr Polygon_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Polygon_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Polygon_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -460,7 +460,7 @@ instance Attr Polyline_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Polyline_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Polyline_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -473,7 +473,7 @@ instance Attr RadialGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr RadialGradient_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -486,7 +486,7 @@ instance Attr Rect_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Rect_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Rect_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -499,7 +499,7 @@ instance Attr Svg_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Svg_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Svg_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -512,7 +512,7 @@ instance Attr Switch_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Switch_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Switch_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -525,7 +525,7 @@ instance Attr Symbol_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Symbol_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Symbol_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -538,7 +538,7 @@ instance Attr Text_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Text_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Text_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -551,7 +551,7 @@ instance Attr TextPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr TextPath_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr TextPath_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -564,7 +564,7 @@ instance Attr Tspan_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Tspan_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Tspan_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -577,7 +577,7 @@ instance Attr Use_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Use_ StrokeMiterlimit  String  where
-  attr StrokeMiterlimit value = unsafeAttribute $ This
+  attr StrokeMiterlimit value = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: prop' value }
 instance Attr Use_ StrokeMiterlimit (Event.Event  String ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue
@@ -588,7 +588,7 @@ instance Attr everything StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "stroke-miterlimit", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
 instance Attr everything StrokeMiterlimit  Unit  where
-  attr StrokeMiterlimit _ = unsafeAttribute $ This
+  attr StrokeMiterlimit _ = unsafeAttribute $ This $ pure $
     { key: "stroke-miterlimit", value: unset' }
 instance Attr everything StrokeMiterlimit (Event.Event  Unit ) where
   attr StrokeMiterlimit eventValue = unsafeAttribute $ That $ eventValue

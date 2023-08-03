@@ -1898,7 +1898,7 @@ unsafeCustomElement name _ = elementify2 name
 data Self = Self
 
 instance Attr anything Self (DOM.Element -> Effect Unit) where
-  attr Self value = unsafeAttribute $ This
+  attr Self value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
@@ -1923,7 +1923,7 @@ instance
 data SelfT = SelfT
 
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything SelfT (Event.Event (DOM.Element -> Effect Unit)) where
@@ -1943,7 +1943,7 @@ instance
     )
 
 instance Attr anything SelfT (Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true)) }
 
 instance Attr anything SelfT (Event.Event (Effect Unit)) where
@@ -1976,7 +1976,7 @@ instance
     )
 
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -1999,7 +1999,7 @@ instance
     )
 
 instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2022,7 +2022,7 @@ instance
     )
 
 instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2045,7 +2045,7 @@ instance
     )
 
 instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2068,7 +2068,7 @@ instance
     )
 
 instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2089,7 +2089,7 @@ instance
     )
 
 instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2110,7 +2110,7 @@ instance
     )
 
 instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2133,7 +2133,7 @@ instance
     )
 
 instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2156,7 +2156,7 @@ instance
     )
 
 instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2177,7 +2177,7 @@ instance
     )
 
 instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2200,7 +2200,7 @@ instance
     )
 
 instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2223,7 +2223,7 @@ instance
     )
 
 instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2244,7 +2244,7 @@ instance
     )
 
 instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2265,7 +2265,7 @@ instance
     )
 
 instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2288,7 +2288,7 @@ instance
     )
 
 instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2311,7 +2311,7 @@ instance
     )
 
 instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2334,7 +2334,7 @@ instance
     )
 
 instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2357,7 +2357,7 @@ instance
     )
 
 instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2380,7 +2380,7 @@ instance
     )
 
 instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2401,7 +2401,7 @@ instance
     )
 
 instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2424,7 +2424,7 @@ instance
     )
 
 instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2447,7 +2447,7 @@ instance
     )
 
 instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2470,7 +2470,7 @@ instance
     )
 
 instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2493,7 +2493,7 @@ instance
     )
 
 instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2517,7 +2517,7 @@ instance
 
 instance
   Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2540,7 +2540,7 @@ instance
     )
 
 instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2563,7 +2563,7 @@ instance
     )
 
 instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2585,7 +2585,7 @@ instance
 
 instance
   Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2608,7 +2608,7 @@ instance
     )
 
 instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2631,7 +2631,7 @@ instance
     )
 
 instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2654,7 +2654,7 @@ instance
     )
 
 instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2677,7 +2677,7 @@ instance
     )
 
 instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2700,7 +2700,7 @@ instance
     )
 
 instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2723,7 +2723,7 @@ instance
     )
 
 instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2749,7 +2749,7 @@ instance
   Attr Td_
     SelfT
     (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2775,7 +2775,7 @@ instance
 
 instance
   Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2799,7 +2799,7 @@ instance
 
 instance
   Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2822,7 +2822,7 @@ instance
     )
 
 instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2845,7 +2845,7 @@ instance
     )
 
 instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2868,7 +2868,7 @@ instance
     )
 
 instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2891,7 +2891,7 @@ instance
     )
 
 instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This
+  attr SelfT value = unsafeAttribute $ This $ pure $
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance

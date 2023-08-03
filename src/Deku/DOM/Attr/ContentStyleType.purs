@@ -17,7 +17,7 @@ instance Attr Svg_ ContentStyleType (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "contentStyleType", value: prop' value }
     )
 instance Attr Svg_ ContentStyleType  String  where
-  attr ContentStyleType value = unsafeAttribute $ This
+  attr ContentStyleType value = unsafeAttribute $ This $ pure $
     { key: "contentStyleType", value: prop' value }
 instance Attr Svg_ ContentStyleType (Event.Event  String ) where
   attr ContentStyleType eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr everything ContentStyleType (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "contentStyleType", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "contentStyleType", value: unset' })
 instance Attr everything ContentStyleType  Unit  where
-  attr ContentStyleType _ = unsafeAttribute $ This
+  attr ContentStyleType _ = unsafeAttribute $ This $ pure $
     { key: "contentStyleType", value: unset' }
 instance Attr everything ContentStyleType (Event.Event  Unit ) where
   attr ContentStyleType eventValue = unsafeAttribute $ That $ eventValue

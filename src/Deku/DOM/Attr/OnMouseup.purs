@@ -15,7 +15,7 @@ instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mouseup", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseup", value: cb' value })
 instance Attr anything OnMouseup  Cb  where
-  attr OnMouseup value = unsafeAttribute $ This
+  attr OnMouseup value = unsafeAttribute $ This $ pure $
     { key: "mouseup", value: cb' value }
 instance Attr anything OnMouseup (Event.Event  Cb ) where
   attr OnMouseup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "mouseup", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMouseup  (Effect Unit)  where
-  attr OnMouseup value = unsafeAttribute $ This
+  attr OnMouseup value = unsafeAttribute $ This $ pure $
     { key: "mouseup", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnMouseup (Event.Event  (Effect Unit) ) where
   attr OnMouseup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnMouseup (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "mouseup", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMouseup  (Effect Boolean)  where
-  attr OnMouseup value = unsafeAttribute $ This
+  attr OnMouseup value = unsafeAttribute $ This $ pure $
     { key: "mouseup", value: cb' (Cb (const value)) }
 instance Attr anything OnMouseup (Event.Event  (Effect Boolean) ) where
   attr OnMouseup eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnMouseup (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "mouseup", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseup", value: unset' })
 instance Attr everything OnMouseup  Unit  where
-  attr OnMouseup _ = unsafeAttribute $ This
+  attr OnMouseup _ = unsafeAttribute $ This $ pure $
     { key: "mouseup", value: unset' }
 instance Attr everything OnMouseup (Event.Event  Unit ) where
   attr OnMouseup eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr anything OnDrag (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "drag", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "drag", value: cb' value })
 instance Attr anything OnDrag  Cb  where
-  attr OnDrag value = unsafeAttribute $ This
+  attr OnDrag value = unsafeAttribute $ This $ pure $
     { key: "drag", value: cb' value }
 instance Attr anything OnDrag (Event.Event  Cb ) where
   attr OnDrag eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDrag (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) wh
         { key: "drag", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDrag  (Effect Unit)  where
-  attr OnDrag value = unsafeAttribute $ This
+  attr OnDrag value = unsafeAttribute $ This $ pure $
     { key: "drag", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDrag (Event.Event  (Effect Unit) ) where
   attr OnDrag eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDrag (NonEmpty.NonEmpty Event.Event  (Effect Boolean) )
         { key: "drag", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDrag  (Effect Boolean)  where
-  attr OnDrag value = unsafeAttribute $ This
+  attr OnDrag value = unsafeAttribute $ This $ pure $
     { key: "drag", value: cb' (Cb (const value)) }
 instance Attr anything OnDrag (Event.Event  (Effect Boolean) ) where
   attr OnDrag eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,7 +54,7 @@ instance Attr everything OnDrag (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnDrag bothValues = unsafeAttribute $ Both { key: "drag", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "drag", value: unset' })
 instance Attr everything OnDrag  Unit  where
-  attr OnDrag _ = unsafeAttribute $ This { key: "drag", value: unset' }
+  attr OnDrag _ = unsafeAttribute $ This $ pure $ { key: "drag", value: unset' }
 instance Attr everything OnDrag (Event.Event  Unit ) where
   attr OnDrag eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "drag", value: unset' }

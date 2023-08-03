@@ -17,7 +17,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         { key: "securitypolicyviolation", value: cb' value }
     )
 instance Attr anything OnSecuritypolicyviolation  Cb  where
-  attr OnSecuritypolicyviolation value = unsafeAttribute $ This
+  attr OnSecuritypolicyviolation value = unsafeAttribute $ This $ pure $
     { key: "securitypolicyviolation", value: cb' value }
 instance Attr anything OnSecuritypolicyviolation (Event.Event  Cb ) where
   attr OnSecuritypolicyviolation eventValue = unsafeAttribute $ That $
@@ -35,7 +35,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         }
     )
 instance Attr anything OnSecuritypolicyviolation  (Effect Unit)  where
-  attr OnSecuritypolicyviolation value = unsafeAttribute $ This
+  attr OnSecuritypolicyviolation value = unsafeAttribute $ This $ pure $
     { key: "securitypolicyviolation", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnSecuritypolicyviolation (Event.Event  (Effect Unit) ) where
   attr OnSecuritypolicyviolation eventValue = unsafeAttribute $ That $
@@ -51,7 +51,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSecuritypolicyviolation  (Effect Boolean)  where
-  attr OnSecuritypolicyviolation value = unsafeAttribute $ This
+  attr OnSecuritypolicyviolation value = unsafeAttribute $ This $ pure $
     { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
 instance Attr anything OnSecuritypolicyviolation (Event.Event  (Effect Boolean) ) where
   attr OnSecuritypolicyviolation eventValue = unsafeAttribute $ That $
@@ -68,7 +68,7 @@ instance Attr everything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Even
     { key: "securitypolicyviolation", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "securitypolicyviolation", value: unset' })
 instance Attr everything OnSecuritypolicyviolation  Unit  where
-  attr OnSecuritypolicyviolation _ = unsafeAttribute $ This
+  attr OnSecuritypolicyviolation _ = unsafeAttribute $ This $ pure $
     { key: "securitypolicyviolation", value: unset' }
 instance Attr everything OnSecuritypolicyviolation (Event.Event  Unit ) where
   attr OnSecuritypolicyviolation eventValue = unsafeAttribute $ That $

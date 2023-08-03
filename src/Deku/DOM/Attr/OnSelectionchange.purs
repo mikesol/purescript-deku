@@ -15,7 +15,7 @@ instance Attr anything OnSelectionchange (NonEmpty.NonEmpty Event.Event  Cb ) wh
     { key: "selectionchange", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "selectionchange", value: cb' value })
 instance Attr anything OnSelectionchange  Cb  where
-  attr OnSelectionchange value = unsafeAttribute $ This
+  attr OnSelectionchange value = unsafeAttribute $ This $ pure $
     { key: "selectionchange", value: cb' value }
 instance Attr anything OnSelectionchange (Event.Event  Cb ) where
   attr OnSelectionchange eventValue = unsafeAttribute $ That $ eventValue
@@ -30,7 +30,7 @@ instance Attr anything OnSelectionchange (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSelectionchange  (Effect Unit)  where
-  attr OnSelectionchange value = unsafeAttribute $ This
+  attr OnSelectionchange value = unsafeAttribute $ This $ pure $
     { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnSelectionchange (Event.Event  (Effect Unit) ) where
   attr OnSelectionchange eventValue = unsafeAttribute $ That $ eventValue
@@ -44,7 +44,7 @@ instance Attr anything OnSelectionchange (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "selectionchange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSelectionchange  (Effect Boolean)  where
-  attr OnSelectionchange value = unsafeAttribute $ This
+  attr OnSelectionchange value = unsafeAttribute $ This $ pure $
     { key: "selectionchange", value: cb' (Cb (const value)) }
 instance Attr anything OnSelectionchange (Event.Event  (Effect Boolean) ) where
   attr OnSelectionchange eventValue = unsafeAttribute $ That $ eventValue
@@ -60,7 +60,7 @@ instance Attr everything OnSelectionchange (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "selectionchange", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "selectionchange", value: unset' })
 instance Attr everything OnSelectionchange  Unit  where
-  attr OnSelectionchange _ = unsafeAttribute $ This
+  attr OnSelectionchange _ = unsafeAttribute $ This $ pure $
     { key: "selectionchange", value: unset' }
 instance Attr everything OnSelectionchange (Event.Event  Unit ) where
   attr OnSelectionchange eventValue = unsafeAttribute $ That $ eventValue

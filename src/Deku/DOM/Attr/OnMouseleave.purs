@@ -15,7 +15,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mouseleave", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseleave", value: cb' value })
 instance Attr anything OnMouseleave  Cb  where
-  attr OnMouseleave value = unsafeAttribute $ This
+  attr OnMouseleave value = unsafeAttribute $ This $ pure $
     { key: "mouseleave", value: cb' value }
 instance Attr anything OnMouseleave (Event.Event  Cb ) where
   attr OnMouseleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMouseleave  (Effect Unit)  where
-  attr OnMouseleave value = unsafeAttribute $ This
+  attr OnMouseleave value = unsafeAttribute $ This $ pure $
     { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnMouseleave (Event.Event  (Effect Unit) ) where
   attr OnMouseleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "mouseleave", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMouseleave  (Effect Boolean)  where
-  attr OnMouseleave value = unsafeAttribute $ This
+  attr OnMouseleave value = unsafeAttribute $ This $ pure $
     { key: "mouseleave", value: cb' (Cb (const value)) }
 instance Attr anything OnMouseleave (Event.Event  (Effect Boolean) ) where
   attr OnMouseleave eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnMouseleave (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "mouseleave", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseleave", value: unset' })
 instance Attr everything OnMouseleave  Unit  where
-  attr OnMouseleave _ = unsafeAttribute $ This
+  attr OnMouseleave _ = unsafeAttribute $ This $ pure $
     { key: "mouseleave", value: unset' }
 instance Attr everything OnMouseleave (Event.Event  Unit ) where
   attr OnMouseleave eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dblclick", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "dblclick", value: cb' value })
 instance Attr anything OnDblclick  Cb  where
-  attr OnDblclick value = unsafeAttribute $ This
+  attr OnDblclick value = unsafeAttribute $ This $ pure $
     { key: "dblclick", value: cb' value }
 instance Attr anything OnDblclick (Event.Event  Cb ) where
   attr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "dblclick", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDblclick  (Effect Unit)  where
-  attr OnDblclick value = unsafeAttribute $ This
+  attr OnDblclick value = unsafeAttribute $ This $ pure $
     { key: "dblclick", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnDblclick (Event.Event  (Effect Unit) ) where
   attr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "dblclick", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDblclick  (Effect Boolean)  where
-  attr OnDblclick value = unsafeAttribute $ This
+  attr OnDblclick value = unsafeAttribute $ This $ pure $
     { key: "dblclick", value: cb' (Cb (const value)) }
 instance Attr anything OnDblclick (Event.Event  (Effect Boolean) ) where
   attr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnDblclick (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dblclick", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "dblclick", value: unset' })
 instance Attr everything OnDblclick  Unit  where
-  attr OnDblclick _ = unsafeAttribute $ This
+  attr OnDblclick _ = unsafeAttribute $ This $ pure $
     { key: "dblclick", value: unset' }
 instance Attr everything OnDblclick (Event.Event  Unit ) where
   attr OnDblclick eventValue = unsafeAttribute $ That $ eventValue <#>

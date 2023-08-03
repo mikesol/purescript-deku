@@ -33,7 +33,7 @@ instance Attr FeBlend_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeBlend_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeBlend_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -44,7 +44,7 @@ instance Attr FeColorMatrix_ Overflow (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeColorMatrix_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeColorMatrix_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -55,7 +55,7 @@ instance Attr FeComponentTransfer_ Overflow (NonEmpty.NonEmpty Event.Event  Stri
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeComponentTransfer_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeComponentTransfer_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -66,7 +66,7 @@ instance Attr FeComposite_ Overflow (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeComposite_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeComposite_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -77,7 +77,7 @@ instance Attr FeConvolveMatrix_ Overflow (NonEmpty.NonEmpty Event.Event  String 
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeConvolveMatrix_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeConvolveMatrix_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -88,7 +88,7 @@ instance Attr FeDiffuseLighting_ Overflow (NonEmpty.NonEmpty Event.Event  String
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeDiffuseLighting_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeDiffuseLighting_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -99,7 +99,7 @@ instance Attr FeDisplacementMap_ Overflow (NonEmpty.NonEmpty Event.Event  String
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeDisplacementMap_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeDisplacementMap_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -110,7 +110,7 @@ instance Attr FeFlood_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeFlood_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeFlood_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -121,7 +121,7 @@ instance Attr FeGaussianBlur_ Overflow (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeGaussianBlur_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeGaussianBlur_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -132,7 +132,7 @@ instance Attr FeImage_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeImage_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeImage_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -143,7 +143,7 @@ instance Attr FeMerge_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeMerge_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeMerge_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -154,7 +154,7 @@ instance Attr FeMorphology_ Overflow (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeMorphology_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeMorphology_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeOffset_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeOffset_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeOffset_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -176,7 +176,7 @@ instance Attr FeSpecularLighting_ Overflow (NonEmpty.NonEmpty Event.Event  Strin
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeSpecularLighting_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeSpecularLighting_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeTile_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeTile_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeTile_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -198,7 +198,7 @@ instance Attr FeTurbulence_ Overflow (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr FeTurbulence_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr FeTurbulence_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -209,7 +209,7 @@ instance Attr Filter_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr Filter_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr Filter_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -220,7 +220,7 @@ instance Attr Image_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr Image_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr Image_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -231,7 +231,7 @@ instance Attr Switch_ Overflow (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "overflow", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "overflow", value: prop' value })
 instance Attr Switch_ Overflow  String  where
-  attr Overflow value = unsafeAttribute $ This
+  attr Overflow value = unsafeAttribute $ This $ pure $
     { key: "overflow", value: prop' value }
 instance Attr Switch_ Overflow (Event.Event  String ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -242,7 +242,7 @@ instance Attr everything Overflow (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "overflow", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "overflow", value: unset' })
 instance Attr everything Overflow  Unit  where
-  attr Overflow _ = unsafeAttribute $ This
+  attr Overflow _ = unsafeAttribute $ This $ pure $
     { key: "overflow", value: unset' }
 instance Attr everything Overflow (Event.Event  Unit ) where
   attr Overflow eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

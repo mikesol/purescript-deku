@@ -15,7 +15,7 @@ instance Attr anything OnLoad (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "load", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "load", value: cb' value })
 instance Attr anything OnLoad  Cb  where
-  attr OnLoad value = unsafeAttribute $ This
+  attr OnLoad value = unsafeAttribute $ This $ pure $
     { key: "load", value: cb' value }
 instance Attr anything OnLoad (Event.Event  Cb ) where
   attr OnLoad eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnLoad (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) wh
         { key: "load", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLoad  (Effect Unit)  where
-  attr OnLoad value = unsafeAttribute $ This
+  attr OnLoad value = unsafeAttribute $ This $ pure $
     { key: "load", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnLoad (Event.Event  (Effect Unit) ) where
   attr OnLoad eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnLoad (NonEmpty.NonEmpty Event.Event  (Effect Boolean) )
         { key: "load", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLoad  (Effect Boolean)  where
-  attr OnLoad value = unsafeAttribute $ This
+  attr OnLoad value = unsafeAttribute $ This $ pure $
     { key: "load", value: cb' (Cb (const value)) }
 instance Attr anything OnLoad (Event.Event  (Effect Boolean) ) where
   attr OnLoad eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -54,7 +54,7 @@ instance Attr everything OnLoad (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnLoad bothValues = unsafeAttribute $ Both { key: "load", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "load", value: unset' })
 instance Attr everything OnLoad  Unit  where
-  attr OnLoad _ = unsafeAttribute $ This { key: "load", value: unset' }
+  attr OnLoad _ = unsafeAttribute $ This $ pure $ { key: "load", value: unset' }
 instance Attr everything OnLoad (Event.Event  Unit ) where
   attr OnLoad eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "load", value: unset' }

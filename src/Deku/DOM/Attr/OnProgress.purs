@@ -15,7 +15,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "progress", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "progress", value: cb' value })
 instance Attr anything OnProgress  Cb  where
-  attr OnProgress value = unsafeAttribute $ This
+  attr OnProgress value = unsafeAttribute $ This $ pure $
     { key: "progress", value: cb' value }
 instance Attr anything OnProgress (Event.Event  Cb ) where
   attr OnProgress eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "progress", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnProgress  (Effect Unit)  where
-  attr OnProgress value = unsafeAttribute $ This
+  attr OnProgress value = unsafeAttribute $ This $ pure $
     { key: "progress", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnProgress (Event.Event  (Effect Unit) ) where
   attr OnProgress eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "progress", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnProgress  (Effect Boolean)  where
-  attr OnProgress value = unsafeAttribute $ This
+  attr OnProgress value = unsafeAttribute $ This $ pure $
     { key: "progress", value: cb' (Cb (const value)) }
 instance Attr anything OnProgress (Event.Event  (Effect Boolean) ) where
   attr OnProgress eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnProgress (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "progress", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "progress", value: unset' })
 instance Attr everything OnProgress  Unit  where
-  attr OnProgress _ = unsafeAttribute $ This
+  attr OnProgress _ = unsafeAttribute $ This $ pure $
     { key: "progress", value: unset' }
 instance Attr everything OnProgress (Event.Event  Unit ) where
   attr OnProgress eventValue = unsafeAttribute $ That $ eventValue <#>

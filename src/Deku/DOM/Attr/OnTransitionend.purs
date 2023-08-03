@@ -15,7 +15,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  Cb ) wher
     { key: "transitionend", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "transitionend", value: cb' value })
 instance Attr anything OnTransitionend  Cb  where
-  attr OnTransitionend value = unsafeAttribute $ This
+  attr OnTransitionend value = unsafeAttribute $ This $ pure $
     { key: "transitionend", value: cb' value }
 instance Attr anything OnTransitionend (Event.Event  Cb ) where
   attr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
@@ -28,7 +28,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect U
         { key: "transitionend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTransitionend  (Effect Unit)  where
-  attr OnTransitionend value = unsafeAttribute $ This
+  attr OnTransitionend value = unsafeAttribute $ This $ pure $
     { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnTransitionend (Event.Event  (Effect Unit) ) where
   attr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
@@ -42,7 +42,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect B
         { key: "transitionend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTransitionend  (Effect Boolean)  where
-  attr OnTransitionend value = unsafeAttribute $ This
+  attr OnTransitionend value = unsafeAttribute $ This $ pure $
     { key: "transitionend", value: cb' (Cb (const value)) }
 instance Attr anything OnTransitionend (Event.Event  (Effect Boolean) ) where
   attr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue
@@ -58,7 +58,7 @@ instance Attr everything OnTransitionend (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "transitionend", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "transitionend", value: unset' })
 instance Attr everything OnTransitionend  Unit  where
-  attr OnTransitionend _ = unsafeAttribute $ This
+  attr OnTransitionend _ = unsafeAttribute $ This $ pure $
     { key: "transitionend", value: unset' }
 instance Attr everything OnTransitionend (Event.Event  Unit ) where
   attr OnTransitionend eventValue = unsafeAttribute $ That $ eventValue

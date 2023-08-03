@@ -15,7 +15,7 @@ instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "playing", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "playing", value: cb' value })
 instance Attr anything OnPlaying  Cb  where
-  attr OnPlaying value = unsafeAttribute $ This
+  attr OnPlaying value = unsafeAttribute $ This $ pure $
     { key: "playing", value: cb' value }
 instance Attr anything OnPlaying (Event.Event  Cb ) where
   attr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "playing", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPlaying  (Effect Unit)  where
-  attr OnPlaying value = unsafeAttribute $ This
+  attr OnPlaying value = unsafeAttribute $ This $ pure $
     { key: "playing", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPlaying (Event.Event  (Effect Unit) ) where
   attr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPlaying (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "playing", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPlaying  (Effect Boolean)  where
-  attr OnPlaying value = unsafeAttribute $ This
+  attr OnPlaying value = unsafeAttribute $ This $ pure $
     { key: "playing", value: cb' (Cb (const value)) }
 instance Attr anything OnPlaying (Event.Event  (Effect Boolean) ) where
   attr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPlaying (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "playing", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "playing", value: unset' })
 instance Attr everything OnPlaying  Unit  where
-  attr OnPlaying _ = unsafeAttribute $ This
+  attr OnPlaying _ = unsafeAttribute $ This $ pure $
     { key: "playing", value: unset' }
 instance Attr everything OnPlaying (Event.Event  Unit ) where
   attr OnPlaying eventValue = unsafeAttribute $ That $ eventValue <#>

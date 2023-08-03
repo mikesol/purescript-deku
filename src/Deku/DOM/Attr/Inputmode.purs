@@ -15,7 +15,7 @@ instance Attr Textarea_ Inputmode (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "inputmode", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "inputmode", value: prop' value })
 instance Attr Textarea_ Inputmode  String  where
-  attr Inputmode value = unsafeAttribute $ This
+  attr Inputmode value = unsafeAttribute $ This $ pure $
     { key: "inputmode", value: prop' value }
 instance Attr Textarea_ Inputmode (Event.Event  String ) where
   attr Inputmode eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Inputmode (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "inputmode", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "inputmode", value: unset' })
 instance Attr everything Inputmode  Unit  where
-  attr Inputmode _ = unsafeAttribute $ This
+  attr Inputmode _ = unsafeAttribute $ This $ pure $
     { key: "inputmode", value: unset' }
 instance Attr everything Inputmode (Event.Event  Unit ) where
   attr Inputmode eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -16,7 +16,7 @@ instance Attr Input_ Multiple (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "multiple", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Input_ Multiple  String  where
-  attr Multiple value = unsafeAttribute $ This
+  attr Multiple value = unsafeAttribute $ This $ pure $
     { key: "multiple", value: prop' value }
 instance Attr Input_ Multiple (Event.Event  String ) where
   attr Multiple eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Select_ Multiple (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "multiple", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Select_ Multiple  String  where
-  attr Multiple value = unsafeAttribute $ This
+  attr Multiple value = unsafeAttribute $ This $ pure $
     { key: "multiple", value: prop' value }
 instance Attr Select_ Multiple (Event.Event  String ) where
   attr Multiple eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Multiple (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "multiple", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "multiple", value: unset' })
 instance Attr everything Multiple  Unit  where
-  attr Multiple _ = unsafeAttribute $ This
+  attr Multiple _ = unsafeAttribute $ This $ pure $
     { key: "multiple", value: unset' }
 instance Attr everything Multiple (Event.Event  Unit ) where
   attr Multiple eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

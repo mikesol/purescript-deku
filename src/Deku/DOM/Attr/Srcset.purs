@@ -16,7 +16,7 @@ instance Attr Img_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Img_ Srcset  String  where
-  attr Srcset value = unsafeAttribute $ This
+  attr Srcset value = unsafeAttribute $ This $ pure $
     { key: "srcset", value: prop' value }
 instance Attr Img_ Srcset (Event.Event  String ) where
   attr Srcset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Source_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcset", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Source_ Srcset  String  where
-  attr Srcset value = unsafeAttribute $ This
+  attr Srcset value = unsafeAttribute $ This $ pure $
     { key: "srcset", value: prop' value }
 instance Attr Source_ Srcset (Event.Event  String ) where
   attr Srcset eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Srcset (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "srcset", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "srcset", value: unset' })
 instance Attr everything Srcset  Unit  where
-  attr Srcset _ = unsafeAttribute $ This { key: "srcset", value: unset' }
+  attr Srcset _ = unsafeAttribute $ This $ pure $ { key: "srcset", value: unset' }
 instance Attr everything Srcset (Event.Event  Unit ) where
   attr Srcset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srcset", value: unset' }

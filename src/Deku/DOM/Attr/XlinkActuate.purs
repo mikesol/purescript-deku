@@ -19,7 +19,7 @@ instance Attr AnimateTransform_ XlinkActuate (NonEmpty.NonEmpty Event.Event  Str
     { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
 instance Attr AnimateTransform_ XlinkActuate  String  where
-  attr XlinkActuate value = unsafeAttribute $ This
+  attr XlinkActuate value = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: prop' value }
 instance Attr AnimateTransform_ XlinkActuate (Event.Event  String ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -30,7 +30,7 @@ instance Attr FeImage_ XlinkActuate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
 instance Attr FeImage_ XlinkActuate  String  where
-  attr XlinkActuate value = unsafeAttribute $ This
+  attr XlinkActuate value = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: prop' value }
 instance Attr FeImage_ XlinkActuate (Event.Event  String ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr Filter_ XlinkActuate (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
 instance Attr Filter_ XlinkActuate  String  where
-  attr XlinkActuate value = unsafeAttribute $ This
+  attr XlinkActuate value = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: prop' value }
 instance Attr Filter_ XlinkActuate (Event.Event  String ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,7 +52,7 @@ instance Attr Image_ XlinkActuate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
 instance Attr Image_ XlinkActuate  String  where
-  attr XlinkActuate value = unsafeAttribute $ This
+  attr XlinkActuate value = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: prop' value }
 instance Attr Image_ XlinkActuate (Event.Event  String ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,7 +63,7 @@ instance Attr Mpath_ XlinkActuate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:actuate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:actuate", value: prop' value })
 instance Attr Mpath_ XlinkActuate  String  where
-  attr XlinkActuate value = unsafeAttribute $ This
+  attr XlinkActuate value = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: prop' value }
 instance Attr Mpath_ XlinkActuate (Event.Event  String ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr everything XlinkActuate (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "xlink:actuate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:actuate", value: unset' })
 instance Attr everything XlinkActuate  Unit  where
-  attr XlinkActuate _ = unsafeAttribute $ This
+  attr XlinkActuate _ = unsafeAttribute $ This $ pure $
     { key: "xlink:actuate", value: unset' }
 instance Attr everything XlinkActuate (Event.Event  Unit ) where
   attr XlinkActuate eventValue = unsafeAttribute $ That $ eventValue <#>

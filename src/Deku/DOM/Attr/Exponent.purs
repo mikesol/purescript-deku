@@ -18,7 +18,7 @@ instance Attr FeFuncA_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "exponent", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncA_ Exponent  String  where
-  attr Exponent value = unsafeAttribute $ This
+  attr Exponent value = unsafeAttribute $ This $ pure $
     { key: "exponent", value: prop' value }
 instance Attr FeFuncA_ Exponent (Event.Event  String ) where
   attr Exponent eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr FeFuncB_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "exponent", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncB_ Exponent  String  where
-  attr Exponent value = unsafeAttribute $ This
+  attr Exponent value = unsafeAttribute $ This $ pure $
     { key: "exponent", value: prop' value }
 instance Attr FeFuncB_ Exponent (Event.Event  String ) where
   attr Exponent eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr FeFuncG_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "exponent", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncG_ Exponent  String  where
-  attr Exponent value = unsafeAttribute $ This
+  attr Exponent value = unsafeAttribute $ This $ pure $
     { key: "exponent", value: prop' value }
 instance Attr FeFuncG_ Exponent (Event.Event  String ) where
   attr Exponent eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr FeFuncR_ Exponent (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "exponent", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "exponent", value: prop' value })
 instance Attr FeFuncR_ Exponent  String  where
-  attr Exponent value = unsafeAttribute $ This
+  attr Exponent value = unsafeAttribute $ This $ pure $
     { key: "exponent", value: prop' value }
 instance Attr FeFuncR_ Exponent (Event.Event  String ) where
   attr Exponent eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -62,7 +62,7 @@ instance Attr everything Exponent (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "exponent", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "exponent", value: unset' })
 instance Attr everything Exponent  Unit  where
-  attr Exponent _ = unsafeAttribute $ This
+  attr Exponent _ = unsafeAttribute $ This $ pure $
     { key: "exponent", value: unset' }
 instance Attr everything Exponent (Event.Event  Unit ) where
   attr Exponent eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

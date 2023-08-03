@@ -16,7 +16,7 @@ instance Attr Form_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Form_ Accept  String  where
-  attr Accept value = unsafeAttribute $ This
+  attr Accept value = unsafeAttribute $ This $ pure $
     { key: "accept", value: prop' value }
 instance Attr Form_ Accept (Event.Event  String ) where
   attr Accept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Input_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accept", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Input_ Accept  String  where
-  attr Accept value = unsafeAttribute $ This
+  attr Accept value = unsafeAttribute $ This $ pure $
     { key: "accept", value: prop' value }
 instance Attr Input_ Accept (Event.Event  String ) where
   attr Accept eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Accept (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "accept", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "accept", value: unset' })
 instance Attr everything Accept  Unit  where
-  attr Accept _ = unsafeAttribute $ This { key: "accept", value: unset' }
+  attr Accept _ = unsafeAttribute $ This $ pure $ { key: "accept", value: unset' }
 instance Attr everything Accept (Event.Event  Unit ) where
   attr Accept eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "accept", value: unset' }

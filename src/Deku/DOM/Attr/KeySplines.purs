@@ -17,7 +17,7 @@ instance Attr Animate_ KeySplines (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr Animate_ KeySplines  String  where
-  attr KeySplines value = unsafeAttribute $ This
+  attr KeySplines value = unsafeAttribute $ This $ pure $
     { key: "keySplines", value: prop' value }
 instance Attr Animate_ KeySplines (Event.Event  String ) where
   attr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr AnimateMotion_ KeySplines (NonEmpty.NonEmpty Event.Event  String )
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateMotion_ KeySplines  String  where
-  attr KeySplines value = unsafeAttribute $ This
+  attr KeySplines value = unsafeAttribute $ This $ pure $
     { key: "keySplines", value: prop' value }
 instance Attr AnimateMotion_ KeySplines (Event.Event  String ) where
   attr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr AnimateTransform_ KeySplines (NonEmpty.NonEmpty Event.Event  Strin
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateTransform_ KeySplines  String  where
-  attr KeySplines value = unsafeAttribute $ This
+  attr KeySplines value = unsafeAttribute $ This $ pure $
     { key: "keySplines", value: prop' value }
 instance Attr AnimateTransform_ KeySplines (Event.Event  String ) where
   attr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything KeySplines (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keySplines", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "keySplines", value: unset' })
 instance Attr everything KeySplines  Unit  where
-  attr KeySplines _ = unsafeAttribute $ This
+  attr KeySplines _ = unsafeAttribute $ This $ pure $
     { key: "keySplines", value: unset' }
 instance Attr everything KeySplines (Event.Event  Unit ) where
   attr KeySplines eventValue = unsafeAttribute $ That $ eventValue <#>

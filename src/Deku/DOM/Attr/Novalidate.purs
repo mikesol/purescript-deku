@@ -15,7 +15,7 @@ instance Attr Form_ Novalidate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "novalidate", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "novalidate", value: prop' value })
 instance Attr Form_ Novalidate  String  where
-  attr Novalidate value = unsafeAttribute $ This
+  attr Novalidate value = unsafeAttribute $ This $ pure $
     { key: "novalidate", value: prop' value }
 instance Attr Form_ Novalidate (Event.Event  String ) where
   attr Novalidate eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Novalidate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "novalidate", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "novalidate", value: unset' })
 instance Attr everything Novalidate  Unit  where
-  attr Novalidate _ = unsafeAttribute $ This
+  attr Novalidate _ = unsafeAttribute $ This $ pure $
     { key: "novalidate", value: unset' }
 instance Attr everything Novalidate (Event.Event  Unit ) where
   attr Novalidate eventValue = unsafeAttribute $ That $ eventValue <#>

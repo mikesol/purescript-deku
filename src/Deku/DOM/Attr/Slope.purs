@@ -18,7 +18,7 @@ instance Attr FeFuncA_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "slope", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncA_ Slope  String  where
-  attr Slope value = unsafeAttribute $ This
+  attr Slope value = unsafeAttribute $ This $ pure $
     { key: "slope", value: prop' value }
 instance Attr FeFuncA_ Slope (Event.Event  String ) where
   attr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -29,7 +29,7 @@ instance Attr FeFuncB_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "slope", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncB_ Slope  String  where
-  attr Slope value = unsafeAttribute $ This
+  attr Slope value = unsafeAttribute $ This $ pure $
     { key: "slope", value: prop' value }
 instance Attr FeFuncB_ Slope (Event.Event  String ) where
   attr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -40,7 +40,7 @@ instance Attr FeFuncG_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "slope", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncG_ Slope  String  where
-  attr Slope value = unsafeAttribute $ This
+  attr Slope value = unsafeAttribute $ This $ pure $
     { key: "slope", value: prop' value }
 instance Attr FeFuncG_ Slope (Event.Event  String ) where
   attr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -51,7 +51,7 @@ instance Attr FeFuncR_ Slope (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "slope", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "slope", value: prop' value })
 instance Attr FeFuncR_ Slope  String  where
-  attr Slope value = unsafeAttribute $ This
+  attr Slope value = unsafeAttribute $ This $ pure $
     { key: "slope", value: prop' value }
 instance Attr FeFuncR_ Slope (Event.Event  String ) where
   attr Slope eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,7 +61,7 @@ instance Attr everything Slope (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Slope bothValues = unsafeAttribute $ Both { key: "slope", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "slope", value: unset' })
 instance Attr everything Slope  Unit  where
-  attr Slope _ = unsafeAttribute $ This { key: "slope", value: unset' }
+  attr Slope _ = unsafeAttribute $ This $ pure $ { key: "slope", value: unset' }
 instance Attr everything Slope (Event.Event  Unit ) where
   attr Slope eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "slope", value: unset' }

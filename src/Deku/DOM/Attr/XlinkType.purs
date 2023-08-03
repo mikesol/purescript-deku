@@ -19,7 +19,7 @@ instance Attr AnimateTransform_ XlinkType (NonEmpty.NonEmpty Event.Event  String
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr AnimateTransform_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute $ This
+  attr XlinkType value = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: prop' value }
 instance Attr AnimateTransform_ XlinkType (Event.Event  String ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -30,7 +30,7 @@ instance Attr FeImage_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr FeImage_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute $ This
+  attr XlinkType value = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: prop' value }
 instance Attr FeImage_ XlinkType (Event.Event  String ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr Filter_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Filter_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute $ This
+  attr XlinkType value = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: prop' value }
 instance Attr Filter_ XlinkType (Event.Event  String ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -52,7 +52,7 @@ instance Attr Image_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Image_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute $ This
+  attr XlinkType value = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: prop' value }
 instance Attr Image_ XlinkType (Event.Event  String ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -63,7 +63,7 @@ instance Attr Mpath_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Mpath_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute $ This
+  attr XlinkType value = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: prop' value }
 instance Attr Mpath_ XlinkType (Event.Event  String ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr everything XlinkType (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "xlink:type", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:type", value: unset' })
 instance Attr everything XlinkType  Unit  where
-  attr XlinkType _ = unsafeAttribute $ This
+  attr XlinkType _ = unsafeAttribute $ This $ pure $
     { key: "xlink:type", value: unset' }
 instance Attr everything XlinkType (Event.Event  Unit ) where
   attr XlinkType eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -56,7 +56,7 @@ instance Attr Circle_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Circle_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Circle_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -67,7 +67,7 @@ instance Attr ClipPath_ Visibility (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr ClipPath_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr ClipPath_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -78,7 +78,7 @@ instance Attr Defs_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Defs_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Defs_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -89,7 +89,7 @@ instance Attr Ellipse_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Ellipse_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Ellipse_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -100,7 +100,7 @@ instance Attr FeBlend_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeBlend_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeBlend_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -111,7 +111,7 @@ instance Attr FeColorMatrix_ Visibility (NonEmpty.NonEmpty Event.Event  String )
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeColorMatrix_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeColorMatrix_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -122,7 +122,7 @@ instance Attr FeComponentTransfer_ Visibility (NonEmpty.NonEmpty Event.Event  St
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeComponentTransfer_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeComponentTransfer_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -133,7 +133,7 @@ instance Attr FeComposite_ Visibility (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeComposite_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeComposite_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -144,7 +144,7 @@ instance Attr FeConvolveMatrix_ Visibility (NonEmpty.NonEmpty Event.Event  Strin
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeConvolveMatrix_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeConvolveMatrix_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -155,7 +155,7 @@ instance Attr FeDiffuseLighting_ Visibility (NonEmpty.NonEmpty Event.Event  Stri
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeDiffuseLighting_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeDiffuseLighting_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -166,7 +166,7 @@ instance Attr FeDisplacementMap_ Visibility (NonEmpty.NonEmpty Event.Event  Stri
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeDisplacementMap_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeDisplacementMap_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -177,7 +177,7 @@ instance Attr FeFlood_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeFlood_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeFlood_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -188,7 +188,7 @@ instance Attr FeGaussianBlur_ Visibility (NonEmpty.NonEmpty Event.Event  String 
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeGaussianBlur_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeGaussianBlur_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -199,7 +199,7 @@ instance Attr FeImage_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeImage_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeImage_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -210,7 +210,7 @@ instance Attr FeMerge_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeMerge_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeMerge_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -221,7 +221,7 @@ instance Attr FeMorphology_ Visibility (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeMorphology_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeMorphology_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -232,7 +232,7 @@ instance Attr FeOffset_ Visibility (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeOffset_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeOffset_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -243,7 +243,7 @@ instance Attr FeSpecularLighting_ Visibility (NonEmpty.NonEmpty Event.Event  Str
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeSpecularLighting_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeSpecularLighting_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -254,7 +254,7 @@ instance Attr FeTile_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeTile_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeTile_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -265,7 +265,7 @@ instance Attr FeTurbulence_ Visibility (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr FeTurbulence_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr FeTurbulence_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -276,7 +276,7 @@ instance Attr Filter_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Filter_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Filter_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -287,7 +287,7 @@ instance Attr ForeignObject_ Visibility (NonEmpty.NonEmpty Event.Event  String )
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr ForeignObject_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr ForeignObject_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -298,7 +298,7 @@ instance Attr G_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr G_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr G_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -309,7 +309,7 @@ instance Attr Image_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Image_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Image_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -320,7 +320,7 @@ instance Attr Line_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Line_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Line_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -331,7 +331,7 @@ instance Attr LinearGradient_ Visibility (NonEmpty.NonEmpty Event.Event  String 
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr LinearGradient_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr LinearGradient_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -342,7 +342,7 @@ instance Attr Marker_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Marker_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Marker_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -353,7 +353,7 @@ instance Attr Mask_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Mask_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Mask_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -364,7 +364,7 @@ instance Attr Path_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Path_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Path_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -375,7 +375,7 @@ instance Attr Pattern_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Pattern_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Pattern_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -386,7 +386,7 @@ instance Attr Polygon_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Polygon_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Polygon_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -397,7 +397,7 @@ instance Attr Polyline_ Visibility (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Polyline_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Polyline_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -408,7 +408,7 @@ instance Attr RadialGradient_ Visibility (NonEmpty.NonEmpty Event.Event  String 
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr RadialGradient_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr RadialGradient_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -419,7 +419,7 @@ instance Attr Rect_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Rect_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Rect_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -430,7 +430,7 @@ instance Attr Stop_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Stop_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Stop_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -441,7 +441,7 @@ instance Attr Svg_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Svg_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Svg_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -452,7 +452,7 @@ instance Attr Switch_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Switch_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Switch_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -463,7 +463,7 @@ instance Attr Symbol_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Symbol_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Symbol_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -474,7 +474,7 @@ instance Attr Text_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Text_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Text_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -485,7 +485,7 @@ instance Attr TextPath_ Visibility (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr TextPath_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr TextPath_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -496,7 +496,7 @@ instance Attr Tspan_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Tspan_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Tspan_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -507,7 +507,7 @@ instance Attr Use_ Visibility (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "visibility", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "visibility", value: prop' value })
 instance Attr Use_ Visibility  String  where
-  attr Visibility value = unsafeAttribute $ This
+  attr Visibility value = unsafeAttribute $ This $ pure $
     { key: "visibility", value: prop' value }
 instance Attr Use_ Visibility (Event.Event  String ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -518,7 +518,7 @@ instance Attr everything Visibility (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "visibility", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "visibility", value: unset' })
 instance Attr everything Visibility  Unit  where
-  attr Visibility _ = unsafeAttribute $ This
+  attr Visibility _ = unsafeAttribute $ This $ pure $
     { key: "visibility", value: unset' }
 instance Attr everything Visibility (Event.Event  Unit ) where
   attr Visibility eventValue = unsafeAttribute $ That $ eventValue <#>

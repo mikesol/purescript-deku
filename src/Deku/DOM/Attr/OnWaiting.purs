@@ -15,7 +15,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "waiting", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "waiting", value: cb' value })
 instance Attr anything OnWaiting  Cb  where
-  attr OnWaiting value = unsafeAttribute $ This
+  attr OnWaiting value = unsafeAttribute $ This $ pure $
     { key: "waiting", value: cb' value }
 instance Attr anything OnWaiting (Event.Event  Cb ) where
   attr OnWaiting eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "waiting", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnWaiting  (Effect Unit)  where
-  attr OnWaiting value = unsafeAttribute $ This
+  attr OnWaiting value = unsafeAttribute $ This $ pure $
     { key: "waiting", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnWaiting (Event.Event  (Effect Unit) ) where
   attr OnWaiting eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "waiting", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnWaiting  (Effect Boolean)  where
-  attr OnWaiting value = unsafeAttribute $ This
+  attr OnWaiting value = unsafeAttribute $ This $ pure $
     { key: "waiting", value: cb' (Cb (const value)) }
 instance Attr anything OnWaiting (Event.Event  (Effect Boolean) ) where
   attr OnWaiting eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnWaiting (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "waiting", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "waiting", value: unset' })
 instance Attr everything OnWaiting  Unit  where
-  attr OnWaiting _ = unsafeAttribute $ This
+  attr OnWaiting _ = unsafeAttribute $ This $ pure $
     { key: "waiting", value: unset' }
 instance Attr everything OnWaiting (Event.Event  Unit ) where
   attr OnWaiting eventValue = unsafeAttribute $ That $ eventValue <#>

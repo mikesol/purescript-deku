@@ -15,7 +15,7 @@ instance Attr anything OnFocus (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "focus", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "focus", value: cb' value })
 instance Attr anything OnFocus  Cb  where
-  attr OnFocus value = unsafeAttribute $ This
+  attr OnFocus value = unsafeAttribute $ This $ pure $
     { key: "focus", value: cb' value }
 instance Attr anything OnFocus (Event.Event  Cb ) where
   attr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnFocus (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "focus", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnFocus  (Effect Unit)  where
-  attr OnFocus value = unsafeAttribute $ This
+  attr OnFocus value = unsafeAttribute $ This $ pure $
     { key: "focus", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnFocus (Event.Event  (Effect Unit) ) where
   attr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnFocus (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "focus", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnFocus  (Effect Boolean)  where
-  attr OnFocus value = unsafeAttribute $ This
+  attr OnFocus value = unsafeAttribute $ This $ pure $
     { key: "focus", value: cb' (Cb (const value)) }
 instance Attr anything OnFocus (Event.Event  (Effect Boolean) ) where
   attr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnFocus (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "focus", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "focus", value: unset' })
 instance Attr everything OnFocus  Unit  where
-  attr OnFocus _ = unsafeAttribute $ This { key: "focus", value: unset' }
+  attr OnFocus _ = unsafeAttribute $ This $ pure $ { key: "focus", value: unset' }
 instance Attr everything OnFocus (Event.Event  Unit ) where
   attr OnFocus eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "focus", value: unset' }

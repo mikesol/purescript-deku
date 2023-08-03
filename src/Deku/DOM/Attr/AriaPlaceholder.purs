@@ -33,7 +33,7 @@ instance Attr Circle_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Circle_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Circle_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -46,7 +46,7 @@ instance Attr Ellipse_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Ellipse_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Ellipse_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -59,7 +59,7 @@ instance Attr ForeignObject_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr ForeignObject_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr ForeignObject_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -72,7 +72,7 @@ instance Attr G_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr G_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr G_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -85,7 +85,7 @@ instance Attr Line_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Line_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Line_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -98,7 +98,7 @@ instance Attr Marker_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Marker_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Marker_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -111,7 +111,7 @@ instance Attr Path_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Path_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Path_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -124,7 +124,7 @@ instance Attr Polygon_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Polygon_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Polygon_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -137,7 +137,7 @@ instance Attr Polyline_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Polyline_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Polyline_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -150,7 +150,7 @@ instance Attr Rect_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Rect_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Rect_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -163,7 +163,7 @@ instance Attr Svg_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Svg_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Svg_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -176,7 +176,7 @@ instance Attr Symbol_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Symbol_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Symbol_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -189,7 +189,7 @@ instance Attr Text_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Text_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Text_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -202,7 +202,7 @@ instance Attr TextPath_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr TextPath_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr TextPath_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -215,7 +215,7 @@ instance Attr Tspan_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Tspan_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Tspan_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -228,7 +228,7 @@ instance Attr Use_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr Use_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr Use_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -241,7 +241,7 @@ instance Attr View_ AriaPlaceholder (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-placeholder", value: prop' value }
     )
 instance Attr View_ AriaPlaceholder  String  where
-  attr AriaPlaceholder value = unsafeAttribute $ This
+  attr AriaPlaceholder value = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: prop' value }
 instance Attr View_ AriaPlaceholder (Event.Event  String ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue
@@ -252,7 +252,7 @@ instance Attr everything AriaPlaceholder (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "aria-placeholder", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-placeholder", value: unset' })
 instance Attr everything AriaPlaceholder  Unit  where
-  attr AriaPlaceholder _ = unsafeAttribute $ This
+  attr AriaPlaceholder _ = unsafeAttribute $ This $ pure $
     { key: "aria-placeholder", value: unset' }
 instance Attr everything AriaPlaceholder (Event.Event  Unit ) where
   attr AriaPlaceholder eventValue = unsafeAttribute $ That $ eventValue

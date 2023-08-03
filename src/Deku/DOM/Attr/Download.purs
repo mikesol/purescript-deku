@@ -16,7 +16,7 @@ instance Attr A_ Download (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "download", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr A_ Download  String  where
-  attr Download value = unsafeAttribute $ This
+  attr Download value = unsafeAttribute $ This $ pure $
     { key: "download", value: prop' value }
 instance Attr A_ Download (Event.Event  String ) where
   attr Download eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr Area_ Download (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "download", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr Area_ Download  String  where
-  attr Download value = unsafeAttribute $ This
+  attr Download value = unsafeAttribute $ This $ pure $
     { key: "download", value: prop' value }
 instance Attr Area_ Download (Event.Event  String ) where
   attr Download eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything Download (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "download", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "download", value: unset' })
 instance Attr everything Download  Unit  where
-  attr Download _ = unsafeAttribute $ This
+  attr Download _ = unsafeAttribute $ This $ pure $
     { key: "download", value: unset' }
 instance Attr everything Download (Event.Event  Unit ) where
   attr Download eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

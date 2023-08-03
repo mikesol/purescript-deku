@@ -15,7 +15,7 @@ instance Attr ClipPath_ ClipPathUnits (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "clipPathUnits", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "clipPathUnits", value: prop' value })
 instance Attr ClipPath_ ClipPathUnits  String  where
-  attr ClipPathUnits value = unsafeAttribute $ This
+  attr ClipPathUnits value = unsafeAttribute $ This $ pure $
     { key: "clipPathUnits", value: prop' value }
 instance Attr ClipPath_ ClipPathUnits (Event.Event  String ) where
   attr ClipPathUnits eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything ClipPathUnits (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "clipPathUnits", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "clipPathUnits", value: unset' })
 instance Attr everything ClipPathUnits  Unit  where
-  attr ClipPathUnits _ = unsafeAttribute $ This
+  attr ClipPathUnits _ = unsafeAttribute $ This $ pure $
     { key: "clipPathUnits", value: unset' }
 instance Attr everything ClipPathUnits (Event.Event  Unit ) where
   attr ClipPathUnits eventValue = unsafeAttribute $ That $ eventValue <#>

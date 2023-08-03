@@ -18,7 +18,7 @@ instance Attr LinearGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  
         { key: "gradientTransform", value: prop' value }
     )
 instance Attr LinearGradient_ GradientTransform  String  where
-  attr GradientTransform value = unsafeAttribute $ This
+  attr GradientTransform value = unsafeAttribute $ This $ pure $
     { key: "gradientTransform", value: prop' value }
 instance Attr LinearGradient_ GradientTransform (Event.Event  String ) where
   attr GradientTransform eventValue = unsafeAttribute $ That $ eventValue
@@ -31,7 +31,7 @@ instance Attr RadialGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  
         { key: "gradientTransform", value: prop' value }
     )
 instance Attr RadialGradient_ GradientTransform  String  where
-  attr GradientTransform value = unsafeAttribute $ This
+  attr GradientTransform value = unsafeAttribute $ This $ pure $
     { key: "gradientTransform", value: prop' value }
 instance Attr RadialGradient_ GradientTransform (Event.Event  String ) where
   attr GradientTransform eventValue = unsafeAttribute $ That $ eventValue
@@ -42,7 +42,7 @@ instance Attr everything GradientTransform (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "gradientTransform", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "gradientTransform", value: unset' })
 instance Attr everything GradientTransform  Unit  where
-  attr GradientTransform _ = unsafeAttribute $ This
+  attr GradientTransform _ = unsafeAttribute $ This $ pure $
     { key: "gradientTransform", value: unset' }
 instance Attr everything GradientTransform (Event.Event  Unit ) where
   attr GradientTransform eventValue = unsafeAttribute $ That $ eventValue

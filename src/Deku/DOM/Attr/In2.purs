@@ -17,7 +17,7 @@ instance Attr FeBlend_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "in2", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeBlend_ In2  String  where
-  attr In2 value = unsafeAttribute $ This { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
 instance Attr FeBlend_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
@@ -27,7 +27,7 @@ instance Attr FeComposite_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "in2", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeComposite_ In2  String  where
-  attr In2 value = unsafeAttribute $ This { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
 instance Attr FeComposite_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
@@ -37,7 +37,7 @@ instance Attr FeDisplacementMap_ In2 (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "in2", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeDisplacementMap_ In2  String  where
-  attr In2 value = unsafeAttribute $ This { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
 instance Attr FeDisplacementMap_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
@@ -46,7 +46,7 @@ instance Attr everything In2 (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr In2 bothValues = unsafeAttribute $ Both { key: "in2", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "in2", value: unset' })
 instance Attr everything In2  Unit  where
-  attr In2 _ = unsafeAttribute $ This { key: "in2", value: unset' }
+  attr In2 _ = unsafeAttribute $ This $ pure $ { key: "in2", value: unset' }
 instance Attr everything In2 (Event.Event  Unit ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "in2", value: unset' }

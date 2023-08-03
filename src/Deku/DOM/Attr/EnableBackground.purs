@@ -35,7 +35,7 @@ instance Attr FeBlend_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeBlend_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeBlend_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -48,7 +48,7 @@ instance Attr FeColorMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event  St
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeColorMatrix_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeColorMatrix_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -61,7 +61,7 @@ instance Attr FeComponentTransfer_ EnableBackground (NonEmpty.NonEmpty Event.Eve
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeComponentTransfer_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeComponentTransfer_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -74,7 +74,7 @@ instance Attr FeComposite_ EnableBackground (NonEmpty.NonEmpty Event.Event  Stri
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeComposite_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeComposite_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -87,7 +87,7 @@ instance Attr FeConvolveMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeConvolveMatrix_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -100,7 +100,7 @@ instance Attr FeDiffuseLighting_ EnableBackground (NonEmpty.NonEmpty Event.Event
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeDiffuseLighting_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -113,7 +113,7 @@ instance Attr FeDisplacementMap_ EnableBackground (NonEmpty.NonEmpty Event.Event
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeDisplacementMap_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeDisplacementMap_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -126,7 +126,7 @@ instance Attr FeFlood_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeFlood_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeFlood_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -139,7 +139,7 @@ instance Attr FeGaussianBlur_ EnableBackground (NonEmpty.NonEmpty Event.Event  S
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeGaussianBlur_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeGaussianBlur_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -152,7 +152,7 @@ instance Attr FeImage_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeImage_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeImage_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -165,7 +165,7 @@ instance Attr FeMerge_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeMerge_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeMerge_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -178,7 +178,7 @@ instance Attr FeMorphology_ EnableBackground (NonEmpty.NonEmpty Event.Event  Str
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeMorphology_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeMorphology_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -191,7 +191,7 @@ instance Attr FeOffset_ EnableBackground (NonEmpty.NonEmpty Event.Event  String 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeOffset_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeOffset_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -204,7 +204,7 @@ instance Attr FeSpecularLighting_ EnableBackground (NonEmpty.NonEmpty Event.Even
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeSpecularLighting_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeSpecularLighting_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -217,7 +217,7 @@ instance Attr FeTile_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeTile_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeTile_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -230,7 +230,7 @@ instance Attr FeTurbulence_ EnableBackground (NonEmpty.NonEmpty Event.Event  Str
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeTurbulence_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr FeTurbulence_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -243,7 +243,7 @@ instance Attr Filter_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr Filter_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr Filter_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -256,7 +256,7 @@ instance Attr Image_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "enable-background", value: prop' value }
     )
 instance Attr Image_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr Image_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -269,7 +269,7 @@ instance Attr Switch_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr Switch_ EnableBackground  String  where
-  attr EnableBackground value = unsafeAttribute $ This
+  attr EnableBackground value = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: prop' value }
 instance Attr Switch_ EnableBackground (Event.Event  String ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue
@@ -280,7 +280,7 @@ instance Attr everything EnableBackground (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "enable-background", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "enable-background", value: unset' })
 instance Attr everything EnableBackground  Unit  where
-  attr EnableBackground _ = unsafeAttribute $ This
+  attr EnableBackground _ = unsafeAttribute $ This $ pure $
     { key: "enable-background", value: unset' }
 instance Attr everything EnableBackground (Event.Event  Unit ) where
   attr EnableBackground eventValue = unsafeAttribute $ That $ eventValue

@@ -57,7 +57,7 @@ instance Attr Circle_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Circle_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Circle_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -70,7 +70,7 @@ instance Attr ClipPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr ClipPath_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr ClipPath_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -83,7 +83,7 @@ instance Attr Defs_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Defs_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Defs_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -96,7 +96,7 @@ instance Attr Ellipse_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Ellipse_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Ellipse_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -109,7 +109,7 @@ instance Attr FeBlend_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeBlend_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeBlend_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -122,7 +122,7 @@ instance Attr FeColorMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeColorMatrix_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -135,7 +135,7 @@ instance Attr FeComponentTransfer_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeComponentTransfer_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -148,7 +148,7 @@ instance Attr FeComposite_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeComposite_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeComposite_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -161,7 +161,7 @@ instance Attr FeConvolveMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeConvolveMatrix_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -174,7 +174,7 @@ instance Attr FeDiffuseLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeDiffuseLighting_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -187,7 +187,7 @@ instance Attr FeDisplacementMap_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeDisplacementMap_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -200,7 +200,7 @@ instance Attr FeFlood_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeFlood_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeFlood_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -213,7 +213,7 @@ instance Attr FeGaussianBlur_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeGaussianBlur_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -226,7 +226,7 @@ instance Attr FeImage_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeImage_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeImage_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -239,7 +239,7 @@ instance Attr FeMerge_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeMerge_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeMerge_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -252,7 +252,7 @@ instance Attr FeMorphology_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeMorphology_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -265,7 +265,7 @@ instance Attr FeOffset_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeOffset_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeOffset_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -278,7 +278,7 @@ instance Attr FeSpecularLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeSpecularLighting_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -291,7 +291,7 @@ instance Attr FeTile_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeTile_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeTile_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -304,7 +304,7 @@ instance Attr FeTurbulence_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr FeTurbulence_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -317,7 +317,7 @@ instance Attr Filter_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Filter_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Filter_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -330,7 +330,7 @@ instance Attr ForeignObject_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr ForeignObject_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -343,7 +343,7 @@ instance Attr G_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr G_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr G_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -356,7 +356,7 @@ instance Attr Image_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Image_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Image_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -369,7 +369,7 @@ instance Attr Line_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Line_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Line_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -382,7 +382,7 @@ instance Attr LinearGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr LinearGradient_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -395,7 +395,7 @@ instance Attr Marker_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Marker_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Marker_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -408,7 +408,7 @@ instance Attr Mask_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Mask_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Mask_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -421,7 +421,7 @@ instance Attr Path_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Path_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Path_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -434,7 +434,7 @@ instance Attr Pattern_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Pattern_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Pattern_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -447,7 +447,7 @@ instance Attr Polygon_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Polygon_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Polygon_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -460,7 +460,7 @@ instance Attr Polyline_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Polyline_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Polyline_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -473,7 +473,7 @@ instance Attr RadialGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr RadialGradient_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -486,7 +486,7 @@ instance Attr Rect_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Rect_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Rect_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -499,7 +499,7 @@ instance Attr Svg_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Svg_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Svg_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -512,7 +512,7 @@ instance Attr Switch_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Switch_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Switch_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -525,7 +525,7 @@ instance Attr Symbol_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Symbol_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Symbol_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -538,7 +538,7 @@ instance Attr Text_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Text_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Text_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -551,7 +551,7 @@ instance Attr TextPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr TextPath_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr TextPath_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -564,7 +564,7 @@ instance Attr Tspan_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Tspan_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Tspan_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -577,7 +577,7 @@ instance Attr Use_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Use_ StrokeLinejoin  String  where
-  attr StrokeLinejoin value = unsafeAttribute $ This
+  attr StrokeLinejoin value = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: prop' value }
 instance Attr Use_ StrokeLinejoin (Event.Event  String ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -588,7 +588,7 @@ instance Attr everything StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "stroke-linejoin", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-linejoin", value: unset' })
 instance Attr everything StrokeLinejoin  Unit  where
-  attr StrokeLinejoin _ = unsafeAttribute $ This
+  attr StrokeLinejoin _ = unsafeAttribute $ This $ pure $
     { key: "stroke-linejoin", value: unset' }
 instance Attr everything StrokeLinejoin (Event.Event  Unit ) where
   attr StrokeLinejoin eventValue = unsafeAttribute $ That $ eventValue <#>

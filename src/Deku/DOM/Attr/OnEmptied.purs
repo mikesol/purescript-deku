@@ -15,7 +15,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "emptied", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "emptied", value: cb' value })
 instance Attr anything OnEmptied  Cb  where
-  attr OnEmptied value = unsafeAttribute $ This
+  attr OnEmptied value = unsafeAttribute $ This $ pure $
     { key: "emptied", value: cb' value }
 instance Attr anything OnEmptied (Event.Event  Cb ) where
   attr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "emptied", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnEmptied  (Effect Unit)  where
-  attr OnEmptied value = unsafeAttribute $ This
+  attr OnEmptied value = unsafeAttribute $ This $ pure $
     { key: "emptied", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnEmptied (Event.Event  (Effect Unit) ) where
   attr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "emptied", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnEmptied  (Effect Boolean)  where
-  attr OnEmptied value = unsafeAttribute $ This
+  attr OnEmptied value = unsafeAttribute $ This $ pure $
     { key: "emptied", value: cb' (Cb (const value)) }
 instance Attr anything OnEmptied (Event.Event  (Effect Boolean) ) where
   attr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnEmptied (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "emptied", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "emptied", value: unset' })
 instance Attr everything OnEmptied  Unit  where
-  attr OnEmptied _ = unsafeAttribute $ This
+  attr OnEmptied _ = unsafeAttribute $ This $ pure $
     { key: "emptied", value: unset' }
 instance Attr everything OnEmptied (Event.Event  Unit ) where
   attr OnEmptied eventValue = unsafeAttribute $ That $ eventValue <#>

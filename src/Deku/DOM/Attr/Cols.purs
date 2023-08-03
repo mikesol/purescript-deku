@@ -15,7 +15,7 @@ instance Attr Textarea_ Cols (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "cols", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "cols", value: prop' value })
 instance Attr Textarea_ Cols  String  where
-  attr Cols value = unsafeAttribute $ This
+  attr Cols value = unsafeAttribute $ This $ pure $
     { key: "cols", value: prop' value }
 instance Attr Textarea_ Cols (Event.Event  String ) where
   attr Cols eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -25,7 +25,7 @@ instance Attr everything Cols (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Cols bothValues = unsafeAttribute $ Both { key: "cols", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "cols", value: unset' })
 instance Attr everything Cols  Unit  where
-  attr Cols _ = unsafeAttribute $ This { key: "cols", value: unset' }
+  attr Cols _ = unsafeAttribute $ This $ pure $ { key: "cols", value: unset' }
 instance Attr everything Cols (Event.Event  Unit ) where
   attr Cols eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "cols", value: unset' }

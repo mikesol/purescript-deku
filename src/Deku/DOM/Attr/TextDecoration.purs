@@ -35,7 +35,7 @@ instance Attr FeBlend_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeBlend_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeBlend_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -48,7 +48,7 @@ instance Attr FeColorMatrix_ TextDecoration (NonEmpty.NonEmpty Event.Event  Stri
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeColorMatrix_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeColorMatrix_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -61,7 +61,7 @@ instance Attr FeComponentTransfer_ TextDecoration (NonEmpty.NonEmpty Event.Event
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeComponentTransfer_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeComponentTransfer_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -74,7 +74,7 @@ instance Attr FeComposite_ TextDecoration (NonEmpty.NonEmpty Event.Event  String
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeComposite_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeComposite_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -87,7 +87,7 @@ instance Attr FeConvolveMatrix_ TextDecoration (NonEmpty.NonEmpty Event.Event  S
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeConvolveMatrix_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -100,7 +100,7 @@ instance Attr FeDiffuseLighting_ TextDecoration (NonEmpty.NonEmpty Event.Event  
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeDiffuseLighting_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -113,7 +113,7 @@ instance Attr FeDisplacementMap_ TextDecoration (NonEmpty.NonEmpty Event.Event  
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeDisplacementMap_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeDisplacementMap_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -126,7 +126,7 @@ instance Attr FeFlood_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeFlood_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeFlood_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -139,7 +139,7 @@ instance Attr FeGaussianBlur_ TextDecoration (NonEmpty.NonEmpty Event.Event  Str
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeGaussianBlur_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeGaussianBlur_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -152,7 +152,7 @@ instance Attr FeImage_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeImage_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeImage_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -165,7 +165,7 @@ instance Attr FeMerge_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeMerge_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeMerge_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -178,7 +178,7 @@ instance Attr FeMorphology_ TextDecoration (NonEmpty.NonEmpty Event.Event  Strin
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeMorphology_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeMorphology_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -191,7 +191,7 @@ instance Attr FeOffset_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeOffset_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeOffset_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -204,7 +204,7 @@ instance Attr FeSpecularLighting_ TextDecoration (NonEmpty.NonEmpty Event.Event 
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeSpecularLighting_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeSpecularLighting_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -217,7 +217,7 @@ instance Attr FeTile_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeTile_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeTile_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -230,7 +230,7 @@ instance Attr FeTurbulence_ TextDecoration (NonEmpty.NonEmpty Event.Event  Strin
         { key: "text-decoration", value: prop' value }
     )
 instance Attr FeTurbulence_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr FeTurbulence_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -243,7 +243,7 @@ instance Attr Filter_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "text-decoration", value: prop' value }
     )
 instance Attr Filter_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr Filter_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -256,7 +256,7 @@ instance Attr Image_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "text-decoration", value: prop' value }
     )
 instance Attr Image_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr Image_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -269,7 +269,7 @@ instance Attr Switch_ TextDecoration (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "text-decoration", value: prop' value }
     )
 instance Attr Switch_ TextDecoration  String  where
-  attr TextDecoration value = unsafeAttribute $ This
+  attr TextDecoration value = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: prop' value }
 instance Attr Switch_ TextDecoration (Event.Event  String ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -280,7 +280,7 @@ instance Attr everything TextDecoration (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "text-decoration", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "text-decoration", value: unset' })
 instance Attr everything TextDecoration  Unit  where
-  attr TextDecoration _ = unsafeAttribute $ This
+  attr TextDecoration _ = unsafeAttribute $ This $ pure $
     { key: "text-decoration", value: unset' }
 instance Attr everything TextDecoration (Event.Event  Unit ) where
   attr TextDecoration eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr FeTurbulence_ Seed (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "seed", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "seed", value: prop' value })
 instance Attr FeTurbulence_ Seed  String  where
-  attr Seed value = unsafeAttribute $ This
+  attr Seed value = unsafeAttribute $ This $ pure $
     { key: "seed", value: prop' value }
 instance Attr FeTurbulence_ Seed (Event.Event  String ) where
   attr Seed eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
@@ -25,7 +25,7 @@ instance Attr everything Seed (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Seed bothValues = unsafeAttribute $ Both { key: "seed", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "seed", value: unset' })
 instance Attr everything Seed  Unit  where
-  attr Seed _ = unsafeAttribute $ This { key: "seed", value: unset' }
+  attr Seed _ = unsafeAttribute $ This $ pure $ { key: "seed", value: unset' }
 instance Attr everything Seed (Event.Event  Unit ) where
   attr Seed eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "seed", value: unset' }

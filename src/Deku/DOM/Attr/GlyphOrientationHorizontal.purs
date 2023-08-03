@@ -35,7 +35,7 @@ instance Attr FeBlend_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeBlend_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeBlend_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -49,7 +49,7 @@ instance Attr FeColorMatrix_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeColorMatrix_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -63,7 +63,7 @@ instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (NonEmpty.NonEmpty
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeComponentTransfer_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -77,7 +77,7 @@ instance Attr FeComposite_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.E
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeComposite_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeComposite_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -91,7 +91,7 @@ instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Ev
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeConvolveMatrix_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -105,7 +105,7 @@ instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (NonEmpty.NonEmpty E
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeDiffuseLighting_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -119,7 +119,7 @@ instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (NonEmpty.NonEmpty E
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeDisplacementMap_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -133,7 +133,7 @@ instance Attr FeFlood_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeFlood_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeFlood_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -147,7 +147,7 @@ instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Even
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeGaussianBlur_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -161,7 +161,7 @@ instance Attr FeImage_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeImage_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeImage_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -175,7 +175,7 @@ instance Attr FeMerge_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeMerge_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeMerge_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -189,7 +189,7 @@ instance Attr FeMorphology_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeMorphology_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeMorphology_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -203,7 +203,7 @@ instance Attr FeOffset_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Even
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeOffset_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeOffset_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -217,7 +217,7 @@ instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (NonEmpty.NonEmpty 
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeSpecularLighting_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -231,7 +231,7 @@ instance Attr FeTile_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event 
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeTile_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeTile_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -245,7 +245,7 @@ instance Attr FeTurbulence_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr FeTurbulence_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr FeTurbulence_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -259,7 +259,7 @@ instance Attr Filter_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event 
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Filter_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr Filter_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -273,7 +273,7 @@ instance Attr Image_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event  
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Image_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr Image_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -287,7 +287,7 @@ instance Attr Switch_ GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Event 
         { key: "glyph-orientation-horizontal", value: prop' value }
     )
 instance Attr Switch_ GlyphOrientationHorizontal  String  where
-  attr GlyphOrientationHorizontal value = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal value = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: prop' value }
 instance Attr Switch_ GlyphOrientationHorizontal (Event.Event  String ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $
@@ -301,7 +301,7 @@ instance Attr everything GlyphOrientationHorizontal (NonEmpty.NonEmpty Event.Eve
         { key: "glyph-orientation-horizontal", value: unset' }
     )
 instance Attr everything GlyphOrientationHorizontal  Unit  where
-  attr GlyphOrientationHorizontal _ = unsafeAttribute $ This
+  attr GlyphOrientationHorizontal _ = unsafeAttribute $ This $ pure $
     { key: "glyph-orientation-horizontal", value: unset' }
 instance Attr everything GlyphOrientationHorizontal (Event.Event  Unit ) where
   attr GlyphOrientationHorizontal eventValue = unsafeAttribute $ That $

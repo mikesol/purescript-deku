@@ -15,7 +15,7 @@ instance Attr anything OnInput (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "input", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "input", value: cb' value })
 instance Attr anything OnInput  Cb  where
-  attr OnInput value = unsafeAttribute $ This
+  attr OnInput value = unsafeAttribute $ This $ pure $
     { key: "input", value: cb' value }
 instance Attr anything OnInput (Event.Event  Cb ) where
   attr OnInput eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnInput (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "input", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnInput  (Effect Unit)  where
-  attr OnInput value = unsafeAttribute $ This
+  attr OnInput value = unsafeAttribute $ This $ pure $
     { key: "input", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnInput (Event.Event  (Effect Unit) ) where
   attr OnInput eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnInput (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "input", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnInput  (Effect Boolean)  where
-  attr OnInput value = unsafeAttribute $ This
+  attr OnInput value = unsafeAttribute $ This $ pure $
     { key: "input", value: cb' (Cb (const value)) }
 instance Attr anything OnInput (Event.Event  (Effect Boolean) ) where
   attr OnInput eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnInput (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "input", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "input", value: unset' })
 instance Attr everything OnInput  Unit  where
-  attr OnInput _ = unsafeAttribute $ This { key: "input", value: unset' }
+  attr OnInput _ = unsafeAttribute $ This $ pure $ { key: "input", value: unset' }
 instance Attr everything OnInput (Event.Event  Unit ) where
   attr OnInput eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "input", value: unset' }

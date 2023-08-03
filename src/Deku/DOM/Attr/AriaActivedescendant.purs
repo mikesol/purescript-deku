@@ -33,7 +33,7 @@ instance Attr Circle_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Circle_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Circle_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -47,7 +47,7 @@ instance Attr Ellipse_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Ellipse_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Ellipse_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -61,7 +61,7 @@ instance Attr ForeignObject_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr ForeignObject_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr ForeignObject_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -75,7 +75,7 @@ instance Attr G_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr G_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr G_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -89,7 +89,7 @@ instance Attr Line_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Line_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Line_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -103,7 +103,7 @@ instance Attr Marker_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Marker_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Marker_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -117,7 +117,7 @@ instance Attr Path_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Path_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Path_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -131,7 +131,7 @@ instance Attr Polygon_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Polygon_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Polygon_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -145,7 +145,7 @@ instance Attr Polyline_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Polyline_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Polyline_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -159,7 +159,7 @@ instance Attr Rect_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Rect_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Rect_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -173,7 +173,7 @@ instance Attr Svg_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Svg_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Svg_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -187,7 +187,7 @@ instance Attr Symbol_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Symbol_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Symbol_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -201,7 +201,7 @@ instance Attr Text_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Text_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Text_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -215,7 +215,7 @@ instance Attr TextPath_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr TextPath_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr TextPath_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -229,7 +229,7 @@ instance Attr Tspan_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Tspan_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Tspan_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -243,7 +243,7 @@ instance Attr Use_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Use_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr Use_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -257,7 +257,7 @@ instance Attr View_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr View_ AriaActivedescendant  String  where
-  attr AriaActivedescendant value = unsafeAttribute $ This
+  attr AriaActivedescendant value = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: prop' value }
 instance Attr View_ AriaActivedescendant (Event.Event  String ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $
@@ -269,7 +269,7 @@ instance Attr everything AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Un
     { key: "aria-activedescendant", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-activedescendant", value: unset' })
 instance Attr everything AriaActivedescendant  Unit  where
-  attr AriaActivedescendant _ = unsafeAttribute $ This
+  attr AriaActivedescendant _ = unsafeAttribute $ This $ pure $
     { key: "aria-activedescendant", value: unset' }
 instance Attr everything AriaActivedescendant (Event.Event  Unit ) where
   attr AriaActivedescendant eventValue = unsafeAttribute $ That $

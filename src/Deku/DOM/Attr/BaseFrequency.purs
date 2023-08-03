@@ -15,7 +15,7 @@ instance Attr FeTurbulence_ BaseFrequency (NonEmpty.NonEmpty Event.Event  String
     { key: "baseFrequency", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseFrequency", value: prop' value })
 instance Attr FeTurbulence_ BaseFrequency  String  where
-  attr BaseFrequency value = unsafeAttribute $ This
+  attr BaseFrequency value = unsafeAttribute $ This $ pure $
     { key: "baseFrequency", value: prop' value }
 instance Attr FeTurbulence_ BaseFrequency (Event.Event  String ) where
   attr BaseFrequency eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything BaseFrequency (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "baseFrequency", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseFrequency", value: unset' })
 instance Attr everything BaseFrequency  Unit  where
-  attr BaseFrequency _ = unsafeAttribute $ This
+  attr BaseFrequency _ = unsafeAttribute $ This $ pure $
     { key: "baseFrequency", value: unset' }
 instance Attr everything BaseFrequency (Event.Event  Unit ) where
   attr BaseFrequency eventValue = unsafeAttribute $ That $ eventValue <#>

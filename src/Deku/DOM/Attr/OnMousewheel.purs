@@ -15,7 +15,7 @@ instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mousewheel", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "mousewheel", value: cb' value })
 instance Attr anything OnMousewheel  Cb  where
-  attr OnMousewheel value = unsafeAttribute $ This
+  attr OnMousewheel value = unsafeAttribute $ This $ pure $
     { key: "mousewheel", value: cb' value }
 instance Attr anything OnMousewheel (Event.Event  Cb ) where
   attr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMousewheel  (Effect Unit)  where
-  attr OnMousewheel value = unsafeAttribute $ This
+  attr OnMousewheel value = unsafeAttribute $ This $ pure $
     { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnMousewheel (Event.Event  (Effect Unit) ) where
   attr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnMousewheel (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "mousewheel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMousewheel  (Effect Boolean)  where
-  attr OnMousewheel value = unsafeAttribute $ This
+  attr OnMousewheel value = unsafeAttribute $ This $ pure $
     { key: "mousewheel", value: cb' (Cb (const value)) }
 instance Attr anything OnMousewheel (Event.Event  (Effect Boolean) ) where
   attr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnMousewheel (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "mousewheel", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "mousewheel", value: unset' })
 instance Attr everything OnMousewheel  Unit  where
-  attr OnMousewheel _ = unsafeAttribute $ This
+  attr OnMousewheel _ = unsafeAttribute $ This $ pure $
     { key: "mousewheel", value: unset' }
 instance Attr everything OnMousewheel (Event.Event  Unit ) where
   attr OnMousewheel eventValue = unsafeAttribute $ That $ eventValue <#>

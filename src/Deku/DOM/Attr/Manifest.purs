@@ -15,7 +15,7 @@ instance Attr Html_ Manifest (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "manifest", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "manifest", value: prop' value })
 instance Attr Html_ Manifest  String  where
-  attr Manifest value = unsafeAttribute $ This
+  attr Manifest value = unsafeAttribute $ This $ pure $
     { key: "manifest", value: prop' value }
 instance Attr Html_ Manifest (Event.Event  String ) where
   attr Manifest eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Manifest (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "manifest", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "manifest", value: unset' })
 instance Attr everything Manifest  Unit  where
-  attr Manifest _ = unsafeAttribute $ This
+  attr Manifest _ = unsafeAttribute $ This $ pure $
     { key: "manifest", value: unset' }
 instance Attr everything Manifest (Event.Event  Unit ) where
   attr Manifest eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

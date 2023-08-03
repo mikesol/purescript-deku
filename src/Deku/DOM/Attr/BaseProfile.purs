@@ -15,7 +15,7 @@ instance Attr Svg_ BaseProfile (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "baseProfile", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "baseProfile", value: prop' value })
 instance Attr Svg_ BaseProfile  String  where
-  attr BaseProfile value = unsafeAttribute $ This
+  attr BaseProfile value = unsafeAttribute $ This $ pure $
     { key: "baseProfile", value: prop' value }
 instance Attr Svg_ BaseProfile (Event.Event  String ) where
   attr BaseProfile eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything BaseProfile (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "baseProfile", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseProfile", value: unset' })
 instance Attr everything BaseProfile  Unit  where
-  attr BaseProfile _ = unsafeAttribute $ This
+  attr BaseProfile _ = unsafeAttribute $ This $ pure $
     { key: "baseProfile", value: unset' }
 instance Attr everything BaseProfile (Event.Event  Unit ) where
   attr BaseProfile eventValue = unsafeAttribute $ That $ eventValue <#>

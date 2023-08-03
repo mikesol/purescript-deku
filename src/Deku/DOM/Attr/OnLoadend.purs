@@ -15,7 +15,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "loadend", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "loadend", value: cb' value })
 instance Attr anything OnLoadend  Cb  where
-  attr OnLoadend value = unsafeAttribute $ This
+  attr OnLoadend value = unsafeAttribute $ This $ pure $
     { key: "loadend", value: cb' value }
 instance Attr anything OnLoadend (Event.Event  Cb ) where
   attr OnLoadend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "loadend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLoadend  (Effect Unit)  where
-  attr OnLoadend value = unsafeAttribute $ This
+  attr OnLoadend value = unsafeAttribute $ This $ pure $
     { key: "loadend", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnLoadend (Event.Event  (Effect Unit) ) where
   attr OnLoadend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "loadend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLoadend  (Effect Boolean)  where
-  attr OnLoadend value = unsafeAttribute $ This
+  attr OnLoadend value = unsafeAttribute $ This $ pure $
     { key: "loadend", value: cb' (Cb (const value)) }
 instance Attr anything OnLoadend (Event.Event  (Effect Boolean) ) where
   attr OnLoadend eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnLoadend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "loadend", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "loadend", value: unset' })
 instance Attr everything OnLoadend  Unit  where
-  attr OnLoadend _ = unsafeAttribute $ This
+  attr OnLoadend _ = unsafeAttribute $ This $ pure $
     { key: "loadend", value: unset' }
 instance Attr everything OnLoadend (Event.Event  Unit ) where
   attr OnLoadend eventValue = unsafeAttribute $ That $ eventValue <#>

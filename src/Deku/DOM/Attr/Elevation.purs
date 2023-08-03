@@ -15,7 +15,7 @@ instance Attr FeDistantLight_ Elevation (NonEmpty.NonEmpty Event.Event  String )
     { key: "elevation", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "elevation", value: prop' value })
 instance Attr FeDistantLight_ Elevation  String  where
-  attr Elevation value = unsafeAttribute $ This
+  attr Elevation value = unsafeAttribute $ This $ pure $
     { key: "elevation", value: prop' value }
 instance Attr FeDistantLight_ Elevation (Event.Event  String ) where
   attr Elevation eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Elevation (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "elevation", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "elevation", value: unset' })
 instance Attr everything Elevation  Unit  where
-  attr Elevation _ = unsafeAttribute $ This
+  attr Elevation _ = unsafeAttribute $ This $ pure $
     { key: "elevation", value: unset' }
 instance Attr everything Elevation (Event.Event  Unit ) where
   attr Elevation eventValue = unsafeAttribute $ That $ eventValue <#>

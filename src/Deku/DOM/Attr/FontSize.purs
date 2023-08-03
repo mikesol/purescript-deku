@@ -35,7 +35,7 @@ instance Attr FeBlend_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeBlend_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeBlend_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -46,7 +46,7 @@ instance Attr FeColorMatrix_ FontSize (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeColorMatrix_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeColorMatrix_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr FeComponentTransfer_ FontSize (NonEmpty.NonEmpty Event.Event  Stri
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeComponentTransfer_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeComponentTransfer_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -68,7 +68,7 @@ instance Attr FeComposite_ FontSize (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeComposite_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeComposite_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -79,7 +79,7 @@ instance Attr FeConvolveMatrix_ FontSize (NonEmpty.NonEmpty Event.Event  String 
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeConvolveMatrix_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeConvolveMatrix_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -90,7 +90,7 @@ instance Attr FeDiffuseLighting_ FontSize (NonEmpty.NonEmpty Event.Event  String
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeDiffuseLighting_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeDiffuseLighting_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -101,7 +101,7 @@ instance Attr FeDisplacementMap_ FontSize (NonEmpty.NonEmpty Event.Event  String
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeDisplacementMap_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeDisplacementMap_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -112,7 +112,7 @@ instance Attr FeFlood_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeFlood_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeFlood_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -123,7 +123,7 @@ instance Attr FeGaussianBlur_ FontSize (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeGaussianBlur_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeGaussianBlur_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -134,7 +134,7 @@ instance Attr FeImage_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeImage_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeImage_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -145,7 +145,7 @@ instance Attr FeMerge_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeMerge_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeMerge_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -156,7 +156,7 @@ instance Attr FeMorphology_ FontSize (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeMorphology_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeMorphology_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -167,7 +167,7 @@ instance Attr FeOffset_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeOffset_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeOffset_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -178,7 +178,7 @@ instance Attr FeSpecularLighting_ FontSize (NonEmpty.NonEmpty Event.Event  Strin
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeSpecularLighting_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeSpecularLighting_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -189,7 +189,7 @@ instance Attr FeTile_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeTile_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeTile_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -200,7 +200,7 @@ instance Attr FeTurbulence_ FontSize (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr FeTurbulence_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr FeTurbulence_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -211,7 +211,7 @@ instance Attr Filter_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr Filter_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr Filter_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -222,7 +222,7 @@ instance Attr Image_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr Image_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr Image_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -233,7 +233,7 @@ instance Attr Switch_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr Switch_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr Switch_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -244,7 +244,7 @@ instance Attr Text_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr Text_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr Text_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -255,7 +255,7 @@ instance Attr Tspan_ FontSize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "font-size", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "font-size", value: prop' value })
 instance Attr Tspan_ FontSize  String  where
-  attr FontSize value = unsafeAttribute $ This
+  attr FontSize value = unsafeAttribute $ This $ pure $
     { key: "font-size", value: prop' value }
 instance Attr Tspan_ FontSize (Event.Event  String ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -266,7 +266,7 @@ instance Attr everything FontSize (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "font-size", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "font-size", value: unset' })
 instance Attr everything FontSize  Unit  where
-  attr FontSize _ = unsafeAttribute $ This
+  attr FontSize _ = unsafeAttribute $ This $ pure $
     { key: "font-size", value: unset' }
 instance Attr everything FontSize (Event.Event  Unit ) where
   attr FontSize eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->

@@ -15,7 +15,7 @@ instance Attr TextPath_ Spacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "spacing", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "spacing", value: prop' value })
 instance Attr TextPath_ Spacing  String  where
-  attr Spacing value = unsafeAttribute $ This
+  attr Spacing value = unsafeAttribute $ This $ pure $
     { key: "spacing", value: prop' value }
 instance Attr TextPath_ Spacing (Event.Event  String ) where
   attr Spacing eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Spacing (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "spacing", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "spacing", value: unset' })
 instance Attr everything Spacing  Unit  where
-  attr Spacing _ = unsafeAttribute $ This { key: "spacing", value: unset' }
+  attr Spacing _ = unsafeAttribute $ This $ pure $ { key: "spacing", value: unset' }
 instance Attr everything Spacing (Event.Event  Unit ) where
   attr Spacing eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "spacing", value: unset' }

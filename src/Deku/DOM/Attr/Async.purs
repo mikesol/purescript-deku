@@ -15,7 +15,7 @@ instance Attr Script_ Async (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "async", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "async", value: prop' value })
 instance Attr Script_ Async  String  where
-  attr Async value = unsafeAttribute $ This
+  attr Async value = unsafeAttribute $ This $ pure $
     { key: "async", value: prop' value }
 instance Attr Script_ Async (Event.Event  String ) where
   attr Async eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -25,7 +25,7 @@ instance Attr everything Async (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Async bothValues = unsafeAttribute $ Both { key: "async", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "async", value: unset' })
 instance Attr everything Async  Unit  where
-  attr Async _ = unsafeAttribute $ This { key: "async", value: unset' }
+  attr Async _ = unsafeAttribute $ This $ pure $ { key: "async", value: unset' }
 instance Attr everything Async (Event.Event  Unit ) where
   attr Async eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "async", value: unset' }

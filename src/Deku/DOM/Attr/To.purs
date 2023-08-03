@@ -18,7 +18,7 @@ instance Attr Animate_ To (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "to", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "to", value: prop' value })
 instance Attr Animate_ To  String  where
-  attr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  attr To value = unsafeAttribute $ This $ pure $ { key: "to", value: prop' value }
 instance Attr Animate_ To (Event.Event  String ) where
   attr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "to", value: prop' value }
@@ -28,7 +28,7 @@ instance Attr AnimateMotion_ To (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "to", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "to", value: prop' value })
 instance Attr AnimateMotion_ To  String  where
-  attr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  attr To value = unsafeAttribute $ This $ pure $ { key: "to", value: prop' value }
 instance Attr AnimateMotion_ To (Event.Event  String ) where
   attr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "to", value: prop' value }
@@ -38,7 +38,7 @@ instance Attr AnimateTransform_ To (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "to", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "to", value: prop' value })
 instance Attr AnimateTransform_ To  String  where
-  attr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  attr To value = unsafeAttribute $ This $ pure $ { key: "to", value: prop' value }
 instance Attr AnimateTransform_ To (Event.Event  String ) where
   attr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "to", value: prop' value }
@@ -48,7 +48,7 @@ instance Attr Set_ To (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "to", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "to", value: prop' value })
 instance Attr Set_ To  String  where
-  attr To value = unsafeAttribute $ This { key: "to", value: prop' value }
+  attr To value = unsafeAttribute $ This $ pure $ { key: "to", value: prop' value }
 instance Attr Set_ To (Event.Event  String ) where
   attr To eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "to", value: prop' value }
@@ -57,7 +57,7 @@ instance Attr everything To (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr To bothValues = unsafeAttribute $ Both { key: "to", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "to", value: unset' })
 instance Attr everything To  Unit  where
-  attr To _ = unsafeAttribute $ This { key: "to", value: unset' }
+  attr To _ = unsafeAttribute $ This $ pure $ { key: "to", value: unset' }
 instance Attr everything To (Event.Event  Unit ) where
   attr To eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "to", value: unset' }

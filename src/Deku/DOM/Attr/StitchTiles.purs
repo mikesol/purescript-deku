@@ -15,7 +15,7 @@ instance Attr FeTurbulence_ StitchTiles (NonEmpty.NonEmpty Event.Event  String )
     { key: "stitchTiles", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "stitchTiles", value: prop' value })
 instance Attr FeTurbulence_ StitchTiles  String  where
-  attr StitchTiles value = unsafeAttribute $ This
+  attr StitchTiles value = unsafeAttribute $ This $ pure $
     { key: "stitchTiles", value: prop' value }
 instance Attr FeTurbulence_ StitchTiles (Event.Event  String ) where
   attr StitchTiles eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything StitchTiles (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "stitchTiles", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "stitchTiles", value: unset' })
 instance Attr everything StitchTiles  Unit  where
-  attr StitchTiles _ = unsafeAttribute $ This
+  attr StitchTiles _ = unsafeAttribute $ This $ pure $
     { key: "stitchTiles", value: unset' }
 instance Attr everything StitchTiles (Event.Event  Unit ) where
   attr StitchTiles eventValue = unsafeAttribute $ That $ eventValue <#>

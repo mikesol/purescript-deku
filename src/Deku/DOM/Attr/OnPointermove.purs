@@ -15,7 +15,7 @@ instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointermove", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "pointermove", value: cb' value })
 instance Attr anything OnPointermove  Cb  where
-  attr OnPointermove value = unsafeAttribute $ This
+  attr OnPointermove value = unsafeAttribute $ This $ pure $
     { key: "pointermove", value: cb' value }
 instance Attr anything OnPointermove (Event.Event  Cb ) where
   attr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "pointermove", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointermove  (Effect Unit)  where
-  attr OnPointermove value = unsafeAttribute $ This
+  attr OnPointermove value = unsafeAttribute $ This $ pure $
     { key: "pointermove", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointermove (Event.Event  (Effect Unit) ) where
   attr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnPointermove (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "pointermove", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointermove  (Effect Boolean)  where
-  attr OnPointermove value = unsafeAttribute $ This
+  attr OnPointermove value = unsafeAttribute $ This $ pure $
     { key: "pointermove", value: cb' (Cb (const value)) }
 instance Attr anything OnPointermove (Event.Event  (Effect Boolean) ) where
   attr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnPointermove (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "pointermove", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointermove", value: unset' })
 instance Attr everything OnPointermove  Unit  where
-  attr OnPointermove _ = unsafeAttribute $ This
+  attr OnPointermove _ = unsafeAttribute $ This $ pure $
     { key: "pointermove", value: unset' }
 instance Attr everything OnPointermove (Event.Event  Unit ) where
   attr OnPointermove eventValue = unsafeAttribute $ That $ eventValue <#>

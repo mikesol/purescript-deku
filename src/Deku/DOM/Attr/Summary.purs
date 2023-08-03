@@ -15,7 +15,7 @@ instance Attr Table_ Summary (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "summary", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "summary", value: prop' value })
 instance Attr Table_ Summary  String  where
-  attr Summary value = unsafeAttribute $ This
+  attr Summary value = unsafeAttribute $ This $ pure $
     { key: "summary", value: prop' value }
 instance Attr Table_ Summary (Event.Event  String ) where
   attr Summary eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything Summary (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "summary", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "summary", value: unset' })
 instance Attr everything Summary  Unit  where
-  attr Summary _ = unsafeAttribute $ This { key: "summary", value: unset' }
+  attr Summary _ = unsafeAttribute $ This $ pure $ { key: "summary", value: unset' }
 instance Attr everything Summary (Event.Event  Unit ) where
   attr Summary eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "summary", value: unset' }

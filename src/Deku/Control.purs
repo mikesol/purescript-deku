@@ -125,24 +125,23 @@ elementify tag atts children = Node $ Element go
         di
       pure
         $ Tuple
-            ( [ makeElement
+            ( [ pure $ makeElement
                   { id: show me, parent, scope, tag, pos, dynFamily }
-              ] <> map (unsafeSetAttribute di $ show me) left
+              ] <> map (map (unsafeSetAttribute di $ show me)) left
                 <>
                   maybe []
                     ( \p ->
-                        [ attributeParent
+                        [ pure $ attributeParent
                             { id: show me, parent: p, pos, dynFamily, ez }
                         ]
                     )
                     parent
                 <> subs
             )
-        $ Tuple ([ deleteFromCache { id: show me } ] <> unsubs)
+        $ Tuple ([ pure $ deleteFromCache { id: show me } ] <> unsubs)
         $
           ( merge $
-              ( (map <<< map) (unsafeSetAttribute di (show me))
-                  right
+              ( (map <<< map) (unsafeSetAttribute di (show me)) right
               ) <> [ evt ]
           )
 
@@ -317,18 +316,18 @@ text_' t1 t2 = Nut go'
     raiseId $ show me
     pure
       $ Tuple
-          ( [ makeText { id: show me, parent, pos, scope, dynFamily } ]
+          ( [ pure $ makeText { id: show me, parent, pos, scope, dynFamily } ]
               <> maybe []
                 ( \p ->
-                    [ attributeParent
+                    [ pure $ attributeParent
                         { id: show me, parent: p, pos, dynFamily, ez }
                     ]
                 )
                 parent
-              <> maybe [] (\t -> [ unsafeSetText di (show me) t ]) t1
+              <> maybe [] (\t -> [ pure $ unsafeSetText di (show me) t ]) t1
 
           )
-      $ Tuple [ deleteFromCache { id: show me } ]
+      $ Tuple [ pure $ deleteFromCache { id: show me } ]
           (maybe empty (map (unsafeSetText di (show me))) t2)
 
 -- | A class representing a conservative smattering of stuff that can turn into a text node
@@ -381,9 +380,11 @@ deku root (Nut cc) = go cc
       , dynFamily: Nothing
       }
       di
-    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple
+    pure $ Tuple ([ pure $ makeRoot { id: me, root } ] <> sub) $ Tuple
       ( unsub <>
-          [ forcePayload (pure headRedecorator), deleteFromCache { id: me } ]
+          [ pure $ forcePayload (pure headRedecorator)
+          , pure $ deleteFromCache { id: me }
+          ]
       )
       (map (redecorateDeferredPayload (pure headRedecorator)) evt)
 

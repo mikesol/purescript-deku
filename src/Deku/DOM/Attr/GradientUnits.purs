@@ -16,7 +16,7 @@ instance Attr LinearGradient_ GradientUnits (NonEmpty.NonEmpty Event.Event  Stri
     { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "gradientUnits", value: prop' value })
 instance Attr LinearGradient_ GradientUnits  String  where
-  attr GradientUnits value = unsafeAttribute $ This
+  attr GradientUnits value = unsafeAttribute $ This $ pure $
     { key: "gradientUnits", value: prop' value }
 instance Attr LinearGradient_ GradientUnits (Event.Event  String ) where
   attr GradientUnits eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -27,7 +27,7 @@ instance Attr RadialGradient_ GradientUnits (NonEmpty.NonEmpty Event.Event  Stri
     { key: "gradientUnits", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "gradientUnits", value: prop' value })
 instance Attr RadialGradient_ GradientUnits  String  where
-  attr GradientUnits value = unsafeAttribute $ This
+  attr GradientUnits value = unsafeAttribute $ This $ pure $
     { key: "gradientUnits", value: prop' value }
 instance Attr RadialGradient_ GradientUnits (Event.Event  String ) where
   attr GradientUnits eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -38,7 +38,7 @@ instance Attr everything GradientUnits (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "gradientUnits", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "gradientUnits", value: unset' })
 instance Attr everything GradientUnits  Unit  where
-  attr GradientUnits _ = unsafeAttribute $ This
+  attr GradientUnits _ = unsafeAttribute $ This $ pure $
     { key: "gradientUnits", value: unset' }
 instance Attr everything GradientUnits (Event.Event  Unit ) where
   attr GradientUnits eventValue = unsafeAttribute $ That $ eventValue <#>

@@ -15,7 +15,7 @@ instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "abort", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "abort", value: cb' value })
 instance Attr anything OnAbort  Cb  where
-  attr OnAbort value = unsafeAttribute $ This
+  attr OnAbort value = unsafeAttribute $ This $ pure $
     { key: "abort", value: cb' value }
 instance Attr anything OnAbort (Event.Event  Cb ) where
   attr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "abort", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnAbort  (Effect Unit)  where
-  attr OnAbort value = unsafeAttribute $ This
+  attr OnAbort value = unsafeAttribute $ This $ pure $
     { key: "abort", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnAbort (Event.Event  (Effect Unit) ) where
   attr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnAbort (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "abort", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnAbort  (Effect Boolean)  where
-  attr OnAbort value = unsafeAttribute $ This
+  attr OnAbort value = unsafeAttribute $ This $ pure $
     { key: "abort", value: cb' (Cb (const value)) }
 instance Attr anything OnAbort (Event.Event  (Effect Boolean) ) where
   attr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnAbort (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "abort", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "abort", value: unset' })
 instance Attr everything OnAbort  Unit  where
-  attr OnAbort _ = unsafeAttribute $ This { key: "abort", value: unset' }
+  attr OnAbort _ = unsafeAttribute $ This $ pure $ { key: "abort", value: unset' }
 instance Attr everything OnAbort (Event.Event  Unit ) where
   attr OnAbort eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "abort", value: unset' }

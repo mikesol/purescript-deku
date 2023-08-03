@@ -15,7 +15,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "ended", value: cb' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "ended", value: cb' value })
 instance Attr anything OnEnded  Cb  where
-  attr OnEnded value = unsafeAttribute $ This
+  attr OnEnded value = unsafeAttribute $ This $ pure $
     { key: "ended", value: cb' value }
 instance Attr anything OnEnded (Event.Event  Cb ) where
   attr OnEnded eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "ended", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnEnded  (Effect Unit)  where
-  attr OnEnded value = unsafeAttribute $ This
+  attr OnEnded value = unsafeAttribute $ This $ pure $
     { key: "ended", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnEnded (Event.Event  (Effect Unit) ) where
   attr OnEnded eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -41,7 +41,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "ended", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnEnded  (Effect Boolean)  where
-  attr OnEnded value = unsafeAttribute $ This
+  attr OnEnded value = unsafeAttribute $ This $ pure $
     { key: "ended", value: cb' (Cb (const value)) }
 instance Attr anything OnEnded (Event.Event  (Effect Boolean) ) where
   attr OnEnded eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -57,7 +57,7 @@ instance Attr everything OnEnded (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "ended", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "ended", value: unset' })
 instance Attr everything OnEnded  Unit  where
-  attr OnEnded _ = unsafeAttribute $ This { key: "ended", value: unset' }
+  attr OnEnded _ = unsafeAttribute $ This $ pure $ { key: "ended", value: unset' }
 instance Attr everything OnEnded (Event.Event  Unit ) where
   attr OnEnded eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "ended", value: unset' }

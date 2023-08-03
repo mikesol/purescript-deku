@@ -17,7 +17,7 @@ instance Attr Text_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Text_ LengthAdjust  String  where
-  attr LengthAdjust value = unsafeAttribute $ This
+  attr LengthAdjust value = unsafeAttribute $ This $ pure $
     { key: "lengthAdjust", value: prop' value }
 instance Attr Text_ LengthAdjust (Event.Event  String ) where
   attr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -28,7 +28,7 @@ instance Attr TextPath_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr TextPath_ LengthAdjust  String  where
-  attr LengthAdjust value = unsafeAttribute $ This
+  attr LengthAdjust value = unsafeAttribute $ This $ pure $
     { key: "lengthAdjust", value: prop' value }
 instance Attr TextPath_ LengthAdjust (Event.Event  String ) where
   attr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -39,7 +39,7 @@ instance Attr Tspan_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Tspan_ LengthAdjust  String  where
-  attr LengthAdjust value = unsafeAttribute $ This
+  attr LengthAdjust value = unsafeAttribute $ This $ pure $
     { key: "lengthAdjust", value: prop' value }
 instance Attr Tspan_ LengthAdjust (Event.Event  String ) where
   attr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -50,7 +50,7 @@ instance Attr everything LengthAdjust (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "lengthAdjust", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "lengthAdjust", value: unset' })
 instance Attr everything LengthAdjust  Unit  where
-  attr LengthAdjust _ = unsafeAttribute $ This
+  attr LengthAdjust _ = unsafeAttribute $ This $ pure $
     { key: "lengthAdjust", value: unset' }
 instance Attr everything LengthAdjust (Event.Event  Unit ) where
   attr LengthAdjust eventValue = unsafeAttribute $ That $ eventValue <#>

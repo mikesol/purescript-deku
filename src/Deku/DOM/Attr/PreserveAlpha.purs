@@ -15,7 +15,7 @@ instance Attr FeConvolveMatrix_ PreserveAlpha (NonEmpty.NonEmpty Event.Event  St
     { key: "preserveAlpha", value: prop' (NonEmpty.head bothValues) }
     (NonEmpty.tail bothValues <#> \value -> { key: "preserveAlpha", value: prop' value })
 instance Attr FeConvolveMatrix_ PreserveAlpha  String  where
-  attr PreserveAlpha value = unsafeAttribute $ This
+  attr PreserveAlpha value = unsafeAttribute $ This $ pure $
     { key: "preserveAlpha", value: prop' value }
 instance Attr FeConvolveMatrix_ PreserveAlpha (Event.Event  String ) where
   attr PreserveAlpha eventValue = unsafeAttribute $ That $ eventValue <#>
@@ -26,7 +26,7 @@ instance Attr everything PreserveAlpha (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "preserveAlpha", value: unset' }
     (NonEmpty.tail bothValues <#> \_ -> { key: "preserveAlpha", value: unset' })
 instance Attr everything PreserveAlpha  Unit  where
-  attr PreserveAlpha _ = unsafeAttribute $ This
+  attr PreserveAlpha _ = unsafeAttribute $ This $ pure $
     { key: "preserveAlpha", value: unset' }
 instance Attr everything PreserveAlpha (Event.Event  Unit ) where
   attr PreserveAlpha eventValue = unsafeAttribute $ That $ eventValue <#>
