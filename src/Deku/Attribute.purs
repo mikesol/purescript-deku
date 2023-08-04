@@ -16,21 +16,14 @@ module Deku.Attribute
   , cb
   , Cb(..)
   , xdata
-  , pureAttr
-  , (!:=)
-  , maybeAttr
-  , (?:=)
   , mapAttr
   , (<:=>)
   ) where
 
 import Prelude
 
-import Control.Plus (empty)
-import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Effect (Effect)
-import FRP.Event as FRP
 import Safe.Coerce (coerce)
 import Web.Event.Internal.Types (Event)
 
@@ -112,31 +105,6 @@ infixr 5 attr as :=
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
 xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
-
--- | A version of `attr` that creates a `pure` event fired immediately
--- | upon the element's creation. More commonly used in its alias `!:=`,
-pureAttr
-  :: forall a b e
-   . Attr e a b
-  => a
-  -> b
-  -> FRP.Event (Attribute e)
-pureAttr a b = pure (a := b)
-
-infixr 5 pureAttr as !:=
-
--- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
--- | More commonly used in its alias `?:=`.
-maybeAttr
-  :: forall a b e
-   . Attr e a b
-  => a
-  -> Maybe b
-  -> FRP.Event (Attribute e)
-maybeAttr a (Just b) = pure (a := b)
-maybeAttr _ Nothing = empty
-
-infix 5 maybeAttr as ?:=
 
 -- | A version of `attr` that maps a value to an attribute or listener.
 -- | More commonly used in its alias `<:=>`.

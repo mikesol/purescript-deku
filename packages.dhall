@@ -3,10 +3,19 @@ let upstream =
         sha256:0168e165b4cdb40ab6f7e01448075680097791c8d98f96d684b20d1eef96f3d0
 
 in  upstream
+  with hyrule =
+    { dependencies =
+      [ "ordered-collections"
+      , "unsafe-reference"
+      , "js-timers"
+      ]
+    , repo = "https://github.com/mikesol/purescript-hyrule.git"
+    , version = "fantasy-land2"
+    }
   with bolson =
     { dependencies =
       [ "hyrule"
       ]
     , repo = "https://github.com/mikesol/purescript-bolson.git"
-    , version = "v0.3.9"
+    , version = "fantasy-land2"
     }

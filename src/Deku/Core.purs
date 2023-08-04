@@ -28,20 +28,11 @@ module Deku.Core
   , Nut'
   , NutF(..)
   , Child(..)
-  , bus
-  , busUncurried
-  , bussed
-  , bussedUncurried
-  , vbussed
-  , vbussedUncurried
-  , insert
-  , insert_
   , remove
   , sendToPos
   , sendToTop
   , dyn
   , fixed
-  , envy
   , unsafeSetPos
   ) where
 
@@ -63,9 +54,9 @@ import Data.Tuple (curry)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
+import FRP.Behavior (Behavior, behavior)
 import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
 import FRP.Event as FRP.Event
-import FRP.Event.VBus (class VBus, V, vbus)
 import Foreign.Object (Object)
 import Prim.RowList (class RowToList)
 import Safe.Coerce (coerce)
@@ -85,84 +76,12 @@ type NutWith env = env -> Nut
 -- | twice on `Nut`.
 newtype ANut = ANut Nut
 
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bus
-  :: forall a b
-   . ((a -> Effect Unit) -> Event a -> b)
-  -> Event b
-bus f = FRP.Event.bus f
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-busUncurried
-  :: forall a b
-   . (((a -> Effect Unit) /\ Event a) -> b)
-  -> Event b
-busUncurried = curry >>> bus
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussed
-  :: forall a
-   . ((a -> Effect Unit) -> Event a -> Nut)
-  -> Nut
-bussed f = Nut (z (map (\(Nut i) -> i) g))
-  where
-  g :: Event Nut
-  g = bus f
-
-  z :: forall payload. Event (NutF payload) -> NutF payload
-  z x = NutF
-    ( Bolson.EventfulElement'
-        (Bolson.EventfulElement (coerce x))
-    )
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussedUncurried
-  :: forall a
-   . ( ((a -> Effect Unit) /\ Event a)
-       -> Nut
-     )
-  -> Nut
-bussedUncurried = curry >>> bussed
-
-vbussed
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Nut)
-  -> Nut
-vbussed px f = Nut
-  ( NutF
-      ( Bolson.EventfulElement'
-          (Bolson.EventfulElement gooo)
-      )
-  )
-  where
-  go :: Event Nut
-  go = vbus px f
-
-  goo :: forall payload. Event (NutF payload)
-  goo = map (\(Nut nf) -> nf) go
-
-  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
-  gooo = map (\(NutF e) -> e) goo
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-vbussedUncurried
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Nut)
-  -> Nut
-vbussedUncurried px = curry >>> vbussed px
-
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
 newtype Node payload = Node
-  ( Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+  ( Bolson.Element (DOMInterpret payload)
+      ((pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String))
+      payload
   )
 
 -- | For internal use in the construction of Nut.
@@ -179,7 +98,10 @@ instance Semigroup Nut where
   append a b = fixed [ a, b ]
 
 instance Monoid Nut where
-  mempty = Nut (NutF (Bolson.envy empty))
+  mempty = Nut
+    ( NutF
+        (Bolson.Element' (Node (Bolson.Element \_ _ -> behavior \_ -> empty)))
+    )
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
@@ -199,37 +121,11 @@ unsafeSetPos' i (Nut df) = Nut (g df)
       :: Bolson.Entity Int (Node payload)
       -> Bolson.Entity Int (Node payload)
     f ii = case ii of
-      Bolson.Element' (Node e') -> Bolson.Element'
-        (Node (lcmap (_ { pos = i }) e'))
-      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
-        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      Bolson.Element' (Node (Bolson.Element e')) -> Bolson.Element'
+        (Node (Bolson.Element (lcmap (_ { pos = i }) e')))
       _ -> ii
 
-newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-insert
-  :: Int
-  -> Nut
-  -> Child
-insert i x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos i x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
-
-insert_
-  :: Nut
-  -> Child
-insert_ x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos' Nothing x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
+newtype Child = Child (Bolson.Child Int)
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 remove :: Child
@@ -410,15 +306,15 @@ portalFlatten =
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Bolson.Element e
+  , toElt: \(Node e) -> e
   }
 
 __internalDekuFlatten
   :: forall payload
-   . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+   . NutF payload
+   -> Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
   -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
+  -> Behavior payload
 __internalDekuFlatten a b c = BControl.flatten portalFlatten a b
   ((\(NutF x) -> x) c)
 
@@ -533,27 +429,3 @@ fixed = dynify myFixed
      . Array (NutF payload)
     -> NutF payload
   myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
-
--- dynify
---   ( coerce
---       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
---   )
-
--- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
--- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
--- | for example `switcher`. It is left in the library for backwards compatibility, but will
--- | likely be deprecated, and then all traces of it will be purged, and then people will be forced to study
--- | a revisionist history of the library that denies it ever existed.
-envy
-  :: Event Nut
-  -> Nut
-envy = dynify myEnvy
-  where
-  myEnvy :: Event Nut -> Nut
-  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
-
-  myEnvy'
-    :: forall payload
-     . Event (NutF payload)
-    -> NutF payload
-  myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))
