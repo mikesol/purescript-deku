@@ -353,7 +353,7 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
       Nothing -> do
         dummyParent <- ids
         pure
-          ( [ pure $ makeElement
+          ( [ makeElement
                 { id: show dummyParent
                 , parent: Nothing
                 , scope
@@ -384,19 +384,19 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
       $ Tuple
           ( parentEvent
               <>
-                [ pure $ makeDynBeacon
+                [ makeDynBeacon
                     { id: show me
                     , parent: Just parentId
                     , scope
                     , dynFamily
                     , pos
                     }
-                , pure $ attributeParent
+                , attributeParent
                     { id: show me, parent: parentId, pos, dynFamily, ez }
                 ]
               <> sub
           )
-      $ Tuple (unsub <> [ pure $ removeDynBeacon { id: show me } ]) evt
+      $ Tuple (unsub <> [ removeDynBeacon { id: show me } ]) evt
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.

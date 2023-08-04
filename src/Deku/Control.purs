@@ -31,6 +31,7 @@ import Data.Newtype (unwrap, wrap)
 import Data.NonEmpty (NonEmpty(..))
 import Data.Profunctor (dimap, lcmap)
 import Data.These (These(..))
+import Data.Traversable (sequence, traverse)
 import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
@@ -116,6 +117,7 @@ elementify tag atts children = Node $ Element go
     do
       me <- ids
       raiseId $ show me
+      attrs <- traverse (map (unsafeSetAttribute di $ show me)) left
       Tuple subs (Tuple unsubs evt) <- __internalDekuFlatten
         children
         { parent: Just $ show me
@@ -128,20 +130,20 @@ elementify tag atts children = Node $ Element go
         di
       pure
         $ Tuple
-            ( [ pure $ makeElement
+            ( [  makeElement
                   { id: show me, parent, scope, tag, pos, dynFamily }
-              ] <> map (map (unsafeSetAttribute di $ show me)) left
+              ] <> attrs
                 <>
                   maybe []
                     ( \p ->
-                        [ pure $ attributeParent
+                        [ attributeParent
                             { id: show me, parent: p, pos, dynFamily, ez }
                         ]
                     )
                     parent
                 <> subs
             )
-        $ Tuple ([ pure $ deleteFromCache { id: show me } ] <> unsubs)
+        $ Tuple ([  deleteFromCache { id: show me } ] <> unsubs)
         $
           ( merge $
               ( (map <<< map) (unsafeSetAttribute di (show me)) right
@@ -304,7 +306,7 @@ text_'
   :: Maybe (ST Global String)
   -> Maybe (Event String)
   -> Nut
-text_' t1 t2 = Nut go'
+text_' t1' t2 = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -317,20 +319,21 @@ text_' t1 t2 = Nut go'
     di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) = do
     me <- ids
     raiseId $ show me
+    t1 <- sequence t1'
     pure
       $ Tuple
-          ( [ pure $ makeText { id: show me, parent, pos, scope, dynFamily } ]
+          ( [  makeText { id: show me, parent, pos, scope, dynFamily } ]
               <> maybe []
                 ( \p ->
-                    [ pure $ attributeParent
+                    [  attributeParent
                         { id: show me, parent: p, pos, dynFamily, ez }
                     ]
                 )
                 parent
-              <> maybe [] (\t -> [ unsafeSetText di (show me) <$> t ]) t1
+              <> maybe [] (\t -> [ unsafeSetText di (show me) t ]) t1
 
           )
-      $ Tuple [ pure $ deleteFromCache { id: show me } ]
+      $ Tuple [  deleteFromCache { id: show me } ]
           (maybe empty (map (unsafeSetText di (show me))) t2)
 
 -- | A class representing a conservative smattering of stuff that can turn into a text node
@@ -389,10 +392,10 @@ deku root (Nut cc) = go cc
       , dynFamily: Nothing
       }
       di
-    pure $ Tuple ([ pure $ makeRoot { id: me, root } ] <> sub) $ Tuple
+    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple
       ( unsub <>
-          [ pure $ forcePayload (pure headRedecorator)
-          , pure $ deleteFromCache { id: me }
+          [  forcePayload (pure headRedecorator)
+          , deleteFromCache { id: me }
           ]
       )
       (map (redecorateDeferredPayload (pure headRedecorator)) evt)

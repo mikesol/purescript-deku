@@ -28,6 +28,7 @@ import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Sym
 import Record (get)
+import Data.Traversable (traverse)
 import Type.Proxy (Proxy(..))
 ''')
 
@@ -190,7 +191,7 @@ instance pursxToElementConsInsert ::
                       di
                     pure $ Tuple (subscr0 <> subscr1) $ Tuple
                       ( unsub0 <> unsub1 <>
-                          [ pure $ deleteFromCache
+                          [ deleteFromCache
                               { id: reflectType pxk <> "@!%" <> pxScope }
                           ]
                       )
@@ -228,14 +229,16 @@ else instance pursxToElementConsAttr ::
             { left: [], right: [] }
             (get pxk r)
         Tuple subscr (Tuple unsub evt) <- rest parent di
+        attrs <- traverse
+          ( map
+              ( unsafeSetAttribute di
+                  (reflectType pxk <> "@!%" <> pxScope)
+              )
+          )
+          left
         pure
           $ Tuple
-              ( subscr <> map
-                  (map (unsafeSetAttribute di
-                      (reflectType pxk <> "@!%" <> pxScope)
-                  ))
-                  left
-              )
+              (subscr <> attrs)
           $ Tuple unsub
           $ merge
               ( [ evt ] <>
@@ -315,7 +318,7 @@ makePursx' verb html r = Nut ee
       Tuple subsc (Tuple unsub evt) <- element z di
       pure
         $ Tuple
-            ( [ pure $ mpx
+            ( [ mpx
                   { id: me
                   , parent
                   , cache
@@ -328,13 +331,13 @@ makePursx' verb html r = Nut ee
                   }
               ] <> subsc <> maybe []
                 ( \p ->
-                    [ pure $ attributeParent
+                    [ attributeParent
                         { id: me, parent: p, pos, dynFamily, ez: false }
                     ]
                 )
                 parent
             )
-        $ Tuple ([ pure $ deleteFromCache { id: me } ] <> unsub) evt
+        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
 
 unsafeMakePursx
   :: forall r rl
@@ -375,7 +378,7 @@ unsafeMakePursx' verb html r = Nut ee
       Tuple subsc (Tuple unsub evt) <- element z di
       pure
         $ Tuple
-            ( [ pure $ mpx
+            ( [ mpx
                   { id: me
                   , parent
                   , cache
@@ -388,13 +391,13 @@ unsafeMakePursx' verb html r = Nut ee
                   }
               ] <> subsc <> maybe []
                 ( \p ->
-                    [ pure $ attributeParent
+                    [ attributeParent
                         { id: me, parent: p, pos, dynFamily, ez: false }
                     ]
                 )
                 parent
             )
-        $ Tuple ([ pure $ deleteFromCache { id: me } ] <> unsub) evt
+        $ Tuple ([ deleteFromCache { id: me } ] <> unsub) evt
 
 __internalDekuFlatten
   :: forall payload

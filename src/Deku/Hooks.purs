@@ -166,7 +166,7 @@ useEffect' mm e f = Nut go'
     pure
       ( Tuple
           ( sub <> maybe empty
-              ( pure <<< pure <<< oneOffEffect <<< { effect: _ } <<< join <<<
+              ( pure <<< oneOffEffect <<< { effect: _ } <<< join <<<
                   liftST
               )
               mm
