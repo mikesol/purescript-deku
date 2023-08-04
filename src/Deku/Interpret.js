@@ -4,6 +4,9 @@ export const setHydrating = (state) => () => {
 export const unSetHydrating = (state) => () => {
   state.hydrating = false;
 };
+export const associateWithUnsubscribe_ = (a) => state => () => {
+  state.units[a.id].unsubscribe = a.unsubscribe;
+}
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
   // console.log("attributeParent_", a);
   if (state.units[a.id]) {
@@ -784,11 +787,10 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
           didInsert = true;
           break;
         }
-        if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+        if (state.units[dkid].dynFamily !== a.dynFamily) {
           i++;
           continue;
         }
-
         // if we've found equal positions already we stop here
         // as all we care about is the pos fixer-upper happening above
         if (didInsert) {
@@ -813,9 +815,11 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
       i++;
     }
     if (didInsert) {
+      // console.log('returning because we successfully inserted');
       return;
     }
     // we return true anyway, as this just means that we can tack this onto the end of our structure
+    // console.log('at the end');
     if (state.units[ptr].main) {
       state.units[parent].main.appendChild(state.units[ptr].main);
     } else {
@@ -876,6 +880,9 @@ export const stateHasKey = (id) => (state) => () => {
 export const deleteFromCache_ = (a) => (state) => () => {
   // console.log("deleteFromCache_", a);
   if (state.units[a.id]) {
+    if (state.units[a.id].unsubscribe) {
+      state.units[a.id].unsubscribe();
+    }
     delete state.units[a.id];
   }
 };
