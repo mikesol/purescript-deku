@@ -10,12 +10,12 @@ in  upstream
       , "js-timers"
       ]
     , repo = "https://github.com/mikesol/purescript-hyrule.git"
-    , version = "fantasy-land"
+    , version = "fantasy-land2"
     }
   with bolson =
     { dependencies =
       [ "hyrule"
       ]
     , repo = "https://github.com/mikesol/purescript-bolson.git"
-    , version = "fantasy-land"
+    , version = "fantasy-land2"
     }

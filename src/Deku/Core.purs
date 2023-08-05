@@ -52,8 +52,11 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
+import Control.Monad.ST.Internal as Ref
 import Control.Plus (empty)
+import Data.Foldable (for_)
 import Data.List (List)
+import Data.List as List
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
@@ -61,7 +64,8 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Event (Event)
+import FRP.Behavior (behavior, sample)
+import FRP.Event (Event, makeLemmingEvent)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
@@ -112,7 +116,7 @@ instance Monoid Nut where
   mempty = Nut
     ( NutF
         ( Bolson.Element'
-            (Node (Bolson.Element \_ _ -> pure $ Tuple [] $ Tuple [] empty))
+            (Node (Bolson.Element \_ _ -> behavior \_ -> empty))
         )
     )
 
@@ -319,15 +323,16 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten a b c = BControl.flatten flattenArgs b c
-  ((\(NutF x) -> x) a)
+__internalDekuFlatten a b c = BControl.flatten flattenArgs ((\(NutF x) -> x) a)
+  b
+  c
 
 dynify
   :: forall i
    . (i -> Nut)
   -> i
   -> Nut
-dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
+dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
   where
   go' :: forall payload. NutF payload -> NutF payload
   go' x = NutF (Bolson.Element' (Node (Bolson.Element (go x))))
@@ -341,69 +346,84 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
     { parent, scope, raiseId, pos, dynFamily, ez }
     di@
       ( DOMInterpret
-          { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
-      ) = do
-    me <- ids
-    raiseId $ show me
-    -- `dyn`-s need to have a parent
-    -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
-    -- Then, we can call `childNodes` and `nextSibling`.
-    -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
-    parentEvent /\ parentId <- case parent of
-      Nothing -> do
-        dummyParent <- ids
-        pure
-          ( [ makeElement
-                { id: show dummyParent
-                , parent: Nothing
-                , scope
-                , tag: "div"
-                , pos: Nothing
-                , dynFamily: Nothing
-                }
+          { ids
+          , makeElement
+          , deferPayload
+          , makeDynBeacon
+          , attributeParent
+          , removeDynBeacon
+          }
+      ) = behavior \e -> makeLemmingEvent \subscribe k -> do
+    urg <- Ref.new (pure unit)
+    ugh <- subscribe e \f -> do
+      me <- ids
+      raiseId $ show me
+      -- `dyn`-s need to have a parent
+      -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
+      -- Then, we can call `childNodes` and `nextSibling`.
+      -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
+      parentEvent /\ parentId <- case parent of
+        Nothing -> do
+          dummyParent <- ids
+          pure
+            ( [ makeElement
+                  { id: show dummyParent
+                  , parent: Nothing
+                  , scope
+                  , tag: "div"
+                  , pos: Nothing
+                  , dynFamily: Nothing
+                  }
 
-            ] /\ show dummyParent
+              ] /\ show dummyParent
+            )
+        Just x -> pure ([] /\ x)
+      let
+        evt = sample
+          ( __internalDekuFlatten fes
+              { parent: Just parentId
+              , scope
+              , ez: false
+              , raiseId: \_ -> pure unit
+              -- clear the pos
+              -- as we don't want the pointer's positional information
+              -- trickling down to what the pointer points to
+              -- the logic in Interpret.js will always give
+              -- the correct positional information to what
+              -- pointers point to
+              , pos: Nothing
+              , dynFamily: Just $ show me
+              }
+              di
           )
-      Just x -> pure ([] /\ x)
-    Tuple sub (Tuple unsub evt) <- __internalDekuFlatten fes
-      { parent: Just parentId
-      , scope
-      , ez: false
-      , raiseId: \_ -> pure unit
-      -- clear the pos
-      -- as we don't want the pointer's positional information
-      -- trickling down to what the pointer points to
-      -- the logic in Interpret.js will always give
-      -- the correct positional information to what
-      -- pointers point to
-      , pos: Nothing
-      , dynFamily: Just $ show me
-      }
-      di
-    pure
-      $ Tuple
-          ( parentEvent
-              <>
-                [ makeDynBeacon
-                    { id: show me
-                    , parent: Just parentId
-                    , scope
-                    , dynFamily
-                    , pos
-                    }
-                , attributeParent
-                    { id: show me, parent: parentId, pos, dynFamily, ez }
-                ]
-              <> sub
-          )
-      $ Tuple (unsub <> [ removeDynBeacon { id: show me } ]) evt
+          e
+      for_
+        ( parentEvent
+            <>
+              [ makeDynBeacon
+                  { id: show me
+                  , parent: Just parentId
+                  , scope
+                  , dynFamily
+                  , pos
+                  }
+              , attributeParent
+                  { id: show me, parent: parentId, pos, dynFamily, ez }
+              ]
+        )
+        (k <<< f)
+      for_ [ removeDynBeacon { id: show me } ]
+        (k <<< f <<< deferPayload List.Nil)
+      uu <- subscribe evt k
+      void $ Ref.modify (_ *> uu) urg
+    pure do
+      ugh
+      join (Ref.read urg)
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
-  :: Tuple
-       (Array (Tuple (Event Child) Nut))
-       (Event (Tuple (Event Child) Nut))
+  :: Event (Tuple (Event Child) Nut)
   -> Nut
 dyn = dynify myDyn
   where
@@ -415,25 +435,16 @@ dyn = dynify myDyn
     ((\(NutF n) -> n) nut)
 
   myDyn
-    :: Tuple
-         (Array (Tuple (Event Child) Nut))
-         (Event (Tuple (Event Child) Nut))
+    :: (Event (Tuple (Event Child) Nut))
     -> Nut
   myDyn e = Nut
-    (myDyn' ((\(Tuple a b) -> Tuple (map bolsonify a) (map bolsonify b)) e))
+    (myDyn' (map bolsonify e))
 
   myDyn'
     :: forall payload
-     . Tuple
-         ( Array
-             ( Tuple (Event (Bolson.Child Int))
-                 (Bolson.Entity Int (Node payload))
-             )
-         )
-         ( Event
-             ( Tuple (Event (Bolson.Child Int))
-                 (Bolson.Entity Int (Node payload))
-             )
+     . Event
+         ( Tuple (Event (Bolson.Child Int))
+             (Bolson.Entity Int (Node payload))
          )
     -> NutF payload
   myDyn' x = NutF (Bolson.dyn x)
