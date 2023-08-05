@@ -44,11 +44,11 @@ import Data.Monoid.Endo (Endo(..))
 import Data.Newtype (unwrap)
 import Data.Profunctor (lcmap)
 import Data.String.Utils (includes)
-import Data.Tuple (Tuple(..))
 import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
 import Deku.Core as Core
 import Effect (Effect)
-import FRP.Event (subscribe)
+import FRP.Behavior (sample)
+import FRP.Event (create, subscribe)
 import Safe.Coerce (coerce)
 
 execute :: forall ignore a b c. (a -> b -> c) -> a -> ignore -> b -> c
@@ -143,9 +143,7 @@ giveNewParentOrReconstruct
 giveNewParentOrReconstruct
   di@
     ( DOMInterpret
-        { ids
-        , redecorateDeferredPayload
-        , deferPayload
+        { redecorateDeferredPayload
         , associateWithUnsubscribe
         }
     )
@@ -171,23 +169,22 @@ giveNewParentOrReconstruct
         let
           newRaiseId = raiseId *> void <<< liftST <<< flip Ref.write myId <<<
             Just
-        Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
-          gnp.ctor
-          { dynFamily
-          , ez
-          , parent: Just parent
-          , pos
-          , raiseId: newRaiseId
-          , scope
-          }
-          di
-        for_ sub executor
-        deferId <- liftST ids
-        let deferredPath = ipl <> pure deferId
-        for_ unsub (deferPayload deferredPath >>> executor)
+        let
+          ohBehave = __internalDekuFlatten
+            gnp.ctor
+            { dynFamily
+            , ez
+            , parent: Just parent
+            , pos
+            , raiseId: newRaiseId
+            , scope
+            }
+            di
+        pump <- liftST create
         unsubscribe <- liftST $ subscribe
-          (redecorateDeferredPayload deferredPath <$> evt)
+          (redecorateDeferredPayload ipl <$> (sample ohBehave pump.event))
           executor
+        pump.push identity
         fetchedId <- liftST $ Ref.read myId
         for_ fetchedId $ executor <<< associateWithUnsubscribe <<<
           { unsubscribe, id: _ }
@@ -210,8 +207,10 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten c a b = BC.flatten flattenArgs a b
+__internalDekuFlatten c a b = BC.flatten flattenArgs
   ((coerce :: NutF payload -> Nut' payload) c)
+  a
+  b
 
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU

@@ -57,6 +57,7 @@ import Bolson.Core as BCore
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
+import Control.Monad.ST.Internal as Ref
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Array as Array
@@ -71,7 +72,8 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, create, filterMap, mailbox, makeEvent, mapAccum, merge, subscribe)
+import FRP.Behavior (behavior)
+import FRP.Event (Event, create, filterMap, mailbox, makeEvent, makeLemmingEvent, mapAccum, merge, subscribe)
 
 flattenArgs
   :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
@@ -92,7 +94,7 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
 useState'
@@ -339,27 +341,30 @@ useDynWith arr' e opts f = Nut go'
   go
     :: forall payload
      . Node' payload
-  go i di = do
-    let
-      mc cx (Tuple pos v) = Tuple
-        ( merge
-            [ opts.remove v $> Child BCore.Remove
-            , Child <<< BCore.Logic <$> opts.sendTo v
-            , cx.event
-            ]
-        )
-        ( unsafeSetPos pos $ f
-            { value: v
-            , remove: cx.push remove
-            , sendTo: cx.push <<< sendToPos
-            }
-        )
-    arr <- traverse sequence arr'
-    c0 <- create
+  go i di = behavior \ee -> makeLemmingEvent \subscribe k -> do
     c1 <- create
-    let
-      Nut nf = dyn $ Tuple (map (mc c0) arr) $ map (mc c1) e
-    __internalDekuFlatten nf i di
+    urg <- Ref.new (pure unit)
+    ugh <- subscribe e \ff -> do
+      let
+        mc cx (Tuple pos v) = Tuple
+          ( merge
+              [ opts.remove v $> Child BCore.Remove
+              , Child <<< BCore.Logic <$> opts.sendTo v
+              , cx.event
+              ]
+          )
+          ( unsafeSetPos pos $ f
+              { value: v
+              , remove: cx.push remove
+              , sendTo: cx.push <<< sendToPos
+              }
+          )
+      let
+        Nut nf = dyn $ map (mc c1) e
+      __internalDekuFlatten nf i di
+    pure do
+      ugh
+      join (Ref.read urg)
 
 useDynAtBeginningWith
   :: forall value
