@@ -18,7 +18,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "contextmenu", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "contextmenu", value: cb' value })
 instance Attr anything OnContextmenu (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "contextmenu", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "contextmenu", value: cb' value })
 instance Attr anything OnContextmenu  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnContextmenu (Event.Event  Cb ) where
     \value -> { key: "contextmenu", value: cb' value }
 
 instance Attr anything OnContextmenu (ST.ST Global.Global  Cb ) where
-  attr OnContextmenu stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnContextmenu iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "contextmenu", value: cb' value }
 
 instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnContextmenu (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "contextmenu", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnContextmenu (Event.Event  (Effect Unit) ) where
     \value -> { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnContextmenu (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnContextmenu stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnContextmenu iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "contextmenu", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnContextmenu (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "contextmenu", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnContextmenu (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "contextmenu", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "contextmenu", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnContextmenu (Event.Event  (Effect Boolean) ) where
     \value -> { key: "contextmenu", value: cb' (Cb (const value)) }
 
 instance Attr anything OnContextmenu (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnContextmenu stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnContextmenu iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "contextmenu", value: cb' (Cb (const value)) }
 
 instance Attr everything OnContextmenu (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnContextmenu (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "contextmenu", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "contextmenu", value: unset' })
 instance Attr everything OnContextmenu (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnContextmenu (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "contextmenu", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "contextmenu", value: unset' })
 instance Attr everything OnContextmenu  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnContextmenu (Event.Event  Unit ) where
     \_ -> { key: "contextmenu", value: unset' }
 
 instance Attr everything OnContextmenu (ST.ST Global.Global  Unit ) where
-  attr OnContextmenu stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnContextmenu iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "contextmenu", value: unset' }

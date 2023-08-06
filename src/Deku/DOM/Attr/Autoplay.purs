@@ -20,7 +20,7 @@ instance Attr Audio_ Autoplay (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autoplay", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Audio_ Autoplay (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autoplay", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Audio_ Autoplay  String  where
@@ -31,7 +31,7 @@ instance Attr Audio_ Autoplay (Event.Event  String ) where
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr Audio_ Autoplay (ST.ST Global.Global  String ) where
-  attr Autoplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autoplay iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr Video_ Autoplay (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Video_ Autoplay (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autoplay", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Video_ Autoplay (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autoplay", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autoplay", value: prop' value })
 instance Attr Video_ Autoplay  String  where
@@ -50,7 +50,7 @@ instance Attr Video_ Autoplay (Event.Event  String ) where
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr Video_ Autoplay (ST.ST Global.Global  String ) where
-  attr Autoplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autoplay iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autoplay", value: prop' value }
 
 instance Attr everything Autoplay (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Autoplay (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "autoplay", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "autoplay", value: unset' })
 instance Attr everything Autoplay (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Autoplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "autoplay", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "autoplay", value: unset' })
 instance Attr everything Autoplay  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Autoplay (Event.Event  Unit ) where
     { key: "autoplay", value: unset' }
 
 instance Attr everything Autoplay (ST.ST Global.Global  Unit ) where
-  attr Autoplay stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Autoplay iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "autoplay", value: unset' }

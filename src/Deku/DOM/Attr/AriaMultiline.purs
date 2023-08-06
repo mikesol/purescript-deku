@@ -35,7 +35,7 @@ instance Attr Circle_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Circle_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Circle_ AriaMultiline  String  where
@@ -46,7 +46,7 @@ instance Attr Circle_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Circle_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Ellipse_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -54,7 +54,7 @@ instance Attr Ellipse_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Ellipse_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Ellipse_ AriaMultiline  String  where
@@ -65,7 +65,7 @@ instance Attr Ellipse_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Ellipse_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr ForeignObject_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -73,7 +73,7 @@ instance Attr ForeignObject_ AriaMultiline (NonEmpty.NonEmpty Event.Event  Strin
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr ForeignObject_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr ForeignObject_ AriaMultiline  String  where
@@ -84,7 +84,7 @@ instance Attr ForeignObject_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr ForeignObject_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr G_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -92,7 +92,7 @@ instance Attr G_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr G_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr G_ AriaMultiline  String  where
@@ -103,7 +103,7 @@ instance Attr G_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr G_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Line_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -111,7 +111,7 @@ instance Attr Line_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Line_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Line_ AriaMultiline  String  where
@@ -122,7 +122,7 @@ instance Attr Line_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Line_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Marker_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Marker_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Marker_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Marker_ AriaMultiline  String  where
@@ -141,7 +141,7 @@ instance Attr Marker_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Marker_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Path_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -149,7 +149,7 @@ instance Attr Path_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Path_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Path_ AriaMultiline  String  where
@@ -160,7 +160,7 @@ instance Attr Path_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Path_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Polygon_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -168,7 +168,7 @@ instance Attr Polygon_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polygon_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polygon_ AriaMultiline  String  where
@@ -179,7 +179,7 @@ instance Attr Polygon_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Polygon_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Polyline_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -187,7 +187,7 @@ instance Attr Polyline_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polyline_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Polyline_ AriaMultiline  String  where
@@ -198,7 +198,7 @@ instance Attr Polyline_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Polyline_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Rect_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -206,7 +206,7 @@ instance Attr Rect_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Rect_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Rect_ AriaMultiline  String  where
@@ -217,7 +217,7 @@ instance Attr Rect_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Rect_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Svg_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -225,7 +225,7 @@ instance Attr Svg_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Svg_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Svg_ AriaMultiline  String  where
@@ -236,7 +236,7 @@ instance Attr Svg_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Svg_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Symbol_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Symbol_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Symbol_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Symbol_ AriaMultiline  String  where
@@ -255,7 +255,7 @@ instance Attr Symbol_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Symbol_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Text_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -263,7 +263,7 @@ instance Attr Text_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Text_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Text_ AriaMultiline  String  where
@@ -274,7 +274,7 @@ instance Attr Text_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Text_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr TextPath_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -282,7 +282,7 @@ instance Attr TextPath_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr TextPath_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr TextPath_ AriaMultiline  String  where
@@ -293,7 +293,7 @@ instance Attr TextPath_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr TextPath_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Tspan_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -301,7 +301,7 @@ instance Attr Tspan_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Tspan_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Tspan_ AriaMultiline  String  where
@@ -312,7 +312,7 @@ instance Attr Tspan_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Tspan_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Use_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -320,7 +320,7 @@ instance Attr Use_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Use_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr Use_ AriaMultiline  String  where
@@ -331,7 +331,7 @@ instance Attr Use_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr Use_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr View_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr View_ AriaMultiline (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-multiline", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr View_ AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-multiline", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-multiline", value: prop' value })
 instance Attr View_ AriaMultiline  String  where
@@ -350,7 +350,7 @@ instance Attr View_ AriaMultiline (Event.Event  String ) where
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr View_ AriaMultiline (ST.ST Global.Global  String ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-multiline", value: prop' value }
 
 instance Attr everything AriaMultiline (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -358,7 +358,7 @@ instance Attr everything AriaMultiline (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "aria-multiline", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-multiline", value: unset' })
 instance Attr everything AriaMultiline (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaMultiline (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-multiline", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-multiline", value: unset' })
 instance Attr everything AriaMultiline  Unit  where
@@ -369,5 +369,5 @@ instance Attr everything AriaMultiline (Event.Event  Unit ) where
     \_ -> { key: "aria-multiline", value: unset' }
 
 instance Attr everything AriaMultiline (ST.ST Global.Global  Unit ) where
-  attr AriaMultiline stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaMultiline iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "aria-multiline", value: unset' }

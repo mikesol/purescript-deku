@@ -19,7 +19,7 @@ instance Attr FeTurbulence_ NumOctaves (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "numOctaves", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "numOctaves", value: prop' value })
 instance Attr FeTurbulence_ NumOctaves (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr NumOctaves (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr NumOctaves (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "numOctaves", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "numOctaves", value: prop' value })
 instance Attr FeTurbulence_ NumOctaves  String  where
@@ -30,7 +30,7 @@ instance Attr FeTurbulence_ NumOctaves (Event.Event  String ) where
     \value -> { key: "numOctaves", value: prop' value }
 
 instance Attr FeTurbulence_ NumOctaves (ST.ST Global.Global  String ) where
-  attr NumOctaves stValue = unsafeAttribute $ This $ stValue <#>
+  attr NumOctaves iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "numOctaves", value: prop' value }
 
 instance Attr everything NumOctaves (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything NumOctaves (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "numOctaves", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "numOctaves", value: unset' })
 instance Attr everything NumOctaves (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr NumOctaves (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr NumOctaves (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "numOctaves", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "numOctaves", value: unset' })
 instance Attr everything NumOctaves  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything NumOctaves (Event.Event  Unit ) where
     \_ -> { key: "numOctaves", value: unset' }
 
 instance Attr everything NumOctaves (ST.ST Global.Global  Unit ) where
-  attr NumOctaves stValue = unsafeAttribute $ This $ stValue <#>
+  attr NumOctaves iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "numOctaves", value: unset' }

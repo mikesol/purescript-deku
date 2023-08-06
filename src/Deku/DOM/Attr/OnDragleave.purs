@@ -18,7 +18,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragleave", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragleave", value: cb' value })
 instance Attr anything OnDragleave (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragleave", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dragleave", value: cb' value })
 instance Attr anything OnDragleave  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDragleave (Event.Event  Cb ) where
     \value -> { key: "dragleave", value: cb' value }
 
 instance Attr anything OnDragleave (ST.ST Global.Global  Cb ) where
-  attr OnDragleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragleave", value: cb' value }
 
 instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "dragleave", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragleave (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragleave", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDragleave (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragleave (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDragleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDragleave (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "dragleave", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragleave (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragleave", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragleave", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnDragleave (Event.Event  (Effect Boolean) ) where
     \value -> { key: "dragleave", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDragleave (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDragleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragleave", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDragleave (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnDragleave (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "dragleave", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragleave", value: unset' })
 instance Attr everything OnDragleave (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnDragleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dragleave", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dragleave", value: unset' })
 instance Attr everything OnDragleave  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnDragleave (Event.Event  Unit ) where
     \_ -> { key: "dragleave", value: unset' }
 
 instance Attr everything OnDragleave (ST.ST Global.Global  Unit ) where
-  attr OnDragleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragleave iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "dragleave", value: unset' }

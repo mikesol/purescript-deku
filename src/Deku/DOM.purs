@@ -1912,9 +1912,9 @@ instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything Self (ST.ST Global.Global (DOM.Element -> Effect Unit)) where
-  attr Self stValue = unsafeAttribute
+  attr Self iValue = unsafeAttribute
     $ This
-    $ stValue <#> \value ->
+    $ iValue <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -1963,9 +1963,9 @@ instance Attr anything SelfT (Event.Event (DOM.Element -> Effect Unit)) where
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything SelfT (ST.ST Global.Global (DOM.Element -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute
+  attr SelfT iValue = unsafeAttribute
     $ This
-    $ stValue <#> \value ->
+    $ iValue <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2011,9 +2011,9 @@ instance Attr anything SelfT (Event.Event (Effect Unit)) where
         }
 
 instance Attr anything SelfT (ST.ST Global.Global (Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute
+  attr SelfT iValue = unsafeAttribute
     $ This
-    $ stValue <#> \value ->
+    $ iValue <#> \value ->
         { key: "@self@"
         , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
         }
@@ -2094,7 +2094,7 @@ instance
   Attr A_
     SelfT
     (ST.ST Global.Global (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2144,7 +2144,7 @@ instance
   Attr Area_
     SelfT
     (ST.ST Global.Global (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2194,7 +2194,7 @@ instance
   Attr Audio_
     SelfT
     (ST.ST Global.Global (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2244,7 +2244,7 @@ instance
   Attr Base_
     SelfT
     (ST.ST Global.Global (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2294,7 +2294,7 @@ instance
   Attr Body_
     SelfT
     (ST.ST Global.Global (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2340,7 +2340,7 @@ instance
   Attr Br_
     SelfT
     (ST.ST Global.Global (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2390,7 +2390,7 @@ instance
   Attr Button_
     SelfT
     (ST.ST Global.Global (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2440,7 +2440,7 @@ instance
   Attr Canvas_
     SelfT
     (ST.ST Global.Global (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2488,7 +2488,7 @@ instance
   Attr Div_
     SelfT
     (ST.ST Global.Global (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2538,7 +2538,7 @@ instance
   Attr Embed_
     SelfT
     (ST.ST Global.Global (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2588,7 +2588,7 @@ instance
   Attr Form_
     SelfT
     (ST.ST Global.Global (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2638,7 +2638,7 @@ instance
   Attr Head_
     SelfT
     (ST.ST Global.Global (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2684,7 +2684,7 @@ instance
   Attr Hr_
     SelfT
     (ST.ST Global.Global (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2734,7 +2734,7 @@ instance
   Attr Html_
     SelfT
     (ST.ST Global.Global (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2784,7 +2784,7 @@ instance
   Attr Input_
     SelfT
     (ST.ST Global.Global (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2834,7 +2834,7 @@ instance
   Attr Label_
     SelfT
     (ST.ST Global.Global (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2884,7 +2884,7 @@ instance
   Attr Legend_
     SelfT
     (ST.ST Global.Global (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2934,7 +2934,7 @@ instance
   Attr Link_
     SelfT
     (ST.ST Global.Global (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -2982,7 +2982,7 @@ instance
   Attr Map_
     SelfT
     (ST.ST Global.Global (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3032,7 +3032,7 @@ instance
   Attr Meta_
     SelfT
     (ST.ST Global.Global (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3082,7 +3082,7 @@ instance
   Attr Meter_
     SelfT
     (ST.ST Global.Global (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3132,7 +3132,7 @@ instance
   Attr Object_
     SelfT
     (ST.ST Global.Global (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3182,7 +3182,7 @@ instance
   Attr Option_
     SelfT
     (ST.ST Global.Global (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3232,7 +3232,7 @@ instance
   Attr Output_
     SelfT
     (ST.ST Global.Global (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3285,7 +3285,7 @@ instance
     ( ST.ST Global.Global
         (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)
     ) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3335,7 +3335,7 @@ instance
   Attr Param_
     SelfT
     (ST.ST Global.Global (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3383,7 +3383,7 @@ instance
   Attr Pre_
     SelfT
     (ST.ST Global.Global (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3436,7 +3436,7 @@ instance
     ( ST.ST Global.Global
         (HTMLProgressElement.HTMLProgressElement -> Effect Unit)
     ) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3486,7 +3486,7 @@ instance
   Attr Script_
     SelfT
     (ST.ST Global.Global (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3536,7 +3536,7 @@ instance
   Attr Select_
     SelfT
     (ST.ST Global.Global (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3586,7 +3586,7 @@ instance
   Attr Source_
     SelfT
     (ST.ST Global.Global (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3636,7 +3636,7 @@ instance
   Attr Span_
     SelfT
     (ST.ST Global.Global (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3686,7 +3686,7 @@ instance
   Attr Style_
     SelfT
     (ST.ST Global.Global (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3736,7 +3736,7 @@ instance
   Attr Table_
     SelfT
     (ST.ST Global.Global (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3793,7 +3793,7 @@ instance
     ( ST.ST Global.Global
         (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
     ) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3846,7 +3846,7 @@ instance
     ( ST.ST Global.Global
         (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)
     ) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3899,7 +3899,7 @@ instance
     ( ST.ST Global.Global
         (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)
     ) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3949,7 +3949,7 @@ instance
   Attr Time_
     SelfT
     (ST.ST Global.Global (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3999,7 +3999,7 @@ instance
   Attr Title_
     SelfT
     (ST.ST Global.Global (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -4049,7 +4049,7 @@ instance
   Attr Track_
     SelfT
     (ST.ST Global.Global (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -4099,5 +4099,5 @@ instance
   Attr Video_
     SelfT
     (ST.ST Global.Global (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
-  attr SelfT stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }

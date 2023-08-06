@@ -32,7 +32,7 @@ instance Attr Applet_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Applet_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Applet_ Align  String  where
@@ -43,7 +43,7 @@ instance Attr Applet_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Applet_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Caption_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -51,7 +51,7 @@ instance Attr Caption_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Caption_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Caption_ Align  String  where
@@ -62,7 +62,7 @@ instance Attr Caption_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Caption_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Col_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -70,7 +70,7 @@ instance Attr Col_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Col_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Col_ Align  String  where
@@ -81,7 +81,7 @@ instance Attr Col_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Col_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Colgroup_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -89,7 +89,7 @@ instance Attr Colgroup_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Colgroup_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Colgroup_ Align  String  where
@@ -100,7 +100,7 @@ instance Attr Colgroup_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Colgroup_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Hr_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -108,7 +108,7 @@ instance Attr Hr_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Hr_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Hr_ Align  String  where
@@ -119,7 +119,7 @@ instance Attr Hr_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Hr_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Iframe_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -127,7 +127,7 @@ instance Attr Iframe_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Iframe_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Iframe_ Align  String  where
@@ -138,7 +138,7 @@ instance Attr Iframe_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Iframe_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Img_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -146,7 +146,7 @@ instance Attr Img_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Img_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Img_ Align  String  where
@@ -157,7 +157,7 @@ instance Attr Img_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Img_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Table_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -165,7 +165,7 @@ instance Attr Table_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Table_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Table_ Align  String  where
@@ -176,7 +176,7 @@ instance Attr Table_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Table_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tbody_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -184,7 +184,7 @@ instance Attr Tbody_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tbody_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tbody_ Align  String  where
@@ -195,7 +195,7 @@ instance Attr Tbody_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tbody_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Td_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -203,7 +203,7 @@ instance Attr Td_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Td_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Td_ Align  String  where
@@ -214,7 +214,7 @@ instance Attr Td_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Td_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tfoot_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -222,7 +222,7 @@ instance Attr Tfoot_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tfoot_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tfoot_ Align  String  where
@@ -233,7 +233,7 @@ instance Attr Tfoot_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tfoot_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Th_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -241,7 +241,7 @@ instance Attr Th_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Th_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Th_ Align  String  where
@@ -252,7 +252,7 @@ instance Attr Th_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Th_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Thead_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -260,7 +260,7 @@ instance Attr Thead_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Thead_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Thead_ Align  String  where
@@ -271,7 +271,7 @@ instance Attr Thead_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Thead_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tr_ Align (NonEmpty.NonEmpty Event.Event  String ) where
@@ -279,7 +279,7 @@ instance Attr Tr_ Align (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "align", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tr_ Align (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "align", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "align", value: prop' value })
 instance Attr Tr_ Align  String  where
@@ -290,21 +290,21 @@ instance Attr Tr_ Align (Event.Event  String ) where
     \value -> { key: "align", value: prop' value }
 
 instance Attr Tr_ Align (ST.ST Global.Global  String ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#>
+  attr Align iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "align", value: prop' value }
 
 instance Attr everything Align (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Align bothValues = unsafeAttribute $ Both (pure  { key: "align", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "align", value: unset' })
 instance Attr everything Align (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "align", value: unset' })
+  attr Align (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "align", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "align", value: unset' })
 instance Attr everything Align  Unit  where
-  attr Align _ = unsafeAttribute $ This $ pure $ { key: "align", value: unset' }
+  attr Align _ = unsafeAttribute $ This $ { key: "align", value: unset' }
 instance Attr everything Align (Event.Event  Unit ) where
   attr Align eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "align", value: unset' }
 
 instance Attr everything Align (ST.ST Global.Global  Unit ) where
-  attr Align stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Align iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "align", value: unset' }

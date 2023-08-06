@@ -21,7 +21,7 @@ instance Attr Animate_ KeySplines (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr Animate_ KeySplines (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keySplines", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr Animate_ KeySplines  String  where
@@ -32,7 +32,7 @@ instance Attr Animate_ KeySplines (Event.Event  String ) where
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr Animate_ KeySplines (ST.ST Global.Global  String ) where
-  attr KeySplines stValue = unsafeAttribute $ This $ stValue <#>
+  attr KeySplines iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr AnimateMotion_ KeySplines (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr AnimateMotion_ KeySplines (NonEmpty.NonEmpty Event.Event  String )
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateMotion_ KeySplines (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keySplines", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateMotion_ KeySplines  String  where
@@ -51,7 +51,7 @@ instance Attr AnimateMotion_ KeySplines (Event.Event  String ) where
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr AnimateMotion_ KeySplines (ST.ST Global.Global  String ) where
-  attr KeySplines stValue = unsafeAttribute $ This $ stValue <#>
+  attr KeySplines iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr AnimateTransform_ KeySplines (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr AnimateTransform_ KeySplines (NonEmpty.NonEmpty Event.Event  Strin
     { key: "keySplines", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateTransform_ KeySplines (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keySplines", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "keySplines", value: prop' value })
 instance Attr AnimateTransform_ KeySplines  String  where
@@ -70,7 +70,7 @@ instance Attr AnimateTransform_ KeySplines (Event.Event  String ) where
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr AnimateTransform_ KeySplines (ST.ST Global.Global  String ) where
-  attr KeySplines stValue = unsafeAttribute $ This $ stValue <#>
+  attr KeySplines iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keySplines", value: prop' value }
 
 instance Attr everything KeySplines (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything KeySplines (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keySplines", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keySplines", value: unset' })
 instance Attr everything KeySplines (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr KeySplines (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "keySplines", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "keySplines", value: unset' })
 instance Attr everything KeySplines  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything KeySplines (Event.Event  Unit ) where
     \_ -> { key: "keySplines", value: unset' }
 
 instance Attr everything KeySplines (ST.ST Global.Global  Unit ) where
-  attr KeySplines stValue = unsafeAttribute $ This $ stValue <#>
+  attr KeySplines iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "keySplines", value: unset' }

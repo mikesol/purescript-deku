@@ -21,7 +21,7 @@ instance Attr A_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr A_ Hreflang (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "hreflang", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr A_ Hreflang  String  where
@@ -32,7 +32,7 @@ instance Attr A_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr A_ Hreflang (ST.ST Global.Global  String ) where
-  attr Hreflang stValue = unsafeAttribute $ This $ stValue <#>
+  attr Hreflang iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Area_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr Area_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Area_ Hreflang (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "hreflang", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Area_ Hreflang  String  where
@@ -51,7 +51,7 @@ instance Attr Area_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Area_ Hreflang (ST.ST Global.Global  String ) where
-  attr Hreflang stValue = unsafeAttribute $ This $ stValue <#>
+  attr Hreflang iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Link_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Link_ Hreflang (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "hreflang", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Link_ Hreflang (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "hreflang", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "hreflang", value: prop' value })
 instance Attr Link_ Hreflang  String  where
@@ -70,7 +70,7 @@ instance Attr Link_ Hreflang (Event.Event  String ) where
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr Link_ Hreflang (ST.ST Global.Global  String ) where
-  attr Hreflang stValue = unsafeAttribute $ This $ stValue <#>
+  attr Hreflang iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "hreflang", value: prop' value }
 
 instance Attr everything Hreflang (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything Hreflang (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "hreflang", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "hreflang", value: unset' })
 instance Attr everything Hreflang (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Hreflang (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "hreflang", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "hreflang", value: unset' })
 instance Attr everything Hreflang  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything Hreflang (Event.Event  Unit ) where
     { key: "hreflang", value: unset' }
 
 instance Attr everything Hreflang (ST.ST Global.Global  Unit ) where
-  attr Hreflang stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Hreflang iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "hreflang", value: unset' }

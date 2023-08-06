@@ -22,7 +22,7 @@ instance Attr Body_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Body_ Background (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "background", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Body_ Background  String  where
@@ -33,7 +33,7 @@ instance Attr Body_ Background (Event.Event  String ) where
     \value -> { key: "background", value: prop' value }
 
 instance Attr Body_ Background (ST.ST Global.Global  String ) where
-  attr Background stValue = unsafeAttribute $ This $ stValue <#>
+  attr Background iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "background", value: prop' value }
 
 instance Attr Table_ Background (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr Table_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Table_ Background (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "background", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Table_ Background  String  where
@@ -52,7 +52,7 @@ instance Attr Table_ Background (Event.Event  String ) where
     \value -> { key: "background", value: prop' value }
 
 instance Attr Table_ Background (ST.ST Global.Global  String ) where
-  attr Background stValue = unsafeAttribute $ This $ stValue <#>
+  attr Background iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "background", value: prop' value }
 
 instance Attr Td_ Background (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr Td_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Td_ Background (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "background", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Td_ Background  String  where
@@ -71,7 +71,7 @@ instance Attr Td_ Background (Event.Event  String ) where
     \value -> { key: "background", value: prop' value }
 
 instance Attr Td_ Background (ST.ST Global.Global  String ) where
-  attr Background stValue = unsafeAttribute $ This $ stValue <#>
+  attr Background iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "background", value: prop' value }
 
 instance Attr Th_ Background (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr Th_ Background (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "background", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Th_ Background (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "background", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "background", value: prop' value })
 instance Attr Th_ Background  String  where
@@ -90,7 +90,7 @@ instance Attr Th_ Background (Event.Event  String ) where
     \value -> { key: "background", value: prop' value }
 
 instance Attr Th_ Background (ST.ST Global.Global  String ) where
-  attr Background stValue = unsafeAttribute $ This $ stValue <#>
+  attr Background iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "background", value: prop' value }
 
 instance Attr everything Background (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything Background (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "background", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "background", value: unset' })
 instance Attr everything Background (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Background (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "background", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "background", value: unset' })
 instance Attr everything Background  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything Background (Event.Event  Unit ) where
     \_ -> { key: "background", value: unset' }
 
 instance Attr everything Background (ST.ST Global.Global  Unit ) where
-  attr Background stValue = unsafeAttribute $ This $ stValue <#>
+  attr Background iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "background", value: unset' }

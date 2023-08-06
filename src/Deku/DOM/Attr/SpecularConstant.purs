@@ -21,7 +21,7 @@ instance Attr FeSpecularLighting_ SpecularConstant (NonEmpty.NonEmpty Event.Even
         { key: "specularConstant", value: prop' value }
     )
 instance Attr FeSpecularLighting_ SpecularConstant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SpecularConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SpecularConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "specularConstant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "specularConstant", value: prop' value }
@@ -34,7 +34,7 @@ instance Attr FeSpecularLighting_ SpecularConstant (Event.Event  String ) where
     <#> \value -> { key: "specularConstant", value: prop' value }
 
 instance Attr FeSpecularLighting_ SpecularConstant (ST.ST Global.Global  String ) where
-  attr SpecularConstant stValue = unsafeAttribute $ This $ stValue
+  attr SpecularConstant iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "specularConstant", value: prop' value }
 
 instance Attr everything SpecularConstant (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -42,7 +42,7 @@ instance Attr everything SpecularConstant (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "specularConstant", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "specularConstant", value: unset' })
 instance Attr everything SpecularConstant (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr SpecularConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr SpecularConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "specularConstant", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "specularConstant", value: unset' })
 instance Attr everything SpecularConstant  Unit  where
@@ -53,5 +53,5 @@ instance Attr everything SpecularConstant (Event.Event  Unit ) where
     <#> \_ -> { key: "specularConstant", value: unset' }
 
 instance Attr everything SpecularConstant (ST.ST Global.Global  Unit ) where
-  attr SpecularConstant stValue = unsafeAttribute $ This $ stValue
+  attr SpecularConstant iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "specularConstant", value: unset' }

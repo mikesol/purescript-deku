@@ -140,7 +140,7 @@ instance Attr A_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr A_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr A_ Translate  String  where
@@ -151,7 +151,7 @@ instance Attr A_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr A_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Abbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -159,7 +159,7 @@ instance Attr Abbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Abbr_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Abbr_ Translate  String  where
@@ -170,7 +170,7 @@ instance Attr Abbr_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Abbr_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Acronym_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -178,7 +178,7 @@ instance Attr Acronym_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Acronym_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Acronym_ Translate  String  where
@@ -189,7 +189,7 @@ instance Attr Acronym_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Acronym_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Address_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -197,7 +197,7 @@ instance Attr Address_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Address_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Address_ Translate  String  where
@@ -208,7 +208,7 @@ instance Attr Address_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Address_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Applet_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -216,7 +216,7 @@ instance Attr Applet_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Applet_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Applet_ Translate  String  where
@@ -227,7 +227,7 @@ instance Attr Applet_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Applet_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Area_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -235,7 +235,7 @@ instance Attr Area_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Area_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Area_ Translate  String  where
@@ -246,7 +246,7 @@ instance Attr Area_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Area_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Article_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -254,7 +254,7 @@ instance Attr Article_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Article_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Article_ Translate  String  where
@@ -265,7 +265,7 @@ instance Attr Article_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Article_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Aside_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -273,7 +273,7 @@ instance Attr Aside_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Aside_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Aside_ Translate  String  where
@@ -284,7 +284,7 @@ instance Attr Aside_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Aside_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Audio_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr Audio_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Audio_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Audio_ Translate  String  where
@@ -303,7 +303,7 @@ instance Attr Audio_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Audio_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr B_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -311,7 +311,7 @@ instance Attr B_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr B_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr B_ Translate  String  where
@@ -322,7 +322,7 @@ instance Attr B_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr B_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Base_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -330,7 +330,7 @@ instance Attr Base_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Base_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Base_ Translate  String  where
@@ -341,7 +341,7 @@ instance Attr Base_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Base_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Basefont_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -349,7 +349,7 @@ instance Attr Basefont_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Basefont_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Basefont_ Translate  String  where
@@ -360,7 +360,7 @@ instance Attr Basefont_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Basefont_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Bdi_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -368,7 +368,7 @@ instance Attr Bdi_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdi_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdi_ Translate  String  where
@@ -379,7 +379,7 @@ instance Attr Bdi_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Bdi_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Bdo_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -387,7 +387,7 @@ instance Attr Bdo_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdo_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Bdo_ Translate  String  where
@@ -398,7 +398,7 @@ instance Attr Bdo_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Bdo_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Big_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr Big_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Big_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Big_ Translate  String  where
@@ -417,7 +417,7 @@ instance Attr Big_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Big_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Blockquote_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -425,7 +425,7 @@ instance Attr Blockquote_ Translate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Blockquote_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Blockquote_ Translate  String  where
@@ -436,7 +436,7 @@ instance Attr Blockquote_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Blockquote_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Body_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -444,7 +444,7 @@ instance Attr Body_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Body_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Body_ Translate  String  where
@@ -455,7 +455,7 @@ instance Attr Body_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Body_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Br_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -463,7 +463,7 @@ instance Attr Br_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Br_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Br_ Translate  String  where
@@ -474,7 +474,7 @@ instance Attr Br_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Br_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Button_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -482,7 +482,7 @@ instance Attr Button_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Button_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Button_ Translate  String  where
@@ -493,7 +493,7 @@ instance Attr Button_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Button_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Canvas_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -501,7 +501,7 @@ instance Attr Canvas_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Canvas_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Canvas_ Translate  String  where
@@ -512,7 +512,7 @@ instance Attr Canvas_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Canvas_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Caption_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -520,7 +520,7 @@ instance Attr Caption_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Caption_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Caption_ Translate  String  where
@@ -531,7 +531,7 @@ instance Attr Caption_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Caption_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Center_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -539,7 +539,7 @@ instance Attr Center_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Center_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Center_ Translate  String  where
@@ -550,7 +550,7 @@ instance Attr Center_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Center_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Cite_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -558,7 +558,7 @@ instance Attr Cite_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Cite_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Cite_ Translate  String  where
@@ -569,7 +569,7 @@ instance Attr Cite_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Cite_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Code_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -577,7 +577,7 @@ instance Attr Code_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Code_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Code_ Translate  String  where
@@ -588,7 +588,7 @@ instance Attr Code_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Code_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Col_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -596,7 +596,7 @@ instance Attr Col_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Col_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Col_ Translate  String  where
@@ -607,7 +607,7 @@ instance Attr Col_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Col_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Colgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -615,7 +615,7 @@ instance Attr Colgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Colgroup_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Colgroup_ Translate  String  where
@@ -626,7 +626,7 @@ instance Attr Colgroup_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Colgroup_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Xdata_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -634,7 +634,7 @@ instance Attr Xdata_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Xdata_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Xdata_ Translate  String  where
@@ -645,7 +645,7 @@ instance Attr Xdata_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Xdata_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Datalist_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -653,7 +653,7 @@ instance Attr Datalist_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Datalist_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Datalist_ Translate  String  where
@@ -664,7 +664,7 @@ instance Attr Datalist_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Datalist_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -672,7 +672,7 @@ instance Attr Dd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dd_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dd_ Translate  String  where
@@ -683,7 +683,7 @@ instance Attr Dd_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dd_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Del_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -691,7 +691,7 @@ instance Attr Del_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Del_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Del_ Translate  String  where
@@ -702,7 +702,7 @@ instance Attr Del_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Del_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Details_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -710,7 +710,7 @@ instance Attr Details_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Details_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Details_ Translate  String  where
@@ -721,7 +721,7 @@ instance Attr Details_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Details_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dfn_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -729,7 +729,7 @@ instance Attr Dfn_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dfn_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dfn_ Translate  String  where
@@ -740,7 +740,7 @@ instance Attr Dfn_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dfn_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dialog_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -748,7 +748,7 @@ instance Attr Dialog_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dialog_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dialog_ Translate  String  where
@@ -759,7 +759,7 @@ instance Attr Dialog_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dialog_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dir_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -767,7 +767,7 @@ instance Attr Dir_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dir_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dir_ Translate  String  where
@@ -778,7 +778,7 @@ instance Attr Dir_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dir_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Div_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -786,7 +786,7 @@ instance Attr Div_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Div_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Div_ Translate  String  where
@@ -797,7 +797,7 @@ instance Attr Div_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Div_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dl_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -805,7 +805,7 @@ instance Attr Dl_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dl_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dl_ Translate  String  where
@@ -816,7 +816,7 @@ instance Attr Dl_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dl_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -824,7 +824,7 @@ instance Attr Dt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dt_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Dt_ Translate  String  where
@@ -835,7 +835,7 @@ instance Attr Dt_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Dt_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Em_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Em_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Em_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Em_ Translate  String  where
@@ -854,7 +854,7 @@ instance Attr Em_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Em_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Embed_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -862,7 +862,7 @@ instance Attr Embed_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Embed_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Embed_ Translate  String  where
@@ -873,7 +873,7 @@ instance Attr Embed_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Embed_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Fieldset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -881,7 +881,7 @@ instance Attr Fieldset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Fieldset_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Fieldset_ Translate  String  where
@@ -892,7 +892,7 @@ instance Attr Fieldset_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Fieldset_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Figcaption_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -900,7 +900,7 @@ instance Attr Figcaption_ Translate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figcaption_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figcaption_ Translate  String  where
@@ -911,7 +911,7 @@ instance Attr Figcaption_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Figcaption_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Figure_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -919,7 +919,7 @@ instance Attr Figure_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figure_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Figure_ Translate  String  where
@@ -930,7 +930,7 @@ instance Attr Figure_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Figure_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Font_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -938,7 +938,7 @@ instance Attr Font_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Font_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Font_ Translate  String  where
@@ -949,7 +949,7 @@ instance Attr Font_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Font_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Footer_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -957,7 +957,7 @@ instance Attr Footer_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Footer_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Footer_ Translate  String  where
@@ -968,7 +968,7 @@ instance Attr Footer_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Footer_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Form_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -976,7 +976,7 @@ instance Attr Form_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Form_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Form_ Translate  String  where
@@ -987,7 +987,7 @@ instance Attr Form_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Form_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Frame_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -995,7 +995,7 @@ instance Attr Frame_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frame_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frame_ Translate  String  where
@@ -1006,7 +1006,7 @@ instance Attr Frame_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Frame_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Frameset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1014,7 +1014,7 @@ instance Attr Frameset_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frameset_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Frameset_ Translate  String  where
@@ -1025,7 +1025,7 @@ instance Attr Frameset_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Frameset_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H1_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1033,7 +1033,7 @@ instance Attr H1_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H1_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H1_ Translate  String  where
@@ -1044,7 +1044,7 @@ instance Attr H1_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H1_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H2_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1052,7 +1052,7 @@ instance Attr H2_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H2_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H2_ Translate  String  where
@@ -1063,7 +1063,7 @@ instance Attr H2_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H2_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H3_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1071,7 +1071,7 @@ instance Attr H3_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H3_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H3_ Translate  String  where
@@ -1082,7 +1082,7 @@ instance Attr H3_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H3_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H4_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1090,7 +1090,7 @@ instance Attr H4_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H4_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H4_ Translate  String  where
@@ -1101,7 +1101,7 @@ instance Attr H4_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H4_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H5_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1109,7 +1109,7 @@ instance Attr H5_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H5_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H5_ Translate  String  where
@@ -1120,7 +1120,7 @@ instance Attr H5_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H5_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H6_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1128,7 +1128,7 @@ instance Attr H6_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H6_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr H6_ Translate  String  where
@@ -1139,7 +1139,7 @@ instance Attr H6_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr H6_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Head_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1147,7 +1147,7 @@ instance Attr Head_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Head_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Head_ Translate  String  where
@@ -1158,7 +1158,7 @@ instance Attr Head_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Head_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Header_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1166,7 +1166,7 @@ instance Attr Header_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Header_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Header_ Translate  String  where
@@ -1177,7 +1177,7 @@ instance Attr Header_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Header_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Hr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1185,7 +1185,7 @@ instance Attr Hr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Hr_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Hr_ Translate  String  where
@@ -1196,7 +1196,7 @@ instance Attr Hr_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Hr_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Html_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1204,7 +1204,7 @@ instance Attr Html_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Html_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Html_ Translate  String  where
@@ -1215,7 +1215,7 @@ instance Attr Html_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Html_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr I_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1223,7 +1223,7 @@ instance Attr I_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr I_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr I_ Translate  String  where
@@ -1234,7 +1234,7 @@ instance Attr I_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr I_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Iframe_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1242,7 +1242,7 @@ instance Attr Iframe_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Iframe_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Iframe_ Translate  String  where
@@ -1253,7 +1253,7 @@ instance Attr Iframe_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Iframe_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Img_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1261,7 +1261,7 @@ instance Attr Img_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Img_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Img_ Translate  String  where
@@ -1272,7 +1272,7 @@ instance Attr Img_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Img_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Input_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1280,7 +1280,7 @@ instance Attr Input_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Input_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Input_ Translate  String  where
@@ -1291,7 +1291,7 @@ instance Attr Input_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Input_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ins_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1299,7 +1299,7 @@ instance Attr Ins_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ins_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ins_ Translate  String  where
@@ -1310,7 +1310,7 @@ instance Attr Ins_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ins_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Kbd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1318,7 +1318,7 @@ instance Attr Kbd_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Kbd_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Kbd_ Translate  String  where
@@ -1329,7 +1329,7 @@ instance Attr Kbd_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Kbd_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Label_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1337,7 +1337,7 @@ instance Attr Label_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Label_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Label_ Translate  String  where
@@ -1348,7 +1348,7 @@ instance Attr Label_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Label_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Legend_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1356,7 +1356,7 @@ instance Attr Legend_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Legend_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Legend_ Translate  String  where
@@ -1367,7 +1367,7 @@ instance Attr Legend_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Legend_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Li_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1375,7 +1375,7 @@ instance Attr Li_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Li_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Li_ Translate  String  where
@@ -1386,7 +1386,7 @@ instance Attr Li_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Li_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Link_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1394,7 +1394,7 @@ instance Attr Link_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Link_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Link_ Translate  String  where
@@ -1405,7 +1405,7 @@ instance Attr Link_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Link_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Main_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1413,7 +1413,7 @@ instance Attr Main_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Main_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Main_ Translate  String  where
@@ -1424,7 +1424,7 @@ instance Attr Main_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Main_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Map_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1432,7 +1432,7 @@ instance Attr Map_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Map_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Map_ Translate  String  where
@@ -1443,7 +1443,7 @@ instance Attr Map_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Map_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Mark_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1451,7 +1451,7 @@ instance Attr Mark_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Mark_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Mark_ Translate  String  where
@@ -1462,7 +1462,7 @@ instance Attr Mark_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Mark_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Meta_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1470,7 +1470,7 @@ instance Attr Meta_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meta_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meta_ Translate  String  where
@@ -1481,7 +1481,7 @@ instance Attr Meta_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Meta_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Meter_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1489,7 +1489,7 @@ instance Attr Meter_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meter_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Meter_ Translate  String  where
@@ -1500,7 +1500,7 @@ instance Attr Meter_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Meter_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Nav_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1508,7 +1508,7 @@ instance Attr Nav_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Nav_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Nav_ Translate  String  where
@@ -1519,7 +1519,7 @@ instance Attr Nav_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Nav_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Noframes_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1527,7 +1527,7 @@ instance Attr Noframes_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noframes_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noframes_ Translate  String  where
@@ -1538,7 +1538,7 @@ instance Attr Noframes_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Noframes_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Noscript_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1546,7 +1546,7 @@ instance Attr Noscript_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noscript_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Noscript_ Translate  String  where
@@ -1557,7 +1557,7 @@ instance Attr Noscript_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Noscript_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Object_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1565,7 +1565,7 @@ instance Attr Object_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Object_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Object_ Translate  String  where
@@ -1576,7 +1576,7 @@ instance Attr Object_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Object_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ol_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1584,7 +1584,7 @@ instance Attr Ol_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ol_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ol_ Translate  String  where
@@ -1595,7 +1595,7 @@ instance Attr Ol_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ol_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Optgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1603,7 +1603,7 @@ instance Attr Optgroup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Optgroup_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Optgroup_ Translate  String  where
@@ -1614,7 +1614,7 @@ instance Attr Optgroup_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Optgroup_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Option_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1622,7 +1622,7 @@ instance Attr Option_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Option_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Option_ Translate  String  where
@@ -1633,7 +1633,7 @@ instance Attr Option_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Option_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Output_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1641,7 +1641,7 @@ instance Attr Output_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Output_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Output_ Translate  String  where
@@ -1652,7 +1652,7 @@ instance Attr Output_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Output_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr P_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1660,7 +1660,7 @@ instance Attr P_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr P_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr P_ Translate  String  where
@@ -1671,7 +1671,7 @@ instance Attr P_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr P_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Param_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1679,7 +1679,7 @@ instance Attr Param_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Param_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Param_ Translate  String  where
@@ -1690,7 +1690,7 @@ instance Attr Param_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Param_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Picture_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1698,7 +1698,7 @@ instance Attr Picture_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Picture_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Picture_ Translate  String  where
@@ -1709,7 +1709,7 @@ instance Attr Picture_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Picture_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Pre_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1717,7 +1717,7 @@ instance Attr Pre_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Pre_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Pre_ Translate  String  where
@@ -1728,7 +1728,7 @@ instance Attr Pre_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Pre_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Progress_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1736,7 +1736,7 @@ instance Attr Progress_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Progress_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Progress_ Translate  String  where
@@ -1747,7 +1747,7 @@ instance Attr Progress_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Progress_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Q_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1755,7 +1755,7 @@ instance Attr Q_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Q_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Q_ Translate  String  where
@@ -1766,7 +1766,7 @@ instance Attr Q_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Q_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Rp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1774,7 +1774,7 @@ instance Attr Rp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rp_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rp_ Translate  String  where
@@ -1785,7 +1785,7 @@ instance Attr Rp_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Rp_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Rt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1793,7 +1793,7 @@ instance Attr Rt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rt_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Rt_ Translate  String  where
@@ -1804,7 +1804,7 @@ instance Attr Rt_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Rt_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ruby_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1812,7 +1812,7 @@ instance Attr Ruby_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ruby_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ruby_ Translate  String  where
@@ -1823,7 +1823,7 @@ instance Attr Ruby_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ruby_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr S_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1831,7 +1831,7 @@ instance Attr S_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr S_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr S_ Translate  String  where
@@ -1842,7 +1842,7 @@ instance Attr S_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr S_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Samp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1850,7 +1850,7 @@ instance Attr Samp_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Samp_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Samp_ Translate  String  where
@@ -1861,7 +1861,7 @@ instance Attr Samp_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Samp_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Script_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1869,7 +1869,7 @@ instance Attr Script_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Script_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Script_ Translate  String  where
@@ -1880,7 +1880,7 @@ instance Attr Script_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Script_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Section_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1888,7 +1888,7 @@ instance Attr Section_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Section_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Section_ Translate  String  where
@@ -1899,7 +1899,7 @@ instance Attr Section_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Section_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Select_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1907,7 +1907,7 @@ instance Attr Select_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Select_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Select_ Translate  String  where
@@ -1918,7 +1918,7 @@ instance Attr Select_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Select_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Small_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1926,7 +1926,7 @@ instance Attr Small_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Small_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Small_ Translate  String  where
@@ -1937,7 +1937,7 @@ instance Attr Small_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Small_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Source_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1945,7 +1945,7 @@ instance Attr Source_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Source_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Source_ Translate  String  where
@@ -1956,7 +1956,7 @@ instance Attr Source_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Source_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Span_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1964,7 +1964,7 @@ instance Attr Span_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Span_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Span_ Translate  String  where
@@ -1975,7 +1975,7 @@ instance Attr Span_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Span_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Strike_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1983,7 +1983,7 @@ instance Attr Strike_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strike_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strike_ Translate  String  where
@@ -1994,7 +1994,7 @@ instance Attr Strike_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Strike_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Strong_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2002,7 +2002,7 @@ instance Attr Strong_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strong_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Strong_ Translate  String  where
@@ -2013,7 +2013,7 @@ instance Attr Strong_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Strong_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Style_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2021,7 +2021,7 @@ instance Attr Style_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Style_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Style_ Translate  String  where
@@ -2032,7 +2032,7 @@ instance Attr Style_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Style_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Sub_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2040,7 +2040,7 @@ instance Attr Sub_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sub_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sub_ Translate  String  where
@@ -2051,7 +2051,7 @@ instance Attr Sub_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Sub_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Summary_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2059,7 +2059,7 @@ instance Attr Summary_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Summary_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Summary_ Translate  String  where
@@ -2070,7 +2070,7 @@ instance Attr Summary_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Summary_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Sup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2078,7 +2078,7 @@ instance Attr Sup_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sup_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Sup_ Translate  String  where
@@ -2089,7 +2089,7 @@ instance Attr Sup_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Sup_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Svg_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2097,7 +2097,7 @@ instance Attr Svg_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Svg_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Svg_ Translate  String  where
@@ -2108,7 +2108,7 @@ instance Attr Svg_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Svg_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Table_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2116,7 +2116,7 @@ instance Attr Table_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Table_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Table_ Translate  String  where
@@ -2127,7 +2127,7 @@ instance Attr Table_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Table_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tbody_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2135,7 +2135,7 @@ instance Attr Tbody_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tbody_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tbody_ Translate  String  where
@@ -2146,7 +2146,7 @@ instance Attr Tbody_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tbody_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Td_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2154,7 +2154,7 @@ instance Attr Td_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Td_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Td_ Translate  String  where
@@ -2165,7 +2165,7 @@ instance Attr Td_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Td_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Template_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2173,7 +2173,7 @@ instance Attr Template_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Template_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Template_ Translate  String  where
@@ -2184,7 +2184,7 @@ instance Attr Template_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Template_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Textarea_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2192,7 +2192,7 @@ instance Attr Textarea_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Textarea_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Textarea_ Translate  String  where
@@ -2203,7 +2203,7 @@ instance Attr Textarea_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Textarea_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tfoot_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2211,7 +2211,7 @@ instance Attr Tfoot_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tfoot_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tfoot_ Translate  String  where
@@ -2222,7 +2222,7 @@ instance Attr Tfoot_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tfoot_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Th_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2230,7 +2230,7 @@ instance Attr Th_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Th_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Th_ Translate  String  where
@@ -2241,7 +2241,7 @@ instance Attr Th_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Th_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Thead_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2249,7 +2249,7 @@ instance Attr Thead_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Thead_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Thead_ Translate  String  where
@@ -2260,7 +2260,7 @@ instance Attr Thead_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Thead_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Time_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2268,7 +2268,7 @@ instance Attr Time_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Time_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Time_ Translate  String  where
@@ -2279,7 +2279,7 @@ instance Attr Time_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Time_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Title_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2287,7 +2287,7 @@ instance Attr Title_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Title_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Title_ Translate  String  where
@@ -2298,7 +2298,7 @@ instance Attr Title_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Title_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2306,7 +2306,7 @@ instance Attr Tr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tr_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tr_ Translate  String  where
@@ -2317,7 +2317,7 @@ instance Attr Tr_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tr_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Track_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2325,7 +2325,7 @@ instance Attr Track_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Track_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Track_ Translate  String  where
@@ -2336,7 +2336,7 @@ instance Attr Track_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Track_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2344,7 +2344,7 @@ instance Attr Tt_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tt_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Tt_ Translate  String  where
@@ -2355,7 +2355,7 @@ instance Attr Tt_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Tt_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr U_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2363,7 +2363,7 @@ instance Attr U_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr U_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr U_ Translate  String  where
@@ -2374,7 +2374,7 @@ instance Attr U_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr U_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ul_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2382,7 +2382,7 @@ instance Attr Ul_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ul_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Ul_ Translate  String  where
@@ -2393,7 +2393,7 @@ instance Attr Ul_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Ul_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Var_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2401,7 +2401,7 @@ instance Attr Var_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Var_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Var_ Translate  String  where
@@ -2412,7 +2412,7 @@ instance Attr Var_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Var_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Video_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2420,7 +2420,7 @@ instance Attr Video_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Video_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Video_ Translate  String  where
@@ -2431,7 +2431,7 @@ instance Attr Video_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Video_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Wbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2439,7 +2439,7 @@ instance Attr Wbr_ Translate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "translate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Wbr_ Translate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "translate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "translate", value: prop' value })
 instance Attr Wbr_ Translate  String  where
@@ -2450,7 +2450,7 @@ instance Attr Wbr_ Translate (Event.Event  String ) where
     \value -> { key: "translate", value: prop' value }
 
 instance Attr Wbr_ Translate (ST.ST Global.Global  String ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "translate", value: prop' value }
 
 instance Attr everything Translate (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -2458,7 +2458,7 @@ instance Attr everything Translate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "translate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "translate", value: unset' })
 instance Attr everything Translate (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Translate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "translate", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "translate", value: unset' })
 instance Attr everything Translate  Unit  where
@@ -2469,5 +2469,5 @@ instance Attr everything Translate (Event.Event  Unit ) where
     \_ -> { key: "translate", value: unset' }
 
 instance Attr everything Translate (ST.ST Global.Global  Unit ) where
-  attr Translate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Translate iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "translate", value: unset' }

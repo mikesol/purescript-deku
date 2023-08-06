@@ -20,7 +20,7 @@ instance Attr Input_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "maxlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Input_ Maxlength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "maxlength", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Input_ Maxlength  String  where
@@ -31,7 +31,7 @@ instance Attr Input_ Maxlength (Event.Event  String ) where
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr Input_ Maxlength (ST.ST Global.Global  String ) where
-  attr Maxlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Maxlength iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr Textarea_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Textarea_ Maxlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "maxlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Textarea_ Maxlength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "maxlength", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "maxlength", value: prop' value })
 instance Attr Textarea_ Maxlength  String  where
@@ -50,7 +50,7 @@ instance Attr Textarea_ Maxlength (Event.Event  String ) where
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr Textarea_ Maxlength (ST.ST Global.Global  String ) where
-  attr Maxlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Maxlength iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "maxlength", value: prop' value }
 
 instance Attr everything Maxlength (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Maxlength (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "maxlength", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "maxlength", value: unset' })
 instance Attr everything Maxlength (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Maxlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "maxlength", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "maxlength", value: unset' })
 instance Attr everything Maxlength  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Maxlength (Event.Event  Unit ) where
     \_ -> { key: "maxlength", value: unset' }
 
 instance Attr everything Maxlength (ST.ST Global.Global  Unit ) where
-  attr Maxlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Maxlength iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "maxlength", value: unset' }

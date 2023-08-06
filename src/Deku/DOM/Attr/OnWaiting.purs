@@ -18,7 +18,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "waiting", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "waiting", value: cb' value })
 instance Attr anything OnWaiting (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "waiting", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "waiting", value: cb' value })
 instance Attr anything OnWaiting  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnWaiting (Event.Event  Cb ) where
     \value -> { key: "waiting", value: cb' value }
 
 instance Attr anything OnWaiting (ST.ST Global.Global  Cb ) where
-  attr OnWaiting stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWaiting iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "waiting", value: cb' value }
 
 instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "waiting", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnWaiting (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "waiting", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "waiting", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnWaiting (Event.Event  (Effect Unit) ) where
     \value -> { key: "waiting", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWaiting (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnWaiting stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWaiting iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "waiting", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnWaiting (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "waiting", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnWaiting (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "waiting", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "waiting", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnWaiting (Event.Event  (Effect Boolean) ) where
     \value -> { key: "waiting", value: cb' (Cb (const value)) }
 
 instance Attr anything OnWaiting (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnWaiting stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWaiting iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "waiting", value: cb' (Cb (const value)) }
 
 instance Attr everything OnWaiting (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnWaiting (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "waiting", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "waiting", value: unset' })
 instance Attr everything OnWaiting (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnWaiting (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "waiting", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "waiting", value: unset' })
 instance Attr everything OnWaiting  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnWaiting (Event.Event  Unit ) where
     \_ -> { key: "waiting", value: unset' }
 
 instance Attr everything OnWaiting (ST.ST Global.Global  Unit ) where
-  attr OnWaiting stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWaiting iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "waiting", value: unset' }

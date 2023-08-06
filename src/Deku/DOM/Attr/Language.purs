@@ -19,7 +19,7 @@ instance Attr Script_ Language (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "language", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "language", value: prop' value })
 instance Attr Script_ Language (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Language (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Language (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "language", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "language", value: prop' value })
 instance Attr Script_ Language  String  where
@@ -30,7 +30,7 @@ instance Attr Script_ Language (Event.Event  String ) where
     \value -> { key: "language", value: prop' value }
 
 instance Attr Script_ Language (ST.ST Global.Global  String ) where
-  attr Language stValue = unsafeAttribute $ This $ stValue <#>
+  attr Language iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "language", value: prop' value }
 
 instance Attr everything Language (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Language (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "language", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "language", value: unset' })
 instance Attr everything Language (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Language (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Language (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "language", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "language", value: unset' })
 instance Attr everything Language  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Language (Event.Event  Unit ) where
     { key: "language", value: unset' }
 
 instance Attr everything Language (ST.ST Global.Global  Unit ) where
-  attr Language stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Language iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "language", value: unset' }

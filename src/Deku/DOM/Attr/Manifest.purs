@@ -19,7 +19,7 @@ instance Attr Html_ Manifest (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "manifest", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "manifest", value: prop' value })
 instance Attr Html_ Manifest (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Manifest (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Manifest (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "manifest", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "manifest", value: prop' value })
 instance Attr Html_ Manifest  String  where
@@ -30,7 +30,7 @@ instance Attr Html_ Manifest (Event.Event  String ) where
     \value -> { key: "manifest", value: prop' value }
 
 instance Attr Html_ Manifest (ST.ST Global.Global  String ) where
-  attr Manifest stValue = unsafeAttribute $ This $ stValue <#>
+  attr Manifest iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "manifest", value: prop' value }
 
 instance Attr everything Manifest (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Manifest (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "manifest", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "manifest", value: unset' })
 instance Attr everything Manifest (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Manifest (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Manifest (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "manifest", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "manifest", value: unset' })
 instance Attr everything Manifest  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Manifest (Event.Event  Unit ) where
     { key: "manifest", value: unset' }
 
 instance Attr everything Manifest (ST.ST Global.Global  Unit ) where
-  attr Manifest stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Manifest iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "manifest", value: unset' }

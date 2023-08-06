@@ -22,7 +22,7 @@ instance Attr Animate_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr Animate_ RepeatDur (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatDur", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr Animate_ RepeatDur  String  where
@@ -33,7 +33,7 @@ instance Attr Animate_ RepeatDur (Event.Event  String ) where
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr Animate_ RepeatDur (ST.ST Global.Global  String ) where
-  attr RepeatDur stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatDur iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr AnimateMotion_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr AnimateMotion_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr AnimateMotion_ RepeatDur (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatDur", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr AnimateMotion_ RepeatDur  String  where
@@ -52,7 +52,7 @@ instance Attr AnimateMotion_ RepeatDur (Event.Event  String ) where
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr AnimateMotion_ RepeatDur (ST.ST Global.Global  String ) where
-  attr RepeatDur stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatDur iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr AnimateTransform_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr AnimateTransform_ RepeatDur (NonEmpty.NonEmpty Event.Event  String
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr AnimateTransform_ RepeatDur (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatDur", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr AnimateTransform_ RepeatDur  String  where
@@ -71,7 +71,7 @@ instance Attr AnimateTransform_ RepeatDur (Event.Event  String ) where
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr AnimateTransform_ RepeatDur (ST.ST Global.Global  String ) where
-  attr RepeatDur stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatDur iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr Set_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr Set_ RepeatDur (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "repeatDur", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr Set_ RepeatDur (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatDur", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatDur", value: prop' value })
 instance Attr Set_ RepeatDur  String  where
@@ -90,7 +90,7 @@ instance Attr Set_ RepeatDur (Event.Event  String ) where
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr Set_ RepeatDur (ST.ST Global.Global  String ) where
-  attr RepeatDur stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatDur iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatDur", value: prop' value }
 
 instance Attr everything RepeatDur (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything RepeatDur (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "repeatDur", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "repeatDur", value: unset' })
 instance Attr everything RepeatDur (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr RepeatDur (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "repeatDur", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "repeatDur", value: unset' })
 instance Attr everything RepeatDur  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything RepeatDur (Event.Event  Unit ) where
     \_ -> { key: "repeatDur", value: unset' }
 
 instance Attr everything RepeatDur (ST.ST Global.Global  Unit ) where
-  attr RepeatDur stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatDur iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "repeatDur", value: unset' }

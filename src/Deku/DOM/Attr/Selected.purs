@@ -19,7 +19,7 @@ instance Attr Option_ Selected (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "selected", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "selected", value: prop' value })
 instance Attr Option_ Selected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Selected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Selected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "selected", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "selected", value: prop' value })
 instance Attr Option_ Selected  String  where
@@ -30,7 +30,7 @@ instance Attr Option_ Selected (Event.Event  String ) where
     \value -> { key: "selected", value: prop' value }
 
 instance Attr Option_ Selected (ST.ST Global.Global  String ) where
-  attr Selected stValue = unsafeAttribute $ This $ stValue <#>
+  attr Selected iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "selected", value: prop' value }
 
 instance Attr everything Selected (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Selected (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "selected", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "selected", value: unset' })
 instance Attr everything Selected (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Selected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Selected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "selected", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "selected", value: unset' })
 instance Attr everything Selected  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Selected (Event.Event  Unit ) where
     { key: "selected", value: unset' }
 
 instance Attr everything Selected (ST.ST Global.Global  Unit ) where
-  attr Selected stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Selected iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "selected", value: unset' }

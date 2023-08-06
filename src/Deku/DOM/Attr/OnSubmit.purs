@@ -18,7 +18,7 @@ instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "submit", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "submit", value: cb' value })
 instance Attr anything OnSubmit (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "submit", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "submit", value: cb' value })
 instance Attr anything OnSubmit  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnSubmit (Event.Event  Cb ) where
     \value -> { key: "submit", value: cb' value }
 
 instance Attr anything OnSubmit (ST.ST Global.Global  Cb ) where
-  attr OnSubmit stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSubmit iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "submit", value: cb' value }
 
 instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "submit", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSubmit (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "submit", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "submit", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnSubmit (Event.Event  (Effect Unit) ) where
     \value -> { key: "submit", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSubmit (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSubmit stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSubmit iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "submit", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnSubmit (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "submit", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSubmit (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "submit", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "submit", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnSubmit (Event.Event  (Effect Boolean) ) where
     \value -> { key: "submit", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSubmit (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSubmit stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSubmit iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "submit", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSubmit (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnSubmit (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "submit", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "submit", value: unset' })
 instance Attr everything OnSubmit (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSubmit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "submit", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "submit", value: unset' })
 instance Attr everything OnSubmit  Unit  where
-  attr OnSubmit _ = unsafeAttribute $ This $ pure $ { key: "submit", value: unset' }
+  attr OnSubmit _ = unsafeAttribute $ This $ { key: "submit", value: unset' }
 instance Attr everything OnSubmit (Event.Event  Unit ) where
   attr OnSubmit eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "submit", value: unset' }
 
 instance Attr everything OnSubmit (ST.ST Global.Global  Unit ) where
-  attr OnSubmit stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnSubmit iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "submit", value: unset' }

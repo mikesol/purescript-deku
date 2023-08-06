@@ -20,7 +20,7 @@ instance Attr Input_ Multiple (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "multiple", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Input_ Multiple (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "multiple", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Input_ Multiple  String  where
@@ -31,7 +31,7 @@ instance Attr Input_ Multiple (Event.Event  String ) where
     \value -> { key: "multiple", value: prop' value }
 
 instance Attr Input_ Multiple (ST.ST Global.Global  String ) where
-  attr Multiple stValue = unsafeAttribute $ This $ stValue <#>
+  attr Multiple iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "multiple", value: prop' value }
 
 instance Attr Select_ Multiple (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Select_ Multiple (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "multiple", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Select_ Multiple (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "multiple", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "multiple", value: prop' value })
 instance Attr Select_ Multiple  String  where
@@ -50,7 +50,7 @@ instance Attr Select_ Multiple (Event.Event  String ) where
     \value -> { key: "multiple", value: prop' value }
 
 instance Attr Select_ Multiple (ST.ST Global.Global  String ) where
-  attr Multiple stValue = unsafeAttribute $ This $ stValue <#>
+  attr Multiple iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "multiple", value: prop' value }
 
 instance Attr everything Multiple (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Multiple (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "multiple", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "multiple", value: unset' })
 instance Attr everything Multiple (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Multiple (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "multiple", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "multiple", value: unset' })
 instance Attr everything Multiple  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Multiple (Event.Event  Unit ) where
     { key: "multiple", value: unset' }
 
 instance Attr everything Multiple (ST.ST Global.Global  Unit ) where
-  attr Multiple stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Multiple iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "multiple", value: unset' }

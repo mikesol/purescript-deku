@@ -18,7 +18,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "touchend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "touchend", value: cb' value })
 instance Attr anything OnTouchend (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchend", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "touchend", value: cb' value })
 instance Attr anything OnTouchend  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnTouchend (Event.Event  Cb ) where
     \value -> { key: "touchend", value: cb' value }
 
 instance Attr anything OnTouchend (ST.ST Global.Global  Cb ) where
-  attr OnTouchend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchend", value: cb' value }
 
 instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "touchend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTouchend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchend", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "touchend", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnTouchend (Event.Event  (Effect Unit) ) where
     \value -> { key: "touchend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchend (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnTouchend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnTouchend (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "touchend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTouchend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchend", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "touchend", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnTouchend (Event.Event  (Effect Boolean) ) where
     \value -> { key: "touchend", value: cb' (Cb (const value)) }
 
 instance Attr anything OnTouchend (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnTouchend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchend", value: cb' (Cb (const value)) }
 
 instance Attr everything OnTouchend (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnTouchend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "touchend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchend", value: unset' })
 instance Attr everything OnTouchend (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnTouchend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "touchend", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "touchend", value: unset' })
 instance Attr everything OnTouchend  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnTouchend (Event.Event  Unit ) where
     \_ -> { key: "touchend", value: unset' }
 
 instance Attr everything OnTouchend (ST.ST Global.Global  Unit ) where
-  attr OnTouchend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchend iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "touchend", value: unset' }

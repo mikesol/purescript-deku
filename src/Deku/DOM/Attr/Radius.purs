@@ -19,7 +19,7 @@ instance Attr FeMorphology_ Radius (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "radius", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "radius", value: prop' value })
 instance Attr FeMorphology_ Radius (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Radius (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Radius (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "radius", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "radius", value: prop' value })
 instance Attr FeMorphology_ Radius  String  where
@@ -30,7 +30,7 @@ instance Attr FeMorphology_ Radius (Event.Event  String ) where
     \value -> { key: "radius", value: prop' value }
 
 instance Attr FeMorphology_ Radius (ST.ST Global.Global  String ) where
-  attr Radius stValue = unsafeAttribute $ This $ stValue <#>
+  attr Radius iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "radius", value: prop' value }
 
 instance Attr everything Radius (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Radius (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "radius", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "radius", value: unset' })
 instance Attr everything Radius (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Radius (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Radius (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "radius", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "radius", value: unset' })
 instance Attr everything Radius  Unit  where
-  attr Radius _ = unsafeAttribute $ This $ pure $ { key: "radius", value: unset' }
+  attr Radius _ = unsafeAttribute $ This $ { key: "radius", value: unset' }
 instance Attr everything Radius (Event.Event  Unit ) where
   attr Radius eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "radius", value: unset' }
 
 instance Attr everything Radius (ST.ST Global.Global  Unit ) where
-  attr Radius stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Radius iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "radius", value: unset' }

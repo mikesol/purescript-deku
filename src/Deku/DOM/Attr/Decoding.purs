@@ -19,7 +19,7 @@ instance Attr Img_ Decoding (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "decoding", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "decoding", value: prop' value })
 instance Attr Img_ Decoding (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Decoding (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Decoding (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "decoding", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "decoding", value: prop' value })
 instance Attr Img_ Decoding  String  where
@@ -30,7 +30,7 @@ instance Attr Img_ Decoding (Event.Event  String ) where
     \value -> { key: "decoding", value: prop' value }
 
 instance Attr Img_ Decoding (ST.ST Global.Global  String ) where
-  attr Decoding stValue = unsafeAttribute $ This $ stValue <#>
+  attr Decoding iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "decoding", value: prop' value }
 
 instance Attr everything Decoding (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Decoding (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "decoding", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "decoding", value: unset' })
 instance Attr everything Decoding (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Decoding (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Decoding (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "decoding", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "decoding", value: unset' })
 instance Attr everything Decoding  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Decoding (Event.Event  Unit ) where
     { key: "decoding", value: unset' }
 
 instance Attr everything Decoding (ST.ST Global.Global  Unit ) where
-  attr Decoding stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Decoding iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "decoding", value: unset' }

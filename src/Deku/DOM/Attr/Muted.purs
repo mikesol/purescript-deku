@@ -20,7 +20,7 @@ instance Attr Audio_ Muted (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "muted", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "muted", value: prop' value })
 instance Attr Audio_ Muted (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "muted", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "muted", value: prop' value })
 instance Attr Audio_ Muted  String  where
@@ -31,7 +31,7 @@ instance Attr Audio_ Muted (Event.Event  String ) where
     \value -> { key: "muted", value: prop' value }
 
 instance Attr Audio_ Muted (ST.ST Global.Global  String ) where
-  attr Muted stValue = unsafeAttribute $ This $ stValue <#>
+  attr Muted iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "muted", value: prop' value }
 
 instance Attr Video_ Muted (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Video_ Muted (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "muted", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "muted", value: prop' value })
 instance Attr Video_ Muted (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "muted", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "muted", value: prop' value })
 instance Attr Video_ Muted  String  where
@@ -50,21 +50,21 @@ instance Attr Video_ Muted (Event.Event  String ) where
     \value -> { key: "muted", value: prop' value }
 
 instance Attr Video_ Muted (ST.ST Global.Global  String ) where
-  attr Muted stValue = unsafeAttribute $ This $ stValue <#>
+  attr Muted iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "muted", value: prop' value }
 
 instance Attr everything Muted (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Muted bothValues = unsafeAttribute $ Both (pure  { key: "muted", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "muted", value: unset' })
 instance Attr everything Muted (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "muted", value: unset' })
+  attr Muted (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "muted", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "muted", value: unset' })
 instance Attr everything Muted  Unit  where
-  attr Muted _ = unsafeAttribute $ This $ pure $ { key: "muted", value: unset' }
+  attr Muted _ = unsafeAttribute $ This $ { key: "muted", value: unset' }
 instance Attr everything Muted (Event.Event  Unit ) where
   attr Muted eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "muted", value: unset' }
 
 instance Attr everything Muted (ST.ST Global.Global  Unit ) where
-  attr Muted stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Muted iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "muted", value: unset' }

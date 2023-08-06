@@ -18,7 +18,7 @@ instance Attr anything OnReset (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "reset", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "reset", value: cb' value })
 instance Attr anything OnReset (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "reset", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "reset", value: cb' value })
 instance Attr anything OnReset  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnReset (Event.Event  Cb ) where
     \value -> { key: "reset", value: cb' value }
 
 instance Attr anything OnReset (ST.ST Global.Global  Cb ) where
-  attr OnReset stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnReset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "reset", value: cb' value }
 
 instance Attr anything OnReset (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnReset (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "reset", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnReset (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "reset", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "reset", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnReset (Event.Event  (Effect Unit) ) where
     \value -> { key: "reset", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnReset (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnReset stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnReset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "reset", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnReset (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnReset (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "reset", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnReset (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "reset", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "reset", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnReset (Event.Event  (Effect Boolean) ) where
     \value -> { key: "reset", value: cb' (Cb (const value)) }
 
 instance Attr anything OnReset (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnReset stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnReset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "reset", value: cb' (Cb (const value)) }
 
 instance Attr everything OnReset (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnReset (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "reset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "reset", value: unset' })
 instance Attr everything OnReset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnReset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "reset", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "reset", value: unset' })
 instance Attr everything OnReset  Unit  where
-  attr OnReset _ = unsafeAttribute $ This $ pure $ { key: "reset", value: unset' }
+  attr OnReset _ = unsafeAttribute $ This $ { key: "reset", value: unset' }
 instance Attr everything OnReset (Event.Event  Unit ) where
   attr OnReset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "reset", value: unset' }
 
 instance Attr everything OnReset (ST.ST Global.Global  Unit ) where
-  attr OnReset stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnReset iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "reset", value: unset' }

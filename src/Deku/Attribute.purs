@@ -23,8 +23,6 @@ module Deku.Attribute
 
 import Prelude
 
-import Control.Monad.ST (ST)
-import Control.Monad.ST.Global (Global)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
@@ -90,19 +88,19 @@ type Attribute' =
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 newtype Attribute (e :: Type) = Attribute
-  (These (ST Global Attribute') (FRP.Event Attribute'))
+  (These Attribute' (FRP.Event Attribute'))
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
   :: forall e
    . Attribute e
-  -> These (ST Global Attribute') (FRP.Event Attribute')
+  -> These Attribute' (FRP.Event Attribute')
 unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
   :: forall e
-   . These (ST Global Attribute') (FRP.Event Attribute')
+   . These Attribute' (FRP.Event Attribute')
   -> Attribute e
 unsafeAttribute = Attribute
 
@@ -116,7 +114,7 @@ class Attr e a b where
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute $ This $ pure { key: "data-" <> k, value: Prop' v }
+xdata k v = unsafeAttribute $ This { key: "data-" <> k, value: Prop' v }
 
 -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
 -- | More commonly used in its alias `?:=`.

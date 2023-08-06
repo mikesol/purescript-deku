@@ -19,7 +19,7 @@ instance Attr FeConvolveMatrix_ PreserveAlpha (NonEmpty.NonEmpty Event.Event  St
     { key: "preserveAlpha", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preserveAlpha", value: prop' value })
 instance Attr FeConvolveMatrix_ PreserveAlpha (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr PreserveAlpha (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr PreserveAlpha (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "preserveAlpha", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "preserveAlpha", value: prop' value })
 instance Attr FeConvolveMatrix_ PreserveAlpha  String  where
@@ -30,7 +30,7 @@ instance Attr FeConvolveMatrix_ PreserveAlpha (Event.Event  String ) where
     \value -> { key: "preserveAlpha", value: prop' value }
 
 instance Attr FeConvolveMatrix_ PreserveAlpha (ST.ST Global.Global  String ) where
-  attr PreserveAlpha stValue = unsafeAttribute $ This $ stValue <#>
+  attr PreserveAlpha iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "preserveAlpha", value: prop' value }
 
 instance Attr everything PreserveAlpha (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything PreserveAlpha (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "preserveAlpha", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "preserveAlpha", value: unset' })
 instance Attr everything PreserveAlpha (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr PreserveAlpha (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr PreserveAlpha (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "preserveAlpha", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "preserveAlpha", value: unset' })
 instance Attr everything PreserveAlpha  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything PreserveAlpha (Event.Event  Unit ) where
     \_ -> { key: "preserveAlpha", value: unset' }
 
 instance Attr everything PreserveAlpha (ST.ST Global.Global  Unit ) where
-  attr PreserveAlpha stValue = unsafeAttribute $ This $ stValue <#>
+  attr PreserveAlpha iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "preserveAlpha", value: unset' }

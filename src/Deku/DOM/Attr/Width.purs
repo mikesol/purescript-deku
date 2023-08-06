@@ -51,7 +51,7 @@ instance Attr Canvas_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Canvas_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Canvas_ Width  String  where
@@ -62,7 +62,7 @@ instance Attr Canvas_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Canvas_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Embed_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -70,7 +70,7 @@ instance Attr Embed_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Embed_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Embed_ Width  String  where
@@ -81,7 +81,7 @@ instance Attr Embed_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Embed_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Iframe_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -89,7 +89,7 @@ instance Attr Iframe_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Iframe_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Iframe_ Width  String  where
@@ -100,7 +100,7 @@ instance Attr Iframe_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Iframe_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Img_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -108,7 +108,7 @@ instance Attr Img_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Img_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Img_ Width  String  where
@@ -119,7 +119,7 @@ instance Attr Img_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Img_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Input_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -127,7 +127,7 @@ instance Attr Input_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Input_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Input_ Width  String  where
@@ -138,7 +138,7 @@ instance Attr Input_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Input_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Object_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -146,7 +146,7 @@ instance Attr Object_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Object_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Object_ Width  String  where
@@ -157,7 +157,7 @@ instance Attr Object_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Object_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Video_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -165,7 +165,7 @@ instance Attr Video_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Video_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Video_ Width  String  where
@@ -176,7 +176,7 @@ instance Attr Video_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Video_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeBlend_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -184,7 +184,7 @@ instance Attr FeBlend_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeBlend_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeBlend_ Width  String  where
@@ -195,7 +195,7 @@ instance Attr FeBlend_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeBlend_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeColorMatrix_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -203,7 +203,7 @@ instance Attr FeColorMatrix_ Width (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeColorMatrix_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeColorMatrix_ Width  String  where
@@ -214,7 +214,7 @@ instance Attr FeColorMatrix_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeColorMatrix_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeComponentTransfer_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -222,7 +222,7 @@ instance Attr FeComponentTransfer_ Width (NonEmpty.NonEmpty Event.Event  String 
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeComponentTransfer_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeComponentTransfer_ Width  String  where
@@ -233,7 +233,7 @@ instance Attr FeComponentTransfer_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeComponentTransfer_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeComposite_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -241,7 +241,7 @@ instance Attr FeComposite_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeComposite_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeComposite_ Width  String  where
@@ -252,7 +252,7 @@ instance Attr FeComposite_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeComposite_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -260,7 +260,7 @@ instance Attr FeConvolveMatrix_ Width (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeConvolveMatrix_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeConvolveMatrix_ Width  String  where
@@ -271,7 +271,7 @@ instance Attr FeConvolveMatrix_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -279,7 +279,7 @@ instance Attr FeDiffuseLighting_ Width (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDiffuseLighting_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDiffuseLighting_ Width  String  where
@@ -290,7 +290,7 @@ instance Attr FeDiffuseLighting_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDisplacementMap_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -298,7 +298,7 @@ instance Attr FeDisplacementMap_ Width (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDisplacementMap_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDisplacementMap_ Width  String  where
@@ -309,7 +309,7 @@ instance Attr FeDisplacementMap_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDisplacementMap_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDropShadow_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -317,7 +317,7 @@ instance Attr FeDropShadow_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDropShadow_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeDropShadow_ Width  String  where
@@ -328,7 +328,7 @@ instance Attr FeDropShadow_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeDropShadow_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeFlood_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -336,7 +336,7 @@ instance Attr FeFlood_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeFlood_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeFlood_ Width  String  where
@@ -347,7 +347,7 @@ instance Attr FeFlood_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeFlood_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeGaussianBlur_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -355,7 +355,7 @@ instance Attr FeGaussianBlur_ Width (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeGaussianBlur_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeGaussianBlur_ Width  String  where
@@ -366,7 +366,7 @@ instance Attr FeGaussianBlur_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeGaussianBlur_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeImage_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -374,7 +374,7 @@ instance Attr FeImage_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeImage_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeImage_ Width  String  where
@@ -385,7 +385,7 @@ instance Attr FeImage_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeImage_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeMerge_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -393,7 +393,7 @@ instance Attr FeMerge_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeMerge_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeMerge_ Width  String  where
@@ -404,7 +404,7 @@ instance Attr FeMerge_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeMerge_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeMorphology_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -412,7 +412,7 @@ instance Attr FeMorphology_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeMorphology_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeMorphology_ Width  String  where
@@ -423,7 +423,7 @@ instance Attr FeMorphology_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeMorphology_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeOffset_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -431,7 +431,7 @@ instance Attr FeOffset_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeOffset_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeOffset_ Width  String  where
@@ -442,7 +442,7 @@ instance Attr FeOffset_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeOffset_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeSpecularLighting_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -450,7 +450,7 @@ instance Attr FeSpecularLighting_ Width (NonEmpty.NonEmpty Event.Event  String )
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeSpecularLighting_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeSpecularLighting_ Width  String  where
@@ -461,7 +461,7 @@ instance Attr FeSpecularLighting_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeSpecularLighting_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeTile_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -469,7 +469,7 @@ instance Attr FeTile_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeTile_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeTile_ Width  String  where
@@ -480,7 +480,7 @@ instance Attr FeTile_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeTile_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeTurbulence_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -488,7 +488,7 @@ instance Attr FeTurbulence_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeTurbulence_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr FeTurbulence_ Width  String  where
@@ -499,7 +499,7 @@ instance Attr FeTurbulence_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr FeTurbulence_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Filter_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -507,7 +507,7 @@ instance Attr Filter_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Filter_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Filter_ Width  String  where
@@ -518,7 +518,7 @@ instance Attr Filter_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Filter_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr ForeignObject_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -526,7 +526,7 @@ instance Attr ForeignObject_ Width (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr ForeignObject_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr ForeignObject_ Width  String  where
@@ -537,7 +537,7 @@ instance Attr ForeignObject_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr ForeignObject_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Image_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -545,7 +545,7 @@ instance Attr Image_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Image_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Image_ Width  String  where
@@ -556,7 +556,7 @@ instance Attr Image_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Image_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Mask_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -564,7 +564,7 @@ instance Attr Mask_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Mask_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Mask_ Width  String  where
@@ -575,7 +575,7 @@ instance Attr Mask_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Mask_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Pattern_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -583,7 +583,7 @@ instance Attr Pattern_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Pattern_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Pattern_ Width  String  where
@@ -594,7 +594,7 @@ instance Attr Pattern_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Pattern_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Rect_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -602,7 +602,7 @@ instance Attr Rect_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Rect_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Rect_ Width  String  where
@@ -613,7 +613,7 @@ instance Attr Rect_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Rect_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Svg_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -621,7 +621,7 @@ instance Attr Svg_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Svg_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Svg_ Width  String  where
@@ -632,7 +632,7 @@ instance Attr Svg_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Svg_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Symbol_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -640,7 +640,7 @@ instance Attr Symbol_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Symbol_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Symbol_ Width  String  where
@@ -651,7 +651,7 @@ instance Attr Symbol_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Symbol_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr Use_ Width (NonEmpty.NonEmpty Event.Event  String ) where
@@ -659,7 +659,7 @@ instance Attr Use_ Width (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "width", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Use_ Width (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "width", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "width", value: prop' value })
 instance Attr Use_ Width  String  where
@@ -670,21 +670,21 @@ instance Attr Use_ Width (Event.Event  String ) where
     \value -> { key: "width", value: prop' value }
 
 instance Attr Use_ Width (ST.ST Global.Global  String ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#>
+  attr Width iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "width", value: prop' value }
 
 instance Attr everything Width (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Width bothValues = unsafeAttribute $ Both (pure  { key: "width", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "width", value: unset' })
 instance Attr everything Width (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "width", value: unset' })
+  attr Width (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "width", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "width", value: unset' })
 instance Attr everything Width  Unit  where
-  attr Width _ = unsafeAttribute $ This $ pure $ { key: "width", value: unset' }
+  attr Width _ = unsafeAttribute $ This $ { key: "width", value: unset' }
 instance Attr everything Width (Event.Event  Unit ) where
   attr Width eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "width", value: unset' }
 
 instance Attr everything Width (ST.ST Global.Global  Unit ) where
-  attr Width stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Width iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "width", value: unset' }

@@ -20,7 +20,7 @@ instance Attr Input_ Dirname (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dirname", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Input_ Dirname (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dirname", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Input_ Dirname  String  where
@@ -31,7 +31,7 @@ instance Attr Input_ Dirname (Event.Event  String ) where
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr Input_ Dirname (ST.ST Global.Global  String ) where
-  attr Dirname stValue = unsafeAttribute $ This $ stValue <#>
+  attr Dirname iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr Textarea_ Dirname (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Textarea_ Dirname (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dirname", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Textarea_ Dirname (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dirname", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dirname", value: prop' value })
 instance Attr Textarea_ Dirname  String  where
@@ -50,7 +50,7 @@ instance Attr Textarea_ Dirname (Event.Event  String ) where
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr Textarea_ Dirname (ST.ST Global.Global  String ) where
-  attr Dirname stValue = unsafeAttribute $ This $ stValue <#>
+  attr Dirname iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dirname", value: prop' value }
 
 instance Attr everything Dirname (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Dirname (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dirname", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dirname", value: unset' })
 instance Attr everything Dirname (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Dirname (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dirname", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dirname", value: unset' })
 instance Attr everything Dirname  Unit  where
-  attr Dirname _ = unsafeAttribute $ This $ pure $ { key: "dirname", value: unset' }
+  attr Dirname _ = unsafeAttribute $ This $ { key: "dirname", value: unset' }
 instance Attr everything Dirname (Event.Event  Unit ) where
   attr Dirname eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "dirname", value: unset' }
 
 instance Attr everything Dirname (ST.ST Global.Global  Unit ) where
-  attr Dirname stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Dirname iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "dirname", value: unset' }

@@ -19,7 +19,7 @@ instance Attr Track_ Default (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "default", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "default", value: prop' value })
 instance Attr Track_ Default (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Default (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Default (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "default", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "default", value: prop' value })
 instance Attr Track_ Default  String  where
@@ -30,7 +30,7 @@ instance Attr Track_ Default (Event.Event  String ) where
     \value -> { key: "default", value: prop' value }
 
 instance Attr Track_ Default (ST.ST Global.Global  String ) where
-  attr Default stValue = unsafeAttribute $ This $ stValue <#>
+  attr Default iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "default", value: prop' value }
 
 instance Attr everything Default (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Default (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "default", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "default", value: unset' })
 instance Attr everything Default (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Default (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Default (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "default", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "default", value: unset' })
 instance Attr everything Default  Unit  where
-  attr Default _ = unsafeAttribute $ This $ pure $ { key: "default", value: unset' }
+  attr Default _ = unsafeAttribute $ This $ { key: "default", value: unset' }
 instance Attr everything Default (Event.Event  Unit ) where
   attr Default eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "default", value: unset' }
 
 instance Attr everything Default (ST.ST Global.Global  Unit ) where
-  attr Default stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Default iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "default", value: unset' }

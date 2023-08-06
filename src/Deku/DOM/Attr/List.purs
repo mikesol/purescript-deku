@@ -19,7 +19,7 @@ instance Attr Input_ List (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "list", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "list", value: prop' value })
 instance Attr Input_ List (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr List (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr List (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "list", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "list", value: prop' value })
 instance Attr Input_ List  String  where
@@ -30,21 +30,21 @@ instance Attr Input_ List (Event.Event  String ) where
     { key: "list", value: prop' value }
 
 instance Attr Input_ List (ST.ST Global.Global  String ) where
-  attr List stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr List iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "list", value: prop' value }
 
 instance Attr everything List (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr List bothValues = unsafeAttribute $ Both (pure  { key: "list", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "list", value: unset' })
 instance Attr everything List (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr List (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "list", value: unset' })
+  attr List (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "list", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "list", value: unset' })
 instance Attr everything List  Unit  where
-  attr List _ = unsafeAttribute $ This $ pure $ { key: "list", value: unset' }
+  attr List _ = unsafeAttribute $ This $ { key: "list", value: unset' }
 instance Attr everything List (Event.Event  Unit ) where
   attr List eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "list", value: unset' }
 
 instance Attr everything List (ST.ST Global.Global  Unit ) where
-  attr List stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr List iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "list", value: unset' }

@@ -20,7 +20,7 @@ instance Attr A_ Download (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "download", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr A_ Download (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "download", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr A_ Download  String  where
@@ -31,7 +31,7 @@ instance Attr A_ Download (Event.Event  String ) where
     \value -> { key: "download", value: prop' value }
 
 instance Attr A_ Download (ST.ST Global.Global  String ) where
-  attr Download stValue = unsafeAttribute $ This $ stValue <#>
+  attr Download iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "download", value: prop' value }
 
 instance Attr Area_ Download (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Area_ Download (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "download", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr Area_ Download (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "download", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "download", value: prop' value })
 instance Attr Area_ Download  String  where
@@ -50,7 +50,7 @@ instance Attr Area_ Download (Event.Event  String ) where
     \value -> { key: "download", value: prop' value }
 
 instance Attr Area_ Download (ST.ST Global.Global  String ) where
-  attr Download stValue = unsafeAttribute $ This $ stValue <#>
+  attr Download iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "download", value: prop' value }
 
 instance Attr everything Download (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Download (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "download", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "download", value: unset' })
 instance Attr everything Download (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Download (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "download", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "download", value: unset' })
 instance Attr everything Download  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Download (Event.Event  Unit ) where
     { key: "download", value: unset' }
 
 instance Attr everything Download (ST.ST Global.Global  Unit ) where
-  attr Download stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Download iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "download", value: unset' }

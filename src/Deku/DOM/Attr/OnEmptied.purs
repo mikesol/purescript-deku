@@ -18,7 +18,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "emptied", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "emptied", value: cb' value })
 instance Attr anything OnEmptied (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "emptied", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "emptied", value: cb' value })
 instance Attr anything OnEmptied  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnEmptied (Event.Event  Cb ) where
     \value -> { key: "emptied", value: cb' value }
 
 instance Attr anything OnEmptied (ST.ST Global.Global  Cb ) where
-  attr OnEmptied stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEmptied iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "emptied", value: cb' value }
 
 instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "emptied", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnEmptied (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "emptied", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnEmptied (Event.Event  (Effect Unit) ) where
     \value -> { key: "emptied", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEmptied (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnEmptied stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEmptied iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "emptied", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnEmptied (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "emptied", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnEmptied (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "emptied", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "emptied", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnEmptied (Event.Event  (Effect Boolean) ) where
     \value -> { key: "emptied", value: cb' (Cb (const value)) }
 
 instance Attr anything OnEmptied (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnEmptied stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEmptied iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "emptied", value: cb' (Cb (const value)) }
 
 instance Attr everything OnEmptied (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnEmptied (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "emptied", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "emptied", value: unset' })
 instance Attr everything OnEmptied (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnEmptied (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "emptied", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "emptied", value: unset' })
 instance Attr everything OnEmptied  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnEmptied (Event.Event  Unit ) where
     \_ -> { key: "emptied", value: unset' }
 
 instance Attr everything OnEmptied (ST.ST Global.Global  Unit ) where
-  attr OnEmptied stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEmptied iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "emptied", value: unset' }

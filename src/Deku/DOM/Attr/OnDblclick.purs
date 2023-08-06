@@ -18,7 +18,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dblclick", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dblclick", value: cb' value })
 instance Attr anything OnDblclick (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dblclick", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dblclick", value: cb' value })
 instance Attr anything OnDblclick  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDblclick (Event.Event  Cb ) where
     \value -> { key: "dblclick", value: cb' value }
 
 instance Attr anything OnDblclick (ST.ST Global.Global  Cb ) where
-  attr OnDblclick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDblclick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dblclick", value: cb' value }
 
 instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "dblclick", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDblclick (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dblclick", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dblclick", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDblclick (Event.Event  (Effect Unit) ) where
     \value -> { key: "dblclick", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDblclick (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDblclick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDblclick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dblclick", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDblclick (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "dblclick", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDblclick (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dblclick", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dblclick", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnDblclick (Event.Event  (Effect Boolean) ) where
     \value -> { key: "dblclick", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDblclick (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDblclick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDblclick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dblclick", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDblclick (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnDblclick (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dblclick", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dblclick", value: unset' })
 instance Attr everything OnDblclick (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnDblclick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dblclick", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dblclick", value: unset' })
 instance Attr everything OnDblclick  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnDblclick (Event.Event  Unit ) where
     \_ -> { key: "dblclick", value: unset' }
 
 instance Attr everything OnDblclick (ST.ST Global.Global  Unit ) where
-  attr OnDblclick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDblclick iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "dblclick", value: unset' }

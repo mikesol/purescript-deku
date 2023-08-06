@@ -61,7 +61,7 @@ instance Attr Circle_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Circle_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -74,7 +74,7 @@ instance Attr Circle_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Circle_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ClipPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -84,7 +84,7 @@ instance Attr ClipPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr ClipPath_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -97,7 +97,7 @@ instance Attr ClipPath_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ClipPath_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Defs_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -107,7 +107,7 @@ instance Attr Defs_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Defs_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -120,7 +120,7 @@ instance Attr Defs_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Defs_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Ellipse_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Ellipse_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Ellipse_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -143,7 +143,7 @@ instance Attr Ellipse_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Ellipse_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeBlend_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -153,7 +153,7 @@ instance Attr FeBlend_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeBlend_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -166,7 +166,7 @@ instance Attr FeBlend_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeBlend_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -176,7 +176,7 @@ instance Attr FeColorMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -189,7 +189,7 @@ instance Attr FeColorMatrix_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -199,7 +199,7 @@ instance Attr FeComponentTransfer_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -212,7 +212,7 @@ instance Attr FeComponentTransfer_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComposite_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -222,7 +222,7 @@ instance Attr FeComposite_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeComposite_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -235,7 +235,7 @@ instance Attr FeComposite_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeComposite_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -245,7 +245,7 @@ instance Attr FeConvolveMatrix_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -258,7 +258,7 @@ instance Attr FeConvolveMatrix_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr FeDiffuseLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -281,7 +281,7 @@ instance Attr FeDiffuseLighting_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -291,7 +291,7 @@ instance Attr FeDisplacementMap_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -304,7 +304,7 @@ instance Attr FeDisplacementMap_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeFlood_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -314,7 +314,7 @@ instance Attr FeFlood_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeFlood_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -327,7 +327,7 @@ instance Attr FeFlood_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeFlood_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -337,7 +337,7 @@ instance Attr FeGaussianBlur_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -350,7 +350,7 @@ instance Attr FeGaussianBlur_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeImage_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -360,7 +360,7 @@ instance Attr FeImage_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeImage_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -373,7 +373,7 @@ instance Attr FeImage_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeImage_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMerge_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -383,7 +383,7 @@ instance Attr FeMerge_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeMerge_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -396,7 +396,7 @@ instance Attr FeMerge_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMerge_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMorphology_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr FeMorphology_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -419,7 +419,7 @@ instance Attr FeMorphology_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeMorphology_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeOffset_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -429,7 +429,7 @@ instance Attr FeOffset_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeOffset_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -442,7 +442,7 @@ instance Attr FeOffset_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeOffset_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -452,7 +452,7 @@ instance Attr FeSpecularLighting_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -465,7 +465,7 @@ instance Attr FeSpecularLighting_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTile_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -475,7 +475,7 @@ instance Attr FeTile_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeTile_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -488,7 +488,7 @@ instance Attr FeTile_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTile_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -498,7 +498,7 @@ instance Attr FeTurbulence_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -511,7 +511,7 @@ instance Attr FeTurbulence_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Filter_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -521,7 +521,7 @@ instance Attr Filter_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Filter_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -534,7 +534,7 @@ instance Attr Filter_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Filter_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ForeignObject_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -544,7 +544,7 @@ instance Attr ForeignObject_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -557,7 +557,7 @@ instance Attr ForeignObject_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr ForeignObject_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr G_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -567,7 +567,7 @@ instance Attr G_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr G_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -580,7 +580,7 @@ instance Attr G_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr G_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Image_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -590,7 +590,7 @@ instance Attr Image_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Image_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -603,7 +603,7 @@ instance Attr Image_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Image_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Line_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -613,7 +613,7 @@ instance Attr Line_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Line_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -626,7 +626,7 @@ instance Attr Line_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Line_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr LinearGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -636,7 +636,7 @@ instance Attr LinearGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -649,7 +649,7 @@ instance Attr LinearGradient_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr LinearGradient_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Marker_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -659,7 +659,7 @@ instance Attr Marker_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Marker_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -672,7 +672,7 @@ instance Attr Marker_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Marker_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Mask_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -682,7 +682,7 @@ instance Attr Mask_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Mask_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -695,7 +695,7 @@ instance Attr Mask_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Mask_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Path_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -705,7 +705,7 @@ instance Attr Path_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Path_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -718,7 +718,7 @@ instance Attr Path_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Path_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Pattern_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -728,7 +728,7 @@ instance Attr Pattern_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Pattern_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -741,7 +741,7 @@ instance Attr Pattern_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Pattern_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polygon_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -751,7 +751,7 @@ instance Attr Polygon_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Polygon_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -764,7 +764,7 @@ instance Attr Polygon_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polygon_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polyline_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -774,7 +774,7 @@ instance Attr Polyline_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Polyline_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -787,7 +787,7 @@ instance Attr Polyline_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Polyline_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr RadialGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -797,7 +797,7 @@ instance Attr RadialGradient_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -810,7 +810,7 @@ instance Attr RadialGradient_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr RadialGradient_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Rect_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -820,7 +820,7 @@ instance Attr Rect_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Rect_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -833,7 +833,7 @@ instance Attr Rect_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Rect_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Svg_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Svg_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Svg_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -856,7 +856,7 @@ instance Attr Svg_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Svg_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Switch_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -866,7 +866,7 @@ instance Attr Switch_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Switch_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -879,7 +879,7 @@ instance Attr Switch_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Switch_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Symbol_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -889,7 +889,7 @@ instance Attr Symbol_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Symbol_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -902,7 +902,7 @@ instance Attr Symbol_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Symbol_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Text_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -912,7 +912,7 @@ instance Attr Text_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Text_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -925,7 +925,7 @@ instance Attr Text_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Text_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr TextPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -935,7 +935,7 @@ instance Attr TextPath_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr TextPath_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -948,7 +948,7 @@ instance Attr TextPath_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr TextPath_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Tspan_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -958,7 +958,7 @@ instance Attr Tspan_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Tspan_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -971,7 +971,7 @@ instance Attr Tspan_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Tspan_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Use_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -981,7 +981,7 @@ instance Attr Use_ StrokeLinejoin (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-linejoin", value: prop' value }
     )
 instance Attr Use_ StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-linejoin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-linejoin", value: prop' value }
@@ -994,7 +994,7 @@ instance Attr Use_ StrokeLinejoin (Event.Event  String ) where
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr Use_ StrokeLinejoin (ST.ST Global.Global  String ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stroke-linejoin", value: prop' value }
 
 instance Attr everything StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -1002,7 +1002,7 @@ instance Attr everything StrokeLinejoin (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "stroke-linejoin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-linejoin", value: unset' })
 instance Attr everything StrokeLinejoin (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr StrokeLinejoin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "stroke-linejoin", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "stroke-linejoin", value: unset' })
 instance Attr everything StrokeLinejoin  Unit  where
@@ -1013,5 +1013,5 @@ instance Attr everything StrokeLinejoin (Event.Event  Unit ) where
     \_ -> { key: "stroke-linejoin", value: unset' }
 
 instance Attr everything StrokeLinejoin (ST.ST Global.Global  Unit ) where
-  attr StrokeLinejoin stValue = unsafeAttribute $ This $ stValue <#>
+  attr StrokeLinejoin iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "stroke-linejoin", value: unset' }

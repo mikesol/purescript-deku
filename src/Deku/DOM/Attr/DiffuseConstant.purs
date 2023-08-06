@@ -21,7 +21,7 @@ instance Attr FeDiffuseLighting_ DiffuseConstant (NonEmpty.NonEmpty Event.Event 
         { key: "diffuseConstant", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ DiffuseConstant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr DiffuseConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr DiffuseConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "diffuseConstant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "diffuseConstant", value: prop' value }
@@ -34,7 +34,7 @@ instance Attr FeDiffuseLighting_ DiffuseConstant (Event.Event  String ) where
     <#> \value -> { key: "diffuseConstant", value: prop' value }
 
 instance Attr FeDiffuseLighting_ DiffuseConstant (ST.ST Global.Global  String ) where
-  attr DiffuseConstant stValue = unsafeAttribute $ This $ stValue
+  attr DiffuseConstant iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "diffuseConstant", value: prop' value }
 
 instance Attr everything DiffuseConstant (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -42,7 +42,7 @@ instance Attr everything DiffuseConstant (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "diffuseConstant", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "diffuseConstant", value: unset' })
 instance Attr everything DiffuseConstant (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr DiffuseConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr DiffuseConstant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "diffuseConstant", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "diffuseConstant", value: unset' })
 instance Attr everything DiffuseConstant  Unit  where
@@ -53,5 +53,5 @@ instance Attr everything DiffuseConstant (Event.Event  Unit ) where
     <#> \_ -> { key: "diffuseConstant", value: unset' }
 
 instance Attr everything DiffuseConstant (ST.ST Global.Global  Unit ) where
-  attr DiffuseConstant stValue = unsafeAttribute $ This $ stValue
+  attr DiffuseConstant iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "diffuseConstant", value: unset' }

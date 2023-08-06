@@ -18,7 +18,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "timeupdate", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "timeupdate", value: cb' value })
 instance Attr anything OnTimeupdate (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "timeupdate", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "timeupdate", value: cb' value })
 instance Attr anything OnTimeupdate  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnTimeupdate (Event.Event  Cb ) where
     \value -> { key: "timeupdate", value: cb' value }
 
 instance Attr anything OnTimeupdate (ST.ST Global.Global  Cb ) where
-  attr OnTimeupdate stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTimeupdate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "timeupdate", value: cb' value }
 
 instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTimeupdate (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "timeupdate", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnTimeupdate (Event.Event  (Effect Unit) ) where
     \value -> { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTimeupdate (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnTimeupdate stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTimeupdate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "timeupdate", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnTimeupdate (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "timeupdate", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTimeupdate (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "timeupdate", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "timeupdate", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnTimeupdate (Event.Event  (Effect Boolean) ) where
     \value -> { key: "timeupdate", value: cb' (Cb (const value)) }
 
 instance Attr anything OnTimeupdate (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnTimeupdate stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTimeupdate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "timeupdate", value: cb' (Cb (const value)) }
 
 instance Attr everything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnTimeupdate (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "timeupdate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "timeupdate", value: unset' })
 instance Attr everything OnTimeupdate (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnTimeupdate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "timeupdate", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "timeupdate", value: unset' })
 instance Attr everything OnTimeupdate  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnTimeupdate (Event.Event  Unit ) where
     \_ -> { key: "timeupdate", value: unset' }
 
 instance Attr everything OnTimeupdate (ST.ST Global.Global  Unit ) where
-  attr OnTimeupdate stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTimeupdate iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "timeupdate", value: unset' }

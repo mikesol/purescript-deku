@@ -39,7 +39,7 @@ instance Attr FeBlend_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeBlend_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -52,7 +52,7 @@ instance Attr FeBlend_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeBlend_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeColorMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr FeColorMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Str
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeColorMatrix_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -75,7 +75,7 @@ instance Attr FeColorMatrix_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeColorMatrix_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComponentTransfer_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -85,7 +85,7 @@ instance Attr FeComponentTransfer_ TransformOrigin (NonEmpty.NonEmpty Event.Even
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeComponentTransfer_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -98,7 +98,7 @@ instance Attr FeComponentTransfer_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComponentTransfer_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComposite_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -108,7 +108,7 @@ instance Attr FeComposite_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Strin
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeComposite_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -121,7 +121,7 @@ instance Attr FeComposite_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeComposite_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -131,7 +131,7 @@ instance Attr FeConvolveMatrix_ TransformOrigin (NonEmpty.NonEmpty Event.Event  
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -144,7 +144,7 @@ instance Attr FeConvolveMatrix_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr FeDiffuseLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -167,7 +167,7 @@ instance Attr FeDiffuseLighting_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDiffuseLighting_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDisplacementMap_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -177,7 +177,7 @@ instance Attr FeDisplacementMap_ TransformOrigin (NonEmpty.NonEmpty Event.Event 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeDisplacementMap_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -190,7 +190,7 @@ instance Attr FeDisplacementMap_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeDisplacementMap_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeFlood_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -200,7 +200,7 @@ instance Attr FeFlood_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeFlood_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -213,7 +213,7 @@ instance Attr FeFlood_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeFlood_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeGaussianBlur_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -223,7 +223,7 @@ instance Attr FeGaussianBlur_ TransformOrigin (NonEmpty.NonEmpty Event.Event  St
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeGaussianBlur_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -236,7 +236,7 @@ instance Attr FeGaussianBlur_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeGaussianBlur_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeImage_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -246,7 +246,7 @@ instance Attr FeImage_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeImage_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -259,7 +259,7 @@ instance Attr FeImage_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeImage_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMerge_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -269,7 +269,7 @@ instance Attr FeMerge_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeMerge_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -282,7 +282,7 @@ instance Attr FeMerge_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMerge_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMorphology_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr FeMorphology_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeMorphology_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -305,7 +305,7 @@ instance Attr FeMorphology_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeMorphology_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeOffset_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -315,7 +315,7 @@ instance Attr FeOffset_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String )
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeOffset_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -328,7 +328,7 @@ instance Attr FeOffset_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeOffset_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeSpecularLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -338,7 +338,7 @@ instance Attr FeSpecularLighting_ TransformOrigin (NonEmpty.NonEmpty Event.Event
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeSpecularLighting_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -351,7 +351,7 @@ instance Attr FeSpecularLighting_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeSpecularLighting_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTile_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -361,7 +361,7 @@ instance Attr FeTile_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeTile_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -374,7 +374,7 @@ instance Attr FeTile_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTile_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTurbulence_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -384,7 +384,7 @@ instance Attr FeTurbulence_ TransformOrigin (NonEmpty.NonEmpty Event.Event  Stri
         { key: "transform-origin", value: prop' value }
     )
 instance Attr FeTurbulence_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -397,7 +397,7 @@ instance Attr FeTurbulence_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr FeTurbulence_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Filter_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -407,7 +407,7 @@ instance Attr Filter_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Filter_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -420,7 +420,7 @@ instance Attr Filter_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Filter_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Image_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -430,7 +430,7 @@ instance Attr Image_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Image_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -443,7 +443,7 @@ instance Attr Image_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Image_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Switch_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -453,7 +453,7 @@ instance Attr Switch_ TransformOrigin (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "transform-origin", value: prop' value }
     )
 instance Attr Switch_ TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transform-origin", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transform-origin", value: prop' value }
@@ -466,7 +466,7 @@ instance Attr Switch_ TransformOrigin (Event.Event  String ) where
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr Switch_ TransformOrigin (ST.ST Global.Global  String ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transform-origin", value: prop' value }
 
 instance Attr everything TransformOrigin (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -474,7 +474,7 @@ instance Attr everything TransformOrigin (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "transform-origin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "transform-origin", value: unset' })
 instance Attr everything TransformOrigin (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr TransformOrigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "transform-origin", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "transform-origin", value: unset' })
 instance Attr everything TransformOrigin  Unit  where
@@ -485,5 +485,5 @@ instance Attr everything TransformOrigin (Event.Event  Unit ) where
     <#> \_ -> { key: "transform-origin", value: unset' }
 
 instance Attr everything TransformOrigin (ST.ST Global.Global  Unit ) where
-  attr TransformOrigin stValue = unsafeAttribute $ This $ stValue
+  attr TransformOrigin iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "transform-origin", value: unset' }

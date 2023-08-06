@@ -18,7 +18,7 @@ instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mouseout", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseout", value: cb' value })
 instance Attr anything OnMouseout (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseout", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "mouseout", value: cb' value })
 instance Attr anything OnMouseout  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnMouseout (Event.Event  Cb ) where
     \value -> { key: "mouseout", value: cb' value }
 
 instance Attr anything OnMouseout (ST.ST Global.Global  Cb ) where
-  attr OnMouseout stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseout iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseout", value: cb' value }
 
 instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "mouseout", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMouseout (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseout", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mouseout", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnMouseout (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseout (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnMouseout stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseout iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseout", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnMouseout (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "mouseout", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMouseout (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseout", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mouseout", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnMouseout (Event.Event  (Effect Boolean) ) where
     \value -> { key: "mouseout", value: cb' (Cb (const value)) }
 
 instance Attr anything OnMouseout (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnMouseout stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseout iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseout", value: cb' (Cb (const value)) }
 
 instance Attr everything OnMouseout (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnMouseout (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "mouseout", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseout", value: unset' })
 instance Attr everything OnMouseout (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnMouseout (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "mouseout", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "mouseout", value: unset' })
 instance Attr everything OnMouseout  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnMouseout (Event.Event  Unit ) where
     \_ -> { key: "mouseout", value: unset' }
 
 instance Attr everything OnMouseout (ST.ST Global.Global  Unit ) where
-  attr OnMouseout stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseout iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "mouseout", value: unset' }

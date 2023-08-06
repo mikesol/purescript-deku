@@ -18,7 +18,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragover", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragover", value: cb' value })
 instance Attr anything OnDragover (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragover", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dragover", value: cb' value })
 instance Attr anything OnDragover  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDragover (Event.Event  Cb ) where
     \value -> { key: "dragover", value: cb' value }
 
 instance Attr anything OnDragover (ST.ST Global.Global  Cb ) where
-  attr OnDragover stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragover iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragover", value: cb' value }
 
 instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "dragover", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragover (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragover", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragover", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDragover (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragover (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDragover stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragover iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragover", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDragover (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "dragover", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragover (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragover", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragover", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnDragover (Event.Event  (Effect Boolean) ) where
     \value -> { key: "dragover", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDragover (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDragover stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragover iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragover", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDragover (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnDragover (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dragover", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragover", value: unset' })
 instance Attr everything OnDragover (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnDragover (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dragover", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dragover", value: unset' })
 instance Attr everything OnDragover  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnDragover (Event.Event  Unit ) where
     \_ -> { key: "dragover", value: unset' }
 
 instance Attr everything OnDragover (ST.ST Global.Global  Unit ) where
-  attr OnDragover stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragover iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "dragover", value: unset' }

@@ -19,7 +19,7 @@ instance Attr View_ ViewTarget (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "viewTarget", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "viewTarget", value: prop' value })
 instance Attr View_ ViewTarget (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ViewTarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ViewTarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "viewTarget", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "viewTarget", value: prop' value })
 instance Attr View_ ViewTarget  String  where
@@ -30,7 +30,7 @@ instance Attr View_ ViewTarget (Event.Event  String ) where
     \value -> { key: "viewTarget", value: prop' value }
 
 instance Attr View_ ViewTarget (ST.ST Global.Global  String ) where
-  attr ViewTarget stValue = unsafeAttribute $ This $ stValue <#>
+  attr ViewTarget iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "viewTarget", value: prop' value }
 
 instance Attr everything ViewTarget (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything ViewTarget (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "viewTarget", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "viewTarget", value: unset' })
 instance Attr everything ViewTarget (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ViewTarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ViewTarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "viewTarget", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "viewTarget", value: unset' })
 instance Attr everything ViewTarget  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything ViewTarget (Event.Event  Unit ) where
     \_ -> { key: "viewTarget", value: unset' }
 
 instance Attr everything ViewTarget (ST.ST Global.Global  Unit ) where
-  attr ViewTarget stValue = unsafeAttribute $ This $ stValue <#>
+  attr ViewTarget iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "viewTarget", value: unset' }

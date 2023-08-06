@@ -19,7 +19,7 @@ instance Attr Area_ Coords (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "coords", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "coords", value: prop' value })
 instance Attr Area_ Coords (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Coords (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Coords (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "coords", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "coords", value: prop' value })
 instance Attr Area_ Coords  String  where
@@ -30,7 +30,7 @@ instance Attr Area_ Coords (Event.Event  String ) where
     \value -> { key: "coords", value: prop' value }
 
 instance Attr Area_ Coords (ST.ST Global.Global  String ) where
-  attr Coords stValue = unsafeAttribute $ This $ stValue <#>
+  attr Coords iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "coords", value: prop' value }
 
 instance Attr everything Coords (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Coords (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "coords", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "coords", value: unset' })
 instance Attr everything Coords (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Coords (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Coords (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "coords", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "coords", value: unset' })
 instance Attr everything Coords  Unit  where
-  attr Coords _ = unsafeAttribute $ This $ pure $ { key: "coords", value: unset' }
+  attr Coords _ = unsafeAttribute $ This $ { key: "coords", value: unset' }
 instance Attr everything Coords (Event.Event  Unit ) where
   attr Coords eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "coords", value: unset' }
 
 instance Attr everything Coords (ST.ST Global.Global  Unit ) where
-  attr Coords stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Coords iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "coords", value: unset' }

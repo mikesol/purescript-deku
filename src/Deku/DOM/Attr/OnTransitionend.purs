@@ -18,7 +18,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  Cb ) wher
     { key: "transitionend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "transitionend", value: cb' value })
 instance Attr anything OnTransitionend (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionend", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "transitionend", value: cb' value })
 instance Attr anything OnTransitionend  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnTransitionend (Event.Event  Cb ) where
     <#> \value -> { key: "transitionend", value: cb' value }
 
 instance Attr anything OnTransitionend (ST.ST Global.Global  Cb ) where
-  attr OnTransitionend stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionend iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transitionend", value: cb' value }
 
 instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect U
         { key: "transitionend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTransitionend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionend", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transitionend", value: cb' (Cb (const (value $> true))) }
@@ -53,7 +53,7 @@ instance Attr anything OnTransitionend (Event.Event  (Effect Unit) ) where
       { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionend (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnTransitionend stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionend iValue = unsafeAttribute $ This $ iValue
     <#> \value ->
       { key: "transitionend", value: cb' (Cb (const (value $> true))) }
 
@@ -64,7 +64,7 @@ instance Attr anything OnTransitionend (NonEmpty.NonEmpty Event.Event  (Effect B
         { key: "transitionend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTransitionend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionend", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transitionend", value: cb' (Cb (const value)) }
@@ -77,7 +77,7 @@ instance Attr anything OnTransitionend (Event.Event  (Effect Boolean) ) where
     <#> \value -> { key: "transitionend", value: cb' (Cb (const value)) }
 
 instance Attr anything OnTransitionend (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnTransitionend stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionend iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transitionend", value: cb' (Cb (const value)) }
 
 instance Attr everything OnTransitionend (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -85,7 +85,7 @@ instance Attr everything OnTransitionend (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "transitionend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "transitionend", value: unset' })
 instance Attr everything OnTransitionend (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnTransitionend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "transitionend", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "transitionend", value: unset' })
 instance Attr everything OnTransitionend  Unit  where
@@ -96,5 +96,5 @@ instance Attr everything OnTransitionend (Event.Event  Unit ) where
     <#> \_ -> { key: "transitionend", value: unset' }
 
 instance Attr everything OnTransitionend (ST.ST Global.Global  Unit ) where
-  attr OnTransitionend stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionend iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "transitionend", value: unset' }

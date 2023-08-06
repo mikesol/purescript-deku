@@ -20,7 +20,7 @@ instance Attr Img_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Img_ Srcset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "srcset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Img_ Srcset  String  where
@@ -31,7 +31,7 @@ instance Attr Img_ Srcset (Event.Event  String ) where
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr Img_ Srcset (ST.ST Global.Global  String ) where
-  attr Srcset stValue = unsafeAttribute $ This $ stValue <#>
+  attr Srcset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr Source_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Source_ Srcset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Source_ Srcset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "srcset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "srcset", value: prop' value })
 instance Attr Source_ Srcset  String  where
@@ -50,7 +50,7 @@ instance Attr Source_ Srcset (Event.Event  String ) where
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr Source_ Srcset (ST.ST Global.Global  String ) where
-  attr Srcset stValue = unsafeAttribute $ This $ stValue <#>
+  attr Srcset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "srcset", value: prop' value }
 
 instance Attr everything Srcset (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Srcset (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "srcset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "srcset", value: unset' })
 instance Attr everything Srcset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Srcset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "srcset", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "srcset", value: unset' })
 instance Attr everything Srcset  Unit  where
-  attr Srcset _ = unsafeAttribute $ This $ pure $ { key: "srcset", value: unset' }
+  attr Srcset _ = unsafeAttribute $ This $ { key: "srcset", value: unset' }
 instance Attr everything Srcset (Event.Event  Unit ) where
   attr Srcset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srcset", value: unset' }
 
 instance Attr everything Srcset (ST.ST Global.Global  Unit ) where
-  attr Srcset stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Srcset iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "srcset", value: unset' }

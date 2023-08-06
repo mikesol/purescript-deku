@@ -18,7 +18,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "formdata", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formdata", value: cb' value })
 instance Attr anything OnFormdata (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "formdata", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "formdata", value: cb' value })
 instance Attr anything OnFormdata  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnFormdata (Event.Event  Cb ) where
     \value -> { key: "formdata", value: cb' value }
 
 instance Attr anything OnFormdata (ST.ST Global.Global  Cb ) where
-  attr OnFormdata stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnFormdata iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "formdata", value: cb' value }
 
 instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "formdata", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnFormdata (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "formdata", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnFormdata (Event.Event  (Effect Unit) ) where
     \value -> { key: "formdata", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnFormdata (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnFormdata stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnFormdata iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "formdata", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnFormdata (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "formdata", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnFormdata (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "formdata", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "formdata", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnFormdata (Event.Event  (Effect Boolean) ) where
     \value -> { key: "formdata", value: cb' (Cb (const value)) }
 
 instance Attr anything OnFormdata (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnFormdata stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnFormdata iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "formdata", value: cb' (Cb (const value)) }
 
 instance Attr everything OnFormdata (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnFormdata (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "formdata", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formdata", value: unset' })
 instance Attr everything OnFormdata (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnFormdata (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "formdata", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "formdata", value: unset' })
 instance Attr everything OnFormdata  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnFormdata (Event.Event  Unit ) where
     \_ -> { key: "formdata", value: unset' }
 
 instance Attr everything OnFormdata (ST.ST Global.Global  Unit ) where
-  attr OnFormdata stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnFormdata iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "formdata", value: unset' }

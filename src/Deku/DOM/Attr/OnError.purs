@@ -18,7 +18,7 @@ instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "error", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "error", value: cb' value })
 instance Attr anything OnError (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "error", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "error", value: cb' value })
 instance Attr anything OnError  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnError (Event.Event  Cb ) where
     \value -> { key: "error", value: cb' value }
 
 instance Attr anything OnError (ST.ST Global.Global  Cb ) where
-  attr OnError stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnError iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "error", value: cb' value }
 
 instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "error", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnError (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "error", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "error", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnError (Event.Event  (Effect Unit) ) where
     \value -> { key: "error", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnError (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnError stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnError iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "error", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnError (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "error", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnError (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "error", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "error", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnError (Event.Event  (Effect Boolean) ) where
     \value -> { key: "error", value: cb' (Cb (const value)) }
 
 instance Attr anything OnError (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnError stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnError iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "error", value: cb' (Cb (const value)) }
 
 instance Attr everything OnError (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnError (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "error", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "error", value: unset' })
 instance Attr everything OnError (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnError (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "error", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "error", value: unset' })
 instance Attr everything OnError  Unit  where
-  attr OnError _ = unsafeAttribute $ This $ pure $ { key: "error", value: unset' }
+  attr OnError _ = unsafeAttribute $ This $ { key: "error", value: unset' }
 instance Attr everything OnError (Event.Event  Unit ) where
   attr OnError eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "error", value: unset' }
 
 instance Attr everything OnError (ST.ST Global.Global  Unit ) where
-  attr OnError stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnError iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "error", value: unset' }

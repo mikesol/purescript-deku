@@ -44,7 +44,7 @@ module Deku.Core
 
 import Prelude
 
-import Bolson.Control (Flatten)
+import Bolson.Control (Flatten, behaving)
 import Bolson.Control as BControl
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
@@ -52,7 +52,6 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
-import Control.Monad.ST.Internal as Ref
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Data.List (List)
@@ -65,7 +64,7 @@ import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Behavior (behavior, sample)
-import FRP.Event (Event, makeLemmingEvent)
+import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
@@ -353,72 +352,66 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
           , attributeParent
           , removeDynBeacon
           }
-      ) = behavior \e -> makeLemmingEvent \subscribe k -> do
-    urg <- Ref.new (pure unit)
-    ugh <- subscribe e \f -> do
-      me <- ids
-      raiseId $ show me
-      -- `dyn`-s need to have a parent
-      -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
-      -- Then, we can call `childNodes` and `nextSibling`.
-      -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
-      parentEvent /\ parentId <- case parent of
-        Nothing -> do
-          dummyParent <- ids
-          pure
-            ( [ makeElement
-                  { id: show dummyParent
-                  , parent: Nothing
-                  , scope
-                  , tag: "div"
-                  , pos: Nothing
-                  , dynFamily: Nothing
-                  }
+      ) = behaving \e kx subscribe -> do
+    me <- ids
+    raiseId $ show me
+    -- `dyn`-s need to have a parent
+    -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
+    -- Then, we can call `childNodes` and `nextSibling`.
+    -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
+    parentEvent /\ parentId <- case parent of
+      Nothing -> do
+        dummyParent <- ids
+        pure
+          ( [ makeElement
+                { id: show dummyParent
+                , parent: Nothing
+                , scope
+                , tag: "div"
+                , pos: Nothing
+                , dynFamily: Nothing
+                }
 
-              ] /\ show dummyParent
-            )
-        Just x -> pure ([] /\ x)
-      let
-        evt = sample
-          ( __internalDekuFlatten fes
-              { parent: Just parentId
-              , scope
-              , ez: false
-              , raiseId: \_ -> pure unit
-              -- clear the pos
-              -- as we don't want the pointer's positional information
-              -- trickling down to what the pointer points to
-              -- the logic in Interpret.js will always give
-              -- the correct positional information to what
-              -- pointers point to
-              , pos: Nothing
-              , dynFamily: Just $ show me
-              }
-              di
+            ] /\ show dummyParent
           )
-          e
-      for_
-        ( parentEvent
-            <>
-              [ makeDynBeacon
-                  { id: show me
-                  , parent: Just parentId
-                  , scope
-                  , dynFamily
-                  , pos
-                  }
-              , attributeParent
-                  { id: show me, parent: parentId, pos, dynFamily, ez }
-              ]
+      Just x -> pure ([] /\ x)
+    let
+      evt = sample
+        ( __internalDekuFlatten fes
+            { parent: Just parentId
+            , scope
+            , ez: false
+            , raiseId: \_ -> pure unit
+            -- clear the pos
+            -- as we don't want the pointer's positional information
+            -- trickling down to what the pointer points to
+            -- the logic in Interpret.js will always give
+            -- the correct positional information to what
+            -- pointers point to
+            , pos: Nothing
+            , dynFamily: Just $ show me
+            }
+            di
         )
-        (k <<< f)
-      for_ [ removeDynBeacon { id: show me } ]
-        (k <<< f <<< deferPayload List.Nil)
-      uu <- subscribe evt k
-      void $ Ref.modify (_ *> uu) urg
-    pure do
-      ugh
-      join (Ref.read urg)
+        e
+    for_
+      ( parentEvent
+          <>
+            [ makeDynBeacon
+                { id: show me
+                , parent: Just parentId
+                , scope
+                , dynFamily
+                , pos
+                }
+            , attributeParent
+                { id: show me, parent: parentId, pos, dynFamily, ez }
+            ]
+      )
+      kx
+    for_ [ removeDynBeacon { id: show me } ]
+      (kx <<< deferPayload List.Nil)
+    subscribe evt
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.

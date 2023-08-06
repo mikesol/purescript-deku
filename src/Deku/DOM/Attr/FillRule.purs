@@ -59,7 +59,7 @@ instance Attr Circle_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Circle_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Circle_ FillRule  String  where
@@ -70,7 +70,7 @@ instance Attr Circle_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Circle_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ClipPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -78,7 +78,7 @@ instance Attr ClipPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ClipPath_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ClipPath_ FillRule  String  where
@@ -89,7 +89,7 @@ instance Attr ClipPath_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ClipPath_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Defs_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -97,7 +97,7 @@ instance Attr Defs_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Defs_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Defs_ FillRule  String  where
@@ -108,7 +108,7 @@ instance Attr Defs_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Defs_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Ellipse_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -116,7 +116,7 @@ instance Attr Ellipse_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Ellipse_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Ellipse_ FillRule  String  where
@@ -127,7 +127,7 @@ instance Attr Ellipse_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Ellipse_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeBlend_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -135,7 +135,7 @@ instance Attr FeBlend_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeBlend_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeBlend_ FillRule  String  where
@@ -146,7 +146,7 @@ instance Attr FeBlend_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeBlend_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeColorMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr FeColorMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeColorMatrix_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeColorMatrix_ FillRule  String  where
@@ -165,7 +165,7 @@ instance Attr FeColorMatrix_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeColorMatrix_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComponentTransfer_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -173,7 +173,7 @@ instance Attr FeComponentTransfer_ FillRule (NonEmpty.NonEmpty Event.Event  Stri
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComponentTransfer_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComponentTransfer_ FillRule  String  where
@@ -184,7 +184,7 @@ instance Attr FeComponentTransfer_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComponentTransfer_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComposite_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -192,7 +192,7 @@ instance Attr FeComposite_ FillRule (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComposite_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeComposite_ FillRule  String  where
@@ -203,7 +203,7 @@ instance Attr FeComposite_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeComposite_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -211,7 +211,7 @@ instance Attr FeConvolveMatrix_ FillRule (NonEmpty.NonEmpty Event.Event  String 
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeConvolveMatrix_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeConvolveMatrix_ FillRule  String  where
@@ -222,7 +222,7 @@ instance Attr FeConvolveMatrix_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -230,7 +230,7 @@ instance Attr FeDiffuseLighting_ FillRule (NonEmpty.NonEmpty Event.Event  String
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDiffuseLighting_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDiffuseLighting_ FillRule  String  where
@@ -241,7 +241,7 @@ instance Attr FeDiffuseLighting_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDisplacementMap_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -249,7 +249,7 @@ instance Attr FeDisplacementMap_ FillRule (NonEmpty.NonEmpty Event.Event  String
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDisplacementMap_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeDisplacementMap_ FillRule  String  where
@@ -260,7 +260,7 @@ instance Attr FeDisplacementMap_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeDisplacementMap_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeFlood_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr FeFlood_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeFlood_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeFlood_ FillRule  String  where
@@ -279,7 +279,7 @@ instance Attr FeFlood_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeFlood_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeGaussianBlur_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -287,7 +287,7 @@ instance Attr FeGaussianBlur_ FillRule (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeGaussianBlur_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeGaussianBlur_ FillRule  String  where
@@ -298,7 +298,7 @@ instance Attr FeGaussianBlur_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeGaussianBlur_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeImage_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -306,7 +306,7 @@ instance Attr FeImage_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeImage_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeImage_ FillRule  String  where
@@ -317,7 +317,7 @@ instance Attr FeImage_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeImage_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMerge_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -325,7 +325,7 @@ instance Attr FeMerge_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMerge_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMerge_ FillRule  String  where
@@ -336,7 +336,7 @@ instance Attr FeMerge_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMerge_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMorphology_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -344,7 +344,7 @@ instance Attr FeMorphology_ FillRule (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMorphology_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeMorphology_ FillRule  String  where
@@ -355,7 +355,7 @@ instance Attr FeMorphology_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeMorphology_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeOffset_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -363,7 +363,7 @@ instance Attr FeOffset_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeOffset_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeOffset_ FillRule  String  where
@@ -374,7 +374,7 @@ instance Attr FeOffset_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeOffset_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeSpecularLighting_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -382,7 +382,7 @@ instance Attr FeSpecularLighting_ FillRule (NonEmpty.NonEmpty Event.Event  Strin
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeSpecularLighting_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeSpecularLighting_ FillRule  String  where
@@ -393,7 +393,7 @@ instance Attr FeSpecularLighting_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeSpecularLighting_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTile_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -401,7 +401,7 @@ instance Attr FeTile_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTile_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTile_ FillRule  String  where
@@ -412,7 +412,7 @@ instance Attr FeTile_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTile_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTurbulence_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -420,7 +420,7 @@ instance Attr FeTurbulence_ FillRule (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTurbulence_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr FeTurbulence_ FillRule  String  where
@@ -431,7 +431,7 @@ instance Attr FeTurbulence_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr FeTurbulence_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Filter_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -439,7 +439,7 @@ instance Attr Filter_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Filter_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Filter_ FillRule  String  where
@@ -450,7 +450,7 @@ instance Attr Filter_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Filter_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ForeignObject_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -458,7 +458,7 @@ instance Attr ForeignObject_ FillRule (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ForeignObject_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr ForeignObject_ FillRule  String  where
@@ -469,7 +469,7 @@ instance Attr ForeignObject_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr ForeignObject_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr G_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -477,7 +477,7 @@ instance Attr G_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr G_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr G_ FillRule  String  where
@@ -488,7 +488,7 @@ instance Attr G_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr G_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Image_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -496,7 +496,7 @@ instance Attr Image_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Image_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Image_ FillRule  String  where
@@ -507,7 +507,7 @@ instance Attr Image_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Image_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Line_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -515,7 +515,7 @@ instance Attr Line_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Line_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Line_ FillRule  String  where
@@ -526,7 +526,7 @@ instance Attr Line_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Line_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr LinearGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -534,7 +534,7 @@ instance Attr LinearGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr LinearGradient_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr LinearGradient_ FillRule  String  where
@@ -545,7 +545,7 @@ instance Attr LinearGradient_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr LinearGradient_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Marker_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -553,7 +553,7 @@ instance Attr Marker_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Marker_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Marker_ FillRule  String  where
@@ -564,7 +564,7 @@ instance Attr Marker_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Marker_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Mask_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -572,7 +572,7 @@ instance Attr Mask_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Mask_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Mask_ FillRule  String  where
@@ -583,7 +583,7 @@ instance Attr Mask_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Mask_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Path_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -591,7 +591,7 @@ instance Attr Path_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Path_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Path_ FillRule  String  where
@@ -602,7 +602,7 @@ instance Attr Path_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Path_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Pattern_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -610,7 +610,7 @@ instance Attr Pattern_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Pattern_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Pattern_ FillRule  String  where
@@ -621,7 +621,7 @@ instance Attr Pattern_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Pattern_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polygon_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -629,7 +629,7 @@ instance Attr Polygon_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polygon_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polygon_ FillRule  String  where
@@ -640,7 +640,7 @@ instance Attr Polygon_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polygon_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polyline_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -648,7 +648,7 @@ instance Attr Polyline_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polyline_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Polyline_ FillRule  String  where
@@ -659,7 +659,7 @@ instance Attr Polyline_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Polyline_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr RadialGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -667,7 +667,7 @@ instance Attr RadialGradient_ FillRule (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr RadialGradient_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr RadialGradient_ FillRule  String  where
@@ -678,7 +678,7 @@ instance Attr RadialGradient_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr RadialGradient_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Rect_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -686,7 +686,7 @@ instance Attr Rect_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Rect_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Rect_ FillRule  String  where
@@ -697,7 +697,7 @@ instance Attr Rect_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Rect_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Svg_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -705,7 +705,7 @@ instance Attr Svg_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Svg_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Svg_ FillRule  String  where
@@ -716,7 +716,7 @@ instance Attr Svg_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Svg_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Switch_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -724,7 +724,7 @@ instance Attr Switch_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Switch_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Switch_ FillRule  String  where
@@ -735,7 +735,7 @@ instance Attr Switch_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Switch_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Symbol_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -743,7 +743,7 @@ instance Attr Symbol_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Symbol_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Symbol_ FillRule  String  where
@@ -754,7 +754,7 @@ instance Attr Symbol_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Symbol_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Text_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -762,7 +762,7 @@ instance Attr Text_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Text_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Text_ FillRule  String  where
@@ -773,7 +773,7 @@ instance Attr Text_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Text_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr TextPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -781,7 +781,7 @@ instance Attr TextPath_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr TextPath_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr TextPath_ FillRule  String  where
@@ -792,7 +792,7 @@ instance Attr TextPath_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr TextPath_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Tspan_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -800,7 +800,7 @@ instance Attr Tspan_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Tspan_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Tspan_ FillRule  String  where
@@ -811,7 +811,7 @@ instance Attr Tspan_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Tspan_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Use_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
@@ -819,7 +819,7 @@ instance Attr Use_ FillRule (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "fill-rule", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Use_ FillRule (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "fill-rule", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "fill-rule", value: prop' value })
 instance Attr Use_ FillRule  String  where
@@ -830,7 +830,7 @@ instance Attr Use_ FillRule (Event.Event  String ) where
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr Use_ FillRule (ST.ST Global.Global  String ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#>
+  attr FillRule iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "fill-rule", value: prop' value }
 
 instance Attr everything FillRule (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -838,7 +838,7 @@ instance Attr everything FillRule (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "fill-rule", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "fill-rule", value: unset' })
 instance Attr everything FillRule (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr FillRule (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "fill-rule", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "fill-rule", value: unset' })
 instance Attr everything FillRule  Unit  where
@@ -849,5 +849,5 @@ instance Attr everything FillRule (Event.Event  Unit ) where
     { key: "fill-rule", value: unset' }
 
 instance Attr everything FillRule (ST.ST Global.Global  Unit ) where
-  attr FillRule stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr FillRule iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "fill-rule", value: unset' }

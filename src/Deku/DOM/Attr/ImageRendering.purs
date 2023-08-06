@@ -39,7 +39,7 @@ instance Attr FeBlend_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeBlend_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -52,7 +52,7 @@ instance Attr FeBlend_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeBlend_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr FeColorMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  Stri
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeColorMatrix_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -75,7 +75,7 @@ instance Attr FeColorMatrix_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -85,7 +85,7 @@ instance Attr FeComponentTransfer_ ImageRendering (NonEmpty.NonEmpty Event.Event
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -98,7 +98,7 @@ instance Attr FeComponentTransfer_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeComposite_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -108,7 +108,7 @@ instance Attr FeComposite_ ImageRendering (NonEmpty.NonEmpty Event.Event  String
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeComposite_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -121,7 +121,7 @@ instance Attr FeComposite_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeComposite_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -131,7 +131,7 @@ instance Attr FeConvolveMatrix_ ImageRendering (NonEmpty.NonEmpty Event.Event  S
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -144,7 +144,7 @@ instance Attr FeConvolveMatrix_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr FeDiffuseLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event  
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -167,7 +167,7 @@ instance Attr FeDiffuseLighting_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -177,7 +177,7 @@ instance Attr FeDisplacementMap_ ImageRendering (NonEmpty.NonEmpty Event.Event  
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -190,7 +190,7 @@ instance Attr FeDisplacementMap_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeFlood_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -200,7 +200,7 @@ instance Attr FeFlood_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeFlood_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -213,7 +213,7 @@ instance Attr FeFlood_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeFlood_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -223,7 +223,7 @@ instance Attr FeGaussianBlur_ ImageRendering (NonEmpty.NonEmpty Event.Event  Str
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -236,7 +236,7 @@ instance Attr FeGaussianBlur_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeImage_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -246,7 +246,7 @@ instance Attr FeImage_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeImage_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -259,7 +259,7 @@ instance Attr FeImage_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeImage_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeMerge_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -269,7 +269,7 @@ instance Attr FeMerge_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeMerge_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -282,7 +282,7 @@ instance Attr FeMerge_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeMerge_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr FeMorphology_ ImageRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeMorphology_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -305,7 +305,7 @@ instance Attr FeMorphology_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeOffset_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -315,7 +315,7 @@ instance Attr FeOffset_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeOffset_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -328,7 +328,7 @@ instance Attr FeOffset_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeOffset_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -338,7 +338,7 @@ instance Attr FeSpecularLighting_ ImageRendering (NonEmpty.NonEmpty Event.Event 
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -351,7 +351,7 @@ instance Attr FeSpecularLighting_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeTile_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -361,7 +361,7 @@ instance Attr FeTile_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeTile_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -374,7 +374,7 @@ instance Attr FeTile_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeTile_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -384,7 +384,7 @@ instance Attr FeTurbulence_ ImageRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "image-rendering", value: prop' value }
     )
 instance Attr FeTurbulence_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -397,7 +397,7 @@ instance Attr FeTurbulence_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Filter_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -407,7 +407,7 @@ instance Attr Filter_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Filter_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -420,7 +420,7 @@ instance Attr Filter_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Filter_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Image_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -430,7 +430,7 @@ instance Attr Image_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Image_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -443,7 +443,7 @@ instance Attr Image_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Image_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Switch_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -453,7 +453,7 @@ instance Attr Switch_ ImageRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "image-rendering", value: prop' value }
     )
 instance Attr Switch_ ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "image-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "image-rendering", value: prop' value }
@@ -466,7 +466,7 @@ instance Attr Switch_ ImageRendering (Event.Event  String ) where
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr Switch_ ImageRendering (ST.ST Global.Global  String ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "image-rendering", value: prop' value }
 
 instance Attr everything ImageRendering (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -474,7 +474,7 @@ instance Attr everything ImageRendering (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "image-rendering", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "image-rendering", value: unset' })
 instance Attr everything ImageRendering (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ImageRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "image-rendering", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "image-rendering", value: unset' })
 instance Attr everything ImageRendering  Unit  where
@@ -485,5 +485,5 @@ instance Attr everything ImageRendering (Event.Event  Unit ) where
     \_ -> { key: "image-rendering", value: unset' }
 
 instance Attr everything ImageRendering (ST.ST Global.Global  Unit ) where
-  attr ImageRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ImageRendering iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "image-rendering", value: unset' }

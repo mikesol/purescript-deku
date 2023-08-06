@@ -19,7 +19,7 @@ instance Attr Iframe_ Sandbox (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "sandbox", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "sandbox", value: prop' value })
 instance Attr Iframe_ Sandbox (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Sandbox (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Sandbox (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "sandbox", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "sandbox", value: prop' value })
 instance Attr Iframe_ Sandbox  String  where
@@ -30,7 +30,7 @@ instance Attr Iframe_ Sandbox (Event.Event  String ) where
     \value -> { key: "sandbox", value: prop' value }
 
 instance Attr Iframe_ Sandbox (ST.ST Global.Global  String ) where
-  attr Sandbox stValue = unsafeAttribute $ This $ stValue <#>
+  attr Sandbox iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "sandbox", value: prop' value }
 
 instance Attr everything Sandbox (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Sandbox (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "sandbox", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "sandbox", value: unset' })
 instance Attr everything Sandbox (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Sandbox (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Sandbox (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "sandbox", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "sandbox", value: unset' })
 instance Attr everything Sandbox  Unit  where
-  attr Sandbox _ = unsafeAttribute $ This $ pure $ { key: "sandbox", value: unset' }
+  attr Sandbox _ = unsafeAttribute $ This $ { key: "sandbox", value: unset' }
 instance Attr everything Sandbox (Event.Event  Unit ) where
   attr Sandbox eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "sandbox", value: unset' }
 
 instance Attr everything Sandbox (ST.ST Global.Global  Unit ) where
-  attr Sandbox stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Sandbox iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "sandbox", value: unset' }

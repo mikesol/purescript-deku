@@ -18,7 +18,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "ended", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "ended", value: cb' value })
 instance Attr anything OnEnded (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "ended", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "ended", value: cb' value })
 instance Attr anything OnEnded  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnEnded (Event.Event  Cb ) where
     \value -> { key: "ended", value: cb' value }
 
 instance Attr anything OnEnded (ST.ST Global.Global  Cb ) where
-  attr OnEnded stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEnded iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "ended", value: cb' value }
 
 instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "ended", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnEnded (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "ended", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "ended", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnEnded (Event.Event  (Effect Unit) ) where
     \value -> { key: "ended", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEnded (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnEnded stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEnded iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "ended", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnEnded (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "ended", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnEnded (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "ended", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "ended", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnEnded (Event.Event  (Effect Boolean) ) where
     \value -> { key: "ended", value: cb' (Cb (const value)) }
 
 instance Attr anything OnEnded (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnEnded stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnEnded iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "ended", value: cb' (Cb (const value)) }
 
 instance Attr everything OnEnded (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnEnded (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "ended", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "ended", value: unset' })
 instance Attr everything OnEnded (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnEnded (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "ended", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "ended", value: unset' })
 instance Attr everything OnEnded  Unit  where
-  attr OnEnded _ = unsafeAttribute $ This $ pure $ { key: "ended", value: unset' }
+  attr OnEnded _ = unsafeAttribute $ This $ { key: "ended", value: unset' }
 instance Attr everything OnEnded (Event.Event  Unit ) where
   attr OnEnded eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "ended", value: unset' }
 
 instance Attr everything OnEnded (ST.ST Global.Global  Unit ) where
-  attr OnEnded stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnEnded iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "ended", value: unset' }

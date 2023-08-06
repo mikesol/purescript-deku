@@ -20,7 +20,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Cb ) 
         { key: "gotpointercapture", value: cb' value }
     )
 instance Attr anything OnGotpointercapture (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "gotpointercapture", value: cb' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "gotpointercapture", value: cb' value }
@@ -33,8 +33,8 @@ instance Attr anything OnGotpointercapture (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "gotpointercapture", value: cb' value }
 
 instance Attr anything OnGotpointercapture (ST.ST Global.Global  Cb ) where
-  attr OnGotpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value -> { key: "gotpointercapture", value: cb' value }
+  attr OnGotpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value -> { key: "gotpointercapture", value: cb' value }
 
 instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnGotpointercapture bothValues = unsafeAttribute $ Both (pure 
@@ -45,7 +45,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnGotpointercapture (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "gotpointercapture"
     , value: cb' (Cb (const ((value) $> true)))
     })
@@ -61,8 +61,8 @@ instance Attr anything OnGotpointercapture (Event.Event  (Effect Unit) ) where
       { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnGotpointercapture (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnGotpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnGotpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "gotpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -72,7 +72,7 @@ instance Attr anything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "gotpointercapture", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnGotpointercapture (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "gotpointercapture", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "gotpointercapture", value: cb' (Cb (const value)) }
@@ -86,8 +86,8 @@ instance Attr anything OnGotpointercapture (Event.Event  (Effect Boolean) ) wher
       { key: "gotpointercapture", value: cb' (Cb (const value)) }
 
 instance Attr anything OnGotpointercapture (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnGotpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnGotpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "gotpointercapture", value: cb' (Cb (const value)) }
 
 instance Attr everything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -95,7 +95,7 @@ instance Attr everything OnGotpointercapture (NonEmpty.NonEmpty Event.Event  Uni
     { key: "gotpointercapture", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "gotpointercapture", value: unset' })
 instance Attr everything OnGotpointercapture (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnGotpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "gotpointercapture", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "gotpointercapture", value: unset' })
 instance Attr everything OnGotpointercapture  Unit  where
@@ -106,5 +106,5 @@ instance Attr everything OnGotpointercapture (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "gotpointercapture", value: unset' }
 
 instance Attr everything OnGotpointercapture (ST.ST Global.Global  Unit ) where
-  attr OnGotpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "gotpointercapture", value: unset' }
+  attr OnGotpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "gotpointercapture", value: unset' }

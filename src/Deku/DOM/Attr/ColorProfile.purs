@@ -37,7 +37,7 @@ instance Attr FeBlend_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeBlend_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeBlend_ ColorProfile  String  where
@@ -48,7 +48,7 @@ instance Attr FeBlend_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeBlend_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -56,7 +56,7 @@ instance Attr FeColorMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  String
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeColorMatrix_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeColorMatrix_ ColorProfile  String  where
@@ -67,7 +67,7 @@ instance Attr FeColorMatrix_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -75,7 +75,7 @@ instance Attr FeComponentTransfer_ ColorProfile (NonEmpty.NonEmpty Event.Event  
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComponentTransfer_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComponentTransfer_ ColorProfile  String  where
@@ -86,7 +86,7 @@ instance Attr FeComponentTransfer_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeComposite_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -94,7 +94,7 @@ instance Attr FeComposite_ ColorProfile (NonEmpty.NonEmpty Event.Event  String )
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComposite_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeComposite_ ColorProfile  String  where
@@ -105,7 +105,7 @@ instance Attr FeComposite_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeComposite_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -113,7 +113,7 @@ instance Attr FeConvolveMatrix_ ColorProfile (NonEmpty.NonEmpty Event.Event  Str
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeConvolveMatrix_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeConvolveMatrix_ ColorProfile  String  where
@@ -124,7 +124,7 @@ instance Attr FeConvolveMatrix_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -132,7 +132,7 @@ instance Attr FeDiffuseLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  St
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDiffuseLighting_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDiffuseLighting_ ColorProfile  String  where
@@ -143,7 +143,7 @@ instance Attr FeDiffuseLighting_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -151,7 +151,7 @@ instance Attr FeDisplacementMap_ ColorProfile (NonEmpty.NonEmpty Event.Event  St
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDisplacementMap_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeDisplacementMap_ ColorProfile  String  where
@@ -162,7 +162,7 @@ instance Attr FeDisplacementMap_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeFlood_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -170,7 +170,7 @@ instance Attr FeFlood_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeFlood_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeFlood_ ColorProfile  String  where
@@ -181,7 +181,7 @@ instance Attr FeFlood_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeFlood_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -189,7 +189,7 @@ instance Attr FeGaussianBlur_ ColorProfile (NonEmpty.NonEmpty Event.Event  Strin
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeGaussianBlur_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeGaussianBlur_ ColorProfile  String  where
@@ -200,7 +200,7 @@ instance Attr FeGaussianBlur_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeImage_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -208,7 +208,7 @@ instance Attr FeImage_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeImage_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeImage_ ColorProfile  String  where
@@ -219,7 +219,7 @@ instance Attr FeImage_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeImage_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeMerge_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -227,7 +227,7 @@ instance Attr FeMerge_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMerge_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMerge_ ColorProfile  String  where
@@ -238,7 +238,7 @@ instance Attr FeMerge_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeMerge_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeMorphology_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -246,7 +246,7 @@ instance Attr FeMorphology_ ColorProfile (NonEmpty.NonEmpty Event.Event  String 
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMorphology_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeMorphology_ ColorProfile  String  where
@@ -257,7 +257,7 @@ instance Attr FeMorphology_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeMorphology_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeOffset_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -265,7 +265,7 @@ instance Attr FeOffset_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeOffset_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeOffset_ ColorProfile  String  where
@@ -276,7 +276,7 @@ instance Attr FeOffset_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeOffset_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -284,7 +284,7 @@ instance Attr FeSpecularLighting_ ColorProfile (NonEmpty.NonEmpty Event.Event  S
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeSpecularLighting_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeSpecularLighting_ ColorProfile  String  where
@@ -295,7 +295,7 @@ instance Attr FeSpecularLighting_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeTile_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -303,7 +303,7 @@ instance Attr FeTile_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTile_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTile_ ColorProfile  String  where
@@ -314,7 +314,7 @@ instance Attr FeTile_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeTile_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeTurbulence_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -322,7 +322,7 @@ instance Attr FeTurbulence_ ColorProfile (NonEmpty.NonEmpty Event.Event  String 
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTurbulence_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr FeTurbulence_ ColorProfile  String  where
@@ -333,7 +333,7 @@ instance Attr FeTurbulence_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr FeTurbulence_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Filter_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -341,7 +341,7 @@ instance Attr Filter_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Filter_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Filter_ ColorProfile  String  where
@@ -352,7 +352,7 @@ instance Attr Filter_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Filter_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Image_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -360,7 +360,7 @@ instance Attr Image_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Image_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Image_ ColorProfile  String  where
@@ -371,7 +371,7 @@ instance Attr Image_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Image_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Switch_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) where
@@ -379,7 +379,7 @@ instance Attr Switch_ ColorProfile (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "color-profile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Switch_ ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-profile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "color-profile", value: prop' value })
 instance Attr Switch_ ColorProfile  String  where
@@ -390,7 +390,7 @@ instance Attr Switch_ ColorProfile (Event.Event  String ) where
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr Switch_ ColorProfile (ST.ST Global.Global  String ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "color-profile", value: prop' value }
 
 instance Attr everything ColorProfile (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -398,7 +398,7 @@ instance Attr everything ColorProfile (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "color-profile", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "color-profile", value: unset' })
 instance Attr everything ColorProfile (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ColorProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "color-profile", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "color-profile", value: unset' })
 instance Attr everything ColorProfile  Unit  where
@@ -409,5 +409,5 @@ instance Attr everything ColorProfile (Event.Event  Unit ) where
     \_ -> { key: "color-profile", value: unset' }
 
 instance Attr everything ColorProfile (ST.ST Global.Global  Unit ) where
-  attr ColorProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr ColorProfile iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "color-profile", value: unset' }

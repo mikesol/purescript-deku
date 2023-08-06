@@ -18,7 +18,7 @@ instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "seeking", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "seeking", value: cb' value })
 instance Attr anything OnSeeking (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "seeking", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "seeking", value: cb' value })
 instance Attr anything OnSeeking  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnSeeking (Event.Event  Cb ) where
     \value -> { key: "seeking", value: cb' value }
 
 instance Attr anything OnSeeking (ST.ST Global.Global  Cb ) where
-  attr OnSeeking stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSeeking iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "seeking", value: cb' value }
 
 instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "seeking", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSeeking (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "seeking", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "seeking", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnSeeking (Event.Event  (Effect Unit) ) where
     \value -> { key: "seeking", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSeeking (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSeeking stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSeeking iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "seeking", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnSeeking (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "seeking", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSeeking (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "seeking", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "seeking", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnSeeking (Event.Event  (Effect Boolean) ) where
     \value -> { key: "seeking", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSeeking (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSeeking stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSeeking iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "seeking", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSeeking (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnSeeking (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "seeking", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "seeking", value: unset' })
 instance Attr everything OnSeeking (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSeeking (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "seeking", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "seeking", value: unset' })
 instance Attr everything OnSeeking  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnSeeking (Event.Event  Unit ) where
     \_ -> { key: "seeking", value: unset' }
 
 instance Attr everything OnSeeking (ST.ST Global.Global  Unit ) where
-  attr OnSeeking stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSeeking iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "seeking", value: unset' }

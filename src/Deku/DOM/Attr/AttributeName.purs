@@ -22,7 +22,7 @@ instance Attr Animate_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Animate_ AttributeName (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "attributeName", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Animate_ AttributeName  String  where
@@ -33,7 +33,7 @@ instance Attr Animate_ AttributeName (Event.Event  String ) where
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr Animate_ AttributeName (ST.ST Global.Global  String ) where
-  attr AttributeName stValue = unsafeAttribute $ This $ stValue <#>
+  attr AttributeName iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr AnimateMotion_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr AnimateMotion_ AttributeName (NonEmpty.NonEmpty Event.Event  Strin
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateMotion_ AttributeName (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "attributeName", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateMotion_ AttributeName  String  where
@@ -52,7 +52,7 @@ instance Attr AnimateMotion_ AttributeName (Event.Event  String ) where
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr AnimateMotion_ AttributeName (ST.ST Global.Global  String ) where
-  attr AttributeName stValue = unsafeAttribute $ This $ stValue <#>
+  attr AttributeName iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr AnimateTransform_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr AnimateTransform_ AttributeName (NonEmpty.NonEmpty Event.Event  St
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateTransform_ AttributeName (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "attributeName", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr AnimateTransform_ AttributeName  String  where
@@ -71,7 +71,7 @@ instance Attr AnimateTransform_ AttributeName (Event.Event  String ) where
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr AnimateTransform_ AttributeName (ST.ST Global.Global  String ) where
-  attr AttributeName stValue = unsafeAttribute $ This $ stValue <#>
+  attr AttributeName iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr Set_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr Set_ AttributeName (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "attributeName", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Set_ AttributeName (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "attributeName", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "attributeName", value: prop' value })
 instance Attr Set_ AttributeName  String  where
@@ -90,7 +90,7 @@ instance Attr Set_ AttributeName (Event.Event  String ) where
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr Set_ AttributeName (ST.ST Global.Global  String ) where
-  attr AttributeName stValue = unsafeAttribute $ This $ stValue <#>
+  attr AttributeName iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "attributeName", value: prop' value }
 
 instance Attr everything AttributeName (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything AttributeName (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "attributeName", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "attributeName", value: unset' })
 instance Attr everything AttributeName (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AttributeName (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "attributeName", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "attributeName", value: unset' })
 instance Attr everything AttributeName  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything AttributeName (Event.Event  Unit ) where
     \_ -> { key: "attributeName", value: unset' }
 
 instance Attr everything AttributeName (ST.ST Global.Global  Unit ) where
-  attr AttributeName stValue = unsafeAttribute $ This $ stValue <#>
+  attr AttributeName iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "attributeName", value: unset' }

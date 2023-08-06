@@ -140,7 +140,7 @@ instance Attr A_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr A_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr A_ Draggable  String  where
@@ -151,7 +151,7 @@ instance Attr A_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr A_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Abbr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -159,7 +159,7 @@ instance Attr Abbr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Abbr_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Abbr_ Draggable  String  where
@@ -170,7 +170,7 @@ instance Attr Abbr_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Abbr_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Acronym_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -178,7 +178,7 @@ instance Attr Acronym_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Acronym_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Acronym_ Draggable  String  where
@@ -189,7 +189,7 @@ instance Attr Acronym_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Acronym_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Address_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -197,7 +197,7 @@ instance Attr Address_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Address_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Address_ Draggable  String  where
@@ -208,7 +208,7 @@ instance Attr Address_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Address_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Applet_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -216,7 +216,7 @@ instance Attr Applet_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Applet_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Applet_ Draggable  String  where
@@ -227,7 +227,7 @@ instance Attr Applet_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Applet_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Area_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -235,7 +235,7 @@ instance Attr Area_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Area_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Area_ Draggable  String  where
@@ -246,7 +246,7 @@ instance Attr Area_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Area_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Article_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -254,7 +254,7 @@ instance Attr Article_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Article_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Article_ Draggable  String  where
@@ -265,7 +265,7 @@ instance Attr Article_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Article_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Aside_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -273,7 +273,7 @@ instance Attr Aside_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Aside_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Aside_ Draggable  String  where
@@ -284,7 +284,7 @@ instance Attr Aside_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Aside_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Audio_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr Audio_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Audio_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Audio_ Draggable  String  where
@@ -303,7 +303,7 @@ instance Attr Audio_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Audio_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr B_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -311,7 +311,7 @@ instance Attr B_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr B_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr B_ Draggable  String  where
@@ -322,7 +322,7 @@ instance Attr B_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr B_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Base_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -330,7 +330,7 @@ instance Attr Base_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Base_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Base_ Draggable  String  where
@@ -341,7 +341,7 @@ instance Attr Base_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Base_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Basefont_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -349,7 +349,7 @@ instance Attr Basefont_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Basefont_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Basefont_ Draggable  String  where
@@ -360,7 +360,7 @@ instance Attr Basefont_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Basefont_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Bdi_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -368,7 +368,7 @@ instance Attr Bdi_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Bdi_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Bdi_ Draggable  String  where
@@ -379,7 +379,7 @@ instance Attr Bdi_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Bdi_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Bdo_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -387,7 +387,7 @@ instance Attr Bdo_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Bdo_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Bdo_ Draggable  String  where
@@ -398,7 +398,7 @@ instance Attr Bdo_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Bdo_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Big_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr Big_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Big_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Big_ Draggable  String  where
@@ -417,7 +417,7 @@ instance Attr Big_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Big_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Blockquote_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -425,7 +425,7 @@ instance Attr Blockquote_ Draggable (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Blockquote_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Blockquote_ Draggable  String  where
@@ -436,7 +436,7 @@ instance Attr Blockquote_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Blockquote_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Body_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -444,7 +444,7 @@ instance Attr Body_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Body_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Body_ Draggable  String  where
@@ -455,7 +455,7 @@ instance Attr Body_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Body_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Br_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -463,7 +463,7 @@ instance Attr Br_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Br_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Br_ Draggable  String  where
@@ -474,7 +474,7 @@ instance Attr Br_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Br_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Button_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -482,7 +482,7 @@ instance Attr Button_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Button_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Button_ Draggable  String  where
@@ -493,7 +493,7 @@ instance Attr Button_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Button_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Canvas_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -501,7 +501,7 @@ instance Attr Canvas_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Canvas_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Canvas_ Draggable  String  where
@@ -512,7 +512,7 @@ instance Attr Canvas_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Canvas_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Caption_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -520,7 +520,7 @@ instance Attr Caption_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Caption_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Caption_ Draggable  String  where
@@ -531,7 +531,7 @@ instance Attr Caption_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Caption_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Center_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -539,7 +539,7 @@ instance Attr Center_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Center_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Center_ Draggable  String  where
@@ -550,7 +550,7 @@ instance Attr Center_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Center_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Cite_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -558,7 +558,7 @@ instance Attr Cite_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Cite_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Cite_ Draggable  String  where
@@ -569,7 +569,7 @@ instance Attr Cite_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Cite_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Code_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -577,7 +577,7 @@ instance Attr Code_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Code_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Code_ Draggable  String  where
@@ -588,7 +588,7 @@ instance Attr Code_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Code_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Col_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -596,7 +596,7 @@ instance Attr Col_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Col_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Col_ Draggable  String  where
@@ -607,7 +607,7 @@ instance Attr Col_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Col_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Colgroup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -615,7 +615,7 @@ instance Attr Colgroup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Colgroup_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Colgroup_ Draggable  String  where
@@ -626,7 +626,7 @@ instance Attr Colgroup_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Colgroup_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Xdata_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -634,7 +634,7 @@ instance Attr Xdata_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Xdata_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Xdata_ Draggable  String  where
@@ -645,7 +645,7 @@ instance Attr Xdata_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Xdata_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Datalist_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -653,7 +653,7 @@ instance Attr Datalist_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Datalist_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Datalist_ Draggable  String  where
@@ -664,7 +664,7 @@ instance Attr Datalist_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Datalist_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dd_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -672,7 +672,7 @@ instance Attr Dd_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dd_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dd_ Draggable  String  where
@@ -683,7 +683,7 @@ instance Attr Dd_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dd_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Del_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -691,7 +691,7 @@ instance Attr Del_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Del_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Del_ Draggable  String  where
@@ -702,7 +702,7 @@ instance Attr Del_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Del_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Details_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -710,7 +710,7 @@ instance Attr Details_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Details_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Details_ Draggable  String  where
@@ -721,7 +721,7 @@ instance Attr Details_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Details_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dfn_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -729,7 +729,7 @@ instance Attr Dfn_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dfn_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dfn_ Draggable  String  where
@@ -740,7 +740,7 @@ instance Attr Dfn_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dfn_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dialog_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -748,7 +748,7 @@ instance Attr Dialog_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dialog_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dialog_ Draggable  String  where
@@ -759,7 +759,7 @@ instance Attr Dialog_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dialog_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dir_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -767,7 +767,7 @@ instance Attr Dir_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dir_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dir_ Draggable  String  where
@@ -778,7 +778,7 @@ instance Attr Dir_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dir_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Div_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -786,7 +786,7 @@ instance Attr Div_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Div_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Div_ Draggable  String  where
@@ -797,7 +797,7 @@ instance Attr Div_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Div_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dl_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -805,7 +805,7 @@ instance Attr Dl_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dl_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dl_ Draggable  String  where
@@ -816,7 +816,7 @@ instance Attr Dl_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dl_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -824,7 +824,7 @@ instance Attr Dt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dt_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Dt_ Draggable  String  where
@@ -835,7 +835,7 @@ instance Attr Dt_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Dt_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Em_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Em_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Em_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Em_ Draggable  String  where
@@ -854,7 +854,7 @@ instance Attr Em_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Em_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Embed_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -862,7 +862,7 @@ instance Attr Embed_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Embed_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Embed_ Draggable  String  where
@@ -873,7 +873,7 @@ instance Attr Embed_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Embed_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Fieldset_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -881,7 +881,7 @@ instance Attr Fieldset_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Fieldset_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Fieldset_ Draggable  String  where
@@ -892,7 +892,7 @@ instance Attr Fieldset_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Fieldset_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Figcaption_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -900,7 +900,7 @@ instance Attr Figcaption_ Draggable (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Figcaption_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Figcaption_ Draggable  String  where
@@ -911,7 +911,7 @@ instance Attr Figcaption_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Figcaption_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Figure_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -919,7 +919,7 @@ instance Attr Figure_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Figure_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Figure_ Draggable  String  where
@@ -930,7 +930,7 @@ instance Attr Figure_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Figure_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Font_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -938,7 +938,7 @@ instance Attr Font_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Font_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Font_ Draggable  String  where
@@ -949,7 +949,7 @@ instance Attr Font_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Font_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Footer_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -957,7 +957,7 @@ instance Attr Footer_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Footer_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Footer_ Draggable  String  where
@@ -968,7 +968,7 @@ instance Attr Footer_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Footer_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Form_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -976,7 +976,7 @@ instance Attr Form_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Form_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Form_ Draggable  String  where
@@ -987,7 +987,7 @@ instance Attr Form_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Form_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Frame_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -995,7 +995,7 @@ instance Attr Frame_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Frame_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Frame_ Draggable  String  where
@@ -1006,7 +1006,7 @@ instance Attr Frame_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Frame_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Frameset_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1014,7 +1014,7 @@ instance Attr Frameset_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Frameset_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Frameset_ Draggable  String  where
@@ -1025,7 +1025,7 @@ instance Attr Frameset_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Frameset_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H1_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1033,7 +1033,7 @@ instance Attr H1_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H1_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H1_ Draggable  String  where
@@ -1044,7 +1044,7 @@ instance Attr H1_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H1_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H2_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1052,7 +1052,7 @@ instance Attr H2_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H2_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H2_ Draggable  String  where
@@ -1063,7 +1063,7 @@ instance Attr H2_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H2_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H3_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1071,7 +1071,7 @@ instance Attr H3_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H3_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H3_ Draggable  String  where
@@ -1082,7 +1082,7 @@ instance Attr H3_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H3_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H4_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1090,7 +1090,7 @@ instance Attr H4_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H4_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H4_ Draggable  String  where
@@ -1101,7 +1101,7 @@ instance Attr H4_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H4_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H5_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1109,7 +1109,7 @@ instance Attr H5_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H5_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H5_ Draggable  String  where
@@ -1120,7 +1120,7 @@ instance Attr H5_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H5_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H6_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1128,7 +1128,7 @@ instance Attr H6_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H6_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr H6_ Draggable  String  where
@@ -1139,7 +1139,7 @@ instance Attr H6_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr H6_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Head_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1147,7 +1147,7 @@ instance Attr Head_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Head_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Head_ Draggable  String  where
@@ -1158,7 +1158,7 @@ instance Attr Head_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Head_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Header_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1166,7 +1166,7 @@ instance Attr Header_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Header_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Header_ Draggable  String  where
@@ -1177,7 +1177,7 @@ instance Attr Header_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Header_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Hr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1185,7 +1185,7 @@ instance Attr Hr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Hr_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Hr_ Draggable  String  where
@@ -1196,7 +1196,7 @@ instance Attr Hr_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Hr_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Html_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1204,7 +1204,7 @@ instance Attr Html_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Html_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Html_ Draggable  String  where
@@ -1215,7 +1215,7 @@ instance Attr Html_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Html_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr I_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1223,7 +1223,7 @@ instance Attr I_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr I_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr I_ Draggable  String  where
@@ -1234,7 +1234,7 @@ instance Attr I_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr I_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Iframe_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1242,7 +1242,7 @@ instance Attr Iframe_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Iframe_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Iframe_ Draggable  String  where
@@ -1253,7 +1253,7 @@ instance Attr Iframe_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Iframe_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Img_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1261,7 +1261,7 @@ instance Attr Img_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Img_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Img_ Draggable  String  where
@@ -1272,7 +1272,7 @@ instance Attr Img_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Img_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Input_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1280,7 +1280,7 @@ instance Attr Input_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Input_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Input_ Draggable  String  where
@@ -1291,7 +1291,7 @@ instance Attr Input_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Input_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ins_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1299,7 +1299,7 @@ instance Attr Ins_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ins_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ins_ Draggable  String  where
@@ -1310,7 +1310,7 @@ instance Attr Ins_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ins_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Kbd_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1318,7 +1318,7 @@ instance Attr Kbd_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Kbd_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Kbd_ Draggable  String  where
@@ -1329,7 +1329,7 @@ instance Attr Kbd_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Kbd_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Label_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1337,7 +1337,7 @@ instance Attr Label_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Label_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Label_ Draggable  String  where
@@ -1348,7 +1348,7 @@ instance Attr Label_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Label_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Legend_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1356,7 +1356,7 @@ instance Attr Legend_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Legend_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Legend_ Draggable  String  where
@@ -1367,7 +1367,7 @@ instance Attr Legend_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Legend_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Li_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1375,7 +1375,7 @@ instance Attr Li_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Li_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Li_ Draggable  String  where
@@ -1386,7 +1386,7 @@ instance Attr Li_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Li_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Link_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1394,7 +1394,7 @@ instance Attr Link_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Link_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Link_ Draggable  String  where
@@ -1405,7 +1405,7 @@ instance Attr Link_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Link_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Main_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1413,7 +1413,7 @@ instance Attr Main_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Main_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Main_ Draggable  String  where
@@ -1424,7 +1424,7 @@ instance Attr Main_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Main_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Map_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1432,7 +1432,7 @@ instance Attr Map_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Map_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Map_ Draggable  String  where
@@ -1443,7 +1443,7 @@ instance Attr Map_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Map_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Mark_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1451,7 +1451,7 @@ instance Attr Mark_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Mark_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Mark_ Draggable  String  where
@@ -1462,7 +1462,7 @@ instance Attr Mark_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Mark_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Meta_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1470,7 +1470,7 @@ instance Attr Meta_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Meta_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Meta_ Draggable  String  where
@@ -1481,7 +1481,7 @@ instance Attr Meta_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Meta_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Meter_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1489,7 +1489,7 @@ instance Attr Meter_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Meter_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Meter_ Draggable  String  where
@@ -1500,7 +1500,7 @@ instance Attr Meter_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Meter_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Nav_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1508,7 +1508,7 @@ instance Attr Nav_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Nav_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Nav_ Draggable  String  where
@@ -1519,7 +1519,7 @@ instance Attr Nav_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Nav_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Noframes_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1527,7 +1527,7 @@ instance Attr Noframes_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Noframes_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Noframes_ Draggable  String  where
@@ -1538,7 +1538,7 @@ instance Attr Noframes_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Noframes_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Noscript_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1546,7 +1546,7 @@ instance Attr Noscript_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Noscript_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Noscript_ Draggable  String  where
@@ -1557,7 +1557,7 @@ instance Attr Noscript_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Noscript_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Object_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1565,7 +1565,7 @@ instance Attr Object_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Object_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Object_ Draggable  String  where
@@ -1576,7 +1576,7 @@ instance Attr Object_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Object_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ol_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1584,7 +1584,7 @@ instance Attr Ol_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ol_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ol_ Draggable  String  where
@@ -1595,7 +1595,7 @@ instance Attr Ol_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ol_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Optgroup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1603,7 +1603,7 @@ instance Attr Optgroup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Optgroup_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Optgroup_ Draggable  String  where
@@ -1614,7 +1614,7 @@ instance Attr Optgroup_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Optgroup_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Option_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1622,7 +1622,7 @@ instance Attr Option_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Option_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Option_ Draggable  String  where
@@ -1633,7 +1633,7 @@ instance Attr Option_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Option_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Output_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1641,7 +1641,7 @@ instance Attr Output_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Output_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Output_ Draggable  String  where
@@ -1652,7 +1652,7 @@ instance Attr Output_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Output_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr P_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1660,7 +1660,7 @@ instance Attr P_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr P_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr P_ Draggable  String  where
@@ -1671,7 +1671,7 @@ instance Attr P_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr P_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Param_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1679,7 +1679,7 @@ instance Attr Param_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Param_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Param_ Draggable  String  where
@@ -1690,7 +1690,7 @@ instance Attr Param_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Param_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Picture_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1698,7 +1698,7 @@ instance Attr Picture_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Picture_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Picture_ Draggable  String  where
@@ -1709,7 +1709,7 @@ instance Attr Picture_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Picture_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Pre_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1717,7 +1717,7 @@ instance Attr Pre_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Pre_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Pre_ Draggable  String  where
@@ -1728,7 +1728,7 @@ instance Attr Pre_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Pre_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Progress_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1736,7 +1736,7 @@ instance Attr Progress_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Progress_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Progress_ Draggable  String  where
@@ -1747,7 +1747,7 @@ instance Attr Progress_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Progress_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Q_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1755,7 +1755,7 @@ instance Attr Q_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Q_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Q_ Draggable  String  where
@@ -1766,7 +1766,7 @@ instance Attr Q_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Q_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Rp_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1774,7 +1774,7 @@ instance Attr Rp_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Rp_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Rp_ Draggable  String  where
@@ -1785,7 +1785,7 @@ instance Attr Rp_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Rp_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Rt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1793,7 +1793,7 @@ instance Attr Rt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Rt_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Rt_ Draggable  String  where
@@ -1804,7 +1804,7 @@ instance Attr Rt_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Rt_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ruby_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1812,7 +1812,7 @@ instance Attr Ruby_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ruby_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ruby_ Draggable  String  where
@@ -1823,7 +1823,7 @@ instance Attr Ruby_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ruby_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr S_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1831,7 +1831,7 @@ instance Attr S_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr S_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr S_ Draggable  String  where
@@ -1842,7 +1842,7 @@ instance Attr S_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr S_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Samp_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1850,7 +1850,7 @@ instance Attr Samp_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Samp_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Samp_ Draggable  String  where
@@ -1861,7 +1861,7 @@ instance Attr Samp_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Samp_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Script_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1869,7 +1869,7 @@ instance Attr Script_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Script_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Script_ Draggable  String  where
@@ -1880,7 +1880,7 @@ instance Attr Script_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Script_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Section_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1888,7 +1888,7 @@ instance Attr Section_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Section_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Section_ Draggable  String  where
@@ -1899,7 +1899,7 @@ instance Attr Section_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Section_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Select_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1907,7 +1907,7 @@ instance Attr Select_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Select_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Select_ Draggable  String  where
@@ -1918,7 +1918,7 @@ instance Attr Select_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Select_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Small_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1926,7 +1926,7 @@ instance Attr Small_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Small_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Small_ Draggable  String  where
@@ -1937,7 +1937,7 @@ instance Attr Small_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Small_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Source_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1945,7 +1945,7 @@ instance Attr Source_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Source_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Source_ Draggable  String  where
@@ -1956,7 +1956,7 @@ instance Attr Source_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Source_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Span_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1964,7 +1964,7 @@ instance Attr Span_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Span_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Span_ Draggable  String  where
@@ -1975,7 +1975,7 @@ instance Attr Span_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Span_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Strike_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1983,7 +1983,7 @@ instance Attr Strike_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Strike_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Strike_ Draggable  String  where
@@ -1994,7 +1994,7 @@ instance Attr Strike_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Strike_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Strong_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2002,7 +2002,7 @@ instance Attr Strong_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Strong_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Strong_ Draggable  String  where
@@ -2013,7 +2013,7 @@ instance Attr Strong_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Strong_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Style_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2021,7 +2021,7 @@ instance Attr Style_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Style_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Style_ Draggable  String  where
@@ -2032,7 +2032,7 @@ instance Attr Style_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Style_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Sub_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2040,7 +2040,7 @@ instance Attr Sub_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Sub_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Sub_ Draggable  String  where
@@ -2051,7 +2051,7 @@ instance Attr Sub_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Sub_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Summary_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2059,7 +2059,7 @@ instance Attr Summary_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Summary_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Summary_ Draggable  String  where
@@ -2070,7 +2070,7 @@ instance Attr Summary_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Summary_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Sup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2078,7 +2078,7 @@ instance Attr Sup_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Sup_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Sup_ Draggable  String  where
@@ -2089,7 +2089,7 @@ instance Attr Sup_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Sup_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Svg_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2097,7 +2097,7 @@ instance Attr Svg_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Svg_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Svg_ Draggable  String  where
@@ -2108,7 +2108,7 @@ instance Attr Svg_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Svg_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Table_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2116,7 +2116,7 @@ instance Attr Table_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Table_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Table_ Draggable  String  where
@@ -2127,7 +2127,7 @@ instance Attr Table_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Table_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tbody_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2135,7 +2135,7 @@ instance Attr Tbody_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tbody_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tbody_ Draggable  String  where
@@ -2146,7 +2146,7 @@ instance Attr Tbody_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tbody_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Td_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2154,7 +2154,7 @@ instance Attr Td_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Td_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Td_ Draggable  String  where
@@ -2165,7 +2165,7 @@ instance Attr Td_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Td_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Template_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2173,7 +2173,7 @@ instance Attr Template_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Template_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Template_ Draggable  String  where
@@ -2184,7 +2184,7 @@ instance Attr Template_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Template_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Textarea_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2192,7 +2192,7 @@ instance Attr Textarea_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Textarea_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Textarea_ Draggable  String  where
@@ -2203,7 +2203,7 @@ instance Attr Textarea_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Textarea_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tfoot_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2211,7 +2211,7 @@ instance Attr Tfoot_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tfoot_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tfoot_ Draggable  String  where
@@ -2222,7 +2222,7 @@ instance Attr Tfoot_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tfoot_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Th_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2230,7 +2230,7 @@ instance Attr Th_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Th_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Th_ Draggable  String  where
@@ -2241,7 +2241,7 @@ instance Attr Th_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Th_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Thead_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2249,7 +2249,7 @@ instance Attr Thead_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Thead_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Thead_ Draggable  String  where
@@ -2260,7 +2260,7 @@ instance Attr Thead_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Thead_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Time_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2268,7 +2268,7 @@ instance Attr Time_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Time_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Time_ Draggable  String  where
@@ -2279,7 +2279,7 @@ instance Attr Time_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Time_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Title_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2287,7 +2287,7 @@ instance Attr Title_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Title_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Title_ Draggable  String  where
@@ -2298,7 +2298,7 @@ instance Attr Title_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Title_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2306,7 +2306,7 @@ instance Attr Tr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tr_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tr_ Draggable  String  where
@@ -2317,7 +2317,7 @@ instance Attr Tr_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tr_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Track_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2325,7 +2325,7 @@ instance Attr Track_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Track_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Track_ Draggable  String  where
@@ -2336,7 +2336,7 @@ instance Attr Track_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Track_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2344,7 +2344,7 @@ instance Attr Tt_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tt_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Tt_ Draggable  String  where
@@ -2355,7 +2355,7 @@ instance Attr Tt_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Tt_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr U_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2363,7 +2363,7 @@ instance Attr U_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr U_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr U_ Draggable  String  where
@@ -2374,7 +2374,7 @@ instance Attr U_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr U_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ul_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2382,7 +2382,7 @@ instance Attr Ul_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ul_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Ul_ Draggable  String  where
@@ -2393,7 +2393,7 @@ instance Attr Ul_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Ul_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Var_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2401,7 +2401,7 @@ instance Attr Var_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Var_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Var_ Draggable  String  where
@@ -2412,7 +2412,7 @@ instance Attr Var_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Var_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Video_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2420,7 +2420,7 @@ instance Attr Video_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Video_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Video_ Draggable  String  where
@@ -2431,7 +2431,7 @@ instance Attr Video_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Video_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Wbr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2439,7 +2439,7 @@ instance Attr Wbr_ Draggable (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "draggable", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Wbr_ Draggable (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "draggable", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "draggable", value: prop' value })
 instance Attr Wbr_ Draggable  String  where
@@ -2450,7 +2450,7 @@ instance Attr Wbr_ Draggable (Event.Event  String ) where
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr Wbr_ Draggable (ST.ST Global.Global  String ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "draggable", value: prop' value }
 
 instance Attr everything Draggable (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -2458,7 +2458,7 @@ instance Attr everything Draggable (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "draggable", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "draggable", value: unset' })
 instance Attr everything Draggable (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Draggable (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "draggable", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "draggable", value: unset' })
 instance Attr everything Draggable  Unit  where
@@ -2469,5 +2469,5 @@ instance Attr everything Draggable (Event.Event  Unit ) where
     \_ -> { key: "draggable", value: unset' }
 
 instance Attr everything Draggable (ST.ST Global.Global  Unit ) where
-  attr Draggable stValue = unsafeAttribute $ This $ stValue <#>
+  attr Draggable iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "draggable", value: unset' }

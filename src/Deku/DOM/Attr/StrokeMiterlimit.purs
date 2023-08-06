@@ -61,7 +61,7 @@ instance Attr Circle_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Circle_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -74,7 +74,7 @@ instance Attr Circle_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Circle_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ClipPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -84,7 +84,7 @@ instance Attr ClipPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr ClipPath_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -97,7 +97,7 @@ instance Attr ClipPath_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ClipPath_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Defs_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -107,7 +107,7 @@ instance Attr Defs_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Defs_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -120,7 +120,7 @@ instance Attr Defs_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Defs_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Ellipse_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Ellipse_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Ellipse_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -143,7 +143,7 @@ instance Attr Ellipse_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Ellipse_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeBlend_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -153,7 +153,7 @@ instance Attr FeBlend_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeBlend_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -166,7 +166,7 @@ instance Attr FeBlend_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeBlend_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -176,7 +176,7 @@ instance Attr FeColorMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeColorMatrix_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -189,7 +189,7 @@ instance Attr FeColorMatrix_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeColorMatrix_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -199,7 +199,7 @@ instance Attr FeComponentTransfer_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Eve
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeComponentTransfer_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -212,7 +212,7 @@ instance Attr FeComponentTransfer_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComponentTransfer_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComposite_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -222,7 +222,7 @@ instance Attr FeComposite_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Stri
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeComposite_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -235,7 +235,7 @@ instance Attr FeComposite_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeComposite_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -245,7 +245,7 @@ instance Attr FeConvolveMatrix_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -258,7 +258,7 @@ instance Attr FeConvolveMatrix_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeConvolveMatrix_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr FeDiffuseLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -281,7 +281,7 @@ instance Attr FeDiffuseLighting_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDiffuseLighting_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -291,7 +291,7 @@ instance Attr FeDisplacementMap_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeDisplacementMap_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -304,7 +304,7 @@ instance Attr FeDisplacementMap_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeDisplacementMap_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeFlood_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -314,7 +314,7 @@ instance Attr FeFlood_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeFlood_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -327,7 +327,7 @@ instance Attr FeFlood_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeFlood_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -337,7 +337,7 @@ instance Attr FeGaussianBlur_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeGaussianBlur_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -350,7 +350,7 @@ instance Attr FeGaussianBlur_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeGaussianBlur_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeImage_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -360,7 +360,7 @@ instance Attr FeImage_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeImage_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -373,7 +373,7 @@ instance Attr FeImage_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeImage_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMerge_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -383,7 +383,7 @@ instance Attr FeMerge_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeMerge_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -396,7 +396,7 @@ instance Attr FeMerge_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMerge_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMorphology_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr FeMorphology_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeMorphology_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -419,7 +419,7 @@ instance Attr FeMorphology_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeMorphology_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeOffset_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -429,7 +429,7 @@ instance Attr FeOffset_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeOffset_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -442,7 +442,7 @@ instance Attr FeOffset_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeOffset_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -452,7 +452,7 @@ instance Attr FeSpecularLighting_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Even
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeSpecularLighting_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -465,7 +465,7 @@ instance Attr FeSpecularLighting_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeSpecularLighting_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTile_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -475,7 +475,7 @@ instance Attr FeTile_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeTile_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -488,7 +488,7 @@ instance Attr FeTile_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTile_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -498,7 +498,7 @@ instance Attr FeTurbulence_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Str
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr FeTurbulence_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -511,7 +511,7 @@ instance Attr FeTurbulence_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr FeTurbulence_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Filter_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -521,7 +521,7 @@ instance Attr Filter_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Filter_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -534,7 +534,7 @@ instance Attr Filter_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Filter_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ForeignObject_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -544,7 +544,7 @@ instance Attr ForeignObject_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  St
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr ForeignObject_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -557,7 +557,7 @@ instance Attr ForeignObject_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr ForeignObject_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr G_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -567,7 +567,7 @@ instance Attr G_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr G_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -580,7 +580,7 @@ instance Attr G_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr G_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Image_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -590,7 +590,7 @@ instance Attr Image_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Image_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -603,7 +603,7 @@ instance Attr Image_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Image_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Line_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -613,7 +613,7 @@ instance Attr Line_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Line_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -626,7 +626,7 @@ instance Attr Line_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Line_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr LinearGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -636,7 +636,7 @@ instance Attr LinearGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr LinearGradient_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -649,7 +649,7 @@ instance Attr LinearGradient_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr LinearGradient_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Marker_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -659,7 +659,7 @@ instance Attr Marker_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Marker_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -672,7 +672,7 @@ instance Attr Marker_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Marker_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Mask_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -682,7 +682,7 @@ instance Attr Mask_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Mask_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -695,7 +695,7 @@ instance Attr Mask_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Mask_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Path_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -705,7 +705,7 @@ instance Attr Path_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Path_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -718,7 +718,7 @@ instance Attr Path_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Path_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Pattern_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -728,7 +728,7 @@ instance Attr Pattern_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Pattern_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -741,7 +741,7 @@ instance Attr Pattern_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Pattern_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polygon_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -751,7 +751,7 @@ instance Attr Polygon_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String )
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Polygon_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -764,7 +764,7 @@ instance Attr Polygon_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polygon_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polyline_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -774,7 +774,7 @@ instance Attr Polyline_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Polyline_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -787,7 +787,7 @@ instance Attr Polyline_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Polyline_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr RadialGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -797,7 +797,7 @@ instance Attr RadialGradient_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  S
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr RadialGradient_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -810,7 +810,7 @@ instance Attr RadialGradient_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr RadialGradient_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Rect_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -820,7 +820,7 @@ instance Attr Rect_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Rect_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -833,7 +833,7 @@ instance Attr Rect_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Rect_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Svg_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Svg_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Svg_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -856,7 +856,7 @@ instance Attr Svg_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Svg_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Switch_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -866,7 +866,7 @@ instance Attr Switch_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Switch_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -879,7 +879,7 @@ instance Attr Switch_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Switch_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Symbol_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -889,7 +889,7 @@ instance Attr Symbol_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Symbol_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -902,7 +902,7 @@ instance Attr Symbol_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Symbol_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Text_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -912,7 +912,7 @@ instance Attr Text_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Text_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -925,7 +925,7 @@ instance Attr Text_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Text_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr TextPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -935,7 +935,7 @@ instance Attr TextPath_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String 
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr TextPath_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -948,7 +948,7 @@ instance Attr TextPath_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr TextPath_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Tspan_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -958,7 +958,7 @@ instance Attr Tspan_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Tspan_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -971,7 +971,7 @@ instance Attr Tspan_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Tspan_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Use_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) where
@@ -981,7 +981,7 @@ instance Attr Use_ StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "stroke-miterlimit", value: prop' value }
     )
 instance Attr Use_ StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stroke-miterlimit", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "stroke-miterlimit", value: prop' value }
@@ -994,7 +994,7 @@ instance Attr Use_ StrokeMiterlimit (Event.Event  String ) where
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr Use_ StrokeMiterlimit (ST.ST Global.Global  String ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "stroke-miterlimit", value: prop' value }
 
 instance Attr everything StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -1002,7 +1002,7 @@ instance Attr everything StrokeMiterlimit (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "stroke-miterlimit", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
 instance Attr everything StrokeMiterlimit (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr StrokeMiterlimit (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "stroke-miterlimit", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "stroke-miterlimit", value: unset' })
 instance Attr everything StrokeMiterlimit  Unit  where
@@ -1013,5 +1013,5 @@ instance Attr everything StrokeMiterlimit (Event.Event  Unit ) where
     <#> \_ -> { key: "stroke-miterlimit", value: unset' }
 
 instance Attr everything StrokeMiterlimit (ST.ST Global.Global  Unit ) where
-  attr StrokeMiterlimit stValue = unsafeAttribute $ This $ stValue
+  attr StrokeMiterlimit iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "stroke-miterlimit", value: unset' }

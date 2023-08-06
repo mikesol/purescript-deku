@@ -18,7 +18,7 @@ instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  Cb ) wher
     { key: "pointercancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointercancel", value: cb' value })
 instance Attr anything OnPointercancel (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointercancel", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "pointercancel", value: cb' value })
 instance Attr anything OnPointercancel  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnPointercancel (Event.Event  Cb ) where
     <#> \value -> { key: "pointercancel", value: cb' value }
 
 instance Attr anything OnPointercancel (ST.ST Global.Global  Cb ) where
-  attr OnPointercancel stValue = unsafeAttribute $ This $ stValue
+  attr OnPointercancel iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "pointercancel", value: cb' value }
 
 instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  (Effect U
         { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointercancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointercancel", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
@@ -53,7 +53,7 @@ instance Attr anything OnPointercancel (Event.Event  (Effect Unit) ) where
       { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointercancel (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnPointercancel stValue = unsafeAttribute $ This $ stValue
+  attr OnPointercancel iValue = unsafeAttribute $ This $ iValue
     <#> \value ->
       { key: "pointercancel", value: cb' (Cb (const (value $> true))) }
 
@@ -64,7 +64,7 @@ instance Attr anything OnPointercancel (NonEmpty.NonEmpty Event.Event  (Effect B
         { key: "pointercancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointercancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointercancel", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointercancel", value: cb' (Cb (const value)) }
@@ -77,7 +77,7 @@ instance Attr anything OnPointercancel (Event.Event  (Effect Boolean) ) where
     <#> \value -> { key: "pointercancel", value: cb' (Cb (const value)) }
 
 instance Attr anything OnPointercancel (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnPointercancel stValue = unsafeAttribute $ This $ stValue
+  attr OnPointercancel iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "pointercancel", value: cb' (Cb (const value)) }
 
 instance Attr everything OnPointercancel (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -85,7 +85,7 @@ instance Attr everything OnPointercancel (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "pointercancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointercancel", value: unset' })
 instance Attr everything OnPointercancel (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnPointercancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "pointercancel", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "pointercancel", value: unset' })
 instance Attr everything OnPointercancel  Unit  where
@@ -96,5 +96,5 @@ instance Attr everything OnPointercancel (Event.Event  Unit ) where
     <#> \_ -> { key: "pointercancel", value: unset' }
 
 instance Attr everything OnPointercancel (ST.ST Global.Global  Unit ) where
-  attr OnPointercancel stValue = unsafeAttribute $ This $ stValue
+  attr OnPointercancel iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "pointercancel", value: unset' }

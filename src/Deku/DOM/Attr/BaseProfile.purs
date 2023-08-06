@@ -19,7 +19,7 @@ instance Attr Svg_ BaseProfile (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "baseProfile", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "baseProfile", value: prop' value })
 instance Attr Svg_ BaseProfile (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr BaseProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr BaseProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "baseProfile", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "baseProfile", value: prop' value })
 instance Attr Svg_ BaseProfile  String  where
@@ -30,7 +30,7 @@ instance Attr Svg_ BaseProfile (Event.Event  String ) where
     \value -> { key: "baseProfile", value: prop' value }
 
 instance Attr Svg_ BaseProfile (ST.ST Global.Global  String ) where
-  attr BaseProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr BaseProfile iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "baseProfile", value: prop' value }
 
 instance Attr everything BaseProfile (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything BaseProfile (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "baseProfile", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseProfile", value: unset' })
 instance Attr everything BaseProfile (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr BaseProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr BaseProfile (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "baseProfile", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "baseProfile", value: unset' })
 instance Attr everything BaseProfile  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything BaseProfile (Event.Event  Unit ) where
     \_ -> { key: "baseProfile", value: unset' }
 
 instance Attr everything BaseProfile (ST.ST Global.Global  Unit ) where
-  attr BaseProfile stValue = unsafeAttribute $ This $ stValue <#>
+  attr BaseProfile iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "baseProfile", value: unset' }

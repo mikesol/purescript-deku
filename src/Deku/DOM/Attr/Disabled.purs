@@ -25,7 +25,7 @@ instance Attr Button_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Button_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Button_ Disabled  String  where
@@ -36,7 +36,7 @@ instance Attr Button_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Button_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Fieldset_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -44,7 +44,7 @@ instance Attr Fieldset_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Fieldset_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Fieldset_ Disabled  String  where
@@ -55,7 +55,7 @@ instance Attr Fieldset_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Fieldset_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Input_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -63,7 +63,7 @@ instance Attr Input_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Input_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Input_ Disabled  String  where
@@ -74,7 +74,7 @@ instance Attr Input_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Input_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Optgroup_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -82,7 +82,7 @@ instance Attr Optgroup_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Optgroup_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Optgroup_ Disabled  String  where
@@ -93,7 +93,7 @@ instance Attr Optgroup_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Optgroup_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Option_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -101,7 +101,7 @@ instance Attr Option_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Option_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Option_ Disabled  String  where
@@ -112,7 +112,7 @@ instance Attr Option_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Option_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Select_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -120,7 +120,7 @@ instance Attr Select_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Select_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Select_ Disabled  String  where
@@ -131,7 +131,7 @@ instance Attr Select_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Select_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Textarea_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
@@ -139,7 +139,7 @@ instance Attr Textarea_ Disabled (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "disabled", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Textarea_ Disabled (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "disabled", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "disabled", value: prop' value })
 instance Attr Textarea_ Disabled  String  where
@@ -150,7 +150,7 @@ instance Attr Textarea_ Disabled (Event.Event  String ) where
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr Textarea_ Disabled (ST.ST Global.Global  String ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#>
+  attr Disabled iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "disabled", value: prop' value }
 
 instance Attr everything Disabled (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -158,7 +158,7 @@ instance Attr everything Disabled (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "disabled", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "disabled", value: unset' })
 instance Attr everything Disabled (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Disabled (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "disabled", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "disabled", value: unset' })
 instance Attr everything Disabled  Unit  where
@@ -169,5 +169,5 @@ instance Attr everything Disabled (Event.Event  Unit ) where
     { key: "disabled", value: unset' }
 
 instance Attr everything Disabled (ST.ST Global.Global  Unit ) where
-  attr Disabled stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Disabled iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "disabled", value: unset' }

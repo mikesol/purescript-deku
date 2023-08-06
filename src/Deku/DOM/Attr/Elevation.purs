@@ -19,7 +19,7 @@ instance Attr FeDistantLight_ Elevation (NonEmpty.NonEmpty Event.Event  String )
     { key: "elevation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "elevation", value: prop' value })
 instance Attr FeDistantLight_ Elevation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Elevation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Elevation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "elevation", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "elevation", value: prop' value })
 instance Attr FeDistantLight_ Elevation  String  where
@@ -30,7 +30,7 @@ instance Attr FeDistantLight_ Elevation (Event.Event  String ) where
     \value -> { key: "elevation", value: prop' value }
 
 instance Attr FeDistantLight_ Elevation (ST.ST Global.Global  String ) where
-  attr Elevation stValue = unsafeAttribute $ This $ stValue <#>
+  attr Elevation iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "elevation", value: prop' value }
 
 instance Attr everything Elevation (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Elevation (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "elevation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "elevation", value: unset' })
 instance Attr everything Elevation (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Elevation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Elevation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "elevation", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "elevation", value: unset' })
 instance Attr everything Elevation  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Elevation (Event.Event  Unit ) where
     \_ -> { key: "elevation", value: unset' }
 
 instance Attr everything Elevation (ST.ST Global.Global  Unit ) where
-  attr Elevation stValue = unsafeAttribute $ This $ stValue <#>
+  attr Elevation iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "elevation", value: unset' }

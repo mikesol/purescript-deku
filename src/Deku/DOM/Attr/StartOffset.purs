@@ -19,7 +19,7 @@ instance Attr TextPath_ StartOffset (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "startOffset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "startOffset", value: prop' value })
 instance Attr TextPath_ StartOffset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StartOffset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StartOffset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "startOffset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "startOffset", value: prop' value })
 instance Attr TextPath_ StartOffset  String  where
@@ -30,7 +30,7 @@ instance Attr TextPath_ StartOffset (Event.Event  String ) where
     \value -> { key: "startOffset", value: prop' value }
 
 instance Attr TextPath_ StartOffset (ST.ST Global.Global  String ) where
-  attr StartOffset stValue = unsafeAttribute $ This $ stValue <#>
+  attr StartOffset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "startOffset", value: prop' value }
 
 instance Attr everything StartOffset (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything StartOffset (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "startOffset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "startOffset", value: unset' })
 instance Attr everything StartOffset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr StartOffset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr StartOffset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "startOffset", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "startOffset", value: unset' })
 instance Attr everything StartOffset  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything StartOffset (Event.Event  Unit ) where
     \_ -> { key: "startOffset", value: unset' }
 
 instance Attr everything StartOffset (ST.ST Global.Global  Unit ) where
-  attr StartOffset stValue = unsafeAttribute $ This $ stValue <#>
+  attr StartOffset iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "startOffset", value: unset' }

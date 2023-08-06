@@ -41,7 +41,7 @@ instance Attr FeBlend_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeBlend_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -54,7 +54,7 @@ instance Attr FeBlend_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeBlend_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeColorMatrix_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -64,7 +64,7 @@ instance Attr FeColorMatrix_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Stri
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeColorMatrix_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -77,7 +77,7 @@ instance Attr FeColorMatrix_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeColorMatrix_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeComponentTransfer_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -87,7 +87,7 @@ instance Attr FeComponentTransfer_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeComponentTransfer_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -100,7 +100,7 @@ instance Attr FeComponentTransfer_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeComponentTransfer_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeComposite_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -110,7 +110,7 @@ instance Attr FeComposite_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeComposite_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -123,7 +123,7 @@ instance Attr FeComposite_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeComposite_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -133,7 +133,7 @@ instance Attr FeConvolveMatrix_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  S
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -146,7 +146,7 @@ instance Attr FeConvolveMatrix_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeConvolveMatrix_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -156,7 +156,7 @@ instance Attr FeDiffuseLighting_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -169,7 +169,7 @@ instance Attr FeDiffuseLighting_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeDiffuseLighting_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeDisplacementMap_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -179,7 +179,7 @@ instance Attr FeDisplacementMap_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeDisplacementMap_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -192,7 +192,7 @@ instance Attr FeDisplacementMap_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeDisplacementMap_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeFlood_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -202,7 +202,7 @@ instance Attr FeFlood_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeFlood_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -215,7 +215,7 @@ instance Attr FeFlood_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeFlood_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeGaussianBlur_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -225,7 +225,7 @@ instance Attr FeGaussianBlur_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Str
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeGaussianBlur_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -238,7 +238,7 @@ instance Attr FeGaussianBlur_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeGaussianBlur_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeImage_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -248,7 +248,7 @@ instance Attr FeImage_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeImage_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -261,7 +261,7 @@ instance Attr FeImage_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeImage_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeMerge_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -271,7 +271,7 @@ instance Attr FeMerge_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeMerge_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -284,7 +284,7 @@ instance Attr FeMerge_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeMerge_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeMorphology_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -294,7 +294,7 @@ instance Attr FeMorphology_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Strin
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeMorphology_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -307,7 +307,7 @@ instance Attr FeMorphology_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeMorphology_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeOffset_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -317,7 +317,7 @@ instance Attr FeOffset_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeOffset_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -330,7 +330,7 @@ instance Attr FeOffset_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeOffset_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeSpecularLighting_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -340,7 +340,7 @@ instance Attr FeSpecularLighting_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event 
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeSpecularLighting_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -353,7 +353,7 @@ instance Attr FeSpecularLighting_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeSpecularLighting_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeTile_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -363,7 +363,7 @@ instance Attr FeTile_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeTile_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -376,7 +376,7 @@ instance Attr FeTile_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeTile_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeTurbulence_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -386,7 +386,7 @@ instance Attr FeTurbulence_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Strin
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr FeTurbulence_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -399,7 +399,7 @@ instance Attr FeTurbulence_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr FeTurbulence_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Filter_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -409,7 +409,7 @@ instance Attr Filter_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr Filter_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -422,7 +422,7 @@ instance Attr Filter_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Filter_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Image_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -432,7 +432,7 @@ instance Attr Image_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr Image_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -445,7 +445,7 @@ instance Attr Image_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Image_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Switch_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -455,7 +455,7 @@ instance Attr Switch_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr Switch_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -468,7 +468,7 @@ instance Attr Switch_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Switch_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Text_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -478,7 +478,7 @@ instance Attr Text_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr Text_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -491,7 +491,7 @@ instance Attr Text_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Text_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Tspan_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -501,7 +501,7 @@ instance Attr Tspan_ FontSizeAdjust (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "font-size-adjust", value: prop' value }
     )
 instance Attr Tspan_ FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "font-size-adjust", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "font-size-adjust", value: prop' value }
@@ -514,7 +514,7 @@ instance Attr Tspan_ FontSizeAdjust (Event.Event  String ) where
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr Tspan_ FontSizeAdjust (ST.ST Global.Global  String ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "font-size-adjust", value: prop' value }
 
 instance Attr everything FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -522,7 +522,7 @@ instance Attr everything FontSizeAdjust (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "font-size-adjust", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "font-size-adjust", value: unset' })
 instance Attr everything FontSizeAdjust (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr FontSizeAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "font-size-adjust", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "font-size-adjust", value: unset' })
 instance Attr everything FontSizeAdjust  Unit  where
@@ -533,5 +533,5 @@ instance Attr everything FontSizeAdjust (Event.Event  Unit ) where
     \_ -> { key: "font-size-adjust", value: unset' }
 
 instance Attr everything FontSizeAdjust (ST.ST Global.Global  Unit ) where
-  attr FontSizeAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr FontSizeAdjust iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "font-size-adjust", value: unset' }

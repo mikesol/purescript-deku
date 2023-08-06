@@ -19,7 +19,7 @@ instance Attr Style_ Scoped (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "scoped", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "scoped", value: prop' value })
 instance Attr Style_ Scoped (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Scoped (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Scoped (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "scoped", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "scoped", value: prop' value })
 instance Attr Style_ Scoped  String  where
@@ -30,7 +30,7 @@ instance Attr Style_ Scoped (Event.Event  String ) where
     \value -> { key: "scoped", value: prop' value }
 
 instance Attr Style_ Scoped (ST.ST Global.Global  String ) where
-  attr Scoped stValue = unsafeAttribute $ This $ stValue <#>
+  attr Scoped iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "scoped", value: prop' value }
 
 instance Attr everything Scoped (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Scoped (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "scoped", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "scoped", value: unset' })
 instance Attr everything Scoped (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Scoped (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Scoped (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "scoped", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "scoped", value: unset' })
 instance Attr everything Scoped  Unit  where
-  attr Scoped _ = unsafeAttribute $ This $ pure $ { key: "scoped", value: unset' }
+  attr Scoped _ = unsafeAttribute $ This $ { key: "scoped", value: unset' }
 instance Attr everything Scoped (Event.Event  Unit ) where
   attr Scoped eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "scoped", value: unset' }
 
 instance Attr everything Scoped (ST.ST Global.Global  Unit ) where
-  attr Scoped stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Scoped iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "scoped", value: unset' }

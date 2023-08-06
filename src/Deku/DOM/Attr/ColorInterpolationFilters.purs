@@ -39,7 +39,7 @@ instance Attr FeBlend_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeBlend_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -53,8 +53,8 @@ instance Attr FeBlend_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeBlend_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -64,7 +64,7 @@ instance Attr FeColorMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeColorMatrix_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -78,8 +78,8 @@ instance Attr FeColorMatrix_ ColorInterpolationFilters (Event.Event  String ) wh
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeColorMatrix_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -89,7 +89,7 @@ instance Attr FeComponentTransfer_ ColorInterpolationFilters (NonEmpty.NonEmpty 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -103,8 +103,8 @@ instance Attr FeComponentTransfer_ ColorInterpolationFilters (Event.Event  Strin
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComponentTransfer_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComposite_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -114,7 +114,7 @@ instance Attr FeComposite_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeComposite_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -128,8 +128,8 @@ instance Attr FeComposite_ ColorInterpolationFilters (Event.Event  String ) wher
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeComposite_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -139,7 +139,7 @@ instance Attr FeConvolveMatrix_ ColorInterpolationFilters (NonEmpty.NonEmpty Eve
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -153,8 +153,8 @@ instance Attr FeConvolveMatrix_ ColorInterpolationFilters (Event.Event  String )
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -164,7 +164,7 @@ instance Attr FeDiffuseLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -178,8 +178,8 @@ instance Attr FeDiffuseLighting_ ColorInterpolationFilters (Event.Event  String 
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -189,7 +189,7 @@ instance Attr FeDisplacementMap_ ColorInterpolationFilters (NonEmpty.NonEmpty Ev
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -203,8 +203,8 @@ instance Attr FeDisplacementMap_ ColorInterpolationFilters (Event.Event  String 
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeDisplacementMap_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeFlood_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -214,7 +214,7 @@ instance Attr FeFlood_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeFlood_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -228,8 +228,8 @@ instance Attr FeFlood_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeFlood_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -239,7 +239,7 @@ instance Attr FeGaussianBlur_ ColorInterpolationFilters (NonEmpty.NonEmpty Event
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -253,8 +253,8 @@ instance Attr FeGaussianBlur_ ColorInterpolationFilters (Event.Event  String ) w
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeGaussianBlur_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeImage_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -264,7 +264,7 @@ instance Attr FeImage_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeImage_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -278,8 +278,8 @@ instance Attr FeImage_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeImage_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMerge_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -289,7 +289,7 @@ instance Attr FeMerge_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event 
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeMerge_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -303,8 +303,8 @@ instance Attr FeMerge_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMerge_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMorphology_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -314,7 +314,7 @@ instance Attr FeMorphology_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeMorphology_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -328,8 +328,8 @@ instance Attr FeMorphology_ ColorInterpolationFilters (Event.Event  String ) whe
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeMorphology_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeOffset_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr FeOffset_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeOffset_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -353,8 +353,8 @@ instance Attr FeOffset_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeOffset_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -364,7 +364,7 @@ instance Attr FeSpecularLighting_ ColorInterpolationFilters (NonEmpty.NonEmpty E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -378,8 +378,8 @@ instance Attr FeSpecularLighting_ ColorInterpolationFilters (Event.Event  String
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeSpecularLighting_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTile_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -389,7 +389,7 @@ instance Attr FeTile_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeTile_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -403,8 +403,8 @@ instance Attr FeTile_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTile_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTurbulence_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -414,7 +414,7 @@ instance Attr FeTurbulence_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.E
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr FeTurbulence_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -428,8 +428,8 @@ instance Attr FeTurbulence_ ColorInterpolationFilters (Event.Event  String ) whe
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr FeTurbulence_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Filter_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -439,7 +439,7 @@ instance Attr Filter_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Filter_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -453,8 +453,8 @@ instance Attr Filter_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Filter_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Image_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -464,7 +464,7 @@ instance Attr Image_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  S
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Image_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -478,8 +478,8 @@ instance Attr Image_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Image_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Switch_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  String ) where
@@ -489,7 +489,7 @@ instance Attr Switch_ ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  
         { key: "color-interpolation-filters", value: prop' value }
     )
 instance Attr Switch_ ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "color-interpolation-filters", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "color-interpolation-filters", value: prop' value }
@@ -503,8 +503,8 @@ instance Attr Switch_ ColorInterpolationFilters (Event.Event  String ) where
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr Switch_ ColorInterpolationFilters (ST.ST Global.Global  String ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "color-interpolation-filters", value: prop' value }
 
 instance Attr everything ColorInterpolationFilters (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -514,7 +514,7 @@ instance Attr everything ColorInterpolationFilters (NonEmpty.NonEmpty Event.Even
         { key: "color-interpolation-filters", value: unset' }
     )
 instance Attr everything ColorInterpolationFilters (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ColorInterpolationFilters (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "color-interpolation-filters", value: unset' })
     ( Tuple.snd bothValues <#> \_ ->
         { key: "color-interpolation-filters", value: unset' }
@@ -527,5 +527,5 @@ instance Attr everything ColorInterpolationFilters (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "color-interpolation-filters", value: unset' }
 
 instance Attr everything ColorInterpolationFilters (ST.ST Global.Global  Unit ) where
-  attr ColorInterpolationFilters stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "color-interpolation-filters", value: unset' }
+  attr ColorInterpolationFilters iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "color-interpolation-filters", value: unset' }

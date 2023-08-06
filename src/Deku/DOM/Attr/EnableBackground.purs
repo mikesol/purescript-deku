@@ -39,7 +39,7 @@ instance Attr FeBlend_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeBlend_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -52,7 +52,7 @@ instance Attr FeBlend_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeBlend_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeColorMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr FeColorMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event  St
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeColorMatrix_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -75,7 +75,7 @@ instance Attr FeColorMatrix_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeColorMatrix_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeComponentTransfer_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -85,7 +85,7 @@ instance Attr FeComponentTransfer_ EnableBackground (NonEmpty.NonEmpty Event.Eve
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeComponentTransfer_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -98,7 +98,7 @@ instance Attr FeComponentTransfer_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeComponentTransfer_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeComposite_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -108,7 +108,7 @@ instance Attr FeComposite_ EnableBackground (NonEmpty.NonEmpty Event.Event  Stri
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeComposite_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -121,7 +121,7 @@ instance Attr FeComposite_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeComposite_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeConvolveMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -131,7 +131,7 @@ instance Attr FeConvolveMatrix_ EnableBackground (NonEmpty.NonEmpty Event.Event 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -144,7 +144,7 @@ instance Attr FeConvolveMatrix_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeConvolveMatrix_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeDiffuseLighting_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr FeDiffuseLighting_ EnableBackground (NonEmpty.NonEmpty Event.Event
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -167,7 +167,7 @@ instance Attr FeDiffuseLighting_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeDiffuseLighting_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeDisplacementMap_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -177,7 +177,7 @@ instance Attr FeDisplacementMap_ EnableBackground (NonEmpty.NonEmpty Event.Event
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeDisplacementMap_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -190,7 +190,7 @@ instance Attr FeDisplacementMap_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeDisplacementMap_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeFlood_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -200,7 +200,7 @@ instance Attr FeFlood_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeFlood_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -213,7 +213,7 @@ instance Attr FeFlood_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeFlood_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeGaussianBlur_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -223,7 +223,7 @@ instance Attr FeGaussianBlur_ EnableBackground (NonEmpty.NonEmpty Event.Event  S
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeGaussianBlur_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -236,7 +236,7 @@ instance Attr FeGaussianBlur_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeGaussianBlur_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeImage_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -246,7 +246,7 @@ instance Attr FeImage_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeImage_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -259,7 +259,7 @@ instance Attr FeImage_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeImage_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeMerge_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -269,7 +269,7 @@ instance Attr FeMerge_ EnableBackground (NonEmpty.NonEmpty Event.Event  String )
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeMerge_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -282,7 +282,7 @@ instance Attr FeMerge_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeMerge_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeMorphology_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr FeMorphology_ EnableBackground (NonEmpty.NonEmpty Event.Event  Str
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeMorphology_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -305,7 +305,7 @@ instance Attr FeMorphology_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeMorphology_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeOffset_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -315,7 +315,7 @@ instance Attr FeOffset_ EnableBackground (NonEmpty.NonEmpty Event.Event  String 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeOffset_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -328,7 +328,7 @@ instance Attr FeOffset_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeOffset_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeSpecularLighting_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -338,7 +338,7 @@ instance Attr FeSpecularLighting_ EnableBackground (NonEmpty.NonEmpty Event.Even
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeSpecularLighting_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -351,7 +351,7 @@ instance Attr FeSpecularLighting_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeSpecularLighting_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeTile_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -361,7 +361,7 @@ instance Attr FeTile_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeTile_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -374,7 +374,7 @@ instance Attr FeTile_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeTile_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeTurbulence_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -384,7 +384,7 @@ instance Attr FeTurbulence_ EnableBackground (NonEmpty.NonEmpty Event.Event  Str
         { key: "enable-background", value: prop' value }
     )
 instance Attr FeTurbulence_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -397,7 +397,7 @@ instance Attr FeTurbulence_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr FeTurbulence_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Filter_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -407,7 +407,7 @@ instance Attr Filter_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr Filter_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -420,7 +420,7 @@ instance Attr Filter_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Filter_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Image_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -430,7 +430,7 @@ instance Attr Image_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "enable-background", value: prop' value }
     )
 instance Attr Image_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -443,7 +443,7 @@ instance Attr Image_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Image_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Switch_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) where
@@ -453,7 +453,7 @@ instance Attr Switch_ EnableBackground (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "enable-background", value: prop' value }
     )
 instance Attr Switch_ EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enable-background", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "enable-background", value: prop' value }
@@ -466,7 +466,7 @@ instance Attr Switch_ EnableBackground (Event.Event  String ) where
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr Switch_ EnableBackground (ST.ST Global.Global  String ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "enable-background", value: prop' value }
 
 instance Attr everything EnableBackground (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -474,7 +474,7 @@ instance Attr everything EnableBackground (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "enable-background", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "enable-background", value: unset' })
 instance Attr everything EnableBackground (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr EnableBackground (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "enable-background", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "enable-background", value: unset' })
 instance Attr everything EnableBackground  Unit  where
@@ -485,5 +485,5 @@ instance Attr everything EnableBackground (Event.Event  Unit ) where
     <#> \_ -> { key: "enable-background", value: unset' }
 
 instance Attr everything EnableBackground (ST.ST Global.Global  Unit ) where
-  attr EnableBackground stValue = unsafeAttribute $ This $ stValue
+  attr EnableBackground iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "enable-background", value: unset' }

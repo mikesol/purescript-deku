@@ -20,7 +20,7 @@ instance Attr FeDropShadow_ StdDeviation (NonEmpty.NonEmpty Event.Event  String 
     { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeDropShadow_ StdDeviation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stdDeviation", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeDropShadow_ StdDeviation  String  where
@@ -31,7 +31,7 @@ instance Attr FeDropShadow_ StdDeviation (Event.Event  String ) where
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr FeDropShadow_ StdDeviation (ST.ST Global.Global  String ) where
-  attr StdDeviation stValue = unsafeAttribute $ This $ stValue <#>
+  attr StdDeviation iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr FeGaussianBlur_ StdDeviation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr FeGaussianBlur_ StdDeviation (NonEmpty.NonEmpty Event.Event  Strin
     { key: "stdDeviation", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeGaussianBlur_ StdDeviation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "stdDeviation", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "stdDeviation", value: prop' value })
 instance Attr FeGaussianBlur_ StdDeviation  String  where
@@ -50,7 +50,7 @@ instance Attr FeGaussianBlur_ StdDeviation (Event.Event  String ) where
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr FeGaussianBlur_ StdDeviation (ST.ST Global.Global  String ) where
-  attr StdDeviation stValue = unsafeAttribute $ This $ stValue <#>
+  attr StdDeviation iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "stdDeviation", value: prop' value }
 
 instance Attr everything StdDeviation (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything StdDeviation (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "stdDeviation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "stdDeviation", value: unset' })
 instance Attr everything StdDeviation (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr StdDeviation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "stdDeviation", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "stdDeviation", value: unset' })
 instance Attr everything StdDeviation  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything StdDeviation (Event.Event  Unit ) where
     \_ -> { key: "stdDeviation", value: unset' }
 
 instance Attr everything StdDeviation (ST.ST Global.Global  Unit ) where
-  attr StdDeviation stValue = unsafeAttribute $ This $ stValue <#>
+  attr StdDeviation iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "stdDeviation", value: unset' }

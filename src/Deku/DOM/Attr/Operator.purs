@@ -20,7 +20,7 @@ instance Attr FeComposite_ Operator (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "operator", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeComposite_ Operator (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "operator", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeComposite_ Operator  String  where
@@ -31,7 +31,7 @@ instance Attr FeComposite_ Operator (Event.Event  String ) where
     \value -> { key: "operator", value: prop' value }
 
 instance Attr FeComposite_ Operator (ST.ST Global.Global  String ) where
-  attr Operator stValue = unsafeAttribute $ This $ stValue <#>
+  attr Operator iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "operator", value: prop' value }
 
 instance Attr FeMorphology_ Operator (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr FeMorphology_ Operator (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "operator", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeMorphology_ Operator (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "operator", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "operator", value: prop' value })
 instance Attr FeMorphology_ Operator  String  where
@@ -50,7 +50,7 @@ instance Attr FeMorphology_ Operator (Event.Event  String ) where
     \value -> { key: "operator", value: prop' value }
 
 instance Attr FeMorphology_ Operator (ST.ST Global.Global  String ) where
-  attr Operator stValue = unsafeAttribute $ This $ stValue <#>
+  attr Operator iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "operator", value: prop' value }
 
 instance Attr everything Operator (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Operator (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "operator", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "operator", value: unset' })
 instance Attr everything Operator (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Operator (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "operator", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "operator", value: unset' })
 instance Attr everything Operator  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Operator (Event.Event  Unit ) where
     { key: "operator", value: unset' }
 
 instance Attr everything Operator (ST.ST Global.Global  Unit ) where
-  attr Operator stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Operator iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "operator", value: unset' }

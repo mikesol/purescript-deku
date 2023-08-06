@@ -35,7 +35,7 @@ instance Attr Circle_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Circle_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Circle_ AriaChecked  String  where
@@ -46,7 +46,7 @@ instance Attr Circle_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Circle_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Ellipse_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -54,7 +54,7 @@ instance Attr Ellipse_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Ellipse_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Ellipse_ AriaChecked  String  where
@@ -65,7 +65,7 @@ instance Attr Ellipse_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Ellipse_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr ForeignObject_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -73,7 +73,7 @@ instance Attr ForeignObject_ AriaChecked (NonEmpty.NonEmpty Event.Event  String 
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr ForeignObject_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr ForeignObject_ AriaChecked  String  where
@@ -84,7 +84,7 @@ instance Attr ForeignObject_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr ForeignObject_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr G_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -92,7 +92,7 @@ instance Attr G_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr G_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr G_ AriaChecked  String  where
@@ -103,7 +103,7 @@ instance Attr G_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr G_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Line_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -111,7 +111,7 @@ instance Attr Line_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Line_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Line_ AriaChecked  String  where
@@ -122,7 +122,7 @@ instance Attr Line_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Line_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Marker_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Marker_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Marker_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Marker_ AriaChecked  String  where
@@ -141,7 +141,7 @@ instance Attr Marker_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Marker_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Path_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -149,7 +149,7 @@ instance Attr Path_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Path_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Path_ AriaChecked  String  where
@@ -160,7 +160,7 @@ instance Attr Path_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Path_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polygon_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -168,7 +168,7 @@ instance Attr Polygon_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polygon_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polygon_ AriaChecked  String  where
@@ -179,7 +179,7 @@ instance Attr Polygon_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polygon_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polyline_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -187,7 +187,7 @@ instance Attr Polyline_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polyline_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Polyline_ AriaChecked  String  where
@@ -198,7 +198,7 @@ instance Attr Polyline_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Polyline_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Rect_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -206,7 +206,7 @@ instance Attr Rect_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Rect_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Rect_ AriaChecked  String  where
@@ -217,7 +217,7 @@ instance Attr Rect_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Rect_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Svg_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -225,7 +225,7 @@ instance Attr Svg_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Svg_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Svg_ AriaChecked  String  where
@@ -236,7 +236,7 @@ instance Attr Svg_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Svg_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Symbol_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Symbol_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Symbol_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Symbol_ AriaChecked  String  where
@@ -255,7 +255,7 @@ instance Attr Symbol_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Symbol_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Text_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -263,7 +263,7 @@ instance Attr Text_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Text_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Text_ AriaChecked  String  where
@@ -274,7 +274,7 @@ instance Attr Text_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Text_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr TextPath_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -282,7 +282,7 @@ instance Attr TextPath_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr TextPath_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr TextPath_ AriaChecked  String  where
@@ -293,7 +293,7 @@ instance Attr TextPath_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr TextPath_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Tspan_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -301,7 +301,7 @@ instance Attr Tspan_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Tspan_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Tspan_ AriaChecked  String  where
@@ -312,7 +312,7 @@ instance Attr Tspan_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Tspan_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Use_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -320,7 +320,7 @@ instance Attr Use_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Use_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr Use_ AriaChecked  String  where
@@ -331,7 +331,7 @@ instance Attr Use_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr Use_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr View_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr View_ AriaChecked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr View_ AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-checked", value: prop' value })
 instance Attr View_ AriaChecked  String  where
@@ -350,7 +350,7 @@ instance Attr View_ AriaChecked (Event.Event  String ) where
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr View_ AriaChecked (ST.ST Global.Global  String ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-checked", value: prop' value }
 
 instance Attr everything AriaChecked (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -358,7 +358,7 @@ instance Attr everything AriaChecked (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "aria-checked", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-checked", value: unset' })
 instance Attr everything AriaChecked (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaChecked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-checked", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-checked", value: unset' })
 instance Attr everything AriaChecked  Unit  where
@@ -369,5 +369,5 @@ instance Attr everything AriaChecked (Event.Event  Unit ) where
     \_ -> { key: "aria-checked", value: unset' }
 
 instance Attr everything AriaChecked (ST.ST Global.Global  Unit ) where
-  attr AriaChecked stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaChecked iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "aria-checked", value: unset' }

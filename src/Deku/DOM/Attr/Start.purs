@@ -19,7 +19,7 @@ instance Attr Ol_ Start (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "start", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "start", value: prop' value })
 instance Attr Ol_ Start (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Start (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Start (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "start", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "start", value: prop' value })
 instance Attr Ol_ Start  String  where
@@ -30,21 +30,21 @@ instance Attr Ol_ Start (Event.Event  String ) where
     \value -> { key: "start", value: prop' value }
 
 instance Attr Ol_ Start (ST.ST Global.Global  String ) where
-  attr Start stValue = unsafeAttribute $ This $ stValue <#>
+  attr Start iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "start", value: prop' value }
 
 instance Attr everything Start (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Start bothValues = unsafeAttribute $ Both (pure  { key: "start", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "start", value: unset' })
 instance Attr everything Start (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Start (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "start", value: unset' })
+  attr Start (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "start", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "start", value: unset' })
 instance Attr everything Start  Unit  where
-  attr Start _ = unsafeAttribute $ This $ pure $ { key: "start", value: unset' }
+  attr Start _ = unsafeAttribute $ This $ { key: "start", value: unset' }
 instance Attr everything Start (Event.Event  Unit ) where
   attr Start eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "start", value: unset' }
 
 instance Attr everything Start (ST.ST Global.Global  Unit ) where
-  attr Start stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Start iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "start", value: unset' }

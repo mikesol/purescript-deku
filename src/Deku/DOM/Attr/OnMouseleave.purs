@@ -18,7 +18,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mouseleave", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mouseleave", value: cb' value })
 instance Attr anything OnMouseleave (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseleave", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "mouseleave", value: cb' value })
 instance Attr anything OnMouseleave  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnMouseleave (Event.Event  Cb ) where
     \value -> { key: "mouseleave", value: cb' value }
 
 instance Attr anything OnMouseleave (ST.ST Global.Global  Cb ) where
-  attr OnMouseleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseleave", value: cb' value }
 
 instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMouseleave (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseleave", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnMouseleave (Event.Event  (Effect Unit) ) where
     \value -> { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseleave (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnMouseleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseleave", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnMouseleave (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "mouseleave", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMouseleave (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mouseleave", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mouseleave", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnMouseleave (Event.Event  (Effect Boolean) ) where
     \value -> { key: "mouseleave", value: cb' (Cb (const value)) }
 
 instance Attr anything OnMouseleave (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnMouseleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseleave iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mouseleave", value: cb' (Cb (const value)) }
 
 instance Attr everything OnMouseleave (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnMouseleave (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "mouseleave", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mouseleave", value: unset' })
 instance Attr everything OnMouseleave (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnMouseleave (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "mouseleave", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "mouseleave", value: unset' })
 instance Attr everything OnMouseleave  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnMouseleave (Event.Event  Unit ) where
     \_ -> { key: "mouseleave", value: unset' }
 
 instance Attr everything OnMouseleave (ST.ST Global.Global  Unit ) where
-  attr OnMouseleave stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMouseleave iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "mouseleave", value: unset' }

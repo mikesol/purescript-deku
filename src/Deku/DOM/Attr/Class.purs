@@ -186,7 +186,7 @@ instance Attr A_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr A_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr A_ Class  String  where
@@ -197,7 +197,7 @@ instance Attr A_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr A_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Abbr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -205,7 +205,7 @@ instance Attr Abbr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Abbr_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Abbr_ Class  String  where
@@ -216,7 +216,7 @@ instance Attr Abbr_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Abbr_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Acronym_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -224,7 +224,7 @@ instance Attr Acronym_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Acronym_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Acronym_ Class  String  where
@@ -235,7 +235,7 @@ instance Attr Acronym_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Acronym_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Address_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -243,7 +243,7 @@ instance Attr Address_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Address_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Address_ Class  String  where
@@ -254,7 +254,7 @@ instance Attr Address_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Address_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Applet_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -262,7 +262,7 @@ instance Attr Applet_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Applet_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Applet_ Class  String  where
@@ -273,7 +273,7 @@ instance Attr Applet_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Applet_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Area_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -281,7 +281,7 @@ instance Attr Area_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Area_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Area_ Class  String  where
@@ -292,7 +292,7 @@ instance Attr Area_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Area_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Article_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -300,7 +300,7 @@ instance Attr Article_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Article_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Article_ Class  String  where
@@ -311,7 +311,7 @@ instance Attr Article_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Article_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Aside_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -319,7 +319,7 @@ instance Attr Aside_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Aside_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Aside_ Class  String  where
@@ -330,7 +330,7 @@ instance Attr Aside_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Aside_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Audio_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -338,7 +338,7 @@ instance Attr Audio_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Audio_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Audio_ Class  String  where
@@ -349,7 +349,7 @@ instance Attr Audio_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Audio_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr B_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -357,7 +357,7 @@ instance Attr B_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr B_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr B_ Class  String  where
@@ -368,7 +368,7 @@ instance Attr B_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr B_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Base_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -376,7 +376,7 @@ instance Attr Base_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Base_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Base_ Class  String  where
@@ -387,7 +387,7 @@ instance Attr Base_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Base_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Basefont_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -395,7 +395,7 @@ instance Attr Basefont_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Basefont_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Basefont_ Class  String  where
@@ -406,7 +406,7 @@ instance Attr Basefont_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Basefont_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Bdi_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -414,7 +414,7 @@ instance Attr Bdi_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Bdi_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Bdi_ Class  String  where
@@ -425,7 +425,7 @@ instance Attr Bdi_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Bdi_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Bdo_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -433,7 +433,7 @@ instance Attr Bdo_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Bdo_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Bdo_ Class  String  where
@@ -444,7 +444,7 @@ instance Attr Bdo_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Bdo_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Big_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -452,7 +452,7 @@ instance Attr Big_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Big_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Big_ Class  String  where
@@ -463,7 +463,7 @@ instance Attr Big_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Big_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Blockquote_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -471,7 +471,7 @@ instance Attr Blockquote_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Blockquote_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Blockquote_ Class  String  where
@@ -482,7 +482,7 @@ instance Attr Blockquote_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Blockquote_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Body_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -490,7 +490,7 @@ instance Attr Body_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Body_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Body_ Class  String  where
@@ -501,7 +501,7 @@ instance Attr Body_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Body_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Br_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -509,7 +509,7 @@ instance Attr Br_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Br_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Br_ Class  String  where
@@ -520,7 +520,7 @@ instance Attr Br_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Br_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Button_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -528,7 +528,7 @@ instance Attr Button_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Button_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Button_ Class  String  where
@@ -539,7 +539,7 @@ instance Attr Button_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Button_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Canvas_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -547,7 +547,7 @@ instance Attr Canvas_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Canvas_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Canvas_ Class  String  where
@@ -558,7 +558,7 @@ instance Attr Canvas_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Canvas_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Caption_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -566,7 +566,7 @@ instance Attr Caption_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Caption_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Caption_ Class  String  where
@@ -577,7 +577,7 @@ instance Attr Caption_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Caption_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Center_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -585,7 +585,7 @@ instance Attr Center_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Center_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Center_ Class  String  where
@@ -596,7 +596,7 @@ instance Attr Center_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Center_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Cite_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -604,7 +604,7 @@ instance Attr Cite_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Cite_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Cite_ Class  String  where
@@ -615,7 +615,7 @@ instance Attr Cite_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Cite_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Code_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -623,7 +623,7 @@ instance Attr Code_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Code_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Code_ Class  String  where
@@ -634,7 +634,7 @@ instance Attr Code_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Code_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Col_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -642,7 +642,7 @@ instance Attr Col_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Col_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Col_ Class  String  where
@@ -653,7 +653,7 @@ instance Attr Col_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Col_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Colgroup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -661,7 +661,7 @@ instance Attr Colgroup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Colgroup_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Colgroup_ Class  String  where
@@ -672,7 +672,7 @@ instance Attr Colgroup_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Colgroup_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Xdata_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -680,7 +680,7 @@ instance Attr Xdata_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Xdata_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Xdata_ Class  String  where
@@ -691,7 +691,7 @@ instance Attr Xdata_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Xdata_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Datalist_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -699,7 +699,7 @@ instance Attr Datalist_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Datalist_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Datalist_ Class  String  where
@@ -710,7 +710,7 @@ instance Attr Datalist_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Datalist_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dd_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -718,7 +718,7 @@ instance Attr Dd_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dd_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dd_ Class  String  where
@@ -729,7 +729,7 @@ instance Attr Dd_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dd_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Del_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -737,7 +737,7 @@ instance Attr Del_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Del_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Del_ Class  String  where
@@ -748,7 +748,7 @@ instance Attr Del_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Del_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Details_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -756,7 +756,7 @@ instance Attr Details_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Details_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Details_ Class  String  where
@@ -767,7 +767,7 @@ instance Attr Details_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Details_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dfn_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -775,7 +775,7 @@ instance Attr Dfn_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dfn_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dfn_ Class  String  where
@@ -786,7 +786,7 @@ instance Attr Dfn_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dfn_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dialog_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -794,7 +794,7 @@ instance Attr Dialog_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dialog_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dialog_ Class  String  where
@@ -805,7 +805,7 @@ instance Attr Dialog_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dialog_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dir_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -813,7 +813,7 @@ instance Attr Dir_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dir_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dir_ Class  String  where
@@ -824,7 +824,7 @@ instance Attr Dir_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dir_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Div_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -832,7 +832,7 @@ instance Attr Div_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Div_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Div_ Class  String  where
@@ -843,7 +843,7 @@ instance Attr Div_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Div_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dl_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -851,7 +851,7 @@ instance Attr Dl_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dl_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dl_ Class  String  where
@@ -862,7 +862,7 @@ instance Attr Dl_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dl_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -870,7 +870,7 @@ instance Attr Dt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dt_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Dt_ Class  String  where
@@ -881,7 +881,7 @@ instance Attr Dt_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Dt_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Em_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -889,7 +889,7 @@ instance Attr Em_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Em_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Em_ Class  String  where
@@ -900,7 +900,7 @@ instance Attr Em_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Em_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Embed_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -908,7 +908,7 @@ instance Attr Embed_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Embed_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Embed_ Class  String  where
@@ -919,7 +919,7 @@ instance Attr Embed_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Embed_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Fieldset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -927,7 +927,7 @@ instance Attr Fieldset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Fieldset_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Fieldset_ Class  String  where
@@ -938,7 +938,7 @@ instance Attr Fieldset_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Fieldset_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Figcaption_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -946,7 +946,7 @@ instance Attr Figcaption_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Figcaption_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Figcaption_ Class  String  where
@@ -957,7 +957,7 @@ instance Attr Figcaption_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Figcaption_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Figure_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -965,7 +965,7 @@ instance Attr Figure_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Figure_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Figure_ Class  String  where
@@ -976,7 +976,7 @@ instance Attr Figure_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Figure_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Font_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -984,7 +984,7 @@ instance Attr Font_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Font_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Font_ Class  String  where
@@ -995,7 +995,7 @@ instance Attr Font_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Font_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Footer_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1003,7 +1003,7 @@ instance Attr Footer_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Footer_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Footer_ Class  String  where
@@ -1014,7 +1014,7 @@ instance Attr Footer_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Footer_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Form_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1022,7 +1022,7 @@ instance Attr Form_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Form_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Form_ Class  String  where
@@ -1033,7 +1033,7 @@ instance Attr Form_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Form_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Frame_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1041,7 +1041,7 @@ instance Attr Frame_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Frame_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Frame_ Class  String  where
@@ -1052,7 +1052,7 @@ instance Attr Frame_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Frame_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Frameset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1060,7 +1060,7 @@ instance Attr Frameset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Frameset_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Frameset_ Class  String  where
@@ -1071,7 +1071,7 @@ instance Attr Frameset_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Frameset_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H1_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1079,7 +1079,7 @@ instance Attr H1_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H1_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H1_ Class  String  where
@@ -1090,7 +1090,7 @@ instance Attr H1_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H1_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H2_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1098,7 +1098,7 @@ instance Attr H2_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H2_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H2_ Class  String  where
@@ -1109,7 +1109,7 @@ instance Attr H2_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H2_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H3_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1117,7 +1117,7 @@ instance Attr H3_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H3_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H3_ Class  String  where
@@ -1128,7 +1128,7 @@ instance Attr H3_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H3_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H4_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1136,7 +1136,7 @@ instance Attr H4_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H4_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H4_ Class  String  where
@@ -1147,7 +1147,7 @@ instance Attr H4_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H4_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H5_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1155,7 +1155,7 @@ instance Attr H5_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H5_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H5_ Class  String  where
@@ -1166,7 +1166,7 @@ instance Attr H5_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H5_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr H6_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1174,7 +1174,7 @@ instance Attr H6_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H6_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr H6_ Class  String  where
@@ -1185,7 +1185,7 @@ instance Attr H6_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr H6_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Head_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1193,7 +1193,7 @@ instance Attr Head_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Head_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Head_ Class  String  where
@@ -1204,7 +1204,7 @@ instance Attr Head_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Head_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Header_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1212,7 +1212,7 @@ instance Attr Header_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Header_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Header_ Class  String  where
@@ -1223,7 +1223,7 @@ instance Attr Header_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Header_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Hr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1231,7 +1231,7 @@ instance Attr Hr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Hr_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Hr_ Class  String  where
@@ -1242,7 +1242,7 @@ instance Attr Hr_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Hr_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Html_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1250,7 +1250,7 @@ instance Attr Html_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Html_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Html_ Class  String  where
@@ -1261,7 +1261,7 @@ instance Attr Html_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Html_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr I_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1269,7 +1269,7 @@ instance Attr I_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr I_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr I_ Class  String  where
@@ -1280,7 +1280,7 @@ instance Attr I_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr I_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Iframe_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1288,7 +1288,7 @@ instance Attr Iframe_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Iframe_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Iframe_ Class  String  where
@@ -1299,7 +1299,7 @@ instance Attr Iframe_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Iframe_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Img_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1307,7 +1307,7 @@ instance Attr Img_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Img_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Img_ Class  String  where
@@ -1318,7 +1318,7 @@ instance Attr Img_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Img_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Input_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1326,7 +1326,7 @@ instance Attr Input_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Input_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Input_ Class  String  where
@@ -1337,7 +1337,7 @@ instance Attr Input_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Input_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ins_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1345,7 +1345,7 @@ instance Attr Ins_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ins_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ins_ Class  String  where
@@ -1356,7 +1356,7 @@ instance Attr Ins_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ins_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Kbd_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1364,7 +1364,7 @@ instance Attr Kbd_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Kbd_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Kbd_ Class  String  where
@@ -1375,7 +1375,7 @@ instance Attr Kbd_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Kbd_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Label_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1383,7 +1383,7 @@ instance Attr Label_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Label_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Label_ Class  String  where
@@ -1394,7 +1394,7 @@ instance Attr Label_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Label_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Legend_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1402,7 +1402,7 @@ instance Attr Legend_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Legend_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Legend_ Class  String  where
@@ -1413,7 +1413,7 @@ instance Attr Legend_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Legend_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Li_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1421,7 +1421,7 @@ instance Attr Li_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Li_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Li_ Class  String  where
@@ -1432,7 +1432,7 @@ instance Attr Li_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Li_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Link_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1440,7 +1440,7 @@ instance Attr Link_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Link_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Link_ Class  String  where
@@ -1451,7 +1451,7 @@ instance Attr Link_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Link_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Main_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1459,7 +1459,7 @@ instance Attr Main_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Main_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Main_ Class  String  where
@@ -1470,7 +1470,7 @@ instance Attr Main_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Main_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Map_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1478,7 +1478,7 @@ instance Attr Map_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Map_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Map_ Class  String  where
@@ -1489,7 +1489,7 @@ instance Attr Map_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Map_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Mark_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1497,7 +1497,7 @@ instance Attr Mark_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Mark_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Mark_ Class  String  where
@@ -1508,7 +1508,7 @@ instance Attr Mark_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Mark_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Meta_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1516,7 +1516,7 @@ instance Attr Meta_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Meta_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Meta_ Class  String  where
@@ -1527,7 +1527,7 @@ instance Attr Meta_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Meta_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Meter_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1535,7 +1535,7 @@ instance Attr Meter_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Meter_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Meter_ Class  String  where
@@ -1546,7 +1546,7 @@ instance Attr Meter_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Meter_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Nav_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1554,7 +1554,7 @@ instance Attr Nav_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Nav_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Nav_ Class  String  where
@@ -1565,7 +1565,7 @@ instance Attr Nav_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Nav_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Noframes_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1573,7 +1573,7 @@ instance Attr Noframes_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Noframes_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Noframes_ Class  String  where
@@ -1584,7 +1584,7 @@ instance Attr Noframes_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Noframes_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Noscript_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1592,7 +1592,7 @@ instance Attr Noscript_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Noscript_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Noscript_ Class  String  where
@@ -1603,7 +1603,7 @@ instance Attr Noscript_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Noscript_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Object_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1611,7 +1611,7 @@ instance Attr Object_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Object_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Object_ Class  String  where
@@ -1622,7 +1622,7 @@ instance Attr Object_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Object_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ol_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1630,7 +1630,7 @@ instance Attr Ol_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ol_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ol_ Class  String  where
@@ -1641,7 +1641,7 @@ instance Attr Ol_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ol_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Optgroup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1649,7 +1649,7 @@ instance Attr Optgroup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Optgroup_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Optgroup_ Class  String  where
@@ -1660,7 +1660,7 @@ instance Attr Optgroup_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Optgroup_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Option_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1668,7 +1668,7 @@ instance Attr Option_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Option_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Option_ Class  String  where
@@ -1679,7 +1679,7 @@ instance Attr Option_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Option_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Output_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1687,7 +1687,7 @@ instance Attr Output_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Output_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Output_ Class  String  where
@@ -1698,7 +1698,7 @@ instance Attr Output_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Output_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr P_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1706,7 +1706,7 @@ instance Attr P_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr P_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr P_ Class  String  where
@@ -1717,7 +1717,7 @@ instance Attr P_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr P_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Param_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1725,7 +1725,7 @@ instance Attr Param_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Param_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Param_ Class  String  where
@@ -1736,7 +1736,7 @@ instance Attr Param_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Param_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Picture_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1744,7 +1744,7 @@ instance Attr Picture_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Picture_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Picture_ Class  String  where
@@ -1755,7 +1755,7 @@ instance Attr Picture_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Picture_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Pre_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1763,7 +1763,7 @@ instance Attr Pre_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Pre_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Pre_ Class  String  where
@@ -1774,7 +1774,7 @@ instance Attr Pre_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Pre_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Progress_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1782,7 +1782,7 @@ instance Attr Progress_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Progress_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Progress_ Class  String  where
@@ -1793,7 +1793,7 @@ instance Attr Progress_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Progress_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Q_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1801,7 +1801,7 @@ instance Attr Q_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Q_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Q_ Class  String  where
@@ -1812,7 +1812,7 @@ instance Attr Q_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Q_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rp_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1820,7 +1820,7 @@ instance Attr Rp_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rp_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rp_ Class  String  where
@@ -1831,7 +1831,7 @@ instance Attr Rp_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rp_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1839,7 +1839,7 @@ instance Attr Rt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rt_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rt_ Class  String  where
@@ -1850,7 +1850,7 @@ instance Attr Rt_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rt_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ruby_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1858,7 +1858,7 @@ instance Attr Ruby_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ruby_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ruby_ Class  String  where
@@ -1869,7 +1869,7 @@ instance Attr Ruby_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ruby_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr S_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1877,7 +1877,7 @@ instance Attr S_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr S_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr S_ Class  String  where
@@ -1888,7 +1888,7 @@ instance Attr S_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr S_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Samp_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1896,7 +1896,7 @@ instance Attr Samp_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Samp_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Samp_ Class  String  where
@@ -1907,7 +1907,7 @@ instance Attr Samp_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Samp_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Script_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1915,7 +1915,7 @@ instance Attr Script_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Script_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Script_ Class  String  where
@@ -1926,7 +1926,7 @@ instance Attr Script_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Script_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Section_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1934,7 +1934,7 @@ instance Attr Section_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Section_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Section_ Class  String  where
@@ -1945,7 +1945,7 @@ instance Attr Section_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Section_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Select_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1953,7 +1953,7 @@ instance Attr Select_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Select_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Select_ Class  String  where
@@ -1964,7 +1964,7 @@ instance Attr Select_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Select_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Small_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1972,7 +1972,7 @@ instance Attr Small_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Small_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Small_ Class  String  where
@@ -1983,7 +1983,7 @@ instance Attr Small_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Small_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Source_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1991,7 +1991,7 @@ instance Attr Source_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Source_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Source_ Class  String  where
@@ -2002,7 +2002,7 @@ instance Attr Source_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Source_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Span_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2010,7 +2010,7 @@ instance Attr Span_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Span_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Span_ Class  String  where
@@ -2021,7 +2021,7 @@ instance Attr Span_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Span_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Strike_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2029,7 +2029,7 @@ instance Attr Strike_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Strike_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Strike_ Class  String  where
@@ -2040,7 +2040,7 @@ instance Attr Strike_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Strike_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Strong_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2048,7 +2048,7 @@ instance Attr Strong_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Strong_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Strong_ Class  String  where
@@ -2059,7 +2059,7 @@ instance Attr Strong_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Strong_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Style_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2067,7 +2067,7 @@ instance Attr Style_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Style_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Style_ Class  String  where
@@ -2078,7 +2078,7 @@ instance Attr Style_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Style_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Sub_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2086,7 +2086,7 @@ instance Attr Sub_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Sub_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Sub_ Class  String  where
@@ -2097,7 +2097,7 @@ instance Attr Sub_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Sub_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Summary_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2105,7 +2105,7 @@ instance Attr Summary_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Summary_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Summary_ Class  String  where
@@ -2116,7 +2116,7 @@ instance Attr Summary_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Summary_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Sup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2124,7 +2124,7 @@ instance Attr Sup_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Sup_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Sup_ Class  String  where
@@ -2135,7 +2135,7 @@ instance Attr Sup_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Sup_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Svg_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2143,7 +2143,7 @@ instance Attr Svg_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Svg_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Svg_ Class  String  where
@@ -2154,7 +2154,7 @@ instance Attr Svg_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Svg_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Table_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2162,7 +2162,7 @@ instance Attr Table_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Table_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Table_ Class  String  where
@@ -2173,7 +2173,7 @@ instance Attr Table_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Table_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tbody_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2181,7 +2181,7 @@ instance Attr Tbody_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tbody_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tbody_ Class  String  where
@@ -2192,7 +2192,7 @@ instance Attr Tbody_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tbody_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Td_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2200,7 +2200,7 @@ instance Attr Td_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Td_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Td_ Class  String  where
@@ -2211,7 +2211,7 @@ instance Attr Td_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Td_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Template_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2219,7 +2219,7 @@ instance Attr Template_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Template_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Template_ Class  String  where
@@ -2230,7 +2230,7 @@ instance Attr Template_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Template_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Textarea_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2238,7 +2238,7 @@ instance Attr Textarea_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Textarea_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Textarea_ Class  String  where
@@ -2249,7 +2249,7 @@ instance Attr Textarea_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Textarea_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tfoot_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2257,7 +2257,7 @@ instance Attr Tfoot_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tfoot_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tfoot_ Class  String  where
@@ -2268,7 +2268,7 @@ instance Attr Tfoot_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tfoot_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Th_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2276,7 +2276,7 @@ instance Attr Th_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Th_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Th_ Class  String  where
@@ -2287,7 +2287,7 @@ instance Attr Th_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Th_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Thead_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2295,7 +2295,7 @@ instance Attr Thead_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Thead_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Thead_ Class  String  where
@@ -2306,7 +2306,7 @@ instance Attr Thead_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Thead_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Time_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2314,7 +2314,7 @@ instance Attr Time_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Time_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Time_ Class  String  where
@@ -2325,7 +2325,7 @@ instance Attr Time_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Time_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Title_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2333,7 +2333,7 @@ instance Attr Title_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Title_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Title_ Class  String  where
@@ -2344,7 +2344,7 @@ instance Attr Title_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Title_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2352,7 +2352,7 @@ instance Attr Tr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tr_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tr_ Class  String  where
@@ -2363,7 +2363,7 @@ instance Attr Tr_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tr_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Track_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2371,7 +2371,7 @@ instance Attr Track_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Track_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Track_ Class  String  where
@@ -2382,7 +2382,7 @@ instance Attr Track_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Track_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2390,7 +2390,7 @@ instance Attr Tt_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tt_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tt_ Class  String  where
@@ -2401,7 +2401,7 @@ instance Attr Tt_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tt_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr U_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2409,7 +2409,7 @@ instance Attr U_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr U_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr U_ Class  String  where
@@ -2420,7 +2420,7 @@ instance Attr U_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr U_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ul_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2428,7 +2428,7 @@ instance Attr Ul_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ul_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ul_ Class  String  where
@@ -2439,7 +2439,7 @@ instance Attr Ul_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ul_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Var_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2447,7 +2447,7 @@ instance Attr Var_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Var_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Var_ Class  String  where
@@ -2458,7 +2458,7 @@ instance Attr Var_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Var_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Video_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2466,7 +2466,7 @@ instance Attr Video_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Video_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Video_ Class  String  where
@@ -2477,7 +2477,7 @@ instance Attr Video_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Video_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Wbr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2485,7 +2485,7 @@ instance Attr Wbr_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Wbr_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Wbr_ Class  String  where
@@ -2496,7 +2496,7 @@ instance Attr Wbr_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Wbr_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Animate_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2504,7 +2504,7 @@ instance Attr Animate_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Animate_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Animate_ Class  String  where
@@ -2515,7 +2515,7 @@ instance Attr Animate_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Animate_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr AnimateMotion_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2523,7 +2523,7 @@ instance Attr AnimateMotion_ Class (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr AnimateMotion_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr AnimateMotion_ Class  String  where
@@ -2534,7 +2534,7 @@ instance Attr AnimateMotion_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr AnimateMotion_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Circle_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2542,7 +2542,7 @@ instance Attr Circle_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Circle_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Circle_ Class  String  where
@@ -2553,7 +2553,7 @@ instance Attr Circle_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Circle_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr ClipPath_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2561,7 +2561,7 @@ instance Attr ClipPath_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr ClipPath_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr ClipPath_ Class  String  where
@@ -2572,7 +2572,7 @@ instance Attr ClipPath_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr ClipPath_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Defs_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2580,7 +2580,7 @@ instance Attr Defs_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Defs_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Defs_ Class  String  where
@@ -2591,7 +2591,7 @@ instance Attr Defs_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Defs_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Desc_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2599,7 +2599,7 @@ instance Attr Desc_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Desc_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Desc_ Class  String  where
@@ -2610,7 +2610,7 @@ instance Attr Desc_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Desc_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ellipse_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2618,7 +2618,7 @@ instance Attr Ellipse_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ellipse_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Ellipse_ Class  String  where
@@ -2629,7 +2629,7 @@ instance Attr Ellipse_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Ellipse_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeBlend_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2637,7 +2637,7 @@ instance Attr FeBlend_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeBlend_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeBlend_ Class  String  where
@@ -2648,7 +2648,7 @@ instance Attr FeBlend_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeBlend_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeColorMatrix_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2656,7 +2656,7 @@ instance Attr FeColorMatrix_ Class (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeColorMatrix_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeColorMatrix_ Class  String  where
@@ -2667,7 +2667,7 @@ instance Attr FeColorMatrix_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeColorMatrix_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeComponentTransfer_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2675,7 +2675,7 @@ instance Attr FeComponentTransfer_ Class (NonEmpty.NonEmpty Event.Event  String 
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeComponentTransfer_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeComponentTransfer_ Class  String  where
@@ -2686,7 +2686,7 @@ instance Attr FeComponentTransfer_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeComponentTransfer_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeComposite_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2694,7 +2694,7 @@ instance Attr FeComposite_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeComposite_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeComposite_ Class  String  where
@@ -2705,7 +2705,7 @@ instance Attr FeComposite_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeComposite_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2713,7 +2713,7 @@ instance Attr FeConvolveMatrix_ Class (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeConvolveMatrix_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeConvolveMatrix_ Class  String  where
@@ -2724,7 +2724,7 @@ instance Attr FeConvolveMatrix_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2732,7 +2732,7 @@ instance Attr FeDiffuseLighting_ Class (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDiffuseLighting_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDiffuseLighting_ Class  String  where
@@ -2743,7 +2743,7 @@ instance Attr FeDiffuseLighting_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDisplacementMap_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2751,7 +2751,7 @@ instance Attr FeDisplacementMap_ Class (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDisplacementMap_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDisplacementMap_ Class  String  where
@@ -2762,7 +2762,7 @@ instance Attr FeDisplacementMap_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDisplacementMap_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDropShadow_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2770,7 +2770,7 @@ instance Attr FeDropShadow_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDropShadow_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeDropShadow_ Class  String  where
@@ -2781,7 +2781,7 @@ instance Attr FeDropShadow_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeDropShadow_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeFlood_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2789,7 +2789,7 @@ instance Attr FeFlood_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeFlood_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeFlood_ Class  String  where
@@ -2800,7 +2800,7 @@ instance Attr FeFlood_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeFlood_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeGaussianBlur_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2808,7 +2808,7 @@ instance Attr FeGaussianBlur_ Class (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeGaussianBlur_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeGaussianBlur_ Class  String  where
@@ -2819,7 +2819,7 @@ instance Attr FeGaussianBlur_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeGaussianBlur_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeImage_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2827,7 +2827,7 @@ instance Attr FeImage_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeImage_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeImage_ Class  String  where
@@ -2838,7 +2838,7 @@ instance Attr FeImage_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeImage_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeMerge_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2846,7 +2846,7 @@ instance Attr FeMerge_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeMerge_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeMerge_ Class  String  where
@@ -2857,7 +2857,7 @@ instance Attr FeMerge_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeMerge_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeMorphology_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2865,7 +2865,7 @@ instance Attr FeMorphology_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeMorphology_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeMorphology_ Class  String  where
@@ -2876,7 +2876,7 @@ instance Attr FeMorphology_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeMorphology_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeOffset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2884,7 +2884,7 @@ instance Attr FeOffset_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeOffset_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeOffset_ Class  String  where
@@ -2895,7 +2895,7 @@ instance Attr FeOffset_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeOffset_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeSpecularLighting_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2903,7 +2903,7 @@ instance Attr FeSpecularLighting_ Class (NonEmpty.NonEmpty Event.Event  String )
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeSpecularLighting_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeSpecularLighting_ Class  String  where
@@ -2914,7 +2914,7 @@ instance Attr FeSpecularLighting_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeSpecularLighting_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeTile_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2922,7 +2922,7 @@ instance Attr FeTile_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeTile_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeTile_ Class  String  where
@@ -2933,7 +2933,7 @@ instance Attr FeTile_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeTile_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeTurbulence_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2941,7 +2941,7 @@ instance Attr FeTurbulence_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeTurbulence_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr FeTurbulence_ Class  String  where
@@ -2952,7 +2952,7 @@ instance Attr FeTurbulence_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr FeTurbulence_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Filter_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2960,7 +2960,7 @@ instance Attr Filter_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Filter_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Filter_ Class  String  where
@@ -2971,7 +2971,7 @@ instance Attr Filter_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Filter_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr ForeignObject_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2979,7 +2979,7 @@ instance Attr ForeignObject_ Class (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr ForeignObject_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr ForeignObject_ Class  String  where
@@ -2990,7 +2990,7 @@ instance Attr ForeignObject_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr ForeignObject_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr G_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2998,7 +2998,7 @@ instance Attr G_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr G_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr G_ Class  String  where
@@ -3009,7 +3009,7 @@ instance Attr G_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr G_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Image_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3017,7 +3017,7 @@ instance Attr Image_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Image_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Image_ Class  String  where
@@ -3028,7 +3028,7 @@ instance Attr Image_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Image_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Line_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3036,7 +3036,7 @@ instance Attr Line_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Line_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Line_ Class  String  where
@@ -3047,7 +3047,7 @@ instance Attr Line_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Line_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr LinearGradient_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3055,7 +3055,7 @@ instance Attr LinearGradient_ Class (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr LinearGradient_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr LinearGradient_ Class  String  where
@@ -3066,7 +3066,7 @@ instance Attr LinearGradient_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr LinearGradient_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Marker_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3074,7 +3074,7 @@ instance Attr Marker_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Marker_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Marker_ Class  String  where
@@ -3085,7 +3085,7 @@ instance Attr Marker_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Marker_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Mask_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3093,7 +3093,7 @@ instance Attr Mask_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Mask_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Mask_ Class  String  where
@@ -3104,7 +3104,7 @@ instance Attr Mask_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Mask_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Path_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3112,7 +3112,7 @@ instance Attr Path_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Path_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Path_ Class  String  where
@@ -3123,7 +3123,7 @@ instance Attr Path_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Path_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Pattern_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3131,7 +3131,7 @@ instance Attr Pattern_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Pattern_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Pattern_ Class  String  where
@@ -3142,7 +3142,7 @@ instance Attr Pattern_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Pattern_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Polygon_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3150,7 +3150,7 @@ instance Attr Polygon_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Polygon_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Polygon_ Class  String  where
@@ -3161,7 +3161,7 @@ instance Attr Polygon_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Polygon_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Polyline_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3169,7 +3169,7 @@ instance Attr Polyline_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Polyline_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Polyline_ Class  String  where
@@ -3180,7 +3180,7 @@ instance Attr Polyline_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Polyline_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr RadialGradient_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3188,7 +3188,7 @@ instance Attr RadialGradient_ Class (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr RadialGradient_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr RadialGradient_ Class  String  where
@@ -3199,7 +3199,7 @@ instance Attr RadialGradient_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr RadialGradient_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rect_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3207,7 +3207,7 @@ instance Attr Rect_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rect_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Rect_ Class  String  where
@@ -3218,7 +3218,7 @@ instance Attr Rect_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Rect_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Set_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3226,7 +3226,7 @@ instance Attr Set_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Set_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Set_ Class  String  where
@@ -3237,7 +3237,7 @@ instance Attr Set_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Set_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Stop_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3245,7 +3245,7 @@ instance Attr Stop_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Stop_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Stop_ Class  String  where
@@ -3256,7 +3256,7 @@ instance Attr Stop_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Stop_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Switch_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3264,7 +3264,7 @@ instance Attr Switch_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Switch_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Switch_ Class  String  where
@@ -3275,7 +3275,7 @@ instance Attr Switch_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Switch_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Symbol_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3283,7 +3283,7 @@ instance Attr Symbol_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Symbol_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Symbol_ Class  String  where
@@ -3294,7 +3294,7 @@ instance Attr Symbol_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Symbol_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Text_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3302,7 +3302,7 @@ instance Attr Text_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Text_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Text_ Class  String  where
@@ -3313,7 +3313,7 @@ instance Attr Text_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Text_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr TextPath_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3321,7 +3321,7 @@ instance Attr TextPath_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr TextPath_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr TextPath_ Class  String  where
@@ -3332,7 +3332,7 @@ instance Attr TextPath_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr TextPath_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tspan_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3340,7 +3340,7 @@ instance Attr Tspan_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tspan_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Tspan_ Class  String  where
@@ -3351,7 +3351,7 @@ instance Attr Tspan_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Tspan_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr Use_ Class (NonEmpty.NonEmpty Event.Event  String ) where
@@ -3359,7 +3359,7 @@ instance Attr Use_ Class (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "class", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Use_ Class (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "class", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "class", value: prop' value })
 instance Attr Use_ Class  String  where
@@ -3370,21 +3370,21 @@ instance Attr Use_ Class (Event.Event  String ) where
     \value -> { key: "class", value: prop' value }
 
 instance Attr Use_ Class (ST.ST Global.Global  String ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#>
+  attr Class iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "class", value: prop' value }
 
 instance Attr everything Class (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Class bothValues = unsafeAttribute $ Both (pure  { key: "class", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "class", value: unset' })
 instance Attr everything Class (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "class", value: unset' })
+  attr Class (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "class", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "class", value: unset' })
 instance Attr everything Class  Unit  where
-  attr Class _ = unsafeAttribute $ This $ pure $ { key: "class", value: unset' }
+  attr Class _ = unsafeAttribute $ This $ { key: "class", value: unset' }
 instance Attr everything Class (Event.Event  Unit ) where
   attr Class eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "class", value: unset' }
 
 instance Attr everything Class (ST.ST Global.Global  Unit ) where
-  attr Class stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Class iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "class", value: unset' }

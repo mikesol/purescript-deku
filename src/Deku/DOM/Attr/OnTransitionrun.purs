@@ -18,7 +18,7 @@ instance Attr anything OnTransitionrun (NonEmpty.NonEmpty Event.Event  Cb ) wher
     { key: "transitionrun", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "transitionrun", value: cb' value })
 instance Attr anything OnTransitionrun (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionrun", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "transitionrun", value: cb' value })
 instance Attr anything OnTransitionrun  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnTransitionrun (Event.Event  Cb ) where
     <#> \value -> { key: "transitionrun", value: cb' value }
 
 instance Attr anything OnTransitionrun (ST.ST Global.Global  Cb ) where
-  attr OnTransitionrun stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionrun iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transitionrun", value: cb' value }
 
 instance Attr anything OnTransitionrun (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnTransitionrun (NonEmpty.NonEmpty Event.Event  (Effect U
         { key: "transitionrun", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTransitionrun (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionrun", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transitionrun", value: cb' (Cb (const (value $> true))) }
@@ -53,7 +53,7 @@ instance Attr anything OnTransitionrun (Event.Event  (Effect Unit) ) where
       { key: "transitionrun", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTransitionrun (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnTransitionrun stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionrun iValue = unsafeAttribute $ This $ iValue
     <#> \value ->
       { key: "transitionrun", value: cb' (Cb (const (value $> true))) }
 
@@ -64,7 +64,7 @@ instance Attr anything OnTransitionrun (NonEmpty.NonEmpty Event.Event  (Effect B
         { key: "transitionrun", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTransitionrun (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "transitionrun", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "transitionrun", value: cb' (Cb (const value)) }
@@ -77,7 +77,7 @@ instance Attr anything OnTransitionrun (Event.Event  (Effect Boolean) ) where
     <#> \value -> { key: "transitionrun", value: cb' (Cb (const value)) }
 
 instance Attr anything OnTransitionrun (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnTransitionrun stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionrun iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "transitionrun", value: cb' (Cb (const value)) }
 
 instance Attr everything OnTransitionrun (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -85,7 +85,7 @@ instance Attr everything OnTransitionrun (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "transitionrun", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "transitionrun", value: unset' })
 instance Attr everything OnTransitionrun (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnTransitionrun (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "transitionrun", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "transitionrun", value: unset' })
 instance Attr everything OnTransitionrun  Unit  where
@@ -96,5 +96,5 @@ instance Attr everything OnTransitionrun (Event.Event  Unit ) where
     <#> \_ -> { key: "transitionrun", value: unset' }
 
 instance Attr everything OnTransitionrun (ST.ST Global.Global  Unit ) where
-  attr OnTransitionrun stValue = unsafeAttribute $ This $ stValue
+  attr OnTransitionrun iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "transitionrun", value: unset' }

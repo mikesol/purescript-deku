@@ -21,17 +21,17 @@ instance Attr FeBlend_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "in2", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeBlend_ In2 (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "in2", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeBlend_ In2  String  where
-  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ { key: "in2", value: prop' value }
 instance Attr FeBlend_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
 
 instance Attr FeBlend_ In2 (ST.ST Global.Global  String ) where
-  attr In2 stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr In2 iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "in2", value: prop' value }
 
 instance Attr FeComposite_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,17 +39,17 @@ instance Attr FeComposite_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "in2", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeComposite_ In2 (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "in2", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeComposite_ In2  String  where
-  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ { key: "in2", value: prop' value }
 instance Attr FeComposite_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
 
 instance Attr FeComposite_ In2 (ST.ST Global.Global  String ) where
-  attr In2 stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr In2 iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "in2", value: prop' value }
 
 instance Attr FeDisplacementMap_ In2 (NonEmpty.NonEmpty Event.Event  String ) where
@@ -57,31 +57,31 @@ instance Attr FeDisplacementMap_ In2 (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "in2", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeDisplacementMap_ In2 (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "in2", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "in2", value: prop' value })
 instance Attr FeDisplacementMap_ In2  String  where
-  attr In2 value = unsafeAttribute $ This $ pure $ { key: "in2", value: prop' value }
+  attr In2 value = unsafeAttribute $ This $ { key: "in2", value: prop' value }
 instance Attr FeDisplacementMap_ In2 (Event.Event  String ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "in2", value: prop' value }
 
 instance Attr FeDisplacementMap_ In2 (ST.ST Global.Global  String ) where
-  attr In2 stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr In2 iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "in2", value: prop' value }
 
 instance Attr everything In2 (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr In2 bothValues = unsafeAttribute $ Both (pure  { key: "in2", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "in2", value: unset' })
 instance Attr everything In2 (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "in2", value: unset' })
+  attr In2 (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "in2", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "in2", value: unset' })
 instance Attr everything In2  Unit  where
-  attr In2 _ = unsafeAttribute $ This $ pure $ { key: "in2", value: unset' }
+  attr In2 _ = unsafeAttribute $ This $ { key: "in2", value: unset' }
 instance Attr everything In2 (Event.Event  Unit ) where
   attr In2 eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "in2", value: unset' }
 
 instance Attr everything In2 (ST.ST Global.Global  Unit ) where
-  attr In2 stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr In2 iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "in2", value: unset' }

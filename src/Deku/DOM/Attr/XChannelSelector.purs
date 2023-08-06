@@ -21,7 +21,7 @@ instance Attr FeDisplacementMap_ XChannelSelector (NonEmpty.NonEmpty Event.Event
         { key: "xChannelSelector", value: prop' value }
     )
 instance Attr FeDisplacementMap_ XChannelSelector (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XChannelSelector (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XChannelSelector (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xChannelSelector", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "xChannelSelector", value: prop' value }
@@ -34,7 +34,7 @@ instance Attr FeDisplacementMap_ XChannelSelector (Event.Event  String ) where
     <#> \value -> { key: "xChannelSelector", value: prop' value }
 
 instance Attr FeDisplacementMap_ XChannelSelector (ST.ST Global.Global  String ) where
-  attr XChannelSelector stValue = unsafeAttribute $ This $ stValue
+  attr XChannelSelector iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "xChannelSelector", value: prop' value }
 
 instance Attr everything XChannelSelector (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -42,7 +42,7 @@ instance Attr everything XChannelSelector (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "xChannelSelector", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xChannelSelector", value: unset' })
 instance Attr everything XChannelSelector (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr XChannelSelector (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr XChannelSelector (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "xChannelSelector", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "xChannelSelector", value: unset' })
 instance Attr everything XChannelSelector  Unit  where
@@ -53,5 +53,5 @@ instance Attr everything XChannelSelector (Event.Event  Unit ) where
     <#> \_ -> { key: "xChannelSelector", value: unset' }
 
 instance Attr everything XChannelSelector (ST.ST Global.Global  Unit ) where
-  attr XChannelSelector stValue = unsafeAttribute $ This $ stValue
+  attr XChannelSelector iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "xChannelSelector", value: unset' }

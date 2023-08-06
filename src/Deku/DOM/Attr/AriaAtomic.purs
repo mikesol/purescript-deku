@@ -35,7 +35,7 @@ instance Attr Circle_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Circle_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Circle_ AriaAtomic  String  where
@@ -46,7 +46,7 @@ instance Attr Circle_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Circle_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Ellipse_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -54,7 +54,7 @@ instance Attr Ellipse_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Ellipse_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Ellipse_ AriaAtomic  String  where
@@ -65,7 +65,7 @@ instance Attr Ellipse_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Ellipse_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr ForeignObject_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -73,7 +73,7 @@ instance Attr ForeignObject_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String )
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr ForeignObject_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr ForeignObject_ AriaAtomic  String  where
@@ -84,7 +84,7 @@ instance Attr ForeignObject_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr ForeignObject_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr G_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -92,7 +92,7 @@ instance Attr G_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr G_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr G_ AriaAtomic  String  where
@@ -103,7 +103,7 @@ instance Attr G_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr G_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Line_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -111,7 +111,7 @@ instance Attr Line_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Line_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Line_ AriaAtomic  String  where
@@ -122,7 +122,7 @@ instance Attr Line_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Line_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Marker_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Marker_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Marker_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Marker_ AriaAtomic  String  where
@@ -141,7 +141,7 @@ instance Attr Marker_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Marker_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Path_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -149,7 +149,7 @@ instance Attr Path_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Path_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Path_ AriaAtomic  String  where
@@ -160,7 +160,7 @@ instance Attr Path_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Path_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polygon_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -168,7 +168,7 @@ instance Attr Polygon_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Polygon_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Polygon_ AriaAtomic  String  where
@@ -179,7 +179,7 @@ instance Attr Polygon_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polygon_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polyline_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -187,7 +187,7 @@ instance Attr Polyline_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Polyline_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Polyline_ AriaAtomic  String  where
@@ -198,7 +198,7 @@ instance Attr Polyline_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Polyline_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Rect_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -206,7 +206,7 @@ instance Attr Rect_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Rect_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Rect_ AriaAtomic  String  where
@@ -217,7 +217,7 @@ instance Attr Rect_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Rect_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Svg_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -225,7 +225,7 @@ instance Attr Svg_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Svg_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Svg_ AriaAtomic  String  where
@@ -236,7 +236,7 @@ instance Attr Svg_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Svg_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Symbol_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Symbol_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Symbol_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Symbol_ AriaAtomic  String  where
@@ -255,7 +255,7 @@ instance Attr Symbol_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Symbol_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Text_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -263,7 +263,7 @@ instance Attr Text_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Text_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Text_ AriaAtomic  String  where
@@ -274,7 +274,7 @@ instance Attr Text_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Text_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr TextPath_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -282,7 +282,7 @@ instance Attr TextPath_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr TextPath_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr TextPath_ AriaAtomic  String  where
@@ -293,7 +293,7 @@ instance Attr TextPath_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr TextPath_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Tspan_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -301,7 +301,7 @@ instance Attr Tspan_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Tspan_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Tspan_ AriaAtomic  String  where
@@ -312,7 +312,7 @@ instance Attr Tspan_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Tspan_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Use_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -320,7 +320,7 @@ instance Attr Use_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Use_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr Use_ AriaAtomic  String  where
@@ -331,7 +331,7 @@ instance Attr Use_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr Use_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr View_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr View_ AriaAtomic (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-atomic", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr View_ AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-atomic", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-atomic", value: prop' value })
 instance Attr View_ AriaAtomic  String  where
@@ -350,7 +350,7 @@ instance Attr View_ AriaAtomic (Event.Event  String ) where
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr View_ AriaAtomic (ST.ST Global.Global  String ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-atomic", value: prop' value }
 
 instance Attr everything AriaAtomic (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -358,7 +358,7 @@ instance Attr everything AriaAtomic (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "aria-atomic", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-atomic", value: unset' })
 instance Attr everything AriaAtomic (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaAtomic (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-atomic", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-atomic", value: unset' })
 instance Attr everything AriaAtomic  Unit  where
@@ -369,5 +369,5 @@ instance Attr everything AriaAtomic (Event.Event  Unit ) where
     \_ -> { key: "aria-atomic", value: unset' }
 
 instance Attr everything AriaAtomic (ST.ST Global.Global  Unit ) where
-  attr AriaAtomic stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaAtomic iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "aria-atomic", value: unset' }

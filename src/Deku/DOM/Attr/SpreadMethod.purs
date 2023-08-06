@@ -20,7 +20,7 @@ instance Attr LinearGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  Strin
     { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr LinearGradient_ SpreadMethod (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "spreadMethod", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr LinearGradient_ SpreadMethod  String  where
@@ -31,7 +31,7 @@ instance Attr LinearGradient_ SpreadMethod (Event.Event  String ) where
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr LinearGradient_ SpreadMethod (ST.ST Global.Global  String ) where
-  attr SpreadMethod stValue = unsafeAttribute $ This $ stValue <#>
+  attr SpreadMethod iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr RadialGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr RadialGradient_ SpreadMethod (NonEmpty.NonEmpty Event.Event  Strin
     { key: "spreadMethod", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr RadialGradient_ SpreadMethod (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "spreadMethod", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "spreadMethod", value: prop' value })
 instance Attr RadialGradient_ SpreadMethod  String  where
@@ -50,7 +50,7 @@ instance Attr RadialGradient_ SpreadMethod (Event.Event  String ) where
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr RadialGradient_ SpreadMethod (ST.ST Global.Global  String ) where
-  attr SpreadMethod stValue = unsafeAttribute $ This $ stValue <#>
+  attr SpreadMethod iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "spreadMethod", value: prop' value }
 
 instance Attr everything SpreadMethod (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything SpreadMethod (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "spreadMethod", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
 instance Attr everything SpreadMethod (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr SpreadMethod (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "spreadMethod", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "spreadMethod", value: unset' })
 instance Attr everything SpreadMethod  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything SpreadMethod (Event.Event  Unit ) where
     \_ -> { key: "spreadMethod", value: unset' }
 
 instance Attr everything SpreadMethod (ST.ST Global.Global  Unit ) where
-  attr SpreadMethod stValue = unsafeAttribute $ This $ stValue <#>
+  attr SpreadMethod iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "spreadMethod", value: unset' }

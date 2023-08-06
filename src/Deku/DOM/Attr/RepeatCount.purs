@@ -22,7 +22,7 @@ instance Attr Animate_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Animate_ RepeatCount (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatCount", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Animate_ RepeatCount  String  where
@@ -33,7 +33,7 @@ instance Attr Animate_ RepeatCount (Event.Event  String ) where
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr Animate_ RepeatCount (ST.ST Global.Global  String ) where
-  attr RepeatCount stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatCount iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr AnimateMotion_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr AnimateMotion_ RepeatCount (NonEmpty.NonEmpty Event.Event  String 
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateMotion_ RepeatCount (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatCount", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateMotion_ RepeatCount  String  where
@@ -52,7 +52,7 @@ instance Attr AnimateMotion_ RepeatCount (Event.Event  String ) where
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr AnimateMotion_ RepeatCount (ST.ST Global.Global  String ) where
-  attr RepeatCount stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatCount iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr AnimateTransform_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr AnimateTransform_ RepeatCount (NonEmpty.NonEmpty Event.Event  Stri
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateTransform_ RepeatCount (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatCount", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr AnimateTransform_ RepeatCount  String  where
@@ -71,7 +71,7 @@ instance Attr AnimateTransform_ RepeatCount (Event.Event  String ) where
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr AnimateTransform_ RepeatCount (ST.ST Global.Global  String ) where
-  attr RepeatCount stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatCount iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr Set_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr Set_ RepeatCount (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "repeatCount", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Set_ RepeatCount (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "repeatCount", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "repeatCount", value: prop' value })
 instance Attr Set_ RepeatCount  String  where
@@ -90,7 +90,7 @@ instance Attr Set_ RepeatCount (Event.Event  String ) where
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr Set_ RepeatCount (ST.ST Global.Global  String ) where
-  attr RepeatCount stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatCount iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "repeatCount", value: prop' value }
 
 instance Attr everything RepeatCount (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything RepeatCount (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "repeatCount", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "repeatCount", value: unset' })
 instance Attr everything RepeatCount (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr RepeatCount (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "repeatCount", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "repeatCount", value: unset' })
 instance Attr everything RepeatCount  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything RepeatCount (Event.Event  Unit ) where
     \_ -> { key: "repeatCount", value: unset' }
 
 instance Attr everything RepeatCount (ST.ST Global.Global  Unit ) where
-  attr RepeatCount stValue = unsafeAttribute $ This $ stValue <#>
+  attr RepeatCount iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "repeatCount", value: unset' }

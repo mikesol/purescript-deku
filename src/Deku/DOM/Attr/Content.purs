@@ -19,7 +19,7 @@ instance Attr Meta_ Content (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "content", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "content", value: prop' value })
 instance Attr Meta_ Content (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Content (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Content (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "content", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "content", value: prop' value })
 instance Attr Meta_ Content  String  where
@@ -30,7 +30,7 @@ instance Attr Meta_ Content (Event.Event  String ) where
     \value -> { key: "content", value: prop' value }
 
 instance Attr Meta_ Content (ST.ST Global.Global  String ) where
-  attr Content stValue = unsafeAttribute $ This $ stValue <#>
+  attr Content iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "content", value: prop' value }
 
 instance Attr everything Content (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Content (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "content", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "content", value: unset' })
 instance Attr everything Content (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Content (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Content (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "content", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "content", value: unset' })
 instance Attr everything Content  Unit  where
-  attr Content _ = unsafeAttribute $ This $ pure $ { key: "content", value: unset' }
+  attr Content _ = unsafeAttribute $ This $ { key: "content", value: unset' }
 instance Attr everything Content (Event.Event  Unit ) where
   attr Content eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "content", value: unset' }
 
 instance Attr everything Content (ST.ST Global.Global  Unit ) where
-  attr Content stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Content iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "content", value: unset' }

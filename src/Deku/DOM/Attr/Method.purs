@@ -20,7 +20,7 @@ instance Attr Form_ Method (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "method", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr Form_ Method (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "method", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr Form_ Method  String  where
@@ -31,7 +31,7 @@ instance Attr Form_ Method (Event.Event  String ) where
     \value -> { key: "method", value: prop' value }
 
 instance Attr Form_ Method (ST.ST Global.Global  String ) where
-  attr Method stValue = unsafeAttribute $ This $ stValue <#>
+  attr Method iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "method", value: prop' value }
 
 instance Attr TextPath_ Method (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr TextPath_ Method (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "method", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr TextPath_ Method (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "method", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "method", value: prop' value })
 instance Attr TextPath_ Method  String  where
@@ -50,7 +50,7 @@ instance Attr TextPath_ Method (Event.Event  String ) where
     \value -> { key: "method", value: prop' value }
 
 instance Attr TextPath_ Method (ST.ST Global.Global  String ) where
-  attr Method stValue = unsafeAttribute $ This $ stValue <#>
+  attr Method iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "method", value: prop' value }
 
 instance Attr everything Method (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Method (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "method", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "method", value: unset' })
 instance Attr everything Method (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Method (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "method", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "method", value: unset' })
 instance Attr everything Method  Unit  where
-  attr Method _ = unsafeAttribute $ This $ pure $ { key: "method", value: unset' }
+  attr Method _ = unsafeAttribute $ This $ { key: "method", value: unset' }
 instance Attr everything Method (Event.Event  Unit ) where
   attr Method eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "method", value: unset' }
 
 instance Attr everything Method (ST.ST Global.Global  Unit ) where
-  attr Method stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Method iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "method", value: unset' }

@@ -59,7 +59,7 @@ instance Attr Circle_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Circle_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Circle_ Filter  String  where
@@ -70,7 +70,7 @@ instance Attr Circle_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Circle_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr ClipPath_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -78,7 +78,7 @@ instance Attr ClipPath_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr ClipPath_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr ClipPath_ Filter  String  where
@@ -89,7 +89,7 @@ instance Attr ClipPath_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr ClipPath_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Defs_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -97,7 +97,7 @@ instance Attr Defs_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Defs_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Defs_ Filter  String  where
@@ -108,7 +108,7 @@ instance Attr Defs_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Defs_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Ellipse_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -116,7 +116,7 @@ instance Attr Ellipse_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Ellipse_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Ellipse_ Filter  String  where
@@ -127,7 +127,7 @@ instance Attr Ellipse_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Ellipse_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeBlend_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -135,7 +135,7 @@ instance Attr FeBlend_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeBlend_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeBlend_ Filter  String  where
@@ -146,7 +146,7 @@ instance Attr FeBlend_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeBlend_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeColorMatrix_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr FeColorMatrix_ Filter (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeColorMatrix_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeColorMatrix_ Filter  String  where
@@ -165,7 +165,7 @@ instance Attr FeColorMatrix_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeColorMatrix_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeComponentTransfer_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -173,7 +173,7 @@ instance Attr FeComponentTransfer_ Filter (NonEmpty.NonEmpty Event.Event  String
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeComponentTransfer_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeComponentTransfer_ Filter  String  where
@@ -184,7 +184,7 @@ instance Attr FeComponentTransfer_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeComponentTransfer_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeComposite_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -192,7 +192,7 @@ instance Attr FeComposite_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeComposite_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeComposite_ Filter  String  where
@@ -203,7 +203,7 @@ instance Attr FeComposite_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeComposite_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -211,7 +211,7 @@ instance Attr FeConvolveMatrix_ Filter (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeConvolveMatrix_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeConvolveMatrix_ Filter  String  where
@@ -222,7 +222,7 @@ instance Attr FeConvolveMatrix_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeConvolveMatrix_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -230,7 +230,7 @@ instance Attr FeDiffuseLighting_ Filter (NonEmpty.NonEmpty Event.Event  String )
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeDiffuseLighting_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeDiffuseLighting_ Filter  String  where
@@ -241,7 +241,7 @@ instance Attr FeDiffuseLighting_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeDiffuseLighting_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeDisplacementMap_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -249,7 +249,7 @@ instance Attr FeDisplacementMap_ Filter (NonEmpty.NonEmpty Event.Event  String )
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeDisplacementMap_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeDisplacementMap_ Filter  String  where
@@ -260,7 +260,7 @@ instance Attr FeDisplacementMap_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeDisplacementMap_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeFlood_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr FeFlood_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeFlood_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeFlood_ Filter  String  where
@@ -279,7 +279,7 @@ instance Attr FeFlood_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeFlood_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeGaussianBlur_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -287,7 +287,7 @@ instance Attr FeGaussianBlur_ Filter (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeGaussianBlur_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeGaussianBlur_ Filter  String  where
@@ -298,7 +298,7 @@ instance Attr FeGaussianBlur_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeGaussianBlur_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeImage_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -306,7 +306,7 @@ instance Attr FeImage_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeImage_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeImage_ Filter  String  where
@@ -317,7 +317,7 @@ instance Attr FeImage_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeImage_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeMerge_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -325,7 +325,7 @@ instance Attr FeMerge_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeMerge_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeMerge_ Filter  String  where
@@ -336,7 +336,7 @@ instance Attr FeMerge_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeMerge_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeMorphology_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -344,7 +344,7 @@ instance Attr FeMorphology_ Filter (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeMorphology_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeMorphology_ Filter  String  where
@@ -355,7 +355,7 @@ instance Attr FeMorphology_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeMorphology_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeOffset_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -363,7 +363,7 @@ instance Attr FeOffset_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeOffset_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeOffset_ Filter  String  where
@@ -374,7 +374,7 @@ instance Attr FeOffset_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeOffset_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeSpecularLighting_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -382,7 +382,7 @@ instance Attr FeSpecularLighting_ Filter (NonEmpty.NonEmpty Event.Event  String 
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeSpecularLighting_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeSpecularLighting_ Filter  String  where
@@ -393,7 +393,7 @@ instance Attr FeSpecularLighting_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeSpecularLighting_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeTile_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -401,7 +401,7 @@ instance Attr FeTile_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeTile_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeTile_ Filter  String  where
@@ -412,7 +412,7 @@ instance Attr FeTile_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeTile_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeTurbulence_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -420,7 +420,7 @@ instance Attr FeTurbulence_ Filter (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeTurbulence_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr FeTurbulence_ Filter  String  where
@@ -431,7 +431,7 @@ instance Attr FeTurbulence_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr FeTurbulence_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Filter_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -439,7 +439,7 @@ instance Attr Filter_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Filter_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Filter_ Filter  String  where
@@ -450,7 +450,7 @@ instance Attr Filter_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Filter_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr ForeignObject_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -458,7 +458,7 @@ instance Attr ForeignObject_ Filter (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr ForeignObject_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr ForeignObject_ Filter  String  where
@@ -469,7 +469,7 @@ instance Attr ForeignObject_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr ForeignObject_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr G_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -477,7 +477,7 @@ instance Attr G_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr G_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr G_ Filter  String  where
@@ -488,7 +488,7 @@ instance Attr G_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr G_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Image_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -496,7 +496,7 @@ instance Attr Image_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Image_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Image_ Filter  String  where
@@ -507,7 +507,7 @@ instance Attr Image_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Image_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Line_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -515,7 +515,7 @@ instance Attr Line_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Line_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Line_ Filter  String  where
@@ -526,7 +526,7 @@ instance Attr Line_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Line_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr LinearGradient_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -534,7 +534,7 @@ instance Attr LinearGradient_ Filter (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr LinearGradient_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr LinearGradient_ Filter  String  where
@@ -545,7 +545,7 @@ instance Attr LinearGradient_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr LinearGradient_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Marker_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -553,7 +553,7 @@ instance Attr Marker_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Marker_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Marker_ Filter  String  where
@@ -564,7 +564,7 @@ instance Attr Marker_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Marker_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Mask_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -572,7 +572,7 @@ instance Attr Mask_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Mask_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Mask_ Filter  String  where
@@ -583,7 +583,7 @@ instance Attr Mask_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Mask_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Path_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -591,7 +591,7 @@ instance Attr Path_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Path_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Path_ Filter  String  where
@@ -602,7 +602,7 @@ instance Attr Path_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Path_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Pattern_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -610,7 +610,7 @@ instance Attr Pattern_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Pattern_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Pattern_ Filter  String  where
@@ -621,7 +621,7 @@ instance Attr Pattern_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Pattern_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Polygon_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -629,7 +629,7 @@ instance Attr Polygon_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Polygon_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Polygon_ Filter  String  where
@@ -640,7 +640,7 @@ instance Attr Polygon_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Polygon_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Polyline_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -648,7 +648,7 @@ instance Attr Polyline_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Polyline_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Polyline_ Filter  String  where
@@ -659,7 +659,7 @@ instance Attr Polyline_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Polyline_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr RadialGradient_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -667,7 +667,7 @@ instance Attr RadialGradient_ Filter (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr RadialGradient_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr RadialGradient_ Filter  String  where
@@ -678,7 +678,7 @@ instance Attr RadialGradient_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr RadialGradient_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Rect_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -686,7 +686,7 @@ instance Attr Rect_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Rect_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Rect_ Filter  String  where
@@ -697,7 +697,7 @@ instance Attr Rect_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Rect_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Svg_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -705,7 +705,7 @@ instance Attr Svg_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Svg_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Svg_ Filter  String  where
@@ -716,7 +716,7 @@ instance Attr Svg_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Svg_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Switch_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -724,7 +724,7 @@ instance Attr Switch_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Switch_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Switch_ Filter  String  where
@@ -735,7 +735,7 @@ instance Attr Switch_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Switch_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Symbol_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -743,7 +743,7 @@ instance Attr Symbol_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Symbol_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Symbol_ Filter  String  where
@@ -754,7 +754,7 @@ instance Attr Symbol_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Symbol_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Text_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -762,7 +762,7 @@ instance Attr Text_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Text_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Text_ Filter  String  where
@@ -773,7 +773,7 @@ instance Attr Text_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Text_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr TextPath_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -781,7 +781,7 @@ instance Attr TextPath_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr TextPath_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr TextPath_ Filter  String  where
@@ -792,7 +792,7 @@ instance Attr TextPath_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr TextPath_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Tspan_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -800,7 +800,7 @@ instance Attr Tspan_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Tspan_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Tspan_ Filter  String  where
@@ -811,7 +811,7 @@ instance Attr Tspan_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Tspan_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Use_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
@@ -819,7 +819,7 @@ instance Attr Use_ Filter (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filter", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Use_ Filter (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filter", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filter", value: prop' value })
 instance Attr Use_ Filter  String  where
@@ -830,7 +830,7 @@ instance Attr Use_ Filter (Event.Event  String ) where
     \value -> { key: "filter", value: prop' value }
 
 instance Attr Use_ Filter (ST.ST Global.Global  String ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#>
+  attr Filter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filter", value: prop' value }
 
 instance Attr everything Filter (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -838,15 +838,15 @@ instance Attr everything Filter (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "filter", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "filter", value: unset' })
 instance Attr everything Filter (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Filter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "filter", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "filter", value: unset' })
 instance Attr everything Filter  Unit  where
-  attr Filter _ = unsafeAttribute $ This $ pure $ { key: "filter", value: unset' }
+  attr Filter _ = unsafeAttribute $ This $ { key: "filter", value: unset' }
 instance Attr everything Filter (Event.Event  Unit ) where
   attr Filter eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "filter", value: unset' }
 
 instance Attr everything Filter (ST.ST Global.Global  Unit ) where
-  attr Filter stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Filter iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "filter", value: unset' }

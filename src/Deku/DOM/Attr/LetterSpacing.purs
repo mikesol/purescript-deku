@@ -37,7 +37,7 @@ instance Attr FeBlend_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeBlend_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeBlend_ LetterSpacing  String  where
@@ -48,7 +48,7 @@ instance Attr FeBlend_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeBlend_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeColorMatrix_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -56,7 +56,7 @@ instance Attr FeColorMatrix_ LetterSpacing (NonEmpty.NonEmpty Event.Event  Strin
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeColorMatrix_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeColorMatrix_ LetterSpacing  String  where
@@ -67,7 +67,7 @@ instance Attr FeColorMatrix_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeColorMatrix_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeComponentTransfer_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -75,7 +75,7 @@ instance Attr FeComponentTransfer_ LetterSpacing (NonEmpty.NonEmpty Event.Event 
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeComponentTransfer_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeComponentTransfer_ LetterSpacing  String  where
@@ -86,7 +86,7 @@ instance Attr FeComponentTransfer_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeComponentTransfer_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeComposite_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -94,7 +94,7 @@ instance Attr FeComposite_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String 
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeComposite_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeComposite_ LetterSpacing  String  where
@@ -105,7 +105,7 @@ instance Attr FeComposite_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeComposite_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeConvolveMatrix_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -113,7 +113,7 @@ instance Attr FeConvolveMatrix_ LetterSpacing (NonEmpty.NonEmpty Event.Event  St
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeConvolveMatrix_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeConvolveMatrix_ LetterSpacing  String  where
@@ -124,7 +124,7 @@ instance Attr FeConvolveMatrix_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeConvolveMatrix_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeDiffuseLighting_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -132,7 +132,7 @@ instance Attr FeDiffuseLighting_ LetterSpacing (NonEmpty.NonEmpty Event.Event  S
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeDiffuseLighting_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeDiffuseLighting_ LetterSpacing  String  where
@@ -143,7 +143,7 @@ instance Attr FeDiffuseLighting_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeDiffuseLighting_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeDisplacementMap_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -151,7 +151,7 @@ instance Attr FeDisplacementMap_ LetterSpacing (NonEmpty.NonEmpty Event.Event  S
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeDisplacementMap_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeDisplacementMap_ LetterSpacing  String  where
@@ -162,7 +162,7 @@ instance Attr FeDisplacementMap_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeDisplacementMap_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeFlood_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -170,7 +170,7 @@ instance Attr FeFlood_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeFlood_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeFlood_ LetterSpacing  String  where
@@ -181,7 +181,7 @@ instance Attr FeFlood_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeFlood_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeGaussianBlur_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -189,7 +189,7 @@ instance Attr FeGaussianBlur_ LetterSpacing (NonEmpty.NonEmpty Event.Event  Stri
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeGaussianBlur_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeGaussianBlur_ LetterSpacing  String  where
@@ -200,7 +200,7 @@ instance Attr FeGaussianBlur_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeGaussianBlur_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeImage_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -208,7 +208,7 @@ instance Attr FeImage_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeImage_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeImage_ LetterSpacing  String  where
@@ -219,7 +219,7 @@ instance Attr FeImage_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeImage_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeMerge_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -227,7 +227,7 @@ instance Attr FeMerge_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeMerge_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeMerge_ LetterSpacing  String  where
@@ -238,7 +238,7 @@ instance Attr FeMerge_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeMerge_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeMorphology_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -246,7 +246,7 @@ instance Attr FeMorphology_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeMorphology_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeMorphology_ LetterSpacing  String  where
@@ -257,7 +257,7 @@ instance Attr FeMorphology_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeMorphology_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeOffset_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -265,7 +265,7 @@ instance Attr FeOffset_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeOffset_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeOffset_ LetterSpacing  String  where
@@ -276,7 +276,7 @@ instance Attr FeOffset_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeOffset_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeSpecularLighting_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -284,7 +284,7 @@ instance Attr FeSpecularLighting_ LetterSpacing (NonEmpty.NonEmpty Event.Event  
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeSpecularLighting_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeSpecularLighting_ LetterSpacing  String  where
@@ -295,7 +295,7 @@ instance Attr FeSpecularLighting_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeSpecularLighting_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeTile_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -303,7 +303,7 @@ instance Attr FeTile_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeTile_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeTile_ LetterSpacing  String  where
@@ -314,7 +314,7 @@ instance Attr FeTile_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeTile_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeTurbulence_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -322,7 +322,7 @@ instance Attr FeTurbulence_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeTurbulence_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr FeTurbulence_ LetterSpacing  String  where
@@ -333,7 +333,7 @@ instance Attr FeTurbulence_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr FeTurbulence_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Filter_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -341,7 +341,7 @@ instance Attr Filter_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Filter_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Filter_ LetterSpacing  String  where
@@ -352,7 +352,7 @@ instance Attr Filter_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Filter_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Image_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -360,7 +360,7 @@ instance Attr Image_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Image_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Image_ LetterSpacing  String  where
@@ -371,7 +371,7 @@ instance Attr Image_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Image_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Switch_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) where
@@ -379,7 +379,7 @@ instance Attr Switch_ LetterSpacing (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "letter-spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Switch_ LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "letter-spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "letter-spacing", value: prop' value })
 instance Attr Switch_ LetterSpacing  String  where
@@ -390,7 +390,7 @@ instance Attr Switch_ LetterSpacing (Event.Event  String ) where
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr Switch_ LetterSpacing (ST.ST Global.Global  String ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "letter-spacing", value: prop' value }
 
 instance Attr everything LetterSpacing (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -398,7 +398,7 @@ instance Attr everything LetterSpacing (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "letter-spacing", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "letter-spacing", value: unset' })
 instance Attr everything LetterSpacing (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr LetterSpacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "letter-spacing", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "letter-spacing", value: unset' })
 instance Attr everything LetterSpacing  Unit  where
@@ -409,5 +409,5 @@ instance Attr everything LetterSpacing (Event.Event  Unit ) where
     \_ -> { key: "letter-spacing", value: unset' }
 
 instance Attr everything LetterSpacing (ST.ST Global.Global  Unit ) where
-  attr LetterSpacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr LetterSpacing iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "letter-spacing", value: unset' }

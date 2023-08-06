@@ -18,7 +18,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "suspend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "suspend", value: cb' value })
 instance Attr anything OnSuspend (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "suspend", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "suspend", value: cb' value })
 instance Attr anything OnSuspend  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnSuspend (Event.Event  Cb ) where
     \value -> { key: "suspend", value: cb' value }
 
 instance Attr anything OnSuspend (ST.ST Global.Global  Cb ) where
-  attr OnSuspend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSuspend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "suspend", value: cb' value }
 
 instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "suspend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSuspend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "suspend", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "suspend", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnSuspend (Event.Event  (Effect Unit) ) where
     \value -> { key: "suspend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSuspend (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSuspend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSuspend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "suspend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnSuspend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "suspend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSuspend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "suspend", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "suspend", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnSuspend (Event.Event  (Effect Boolean) ) where
     \value -> { key: "suspend", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSuspend (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSuspend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSuspend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "suspend", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSuspend (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnSuspend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "suspend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "suspend", value: unset' })
 instance Attr everything OnSuspend (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSuspend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "suspend", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "suspend", value: unset' })
 instance Attr everything OnSuspend  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnSuspend (Event.Event  Unit ) where
     \_ -> { key: "suspend", value: unset' }
 
 instance Attr everything OnSuspend (ST.ST Global.Global  Unit ) where
-  attr OnSuspend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSuspend iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "suspend", value: unset' }

@@ -20,7 +20,7 @@ instance Attr Input_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "placeholder", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Input_ Placeholder (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "placeholder", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Input_ Placeholder  String  where
@@ -31,7 +31,7 @@ instance Attr Input_ Placeholder (Event.Event  String ) where
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr Input_ Placeholder (ST.ST Global.Global  String ) where
-  attr Placeholder stValue = unsafeAttribute $ This $ stValue <#>
+  attr Placeholder iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr Textarea_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Textarea_ Placeholder (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "placeholder", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Textarea_ Placeholder (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "placeholder", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "placeholder", value: prop' value })
 instance Attr Textarea_ Placeholder  String  where
@@ -50,7 +50,7 @@ instance Attr Textarea_ Placeholder (Event.Event  String ) where
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr Textarea_ Placeholder (ST.ST Global.Global  String ) where
-  attr Placeholder stValue = unsafeAttribute $ This $ stValue <#>
+  attr Placeholder iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "placeholder", value: prop' value }
 
 instance Attr everything Placeholder (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Placeholder (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "placeholder", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "placeholder", value: unset' })
 instance Attr everything Placeholder (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Placeholder (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "placeholder", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "placeholder", value: unset' })
 instance Attr everything Placeholder  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Placeholder (Event.Event  Unit ) where
     \_ -> { key: "placeholder", value: unset' }
 
 instance Attr everything Placeholder (ST.ST Global.Global  Unit ) where
-  attr Placeholder stValue = unsafeAttribute $ This $ stValue <#>
+  attr Placeholder iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "placeholder", value: unset' }

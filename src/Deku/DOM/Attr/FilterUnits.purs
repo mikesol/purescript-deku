@@ -19,7 +19,7 @@ instance Attr Filter_ FilterUnits (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filterUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filterUnits", value: prop' value })
 instance Attr Filter_ FilterUnits (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FilterUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FilterUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filterUnits", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filterUnits", value: prop' value })
 instance Attr Filter_ FilterUnits  String  where
@@ -30,7 +30,7 @@ instance Attr Filter_ FilterUnits (Event.Event  String ) where
     \value -> { key: "filterUnits", value: prop' value }
 
 instance Attr Filter_ FilterUnits (ST.ST Global.Global  String ) where
-  attr FilterUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr FilterUnits iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filterUnits", value: prop' value }
 
 instance Attr everything FilterUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything FilterUnits (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "filterUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "filterUnits", value: unset' })
 instance Attr everything FilterUnits (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr FilterUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr FilterUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "filterUnits", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "filterUnits", value: unset' })
 instance Attr everything FilterUnits  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything FilterUnits (Event.Event  Unit ) where
     \_ -> { key: "filterUnits", value: unset' }
 
 instance Attr everything FilterUnits (ST.ST Global.Global  Unit ) where
-  attr FilterUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr FilterUnits iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "filterUnits", value: unset' }

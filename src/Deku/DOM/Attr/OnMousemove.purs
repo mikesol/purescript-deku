@@ -18,7 +18,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "mousemove", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "mousemove", value: cb' value })
 instance Attr anything OnMousemove (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mousemove", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "mousemove", value: cb' value })
 instance Attr anything OnMousemove  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnMousemove (Event.Event  Cb ) where
     \value -> { key: "mousemove", value: cb' value }
 
 instance Attr anything OnMousemove (ST.ST Global.Global  Cb ) where
-  attr OnMousemove stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMousemove iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mousemove", value: cb' value }
 
 instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "mousemove", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnMousemove (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mousemove", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mousemove", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnMousemove (Event.Event  (Effect Unit) ) where
     \value -> { key: "mousemove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousemove (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnMousemove stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMousemove iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mousemove", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnMousemove (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "mousemove", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnMousemove (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "mousemove", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "mousemove", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnMousemove (Event.Event  (Effect Boolean) ) where
     \value -> { key: "mousemove", value: cb' (Cb (const value)) }
 
 instance Attr anything OnMousemove (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnMousemove stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMousemove iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "mousemove", value: cb' (Cb (const value)) }
 
 instance Attr everything OnMousemove (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnMousemove (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "mousemove", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "mousemove", value: unset' })
 instance Attr everything OnMousemove (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnMousemove (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "mousemove", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "mousemove", value: unset' })
 instance Attr everything OnMousemove  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnMousemove (Event.Event  Unit ) where
     \_ -> { key: "mousemove", value: unset' }
 
 instance Attr everything OnMousemove (ST.ST Global.Global  Unit ) where
-  attr OnMousemove stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnMousemove iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "mousemove", value: unset' }

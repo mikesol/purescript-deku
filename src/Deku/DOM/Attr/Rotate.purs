@@ -21,7 +21,7 @@ instance Attr AnimateMotion_ Rotate (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr AnimateMotion_ Rotate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "rotate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr AnimateMotion_ Rotate  String  where
@@ -32,7 +32,7 @@ instance Attr AnimateMotion_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr AnimateMotion_ Rotate (ST.ST Global.Global  String ) where
-  attr Rotate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Rotate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Text_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr Text_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Text_ Rotate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "rotate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Text_ Rotate  String  where
@@ -51,7 +51,7 @@ instance Attr Text_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Text_ Rotate (ST.ST Global.Global  String ) where
-  attr Rotate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Rotate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Tspan_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Tspan_ Rotate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "rotate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Tspan_ Rotate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "rotate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "rotate", value: prop' value })
 instance Attr Tspan_ Rotate  String  where
@@ -70,7 +70,7 @@ instance Attr Tspan_ Rotate (Event.Event  String ) where
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr Tspan_ Rotate (ST.ST Global.Global  String ) where
-  attr Rotate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Rotate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "rotate", value: prop' value }
 
 instance Attr everything Rotate (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,15 +78,15 @@ instance Attr everything Rotate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "rotate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "rotate", value: unset' })
 instance Attr everything Rotate (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Rotate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "rotate", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "rotate", value: unset' })
 instance Attr everything Rotate  Unit  where
-  attr Rotate _ = unsafeAttribute $ This $ pure $ { key: "rotate", value: unset' }
+  attr Rotate _ = unsafeAttribute $ This $ { key: "rotate", value: unset' }
 instance Attr everything Rotate (Event.Event  Unit ) where
   attr Rotate eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "rotate", value: unset' }
 
 instance Attr everything Rotate (ST.ST Global.Global  Unit ) where
-  attr Rotate stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Rotate iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "rotate", value: unset' }

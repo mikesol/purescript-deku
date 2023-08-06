@@ -21,7 +21,7 @@ instance Attr Input_ Required (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Input_ Required (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "required", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Input_ Required  String  where
@@ -32,7 +32,7 @@ instance Attr Input_ Required (Event.Event  String ) where
     \value -> { key: "required", value: prop' value }
 
 instance Attr Input_ Required (ST.ST Global.Global  String ) where
-  attr Required stValue = unsafeAttribute $ This $ stValue <#>
+  attr Required iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "required", value: prop' value }
 
 instance Attr Select_ Required (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr Select_ Required (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Select_ Required (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "required", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Select_ Required  String  where
@@ -51,7 +51,7 @@ instance Attr Select_ Required (Event.Event  String ) where
     \value -> { key: "required", value: prop' value }
 
 instance Attr Select_ Required (ST.ST Global.Global  String ) where
-  attr Required stValue = unsafeAttribute $ This $ stValue <#>
+  attr Required iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "required", value: prop' value }
 
 instance Attr Textarea_ Required (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Textarea_ Required (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "required", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Textarea_ Required (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "required", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "required", value: prop' value })
 instance Attr Textarea_ Required  String  where
@@ -70,7 +70,7 @@ instance Attr Textarea_ Required (Event.Event  String ) where
     \value -> { key: "required", value: prop' value }
 
 instance Attr Textarea_ Required (ST.ST Global.Global  String ) where
-  attr Required stValue = unsafeAttribute $ This $ stValue <#>
+  attr Required iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "required", value: prop' value }
 
 instance Attr everything Required (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything Required (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "required", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "required", value: unset' })
 instance Attr everything Required (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Required (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "required", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "required", value: unset' })
 instance Attr everything Required  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything Required (Event.Event  Unit ) where
     { key: "required", value: unset' }
 
 instance Attr everything Required (ST.ST Global.Global  Unit ) where
-  attr Required stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Required iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "required", value: unset' }

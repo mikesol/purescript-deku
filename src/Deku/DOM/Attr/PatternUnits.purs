@@ -19,7 +19,7 @@ instance Attr Pattern_ PatternUnits (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "patternUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "patternUnits", value: prop' value })
 instance Attr Pattern_ PatternUnits (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr PatternUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr PatternUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "patternUnits", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "patternUnits", value: prop' value })
 instance Attr Pattern_ PatternUnits  String  where
@@ -30,7 +30,7 @@ instance Attr Pattern_ PatternUnits (Event.Event  String ) where
     \value -> { key: "patternUnits", value: prop' value }
 
 instance Attr Pattern_ PatternUnits (ST.ST Global.Global  String ) where
-  attr PatternUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr PatternUnits iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "patternUnits", value: prop' value }
 
 instance Attr everything PatternUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything PatternUnits (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "patternUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "patternUnits", value: unset' })
 instance Attr everything PatternUnits (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr PatternUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr PatternUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "patternUnits", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "patternUnits", value: unset' })
 instance Attr everything PatternUnits  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything PatternUnits (Event.Event  Unit ) where
     \_ -> { key: "patternUnits", value: unset' }
 
 instance Attr everything PatternUnits (ST.ST Global.Global  Unit ) where
-  attr PatternUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr PatternUnits iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "patternUnits", value: unset' }

@@ -24,7 +24,7 @@ instance Attr Audio_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Audio_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Audio_ Crossorigin  String  where
@@ -35,7 +35,7 @@ instance Attr Audio_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Audio_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Img_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -43,7 +43,7 @@ instance Attr Img_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Img_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Img_ Crossorigin  String  where
@@ -54,7 +54,7 @@ instance Attr Img_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Img_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Link_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr Link_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Link_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Link_ Crossorigin  String  where
@@ -73,7 +73,7 @@ instance Attr Link_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Link_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Script_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -81,7 +81,7 @@ instance Attr Script_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Script_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Script_ Crossorigin  String  where
@@ -92,7 +92,7 @@ instance Attr Script_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Script_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Video_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -100,7 +100,7 @@ instance Attr Video_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Video_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Video_ Crossorigin  String  where
@@ -111,7 +111,7 @@ instance Attr Video_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Video_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Image_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
@@ -119,7 +119,7 @@ instance Attr Image_ Crossorigin (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "crossorigin", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Image_ Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "crossorigin", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "crossorigin", value: prop' value })
 instance Attr Image_ Crossorigin  String  where
@@ -130,7 +130,7 @@ instance Attr Image_ Crossorigin (Event.Event  String ) where
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr Image_ Crossorigin (ST.ST Global.Global  String ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "crossorigin", value: prop' value }
 
 instance Attr everything Crossorigin (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -138,7 +138,7 @@ instance Attr everything Crossorigin (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "crossorigin", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "crossorigin", value: unset' })
 instance Attr everything Crossorigin (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Crossorigin (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "crossorigin", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "crossorigin", value: unset' })
 instance Attr everything Crossorigin  Unit  where
@@ -149,5 +149,5 @@ instance Attr everything Crossorigin (Event.Event  Unit ) where
     \_ -> { key: "crossorigin", value: unset' }
 
 instance Attr everything Crossorigin (ST.ST Global.Global  Unit ) where
-  attr Crossorigin stValue = unsafeAttribute $ This $ stValue <#>
+  attr Crossorigin iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "crossorigin", value: unset' }

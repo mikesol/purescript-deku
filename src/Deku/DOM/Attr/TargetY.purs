@@ -19,7 +19,7 @@ instance Attr FeConvolveMatrix_ TargetY (NonEmpty.NonEmpty Event.Event  String )
     { key: "targetY", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "targetY", value: prop' value })
 instance Attr FeConvolveMatrix_ TargetY (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TargetY (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TargetY (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "targetY", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "targetY", value: prop' value })
 instance Attr FeConvolveMatrix_ TargetY  String  where
@@ -30,7 +30,7 @@ instance Attr FeConvolveMatrix_ TargetY (Event.Event  String ) where
     \value -> { key: "targetY", value: prop' value }
 
 instance Attr FeConvolveMatrix_ TargetY (ST.ST Global.Global  String ) where
-  attr TargetY stValue = unsafeAttribute $ This $ stValue <#>
+  attr TargetY iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "targetY", value: prop' value }
 
 instance Attr everything TargetY (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything TargetY (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "targetY", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "targetY", value: unset' })
 instance Attr everything TargetY (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr TargetY (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr TargetY (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "targetY", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "targetY", value: unset' })
 instance Attr everything TargetY  Unit  where
-  attr TargetY _ = unsafeAttribute $ This $ pure $ { key: "targetY", value: unset' }
+  attr TargetY _ = unsafeAttribute $ This $ { key: "targetY", value: unset' }
 instance Attr everything TargetY (Event.Event  Unit ) where
   attr TargetY eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "targetY", value: unset' }
 
 instance Attr everything TargetY (ST.ST Global.Global  Unit ) where
-  attr TargetY stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr TargetY iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "targetY", value: unset' }

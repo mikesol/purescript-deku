@@ -21,7 +21,7 @@ instance Attr Del_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Del_ Datetime (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "datetime", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Del_ Datetime  String  where
@@ -32,7 +32,7 @@ instance Attr Del_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Del_ Datetime (ST.ST Global.Global  String ) where
-  attr Datetime stValue = unsafeAttribute $ This $ stValue <#>
+  attr Datetime iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Ins_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr Ins_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Ins_ Datetime (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "datetime", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Ins_ Datetime  String  where
@@ -51,7 +51,7 @@ instance Attr Ins_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Ins_ Datetime (ST.ST Global.Global  String ) where
-  attr Datetime stValue = unsafeAttribute $ This $ stValue <#>
+  attr Datetime iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Time_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Time_ Datetime (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "datetime", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Time_ Datetime (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "datetime", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "datetime", value: prop' value })
 instance Attr Time_ Datetime  String  where
@@ -70,7 +70,7 @@ instance Attr Time_ Datetime (Event.Event  String ) where
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr Time_ Datetime (ST.ST Global.Global  String ) where
-  attr Datetime stValue = unsafeAttribute $ This $ stValue <#>
+  attr Datetime iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "datetime", value: prop' value }
 
 instance Attr everything Datetime (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything Datetime (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "datetime", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "datetime", value: unset' })
 instance Attr everything Datetime (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Datetime (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "datetime", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "datetime", value: unset' })
 instance Attr everything Datetime  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything Datetime (Event.Event  Unit ) where
     { key: "datetime", value: unset' }
 
 instance Attr everything Datetime (ST.ST Global.Global  Unit ) where
-  attr Datetime stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Datetime iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "datetime", value: unset' }

@@ -18,7 +18,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "show", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "show", value: cb' value })
 instance Attr anything OnShow (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "show", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "show", value: cb' value })
 instance Attr anything OnShow  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnShow (Event.Event  Cb ) where
     \value -> { key: "show", value: cb' value }
 
 instance Attr anything OnShow (ST.ST Global.Global  Cb ) where
-  attr OnShow stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnShow iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "show", value: cb' value }
 
 instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) wh
         { key: "show", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnShow (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "show", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "show", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnShow (Event.Event  (Effect Unit) ) where
     \value -> { key: "show", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnShow (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnShow stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnShow iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "show", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnShow (NonEmpty.NonEmpty Event.Event  (Effect Boolean) )
         { key: "show", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnShow (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "show", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "show", value: cb' (Cb (const value)) }
@@ -75,21 +75,21 @@ instance Attr anything OnShow (Event.Event  (Effect Boolean) ) where
     \value -> { key: "show", value: cb' (Cb (const value)) }
 
 instance Attr anything OnShow (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnShow stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnShow iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "show", value: cb' (Cb (const value)) }
 
 instance Attr everything OnShow (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnShow bothValues = unsafeAttribute $ Both (pure  { key: "show", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "show", value: unset' })
 instance Attr everything OnShow (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "show", value: unset' })
+  attr OnShow (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "show", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "show", value: unset' })
 instance Attr everything OnShow  Unit  where
-  attr OnShow _ = unsafeAttribute $ This $ pure $ { key: "show", value: unset' }
+  attr OnShow _ = unsafeAttribute $ This $ { key: "show", value: unset' }
 instance Attr everything OnShow (Event.Event  Unit ) where
   attr OnShow eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "show", value: unset' }
 
 instance Attr everything OnShow (ST.ST Global.Global  Unit ) where
-  attr OnShow stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnShow iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "show", value: unset' }

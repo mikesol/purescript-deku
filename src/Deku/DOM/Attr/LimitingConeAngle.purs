@@ -21,7 +21,7 @@ instance Attr FeSpotLight_ LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Str
         { key: "limitingConeAngle", value: prop' value }
     )
 instance Attr FeSpotLight_ LimitingConeAngle (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LimitingConeAngle (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LimitingConeAngle (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "limitingConeAngle", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "limitingConeAngle", value: prop' value }
@@ -34,7 +34,7 @@ instance Attr FeSpotLight_ LimitingConeAngle (Event.Event  String ) where
     <#> \value -> { key: "limitingConeAngle", value: prop' value }
 
 instance Attr FeSpotLight_ LimitingConeAngle (ST.ST Global.Global  String ) where
-  attr LimitingConeAngle stValue = unsafeAttribute $ This $ stValue
+  attr LimitingConeAngle iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "limitingConeAngle", value: prop' value }
 
 instance Attr everything LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -42,7 +42,7 @@ instance Attr everything LimitingConeAngle (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "limitingConeAngle", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
 instance Attr everything LimitingConeAngle (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr LimitingConeAngle (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr LimitingConeAngle (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "limitingConeAngle", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "limitingConeAngle", value: unset' })
 instance Attr everything LimitingConeAngle  Unit  where
@@ -53,5 +53,5 @@ instance Attr everything LimitingConeAngle (Event.Event  Unit ) where
     <#> \_ -> { key: "limitingConeAngle", value: unset' }
 
 instance Attr everything LimitingConeAngle (ST.ST Global.Global  Unit ) where
-  attr LimitingConeAngle stValue = unsafeAttribute $ This $ stValue
+  attr LimitingConeAngle iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "limitingConeAngle", value: unset' }

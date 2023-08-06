@@ -19,7 +19,7 @@ instance Attr FeTurbulence_ BaseFrequency (NonEmpty.NonEmpty Event.Event  String
     { key: "baseFrequency", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "baseFrequency", value: prop' value })
 instance Attr FeTurbulence_ BaseFrequency (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr BaseFrequency (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr BaseFrequency (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "baseFrequency", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "baseFrequency", value: prop' value })
 instance Attr FeTurbulence_ BaseFrequency  String  where
@@ -30,7 +30,7 @@ instance Attr FeTurbulence_ BaseFrequency (Event.Event  String ) where
     \value -> { key: "baseFrequency", value: prop' value }
 
 instance Attr FeTurbulence_ BaseFrequency (ST.ST Global.Global  String ) where
-  attr BaseFrequency stValue = unsafeAttribute $ This $ stValue <#>
+  attr BaseFrequency iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "baseFrequency", value: prop' value }
 
 instance Attr everything BaseFrequency (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything BaseFrequency (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "baseFrequency", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "baseFrequency", value: unset' })
 instance Attr everything BaseFrequency (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr BaseFrequency (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr BaseFrequency (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "baseFrequency", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "baseFrequency", value: unset' })
 instance Attr everything BaseFrequency  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything BaseFrequency (Event.Event  Unit ) where
     \_ -> { key: "baseFrequency", value: unset' }
 
 instance Attr everything BaseFrequency (ST.ST Global.Global  Unit ) where
-  attr BaseFrequency stValue = unsafeAttribute $ This $ stValue <#>
+  attr BaseFrequency iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "baseFrequency", value: unset' }

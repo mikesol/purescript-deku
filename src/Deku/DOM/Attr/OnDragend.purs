@@ -18,7 +18,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragend", value: cb' value })
 instance Attr anything OnDragend (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragend", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dragend", value: cb' value })
 instance Attr anything OnDragend  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDragend (Event.Event  Cb ) where
     \value -> { key: "dragend", value: cb' value }
 
 instance Attr anything OnDragend (ST.ST Global.Global  Cb ) where
-  attr OnDragend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragend", value: cb' value }
 
 instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "dragend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragend", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragend", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDragend (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragend (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDragend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDragend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "dragend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragend", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragend", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnDragend (Event.Event  (Effect Boolean) ) where
     \value -> { key: "dragend", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDragend (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDragend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragend", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDragend (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnDragend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "dragend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragend", value: unset' })
 instance Attr everything OnDragend (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnDragend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dragend", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dragend", value: unset' })
 instance Attr everything OnDragend  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnDragend (Event.Event  Unit ) where
     \_ -> { key: "dragend", value: unset' }
 
 instance Attr everything OnDragend (ST.ST Global.Global  Unit ) where
-  attr OnDragend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragend iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "dragend", value: unset' }

@@ -19,7 +19,7 @@ instance Attr Applet_ Code (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "code", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "code", value: prop' value })
 instance Attr Applet_ Code (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Code (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Code (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "code", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "code", value: prop' value })
 instance Attr Applet_ Code  String  where
@@ -30,21 +30,21 @@ instance Attr Applet_ Code (Event.Event  String ) where
     { key: "code", value: prop' value }
 
 instance Attr Applet_ Code (ST.ST Global.Global  String ) where
-  attr Code stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Code iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "code", value: prop' value }
 
 instance Attr everything Code (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Code bothValues = unsafeAttribute $ Both (pure  { key: "code", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "code", value: unset' })
 instance Attr everything Code (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Code (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "code", value: unset' })
+  attr Code (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "code", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "code", value: unset' })
 instance Attr everything Code  Unit  where
-  attr Code _ = unsafeAttribute $ This $ pure $ { key: "code", value: unset' }
+  attr Code _ = unsafeAttribute $ This $ { key: "code", value: unset' }
 instance Attr everything Code (Event.Event  Unit ) where
   attr Code eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "code", value: unset' }
 
 instance Attr everything Code (ST.ST Global.Global  Unit ) where
-  attr Code stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Code iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "code", value: unset' }

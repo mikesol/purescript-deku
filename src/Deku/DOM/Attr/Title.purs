@@ -140,7 +140,7 @@ instance Attr A_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr A_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr A_ Title  String  where
@@ -151,7 +151,7 @@ instance Attr A_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr A_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Abbr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -159,7 +159,7 @@ instance Attr Abbr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Abbr_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Abbr_ Title  String  where
@@ -170,7 +170,7 @@ instance Attr Abbr_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Abbr_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Acronym_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -178,7 +178,7 @@ instance Attr Acronym_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Acronym_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Acronym_ Title  String  where
@@ -189,7 +189,7 @@ instance Attr Acronym_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Acronym_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Address_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -197,7 +197,7 @@ instance Attr Address_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Address_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Address_ Title  String  where
@@ -208,7 +208,7 @@ instance Attr Address_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Address_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Applet_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -216,7 +216,7 @@ instance Attr Applet_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Applet_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Applet_ Title  String  where
@@ -227,7 +227,7 @@ instance Attr Applet_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Applet_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Area_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -235,7 +235,7 @@ instance Attr Area_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Area_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Area_ Title  String  where
@@ -246,7 +246,7 @@ instance Attr Area_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Area_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Article_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -254,7 +254,7 @@ instance Attr Article_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Article_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Article_ Title  String  where
@@ -265,7 +265,7 @@ instance Attr Article_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Article_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Aside_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -273,7 +273,7 @@ instance Attr Aside_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Aside_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Aside_ Title  String  where
@@ -284,7 +284,7 @@ instance Attr Aside_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Aside_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Audio_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr Audio_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Audio_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Audio_ Title  String  where
@@ -303,7 +303,7 @@ instance Attr Audio_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Audio_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr B_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -311,7 +311,7 @@ instance Attr B_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr B_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr B_ Title  String  where
@@ -322,7 +322,7 @@ instance Attr B_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr B_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Base_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -330,7 +330,7 @@ instance Attr Base_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Base_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Base_ Title  String  where
@@ -341,7 +341,7 @@ instance Attr Base_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Base_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Basefont_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -349,7 +349,7 @@ instance Attr Basefont_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Basefont_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Basefont_ Title  String  where
@@ -360,7 +360,7 @@ instance Attr Basefont_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Basefont_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Bdi_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -368,7 +368,7 @@ instance Attr Bdi_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Bdi_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Bdi_ Title  String  where
@@ -379,7 +379,7 @@ instance Attr Bdi_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Bdi_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Bdo_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -387,7 +387,7 @@ instance Attr Bdo_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Bdo_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Bdo_ Title  String  where
@@ -398,7 +398,7 @@ instance Attr Bdo_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Bdo_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Big_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr Big_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Big_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Big_ Title  String  where
@@ -417,7 +417,7 @@ instance Attr Big_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Big_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Blockquote_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -425,7 +425,7 @@ instance Attr Blockquote_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Blockquote_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Blockquote_ Title  String  where
@@ -436,7 +436,7 @@ instance Attr Blockquote_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Blockquote_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Body_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -444,7 +444,7 @@ instance Attr Body_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Body_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Body_ Title  String  where
@@ -455,7 +455,7 @@ instance Attr Body_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Body_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Br_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -463,7 +463,7 @@ instance Attr Br_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Br_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Br_ Title  String  where
@@ -474,7 +474,7 @@ instance Attr Br_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Br_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Button_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -482,7 +482,7 @@ instance Attr Button_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Button_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Button_ Title  String  where
@@ -493,7 +493,7 @@ instance Attr Button_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Button_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Canvas_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -501,7 +501,7 @@ instance Attr Canvas_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Canvas_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Canvas_ Title  String  where
@@ -512,7 +512,7 @@ instance Attr Canvas_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Canvas_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Caption_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -520,7 +520,7 @@ instance Attr Caption_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Caption_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Caption_ Title  String  where
@@ -531,7 +531,7 @@ instance Attr Caption_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Caption_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Center_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -539,7 +539,7 @@ instance Attr Center_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Center_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Center_ Title  String  where
@@ -550,7 +550,7 @@ instance Attr Center_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Center_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Cite_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -558,7 +558,7 @@ instance Attr Cite_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Cite_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Cite_ Title  String  where
@@ -569,7 +569,7 @@ instance Attr Cite_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Cite_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Code_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -577,7 +577,7 @@ instance Attr Code_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Code_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Code_ Title  String  where
@@ -588,7 +588,7 @@ instance Attr Code_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Code_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Col_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -596,7 +596,7 @@ instance Attr Col_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Col_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Col_ Title  String  where
@@ -607,7 +607,7 @@ instance Attr Col_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Col_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Colgroup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -615,7 +615,7 @@ instance Attr Colgroup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Colgroup_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Colgroup_ Title  String  where
@@ -626,7 +626,7 @@ instance Attr Colgroup_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Colgroup_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Xdata_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -634,7 +634,7 @@ instance Attr Xdata_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Xdata_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Xdata_ Title  String  where
@@ -645,7 +645,7 @@ instance Attr Xdata_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Xdata_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Datalist_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -653,7 +653,7 @@ instance Attr Datalist_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Datalist_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Datalist_ Title  String  where
@@ -664,7 +664,7 @@ instance Attr Datalist_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Datalist_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dd_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -672,7 +672,7 @@ instance Attr Dd_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dd_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dd_ Title  String  where
@@ -683,7 +683,7 @@ instance Attr Dd_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dd_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Del_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -691,7 +691,7 @@ instance Attr Del_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Del_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Del_ Title  String  where
@@ -702,7 +702,7 @@ instance Attr Del_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Del_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Details_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -710,7 +710,7 @@ instance Attr Details_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Details_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Details_ Title  String  where
@@ -721,7 +721,7 @@ instance Attr Details_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Details_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dfn_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -729,7 +729,7 @@ instance Attr Dfn_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dfn_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dfn_ Title  String  where
@@ -740,7 +740,7 @@ instance Attr Dfn_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dfn_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dialog_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -748,7 +748,7 @@ instance Attr Dialog_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dialog_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dialog_ Title  String  where
@@ -759,7 +759,7 @@ instance Attr Dialog_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dialog_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dir_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -767,7 +767,7 @@ instance Attr Dir_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dir_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dir_ Title  String  where
@@ -778,7 +778,7 @@ instance Attr Dir_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dir_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Div_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -786,7 +786,7 @@ instance Attr Div_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Div_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Div_ Title  String  where
@@ -797,7 +797,7 @@ instance Attr Div_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Div_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dl_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -805,7 +805,7 @@ instance Attr Dl_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dl_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dl_ Title  String  where
@@ -816,7 +816,7 @@ instance Attr Dl_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dl_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -824,7 +824,7 @@ instance Attr Dt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dt_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Dt_ Title  String  where
@@ -835,7 +835,7 @@ instance Attr Dt_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Dt_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Em_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Em_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Em_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Em_ Title  String  where
@@ -854,7 +854,7 @@ instance Attr Em_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Em_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Embed_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -862,7 +862,7 @@ instance Attr Embed_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Embed_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Embed_ Title  String  where
@@ -873,7 +873,7 @@ instance Attr Embed_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Embed_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Fieldset_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -881,7 +881,7 @@ instance Attr Fieldset_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Fieldset_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Fieldset_ Title  String  where
@@ -892,7 +892,7 @@ instance Attr Fieldset_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Fieldset_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Figcaption_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -900,7 +900,7 @@ instance Attr Figcaption_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Figcaption_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Figcaption_ Title  String  where
@@ -911,7 +911,7 @@ instance Attr Figcaption_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Figcaption_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Figure_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -919,7 +919,7 @@ instance Attr Figure_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Figure_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Figure_ Title  String  where
@@ -930,7 +930,7 @@ instance Attr Figure_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Figure_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Font_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -938,7 +938,7 @@ instance Attr Font_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Font_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Font_ Title  String  where
@@ -949,7 +949,7 @@ instance Attr Font_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Font_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Footer_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -957,7 +957,7 @@ instance Attr Footer_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Footer_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Footer_ Title  String  where
@@ -968,7 +968,7 @@ instance Attr Footer_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Footer_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Form_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -976,7 +976,7 @@ instance Attr Form_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Form_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Form_ Title  String  where
@@ -987,7 +987,7 @@ instance Attr Form_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Form_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Frame_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -995,7 +995,7 @@ instance Attr Frame_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Frame_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Frame_ Title  String  where
@@ -1006,7 +1006,7 @@ instance Attr Frame_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Frame_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Frameset_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1014,7 +1014,7 @@ instance Attr Frameset_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Frameset_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Frameset_ Title  String  where
@@ -1025,7 +1025,7 @@ instance Attr Frameset_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Frameset_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H1_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1033,7 +1033,7 @@ instance Attr H1_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H1_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H1_ Title  String  where
@@ -1044,7 +1044,7 @@ instance Attr H1_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H1_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H2_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1052,7 +1052,7 @@ instance Attr H2_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H2_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H2_ Title  String  where
@@ -1063,7 +1063,7 @@ instance Attr H2_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H2_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H3_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1071,7 +1071,7 @@ instance Attr H3_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H3_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H3_ Title  String  where
@@ -1082,7 +1082,7 @@ instance Attr H3_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H3_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H4_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1090,7 +1090,7 @@ instance Attr H4_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H4_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H4_ Title  String  where
@@ -1101,7 +1101,7 @@ instance Attr H4_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H4_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H5_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1109,7 +1109,7 @@ instance Attr H5_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H5_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H5_ Title  String  where
@@ -1120,7 +1120,7 @@ instance Attr H5_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H5_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr H6_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1128,7 +1128,7 @@ instance Attr H6_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H6_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr H6_ Title  String  where
@@ -1139,7 +1139,7 @@ instance Attr H6_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr H6_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Head_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1147,7 +1147,7 @@ instance Attr Head_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Head_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Head_ Title  String  where
@@ -1158,7 +1158,7 @@ instance Attr Head_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Head_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Header_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1166,7 +1166,7 @@ instance Attr Header_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Header_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Header_ Title  String  where
@@ -1177,7 +1177,7 @@ instance Attr Header_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Header_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Hr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1185,7 +1185,7 @@ instance Attr Hr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Hr_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Hr_ Title  String  where
@@ -1196,7 +1196,7 @@ instance Attr Hr_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Hr_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Html_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1204,7 +1204,7 @@ instance Attr Html_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Html_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Html_ Title  String  where
@@ -1215,7 +1215,7 @@ instance Attr Html_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Html_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr I_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1223,7 +1223,7 @@ instance Attr I_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr I_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr I_ Title  String  where
@@ -1234,7 +1234,7 @@ instance Attr I_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr I_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Iframe_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1242,7 +1242,7 @@ instance Attr Iframe_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Iframe_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Iframe_ Title  String  where
@@ -1253,7 +1253,7 @@ instance Attr Iframe_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Iframe_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Img_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1261,7 +1261,7 @@ instance Attr Img_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Img_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Img_ Title  String  where
@@ -1272,7 +1272,7 @@ instance Attr Img_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Img_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Input_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1280,7 +1280,7 @@ instance Attr Input_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Input_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Input_ Title  String  where
@@ -1291,7 +1291,7 @@ instance Attr Input_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Input_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ins_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1299,7 +1299,7 @@ instance Attr Ins_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ins_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ins_ Title  String  where
@@ -1310,7 +1310,7 @@ instance Attr Ins_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ins_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Kbd_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1318,7 +1318,7 @@ instance Attr Kbd_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Kbd_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Kbd_ Title  String  where
@@ -1329,7 +1329,7 @@ instance Attr Kbd_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Kbd_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Label_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1337,7 +1337,7 @@ instance Attr Label_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Label_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Label_ Title  String  where
@@ -1348,7 +1348,7 @@ instance Attr Label_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Label_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Legend_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1356,7 +1356,7 @@ instance Attr Legend_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Legend_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Legend_ Title  String  where
@@ -1367,7 +1367,7 @@ instance Attr Legend_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Legend_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Li_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1375,7 +1375,7 @@ instance Attr Li_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Li_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Li_ Title  String  where
@@ -1386,7 +1386,7 @@ instance Attr Li_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Li_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Link_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1394,7 +1394,7 @@ instance Attr Link_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Link_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Link_ Title  String  where
@@ -1405,7 +1405,7 @@ instance Attr Link_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Link_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Main_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1413,7 +1413,7 @@ instance Attr Main_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Main_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Main_ Title  String  where
@@ -1424,7 +1424,7 @@ instance Attr Main_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Main_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Map_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1432,7 +1432,7 @@ instance Attr Map_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Map_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Map_ Title  String  where
@@ -1443,7 +1443,7 @@ instance Attr Map_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Map_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Mark_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1451,7 +1451,7 @@ instance Attr Mark_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Mark_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Mark_ Title  String  where
@@ -1462,7 +1462,7 @@ instance Attr Mark_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Mark_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Meta_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1470,7 +1470,7 @@ instance Attr Meta_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Meta_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Meta_ Title  String  where
@@ -1481,7 +1481,7 @@ instance Attr Meta_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Meta_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Meter_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1489,7 +1489,7 @@ instance Attr Meter_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Meter_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Meter_ Title  String  where
@@ -1500,7 +1500,7 @@ instance Attr Meter_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Meter_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Nav_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1508,7 +1508,7 @@ instance Attr Nav_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Nav_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Nav_ Title  String  where
@@ -1519,7 +1519,7 @@ instance Attr Nav_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Nav_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Noframes_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1527,7 +1527,7 @@ instance Attr Noframes_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Noframes_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Noframes_ Title  String  where
@@ -1538,7 +1538,7 @@ instance Attr Noframes_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Noframes_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Noscript_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1546,7 +1546,7 @@ instance Attr Noscript_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Noscript_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Noscript_ Title  String  where
@@ -1557,7 +1557,7 @@ instance Attr Noscript_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Noscript_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Object_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1565,7 +1565,7 @@ instance Attr Object_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Object_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Object_ Title  String  where
@@ -1576,7 +1576,7 @@ instance Attr Object_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Object_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ol_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1584,7 +1584,7 @@ instance Attr Ol_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ol_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ol_ Title  String  where
@@ -1595,7 +1595,7 @@ instance Attr Ol_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ol_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Optgroup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1603,7 +1603,7 @@ instance Attr Optgroup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Optgroup_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Optgroup_ Title  String  where
@@ -1614,7 +1614,7 @@ instance Attr Optgroup_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Optgroup_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Option_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1622,7 +1622,7 @@ instance Attr Option_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Option_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Option_ Title  String  where
@@ -1633,7 +1633,7 @@ instance Attr Option_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Option_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Output_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1641,7 +1641,7 @@ instance Attr Output_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Output_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Output_ Title  String  where
@@ -1652,7 +1652,7 @@ instance Attr Output_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Output_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr P_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1660,7 +1660,7 @@ instance Attr P_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr P_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr P_ Title  String  where
@@ -1671,7 +1671,7 @@ instance Attr P_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr P_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Param_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1679,7 +1679,7 @@ instance Attr Param_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Param_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Param_ Title  String  where
@@ -1690,7 +1690,7 @@ instance Attr Param_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Param_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Picture_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1698,7 +1698,7 @@ instance Attr Picture_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Picture_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Picture_ Title  String  where
@@ -1709,7 +1709,7 @@ instance Attr Picture_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Picture_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Pre_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1717,7 +1717,7 @@ instance Attr Pre_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Pre_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Pre_ Title  String  where
@@ -1728,7 +1728,7 @@ instance Attr Pre_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Pre_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Progress_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1736,7 +1736,7 @@ instance Attr Progress_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Progress_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Progress_ Title  String  where
@@ -1747,7 +1747,7 @@ instance Attr Progress_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Progress_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Q_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1755,7 +1755,7 @@ instance Attr Q_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Q_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Q_ Title  String  where
@@ -1766,7 +1766,7 @@ instance Attr Q_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Q_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Rp_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1774,7 +1774,7 @@ instance Attr Rp_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Rp_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Rp_ Title  String  where
@@ -1785,7 +1785,7 @@ instance Attr Rp_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Rp_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Rt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1793,7 +1793,7 @@ instance Attr Rt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Rt_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Rt_ Title  String  where
@@ -1804,7 +1804,7 @@ instance Attr Rt_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Rt_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ruby_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1812,7 +1812,7 @@ instance Attr Ruby_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ruby_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ruby_ Title  String  where
@@ -1823,7 +1823,7 @@ instance Attr Ruby_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ruby_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr S_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1831,7 +1831,7 @@ instance Attr S_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr S_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr S_ Title  String  where
@@ -1842,7 +1842,7 @@ instance Attr S_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr S_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Samp_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1850,7 +1850,7 @@ instance Attr Samp_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Samp_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Samp_ Title  String  where
@@ -1861,7 +1861,7 @@ instance Attr Samp_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Samp_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Script_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1869,7 +1869,7 @@ instance Attr Script_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Script_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Script_ Title  String  where
@@ -1880,7 +1880,7 @@ instance Attr Script_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Script_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Section_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1888,7 +1888,7 @@ instance Attr Section_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Section_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Section_ Title  String  where
@@ -1899,7 +1899,7 @@ instance Attr Section_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Section_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Select_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1907,7 +1907,7 @@ instance Attr Select_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Select_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Select_ Title  String  where
@@ -1918,7 +1918,7 @@ instance Attr Select_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Select_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Small_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1926,7 +1926,7 @@ instance Attr Small_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Small_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Small_ Title  String  where
@@ -1937,7 +1937,7 @@ instance Attr Small_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Small_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Source_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1945,7 +1945,7 @@ instance Attr Source_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Source_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Source_ Title  String  where
@@ -1956,7 +1956,7 @@ instance Attr Source_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Source_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Span_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1964,7 +1964,7 @@ instance Attr Span_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Span_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Span_ Title  String  where
@@ -1975,7 +1975,7 @@ instance Attr Span_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Span_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Strike_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1983,7 +1983,7 @@ instance Attr Strike_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Strike_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Strike_ Title  String  where
@@ -1994,7 +1994,7 @@ instance Attr Strike_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Strike_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Strong_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2002,7 +2002,7 @@ instance Attr Strong_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Strong_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Strong_ Title  String  where
@@ -2013,7 +2013,7 @@ instance Attr Strong_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Strong_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Style_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2021,7 +2021,7 @@ instance Attr Style_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Style_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Style_ Title  String  where
@@ -2032,7 +2032,7 @@ instance Attr Style_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Style_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Sub_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2040,7 +2040,7 @@ instance Attr Sub_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Sub_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Sub_ Title  String  where
@@ -2051,7 +2051,7 @@ instance Attr Sub_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Sub_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Summary_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2059,7 +2059,7 @@ instance Attr Summary_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Summary_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Summary_ Title  String  where
@@ -2070,7 +2070,7 @@ instance Attr Summary_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Summary_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Sup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2078,7 +2078,7 @@ instance Attr Sup_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Sup_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Sup_ Title  String  where
@@ -2089,7 +2089,7 @@ instance Attr Sup_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Sup_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Svg_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2097,7 +2097,7 @@ instance Attr Svg_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Svg_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Svg_ Title  String  where
@@ -2108,7 +2108,7 @@ instance Attr Svg_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Svg_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Table_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2116,7 +2116,7 @@ instance Attr Table_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Table_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Table_ Title  String  where
@@ -2127,7 +2127,7 @@ instance Attr Table_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Table_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tbody_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2135,7 +2135,7 @@ instance Attr Tbody_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tbody_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tbody_ Title  String  where
@@ -2146,7 +2146,7 @@ instance Attr Tbody_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tbody_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Td_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2154,7 +2154,7 @@ instance Attr Td_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Td_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Td_ Title  String  where
@@ -2165,7 +2165,7 @@ instance Attr Td_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Td_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Template_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2173,7 +2173,7 @@ instance Attr Template_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Template_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Template_ Title  String  where
@@ -2184,7 +2184,7 @@ instance Attr Template_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Template_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Textarea_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2192,7 +2192,7 @@ instance Attr Textarea_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Textarea_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Textarea_ Title  String  where
@@ -2203,7 +2203,7 @@ instance Attr Textarea_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Textarea_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tfoot_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2211,7 +2211,7 @@ instance Attr Tfoot_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tfoot_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tfoot_ Title  String  where
@@ -2222,7 +2222,7 @@ instance Attr Tfoot_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tfoot_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Th_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2230,7 +2230,7 @@ instance Attr Th_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Th_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Th_ Title  String  where
@@ -2241,7 +2241,7 @@ instance Attr Th_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Th_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Thead_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2249,7 +2249,7 @@ instance Attr Thead_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Thead_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Thead_ Title  String  where
@@ -2260,7 +2260,7 @@ instance Attr Thead_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Thead_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Time_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2268,7 +2268,7 @@ instance Attr Time_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Time_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Time_ Title  String  where
@@ -2279,7 +2279,7 @@ instance Attr Time_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Time_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Title_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2287,7 +2287,7 @@ instance Attr Title_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Title_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Title_ Title  String  where
@@ -2298,7 +2298,7 @@ instance Attr Title_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Title_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2306,7 +2306,7 @@ instance Attr Tr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tr_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tr_ Title  String  where
@@ -2317,7 +2317,7 @@ instance Attr Tr_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tr_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Track_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2325,7 +2325,7 @@ instance Attr Track_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Track_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Track_ Title  String  where
@@ -2336,7 +2336,7 @@ instance Attr Track_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Track_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2344,7 +2344,7 @@ instance Attr Tt_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tt_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Tt_ Title  String  where
@@ -2355,7 +2355,7 @@ instance Attr Tt_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Tt_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr U_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2363,7 +2363,7 @@ instance Attr U_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr U_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr U_ Title  String  where
@@ -2374,7 +2374,7 @@ instance Attr U_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr U_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ul_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2382,7 +2382,7 @@ instance Attr Ul_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ul_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Ul_ Title  String  where
@@ -2393,7 +2393,7 @@ instance Attr Ul_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Ul_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Var_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2401,7 +2401,7 @@ instance Attr Var_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Var_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Var_ Title  String  where
@@ -2412,7 +2412,7 @@ instance Attr Var_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Var_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Video_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2420,7 +2420,7 @@ instance Attr Video_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Video_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Video_ Title  String  where
@@ -2431,7 +2431,7 @@ instance Attr Video_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Video_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr Wbr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2439,7 +2439,7 @@ instance Attr Wbr_ Title (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "title", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Wbr_ Title (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "title", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "title", value: prop' value })
 instance Attr Wbr_ Title  String  where
@@ -2450,21 +2450,21 @@ instance Attr Wbr_ Title (Event.Event  String ) where
     \value -> { key: "title", value: prop' value }
 
 instance Attr Wbr_ Title (ST.ST Global.Global  String ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#>
+  attr Title iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "title", value: prop' value }
 
 instance Attr everything Title (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Title bothValues = unsafeAttribute $ Both (pure  { key: "title", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "title", value: unset' })
 instance Attr everything Title (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "title", value: unset' })
+  attr Title (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "title", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "title", value: unset' })
 instance Attr everything Title  Unit  where
-  attr Title _ = unsafeAttribute $ This $ pure $ { key: "title", value: unset' }
+  attr Title _ = unsafeAttribute $ This $ { key: "title", value: unset' }
 instance Attr everything Title (Event.Event  Unit ) where
   attr Title eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "title", value: unset' }
 
 instance Attr everything Title (ST.ST Global.Global  Unit ) where
-  attr Title stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Title iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "title", value: unset' }

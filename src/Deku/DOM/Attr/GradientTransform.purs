@@ -22,7 +22,7 @@ instance Attr LinearGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  
         { key: "gradientTransform", value: prop' value }
     )
 instance Attr LinearGradient_ GradientTransform (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "gradientTransform", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "gradientTransform", value: prop' value }
@@ -35,7 +35,7 @@ instance Attr LinearGradient_ GradientTransform (Event.Event  String ) where
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr LinearGradient_ GradientTransform (ST.ST Global.Global  String ) where
-  attr GradientTransform stValue = unsafeAttribute $ This $ stValue
+  attr GradientTransform iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr RadialGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  String ) where
@@ -45,7 +45,7 @@ instance Attr RadialGradient_ GradientTransform (NonEmpty.NonEmpty Event.Event  
         { key: "gradientTransform", value: prop' value }
     )
 instance Attr RadialGradient_ GradientTransform (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "gradientTransform", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "gradientTransform", value: prop' value }
@@ -58,7 +58,7 @@ instance Attr RadialGradient_ GradientTransform (Event.Event  String ) where
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr RadialGradient_ GradientTransform (ST.ST Global.Global  String ) where
-  attr GradientTransform stValue = unsafeAttribute $ This $ stValue
+  attr GradientTransform iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "gradientTransform", value: prop' value }
 
 instance Attr everything GradientTransform (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -66,7 +66,7 @@ instance Attr everything GradientTransform (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "gradientTransform", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "gradientTransform", value: unset' })
 instance Attr everything GradientTransform (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr GradientTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "gradientTransform", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "gradientTransform", value: unset' })
 instance Attr everything GradientTransform  Unit  where
@@ -77,5 +77,5 @@ instance Attr everything GradientTransform (Event.Event  Unit ) where
     <#> \_ -> { key: "gradientTransform", value: unset' }
 
 instance Attr everything GradientTransform (ST.ST Global.Global  Unit ) where
-  attr GradientTransform stValue = unsafeAttribute $ This $ stValue
+  attr GradientTransform iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "gradientTransform", value: unset' }

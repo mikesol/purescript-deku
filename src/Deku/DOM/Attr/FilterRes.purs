@@ -19,7 +19,7 @@ instance Attr Filter_ FilterRes (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "filterRes", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "filterRes", value: prop' value })
 instance Attr Filter_ FilterRes (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr FilterRes (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr FilterRes (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "filterRes", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "filterRes", value: prop' value })
 instance Attr Filter_ FilterRes  String  where
@@ -30,7 +30,7 @@ instance Attr Filter_ FilterRes (Event.Event  String ) where
     \value -> { key: "filterRes", value: prop' value }
 
 instance Attr Filter_ FilterRes (ST.ST Global.Global  String ) where
-  attr FilterRes stValue = unsafeAttribute $ This $ stValue <#>
+  attr FilterRes iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "filterRes", value: prop' value }
 
 instance Attr everything FilterRes (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything FilterRes (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "filterRes", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "filterRes", value: unset' })
 instance Attr everything FilterRes (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr FilterRes (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr FilterRes (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "filterRes", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "filterRes", value: unset' })
 instance Attr everything FilterRes  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything FilterRes (Event.Event  Unit ) where
     \_ -> { key: "filterRes", value: unset' }
 
 instance Attr everything FilterRes (ST.ST Global.Global  Unit ) where
-  attr FilterRes stValue = unsafeAttribute $ This $ stValue <#>
+  attr FilterRes iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "filterRes", value: unset' }

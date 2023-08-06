@@ -22,7 +22,7 @@ instance Attr FeFuncA_ TableValues (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncA_ TableValues (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "tableValues", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncA_ TableValues  String  where
@@ -33,7 +33,7 @@ instance Attr FeFuncA_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncA_ TableValues (ST.ST Global.Global  String ) where
-  attr TableValues stValue = unsafeAttribute $ This $ stValue <#>
+  attr TableValues iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncB_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr FeFuncB_ TableValues (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncB_ TableValues (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "tableValues", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncB_ TableValues  String  where
@@ -52,7 +52,7 @@ instance Attr FeFuncB_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncB_ TableValues (ST.ST Global.Global  String ) where
-  attr TableValues stValue = unsafeAttribute $ This $ stValue <#>
+  attr TableValues iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncG_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr FeFuncG_ TableValues (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncG_ TableValues (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "tableValues", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncG_ TableValues  String  where
@@ -71,7 +71,7 @@ instance Attr FeFuncG_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncG_ TableValues (ST.ST Global.Global  String ) where
-  attr TableValues stValue = unsafeAttribute $ This $ stValue <#>
+  attr TableValues iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncR_ TableValues (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr FeFuncR_ TableValues (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "tableValues", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncR_ TableValues (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "tableValues", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "tableValues", value: prop' value })
 instance Attr FeFuncR_ TableValues  String  where
@@ -90,7 +90,7 @@ instance Attr FeFuncR_ TableValues (Event.Event  String ) where
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr FeFuncR_ TableValues (ST.ST Global.Global  String ) where
-  attr TableValues stValue = unsafeAttribute $ This $ stValue <#>
+  attr TableValues iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "tableValues", value: prop' value }
 
 instance Attr everything TableValues (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything TableValues (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "tableValues", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "tableValues", value: unset' })
 instance Attr everything TableValues (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr TableValues (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "tableValues", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "tableValues", value: unset' })
 instance Attr everything TableValues  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything TableValues (Event.Event  Unit ) where
     \_ -> { key: "tableValues", value: unset' }
 
 instance Attr everything TableValues (ST.ST Global.Global  Unit ) where
-  attr TableValues stValue = unsafeAttribute $ This $ stValue <#>
+  attr TableValues iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "tableValues", value: unset' }

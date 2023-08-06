@@ -18,7 +18,7 @@ instance Attr anything OnKeypress (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "keypress", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keypress", value: cb' value })
 instance Attr anything OnKeypress (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keypress", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "keypress", value: cb' value })
 instance Attr anything OnKeypress  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnKeypress (Event.Event  Cb ) where
     \value -> { key: "keypress", value: cb' value }
 
 instance Attr anything OnKeypress (ST.ST Global.Global  Cb ) where
-  attr OnKeypress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeypress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keypress", value: cb' value }
 
 instance Attr anything OnKeypress (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnKeypress (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "keypress", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnKeypress (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keypress", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "keypress", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnKeypress (Event.Event  (Effect Unit) ) where
     \value -> { key: "keypress", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeypress (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnKeypress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeypress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keypress", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeypress (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnKeypress (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "keypress", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnKeypress (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keypress", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "keypress", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnKeypress (Event.Event  (Effect Boolean) ) where
     \value -> { key: "keypress", value: cb' (Cb (const value)) }
 
 instance Attr anything OnKeypress (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnKeypress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeypress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keypress", value: cb' (Cb (const value)) }
 
 instance Attr everything OnKeypress (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnKeypress (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keypress", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keypress", value: unset' })
 instance Attr everything OnKeypress (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnKeypress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "keypress", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "keypress", value: unset' })
 instance Attr everything OnKeypress  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnKeypress (Event.Event  Unit ) where
     \_ -> { key: "keypress", value: unset' }
 
 instance Attr everything OnKeypress (ST.ST Global.Global  Unit ) where
-  attr OnKeypress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeypress iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "keypress", value: unset' }

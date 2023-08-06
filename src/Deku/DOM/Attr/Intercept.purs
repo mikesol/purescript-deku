@@ -22,7 +22,7 @@ instance Attr FeFuncA_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncA_ Intercept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "intercept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncA_ Intercept  String  where
@@ -33,7 +33,7 @@ instance Attr FeFuncA_ Intercept (Event.Event  String ) where
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncA_ Intercept (ST.ST Global.Global  String ) where
-  attr Intercept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intercept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncB_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr FeFuncB_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncB_ Intercept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "intercept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncB_ Intercept  String  where
@@ -52,7 +52,7 @@ instance Attr FeFuncB_ Intercept (Event.Event  String ) where
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncB_ Intercept (ST.ST Global.Global  String ) where
-  attr Intercept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intercept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncG_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr FeFuncG_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncG_ Intercept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "intercept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncG_ Intercept  String  where
@@ -71,7 +71,7 @@ instance Attr FeFuncG_ Intercept (Event.Event  String ) where
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncG_ Intercept (ST.ST Global.Global  String ) where
-  attr Intercept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intercept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncR_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr FeFuncR_ Intercept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intercept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncR_ Intercept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "intercept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "intercept", value: prop' value })
 instance Attr FeFuncR_ Intercept  String  where
@@ -90,7 +90,7 @@ instance Attr FeFuncR_ Intercept (Event.Event  String ) where
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr FeFuncR_ Intercept (ST.ST Global.Global  String ) where
-  attr Intercept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intercept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "intercept", value: prop' value }
 
 instance Attr everything Intercept (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything Intercept (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "intercept", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "intercept", value: unset' })
 instance Attr everything Intercept (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Intercept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "intercept", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "intercept", value: unset' })
 instance Attr everything Intercept  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything Intercept (Event.Event  Unit ) where
     \_ -> { key: "intercept", value: unset' }
 
 instance Attr everything Intercept (ST.ST Global.Global  Unit ) where
-  attr Intercept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intercept iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "intercept", value: unset' }

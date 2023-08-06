@@ -23,7 +23,7 @@ instance Attr FeConvolveMatrix_ KernelUnitLength (NonEmpty.NonEmpty Event.Event 
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ KernelUnitLength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "kernelUnitLength", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
@@ -36,7 +36,7 @@ instance Attr FeConvolveMatrix_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeConvolveMatrix_ KernelUnitLength (ST.ST Global.Global  String ) where
-  attr KernelUnitLength stValue = unsafeAttribute $ This $ stValue
+  attr KernelUnitLength iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeDiffuseLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event  String ) where
@@ -46,7 +46,7 @@ instance Attr FeDiffuseLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ KernelUnitLength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "kernelUnitLength", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
@@ -59,7 +59,7 @@ instance Attr FeDiffuseLighting_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeDiffuseLighting_ KernelUnitLength (ST.ST Global.Global  String ) where
-  attr KernelUnitLength stValue = unsafeAttribute $ This $ stValue
+  attr KernelUnitLength iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeSpecularLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Event  String ) where
@@ -69,7 +69,7 @@ instance Attr FeSpecularLighting_ KernelUnitLength (NonEmpty.NonEmpty Event.Even
         { key: "kernelUnitLength", value: prop' value }
     )
 instance Attr FeSpecularLighting_ KernelUnitLength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "kernelUnitLength", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "kernelUnitLength", value: prop' value }
@@ -82,7 +82,7 @@ instance Attr FeSpecularLighting_ KernelUnitLength (Event.Event  String ) where
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr FeSpecularLighting_ KernelUnitLength (ST.ST Global.Global  String ) where
-  attr KernelUnitLength stValue = unsafeAttribute $ This $ stValue
+  attr KernelUnitLength iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "kernelUnitLength", value: prop' value }
 
 instance Attr everything KernelUnitLength (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -90,7 +90,7 @@ instance Attr everything KernelUnitLength (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "kernelUnitLength", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "kernelUnitLength", value: unset' })
 instance Attr everything KernelUnitLength (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr KernelUnitLength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "kernelUnitLength", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "kernelUnitLength", value: unset' })
 instance Attr everything KernelUnitLength  Unit  where
@@ -101,5 +101,5 @@ instance Attr everything KernelUnitLength (Event.Event  Unit ) where
     <#> \_ -> { key: "kernelUnitLength", value: unset' }
 
 instance Attr everything KernelUnitLength (ST.ST Global.Global  Unit ) where
-  attr KernelUnitLength stValue = unsafeAttribute $ This $ stValue
+  attr KernelUnitLength iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "kernelUnitLength", value: unset' }

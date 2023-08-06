@@ -18,7 +18,7 @@ instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "keyup", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "keyup", value: cb' value })
 instance Attr anything OnKeyup (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keyup", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "keyup", value: cb' value })
 instance Attr anything OnKeyup  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnKeyup (Event.Event  Cb ) where
     \value -> { key: "keyup", value: cb' value }
 
 instance Attr anything OnKeyup (ST.ST Global.Global  Cb ) where
-  attr OnKeyup stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeyup iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keyup", value: cb' value }
 
 instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "keyup", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnKeyup (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keyup", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "keyup", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnKeyup (Event.Event  (Effect Unit) ) where
     \value -> { key: "keyup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeyup (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnKeyup stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeyup iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keyup", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnKeyup (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "keyup", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnKeyup (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "keyup", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "keyup", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnKeyup (Event.Event  (Effect Boolean) ) where
     \value -> { key: "keyup", value: cb' (Cb (const value)) }
 
 instance Attr anything OnKeyup (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnKeyup stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnKeyup iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "keyup", value: cb' (Cb (const value)) }
 
 instance Attr everything OnKeyup (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnKeyup (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "keyup", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "keyup", value: unset' })
 instance Attr everything OnKeyup (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnKeyup (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "keyup", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "keyup", value: unset' })
 instance Attr everything OnKeyup  Unit  where
-  attr OnKeyup _ = unsafeAttribute $ This $ pure $ { key: "keyup", value: unset' }
+  attr OnKeyup _ = unsafeAttribute $ This $ { key: "keyup", value: unset' }
 instance Attr everything OnKeyup (Event.Event  Unit ) where
   attr OnKeyup eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "keyup", value: unset' }
 
 instance Attr everything OnKeyup (ST.ST Global.Global  Unit ) where
-  attr OnKeyup stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnKeyup iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "keyup", value: unset' }

@@ -19,7 +19,7 @@ instance Attr Svg_ Version (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "version", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "version", value: prop' value })
 instance Attr Svg_ Version (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Version (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Version (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "version", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "version", value: prop' value })
 instance Attr Svg_ Version  String  where
@@ -30,7 +30,7 @@ instance Attr Svg_ Version (Event.Event  String ) where
     \value -> { key: "version", value: prop' value }
 
 instance Attr Svg_ Version (ST.ST Global.Global  String ) where
-  attr Version stValue = unsafeAttribute $ This $ stValue <#>
+  attr Version iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "version", value: prop' value }
 
 instance Attr everything Version (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Version (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "version", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "version", value: unset' })
 instance Attr everything Version (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Version (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Version (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "version", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "version", value: unset' })
 instance Attr everything Version  Unit  where
-  attr Version _ = unsafeAttribute $ This $ pure $ { key: "version", value: unset' }
+  attr Version _ = unsafeAttribute $ This $ { key: "version", value: unset' }
 instance Attr everything Version (Event.Event  Unit ) where
   attr Version eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "version", value: unset' }
 
 instance Attr everything Version (ST.ST Global.Global  Unit ) where
-  attr Version stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Version iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "version", value: unset' }

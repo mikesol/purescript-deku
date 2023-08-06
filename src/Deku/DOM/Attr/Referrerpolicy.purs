@@ -24,7 +24,7 @@ instance Attr A_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr A_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr A_ Referrerpolicy  String  where
@@ -35,7 +35,7 @@ instance Attr A_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr A_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Area_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
@@ -43,7 +43,7 @@ instance Attr Area_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Area_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Area_ Referrerpolicy  String  where
@@ -54,7 +54,7 @@ instance Attr Area_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Area_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Iframe_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr Iframe_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Iframe_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Iframe_ Referrerpolicy  String  where
@@ -73,7 +73,7 @@ instance Attr Iframe_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Iframe_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Img_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
@@ -81,7 +81,7 @@ instance Attr Img_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Img_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Img_ Referrerpolicy  String  where
@@ -92,7 +92,7 @@ instance Attr Img_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Img_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Link_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
@@ -100,7 +100,7 @@ instance Attr Link_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Link_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Link_ Referrerpolicy  String  where
@@ -111,7 +111,7 @@ instance Attr Link_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Link_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Script_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) where
@@ -119,7 +119,7 @@ instance Attr Script_ Referrerpolicy (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "referrerpolicy", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Script_ Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "referrerpolicy", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "referrerpolicy", value: prop' value })
 instance Attr Script_ Referrerpolicy  String  where
@@ -130,7 +130,7 @@ instance Attr Script_ Referrerpolicy (Event.Event  String ) where
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr Script_ Referrerpolicy (ST.ST Global.Global  String ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "referrerpolicy", value: prop' value }
 
 instance Attr everything Referrerpolicy (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -138,7 +138,7 @@ instance Attr everything Referrerpolicy (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "referrerpolicy", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "referrerpolicy", value: unset' })
 instance Attr everything Referrerpolicy (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Referrerpolicy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "referrerpolicy", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "referrerpolicy", value: unset' })
 instance Attr everything Referrerpolicy  Unit  where
@@ -149,5 +149,5 @@ instance Attr everything Referrerpolicy (Event.Event  Unit ) where
     \_ -> { key: "referrerpolicy", value: unset' }
 
 instance Attr everything Referrerpolicy (ST.ST Global.Global  Unit ) where
-  attr Referrerpolicy stValue = unsafeAttribute $ This $ stValue <#>
+  attr Referrerpolicy iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "referrerpolicy", value: unset' }

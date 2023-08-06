@@ -18,7 +18,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  Cb ) wh
     { key: "animationcancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "animationcancel", value: cb' value })
 instance Attr anything OnAnimationcancel (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "animationcancel", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "animationcancel", value: cb' value })
 instance Attr anything OnAnimationcancel  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnAnimationcancel (Event.Event  Cb ) where
     <#> \value -> { key: "animationcancel", value: cb' value }
 
 instance Attr anything OnAnimationcancel (ST.ST Global.Global  Cb ) where
-  attr OnAnimationcancel stValue = unsafeAttribute $ This $ stValue
+  attr OnAnimationcancel iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "animationcancel", value: cb' value }
 
 instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -41,7 +41,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnAnimationcancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "animationcancel"
     , value: cb' (Cb (const ((value) $> true)))
     })
@@ -57,7 +57,7 @@ instance Attr anything OnAnimationcancel (Event.Event  (Effect Unit) ) where
       { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnAnimationcancel (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnAnimationcancel stValue = unsafeAttribute $ This $ stValue
+  attr OnAnimationcancel iValue = unsafeAttribute $ This $ iValue
     <#> \value ->
       { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
 
@@ -68,7 +68,7 @@ instance Attr anything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  (Effect
         { key: "animationcancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnAnimationcancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "animationcancel", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "animationcancel", value: cb' (Cb (const value)) }
@@ -81,7 +81,7 @@ instance Attr anything OnAnimationcancel (Event.Event  (Effect Boolean) ) where
     <#> \value -> { key: "animationcancel", value: cb' (Cb (const value)) }
 
 instance Attr anything OnAnimationcancel (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnAnimationcancel stValue = unsafeAttribute $ This $ stValue
+  attr OnAnimationcancel iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "animationcancel", value: cb' (Cb (const value)) }
 
 instance Attr everything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -89,7 +89,7 @@ instance Attr everything OnAnimationcancel (NonEmpty.NonEmpty Event.Event  Unit 
     { key: "animationcancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "animationcancel", value: unset' })
 instance Attr everything OnAnimationcancel (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnAnimationcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "animationcancel", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "animationcancel", value: unset' })
 instance Attr everything OnAnimationcancel  Unit  where
@@ -100,5 +100,5 @@ instance Attr everything OnAnimationcancel (Event.Event  Unit ) where
     <#> \_ -> { key: "animationcancel", value: unset' }
 
 instance Attr everything OnAnimationcancel (ST.ST Global.Global  Unit ) where
-  attr OnAnimationcancel stValue = unsafeAttribute $ This $ stValue
+  attr OnAnimationcancel iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "animationcancel", value: unset' }

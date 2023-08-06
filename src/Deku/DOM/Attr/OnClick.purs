@@ -18,7 +18,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "click", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "click", value: cb' value })
 instance Attr anything OnClick (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "click", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "click", value: cb' value })
 instance Attr anything OnClick  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnClick (Event.Event  Cb ) where
     \value -> { key: "click", value: cb' value }
 
 instance Attr anything OnClick (ST.ST Global.Global  Cb ) where
-  attr OnClick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnClick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "click", value: cb' value }
 
 instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "click", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnClick (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "click", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "click", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnClick (Event.Event  (Effect Unit) ) where
     \value -> { key: "click", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnClick (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnClick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnClick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "click", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnClick (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "click", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnClick (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "click", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "click", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnClick (Event.Event  (Effect Boolean) ) where
     \value -> { key: "click", value: cb' (Cb (const value)) }
 
 instance Attr anything OnClick (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnClick stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnClick iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "click", value: cb' (Cb (const value)) }
 
 instance Attr everything OnClick (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnClick (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "click", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "click", value: unset' })
 instance Attr everything OnClick (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnClick (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "click", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "click", value: unset' })
 instance Attr everything OnClick  Unit  where
-  attr OnClick _ = unsafeAttribute $ This $ pure $ { key: "click", value: unset' }
+  attr OnClick _ = unsafeAttribute $ This $ { key: "click", value: unset' }
 instance Attr everything OnClick (Event.Event  Unit ) where
   attr OnClick eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "click", value: unset' }
 
 instance Attr everything OnClick (ST.ST Global.Global  Unit ) where
-  attr OnClick stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnClick iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "click", value: unset' }

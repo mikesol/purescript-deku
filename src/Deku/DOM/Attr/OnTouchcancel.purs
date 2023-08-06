@@ -18,7 +18,7 @@ instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "touchcancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "touchcancel", value: cb' value })
 instance Attr anything OnTouchcancel (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchcancel", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "touchcancel", value: cb' value })
 instance Attr anything OnTouchcancel  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnTouchcancel (Event.Event  Cb ) where
     \value -> { key: "touchcancel", value: cb' value }
 
 instance Attr anything OnTouchcancel (ST.ST Global.Global  Cb ) where
-  attr OnTouchcancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchcancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchcancel", value: cb' value }
 
 instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Uni
         { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnTouchcancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchcancel", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnTouchcancel (Event.Event  (Effect Unit) ) where
     \value -> { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchcancel (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnTouchcancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchcancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchcancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnTouchcancel (NonEmpty.NonEmpty Event.Event  (Effect Boo
         { key: "touchcancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnTouchcancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "touchcancel", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "touchcancel", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnTouchcancel (Event.Event  (Effect Boolean) ) where
     \value -> { key: "touchcancel", value: cb' (Cb (const value)) }
 
 instance Attr anything OnTouchcancel (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnTouchcancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchcancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "touchcancel", value: cb' (Cb (const value)) }
 
 instance Attr everything OnTouchcancel (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnTouchcancel (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "touchcancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "touchcancel", value: unset' })
 instance Attr everything OnTouchcancel (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnTouchcancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "touchcancel", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "touchcancel", value: unset' })
 instance Attr everything OnTouchcancel  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnTouchcancel (Event.Event  Unit ) where
     \_ -> { key: "touchcancel", value: unset' }
 
 instance Attr everything OnTouchcancel (ST.ST Global.Global  Unit ) where
-  attr OnTouchcancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnTouchcancel iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "touchcancel", value: unset' }

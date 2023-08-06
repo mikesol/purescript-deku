@@ -18,7 +18,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "dragstart", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dragstart", value: cb' value })
 instance Attr anything OnDragstart (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragstart", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dragstart", value: cb' value })
 instance Attr anything OnDragstart  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDragstart (Event.Event  Cb ) where
     \value -> { key: "dragstart", value: cb' value }
 
 instance Attr anything OnDragstart (ST.ST Global.Global  Cb ) where
-  attr OnDragstart stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragstart iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragstart", value: cb' value }
 
 instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Unit)
         { key: "dragstart", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDragstart (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragstart", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragstart", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDragstart (Event.Event  (Effect Unit) ) where
     \value -> { key: "dragstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragstart (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDragstart stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragstart iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragstart", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDragstart (NonEmpty.NonEmpty Event.Event  (Effect Boole
         { key: "dragstart", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDragstart (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dragstart", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "dragstart", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnDragstart (Event.Event  (Effect Boolean) ) where
     \value -> { key: "dragstart", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDragstart (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDragstart stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragstart iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "dragstart", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDragstart (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnDragstart (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "dragstart", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dragstart", value: unset' })
 instance Attr everything OnDragstart (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnDragstart (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "dragstart", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dragstart", value: unset' })
 instance Attr everything OnDragstart  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnDragstart (Event.Event  Unit ) where
     \_ -> { key: "dragstart", value: unset' }
 
 instance Attr everything OnDragstart (ST.ST Global.Global  Unit ) where
-  attr OnDragstart stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDragstart iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "dragstart", value: unset' }

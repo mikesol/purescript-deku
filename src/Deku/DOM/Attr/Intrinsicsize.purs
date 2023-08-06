@@ -19,7 +19,7 @@ instance Attr Img_ Intrinsicsize (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "intrinsicsize", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "intrinsicsize", value: prop' value })
 instance Attr Img_ Intrinsicsize (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Intrinsicsize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Intrinsicsize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "intrinsicsize", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "intrinsicsize", value: prop' value })
 instance Attr Img_ Intrinsicsize  String  where
@@ -30,7 +30,7 @@ instance Attr Img_ Intrinsicsize (Event.Event  String ) where
     \value -> { key: "intrinsicsize", value: prop' value }
 
 instance Attr Img_ Intrinsicsize (ST.ST Global.Global  String ) where
-  attr Intrinsicsize stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intrinsicsize iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "intrinsicsize", value: prop' value }
 
 instance Attr everything Intrinsicsize (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Intrinsicsize (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "intrinsicsize", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "intrinsicsize", value: unset' })
 instance Attr everything Intrinsicsize (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Intrinsicsize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Intrinsicsize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "intrinsicsize", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "intrinsicsize", value: unset' })
 instance Attr everything Intrinsicsize  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Intrinsicsize (Event.Event  Unit ) where
     \_ -> { key: "intrinsicsize", value: unset' }
 
 instance Attr everything Intrinsicsize (ST.ST Global.Global  Unit ) where
-  attr Intrinsicsize stValue = unsafeAttribute $ This $ stValue <#>
+  attr Intrinsicsize iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "intrinsicsize", value: unset' }

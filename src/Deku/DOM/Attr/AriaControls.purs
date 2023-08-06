@@ -35,7 +35,7 @@ instance Attr Circle_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Circle_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Circle_ AriaControls  String  where
@@ -46,7 +46,7 @@ instance Attr Circle_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Circle_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Ellipse_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -54,7 +54,7 @@ instance Attr Ellipse_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Ellipse_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Ellipse_ AriaControls  String  where
@@ -65,7 +65,7 @@ instance Attr Ellipse_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Ellipse_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr ForeignObject_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -73,7 +73,7 @@ instance Attr ForeignObject_ AriaControls (NonEmpty.NonEmpty Event.Event  String
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr ForeignObject_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr ForeignObject_ AriaControls  String  where
@@ -84,7 +84,7 @@ instance Attr ForeignObject_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr ForeignObject_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr G_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -92,7 +92,7 @@ instance Attr G_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr G_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr G_ AriaControls  String  where
@@ -103,7 +103,7 @@ instance Attr G_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr G_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Line_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -111,7 +111,7 @@ instance Attr Line_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Line_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Line_ AriaControls  String  where
@@ -122,7 +122,7 @@ instance Attr Line_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Line_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Marker_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Marker_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Marker_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Marker_ AriaControls  String  where
@@ -141,7 +141,7 @@ instance Attr Marker_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Marker_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Path_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -149,7 +149,7 @@ instance Attr Path_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Path_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Path_ AriaControls  String  where
@@ -160,7 +160,7 @@ instance Attr Path_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Path_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Polygon_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -168,7 +168,7 @@ instance Attr Polygon_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Polygon_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Polygon_ AriaControls  String  where
@@ -179,7 +179,7 @@ instance Attr Polygon_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Polygon_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Polyline_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -187,7 +187,7 @@ instance Attr Polyline_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Polyline_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Polyline_ AriaControls  String  where
@@ -198,7 +198,7 @@ instance Attr Polyline_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Polyline_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Rect_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -206,7 +206,7 @@ instance Attr Rect_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Rect_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Rect_ AriaControls  String  where
@@ -217,7 +217,7 @@ instance Attr Rect_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Rect_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Svg_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -225,7 +225,7 @@ instance Attr Svg_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Svg_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Svg_ AriaControls  String  where
@@ -236,7 +236,7 @@ instance Attr Svg_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Svg_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Symbol_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Symbol_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Symbol_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Symbol_ AriaControls  String  where
@@ -255,7 +255,7 @@ instance Attr Symbol_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Symbol_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Text_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -263,7 +263,7 @@ instance Attr Text_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Text_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Text_ AriaControls  String  where
@@ -274,7 +274,7 @@ instance Attr Text_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Text_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr TextPath_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -282,7 +282,7 @@ instance Attr TextPath_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr TextPath_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr TextPath_ AriaControls  String  where
@@ -293,7 +293,7 @@ instance Attr TextPath_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr TextPath_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Tspan_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -301,7 +301,7 @@ instance Attr Tspan_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Tspan_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Tspan_ AriaControls  String  where
@@ -312,7 +312,7 @@ instance Attr Tspan_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Tspan_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Use_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -320,7 +320,7 @@ instance Attr Use_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Use_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr Use_ AriaControls  String  where
@@ -331,7 +331,7 @@ instance Attr Use_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr Use_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr View_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr View_ AriaControls (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "aria-controls", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr View_ AriaControls (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-controls", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "aria-controls", value: prop' value })
 instance Attr View_ AriaControls  String  where
@@ -350,7 +350,7 @@ instance Attr View_ AriaControls (Event.Event  String ) where
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr View_ AriaControls (ST.ST Global.Global  String ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "aria-controls", value: prop' value }
 
 instance Attr everything AriaControls (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -358,7 +358,7 @@ instance Attr everything AriaControls (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "aria-controls", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-controls", value: unset' })
 instance Attr everything AriaControls (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaControls (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-controls", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-controls", value: unset' })
 instance Attr everything AriaControls  Unit  where
@@ -369,5 +369,5 @@ instance Attr everything AriaControls (Event.Event  Unit ) where
     \_ -> { key: "aria-controls", value: unset' }
 
 instance Attr everything AriaControls (ST.ST Global.Global  Unit ) where
-  attr AriaControls stValue = unsafeAttribute $ This $ stValue <#>
+  attr AriaControls iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "aria-controls", value: unset' }

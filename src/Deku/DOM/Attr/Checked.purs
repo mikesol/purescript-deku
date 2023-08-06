@@ -19,7 +19,7 @@ instance Attr Input_ Checked (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "checked", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "checked", value: prop' value })
 instance Attr Input_ Checked (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Checked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Checked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "checked", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "checked", value: prop' value })
 instance Attr Input_ Checked  String  where
@@ -30,7 +30,7 @@ instance Attr Input_ Checked (Event.Event  String ) where
     \value -> { key: "checked", value: prop' value }
 
 instance Attr Input_ Checked (ST.ST Global.Global  String ) where
-  attr Checked stValue = unsafeAttribute $ This $ stValue <#>
+  attr Checked iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "checked", value: prop' value }
 
 instance Attr everything Checked (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Checked (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "checked", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "checked", value: unset' })
 instance Attr everything Checked (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Checked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Checked (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "checked", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "checked", value: unset' })
 instance Attr everything Checked  Unit  where
-  attr Checked _ = unsafeAttribute $ This $ pure $ { key: "checked", value: unset' }
+  attr Checked _ = unsafeAttribute $ This $ { key: "checked", value: unset' }
 instance Attr everything Checked (Event.Event  Unit ) where
   attr Checked eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "checked", value: unset' }
 
 instance Attr everything Checked (ST.ST Global.Global  Unit ) where
-  attr Checked stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Checked iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "checked", value: unset' }

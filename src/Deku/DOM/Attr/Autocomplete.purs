@@ -22,7 +22,7 @@ instance Attr Form_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Form_ Autocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autocomplete", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Form_ Autocomplete  String  where
@@ -33,7 +33,7 @@ instance Attr Form_ Autocomplete (Event.Event  String ) where
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Form_ Autocomplete (ST.ST Global.Global  String ) where
-  attr Autocomplete stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autocomplete iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Input_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -41,7 +41,7 @@ instance Attr Input_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Input_ Autocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autocomplete", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Input_ Autocomplete  String  where
@@ -52,7 +52,7 @@ instance Attr Input_ Autocomplete (Event.Event  String ) where
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Input_ Autocomplete (ST.ST Global.Global  String ) where
-  attr Autocomplete stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autocomplete iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Select_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr Select_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Select_ Autocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autocomplete", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Select_ Autocomplete  String  where
@@ -71,7 +71,7 @@ instance Attr Select_ Autocomplete (Event.Event  String ) where
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Select_ Autocomplete (ST.ST Global.Global  String ) where
-  attr Autocomplete stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autocomplete iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Textarea_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -79,7 +79,7 @@ instance Attr Textarea_ Autocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "autocomplete", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Textarea_ Autocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "autocomplete", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "autocomplete", value: prop' value })
 instance Attr Textarea_ Autocomplete  String  where
@@ -90,7 +90,7 @@ instance Attr Textarea_ Autocomplete (Event.Event  String ) where
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr Textarea_ Autocomplete (ST.ST Global.Global  String ) where
-  attr Autocomplete stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autocomplete iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "autocomplete", value: prop' value }
 
 instance Attr everything Autocomplete (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -98,7 +98,7 @@ instance Attr everything Autocomplete (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "autocomplete", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "autocomplete", value: unset' })
 instance Attr everything Autocomplete (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Autocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "autocomplete", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "autocomplete", value: unset' })
 instance Attr everything Autocomplete  Unit  where
@@ -109,5 +109,5 @@ instance Attr everything Autocomplete (Event.Event  Unit ) where
     \_ -> { key: "autocomplete", value: unset' }
 
 instance Attr everything Autocomplete (ST.ST Global.Global  Unit ) where
-  attr Autocomplete stValue = unsafeAttribute $ This $ stValue <#>
+  attr Autocomplete iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "autocomplete", value: unset' }

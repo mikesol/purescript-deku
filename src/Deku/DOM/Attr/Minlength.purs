@@ -20,7 +20,7 @@ instance Attr Input_ Minlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "minlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "minlength", value: prop' value })
 instance Attr Input_ Minlength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "minlength", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "minlength", value: prop' value })
 instance Attr Input_ Minlength  String  where
@@ -31,7 +31,7 @@ instance Attr Input_ Minlength (Event.Event  String ) where
     \value -> { key: "minlength", value: prop' value }
 
 instance Attr Input_ Minlength (ST.ST Global.Global  String ) where
-  attr Minlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Minlength iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "minlength", value: prop' value }
 
 instance Attr Textarea_ Minlength (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Textarea_ Minlength (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "minlength", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "minlength", value: prop' value })
 instance Attr Textarea_ Minlength (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "minlength", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "minlength", value: prop' value })
 instance Attr Textarea_ Minlength  String  where
@@ -50,7 +50,7 @@ instance Attr Textarea_ Minlength (Event.Event  String ) where
     \value -> { key: "minlength", value: prop' value }
 
 instance Attr Textarea_ Minlength (ST.ST Global.Global  String ) where
-  attr Minlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Minlength iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "minlength", value: prop' value }
 
 instance Attr everything Minlength (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Minlength (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "minlength", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "minlength", value: unset' })
 instance Attr everything Minlength (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Minlength (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "minlength", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "minlength", value: unset' })
 instance Attr everything Minlength  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Minlength (Event.Event  Unit ) where
     \_ -> { key: "minlength", value: unset' }
 
 instance Attr everything Minlength (ST.ST Global.Global  Unit ) where
-  attr Minlength stValue = unsafeAttribute $ This $ stValue <#>
+  attr Minlength iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "minlength", value: unset' }

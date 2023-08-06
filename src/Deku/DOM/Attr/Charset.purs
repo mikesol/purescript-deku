@@ -20,7 +20,7 @@ instance Attr Meta_ Charset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "charset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "charset", value: prop' value })
 instance Attr Meta_ Charset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "charset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "charset", value: prop' value })
 instance Attr Meta_ Charset  String  where
@@ -31,7 +31,7 @@ instance Attr Meta_ Charset (Event.Event  String ) where
     \value -> { key: "charset", value: prop' value }
 
 instance Attr Meta_ Charset (ST.ST Global.Global  String ) where
-  attr Charset stValue = unsafeAttribute $ This $ stValue <#>
+  attr Charset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "charset", value: prop' value }
 
 instance Attr Script_ Charset (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Script_ Charset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "charset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "charset", value: prop' value })
 instance Attr Script_ Charset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "charset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "charset", value: prop' value })
 instance Attr Script_ Charset  String  where
@@ -50,7 +50,7 @@ instance Attr Script_ Charset (Event.Event  String ) where
     \value -> { key: "charset", value: prop' value }
 
 instance Attr Script_ Charset (ST.ST Global.Global  String ) where
-  attr Charset stValue = unsafeAttribute $ This $ stValue <#>
+  attr Charset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "charset", value: prop' value }
 
 instance Attr everything Charset (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Charset (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "charset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "charset", value: unset' })
 instance Attr everything Charset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Charset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "charset", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "charset", value: unset' })
 instance Attr everything Charset  Unit  where
-  attr Charset _ = unsafeAttribute $ This $ pure $ { key: "charset", value: unset' }
+  attr Charset _ = unsafeAttribute $ This $ { key: "charset", value: unset' }
 instance Attr everything Charset (Event.Event  Unit ) where
   attr Charset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "charset", value: unset' }
 
 instance Attr everything Charset (ST.ST Global.Global  Unit ) where
-  attr Charset stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Charset iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "charset", value: unset' }

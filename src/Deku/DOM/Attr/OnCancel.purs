@@ -18,7 +18,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "cancel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "cancel", value: cb' value })
 instance Attr anything OnCancel (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "cancel", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "cancel", value: cb' value })
 instance Attr anything OnCancel  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnCancel (Event.Event  Cb ) where
     \value -> { key: "cancel", value: cb' value }
 
 instance Attr anything OnCancel (ST.ST Global.Global  Cb ) where
-  attr OnCancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "cancel", value: cb' value }
 
 instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "cancel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnCancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "cancel", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "cancel", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnCancel (Event.Event  (Effect Unit) ) where
     \value -> { key: "cancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCancel (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnCancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "cancel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnCancel (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "cancel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnCancel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "cancel", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "cancel", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnCancel (Event.Event  (Effect Boolean) ) where
     \value -> { key: "cancel", value: cb' (Cb (const value)) }
 
 instance Attr anything OnCancel (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnCancel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCancel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "cancel", value: cb' (Cb (const value)) }
 
 instance Attr everything OnCancel (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnCancel (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "cancel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "cancel", value: unset' })
 instance Attr everything OnCancel (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnCancel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "cancel", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "cancel", value: unset' })
 instance Attr everything OnCancel  Unit  where
-  attr OnCancel _ = unsafeAttribute $ This $ pure $ { key: "cancel", value: unset' }
+  attr OnCancel _ = unsafeAttribute $ This $ { key: "cancel", value: unset' }
 instance Attr everything OnCancel (Event.Event  Unit ) where
   attr OnCancel eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "cancel", value: unset' }
 
 instance Attr everything OnCancel (ST.ST Global.Global  Unit ) where
-  attr OnCancel stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnCancel iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "cancel", value: unset' }

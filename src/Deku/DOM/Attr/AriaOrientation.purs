@@ -37,7 +37,7 @@ instance Attr Circle_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Circle_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -50,7 +50,7 @@ instance Attr Circle_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Circle_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Ellipse_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr Ellipse_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Ellipse_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -73,7 +73,7 @@ instance Attr Ellipse_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Ellipse_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr ForeignObject_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -83,7 +83,7 @@ instance Attr ForeignObject_ AriaOrientation (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr ForeignObject_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -96,7 +96,7 @@ instance Attr ForeignObject_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr ForeignObject_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr G_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -106,7 +106,7 @@ instance Attr G_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr G_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -119,7 +119,7 @@ instance Attr G_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr G_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Line_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -129,7 +129,7 @@ instance Attr Line_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Line_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -142,7 +142,7 @@ instance Attr Line_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Line_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Marker_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -152,7 +152,7 @@ instance Attr Marker_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Marker_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -165,7 +165,7 @@ instance Attr Marker_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Marker_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Path_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -175,7 +175,7 @@ instance Attr Path_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Path_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -188,7 +188,7 @@ instance Attr Path_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Path_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polygon_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -198,7 +198,7 @@ instance Attr Polygon_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Polygon_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -211,7 +211,7 @@ instance Attr Polygon_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polygon_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polyline_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -221,7 +221,7 @@ instance Attr Polyline_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Polyline_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -234,7 +234,7 @@ instance Attr Polyline_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Polyline_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Rect_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Rect_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Rect_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -257,7 +257,7 @@ instance Attr Rect_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Rect_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Svg_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -267,7 +267,7 @@ instance Attr Svg_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Svg_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -280,7 +280,7 @@ instance Attr Svg_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Svg_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Symbol_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -290,7 +290,7 @@ instance Attr Symbol_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Symbol_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -303,7 +303,7 @@ instance Attr Symbol_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Symbol_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Text_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -313,7 +313,7 @@ instance Attr Text_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Text_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -326,7 +326,7 @@ instance Attr Text_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Text_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr TextPath_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -336,7 +336,7 @@ instance Attr TextPath_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr TextPath_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -349,7 +349,7 @@ instance Attr TextPath_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr TextPath_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Tspan_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -359,7 +359,7 @@ instance Attr Tspan_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Tspan_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -372,7 +372,7 @@ instance Attr Tspan_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Tspan_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Use_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -382,7 +382,7 @@ instance Attr Use_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr Use_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -395,7 +395,7 @@ instance Attr Use_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr Use_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr View_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) where
@@ -405,7 +405,7 @@ instance Attr View_ AriaOrientation (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-orientation", value: prop' value }
     )
 instance Attr View_ AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-orientation", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-orientation", value: prop' value }
@@ -418,7 +418,7 @@ instance Attr View_ AriaOrientation (Event.Event  String ) where
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr View_ AriaOrientation (ST.ST Global.Global  String ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 instance Attr everything AriaOrientation (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -426,7 +426,7 @@ instance Attr everything AriaOrientation (NonEmpty.NonEmpty Event.Event  Unit ) 
     { key: "aria-orientation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
 instance Attr everything AriaOrientation (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaOrientation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-orientation", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-orientation", value: unset' })
 instance Attr everything AriaOrientation  Unit  where
@@ -437,5 +437,5 @@ instance Attr everything AriaOrientation (Event.Event  Unit ) where
     <#> \_ -> { key: "aria-orientation", value: unset' }
 
 instance Attr everything AriaOrientation (ST.ST Global.Global  Unit ) where
-  attr AriaOrientation stValue = unsafeAttribute $ This $ stValue
+  attr AriaOrientation iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "aria-orientation", value: unset' }

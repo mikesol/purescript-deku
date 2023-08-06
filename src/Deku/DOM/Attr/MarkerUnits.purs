@@ -19,7 +19,7 @@ instance Attr Marker_ MarkerUnits (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "markerUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "markerUnits", value: prop' value })
 instance Attr Marker_ MarkerUnits (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr MarkerUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr MarkerUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "markerUnits", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "markerUnits", value: prop' value })
 instance Attr Marker_ MarkerUnits  String  where
@@ -30,7 +30,7 @@ instance Attr Marker_ MarkerUnits (Event.Event  String ) where
     \value -> { key: "markerUnits", value: prop' value }
 
 instance Attr Marker_ MarkerUnits (ST.ST Global.Global  String ) where
-  attr MarkerUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr MarkerUnits iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "markerUnits", value: prop' value }
 
 instance Attr everything MarkerUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything MarkerUnits (NonEmpty.NonEmpty Event.Event  Unit ) wher
     { key: "markerUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "markerUnits", value: unset' })
 instance Attr everything MarkerUnits (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr MarkerUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr MarkerUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "markerUnits", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "markerUnits", value: unset' })
 instance Attr everything MarkerUnits  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything MarkerUnits (Event.Event  Unit ) where
     \_ -> { key: "markerUnits", value: unset' }
 
 instance Attr everything MarkerUnits (ST.ST Global.Global  Unit ) where
-  attr MarkerUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr MarkerUnits iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "markerUnits", value: unset' }

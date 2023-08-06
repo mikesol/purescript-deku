@@ -19,7 +19,7 @@ instance Attr Ol_ Reversed (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "reversed", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "reversed", value: prop' value })
 instance Attr Ol_ Reversed (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Reversed (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Reversed (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "reversed", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "reversed", value: prop' value })
 instance Attr Ol_ Reversed  String  where
@@ -30,7 +30,7 @@ instance Attr Ol_ Reversed (Event.Event  String ) where
     \value -> { key: "reversed", value: prop' value }
 
 instance Attr Ol_ Reversed (ST.ST Global.Global  String ) where
-  attr Reversed stValue = unsafeAttribute $ This $ stValue <#>
+  attr Reversed iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "reversed", value: prop' value }
 
 instance Attr everything Reversed (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Reversed (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "reversed", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "reversed", value: unset' })
 instance Attr everything Reversed (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Reversed (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Reversed (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "reversed", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "reversed", value: unset' })
 instance Attr everything Reversed  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Reversed (Event.Event  Unit ) where
     { key: "reversed", value: unset' }
 
 instance Attr everything Reversed (ST.ST Global.Global  Unit ) where
-  attr Reversed stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Reversed iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "reversed", value: unset' }

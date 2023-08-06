@@ -19,7 +19,7 @@ instance Attr Iframe_ Srcdoc (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "srcdoc", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "srcdoc", value: prop' value })
 instance Attr Iframe_ Srcdoc (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Srcdoc (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Srcdoc (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "srcdoc", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "srcdoc", value: prop' value })
 instance Attr Iframe_ Srcdoc  String  where
@@ -30,7 +30,7 @@ instance Attr Iframe_ Srcdoc (Event.Event  String ) where
     \value -> { key: "srcdoc", value: prop' value }
 
 instance Attr Iframe_ Srcdoc (ST.ST Global.Global  String ) where
-  attr Srcdoc stValue = unsafeAttribute $ This $ stValue <#>
+  attr Srcdoc iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "srcdoc", value: prop' value }
 
 instance Attr everything Srcdoc (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Srcdoc (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "srcdoc", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "srcdoc", value: unset' })
 instance Attr everything Srcdoc (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Srcdoc (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Srcdoc (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "srcdoc", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "srcdoc", value: unset' })
 instance Attr everything Srcdoc  Unit  where
-  attr Srcdoc _ = unsafeAttribute $ This $ pure $ { key: "srcdoc", value: unset' }
+  attr Srcdoc _ = unsafeAttribute $ This $ { key: "srcdoc", value: unset' }
 instance Attr everything Srcdoc (Event.Event  Unit ) where
   attr Srcdoc eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "srcdoc", value: unset' }
 
 instance Attr everything Srcdoc (ST.ST Global.Global  Unit ) where
-  attr Srcdoc stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Srcdoc iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "srcdoc", value: unset' }

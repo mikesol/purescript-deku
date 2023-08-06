@@ -21,7 +21,7 @@ instance Attr Animate_ From (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr Animate_ From (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "from", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr Animate_ From  String  where
@@ -32,7 +32,7 @@ instance Attr Animate_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr Animate_ From (ST.ST Global.Global  String ) where
-  attr From stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr From iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "from", value: prop' value }
 
 instance Attr AnimateMotion_ From (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr AnimateMotion_ From (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateMotion_ From (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "from", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateMotion_ From  String  where
@@ -51,7 +51,7 @@ instance Attr AnimateMotion_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr AnimateMotion_ From (ST.ST Global.Global  String ) where
-  attr From stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr From iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "from", value: prop' value }
 
 instance Attr AnimateTransform_ From (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr AnimateTransform_ From (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "from", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateTransform_ From (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "from", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "from", value: prop' value })
 instance Attr AnimateTransform_ From  String  where
@@ -70,21 +70,21 @@ instance Attr AnimateTransform_ From (Event.Event  String ) where
     { key: "from", value: prop' value }
 
 instance Attr AnimateTransform_ From (ST.ST Global.Global  String ) where
-  attr From stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr From iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "from", value: prop' value }
 
 instance Attr everything From (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr From bothValues = unsafeAttribute $ Both (pure  { key: "from", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "from", value: unset' })
 instance Attr everything From (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "from", value: unset' })
+  attr From (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "from", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "from", value: unset' })
 instance Attr everything From  Unit  where
-  attr From _ = unsafeAttribute $ This $ pure $ { key: "from", value: unset' }
+  attr From _ = unsafeAttribute $ This $ { key: "from", value: unset' }
 instance Attr everything From (Event.Event  Unit ) where
   attr From eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "from", value: unset' }
 
 instance Attr everything From (ST.ST Global.Global  Unit ) where
-  attr From stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr From iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "from", value: unset' }

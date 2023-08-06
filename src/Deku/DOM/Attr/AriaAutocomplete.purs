@@ -37,7 +37,7 @@ instance Attr Circle_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Circle_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -50,7 +50,7 @@ instance Attr Circle_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Circle_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Ellipse_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -60,7 +60,7 @@ instance Attr Ellipse_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Ellipse_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -73,7 +73,7 @@ instance Attr Ellipse_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Ellipse_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr ForeignObject_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -83,7 +83,7 @@ instance Attr ForeignObject_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  St
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr ForeignObject_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -96,7 +96,7 @@ instance Attr ForeignObject_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr ForeignObject_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr G_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -106,7 +106,7 @@ instance Attr G_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr G_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -119,7 +119,7 @@ instance Attr G_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr G_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Line_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -129,7 +129,7 @@ instance Attr Line_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Line_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -142,7 +142,7 @@ instance Attr Line_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Line_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Marker_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -152,7 +152,7 @@ instance Attr Marker_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Marker_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -165,7 +165,7 @@ instance Attr Marker_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Marker_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Path_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -175,7 +175,7 @@ instance Attr Path_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Path_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -188,7 +188,7 @@ instance Attr Path_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Path_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polygon_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -198,7 +198,7 @@ instance Attr Polygon_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Polygon_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -211,7 +211,7 @@ instance Attr Polygon_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polygon_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polyline_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -221,7 +221,7 @@ instance Attr Polyline_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Polyline_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -234,7 +234,7 @@ instance Attr Polyline_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Polyline_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Rect_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -244,7 +244,7 @@ instance Attr Rect_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Rect_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -257,7 +257,7 @@ instance Attr Rect_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Rect_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Svg_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -267,7 +267,7 @@ instance Attr Svg_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Svg_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -280,7 +280,7 @@ instance Attr Svg_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Svg_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Symbol_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -290,7 +290,7 @@ instance Attr Symbol_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Symbol_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -303,7 +303,7 @@ instance Attr Symbol_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Symbol_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Text_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -313,7 +313,7 @@ instance Attr Text_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Text_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -326,7 +326,7 @@ instance Attr Text_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Text_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr TextPath_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -336,7 +336,7 @@ instance Attr TextPath_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr TextPath_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -349,7 +349,7 @@ instance Attr TextPath_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr TextPath_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Tspan_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -359,7 +359,7 @@ instance Attr Tspan_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Tspan_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -372,7 +372,7 @@ instance Attr Tspan_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Tspan_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Use_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -382,7 +382,7 @@ instance Attr Use_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr Use_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -395,7 +395,7 @@ instance Attr Use_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr Use_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr View_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) where
@@ -405,7 +405,7 @@ instance Attr View_ AriaAutocomplete (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "aria-autocomplete", value: prop' value }
     )
 instance Attr View_ AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-autocomplete", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-autocomplete", value: prop' value }
@@ -418,7 +418,7 @@ instance Attr View_ AriaAutocomplete (Event.Event  String ) where
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr View_ AriaAutocomplete (ST.ST Global.Global  String ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "aria-autocomplete", value: prop' value }
 
 instance Attr everything AriaAutocomplete (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -426,7 +426,7 @@ instance Attr everything AriaAutocomplete (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "aria-autocomplete", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-autocomplete", value: unset' })
 instance Attr everything AriaAutocomplete (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaAutocomplete (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-autocomplete", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-autocomplete", value: unset' })
 instance Attr everything AriaAutocomplete  Unit  where
@@ -437,5 +437,5 @@ instance Attr everything AriaAutocomplete (Event.Event  Unit ) where
     <#> \_ -> { key: "aria-autocomplete", value: unset' }
 
 instance Attr everything AriaAutocomplete (ST.ST Global.Global  Unit ) where
-  attr AriaAutocomplete stValue = unsafeAttribute $ This $ stValue
+  attr AriaAutocomplete iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "aria-autocomplete", value: unset' }

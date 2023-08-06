@@ -40,7 +40,7 @@ instance Attr AnimateTransform_ RequiredFeatures (NonEmpty.NonEmpty Event.Event 
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr AnimateTransform_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -53,7 +53,7 @@ instance Attr AnimateTransform_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr AnimateTransform_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Discard_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -63,7 +63,7 @@ instance Attr Discard_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Discard_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -76,7 +76,7 @@ instance Attr Discard_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Discard_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Ellipse_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -86,7 +86,7 @@ instance Attr Ellipse_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Ellipse_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -99,7 +99,7 @@ instance Attr Ellipse_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Ellipse_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr ForeignObject_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -109,7 +109,7 @@ instance Attr ForeignObject_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  St
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr ForeignObject_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -122,7 +122,7 @@ instance Attr ForeignObject_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr ForeignObject_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr G_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -132,7 +132,7 @@ instance Attr G_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr G_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -145,7 +145,7 @@ instance Attr G_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr G_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Image_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -155,7 +155,7 @@ instance Attr Image_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Image_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -168,7 +168,7 @@ instance Attr Image_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Image_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Line_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -178,7 +178,7 @@ instance Attr Line_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Line_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -191,7 +191,7 @@ instance Attr Line_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Line_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Marker_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -201,7 +201,7 @@ instance Attr Marker_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Marker_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -214,7 +214,7 @@ instance Attr Marker_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Marker_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Mask_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -224,7 +224,7 @@ instance Attr Mask_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Mask_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -237,7 +237,7 @@ instance Attr Mask_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Mask_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Path_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -247,7 +247,7 @@ instance Attr Path_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Path_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -260,7 +260,7 @@ instance Attr Path_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Path_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Pattern_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -270,7 +270,7 @@ instance Attr Pattern_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Pattern_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -283,7 +283,7 @@ instance Attr Pattern_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Pattern_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polygon_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -293,7 +293,7 @@ instance Attr Polygon_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String )
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Polygon_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -306,7 +306,7 @@ instance Attr Polygon_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polygon_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polyline_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -316,7 +316,7 @@ instance Attr Polyline_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String 
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Polyline_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -329,7 +329,7 @@ instance Attr Polyline_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Polyline_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Rect_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -339,7 +339,7 @@ instance Attr Rect_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Rect_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -352,7 +352,7 @@ instance Attr Rect_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Rect_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Svg_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -362,7 +362,7 @@ instance Attr Svg_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Svg_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -375,7 +375,7 @@ instance Attr Svg_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Svg_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Switch_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -385,7 +385,7 @@ instance Attr Switch_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Switch_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -398,7 +398,7 @@ instance Attr Switch_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Switch_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Text_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -408,7 +408,7 @@ instance Attr Text_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Text_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -421,7 +421,7 @@ instance Attr Text_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Text_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr TextPath_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -431,7 +431,7 @@ instance Attr TextPath_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String 
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr TextPath_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -444,7 +444,7 @@ instance Attr TextPath_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr TextPath_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Tspan_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -454,7 +454,7 @@ instance Attr Tspan_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Tspan_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -467,7 +467,7 @@ instance Attr Tspan_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Tspan_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Use_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) where
@@ -477,7 +477,7 @@ instance Attr Use_ RequiredFeatures (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "requiredFeatures", value: prop' value }
     )
 instance Attr Use_ RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "requiredFeatures", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "requiredFeatures", value: prop' value }
@@ -490,7 +490,7 @@ instance Attr Use_ RequiredFeatures (Event.Event  String ) where
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr Use_ RequiredFeatures (ST.ST Global.Global  String ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "requiredFeatures", value: prop' value }
 
 instance Attr everything RequiredFeatures (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -498,7 +498,7 @@ instance Attr everything RequiredFeatures (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "requiredFeatures", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "requiredFeatures", value: unset' })
 instance Attr everything RequiredFeatures (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr RequiredFeatures (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "requiredFeatures", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "requiredFeatures", value: unset' })
 instance Attr everything RequiredFeatures  Unit  where
@@ -509,5 +509,5 @@ instance Attr everything RequiredFeatures (Event.Event  Unit ) where
     <#> \_ -> { key: "requiredFeatures", value: unset' }
 
 instance Attr everything RequiredFeatures (ST.ST Global.Global  Unit ) where
-  attr RequiredFeatures stValue = unsafeAttribute $ This $ stValue
+  attr RequiredFeatures iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "requiredFeatures", value: unset' }

@@ -22,17 +22,17 @@ instance Attr FeDropShadow_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeDropShadow_ Dx (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dx", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeDropShadow_ Dx  String  where
-  attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
+  attr Dx value = unsafeAttribute $ This $ { key: "dx", value: prop' value }
 instance Attr FeDropShadow_ Dx (Event.Event  String ) where
   attr Dx eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dx", value: prop' value }
 
 instance Attr FeDropShadow_ Dx (ST.ST Global.Global  String ) where
-  attr Dx stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Dx iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "dx", value: prop' value }
 
 instance Attr FeOffset_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,17 +40,17 @@ instance Attr FeOffset_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeOffset_ Dx (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dx", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr FeOffset_ Dx  String  where
-  attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
+  attr Dx value = unsafeAttribute $ This $ { key: "dx", value: prop' value }
 instance Attr FeOffset_ Dx (Event.Event  String ) where
   attr Dx eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dx", value: prop' value }
 
 instance Attr FeOffset_ Dx (ST.ST Global.Global  String ) where
-  attr Dx stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Dx iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "dx", value: prop' value }
 
 instance Attr Text_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
@@ -58,17 +58,17 @@ instance Attr Text_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Text_ Dx (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dx", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Text_ Dx  String  where
-  attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
+  attr Dx value = unsafeAttribute $ This $ { key: "dx", value: prop' value }
 instance Attr Text_ Dx (Event.Event  String ) where
   attr Dx eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dx", value: prop' value }
 
 instance Attr Text_ Dx (ST.ST Global.Global  String ) where
-  attr Dx stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Dx iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "dx", value: prop' value }
 
 instance Attr Tspan_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
@@ -76,31 +76,31 @@ instance Attr Tspan_ Dx (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "dx", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Tspan_ Dx (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "dx", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "dx", value: prop' value })
 instance Attr Tspan_ Dx  String  where
-  attr Dx value = unsafeAttribute $ This $ pure $ { key: "dx", value: prop' value }
+  attr Dx value = unsafeAttribute $ This $ { key: "dx", value: prop' value }
 instance Attr Tspan_ Dx (Event.Event  String ) where
   attr Dx eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
     { key: "dx", value: prop' value }
 
 instance Attr Tspan_ Dx (ST.ST Global.Global  String ) where
-  attr Dx stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Dx iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "dx", value: prop' value }
 
 instance Attr everything Dx (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Dx bothValues = unsafeAttribute $ Both (pure  { key: "dx", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "dx", value: unset' })
 instance Attr everything Dx (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "dx", value: unset' })
+  attr Dx (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "dx", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "dx", value: unset' })
 instance Attr everything Dx  Unit  where
-  attr Dx _ = unsafeAttribute $ This $ pure $ { key: "dx", value: unset' }
+  attr Dx _ = unsafeAttribute $ This $ { key: "dx", value: unset' }
 instance Attr everything Dx (Event.Event  Unit ) where
   attr Dx eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "dx", value: unset' }
 
 instance Attr everything Dx (ST.ST Global.Global  Unit ) where
-  attr Dx stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Dx iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "dx", value: unset' }

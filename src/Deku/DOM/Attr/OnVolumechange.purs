@@ -18,7 +18,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "volumechange", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "volumechange", value: cb' value })
 instance Attr anything OnVolumechange (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "volumechange", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "volumechange", value: cb' value })
 instance Attr anything OnVolumechange  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnVolumechange (Event.Event  Cb ) where
     \value -> { key: "volumechange", value: cb' value }
 
 instance Attr anything OnVolumechange (ST.ST Global.Global  Cb ) where
-  attr OnVolumechange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnVolumechange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "volumechange", value: cb' value }
 
 instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Un
         { key: "volumechange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnVolumechange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "volumechange", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "volumechange", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnVolumechange (Event.Event  (Effect Unit) ) where
     \value -> { key: "volumechange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnVolumechange (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnVolumechange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnVolumechange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "volumechange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnVolumechange (NonEmpty.NonEmpty Event.Event  (Effect Bo
         { key: "volumechange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnVolumechange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "volumechange", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "volumechange", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnVolumechange (Event.Event  (Effect Boolean) ) where
     \value -> { key: "volumechange", value: cb' (Cb (const value)) }
 
 instance Attr anything OnVolumechange (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnVolumechange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnVolumechange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "volumechange", value: cb' (Cb (const value)) }
 
 instance Attr everything OnVolumechange (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnVolumechange (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "volumechange", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "volumechange", value: unset' })
 instance Attr everything OnVolumechange (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnVolumechange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "volumechange", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "volumechange", value: unset' })
 instance Attr everything OnVolumechange  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnVolumechange (Event.Event  Unit ) where
     \_ -> { key: "volumechange", value: unset' }
 
 instance Attr everything OnVolumechange (ST.ST Global.Global  Unit ) where
-  attr OnVolumechange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnVolumechange iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "volumechange", value: unset' }

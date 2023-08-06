@@ -23,7 +23,7 @@ instance Attr AnimateTransform_ XlinkType (NonEmpty.NonEmpty Event.Event  String
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr AnimateTransform_ XlinkType (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xlink:type", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr AnimateTransform_ XlinkType  String  where
@@ -34,7 +34,7 @@ instance Attr AnimateTransform_ XlinkType (Event.Event  String ) where
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr AnimateTransform_ XlinkType (ST.ST Global.Global  String ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr FeImage_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
@@ -42,7 +42,7 @@ instance Attr FeImage_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr FeImage_ XlinkType (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xlink:type", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr FeImage_ XlinkType  String  where
@@ -53,7 +53,7 @@ instance Attr FeImage_ XlinkType (Event.Event  String ) where
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr FeImage_ XlinkType (ST.ST Global.Global  String ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Filter_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
@@ -61,7 +61,7 @@ instance Attr Filter_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Filter_ XlinkType (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xlink:type", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Filter_ XlinkType  String  where
@@ -72,7 +72,7 @@ instance Attr Filter_ XlinkType (Event.Event  String ) where
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Filter_ XlinkType (ST.ST Global.Global  String ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Image_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
@@ -80,7 +80,7 @@ instance Attr Image_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Image_ XlinkType (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xlink:type", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Image_ XlinkType  String  where
@@ -91,7 +91,7 @@ instance Attr Image_ XlinkType (Event.Event  String ) where
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Image_ XlinkType (ST.ST Global.Global  String ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Mpath_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
@@ -99,7 +99,7 @@ instance Attr Mpath_ XlinkType (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "xlink:type", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Mpath_ XlinkType (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "xlink:type", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "xlink:type", value: prop' value })
 instance Attr Mpath_ XlinkType  String  where
@@ -110,7 +110,7 @@ instance Attr Mpath_ XlinkType (Event.Event  String ) where
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr Mpath_ XlinkType (ST.ST Global.Global  String ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "xlink:type", value: prop' value }
 
 instance Attr everything XlinkType (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -118,7 +118,7 @@ instance Attr everything XlinkType (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "xlink:type", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "xlink:type", value: unset' })
 instance Attr everything XlinkType (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr XlinkType (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "xlink:type", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "xlink:type", value: unset' })
 instance Attr everything XlinkType  Unit  where
@@ -129,5 +129,5 @@ instance Attr everything XlinkType (Event.Event  Unit ) where
     \_ -> { key: "xlink:type", value: unset' }
 
 instance Attr everything XlinkType (ST.ST Global.Global  Unit ) where
-  attr XlinkType stValue = unsafeAttribute $ This $ stValue <#>
+  attr XlinkType iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "xlink:type", value: unset' }

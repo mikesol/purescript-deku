@@ -20,7 +20,7 @@ instance Attr Td_ Colspan (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "colspan", value: prop' value })
 instance Attr Td_ Colspan (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "colspan", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "colspan", value: prop' value })
 instance Attr Td_ Colspan  String  where
@@ -31,7 +31,7 @@ instance Attr Td_ Colspan (Event.Event  String ) where
     \value -> { key: "colspan", value: prop' value }
 
 instance Attr Td_ Colspan (ST.ST Global.Global  String ) where
-  attr Colspan stValue = unsafeAttribute $ This $ stValue <#>
+  attr Colspan iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "colspan", value: prop' value }
 
 instance Attr Th_ Colspan (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Th_ Colspan (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "colspan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "colspan", value: prop' value })
 instance Attr Th_ Colspan (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "colspan", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "colspan", value: prop' value })
 instance Attr Th_ Colspan  String  where
@@ -50,7 +50,7 @@ instance Attr Th_ Colspan (Event.Event  String ) where
     \value -> { key: "colspan", value: prop' value }
 
 instance Attr Th_ Colspan (ST.ST Global.Global  String ) where
-  attr Colspan stValue = unsafeAttribute $ This $ stValue <#>
+  attr Colspan iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "colspan", value: prop' value }
 
 instance Attr everything Colspan (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Colspan (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "colspan", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "colspan", value: unset' })
 instance Attr everything Colspan (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Colspan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "colspan", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "colspan", value: unset' })
 instance Attr everything Colspan  Unit  where
-  attr Colspan _ = unsafeAttribute $ This $ pure $ { key: "colspan", value: unset' }
+  attr Colspan _ = unsafeAttribute $ This $ { key: "colspan", value: unset' }
 instance Attr everything Colspan (Event.Event  Unit ) where
   attr Colspan eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "colspan", value: unset' }
 
 instance Attr everything Colspan (ST.ST Global.Global  Unit ) where
-  attr Colspan stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Colspan iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "colspan", value: unset' }

@@ -18,7 +18,7 @@ instance Attr anything OnCanplay (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "canplay", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "canplay", value: cb' value })
 instance Attr anything OnCanplay (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "canplay", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "canplay", value: cb' value })
 instance Attr anything OnCanplay  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnCanplay (Event.Event  Cb ) where
     \value -> { key: "canplay", value: cb' value }
 
 instance Attr anything OnCanplay (ST.ST Global.Global  Cb ) where
-  attr OnCanplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCanplay iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "canplay", value: cb' value }
 
 instance Attr anything OnCanplay (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnCanplay (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "canplay", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnCanplay (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "canplay", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "canplay", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnCanplay (Event.Event  (Effect Unit) ) where
     \value -> { key: "canplay", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCanplay (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnCanplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCanplay iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "canplay", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnCanplay (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnCanplay (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "canplay", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnCanplay (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "canplay", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "canplay", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnCanplay (Event.Event  (Effect Boolean) ) where
     \value -> { key: "canplay", value: cb' (Cb (const value)) }
 
 instance Attr anything OnCanplay (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnCanplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCanplay iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "canplay", value: cb' (Cb (const value)) }
 
 instance Attr everything OnCanplay (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnCanplay (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "canplay", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "canplay", value: unset' })
 instance Attr everything OnCanplay (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnCanplay (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "canplay", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "canplay", value: unset' })
 instance Attr everything OnCanplay  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnCanplay (Event.Event  Unit ) where
     \_ -> { key: "canplay", value: unset' }
 
 instance Attr everything OnCanplay (ST.ST Global.Global  Unit ) where
-  attr OnCanplay stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnCanplay iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "canplay", value: unset' }

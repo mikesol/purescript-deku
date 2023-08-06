@@ -19,7 +19,7 @@ instance Attr FeConvolveMatrix_ KernelMatrix (NonEmpty.NonEmpty Event.Event  Str
     { key: "kernelMatrix", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "kernelMatrix", value: prop' value })
 instance Attr FeConvolveMatrix_ KernelMatrix (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr KernelMatrix (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr KernelMatrix (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "kernelMatrix", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "kernelMatrix", value: prop' value })
 instance Attr FeConvolveMatrix_ KernelMatrix  String  where
@@ -30,7 +30,7 @@ instance Attr FeConvolveMatrix_ KernelMatrix (Event.Event  String ) where
     \value -> { key: "kernelMatrix", value: prop' value }
 
 instance Attr FeConvolveMatrix_ KernelMatrix (ST.ST Global.Global  String ) where
-  attr KernelMatrix stValue = unsafeAttribute $ This $ stValue <#>
+  attr KernelMatrix iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "kernelMatrix", value: prop' value }
 
 instance Attr everything KernelMatrix (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything KernelMatrix (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "kernelMatrix", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "kernelMatrix", value: unset' })
 instance Attr everything KernelMatrix (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr KernelMatrix (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr KernelMatrix (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "kernelMatrix", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "kernelMatrix", value: unset' })
 instance Attr everything KernelMatrix  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything KernelMatrix (Event.Event  Unit ) where
     \_ -> { key: "kernelMatrix", value: unset' }
 
 instance Attr everything KernelMatrix (ST.ST Global.Global  Unit ) where
-  attr KernelMatrix stValue = unsafeAttribute $ This $ stValue <#>
+  attr KernelMatrix iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "kernelMatrix", value: unset' }

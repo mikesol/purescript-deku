@@ -19,7 +19,7 @@ instance Attr ClipPath_ ClipPathUnits (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "clipPathUnits", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "clipPathUnits", value: prop' value })
 instance Attr ClipPath_ ClipPathUnits (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPathUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ClipPathUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "clipPathUnits", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "clipPathUnits", value: prop' value })
 instance Attr ClipPath_ ClipPathUnits  String  where
@@ -30,7 +30,7 @@ instance Attr ClipPath_ ClipPathUnits (Event.Event  String ) where
     \value -> { key: "clipPathUnits", value: prop' value }
 
 instance Attr ClipPath_ ClipPathUnits (ST.ST Global.Global  String ) where
-  attr ClipPathUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr ClipPathUnits iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "clipPathUnits", value: prop' value }
 
 instance Attr everything ClipPathUnits (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything ClipPathUnits (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "clipPathUnits", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "clipPathUnits", value: unset' })
 instance Attr everything ClipPathUnits (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ClipPathUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ClipPathUnits (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "clipPathUnits", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "clipPathUnits", value: unset' })
 instance Attr everything ClipPathUnits  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything ClipPathUnits (Event.Event  Unit ) where
     \_ -> { key: "clipPathUnits", value: unset' }
 
 instance Attr everything ClipPathUnits (ST.ST Global.Global  Unit ) where
-  attr ClipPathUnits stValue = unsafeAttribute $ This $ stValue <#>
+  attr ClipPathUnits iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "clipPathUnits", value: unset' }

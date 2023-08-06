@@ -19,7 +19,7 @@ instance Attr Meta_ HttpEquiv (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "http-equiv", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "http-equiv", value: prop' value })
 instance Attr Meta_ HttpEquiv (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr HttpEquiv (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr HttpEquiv (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "http-equiv", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "http-equiv", value: prop' value })
 instance Attr Meta_ HttpEquiv  String  where
@@ -30,7 +30,7 @@ instance Attr Meta_ HttpEquiv (Event.Event  String ) where
     \value -> { key: "http-equiv", value: prop' value }
 
 instance Attr Meta_ HttpEquiv (ST.ST Global.Global  String ) where
-  attr HttpEquiv stValue = unsafeAttribute $ This $ stValue <#>
+  attr HttpEquiv iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "http-equiv", value: prop' value }
 
 instance Attr everything HttpEquiv (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything HttpEquiv (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "http-equiv", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "http-equiv", value: unset' })
 instance Attr everything HttpEquiv (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr HttpEquiv (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr HttpEquiv (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "http-equiv", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "http-equiv", value: unset' })
 instance Attr everything HttpEquiv  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything HttpEquiv (Event.Event  Unit ) where
     \_ -> { key: "http-equiv", value: unset' }
 
 instance Attr everything HttpEquiv (ST.ST Global.Global  Unit ) where
-  attr HttpEquiv stValue = unsafeAttribute $ This $ stValue <#>
+  attr HttpEquiv iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "http-equiv", value: unset' }

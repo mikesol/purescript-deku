@@ -21,7 +21,7 @@ instance Attr Pattern_ PatternTransform (NonEmpty.NonEmpty Event.Event  String )
         { key: "patternTransform", value: prop' value }
     )
 instance Attr Pattern_ PatternTransform (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr PatternTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr PatternTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "patternTransform", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "patternTransform", value: prop' value }
@@ -34,7 +34,7 @@ instance Attr Pattern_ PatternTransform (Event.Event  String ) where
     <#> \value -> { key: "patternTransform", value: prop' value }
 
 instance Attr Pattern_ PatternTransform (ST.ST Global.Global  String ) where
-  attr PatternTransform stValue = unsafeAttribute $ This $ stValue
+  attr PatternTransform iValue = unsafeAttribute $ This $ iValue
     <#> \value -> { key: "patternTransform", value: prop' value }
 
 instance Attr everything PatternTransform (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -42,7 +42,7 @@ instance Attr everything PatternTransform (NonEmpty.NonEmpty Event.Event  Unit )
     { key: "patternTransform", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "patternTransform", value: unset' })
 instance Attr everything PatternTransform (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr PatternTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr PatternTransform (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "patternTransform", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "patternTransform", value: unset' })
 instance Attr everything PatternTransform  Unit  where
@@ -53,5 +53,5 @@ instance Attr everything PatternTransform (Event.Event  Unit ) where
     <#> \_ -> { key: "patternTransform", value: unset' }
 
 instance Attr everything PatternTransform (ST.ST Global.Global  Unit ) where
-  attr PatternTransform stValue = unsafeAttribute $ This $ stValue
+  attr PatternTransform iValue = unsafeAttribute $ This $ iValue
     <#> \_ -> { key: "patternTransform", value: unset' }

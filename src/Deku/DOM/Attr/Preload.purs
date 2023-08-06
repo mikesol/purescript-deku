@@ -20,7 +20,7 @@ instance Attr Audio_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "preload", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Audio_ Preload (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "preload", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Audio_ Preload  String  where
@@ -31,7 +31,7 @@ instance Attr Audio_ Preload (Event.Event  String ) where
     \value -> { key: "preload", value: prop' value }
 
 instance Attr Audio_ Preload (ST.ST Global.Global  String ) where
-  attr Preload stValue = unsafeAttribute $ This $ stValue <#>
+  attr Preload iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "preload", value: prop' value }
 
 instance Attr Video_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Video_ Preload (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "preload", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Video_ Preload (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "preload", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "preload", value: prop' value })
 instance Attr Video_ Preload  String  where
@@ -50,7 +50,7 @@ instance Attr Video_ Preload (Event.Event  String ) where
     \value -> { key: "preload", value: prop' value }
 
 instance Attr Video_ Preload (ST.ST Global.Global  String ) where
-  attr Preload stValue = unsafeAttribute $ This $ stValue <#>
+  attr Preload iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "preload", value: prop' value }
 
 instance Attr everything Preload (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Preload (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "preload", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "preload", value: unset' })
 instance Attr everything Preload (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Preload (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "preload", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "preload", value: unset' })
 instance Attr everything Preload  Unit  where
-  attr Preload _ = unsafeAttribute $ This $ pure $ { key: "preload", value: unset' }
+  attr Preload _ = unsafeAttribute $ This $ { key: "preload", value: unset' }
 instance Attr everything Preload (Event.Event  Unit ) where
   attr Preload eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "preload", value: unset' }
 
 instance Attr everything Preload (ST.ST Global.Global  Unit ) where
-  attr Preload stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Preload iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "preload", value: unset' }

@@ -19,7 +19,7 @@ instance Attr Form_ AcceptCharset (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accept-charset", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept-charset", value: prop' value })
 instance Attr Form_ AcceptCharset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AcceptCharset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AcceptCharset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accept-charset", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accept-charset", value: prop' value })
 instance Attr Form_ AcceptCharset  String  where
@@ -30,7 +30,7 @@ instance Attr Form_ AcceptCharset (Event.Event  String ) where
     \value -> { key: "accept-charset", value: prop' value }
 
 instance Attr Form_ AcceptCharset (ST.ST Global.Global  String ) where
-  attr AcceptCharset stValue = unsafeAttribute $ This $ stValue <#>
+  attr AcceptCharset iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accept-charset", value: prop' value }
 
 instance Attr everything AcceptCharset (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything AcceptCharset (NonEmpty.NonEmpty Event.Event  Unit ) wh
     { key: "accept-charset", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accept-charset", value: unset' })
 instance Attr everything AcceptCharset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AcceptCharset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AcceptCharset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "accept-charset", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "accept-charset", value: unset' })
 instance Attr everything AcceptCharset  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything AcceptCharset (Event.Event  Unit ) where
     \_ -> { key: "accept-charset", value: unset' }
 
 instance Attr everything AcceptCharset (ST.ST Global.Global  Unit ) where
-  attr AcceptCharset stValue = unsafeAttribute $ This $ stValue <#>
+  attr AcceptCharset iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "accept-charset", value: unset' }

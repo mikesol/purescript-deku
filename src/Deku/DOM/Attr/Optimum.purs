@@ -19,7 +19,7 @@ instance Attr Meter_ Optimum (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "optimum", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "optimum", value: prop' value })
 instance Attr Meter_ Optimum (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Optimum (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Optimum (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "optimum", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "optimum", value: prop' value })
 instance Attr Meter_ Optimum  String  where
@@ -30,7 +30,7 @@ instance Attr Meter_ Optimum (Event.Event  String ) where
     \value -> { key: "optimum", value: prop' value }
 
 instance Attr Meter_ Optimum (ST.ST Global.Global  String ) where
-  attr Optimum stValue = unsafeAttribute $ This $ stValue <#>
+  attr Optimum iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "optimum", value: prop' value }
 
 instance Attr everything Optimum (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Optimum (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "optimum", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "optimum", value: unset' })
 instance Attr everything Optimum (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Optimum (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Optimum (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "optimum", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "optimum", value: unset' })
 instance Attr everything Optimum  Unit  where
-  attr Optimum _ = unsafeAttribute $ This $ pure $ { key: "optimum", value: unset' }
+  attr Optimum _ = unsafeAttribute $ This $ { key: "optimum", value: unset' }
 instance Attr everything Optimum (Event.Event  Unit ) where
   attr Optimum eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "optimum", value: unset' }
 
 instance Attr everything Optimum (ST.ST Global.Global  Unit ) where
-  attr Optimum stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Optimum iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "optimum", value: unset' }

@@ -18,7 +18,7 @@ instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "drop", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "drop", value: cb' value })
 instance Attr anything OnDrop (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "drop", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "drop", value: cb' value })
 instance Attr anything OnDrop  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnDrop (Event.Event  Cb ) where
     \value -> { key: "drop", value: cb' value }
 
 instance Attr anything OnDrop (ST.ST Global.Global  Cb ) where
-  attr OnDrop stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDrop iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "drop", value: cb' value }
 
 instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) wh
         { key: "drop", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnDrop (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "drop", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnDrop (Event.Event  (Effect Unit) ) where
     \value -> { key: "drop", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDrop (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnDrop stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDrop iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "drop", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnDrop (NonEmpty.NonEmpty Event.Event  (Effect Boolean) )
         { key: "drop", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnDrop (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "drop", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "drop", value: cb' (Cb (const value)) }
@@ -75,21 +75,21 @@ instance Attr anything OnDrop (Event.Event  (Effect Boolean) ) where
     \value -> { key: "drop", value: cb' (Cb (const value)) }
 
 instance Attr anything OnDrop (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnDrop stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnDrop iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "drop", value: cb' (Cb (const value)) }
 
 instance Attr everything OnDrop (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr OnDrop bothValues = unsafeAttribute $ Both (pure  { key: "drop", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "drop", value: unset' })
 instance Attr everything OnDrop (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "drop", value: unset' })
+  attr OnDrop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "drop", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "drop", value: unset' })
 instance Attr everything OnDrop  Unit  where
-  attr OnDrop _ = unsafeAttribute $ This $ pure $ { key: "drop", value: unset' }
+  attr OnDrop _ = unsafeAttribute $ This $ { key: "drop", value: unset' }
 instance Attr everything OnDrop (Event.Event  Unit ) where
   attr OnDrop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "drop", value: unset' }
 
 instance Attr everything OnDrop (ST.ST Global.Global  Unit ) where
-  attr OnDrop stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnDrop iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "drop", value: unset' }

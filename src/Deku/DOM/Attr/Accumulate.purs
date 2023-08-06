@@ -21,7 +21,7 @@ instance Attr Animate_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr Animate_ Accumulate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accumulate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr Animate_ Accumulate  String  where
@@ -32,7 +32,7 @@ instance Attr Animate_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr Animate_ Accumulate (ST.ST Global.Global  String ) where
-  attr Accumulate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accumulate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateMotion_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr AnimateMotion_ Accumulate (NonEmpty.NonEmpty Event.Event  String )
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateMotion_ Accumulate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accumulate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateMotion_ Accumulate  String  where
@@ -51,7 +51,7 @@ instance Attr AnimateMotion_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateMotion_ Accumulate (ST.ST Global.Global  String ) where
-  attr Accumulate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accumulate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateTransform_ Accumulate (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr AnimateTransform_ Accumulate (NonEmpty.NonEmpty Event.Event  Strin
     { key: "accumulate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateTransform_ Accumulate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accumulate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accumulate", value: prop' value })
 instance Attr AnimateTransform_ Accumulate  String  where
@@ -70,7 +70,7 @@ instance Attr AnimateTransform_ Accumulate (Event.Event  String ) where
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr AnimateTransform_ Accumulate (ST.ST Global.Global  String ) where
-  attr Accumulate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accumulate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accumulate", value: prop' value }
 
 instance Attr everything Accumulate (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything Accumulate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "accumulate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accumulate", value: unset' })
 instance Attr everything Accumulate (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Accumulate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "accumulate", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "accumulate", value: unset' })
 instance Attr everything Accumulate  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything Accumulate (Event.Event  Unit ) where
     \_ -> { key: "accumulate", value: unset' }
 
 instance Attr everything Accumulate (ST.ST Global.Global  Unit ) where
-  attr Accumulate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accumulate iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "accumulate", value: unset' }

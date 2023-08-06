@@ -18,7 +18,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "loadend", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "loadend", value: cb' value })
 instance Attr anything OnLoadend (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "loadend", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "loadend", value: cb' value })
 instance Attr anything OnLoadend  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnLoadend (Event.Event  Cb ) where
     \value -> { key: "loadend", value: cb' value }
 
 instance Attr anything OnLoadend (ST.ST Global.Global  Cb ) where
-  attr OnLoadend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnLoadend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "loadend", value: cb' value }
 
 instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Unit) )
         { key: "loadend", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLoadend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "loadend", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "loadend", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnLoadend (Event.Event  (Effect Unit) ) where
     \value -> { key: "loadend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadend (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnLoadend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnLoadend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "loadend", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnLoadend (NonEmpty.NonEmpty Event.Event  (Effect Boolean
         { key: "loadend", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLoadend (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "loadend", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "loadend", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnLoadend (Event.Event  (Effect Boolean) ) where
     \value -> { key: "loadend", value: cb' (Cb (const value)) }
 
 instance Attr anything OnLoadend (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnLoadend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnLoadend iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "loadend", value: cb' (Cb (const value)) }
 
 instance Attr everything OnLoadend (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnLoadend (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "loadend", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "loadend", value: unset' })
 instance Attr everything OnLoadend (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnLoadend (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "loadend", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "loadend", value: unset' })
 instance Attr everything OnLoadend  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnLoadend (Event.Event  Unit ) where
     \_ -> { key: "loadend", value: unset' }
 
 instance Attr everything OnLoadend (ST.ST Global.Global  Unit ) where
-  attr OnLoadend stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnLoadend iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "loadend", value: unset' }

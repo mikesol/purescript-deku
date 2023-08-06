@@ -19,7 +19,7 @@ instance Attr TextPath_ Spacing (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "spacing", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "spacing", value: prop' value })
 instance Attr TextPath_ Spacing (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Spacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Spacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "spacing", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "spacing", value: prop' value })
 instance Attr TextPath_ Spacing  String  where
@@ -30,7 +30,7 @@ instance Attr TextPath_ Spacing (Event.Event  String ) where
     \value -> { key: "spacing", value: prop' value }
 
 instance Attr TextPath_ Spacing (ST.ST Global.Global  String ) where
-  attr Spacing stValue = unsafeAttribute $ This $ stValue <#>
+  attr Spacing iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "spacing", value: prop' value }
 
 instance Attr everything Spacing (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Spacing (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "spacing", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "spacing", value: unset' })
 instance Attr everything Spacing (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Spacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Spacing (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "spacing", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "spacing", value: unset' })
 instance Attr everything Spacing  Unit  where
-  attr Spacing _ = unsafeAttribute $ This $ pure $ { key: "spacing", value: unset' }
+  attr Spacing _ = unsafeAttribute $ This $ { key: "spacing", value: unset' }
 instance Attr everything Spacing (Event.Event  Unit ) where
   attr Spacing eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "spacing", value: unset' }
 
 instance Attr everything Spacing (ST.ST Global.Global  Unit ) where
-  attr Spacing stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Spacing iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "spacing", value: unset' }

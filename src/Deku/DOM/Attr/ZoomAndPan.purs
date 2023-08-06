@@ -19,7 +19,7 @@ instance Attr View_ ZoomAndPan (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "zoomAndPan", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "zoomAndPan", value: prop' value })
 instance Attr View_ ZoomAndPan (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ZoomAndPan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ZoomAndPan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "zoomAndPan", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "zoomAndPan", value: prop' value })
 instance Attr View_ ZoomAndPan  String  where
@@ -30,7 +30,7 @@ instance Attr View_ ZoomAndPan (Event.Event  String ) where
     \value -> { key: "zoomAndPan", value: prop' value }
 
 instance Attr View_ ZoomAndPan (ST.ST Global.Global  String ) where
-  attr ZoomAndPan stValue = unsafeAttribute $ This $ stValue <#>
+  attr ZoomAndPan iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "zoomAndPan", value: prop' value }
 
 instance Attr everything ZoomAndPan (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything ZoomAndPan (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "zoomAndPan", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "zoomAndPan", value: unset' })
 instance Attr everything ZoomAndPan (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ZoomAndPan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ZoomAndPan (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "zoomAndPan", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "zoomAndPan", value: unset' })
 instance Attr everything ZoomAndPan  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything ZoomAndPan (Event.Event  Unit ) where
     \_ -> { key: "zoomAndPan", value: unset' }
 
 instance Attr everything ZoomAndPan (ST.ST Global.Global  Unit ) where
-  attr ZoomAndPan stValue = unsafeAttribute $ This $ stValue <#>
+  attr ZoomAndPan iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "zoomAndPan", value: unset' }

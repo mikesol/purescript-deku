@@ -61,7 +61,7 @@ instance Attr Circle_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Circle_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -74,7 +74,7 @@ instance Attr Circle_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Circle_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ClipPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -84,7 +84,7 @@ instance Attr ClipPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr ClipPath_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -97,7 +97,7 @@ instance Attr ClipPath_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ClipPath_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Defs_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -107,7 +107,7 @@ instance Attr Defs_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Defs_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -120,7 +120,7 @@ instance Attr Defs_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Defs_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Ellipse_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -130,7 +130,7 @@ instance Attr Ellipse_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Ellipse_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -143,7 +143,7 @@ instance Attr Ellipse_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Ellipse_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeBlend_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -153,7 +153,7 @@ instance Attr FeBlend_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeBlend_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -166,7 +166,7 @@ instance Attr FeBlend_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeBlend_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -176,7 +176,7 @@ instance Attr FeColorMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Stri
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeColorMatrix_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -189,7 +189,7 @@ instance Attr FeColorMatrix_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeColorMatrix_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -199,7 +199,7 @@ instance Attr FeComponentTransfer_ ShapeRendering (NonEmpty.NonEmpty Event.Event
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeComponentTransfer_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -212,7 +212,7 @@ instance Attr FeComponentTransfer_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComponentTransfer_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComposite_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -222,7 +222,7 @@ instance Attr FeComposite_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeComposite_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -235,7 +235,7 @@ instance Attr FeComposite_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeComposite_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -245,7 +245,7 @@ instance Attr FeConvolveMatrix_ ShapeRendering (NonEmpty.NonEmpty Event.Event  S
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeConvolveMatrix_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -258,7 +258,7 @@ instance Attr FeConvolveMatrix_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeConvolveMatrix_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr FeDiffuseLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event  
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeDiffuseLighting_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -281,7 +281,7 @@ instance Attr FeDiffuseLighting_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDiffuseLighting_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -291,7 +291,7 @@ instance Attr FeDisplacementMap_ ShapeRendering (NonEmpty.NonEmpty Event.Event  
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeDisplacementMap_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -304,7 +304,7 @@ instance Attr FeDisplacementMap_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeDisplacementMap_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeFlood_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -314,7 +314,7 @@ instance Attr FeFlood_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeFlood_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -327,7 +327,7 @@ instance Attr FeFlood_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeFlood_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -337,7 +337,7 @@ instance Attr FeGaussianBlur_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Str
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeGaussianBlur_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -350,7 +350,7 @@ instance Attr FeGaussianBlur_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeGaussianBlur_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeImage_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -360,7 +360,7 @@ instance Attr FeImage_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeImage_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -373,7 +373,7 @@ instance Attr FeImage_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeImage_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMerge_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -383,7 +383,7 @@ instance Attr FeMerge_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeMerge_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -396,7 +396,7 @@ instance Attr FeMerge_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMerge_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr FeMorphology_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeMorphology_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -419,7 +419,7 @@ instance Attr FeMorphology_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeMorphology_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeOffset_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -429,7 +429,7 @@ instance Attr FeOffset_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeOffset_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -442,7 +442,7 @@ instance Attr FeOffset_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeOffset_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -452,7 +452,7 @@ instance Attr FeSpecularLighting_ ShapeRendering (NonEmpty.NonEmpty Event.Event 
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeSpecularLighting_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -465,7 +465,7 @@ instance Attr FeSpecularLighting_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeSpecularLighting_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTile_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -475,7 +475,7 @@ instance Attr FeTile_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeTile_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -488,7 +488,7 @@ instance Attr FeTile_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTile_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -498,7 +498,7 @@ instance Attr FeTurbulence_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Strin
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr FeTurbulence_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -511,7 +511,7 @@ instance Attr FeTurbulence_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr FeTurbulence_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Filter_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -521,7 +521,7 @@ instance Attr Filter_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Filter_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -534,7 +534,7 @@ instance Attr Filter_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Filter_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ForeignObject_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -544,7 +544,7 @@ instance Attr ForeignObject_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Stri
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr ForeignObject_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -557,7 +557,7 @@ instance Attr ForeignObject_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr ForeignObject_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr G_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -567,7 +567,7 @@ instance Attr G_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr G_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -580,7 +580,7 @@ instance Attr G_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr G_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Image_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -590,7 +590,7 @@ instance Attr Image_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Image_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -603,7 +603,7 @@ instance Attr Image_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Image_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Line_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -613,7 +613,7 @@ instance Attr Line_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Line_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -626,7 +626,7 @@ instance Attr Line_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Line_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr LinearGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -636,7 +636,7 @@ instance Attr LinearGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Str
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr LinearGradient_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -649,7 +649,7 @@ instance Attr LinearGradient_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr LinearGradient_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Marker_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -659,7 +659,7 @@ instance Attr Marker_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Marker_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -672,7 +672,7 @@ instance Attr Marker_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Marker_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Mask_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -682,7 +682,7 @@ instance Attr Mask_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Mask_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -695,7 +695,7 @@ instance Attr Mask_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Mask_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Path_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -705,7 +705,7 @@ instance Attr Path_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Path_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -718,7 +718,7 @@ instance Attr Path_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Path_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Pattern_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -728,7 +728,7 @@ instance Attr Pattern_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Pattern_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -741,7 +741,7 @@ instance Attr Pattern_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Pattern_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polygon_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -751,7 +751,7 @@ instance Attr Polygon_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Polygon_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -764,7 +764,7 @@ instance Attr Polygon_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polygon_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polyline_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -774,7 +774,7 @@ instance Attr Polyline_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Polyline_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -787,7 +787,7 @@ instance Attr Polyline_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Polyline_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr RadialGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -797,7 +797,7 @@ instance Attr RadialGradient_ ShapeRendering (NonEmpty.NonEmpty Event.Event  Str
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr RadialGradient_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -810,7 +810,7 @@ instance Attr RadialGradient_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr RadialGradient_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Rect_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -820,7 +820,7 @@ instance Attr Rect_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Rect_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -833,7 +833,7 @@ instance Attr Rect_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Rect_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Svg_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Svg_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Svg_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -856,7 +856,7 @@ instance Attr Svg_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Svg_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Switch_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -866,7 +866,7 @@ instance Attr Switch_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Switch_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -879,7 +879,7 @@ instance Attr Switch_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Switch_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Symbol_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -889,7 +889,7 @@ instance Attr Symbol_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wh
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Symbol_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -902,7 +902,7 @@ instance Attr Symbol_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Symbol_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Text_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -912,7 +912,7 @@ instance Attr Text_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) wher
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Text_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -925,7 +925,7 @@ instance Attr Text_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Text_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr TextPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -935,7 +935,7 @@ instance Attr TextPath_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) 
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr TextPath_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -948,7 +948,7 @@ instance Attr TextPath_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr TextPath_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Tspan_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -958,7 +958,7 @@ instance Attr Tspan_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) whe
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Tspan_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -971,7 +971,7 @@ instance Attr Tspan_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Tspan_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Use_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
@@ -981,7 +981,7 @@ instance Attr Use_ ShapeRendering (NonEmpty.NonEmpty Event.Event  String ) where
         { key: "shape-rendering", value: prop' value }
     )
 instance Attr Use_ ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "shape-rendering", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "shape-rendering", value: prop' value }
@@ -994,7 +994,7 @@ instance Attr Use_ ShapeRendering (Event.Event  String ) where
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr Use_ ShapeRendering (ST.ST Global.Global  String ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "shape-rendering", value: prop' value }
 
 instance Attr everything ShapeRendering (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -1002,7 +1002,7 @@ instance Attr everything ShapeRendering (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "shape-rendering", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "shape-rendering", value: unset' })
 instance Attr everything ShapeRendering (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr ShapeRendering (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "shape-rendering", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "shape-rendering", value: unset' })
 instance Attr everything ShapeRendering  Unit  where
@@ -1013,5 +1013,5 @@ instance Attr everything ShapeRendering (Event.Event  Unit ) where
     \_ -> { key: "shape-rendering", value: unset' }
 
 instance Attr everything ShapeRendering (ST.ST Global.Global  Unit ) where
-  attr ShapeRendering stValue = unsafeAttribute $ This $ stValue <#>
+  attr ShapeRendering iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "shape-rendering", value: unset' }

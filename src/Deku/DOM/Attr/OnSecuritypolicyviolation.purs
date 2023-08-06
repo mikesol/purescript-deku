@@ -20,7 +20,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         { key: "securitypolicyviolation", value: cb' value }
     )
 instance Attr anything OnSecuritypolicyviolation (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "securitypolicyviolation", value: cb' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "securitypolicyviolation", value: cb' value }
@@ -34,8 +34,8 @@ instance Attr anything OnSecuritypolicyviolation (Event.Event  Cb ) where
       { key: "securitypolicyviolation", value: cb' value }
 
 instance Attr anything OnSecuritypolicyviolation (ST.ST Global.Global  Cb ) where
-  attr OnSecuritypolicyviolation stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnSecuritypolicyviolation iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "securitypolicyviolation", value: cb' value }
 
 instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -49,7 +49,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         }
     )
 instance Attr anything OnSecuritypolicyviolation (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "securitypolicyviolation"
     , value: cb' (Cb (const ((value) $> true)))
     })
@@ -69,8 +69,8 @@ instance Attr anything OnSecuritypolicyviolation (Event.Event  (Effect Unit) ) w
       }
 
 instance Attr anything OnSecuritypolicyviolation (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSecuritypolicyviolation stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnSecuritypolicyviolation iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "securitypolicyviolation"
       , value: cb' (Cb (const (value $> true)))
       }
@@ -82,7 +82,7 @@ instance Attr anything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event 
         { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSecuritypolicyviolation (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "securitypolicyviolation", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
@@ -96,8 +96,8 @@ instance Attr anything OnSecuritypolicyviolation (Event.Event  (Effect Boolean) 
       { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSecuritypolicyviolation (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSecuritypolicyviolation stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnSecuritypolicyviolation iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "securitypolicyviolation", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -105,7 +105,7 @@ instance Attr everything OnSecuritypolicyviolation (NonEmpty.NonEmpty Event.Even
     { key: "securitypolicyviolation", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "securitypolicyviolation", value: unset' })
 instance Attr everything OnSecuritypolicyviolation (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSecuritypolicyviolation (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "securitypolicyviolation", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "securitypolicyviolation", value: unset' })
 instance Attr everything OnSecuritypolicyviolation  Unit  where
@@ -116,5 +116,5 @@ instance Attr everything OnSecuritypolicyviolation (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "securitypolicyviolation", value: unset' }
 
 instance Attr everything OnSecuritypolicyviolation (ST.ST Global.Global  Unit ) where
-  attr OnSecuritypolicyviolation stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "securitypolicyviolation", value: unset' }
+  attr OnSecuritypolicyviolation iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "securitypolicyviolation", value: unset' }

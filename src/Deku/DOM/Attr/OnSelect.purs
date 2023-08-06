@@ -18,7 +18,7 @@ instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "select", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "select", value: cb' value })
 instance Attr anything OnSelect (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "select", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "select", value: cb' value })
 instance Attr anything OnSelect  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnSelect (Event.Event  Cb ) where
     \value -> { key: "select", value: cb' value }
 
 instance Attr anything OnSelect (ST.ST Global.Global  Cb ) where
-  attr OnSelect stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSelect iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "select", value: cb' value }
 
 instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "select", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSelect (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "select", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "select", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnSelect (Event.Event  (Effect Unit) ) where
     \value -> { key: "select", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSelect (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSelect stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSelect iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "select", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnSelect (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "select", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSelect (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "select", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "select", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnSelect (Event.Event  (Effect Boolean) ) where
     \value -> { key: "select", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSelect (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSelect stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSelect iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "select", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSelect (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnSelect (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "select", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "select", value: unset' })
 instance Attr everything OnSelect (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSelect (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "select", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "select", value: unset' })
 instance Attr everything OnSelect  Unit  where
-  attr OnSelect _ = unsafeAttribute $ This $ pure $ { key: "select", value: unset' }
+  attr OnSelect _ = unsafeAttribute $ This $ { key: "select", value: unset' }
 instance Attr everything OnSelect (Event.Event  Unit ) where
   attr OnSelect eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "select", value: unset' }
 
 instance Attr everything OnSelect (ST.ST Global.Global  Unit ) where
-  attr OnSelect stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnSelect iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "select", value: unset' }

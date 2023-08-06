@@ -19,7 +19,7 @@ instance Attr Form_ Novalidate (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "novalidate", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "novalidate", value: prop' value })
 instance Attr Form_ Novalidate (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Novalidate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Novalidate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "novalidate", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "novalidate", value: prop' value })
 instance Attr Form_ Novalidate  String  where
@@ -30,7 +30,7 @@ instance Attr Form_ Novalidate (Event.Event  String ) where
     \value -> { key: "novalidate", value: prop' value }
 
 instance Attr Form_ Novalidate (ST.ST Global.Global  String ) where
-  attr Novalidate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Novalidate iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "novalidate", value: prop' value }
 
 instance Attr everything Novalidate (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Novalidate (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "novalidate", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "novalidate", value: unset' })
 instance Attr everything Novalidate (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Novalidate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Novalidate (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "novalidate", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "novalidate", value: unset' })
 instance Attr everything Novalidate  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Novalidate (Event.Event  Unit ) where
     \_ -> { key: "novalidate", value: unset' }
 
 instance Attr everything Novalidate (ST.ST Global.Global  Unit ) where
-  attr Novalidate stValue = unsafeAttribute $ This $ stValue <#>
+  attr Novalidate iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "novalidate", value: unset' }

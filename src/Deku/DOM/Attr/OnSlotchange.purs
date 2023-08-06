@@ -18,7 +18,7 @@ instance Attr anything OnSlotchange (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "slotchange", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "slotchange", value: cb' value })
 instance Attr anything OnSlotchange (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "slotchange", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "slotchange", value: cb' value })
 instance Attr anything OnSlotchange  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnSlotchange (Event.Event  Cb ) where
     \value -> { key: "slotchange", value: cb' value }
 
 instance Attr anything OnSlotchange (ST.ST Global.Global  Cb ) where
-  attr OnSlotchange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSlotchange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "slotchange", value: cb' value }
 
 instance Attr anything OnSlotchange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnSlotchange (NonEmpty.NonEmpty Event.Event  (Effect Unit
         { key: "slotchange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnSlotchange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "slotchange", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "slotchange", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnSlotchange (Event.Event  (Effect Unit) ) where
     \value -> { key: "slotchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSlotchange (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnSlotchange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSlotchange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "slotchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnSlotchange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnSlotchange (NonEmpty.NonEmpty Event.Event  (Effect Bool
         { key: "slotchange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnSlotchange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "slotchange", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "slotchange", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnSlotchange (Event.Event  (Effect Boolean) ) where
     \value -> { key: "slotchange", value: cb' (Cb (const value)) }
 
 instance Attr anything OnSlotchange (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnSlotchange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSlotchange iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "slotchange", value: cb' (Cb (const value)) }
 
 instance Attr everything OnSlotchange (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnSlotchange (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "slotchange", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "slotchange", value: unset' })
 instance Attr everything OnSlotchange (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnSlotchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "slotchange", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "slotchange", value: unset' })
 instance Attr everything OnSlotchange  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnSlotchange (Event.Event  Unit ) where
     \_ -> { key: "slotchange", value: unset' }
 
 instance Attr everything OnSlotchange (ST.ST Global.Global  Unit ) where
-  attr OnSlotchange stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnSlotchange iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "slotchange", value: unset' }

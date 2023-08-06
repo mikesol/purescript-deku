@@ -37,7 +37,7 @@ instance Attr Circle_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Circle_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -51,8 +51,8 @@ instance Attr Circle_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Circle_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Ellipse_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -62,7 +62,7 @@ instance Attr Ellipse_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Ellipse_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -76,8 +76,8 @@ instance Attr Ellipse_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Ellipse_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr ForeignObject_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -87,7 +87,7 @@ instance Attr ForeignObject_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr ForeignObject_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -101,8 +101,8 @@ instance Attr ForeignObject_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr ForeignObject_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr G_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -112,7 +112,7 @@ instance Attr G_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) w
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr G_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -126,8 +126,8 @@ instance Attr G_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr G_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Line_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -137,7 +137,7 @@ instance Attr Line_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Line_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -151,8 +151,8 @@ instance Attr Line_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Line_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Marker_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -162,7 +162,7 @@ instance Attr Marker_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Marker_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -176,8 +176,8 @@ instance Attr Marker_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Marker_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Path_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -187,7 +187,7 @@ instance Attr Path_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Path_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -201,8 +201,8 @@ instance Attr Path_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Path_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polygon_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -212,7 +212,7 @@ instance Attr Polygon_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Stri
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Polygon_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -226,8 +226,8 @@ instance Attr Polygon_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polygon_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polyline_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -237,7 +237,7 @@ instance Attr Polyline_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Polyline_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -251,8 +251,8 @@ instance Attr Polyline_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Polyline_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Rect_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -262,7 +262,7 @@ instance Attr Rect_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Rect_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -276,8 +276,8 @@ instance Attr Rect_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Rect_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Svg_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -287,7 +287,7 @@ instance Attr Svg_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Svg_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -301,8 +301,8 @@ instance Attr Svg_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Svg_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Symbol_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -312,7 +312,7 @@ instance Attr Symbol_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Strin
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Symbol_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -326,8 +326,8 @@ instance Attr Symbol_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Symbol_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Text_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -337,7 +337,7 @@ instance Attr Text_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Text_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -351,8 +351,8 @@ instance Attr Text_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Text_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr TextPath_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -362,7 +362,7 @@ instance Attr TextPath_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Str
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr TextPath_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -376,8 +376,8 @@ instance Attr TextPath_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr TextPath_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Tspan_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -387,7 +387,7 @@ instance Attr Tspan_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Tspan_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -401,8 +401,8 @@ instance Attr Tspan_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Tspan_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Use_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -412,7 +412,7 @@ instance Attr Use_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String )
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr Use_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -426,8 +426,8 @@ instance Attr Use_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr Use_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr View_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String ) where
@@ -437,7 +437,7 @@ instance Attr View_ AriaActivedescendant (NonEmpty.NonEmpty Event.Event  String 
         { key: "aria-activedescendant", value: prop' value }
     )
 instance Attr View_ AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "aria-activedescendant", value: prop' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "aria-activedescendant", value: prop' value }
@@ -451,8 +451,8 @@ instance Attr View_ AriaActivedescendant (Event.Event  String ) where
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr View_ AriaActivedescendant (ST.ST Global.Global  String ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "aria-activedescendant", value: prop' value }
 
 instance Attr everything AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -460,7 +460,7 @@ instance Attr everything AriaActivedescendant (NonEmpty.NonEmpty Event.Event  Un
     { key: "aria-activedescendant", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "aria-activedescendant", value: unset' })
 instance Attr everything AriaActivedescendant (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr AriaActivedescendant (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "aria-activedescendant", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "aria-activedescendant", value: unset' })
 instance Attr everything AriaActivedescendant  Unit  where
@@ -471,5 +471,5 @@ instance Attr everything AriaActivedescendant (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "aria-activedescendant", value: unset' }
 
 instance Attr everything AriaActivedescendant (ST.ST Global.Global  Unit ) where
-  attr AriaActivedescendant stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "aria-activedescendant", value: unset' }
+  attr AriaActivedescendant iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "aria-activedescendant", value: unset' }

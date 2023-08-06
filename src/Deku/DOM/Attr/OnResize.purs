@@ -18,7 +18,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "resize", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "resize", value: cb' value })
 instance Attr anything OnResize (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "resize", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "resize", value: cb' value })
 instance Attr anything OnResize  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnResize (Event.Event  Cb ) where
     \value -> { key: "resize", value: cb' value }
 
 instance Attr anything OnResize (ST.ST Global.Global  Cb ) where
-  attr OnResize stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnResize iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "resize", value: cb' value }
 
 instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) 
         { key: "resize", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnResize (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "resize", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "resize", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnResize (Event.Event  (Effect Unit) ) where
     \value -> { key: "resize", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnResize (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnResize stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnResize iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "resize", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnResize (NonEmpty.NonEmpty Event.Event  (Effect Boolean)
         { key: "resize", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnResize (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "resize", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "resize", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnResize (Event.Event  (Effect Boolean) ) where
     \value -> { key: "resize", value: cb' (Cb (const value)) }
 
 instance Attr anything OnResize (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnResize stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnResize iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "resize", value: cb' (Cb (const value)) }
 
 instance Attr everything OnResize (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnResize (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "resize", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "resize", value: unset' })
 instance Attr everything OnResize (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnResize (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "resize", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "resize", value: unset' })
 instance Attr everything OnResize  Unit  where
-  attr OnResize _ = unsafeAttribute $ This $ pure $ { key: "resize", value: unset' }
+  attr OnResize _ = unsafeAttribute $ This $ { key: "resize", value: unset' }
 instance Attr everything OnResize (Event.Event  Unit ) where
   attr OnResize eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "resize", value: unset' }
 
 instance Attr everything OnResize (ST.ST Global.Global  Unit ) where
-  attr OnResize stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnResize iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "resize", value: unset' }

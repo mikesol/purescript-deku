@@ -18,7 +18,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "wheel", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "wheel", value: cb' value })
 instance Attr anything OnWheel (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "wheel", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "wheel", value: cb' value })
 instance Attr anything OnWheel  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnWheel (Event.Event  Cb ) where
     \value -> { key: "wheel", value: cb' value }
 
 instance Attr anything OnWheel (ST.ST Global.Global  Cb ) where
-  attr OnWheel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWheel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "wheel", value: cb' value }
 
 instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) w
         { key: "wheel", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnWheel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "wheel", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnWheel (Event.Event  (Effect Unit) ) where
     \value -> { key: "wheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWheel (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnWheel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWheel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "wheel", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnWheel (NonEmpty.NonEmpty Event.Event  (Effect Boolean) 
         { key: "wheel", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnWheel (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "wheel", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "wheel", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnWheel (Event.Event  (Effect Boolean) ) where
     \value -> { key: "wheel", value: cb' (Cb (const value)) }
 
 instance Attr anything OnWheel (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnWheel stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnWheel iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "wheel", value: cb' (Cb (const value)) }
 
 instance Attr everything OnWheel (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,15 +83,15 @@ instance Attr everything OnWheel (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "wheel", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "wheel", value: unset' })
 instance Attr everything OnWheel (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnWheel (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "wheel", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "wheel", value: unset' })
 instance Attr everything OnWheel  Unit  where
-  attr OnWheel _ = unsafeAttribute $ This $ pure $ { key: "wheel", value: unset' }
+  attr OnWheel _ = unsafeAttribute $ This $ { key: "wheel", value: unset' }
 instance Attr everything OnWheel (Event.Event  Unit ) where
   attr OnWheel eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "wheel", value: unset' }
 
 instance Attr everything OnWheel (ST.ST Global.Global  Unit ) where
-  attr OnWheel stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr OnWheel iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "wheel", value: unset' }

@@ -18,7 +18,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "progress", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "progress", value: cb' value })
 instance Attr anything OnProgress (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "progress", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "progress", value: cb' value })
 instance Attr anything OnProgress  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnProgress (Event.Event  Cb ) where
     \value -> { key: "progress", value: cb' value }
 
 instance Attr anything OnProgress (ST.ST Global.Global  Cb ) where
-  attr OnProgress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnProgress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "progress", value: cb' value }
 
 instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Unit) 
         { key: "progress", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnProgress (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "progress", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "progress", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnProgress (Event.Event  (Effect Unit) ) where
     \value -> { key: "progress", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnProgress (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnProgress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnProgress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "progress", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnProgress (NonEmpty.NonEmpty Event.Event  (Effect Boolea
         { key: "progress", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnProgress (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "progress", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "progress", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnProgress (Event.Event  (Effect Boolean) ) where
     \value -> { key: "progress", value: cb' (Cb (const value)) }
 
 instance Attr anything OnProgress (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnProgress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnProgress iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "progress", value: cb' (Cb (const value)) }
 
 instance Attr everything OnProgress (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnProgress (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "progress", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "progress", value: unset' })
 instance Attr everything OnProgress (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnProgress (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "progress", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "progress", value: unset' })
 instance Attr everything OnProgress  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnProgress (Event.Event  Unit ) where
     \_ -> { key: "progress", value: unset' }
 
 instance Attr everything OnProgress (ST.ST Global.Global  Unit ) where
-  attr OnProgress stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnProgress iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "progress", value: unset' }

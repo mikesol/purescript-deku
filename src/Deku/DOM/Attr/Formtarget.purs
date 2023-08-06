@@ -20,7 +20,7 @@ instance Attr Button_ Formtarget (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "formtarget", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formtarget", value: prop' value })
 instance Attr Button_ Formtarget (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "formtarget", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "formtarget", value: prop' value })
 instance Attr Button_ Formtarget  String  where
@@ -31,7 +31,7 @@ instance Attr Button_ Formtarget (Event.Event  String ) where
     \value -> { key: "formtarget", value: prop' value }
 
 instance Attr Button_ Formtarget (ST.ST Global.Global  String ) where
-  attr Formtarget stValue = unsafeAttribute $ This $ stValue <#>
+  attr Formtarget iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "formtarget", value: prop' value }
 
 instance Attr Input_ Formtarget (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Input_ Formtarget (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "formtarget", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "formtarget", value: prop' value })
 instance Attr Input_ Formtarget (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "formtarget", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "formtarget", value: prop' value })
 instance Attr Input_ Formtarget  String  where
@@ -50,7 +50,7 @@ instance Attr Input_ Formtarget (Event.Event  String ) where
     \value -> { key: "formtarget", value: prop' value }
 
 instance Attr Input_ Formtarget (ST.ST Global.Global  String ) where
-  attr Formtarget stValue = unsafeAttribute $ This $ stValue <#>
+  attr Formtarget iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "formtarget", value: prop' value }
 
 instance Attr everything Formtarget (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,7 +58,7 @@ instance Attr everything Formtarget (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "formtarget", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "formtarget", value: unset' })
 instance Attr everything Formtarget (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Formtarget (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "formtarget", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "formtarget", value: unset' })
 instance Attr everything Formtarget  Unit  where
@@ -69,5 +69,5 @@ instance Attr everything Formtarget (Event.Event  Unit ) where
     \_ -> { key: "formtarget", value: unset' }
 
 instance Attr everything Formtarget (ST.ST Global.Global  Unit ) where
-  attr Formtarget stValue = unsafeAttribute $ This $ stValue <#>
+  attr Formtarget iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "formtarget", value: unset' }

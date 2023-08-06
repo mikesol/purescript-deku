@@ -20,7 +20,7 @@ instance Attr Marker_ RefX (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "refX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Marker_ RefX (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "refX", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Marker_ RefX  String  where
@@ -31,7 +31,7 @@ instance Attr Marker_ RefX (Event.Event  String ) where
     { key: "refX", value: prop' value }
 
 instance Attr Marker_ RefX (ST.ST Global.Global  String ) where
-  attr RefX stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr RefX iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "refX", value: prop' value }
 
 instance Attr Symbol_ RefX (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Symbol_ RefX (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "refX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Symbol_ RefX (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "refX", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "refX", value: prop' value })
 instance Attr Symbol_ RefX  String  where
@@ -50,21 +50,21 @@ instance Attr Symbol_ RefX (Event.Event  String ) where
     { key: "refX", value: prop' value }
 
 instance Attr Symbol_ RefX (ST.ST Global.Global  String ) where
-  attr RefX stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr RefX iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "refX", value: prop' value }
 
 instance Attr everything RefX (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr RefX bothValues = unsafeAttribute $ Both (pure  { key: "refX", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "refX", value: unset' })
 instance Attr everything RefX (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "refX", value: unset' })
+  attr RefX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "refX", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "refX", value: unset' })
 instance Attr everything RefX  Unit  where
-  attr RefX _ = unsafeAttribute $ This $ pure $ { key: "refX", value: unset' }
+  attr RefX _ = unsafeAttribute $ This $ { key: "refX", value: unset' }
 instance Attr everything RefX (Event.Event  Unit ) where
   attr RefX eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "refX", value: unset' }
 
 instance Attr everything RefX (ST.ST Global.Global  Unit ) where
-  attr RefX stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr RefX iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "refX", value: unset' }

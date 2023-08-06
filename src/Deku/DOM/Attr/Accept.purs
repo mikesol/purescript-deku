@@ -20,7 +20,7 @@ instance Attr Form_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Form_ Accept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Form_ Accept  String  where
@@ -31,7 +31,7 @@ instance Attr Form_ Accept (Event.Event  String ) where
     \value -> { key: "accept", value: prop' value }
 
 instance Attr Form_ Accept (ST.ST Global.Global  String ) where
-  attr Accept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accept", value: prop' value }
 
 instance Attr Input_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Input_ Accept (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "accept", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Input_ Accept (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "accept", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "accept", value: prop' value })
 instance Attr Input_ Accept  String  where
@@ -50,7 +50,7 @@ instance Attr Input_ Accept (Event.Event  String ) where
     \value -> { key: "accept", value: prop' value }
 
 instance Attr Input_ Accept (ST.ST Global.Global  String ) where
-  attr Accept stValue = unsafeAttribute $ This $ stValue <#>
+  attr Accept iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "accept", value: prop' value }
 
 instance Attr everything Accept (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Accept (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "accept", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "accept", value: unset' })
 instance Attr everything Accept (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Accept (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "accept", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "accept", value: unset' })
 instance Attr everything Accept  Unit  where
-  attr Accept _ = unsafeAttribute $ This $ pure $ { key: "accept", value: unset' }
+  attr Accept _ = unsafeAttribute $ This $ { key: "accept", value: unset' }
 instance Attr everything Accept (Event.Event  Unit ) where
   attr Accept eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "accept", value: unset' }
 
 instance Attr everything Accept (ST.ST Global.Global  Unit ) where
-  attr Accept stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Accept iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "accept", value: unset' }

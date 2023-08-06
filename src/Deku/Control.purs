@@ -16,26 +16,23 @@ module Deku.Control
 
 import Prelude
 
+import Bolson.Control (behaving)
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
-import Control.Monad.ST (ST)
-import Control.Monad.ST.Global (Global)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Foldable (foldl)
-import Data.Functor.Product (Product(..))
+import Data.Foldable (foldl, for_)
 import Data.FunctorWithIndex (mapWithIndex)
+import Data.List as List
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
-import Data.NonEmpty (NonEmpty(..))
 import Data.Profunctor (dimap, lcmap)
 import Data.These (These(..))
-import Data.Traversable (sequence, traverse)
-import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
-import FRP.Event (Event, merge)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
+import FRP.Behavior (sample)
+import FRP.Event (Event, merge, sampleOnRight)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -113,42 +110,39 @@ elementify tag atts children = Node $ Element go
   go :: Node' payload
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
-    di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
-    do
-      me <- ids
-      raiseId $ show me
-      attrs <- traverse (map (unsafeSetAttribute di $ show me)) left
-      Tuple subs (Tuple unsubs evt) <- __internalDekuFlatten
-        children
-        { parent: Just $ show me
-        , scope
-        , ez: true
-        , raiseId: \_ -> pure unit
-        , pos: Nothing
-        , dynFamily: Nothing
-        }
-        di
-      pure
-        $ Tuple
-            ( [  makeElement
-                  { id: show me, parent, scope, tag, pos, dynFamily }
-              ] <> attrs
-                <>
-                  maybe []
-                    ( \p ->
-                        [ attributeParent
-                            { id: show me, parent: p, pos, dynFamily, ez }
-                        ]
-                    )
-                    parent
-                <> subs
-            )
-        $ Tuple ([  deleteFromCache { id: show me } ] <> unsubs)
-        $
-          ( merge $
-              ( (map <<< map) (unsafeSetAttribute di (show me)) right
-              ) <> [ evt ]
+    di@
+      ( DOMInterpret
+          { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
+      ) = behaving \ee kx subscribe -> do
+    me <- ids
+    raiseId $ show me
+    kx $ makeElement { id: show me, parent, scope, tag, pos, dynFamily }
+    for_ parent \p ->
+      kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+
+    for_ left \v -> kx (unsafeSetAttribute di (show me) v)
+    kx $ deferPayload List.Nil $ deleteFromCache { id: show me }
+    subscribe
+      ( sample
+          ( __internalDekuFlatten
+              children
+              { parent: Just $ show me
+              , scope
+              , ez: true
+              , raiseId: \_ -> pure unit
+              , pos: Nothing
+              , dynFamily: Nothing
+              }
+              di
           )
+          ee
+      )
+    subscribe
+      ( sampleOnRight ee
+          ( map (\zzz fff -> fff $ unsafeSetAttribute di (show me) zzz)
+              (merge right)
+          )
+      )
 
 -- | Creates a portal.
 -- |
@@ -260,17 +254,22 @@ portal v' c' =
   -- allow us to determine if they've exacped their scope
   -- for global portals, this is not needed as they use the global scope
   -- todo: this logic is a hack. try to get rid of it.
-  dyn
-    ( Tuple
-        [ Tuple empty
-            ( Nut
-                ( go (map (\(Nut df) -> df) v')
-                    (shouldBeSafe c')
-                )
-            )
-        ]
-        empty
-    )
+  -- dyn
+  --   ( Tuple
+  --       [ Tuple empty
+  --           ( Nut
+  --               ( go (map (\(Nut df) -> df) v')
+  --                   (shouldBeSafe c')
+  --               )
+  --           )
+  --       ]
+  --       empty
+  --   )
+  ( Nut
+      ( go (map (\(Nut df) -> df) v')
+          (shouldBeSafe c')
+      )
+  )
 
   where
   shouldBeSafe
@@ -303,10 +302,10 @@ portal v' c' =
     )
 
 text_'
-  :: Maybe (ST Global String)
+  :: Maybe String
   -> Maybe (Event String)
   -> Nut
-text_' t1' t2 = Nut go'
+text_' t1 t2 = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -316,25 +315,25 @@ text_' t1' t2 = Nut go'
      . Node' payload
   go
     { parent, scope, raiseId, dynFamily, pos, ez }
-    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) = do
+    di@
+      ( DOMInterpret
+          { ids, makeText, deferPayload, deleteFromCache, attributeParent }
+      ) = behaving \ee kx subscribe -> do
     me <- ids
     raiseId $ show me
-    t1 <- sequence t1'
-    pure
-      $ Tuple
-          ( [  makeText { id: show me, parent, pos, scope, dynFamily } ]
-              <> maybe []
-                ( \p ->
-                    [  attributeParent
-                        { id: show me, parent: p, pos, dynFamily, ez }
-                    ]
-                )
-                parent
-              <> maybe [] (\t -> [ unsafeSetText di (show me) t ]) t1
-
+    kx $ makeText { id: show me, parent, pos, scope, dynFamily }
+    for_ parent \p ->
+      kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+    for_ t1 \t ->
+      kx $ unsafeSetText di (show me) t
+    kx $ deferPayload List.Nil (deleteFromCache { id: show me })
+    subscribe
+      ( maybe empty
+          ( \iii -> sampleOnRight ee
+              ((\ttt fff -> fff $ unsafeSetText di (show me) ttt) <$> iii)
           )
-      $ Tuple [  deleteFromCache { id: show me } ]
-          (maybe empty (map (unsafeSetText di (show me))) t2)
+          t2
+      )
 
 -- | A class representing a conservative smattering of stuff that can turn into a text node
 class Textable text where
@@ -346,16 +345,7 @@ instance Textable (Event String) where
   text = text_' Nothing <<< Just
 
 instance Textable String where
-  text txt = text_' (Just (pure txt)) Nothing
-
-instance Textable (NonEmpty Event String) where
-  text (NonEmpty txt e) = text_' (Just (pure txt)) (Just e)
-
-instance Textable (ST Global String) where
   text txt = text_' (Just txt) Nothing
-
-instance Textable (Product (ST Global) Event String) where
-  text (Product (Tuple txt e)) = text_' (Just txt) (Just e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
@@ -376,29 +366,35 @@ deku root (Nut cc) = go cc
           { ids
           , makeRoot
           , forcePayload
+          , deferPayload
           , deleteFromCache
           , redecorateDeferredPayload
           }
-      ) = do
+      ) = behaving \ee kx subscribe -> do
     let me = "deku-root"
     headRedecorator <- ids
-    Tuple sub (Tuple unsub evt) <- __internalDekuFlatten
-      children
-      { parent: Just me
-      , scope: Local "rootScope"
-      , raiseId: \_ -> pure unit
-      , ez: true
-      , pos: Nothing
-      , dynFamily: Nothing
-      }
-      di
-    pure $ Tuple ([ makeRoot { id: me, root } ] <> sub) $ Tuple
-      ( unsub <>
-          [  forcePayload (pure headRedecorator)
-          , deleteFromCache { id: me }
-          ]
+    kx $ makeRoot { id: me, root }
+    for_
+      [ forcePayload (pure headRedecorator)
+      , deleteFromCache { id: me }
+      ]
+      (kx <<< deferPayload (pure headRedecorator))
+    subscribe
+      ( ( sample
+            ( __internalDekuFlatten
+                children
+                { parent: Just me
+                , scope: Local "rootScope"
+                , raiseId: \_ -> pure unit
+                , ez: true
+                , pos: Nothing
+                , dynFamily: Nothing
+                }
+                di
+            )
+            (map (lcmap (redecorateDeferredPayload (pure headRedecorator))) ee)
+        )
       )
-      (map (redecorateDeferredPayload (pure headRedecorator)) evt)
 
 data Stage = Begin | Middle | End
 
@@ -406,4 +402,4 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs a b c
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b

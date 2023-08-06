@@ -19,7 +19,7 @@ instance Attr Textarea_ Enterkeyhint (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "enterkeyhint", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "enterkeyhint", value: prop' value })
 instance Attr Textarea_ Enterkeyhint (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Enterkeyhint (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Enterkeyhint (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enterkeyhint", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "enterkeyhint", value: prop' value })
 instance Attr Textarea_ Enterkeyhint  String  where
@@ -30,7 +30,7 @@ instance Attr Textarea_ Enterkeyhint (Event.Event  String ) where
     \value -> { key: "enterkeyhint", value: prop' value }
 
 instance Attr Textarea_ Enterkeyhint (ST.ST Global.Global  String ) where
-  attr Enterkeyhint stValue = unsafeAttribute $ This $ stValue <#>
+  attr Enterkeyhint iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "enterkeyhint", value: prop' value }
 
 instance Attr everything Enterkeyhint (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Enterkeyhint (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "enterkeyhint", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "enterkeyhint", value: unset' })
 instance Attr everything Enterkeyhint (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Enterkeyhint (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Enterkeyhint (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "enterkeyhint", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "enterkeyhint", value: unset' })
 instance Attr everything Enterkeyhint  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Enterkeyhint (Event.Event  Unit ) where
     \_ -> { key: "enterkeyhint", value: unset' }
 
 instance Attr everything Enterkeyhint (ST.ST Global.Global  Unit ) where
-  attr Enterkeyhint stValue = unsafeAttribute $ This $ stValue <#>
+  attr Enterkeyhint iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "enterkeyhint", value: unset' }

@@ -140,7 +140,7 @@ instance Attr A_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr A_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr A_ Icon  String  where
@@ -151,7 +151,7 @@ instance Attr A_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr A_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Abbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -159,7 +159,7 @@ instance Attr Abbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Abbr_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Abbr_ Icon  String  where
@@ -170,7 +170,7 @@ instance Attr Abbr_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Abbr_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Acronym_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -178,7 +178,7 @@ instance Attr Acronym_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Acronym_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Acronym_ Icon  String  where
@@ -189,7 +189,7 @@ instance Attr Acronym_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Acronym_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Address_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -197,7 +197,7 @@ instance Attr Address_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Address_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Address_ Icon  String  where
@@ -208,7 +208,7 @@ instance Attr Address_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Address_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Applet_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -216,7 +216,7 @@ instance Attr Applet_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Applet_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Applet_ Icon  String  where
@@ -227,7 +227,7 @@ instance Attr Applet_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Applet_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Area_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -235,7 +235,7 @@ instance Attr Area_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Area_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Area_ Icon  String  where
@@ -246,7 +246,7 @@ instance Attr Area_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Area_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Article_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -254,7 +254,7 @@ instance Attr Article_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Article_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Article_ Icon  String  where
@@ -265,7 +265,7 @@ instance Attr Article_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Article_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Aside_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -273,7 +273,7 @@ instance Attr Aside_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Aside_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Aside_ Icon  String  where
@@ -284,7 +284,7 @@ instance Attr Aside_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Aside_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Audio_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -292,7 +292,7 @@ instance Attr Audio_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Audio_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Audio_ Icon  String  where
@@ -303,7 +303,7 @@ instance Attr Audio_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Audio_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr B_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -311,7 +311,7 @@ instance Attr B_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr B_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr B_ Icon  String  where
@@ -322,7 +322,7 @@ instance Attr B_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr B_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Base_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -330,7 +330,7 @@ instance Attr Base_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Base_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Base_ Icon  String  where
@@ -341,7 +341,7 @@ instance Attr Base_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Base_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Basefont_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -349,7 +349,7 @@ instance Attr Basefont_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Basefont_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Basefont_ Icon  String  where
@@ -360,7 +360,7 @@ instance Attr Basefont_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Basefont_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Bdi_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -368,7 +368,7 @@ instance Attr Bdi_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Bdi_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Bdi_ Icon  String  where
@@ -379,7 +379,7 @@ instance Attr Bdi_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Bdi_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Bdo_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -387,7 +387,7 @@ instance Attr Bdo_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Bdo_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Bdo_ Icon  String  where
@@ -398,7 +398,7 @@ instance Attr Bdo_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Bdo_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Big_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -406,7 +406,7 @@ instance Attr Big_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Big_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Big_ Icon  String  where
@@ -417,7 +417,7 @@ instance Attr Big_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Big_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Blockquote_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -425,7 +425,7 @@ instance Attr Blockquote_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Blockquote_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Blockquote_ Icon  String  where
@@ -436,7 +436,7 @@ instance Attr Blockquote_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Blockquote_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Body_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -444,7 +444,7 @@ instance Attr Body_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Body_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Body_ Icon  String  where
@@ -455,7 +455,7 @@ instance Attr Body_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Body_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Br_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -463,7 +463,7 @@ instance Attr Br_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Br_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Br_ Icon  String  where
@@ -474,7 +474,7 @@ instance Attr Br_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Br_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Button_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -482,7 +482,7 @@ instance Attr Button_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Button_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Button_ Icon  String  where
@@ -493,7 +493,7 @@ instance Attr Button_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Button_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Canvas_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -501,7 +501,7 @@ instance Attr Canvas_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Canvas_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Canvas_ Icon  String  where
@@ -512,7 +512,7 @@ instance Attr Canvas_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Canvas_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Caption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -520,7 +520,7 @@ instance Attr Caption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Caption_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Caption_ Icon  String  where
@@ -531,7 +531,7 @@ instance Attr Caption_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Caption_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Center_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -539,7 +539,7 @@ instance Attr Center_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Center_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Center_ Icon  String  where
@@ -550,7 +550,7 @@ instance Attr Center_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Center_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Cite_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -558,7 +558,7 @@ instance Attr Cite_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Cite_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Cite_ Icon  String  where
@@ -569,7 +569,7 @@ instance Attr Cite_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Cite_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Code_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -577,7 +577,7 @@ instance Attr Code_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Code_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Code_ Icon  String  where
@@ -588,7 +588,7 @@ instance Attr Code_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Code_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Col_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -596,7 +596,7 @@ instance Attr Col_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Col_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Col_ Icon  String  where
@@ -607,7 +607,7 @@ instance Attr Col_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Col_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Colgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -615,7 +615,7 @@ instance Attr Colgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Colgroup_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Colgroup_ Icon  String  where
@@ -626,7 +626,7 @@ instance Attr Colgroup_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Colgroup_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Xdata_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -634,7 +634,7 @@ instance Attr Xdata_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Xdata_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Xdata_ Icon  String  where
@@ -645,7 +645,7 @@ instance Attr Xdata_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Xdata_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Datalist_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -653,7 +653,7 @@ instance Attr Datalist_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Datalist_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Datalist_ Icon  String  where
@@ -664,7 +664,7 @@ instance Attr Datalist_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Datalist_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -672,7 +672,7 @@ instance Attr Dd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dd_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dd_ Icon  String  where
@@ -683,7 +683,7 @@ instance Attr Dd_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dd_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Del_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -691,7 +691,7 @@ instance Attr Del_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Del_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Del_ Icon  String  where
@@ -702,7 +702,7 @@ instance Attr Del_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Del_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Details_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -710,7 +710,7 @@ instance Attr Details_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Details_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Details_ Icon  String  where
@@ -721,7 +721,7 @@ instance Attr Details_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Details_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dfn_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -729,7 +729,7 @@ instance Attr Dfn_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dfn_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dfn_ Icon  String  where
@@ -740,7 +740,7 @@ instance Attr Dfn_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dfn_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dialog_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -748,7 +748,7 @@ instance Attr Dialog_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dialog_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dialog_ Icon  String  where
@@ -759,7 +759,7 @@ instance Attr Dialog_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dialog_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dir_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -767,7 +767,7 @@ instance Attr Dir_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dir_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dir_ Icon  String  where
@@ -778,7 +778,7 @@ instance Attr Dir_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dir_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Div_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -786,7 +786,7 @@ instance Attr Div_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Div_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Div_ Icon  String  where
@@ -797,7 +797,7 @@ instance Attr Div_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Div_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dl_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -805,7 +805,7 @@ instance Attr Dl_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dl_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dl_ Icon  String  where
@@ -816,7 +816,7 @@ instance Attr Dl_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dl_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Dt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -824,7 +824,7 @@ instance Attr Dt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dt_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Dt_ Icon  String  where
@@ -835,7 +835,7 @@ instance Attr Dt_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Dt_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Em_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -843,7 +843,7 @@ instance Attr Em_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Em_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Em_ Icon  String  where
@@ -854,7 +854,7 @@ instance Attr Em_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Em_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Embed_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -862,7 +862,7 @@ instance Attr Embed_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Embed_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Embed_ Icon  String  where
@@ -873,7 +873,7 @@ instance Attr Embed_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Embed_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Fieldset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -881,7 +881,7 @@ instance Attr Fieldset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Fieldset_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Fieldset_ Icon  String  where
@@ -892,7 +892,7 @@ instance Attr Fieldset_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Fieldset_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Figcaption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -900,7 +900,7 @@ instance Attr Figcaption_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Figcaption_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Figcaption_ Icon  String  where
@@ -911,7 +911,7 @@ instance Attr Figcaption_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Figcaption_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Figure_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -919,7 +919,7 @@ instance Attr Figure_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Figure_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Figure_ Icon  String  where
@@ -930,7 +930,7 @@ instance Attr Figure_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Figure_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Font_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -938,7 +938,7 @@ instance Attr Font_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Font_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Font_ Icon  String  where
@@ -949,7 +949,7 @@ instance Attr Font_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Font_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Footer_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -957,7 +957,7 @@ instance Attr Footer_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Footer_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Footer_ Icon  String  where
@@ -968,7 +968,7 @@ instance Attr Footer_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Footer_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Form_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -976,7 +976,7 @@ instance Attr Form_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Form_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Form_ Icon  String  where
@@ -987,7 +987,7 @@ instance Attr Form_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Form_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Frame_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -995,7 +995,7 @@ instance Attr Frame_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Frame_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Frame_ Icon  String  where
@@ -1006,7 +1006,7 @@ instance Attr Frame_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Frame_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Frameset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1014,7 +1014,7 @@ instance Attr Frameset_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Frameset_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Frameset_ Icon  String  where
@@ -1025,7 +1025,7 @@ instance Attr Frameset_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Frameset_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H1_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1033,7 +1033,7 @@ instance Attr H1_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H1_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H1_ Icon  String  where
@@ -1044,7 +1044,7 @@ instance Attr H1_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H1_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H2_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1052,7 +1052,7 @@ instance Attr H2_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H2_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H2_ Icon  String  where
@@ -1063,7 +1063,7 @@ instance Attr H2_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H2_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H3_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1071,7 +1071,7 @@ instance Attr H3_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H3_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H3_ Icon  String  where
@@ -1082,7 +1082,7 @@ instance Attr H3_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H3_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H4_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1090,7 +1090,7 @@ instance Attr H4_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H4_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H4_ Icon  String  where
@@ -1101,7 +1101,7 @@ instance Attr H4_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H4_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H5_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1109,7 +1109,7 @@ instance Attr H5_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H5_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H5_ Icon  String  where
@@ -1120,7 +1120,7 @@ instance Attr H5_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H5_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr H6_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1128,7 +1128,7 @@ instance Attr H6_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H6_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr H6_ Icon  String  where
@@ -1139,7 +1139,7 @@ instance Attr H6_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr H6_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Head_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1147,7 +1147,7 @@ instance Attr Head_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Head_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Head_ Icon  String  where
@@ -1158,7 +1158,7 @@ instance Attr Head_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Head_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Header_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1166,7 +1166,7 @@ instance Attr Header_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Header_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Header_ Icon  String  where
@@ -1177,7 +1177,7 @@ instance Attr Header_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Header_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Hr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1185,7 +1185,7 @@ instance Attr Hr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Hr_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Hr_ Icon  String  where
@@ -1196,7 +1196,7 @@ instance Attr Hr_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Hr_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Html_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1204,7 +1204,7 @@ instance Attr Html_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Html_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Html_ Icon  String  where
@@ -1215,7 +1215,7 @@ instance Attr Html_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Html_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr I_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1223,7 +1223,7 @@ instance Attr I_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr I_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr I_ Icon  String  where
@@ -1234,7 +1234,7 @@ instance Attr I_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr I_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Iframe_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1242,7 +1242,7 @@ instance Attr Iframe_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Iframe_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Iframe_ Icon  String  where
@@ -1253,7 +1253,7 @@ instance Attr Iframe_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Iframe_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Img_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1261,7 +1261,7 @@ instance Attr Img_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Img_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Img_ Icon  String  where
@@ -1272,7 +1272,7 @@ instance Attr Img_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Img_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Input_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1280,7 +1280,7 @@ instance Attr Input_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Input_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Input_ Icon  String  where
@@ -1291,7 +1291,7 @@ instance Attr Input_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Input_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Ins_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1299,7 +1299,7 @@ instance Attr Ins_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ins_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ins_ Icon  String  where
@@ -1310,7 +1310,7 @@ instance Attr Ins_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Ins_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Kbd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1318,7 +1318,7 @@ instance Attr Kbd_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Kbd_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Kbd_ Icon  String  where
@@ -1329,7 +1329,7 @@ instance Attr Kbd_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Kbd_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Label_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1337,7 +1337,7 @@ instance Attr Label_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Label_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Label_ Icon  String  where
@@ -1348,7 +1348,7 @@ instance Attr Label_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Label_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Legend_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1356,7 +1356,7 @@ instance Attr Legend_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Legend_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Legend_ Icon  String  where
@@ -1367,7 +1367,7 @@ instance Attr Legend_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Legend_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Li_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1375,7 +1375,7 @@ instance Attr Li_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Li_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Li_ Icon  String  where
@@ -1386,7 +1386,7 @@ instance Attr Li_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Li_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Link_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1394,7 +1394,7 @@ instance Attr Link_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Link_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Link_ Icon  String  where
@@ -1405,7 +1405,7 @@ instance Attr Link_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Link_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Main_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1413,7 +1413,7 @@ instance Attr Main_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Main_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Main_ Icon  String  where
@@ -1424,7 +1424,7 @@ instance Attr Main_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Main_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Map_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1432,7 +1432,7 @@ instance Attr Map_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Map_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Map_ Icon  String  where
@@ -1443,7 +1443,7 @@ instance Attr Map_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Map_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Mark_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1451,7 +1451,7 @@ instance Attr Mark_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Mark_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Mark_ Icon  String  where
@@ -1462,7 +1462,7 @@ instance Attr Mark_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Mark_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Meta_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1470,7 +1470,7 @@ instance Attr Meta_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Meta_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Meta_ Icon  String  where
@@ -1481,7 +1481,7 @@ instance Attr Meta_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Meta_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Meter_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1489,7 +1489,7 @@ instance Attr Meter_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Meter_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Meter_ Icon  String  where
@@ -1500,7 +1500,7 @@ instance Attr Meter_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Meter_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Nav_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1508,7 +1508,7 @@ instance Attr Nav_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Nav_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Nav_ Icon  String  where
@@ -1519,7 +1519,7 @@ instance Attr Nav_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Nav_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Noframes_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1527,7 +1527,7 @@ instance Attr Noframes_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Noframes_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Noframes_ Icon  String  where
@@ -1538,7 +1538,7 @@ instance Attr Noframes_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Noframes_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Noscript_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1546,7 +1546,7 @@ instance Attr Noscript_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Noscript_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Noscript_ Icon  String  where
@@ -1557,7 +1557,7 @@ instance Attr Noscript_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Noscript_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Object_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1565,7 +1565,7 @@ instance Attr Object_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Object_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Object_ Icon  String  where
@@ -1576,7 +1576,7 @@ instance Attr Object_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Object_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Ol_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1584,7 +1584,7 @@ instance Attr Ol_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ol_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ol_ Icon  String  where
@@ -1595,7 +1595,7 @@ instance Attr Ol_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Ol_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Optgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1603,7 +1603,7 @@ instance Attr Optgroup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Optgroup_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Optgroup_ Icon  String  where
@@ -1614,7 +1614,7 @@ instance Attr Optgroup_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Optgroup_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Option_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1622,7 +1622,7 @@ instance Attr Option_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Option_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Option_ Icon  String  where
@@ -1633,7 +1633,7 @@ instance Attr Option_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Option_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Output_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1641,7 +1641,7 @@ instance Attr Output_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Output_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Output_ Icon  String  where
@@ -1652,7 +1652,7 @@ instance Attr Output_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Output_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr P_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1660,7 +1660,7 @@ instance Attr P_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr P_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr P_ Icon  String  where
@@ -1671,7 +1671,7 @@ instance Attr P_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr P_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Param_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1679,7 +1679,7 @@ instance Attr Param_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Param_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Param_ Icon  String  where
@@ -1690,7 +1690,7 @@ instance Attr Param_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Param_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Picture_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1698,7 +1698,7 @@ instance Attr Picture_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Picture_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Picture_ Icon  String  where
@@ -1709,7 +1709,7 @@ instance Attr Picture_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Picture_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Pre_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1717,7 +1717,7 @@ instance Attr Pre_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Pre_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Pre_ Icon  String  where
@@ -1728,7 +1728,7 @@ instance Attr Pre_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Pre_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Progress_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1736,7 +1736,7 @@ instance Attr Progress_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Progress_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Progress_ Icon  String  where
@@ -1747,7 +1747,7 @@ instance Attr Progress_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Progress_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Q_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1755,7 +1755,7 @@ instance Attr Q_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Q_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Q_ Icon  String  where
@@ -1766,7 +1766,7 @@ instance Attr Q_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Q_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Rp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1774,7 +1774,7 @@ instance Attr Rp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Rp_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Rp_ Icon  String  where
@@ -1785,7 +1785,7 @@ instance Attr Rp_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Rp_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Rt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1793,7 +1793,7 @@ instance Attr Rt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Rt_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Rt_ Icon  String  where
@@ -1804,7 +1804,7 @@ instance Attr Rt_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Rt_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Ruby_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1812,7 +1812,7 @@ instance Attr Ruby_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ruby_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ruby_ Icon  String  where
@@ -1823,7 +1823,7 @@ instance Attr Ruby_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Ruby_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr S_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1831,7 +1831,7 @@ instance Attr S_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr S_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr S_ Icon  String  where
@@ -1842,7 +1842,7 @@ instance Attr S_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr S_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Samp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1850,7 +1850,7 @@ instance Attr Samp_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Samp_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Samp_ Icon  String  where
@@ -1861,7 +1861,7 @@ instance Attr Samp_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Samp_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Script_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1869,7 +1869,7 @@ instance Attr Script_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Script_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Script_ Icon  String  where
@@ -1880,7 +1880,7 @@ instance Attr Script_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Script_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Section_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1888,7 +1888,7 @@ instance Attr Section_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Section_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Section_ Icon  String  where
@@ -1899,7 +1899,7 @@ instance Attr Section_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Section_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Select_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1907,7 +1907,7 @@ instance Attr Select_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Select_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Select_ Icon  String  where
@@ -1918,7 +1918,7 @@ instance Attr Select_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Select_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Small_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1926,7 +1926,7 @@ instance Attr Small_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Small_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Small_ Icon  String  where
@@ -1937,7 +1937,7 @@ instance Attr Small_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Small_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Source_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1945,7 +1945,7 @@ instance Attr Source_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Source_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Source_ Icon  String  where
@@ -1956,7 +1956,7 @@ instance Attr Source_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Source_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Span_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1964,7 +1964,7 @@ instance Attr Span_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Span_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Span_ Icon  String  where
@@ -1975,7 +1975,7 @@ instance Attr Span_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Span_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Strike_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -1983,7 +1983,7 @@ instance Attr Strike_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Strike_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Strike_ Icon  String  where
@@ -1994,7 +1994,7 @@ instance Attr Strike_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Strike_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Strong_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2002,7 +2002,7 @@ instance Attr Strong_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Strong_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Strong_ Icon  String  where
@@ -2013,7 +2013,7 @@ instance Attr Strong_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Strong_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Style_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2021,7 +2021,7 @@ instance Attr Style_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Style_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Style_ Icon  String  where
@@ -2032,7 +2032,7 @@ instance Attr Style_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Style_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Sub_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2040,7 +2040,7 @@ instance Attr Sub_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Sub_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Sub_ Icon  String  where
@@ -2051,7 +2051,7 @@ instance Attr Sub_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Sub_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Summary_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2059,7 +2059,7 @@ instance Attr Summary_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Summary_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Summary_ Icon  String  where
@@ -2070,7 +2070,7 @@ instance Attr Summary_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Summary_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Sup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2078,7 +2078,7 @@ instance Attr Sup_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Sup_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Sup_ Icon  String  where
@@ -2089,7 +2089,7 @@ instance Attr Sup_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Sup_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Svg_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2097,7 +2097,7 @@ instance Attr Svg_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Svg_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Svg_ Icon  String  where
@@ -2108,7 +2108,7 @@ instance Attr Svg_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Svg_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Table_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2116,7 +2116,7 @@ instance Attr Table_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Table_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Table_ Icon  String  where
@@ -2127,7 +2127,7 @@ instance Attr Table_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Table_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Tbody_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2135,7 +2135,7 @@ instance Attr Tbody_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tbody_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tbody_ Icon  String  where
@@ -2146,7 +2146,7 @@ instance Attr Tbody_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Tbody_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Td_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2154,7 +2154,7 @@ instance Attr Td_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Td_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Td_ Icon  String  where
@@ -2165,7 +2165,7 @@ instance Attr Td_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Td_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Template_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2173,7 +2173,7 @@ instance Attr Template_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Template_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Template_ Icon  String  where
@@ -2184,7 +2184,7 @@ instance Attr Template_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Template_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Textarea_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2192,7 +2192,7 @@ instance Attr Textarea_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Textarea_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Textarea_ Icon  String  where
@@ -2203,7 +2203,7 @@ instance Attr Textarea_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Textarea_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Tfoot_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2211,7 +2211,7 @@ instance Attr Tfoot_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tfoot_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tfoot_ Icon  String  where
@@ -2222,7 +2222,7 @@ instance Attr Tfoot_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Tfoot_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Th_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2230,7 +2230,7 @@ instance Attr Th_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Th_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Th_ Icon  String  where
@@ -2241,7 +2241,7 @@ instance Attr Th_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Th_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Thead_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2249,7 +2249,7 @@ instance Attr Thead_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Thead_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Thead_ Icon  String  where
@@ -2260,7 +2260,7 @@ instance Attr Thead_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Thead_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Time_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2268,7 +2268,7 @@ instance Attr Time_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Time_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Time_ Icon  String  where
@@ -2279,7 +2279,7 @@ instance Attr Time_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Time_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Title_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2287,7 +2287,7 @@ instance Attr Title_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Title_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Title_ Icon  String  where
@@ -2298,7 +2298,7 @@ instance Attr Title_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Title_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Tr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2306,7 +2306,7 @@ instance Attr Tr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tr_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tr_ Icon  String  where
@@ -2317,7 +2317,7 @@ instance Attr Tr_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Tr_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Track_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2325,7 +2325,7 @@ instance Attr Track_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Track_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Track_ Icon  String  where
@@ -2336,7 +2336,7 @@ instance Attr Track_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Track_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Tt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2344,7 +2344,7 @@ instance Attr Tt_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tt_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Tt_ Icon  String  where
@@ -2355,7 +2355,7 @@ instance Attr Tt_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Tt_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr U_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2363,7 +2363,7 @@ instance Attr U_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr U_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr U_ Icon  String  where
@@ -2374,7 +2374,7 @@ instance Attr U_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr U_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Ul_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2382,7 +2382,7 @@ instance Attr Ul_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ul_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Ul_ Icon  String  where
@@ -2393,7 +2393,7 @@ instance Attr Ul_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Ul_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Var_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2401,7 +2401,7 @@ instance Attr Var_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Var_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Var_ Icon  String  where
@@ -2412,7 +2412,7 @@ instance Attr Var_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Var_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Video_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2420,7 +2420,7 @@ instance Attr Video_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Video_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Video_ Icon  String  where
@@ -2431,7 +2431,7 @@ instance Attr Video_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Video_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr Wbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
@@ -2439,7 +2439,7 @@ instance Attr Wbr_ Icon (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "icon", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Wbr_ Icon (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "icon", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "icon", value: prop' value })
 instance Attr Wbr_ Icon  String  where
@@ -2450,21 +2450,21 @@ instance Attr Wbr_ Icon (Event.Event  String ) where
     { key: "icon", value: prop' value }
 
 instance Attr Wbr_ Icon (ST.ST Global.Global  String ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \value ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \value ->
     { key: "icon", value: prop' value }
 
 instance Attr everything Icon (NonEmpty.NonEmpty Event.Event  Unit ) where
   attr Icon bothValues = unsafeAttribute $ Both (pure  { key: "icon", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "icon", value: unset' })
 instance Attr everything Icon (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->   { key: "icon", value: unset' })
+  attr Icon (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "icon", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "icon", value: unset' })
 instance Attr everything Icon  Unit  where
-  attr Icon _ = unsafeAttribute $ This $ pure $ { key: "icon", value: unset' }
+  attr Icon _ = unsafeAttribute $ This $ { key: "icon", value: unset' }
 instance Attr everything Icon (Event.Event  Unit ) where
   attr Icon eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "icon", value: unset' }
 
 instance Attr everything Icon (ST.ST Global.Global  Unit ) where
-  attr Icon stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Icon iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "icon", value: unset' }

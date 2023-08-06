@@ -21,7 +21,7 @@ instance Attr Text_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Text_ LengthAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lengthAdjust", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Text_ LengthAdjust  String  where
@@ -32,7 +32,7 @@ instance Attr Text_ LengthAdjust (Event.Event  String ) where
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr Text_ LengthAdjust (ST.ST Global.Global  String ) where
-  attr LengthAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr LengthAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr TextPath_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -40,7 +40,7 @@ instance Attr TextPath_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr TextPath_ LengthAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lengthAdjust", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr TextPath_ LengthAdjust  String  where
@@ -51,7 +51,7 @@ instance Attr TextPath_ LengthAdjust (Event.Event  String ) where
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr TextPath_ LengthAdjust (ST.ST Global.Global  String ) where
-  attr LengthAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr LengthAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr Tspan_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Tspan_ LengthAdjust (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "lengthAdjust", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Tspan_ LengthAdjust (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lengthAdjust", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "lengthAdjust", value: prop' value })
 instance Attr Tspan_ LengthAdjust  String  where
@@ -70,7 +70,7 @@ instance Attr Tspan_ LengthAdjust (Event.Event  String ) where
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr Tspan_ LengthAdjust (ST.ST Global.Global  String ) where
-  attr LengthAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr LengthAdjust iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "lengthAdjust", value: prop' value }
 
 instance Attr everything LengthAdjust (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -78,7 +78,7 @@ instance Attr everything LengthAdjust (NonEmpty.NonEmpty Event.Event  Unit ) whe
     { key: "lengthAdjust", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "lengthAdjust", value: unset' })
 instance Attr everything LengthAdjust (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr LengthAdjust (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "lengthAdjust", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "lengthAdjust", value: unset' })
 instance Attr everything LengthAdjust  Unit  where
@@ -89,5 +89,5 @@ instance Attr everything LengthAdjust (Event.Event  Unit ) where
     \_ -> { key: "lengthAdjust", value: unset' }
 
 instance Attr everything LengthAdjust (ST.ST Global.Global  Unit ) where
-  attr LengthAdjust stValue = unsafeAttribute $ This $ stValue <#>
+  attr LengthAdjust iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "lengthAdjust", value: unset' }

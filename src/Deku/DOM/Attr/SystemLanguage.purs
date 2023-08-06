@@ -40,7 +40,7 @@ instance Attr AnimateTransform_ SystemLanguage (NonEmpty.NonEmpty Event.Event  S
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr AnimateTransform_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr AnimateTransform_ SystemLanguage  String  where
@@ -51,7 +51,7 @@ instance Attr AnimateTransform_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr AnimateTransform_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Circle_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -59,7 +59,7 @@ instance Attr Circle_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Circle_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Circle_ SystemLanguage  String  where
@@ -70,7 +70,7 @@ instance Attr Circle_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Circle_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr ClipPath_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -78,7 +78,7 @@ instance Attr ClipPath_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr ClipPath_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr ClipPath_ SystemLanguage  String  where
@@ -89,7 +89,7 @@ instance Attr ClipPath_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr ClipPath_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Discard_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -97,7 +97,7 @@ instance Attr Discard_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Discard_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Discard_ SystemLanguage  String  where
@@ -108,7 +108,7 @@ instance Attr Discard_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Discard_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Ellipse_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -116,7 +116,7 @@ instance Attr Ellipse_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Ellipse_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Ellipse_ SystemLanguage  String  where
@@ -127,7 +127,7 @@ instance Attr Ellipse_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Ellipse_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr ForeignObject_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -135,7 +135,7 @@ instance Attr ForeignObject_ SystemLanguage (NonEmpty.NonEmpty Event.Event  Stri
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr ForeignObject_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr ForeignObject_ SystemLanguage  String  where
@@ -146,7 +146,7 @@ instance Attr ForeignObject_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr ForeignObject_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr G_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -154,7 +154,7 @@ instance Attr G_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr G_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr G_ SystemLanguage  String  where
@@ -165,7 +165,7 @@ instance Attr G_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr G_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Image_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -173,7 +173,7 @@ instance Attr Image_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Image_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Image_ SystemLanguage  String  where
@@ -184,7 +184,7 @@ instance Attr Image_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Image_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Line_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -192,7 +192,7 @@ instance Attr Line_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Line_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Line_ SystemLanguage  String  where
@@ -203,7 +203,7 @@ instance Attr Line_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Line_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Marker_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -211,7 +211,7 @@ instance Attr Marker_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Marker_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Marker_ SystemLanguage  String  where
@@ -222,7 +222,7 @@ instance Attr Marker_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Marker_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Mask_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -230,7 +230,7 @@ instance Attr Mask_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Mask_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Mask_ SystemLanguage  String  where
@@ -241,7 +241,7 @@ instance Attr Mask_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Mask_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Path_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -249,7 +249,7 @@ instance Attr Path_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Path_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Path_ SystemLanguage  String  where
@@ -260,7 +260,7 @@ instance Attr Path_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Path_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Pattern_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -268,7 +268,7 @@ instance Attr Pattern_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Pattern_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Pattern_ SystemLanguage  String  where
@@ -279,7 +279,7 @@ instance Attr Pattern_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Pattern_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Polygon_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -287,7 +287,7 @@ instance Attr Polygon_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) w
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Polygon_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Polygon_ SystemLanguage  String  where
@@ -298,7 +298,7 @@ instance Attr Polygon_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Polygon_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Polyline_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -306,7 +306,7 @@ instance Attr Polyline_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Polyline_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Polyline_ SystemLanguage  String  where
@@ -317,7 +317,7 @@ instance Attr Polyline_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Polyline_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Rect_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -325,7 +325,7 @@ instance Attr Rect_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Rect_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Rect_ SystemLanguage  String  where
@@ -336,7 +336,7 @@ instance Attr Rect_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Rect_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Svg_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -344,7 +344,7 @@ instance Attr Svg_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Svg_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Svg_ SystemLanguage  String  where
@@ -355,7 +355,7 @@ instance Attr Svg_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Svg_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Switch_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -363,7 +363,7 @@ instance Attr Switch_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Switch_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Switch_ SystemLanguage  String  where
@@ -374,7 +374,7 @@ instance Attr Switch_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Switch_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Text_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -382,7 +382,7 @@ instance Attr Text_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) wher
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Text_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Text_ SystemLanguage  String  where
@@ -393,7 +393,7 @@ instance Attr Text_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Text_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr TextPath_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -401,7 +401,7 @@ instance Attr TextPath_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) 
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr TextPath_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr TextPath_ SystemLanguage  String  where
@@ -412,7 +412,7 @@ instance Attr TextPath_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr TextPath_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Tspan_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -420,7 +420,7 @@ instance Attr Tspan_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) whe
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Tspan_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Tspan_ SystemLanguage  String  where
@@ -431,7 +431,7 @@ instance Attr Tspan_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Tspan_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Use_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
@@ -439,7 +439,7 @@ instance Attr Use_ SystemLanguage (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "systemLanguage", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Use_ SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "systemLanguage", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "systemLanguage", value: prop' value })
 instance Attr Use_ SystemLanguage  String  where
@@ -450,7 +450,7 @@ instance Attr Use_ SystemLanguage (Event.Event  String ) where
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr Use_ SystemLanguage (ST.ST Global.Global  String ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "systemLanguage", value: prop' value }
 
 instance Attr everything SystemLanguage (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -458,7 +458,7 @@ instance Attr everything SystemLanguage (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "systemLanguage", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "systemLanguage", value: unset' })
 instance Attr everything SystemLanguage (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr SystemLanguage (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "systemLanguage", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "systemLanguage", value: unset' })
 instance Attr everything SystemLanguage  Unit  where
@@ -469,5 +469,5 @@ instance Attr everything SystemLanguage (Event.Event  Unit ) where
     \_ -> { key: "systemLanguage", value: unset' }
 
 instance Attr everything SystemLanguage (ST.ST Global.Global  Unit ) where
-  attr SystemLanguage stValue = unsafeAttribute $ This $ stValue <#>
+  attr SystemLanguage iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "systemLanguage", value: unset' }

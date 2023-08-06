@@ -19,7 +19,7 @@ instance Attr FeSpotLight_ PointsAtX (NonEmpty.NonEmpty Event.Event  String ) wh
     { key: "pointsAtX", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointsAtX", value: prop' value })
 instance Attr FeSpotLight_ PointsAtX (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr PointsAtX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr PointsAtX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointsAtX", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "pointsAtX", value: prop' value })
 instance Attr FeSpotLight_ PointsAtX  String  where
@@ -30,7 +30,7 @@ instance Attr FeSpotLight_ PointsAtX (Event.Event  String ) where
     \value -> { key: "pointsAtX", value: prop' value }
 
 instance Attr FeSpotLight_ PointsAtX (ST.ST Global.Global  String ) where
-  attr PointsAtX stValue = unsafeAttribute $ This $ stValue <#>
+  attr PointsAtX iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "pointsAtX", value: prop' value }
 
 instance Attr everything PointsAtX (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything PointsAtX (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "pointsAtX", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointsAtX", value: unset' })
 instance Attr everything PointsAtX (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr PointsAtX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr PointsAtX (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "pointsAtX", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "pointsAtX", value: unset' })
 instance Attr everything PointsAtX  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything PointsAtX (Event.Event  Unit ) where
     \_ -> { key: "pointsAtX", value: unset' }
 
 instance Attr everything PointsAtX (ST.ST Global.Global  Unit ) where
-  attr PointsAtX stValue = unsafeAttribute $ This $ stValue <#>
+  attr PointsAtX iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "pointsAtX", value: unset' }

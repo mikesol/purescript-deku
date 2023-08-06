@@ -19,7 +19,7 @@ instance Attr Textarea_ Inputmode (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "inputmode", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "inputmode", value: prop' value })
 instance Attr Textarea_ Inputmode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Inputmode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Inputmode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "inputmode", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "inputmode", value: prop' value })
 instance Attr Textarea_ Inputmode  String  where
@@ -30,7 +30,7 @@ instance Attr Textarea_ Inputmode (Event.Event  String ) where
     \value -> { key: "inputmode", value: prop' value }
 
 instance Attr Textarea_ Inputmode (ST.ST Global.Global  String ) where
-  attr Inputmode stValue = unsafeAttribute $ This $ stValue <#>
+  attr Inputmode iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "inputmode", value: prop' value }
 
 instance Attr everything Inputmode (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,7 +38,7 @@ instance Attr everything Inputmode (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "inputmode", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "inputmode", value: unset' })
 instance Attr everything Inputmode (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Inputmode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Inputmode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "inputmode", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "inputmode", value: unset' })
 instance Attr everything Inputmode  Unit  where
@@ -49,5 +49,5 @@ instance Attr everything Inputmode (Event.Event  Unit ) where
     \_ -> { key: "inputmode", value: unset' }
 
 instance Attr everything Inputmode (ST.ST Global.Global  Unit ) where
-  attr Inputmode stValue = unsafeAttribute $ This $ stValue <#>
+  attr Inputmode iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "inputmode", value: unset' }

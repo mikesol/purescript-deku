@@ -20,7 +20,7 @@ instance Attr Polygon_ Points (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "points", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "points", value: prop' value })
 instance Attr Polygon_ Points (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "points", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "points", value: prop' value })
 instance Attr Polygon_ Points  String  where
@@ -31,7 +31,7 @@ instance Attr Polygon_ Points (Event.Event  String ) where
     \value -> { key: "points", value: prop' value }
 
 instance Attr Polygon_ Points (ST.ST Global.Global  String ) where
-  attr Points stValue = unsafeAttribute $ This $ stValue <#>
+  attr Points iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "points", value: prop' value }
 
 instance Attr Polyline_ Points (NonEmpty.NonEmpty Event.Event  String ) where
@@ -39,7 +39,7 @@ instance Attr Polyline_ Points (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "points", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "points", value: prop' value })
 instance Attr Polyline_ Points (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "points", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "points", value: prop' value })
 instance Attr Polyline_ Points  String  where
@@ -50,7 +50,7 @@ instance Attr Polyline_ Points (Event.Event  String ) where
     \value -> { key: "points", value: prop' value }
 
 instance Attr Polyline_ Points (ST.ST Global.Global  String ) where
-  attr Points stValue = unsafeAttribute $ This $ stValue <#>
+  attr Points iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "points", value: prop' value }
 
 instance Attr everything Points (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -58,15 +58,15 @@ instance Attr everything Points (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "points", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "points", value: unset' })
 instance Attr everything Points (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Points (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "points", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "points", value: unset' })
 instance Attr everything Points  Unit  where
-  attr Points _ = unsafeAttribute $ This $ pure $ { key: "points", value: unset' }
+  attr Points _ = unsafeAttribute $ This $ { key: "points", value: unset' }
 instance Attr everything Points (Event.Event  Unit ) where
   attr Points eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "points", value: unset' }
 
 instance Attr everything Points (ST.ST Global.Global  Unit ) where
-  attr Points stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Points iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "points", value: unset' }

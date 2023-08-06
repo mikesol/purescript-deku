@@ -20,7 +20,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Cb ) 
         { key: "pointerlockchange", value: cb' value }
     )
 instance Attr anything OnPointerlockchange (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerlockchange", value: cb' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' value }
@@ -33,8 +33,8 @@ instance Attr anything OnPointerlockchange (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "pointerlockchange", value: cb' value }
 
 instance Attr anything OnPointerlockchange (ST.ST Global.Global  Cb ) where
-  attr OnPointerlockchange stValue = unsafeAttribute $ This $
-    stValue <#> \value -> { key: "pointerlockchange", value: cb' value }
+  attr OnPointerlockchange iValue = unsafeAttribute $ This $
+    iValue <#> \value -> { key: "pointerlockchange", value: cb' value }
 
 instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnPointerlockchange bothValues = unsafeAttribute $ Both (pure 
@@ -45,7 +45,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerlockchange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerlockchange"
     , value: cb' (Cb (const ((value) $> true)))
     })
@@ -61,8 +61,8 @@ instance Attr anything OnPointerlockchange (Event.Event  (Effect Unit) ) where
       { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerlockchange (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnPointerlockchange stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnPointerlockchange iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "pointerlockchange", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -72,7 +72,7 @@ instance Attr anything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  (Effe
         { key: "pointerlockchange", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerlockchange (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerlockchange", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointerlockchange", value: cb' (Cb (const value)) }
@@ -86,8 +86,8 @@ instance Attr anything OnPointerlockchange (Event.Event  (Effect Boolean) ) wher
       { key: "pointerlockchange", value: cb' (Cb (const value)) }
 
 instance Attr anything OnPointerlockchange (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnPointerlockchange stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnPointerlockchange iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "pointerlockchange", value: cb' (Cb (const value)) }
 
 instance Attr everything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -95,7 +95,7 @@ instance Attr everything OnPointerlockchange (NonEmpty.NonEmpty Event.Event  Uni
     { key: "pointerlockchange", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
 instance Attr everything OnPointerlockchange (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnPointerlockchange (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "pointerlockchange", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "pointerlockchange", value: unset' })
 instance Attr everything OnPointerlockchange  Unit  where
@@ -106,5 +106,5 @@ instance Attr everything OnPointerlockchange (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "pointerlockchange", value: unset' }
 
 instance Attr everything OnPointerlockchange (ST.ST Global.Global  Unit ) where
-  attr OnPointerlockchange stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "pointerlockchange", value: unset' }
+  attr OnPointerlockchange iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "pointerlockchange", value: unset' }

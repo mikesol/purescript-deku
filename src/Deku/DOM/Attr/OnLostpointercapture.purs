@@ -20,7 +20,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  Cb )
         { key: "lostpointercapture", value: cb' value }
     )
 instance Attr anything OnLostpointercapture (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lostpointercapture", value: cb' (value) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "lostpointercapture", value: cb' value }
@@ -33,8 +33,8 @@ instance Attr anything OnLostpointercapture (Event.Event  Cb ) where
     eventValue <#> \value -> { key: "lostpointercapture", value: cb' value }
 
 instance Attr anything OnLostpointercapture (ST.ST Global.Global  Cb ) where
-  attr OnLostpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value -> { key: "lostpointercapture", value: cb' value }
+  attr OnLostpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value -> { key: "lostpointercapture", value: cb' value }
 
 instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
   attr OnLostpointercapture bothValues = unsafeAttribute $ Both (pure 
@@ -45,7 +45,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnLostpointercapture (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lostpointercapture"
     , value: cb' (Cb (const ((value) $> true)))
     })
@@ -61,8 +61,8 @@ instance Attr anything OnLostpointercapture (Event.Event  (Effect Unit) ) where
       { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLostpointercapture (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnLostpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnLostpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -72,7 +72,7 @@ instance Attr anything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  (Eff
         { key: "lostpointercapture", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnLostpointercapture (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "lostpointercapture", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "lostpointercapture", value: cb' (Cb (const value)) }
@@ -86,8 +86,8 @@ instance Attr anything OnLostpointercapture (Event.Event  (Effect Boolean) ) whe
       { key: "lostpointercapture", value: cb' (Cb (const value)) }
 
 instance Attr anything OnLostpointercapture (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnLostpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \value ->
+  attr OnLostpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \value ->
       { key: "lostpointercapture", value: cb' (Cb (const value)) }
 
 instance Attr everything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -95,7 +95,7 @@ instance Attr everything OnLostpointercapture (NonEmpty.NonEmpty Event.Event  Un
     { key: "lostpointercapture", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "lostpointercapture", value: unset' })
 instance Attr everything OnLostpointercapture (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnLostpointercapture (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "lostpointercapture", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "lostpointercapture", value: unset' })
 instance Attr everything OnLostpointercapture  Unit  where
@@ -106,5 +106,5 @@ instance Attr everything OnLostpointercapture (Event.Event  Unit ) where
     eventValue <#> \_ -> { key: "lostpointercapture", value: unset' }
 
 instance Attr everything OnLostpointercapture (ST.ST Global.Global  Unit ) where
-  attr OnLostpointercapture stValue = unsafeAttribute $ This $
-    stValue <#> \_ -> { key: "lostpointercapture", value: unset' }
+  attr OnLostpointercapture iValue = unsafeAttribute $ This $
+    iValue <#> \_ -> { key: "lostpointercapture", value: unset' }

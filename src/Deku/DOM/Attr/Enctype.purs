@@ -19,7 +19,7 @@ instance Attr Form_ Enctype (NonEmpty.NonEmpty Event.Event  String ) where
     { key: "enctype", value: prop' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "enctype", value: prop' value })
 instance Attr Form_ Enctype (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Enctype (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr Enctype (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "enctype", value: prop' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "enctype", value: prop' value })
 instance Attr Form_ Enctype  String  where
@@ -30,7 +30,7 @@ instance Attr Form_ Enctype (Event.Event  String ) where
     \value -> { key: "enctype", value: prop' value }
 
 instance Attr Form_ Enctype (ST.ST Global.Global  String ) where
-  attr Enctype stValue = unsafeAttribute $ This $ stValue <#>
+  attr Enctype iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "enctype", value: prop' value }
 
 instance Attr everything Enctype (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -38,15 +38,15 @@ instance Attr everything Enctype (NonEmpty.NonEmpty Event.Event  Unit ) where
     { key: "enctype", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "enctype", value: unset' })
 instance Attr everything Enctype (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Enctype (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr Enctype (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "enctype", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "enctype", value: unset' })
 instance Attr everything Enctype  Unit  where
-  attr Enctype _ = unsafeAttribute $ This $ pure $ { key: "enctype", value: unset' }
+  attr Enctype _ = unsafeAttribute $ This $ { key: "enctype", value: unset' }
 instance Attr everything Enctype (Event.Event  Unit ) where
   attr Enctype eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
     { key: "enctype", value: unset' }
 
 instance Attr everything Enctype (ST.ST Global.Global  Unit ) where
-  attr Enctype stValue = unsafeAttribute $ This $ stValue <#> \_ ->
+  attr Enctype iValue = unsafeAttribute $ This $ iValue # \_ ->
     { key: "enctype", value: unset' }

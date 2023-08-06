@@ -18,7 +18,7 @@ instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  Cb ) where
     { key: "pointerenter", value: cb' (NonEmpty.head bothValues) })
     (NonEmpty.tail bothValues <#> \value -> { key: "pointerenter", value: cb' value })
 instance Attr anything OnPointerenter (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerenter", value: cb' (value) })
     (Tuple.snd bothValues <#> \value -> { key: "pointerenter", value: cb' value })
 instance Attr anything OnPointerenter  Cb  where
@@ -29,7 +29,7 @@ instance Attr anything OnPointerenter (Event.Event  Cb ) where
     \value -> { key: "pointerenter", value: cb' value }
 
 instance Attr anything OnPointerenter (ST.ST Global.Global  Cb ) where
-  attr OnPointerenter stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnPointerenter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "pointerenter", value: cb' value }
 
 instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
@@ -39,7 +39,7 @@ instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Un
         { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
     )
 instance Attr anything OnPointerenter (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerenter", value: cb' (Cb (const ((value) $> true))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
@@ -52,7 +52,7 @@ instance Attr anything OnPointerenter (Event.Event  (Effect Unit) ) where
     \value -> { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerenter (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnPointerenter stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnPointerenter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "pointerenter", value: cb' (Cb (const (value $> true))) }
 
 instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
@@ -62,7 +62,7 @@ instance Attr anything OnPointerenter (NonEmpty.NonEmpty Event.Event  (Effect Bo
         { key: "pointerenter", value: cb' (Cb (const value)) }
     )
 instance Attr anything OnPointerenter (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \value ->  
+  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
     { key: "pointerenter", value: cb' (Cb (const (value))) })
     ( Tuple.snd bothValues <#> \value ->
         { key: "pointerenter", value: cb' (Cb (const value)) }
@@ -75,7 +75,7 @@ instance Attr anything OnPointerenter (Event.Event  (Effect Boolean) ) where
     \value -> { key: "pointerenter", value: cb' (Cb (const value)) }
 
 instance Attr anything OnPointerenter (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnPointerenter stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnPointerenter iValue = unsafeAttribute $ This $ iValue #
     \value -> { key: "pointerenter", value: cb' (Cb (const value)) }
 
 instance Attr everything OnPointerenter (NonEmpty.NonEmpty Event.Event  Unit ) where
@@ -83,7 +83,7 @@ instance Attr everything OnPointerenter (NonEmpty.NonEmpty Event.Event  Unit ) w
     { key: "pointerenter", value: unset' })
     (NonEmpty.tail bothValues <#> \_ -> { key: "pointerenter", value: unset' })
 instance Attr everything OnPointerenter (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues <#> \_ ->  
+  attr OnPointerenter (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
     { key: "pointerenter", value: unset' })
     (Tuple.snd bothValues <#> \_ -> { key: "pointerenter", value: unset' })
 instance Attr everything OnPointerenter  Unit  where
@@ -94,5 +94,5 @@ instance Attr everything OnPointerenter (Event.Event  Unit ) where
     \_ -> { key: "pointerenter", value: unset' }
 
 instance Attr everything OnPointerenter (ST.ST Global.Global  Unit ) where
-  attr OnPointerenter stValue = unsafeAttribute $ This $ stValue <#>
+  attr OnPointerenter iValue = unsafeAttribute $ This $ iValue #
     \_ -> { key: "pointerenter", value: unset' }
