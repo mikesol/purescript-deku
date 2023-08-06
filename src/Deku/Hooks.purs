@@ -13,13 +13,13 @@
 module Deku.Hooks
   ( (<#~>)
   , (<$~>)
-  , useHot
   , cycle
   , dynOptions
   , guard
   , guardWith
   , switcher
   , switcherFlipped
+  , usePure
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
@@ -44,22 +44,24 @@ import Bolson.Control (Flatten, behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Bolson.Core as BCore
+import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
-import Data.Functor.Product (Product(..))
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
 import FRP.Behavior (sample)
 import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge, sampleOnRight)
+import FRP.Event.Class (once)
 
 flattenArgs
   :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
@@ -68,8 +70,6 @@ flattenArgs =
   , ids: unwrap >>> _.ids
   , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
   , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
-  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) ->
-      redecorateDeferredPayload
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
@@ -123,16 +123,6 @@ useState a makeHook = Deku.do
   pe <- usePure
   makeHook (push /\ merge [ pe $> a, event ])
 
--- | A hot state hook.
-useHot
-  :: forall a
-   . a
-  -> Hook ((a -> Effect Unit) /\ Product (ST Global) Event a)
-useHot a f = Deku.do
-  push /\ event <- useState'
-  ref <- useRefST a event
-  f (Tuple push (Product (Tuple ref event)))
-
 guard :: Event Boolean -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b
 
@@ -159,7 +149,7 @@ useEffect e f = Nut go'
       exv = merge
         [ sample (__internalDekuFlatten nf i di) ee
         , ( sampleOnRight ee
-              ( ( \effect ff -> ff
+              ( ( \effect ff -> let _ = spy "oneOffEffect" true in ff
                     (oneOffEffect { effect })
                 ) <$> e
               )
@@ -180,7 +170,8 @@ useMemoized e f = Nut go'
   go i di = behaving' \ee _ subscribe -> do
     { event, push } <- createPure
     subscribe e (\_ -> push)
-    let Nut nf = f event
+    -- we `once e` in case it has an initial value
+    let Nut nf = f (once e <|> event)
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
 -- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.

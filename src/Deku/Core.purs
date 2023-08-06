@@ -46,16 +46,15 @@ import Prelude
 
 import Bolson.Control (Flatten, behaving)
 import Bolson.Control as BControl
+import Control.Monad.ST as ST
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
-import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Data.List (List)
-import Data.List as List
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
@@ -184,6 +183,7 @@ type GiveNewParent payload =
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
+  , deferralPath :: List Int
   , ctor :: NutF payload
   , raiseId :: String -> ST.ST Region.Global Unit
   }
@@ -280,7 +280,6 @@ newtype DOMInterpret payload = DOMInterpret
   { ids :: ST Global Int
   , deferPayload :: List Int -> payload -> payload
   , forcePayload :: List Int -> payload
-  , redecorateDeferredPayload :: List Int -> payload -> payload
   , associateWithUnsubscribe :: AssociateWithUnsubscribe -> payload
   , oneOffEffect :: OneOffEffect -> payload
   , makeRoot :: MakeRoot -> payload
@@ -309,8 +308,6 @@ flattenArgs =
   { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
   , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
   , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
-  , redecorateDeferredPayload: \(DOMInterpret { redecorateDeferredPayload }) ->
-      redecorateDeferredPayload
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
@@ -342,7 +339,7 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
     -> Node' payload
   go
     fes
-    { parent, scope, raiseId, pos, dynFamily, ez }
+    { parent, scope, raiseId, pos, dynFamily, ez, deferralPath }
     di@
       ( DOMInterpret
           { ids
@@ -382,6 +379,7 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
             , scope
             , ez: false
             , raiseId: \_ -> pure unit
+            , deferralPath
             -- clear the pos
             -- as we don't want the pointer's positional information
             -- trickling down to what the pointer points to
@@ -410,7 +408,7 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
       )
       kx
     for_ [ removeDynBeacon { id: show me } ]
-      (kx <<< deferPayload List.Nil)
+      (kx <<< deferPayload deferralPath)
     subscribe evt
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.

@@ -1,14 +1,9 @@
 module Deku.DOM.Attr.Bgcolor where
 
-import Data.Tuple as Tuple
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
-import Data.Functor.Product as Product
+
 import Prelude
 import Data.Either (Either(..))
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
-
 import Deku.DOM.Elt.Body (Body_)
 import Deku.DOM.Elt.Col (Col_)
 import Deku.DOM.Elt.Colgroup (Colgroup_)

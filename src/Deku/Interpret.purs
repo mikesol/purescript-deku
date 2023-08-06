@@ -42,7 +42,6 @@ import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
 import Data.Monoid.Endo (Endo(..))
 import Data.Newtype (unwrap)
-import Data.Profunctor (lcmap)
 import Data.String.Utils (includes)
 import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
 import Deku.Core as Core
@@ -50,9 +49,6 @@ import Effect (Effect)
 import FRP.Behavior (sample)
 import FRP.Event (create, subscribe)
 import Safe.Coerce (coerce)
-
-execute :: forall ignore a b c. (a -> b -> c) -> a -> ignore -> b -> c
-execute f a _ = f a
 
 -- foreign
 data FFIDOMSnapshot
@@ -143,15 +139,13 @@ giveNewParentOrReconstruct
 giveNewParentOrReconstruct
   di@
     ( DOMInterpret
-        { redecorateDeferredPayload
-        , associateWithUnsubscribe
+        { associateWithUnsubscribe
         }
     )
   executor
   just
   roj
   gnp
-  ipl
   ffi = do
   let
     hasIdAndInScope = giveNewParent_ just roj gnp ffi
@@ -174,6 +168,7 @@ giveNewParentOrReconstruct
             gnp.ctor
             { dynFamily
             , ez
+            , deferralPath: gnp.deferralPath
             , parent: Just parent
             , pos
             , raiseId: newRaiseId
@@ -182,7 +177,7 @@ giveNewParentOrReconstruct
             di
         pump <- liftST create
         unsubscribe <- liftST $ subscribe
-          (redecorateDeferredPayload ipl <$> (sample ohBehave pump.event))
+          (sample ohBehave pump.event)
           executor
         pump.push identity
         fetchedId <- liftST $ Ref.read myId
@@ -238,30 +233,29 @@ fullDOMInterpret seed deferredCache executor =
           s <- Ref.read seed
           void $ Ref.modify (add 1) seed
           pure s
-      , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE
+      , associateWithUnsubscribe:  associateWithUnsubscribe_
       , deferPayload: deferPayloadE deferredCache
-      , oneOffEffect: execute \{ effect } _ -> effect
-      , forcePayload: execute $ forcePayloadE deferredCache executor
-      , makeElement: execute $ makeElement_ runOnJust false
-      , makeDynBeacon: execute $ makeDynBeacon_ runOnJust false
-      , attributeParent: execute $ attributeParent_ runOnJust
-      , makeRoot: execute $ makeRoot_
-      , makeText: execute $ makeText_ runOnJust false (maybe unit)
-      , makePursx: execute $ makePursx_ runOnJust false (maybe unit)
-      , setProp: execute $ setProp_ false
-      , setCb: execute $ setCb_ false
-      , unsetAttribute: execute $ unsetAttribute_ false
-      , setText: execute $ setText_
-      , sendToPos: execute $ sendToPos
-      , removeDynBeacon: execute $
+      , oneOffEffect: \{ effect } _ -> effect
+      , forcePayload:  forcePayloadE deferredCache executor
+      , makeElement:  makeElement_ runOnJust false
+      , makeDynBeacon:  makeDynBeacon_ runOnJust false
+      , attributeParent:  attributeParent_ runOnJust
+      , makeRoot:  makeRoot_
+      , makeText:  makeText_ runOnJust false (maybe unit)
+      , makePursx:  makePursx_ runOnJust false (maybe unit)
+      , setProp:  setProp_ false
+      , setCb:  setCb_ false
+      , unsetAttribute:  unsetAttribute_ false
+      , setText:  setText_
+      , sendToPos:  sendToPos
+      , removeDynBeacon: 
           removeDynBeacon_
-      , deleteFromCache: execute $
+      , deleteFromCache: 
           deleteFromCache_
       , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
           runOnJust
           gnp
-      , disconnectElement: execute $
+      , disconnectElement: 
           disconnectElement_
       }
   in
@@ -392,38 +386,27 @@ deferPayloadE
    . Functor o
   => MonadST Global o
   => Ref.STRef Global
-       (Map.Map (List.List Int) (Array (List.List Int -> i -> o Unit)))
+       (Map.Map (List.List Int) (Array (i -> o Unit)))
   -> List.List Int
-  -> (List.List Int -> i -> o Unit)
-  -> List.List Int
+  -> (i -> o Unit)
   -> i
   -> o Unit
-deferPayloadE deferredCache l p _ _ = do
+deferPayloadE deferredCache l p _ = do
   void $ liftST $ Ref.modify
     ( flip Map.alter l case _ of
-        Nothing -> Just [ p ]
+        Nothing ->Just [ p ]
         Just x -> Just (x <> [ p ])
     )
     deferredCache
 
-redecorateDeferredPayloadE
-  :: forall i o
-   . Functor o
-  => MonadST Global o
-  => List.List Int
-  -> (List.List Int -> i -> o Unit)
-  -> List.List Int
-  -> i
-  -> o Unit
-redecorateDeferredPayloadE l1 p = lcmap (l1 <> _) p
 
 forcePayloadE
   :: forall i o
    . Functor o
   => MonadST Global o
   => Ref.STRef Global
-       (Map.Map (List.List Int) (Array (List.List Int -> i -> o Unit)))
-  -> ((List.List Int -> i -> o Unit) -> o Unit)
+       (Map.Map (List.List Int) (Array (i -> o Unit)))
+  -> ((i -> o Unit) -> o Unit)
   -> List.List Int
   -> i
   -> o Unit
@@ -443,16 +426,16 @@ forcePayloadE deferredCache executor l = fn
           { newMap: Endo (Map.delete k)
           , instructions: Endo $ Array.cons v
           }
-    for_ (join $ unwrap instructions []) executor
     void $ liftST $ Ref.modify (unwrap newMap)
       deferredCache
+    for_ (join $ unwrap instructions []) executor
 
 type FunctionOfArrayInstructionsU =
   Ref.STRef Global (Array Instruction) -> ST Global Unit
 
-type STPayload = List.List Int -> FunctionOfArrayInstructionsU
+type STPayload = FunctionOfArrayInstructionsU
 
-type EffectfulPayload = List.List Int -> FunctionOfFFIDOMSnapshotU
+type EffectfulPayload = FunctionOfFFIDOMSnapshotU
 
 type EffectfulExecutor = EffectfulPayload -> Effect Unit
 type STExecutor = STPayload -> ST Global Unit
@@ -467,26 +450,25 @@ ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
       s <- Ref.read seed
       void $ Ref.modify (add 1) seed
       pure s
-  , associateWithUnsubscribe: execute \_ _ -> pure unit
+  , associateWithUnsubscribe: \_ _ -> pure unit
   , deferPayload: deferPayloadE deferredCache
-  , redecorateDeferredPayload: redecorateDeferredPayloadE
-  , oneOffEffect: execute \_ _ -> pure unit
-  , forcePayload: execute $ forcePayloadE deferredCache executor
-  , makeElement: execute ssrMakeElement
-  , attributeParent: execute \_ _ -> pure unit
-  , makeRoot: execute ssrMakeRoot
-  , makeText: execute ssrMakeText
-  , makePursx: execute ssrMakePursx
-  , setProp: execute ssrSetProp
-  , unsetAttribute: execute ssrUnsetAttribute
-  , makeDynBeacon: execute ssrMakeDynBeacon
-  , setCb: execute \_ _ -> pure unit
-  , setText: execute ssrSetText
-  , sendToPos: execute ssrSendToPos
-  , deleteFromCache: execute ssrDeleteFromCache
-  , removeDynBeacon: execute ssrRemoveDynBeacon
-  , giveNewParent: execute ssrGiveNewParent
-  , disconnectElement: execute ssrDisconnectElement
+  , oneOffEffect: \_ _ -> pure unit
+  , forcePayload:  forcePayloadE deferredCache executor
+  , makeElement: ssrMakeElement
+  , attributeParent: \_ _ -> pure unit
+  , makeRoot: ssrMakeRoot
+  , makeText: ssrMakeText
+  , makePursx: ssrMakePursx
+  , setProp: ssrSetProp
+  , unsetAttribute: ssrUnsetAttribute
+  , makeDynBeacon: ssrMakeDynBeacon
+  , setCb: \_ _ -> pure unit
+  , setText: ssrSetText
+  , sendToPos: ssrSendToPos
+  , deleteFromCache: ssrDeleteFromCache
+  , removeDynBeacon: ssrRemoveDynBeacon
+  , giveNewParent: ssrGiveNewParent
+  , disconnectElement: ssrDisconnectElement
   }
 
 sendToPos :: Core.SendToPos -> FunctionOfFFIDOMSnapshotU
@@ -500,6 +482,7 @@ sendToPos a = \state -> do
       , parent
       , dynFamily
       , id: a.id
+      , deferralPath: List.Nil
       , pos: Just a.pos
       , ez: false
       , raiseId: mempty
@@ -520,30 +503,29 @@ hydratingDOMInterpret seed deferredCache executor =
           s <- Ref.read seed
           void $ Ref.modify (add 1) seed
           pure s
-      , associateWithUnsubscribe: execute $ associateWithUnsubscribe_
-      , redecorateDeferredPayload: redecorateDeferredPayloadE
+      , associateWithUnsubscribe:  associateWithUnsubscribe_
       , deferPayload: deferPayloadE deferredCache
-      , oneOffEffect: execute \{ effect } _ -> effect
-      , forcePayload: execute $ forcePayloadE deferredCache executor
-      , makeElement: execute $ makeElement_ runOnJust true
-      , makeDynBeacon: execute $ makeDynBeacon_ runOnJust true
-      , attributeParent: execute $ attributeParent_ runOnJust
-      , makeRoot: execute $ makeRoot_
-      , makeText: execute $ makeText_ runOnJust true (maybe unit)
-      , makePursx: execute $ makePursx_ runOnJust true (maybe unit)
-      , setProp: execute $ setProp_ true
-      , setCb: execute $ setCb_ true
-      , unsetAttribute: execute $ unsetAttribute_ true
-      , setText: execute $ setText_
-      , sendToPos: execute $ sendToPos
-      , deleteFromCache: execute $
+      , oneOffEffect: \{ effect } _ -> effect
+      , forcePayload:  forcePayloadE deferredCache executor
+      , makeElement:  makeElement_ runOnJust true
+      , makeDynBeacon:  makeDynBeacon_ runOnJust true
+      , attributeParent:  attributeParent_ runOnJust
+      , makeRoot:  makeRoot_
+      , makeText:  makeText_ runOnJust true (maybe unit)
+      , makePursx:  makePursx_ runOnJust true (maybe unit)
+      , setProp:  setProp_ true
+      , setCb:  setCb_ true
+      , unsetAttribute:  unsetAttribute_ true
+      , setText:  setText_
+      , sendToPos:  sendToPos
+      , deleteFromCache: 
           deleteFromCache_
-      , removeDynBeacon: execute $
+      , removeDynBeacon: 
           removeDynBeacon_
       , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
           runOnJust
           gnp
-      , disconnectElement: execute $
+      , disconnectElement: 
           disconnectElement_
       }
   in

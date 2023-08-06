@@ -16,14 +16,12 @@ import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
 import Data.Foldable (for_, traverse_)
-import Data.List as List
 import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
-import Data.Tuple (Tuple(..))
 import Deku.Control (deku)
 import Deku.Core (Node', Nut(..), NutF(..), flattenArgs)
-import Deku.Interpret (FFIDOMSnapshot, FunctionOfFFIDOMSnapshotU, EffectfulPayload, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Exception (error, throwException)
@@ -49,7 +47,7 @@ runInElement' elt eee = do
   seed <- liftST $ RRef.new 0
   cache <- liftST $ RRef.new Map.empty
   let
-    executor f = f List.Nil ffi
+    executor f = f ffi
     bhv = deku elt eee (fullDOMInterpret seed cache executor)
   bang <- liftST $ create
   u <- liftST $ subscribe (sample_ bhv bang.event) executor
@@ -90,7 +88,7 @@ hydrate' children = do
   seed <- liftST $ RRef.new 0
   cache <- liftST $ RRef.new Map.empty
   let
-    executor f = f List.Nil ffi
+    executor f = f ffi
     di = hydratingDOMInterpret seed cache executor
   (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
@@ -101,26 +99,23 @@ hydrate' children = do
       (unsafeCoerce children)
       { parent: Just "deku-root"
       , scope: Local "rootScope"
+      , deferralPath: pure headRedecorator
       , raiseId: \_ -> pure unit
       , ez: true
       , pos: Nothing
       , dynFamily: Nothing
       }
       di
-  (unwrap di).makeRoot { id: me, root } List.Nil ffi
+  (unwrap di).makeRoot { id: me, root } ffi
   bang <- liftST $ create
-  u <- liftST $ subscribe
-    ( map ((unwrap di).redecorateDeferredPayload (pure headRedecorator))
-        (sample_ bhv bang.event)
-    )
-    executor
+  u <- liftST $ subscribe (sample_ bhv bang.event) executor
   bang.push unit
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
     o <- liftST $ RRef.read cache
     for_ o (traverse_ executor)
-    (unwrap di).forcePayload (pure headRedecorator) List.Nil ffi
-    (unwrap di).deleteFromCache { id: me } List.Nil ffi
+    (unwrap di).forcePayload (pure headRedecorator) ffi
+    (unwrap di).deleteFromCache { id: me } ffi
     liftST $ u
     pure ffi
 
@@ -151,22 +146,22 @@ runSSR' topTag = go
     cache <- liftST $ RRef.new Map.empty
     let di = ssrDOMInterpret seed cache mempty
     -- we thunk to create the head redecorator
-    _ <- liftST $ (unwrap di).ids
+    headRedecorator <- liftST $ (unwrap di).ids
     let
       bhv = __internalDekuFlatten
         children
         { parent: Just "deku-root"
         , scope: Local "rootScope"
         , raiseId: \_ -> pure unit
+        , deferralPath: pure headRedecorator
         , ez: true
         , pos: Nothing
         , dynFamily: Nothing
         }
         di
     bang <- createPure
-    u <- subscribePure (sample_ bhv bang.event) executor
+    _ <- subscribePure (sample_ bhv bang.event) (\f -> f instr)
     bang.push unit
-    for_ subscr (\f -> f List.Nil instr)
     RRef.read instr
 
 __internalDekuFlatten

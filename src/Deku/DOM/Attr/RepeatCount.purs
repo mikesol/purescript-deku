@@ -1,14 +1,9 @@
 module Deku.DOM.Attr.RepeatCount where
 
-import Data.Tuple as Tuple
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
-import Data.Functor.Product as Product
+
 import Prelude
 import Data.Either (Either(..))
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
-
 import Deku.DOM.Elt.Set (Set_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)

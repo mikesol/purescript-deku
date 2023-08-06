@@ -1,9 +1,6 @@
 module Deku.DOM.Attr.OnVolumechange where
 
-import Data.Tuple as Tuple
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
-import Data.Functor.Product as Product
+
 import Prelude
 import Data.Either (Either(..))
 import FRP.Event as Event

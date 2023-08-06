@@ -25,7 +25,6 @@ import Data.Either (Either(..))
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Foldable (foldl, for_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.List as List
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
@@ -108,7 +107,7 @@ elementify tag atts children = Node $ Element go
 
   go :: Node' payload
   go
-    { parent, scope, raiseId, pos, dynFamily, ez }
+    { parent, scope, raiseId, pos, deferralPath, dynFamily, ez }
     di@
       ( DOMInterpret
           { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
@@ -120,12 +119,13 @@ elementify tag atts children = Node $ Element go
       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
 
     for_ left \v -> kx (unsafeSetAttribute di (show me) v)
-    kx $ deferPayload List.Nil $ deleteFromCache { id: show me }
+    kx $ deferPayload deferralPath $ deleteFromCache { id: show me }
     subscribe
       ( sample
           ( __internalDekuFlatten
               children
               { parent: Just $ show me
+              , deferralPath
               , scope
               , ez: true
               , raiseId: \_ -> pure unit
@@ -313,7 +313,7 @@ text_' t1 t2 = Nut go'
     :: forall payload
      . Node' payload
   go
-    { parent, scope, raiseId, dynFamily, pos, ez }
+    { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
     di@
       ( DOMInterpret
           { ids, makeText, deferPayload, deleteFromCache, attributeParent }
@@ -325,7 +325,7 @@ text_' t1 t2 = Nut go'
       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
     for_ t1 \t ->
       kx $ unsafeSetText di (show me) t
-    kx $ deferPayload List.Nil (deleteFromCache { id: show me })
+    kx $ deferPayload deferralPath (deleteFromCache { id: show me })
     subscribe
       ( maybe empty
           ( \iii -> sampleOnRight ee
@@ -367,7 +367,6 @@ deku root (Nut cc) = go cc
           , forcePayload
           , deferPayload
           , deleteFromCache
-          , redecorateDeferredPayload
           }
       ) = behaving \ee kx subscribe -> do
     let me = "deku-root"
@@ -383,6 +382,7 @@ deku root (Nut cc) = go cc
             ( __internalDekuFlatten
                 children
                 { parent: Just me
+                , deferralPath: pure headRedecorator
                 , scope: Local "rootScope"
                 , raiseId: \_ -> pure unit
                 , ez: true
@@ -391,7 +391,7 @@ deku root (Nut cc) = go cc
                 }
                 di
             )
-            (map (lcmap (redecorateDeferredPayload (pure headRedecorator))) ee)
+            ee
         )
       )
 

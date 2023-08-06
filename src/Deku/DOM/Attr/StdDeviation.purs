@@ -1,14 +1,9 @@
 module Deku.DOM.Attr.StdDeviation where
 
-import Data.Tuple as Tuple
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
-import Data.Functor.Product as Product
+
 import Prelude
 import Data.Either (Either(..))
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
-
 import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
 import Deku.DOM.Elt.FeDropShadow (FeDropShadow_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
