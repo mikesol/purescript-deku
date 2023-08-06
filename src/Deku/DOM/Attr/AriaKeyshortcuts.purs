@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -30,412 +30,145 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaKeyshortcuts = AriaKeyshortcuts
 
-instance Attr Circle_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Circle_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Circle_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Circle_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Circle_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Ellipse_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Ellipse_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Ellipse_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Ellipse_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Ellipse_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr ForeignObject_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr ForeignObject_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr ForeignObject_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr ForeignObject_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr ForeignObject_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr G_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr G_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr G_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr G_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr G_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Line_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Line_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Line_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Line_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Line_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Marker_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Marker_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Marker_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Marker_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Marker_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Path_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Path_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Path_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Path_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Path_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polygon_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Polygon_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Polygon_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Polygon_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polygon_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polyline_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Polyline_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Polyline_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Polyline_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Polyline_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Rect_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Rect_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Rect_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Rect_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Rect_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Svg_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Svg_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Svg_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Svg_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Svg_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Symbol_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Symbol_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Symbol_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Symbol_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Symbol_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Text_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Text_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Text_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Text_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Text_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr TextPath_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr TextPath_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr TextPath_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr TextPath_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr TextPath_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Tspan_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Tspan_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Tspan_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Tspan_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Tspan_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Use_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr Use_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr Use_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr Use_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr Use_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr View_ AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: prop' (NonEmpty.head bothValues) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
-instance Attr View_ AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-keyshortcuts", value: prop' (value) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "aria-keyshortcuts", value: prop' value }
-    )
 instance Attr View_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: prop' value }
 instance Attr View_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr View_ AriaKeyshortcuts (ST.ST Global.Global  String ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
-instance Attr everything AriaKeyshortcuts (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaKeyshortcuts bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-keyshortcuts", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-keyshortcuts", value: unset' })
-instance Attr everything AriaKeyshortcuts (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaKeyshortcuts (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "aria-keyshortcuts", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "aria-keyshortcuts", value: unset' })
 instance Attr everything AriaKeyshortcuts  Unit  where
-  attr AriaKeyshortcuts _ = unsafeAttribute $ This $ pure $
+  attr AriaKeyshortcuts _ = unsafeAttribute $ Left $  
     { key: "aria-keyshortcuts", value: unset' }
 instance Attr everything AriaKeyshortcuts (Event.Event  Unit ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ That $ eventValue
-    <#> \_ -> { key: "aria-keyshortcuts", value: unset' }
-
-instance Attr everything AriaKeyshortcuts (ST.ST Global.Global  Unit ) where
-  attr AriaKeyshortcuts iValue = unsafeAttribute $ This $ iValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
     <#> \_ -> { key: "aria-keyshortcuts", value: unset' }

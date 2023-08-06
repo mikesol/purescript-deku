@@ -21,6 +21,7 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
 import Control.Plus (empty)
+import Data.Either (Either(..))
 import Data.FastVect.FastVect (Vect, singleton, index)
 import Data.Foldable (foldl, for_)
 import Data.FunctorWithIndex (mapWithIndex)
@@ -28,7 +29,6 @@ import Data.List as List
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.These (These(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
 import FRP.Behavior (sample)
@@ -100,9 +100,8 @@ elementify tag atts children = Node $ Element go
   where
   { left, right } = foldl
     ( \b a -> case unsafeUnAttribute a of
-        This l -> b { left = b.left <> [ l ] }
-        That r -> b { right = b.right <> [ r ] }
-        Both l r -> b { left = b.left <> [ l ], right = b.right <> [ r ] }
+        Left l -> b { left = b.left <> [ l ] }
+        Right r -> b { right = b.right <> [ r ] }
     )
     { left: [], right: [] }
     atts

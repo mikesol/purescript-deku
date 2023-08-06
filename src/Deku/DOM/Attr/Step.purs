@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -14,37 +14,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Step = Step
 
-instance Attr Input_ Step (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Step bothValues = unsafeAttribute $ Both (pure 
-    { key: "step", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "step", value: prop' value })
-instance Attr Input_ Step (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Step (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "step", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "step", value: prop' value })
 instance Attr Input_ Step  String  where
-  attr Step value = unsafeAttribute $ This $ pure $
+  attr Step value = unsafeAttribute $ Left $  
     { key: "step", value: prop' value }
 instance Attr Input_ Step (Event.Event  String ) where
-  attr Step eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr Step eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "step", value: prop' value }
 
-instance Attr Input_ Step (ST.ST Global.Global  String ) where
-  attr Step iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "step", value: prop' value }
 
-instance Attr everything Step (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Step bothValues = unsafeAttribute $ Both (pure  { key: "step", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "step", value: unset' })
-instance Attr everything Step (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Step (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "step", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "step", value: unset' })
 instance Attr everything Step  Unit  where
-  attr Step _ = unsafeAttribute $ This $ { key: "step", value: unset' }
+  attr Step _ = unsafeAttribute $ Left $  { key: "step", value: unset' }
 instance Attr everything Step (Event.Event  Unit ) where
-  attr Step eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "step", value: unset' }
-
-instance Attr everything Step (ST.ST Global.Global  Unit ) where
-  attr Step iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Step eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "step", value: unset' }

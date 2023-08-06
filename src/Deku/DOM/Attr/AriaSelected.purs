@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -30,344 +30,145 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data AriaSelected = AriaSelected
 
-instance Attr Circle_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Circle_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Circle_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Circle_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Circle_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Ellipse_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Ellipse_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Ellipse_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Ellipse_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Ellipse_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr ForeignObject_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr ForeignObject_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr ForeignObject_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr ForeignObject_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr ForeignObject_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr G_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr G_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr G_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr G_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr G_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Line_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Line_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Line_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Line_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Line_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Marker_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Marker_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Marker_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Marker_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Marker_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Path_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Path_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Path_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Path_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Path_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polygon_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Polygon_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Polygon_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Polygon_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polygon_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polyline_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Polyline_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Polyline_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Polyline_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Polyline_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Rect_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Rect_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Rect_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Rect_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Rect_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Svg_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Svg_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Svg_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Svg_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Svg_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Symbol_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Symbol_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Symbol_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Symbol_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Symbol_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Text_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Text_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Text_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Text_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Text_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr TextPath_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr TextPath_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr TextPath_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr TextPath_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr TextPath_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Tspan_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Tspan_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Tspan_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Tspan_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Tspan_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Use_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr Use_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr Use_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr Use_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr Use_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr View_ AriaSelected (NonEmpty.NonEmpty Event.Event  String ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "aria-selected", value: prop' value })
-instance Attr View_ AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "aria-selected", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "aria-selected", value: prop' value })
 instance Attr View_ AriaSelected  String  where
-  attr AriaSelected value = unsafeAttribute $ This $ pure $
+  attr AriaSelected value = unsafeAttribute $ Left $  
     { key: "aria-selected", value: prop' value }
 instance Attr View_ AriaSelected (Event.Event  String ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr View_ AriaSelected (ST.ST Global.Global  String ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "aria-selected", value: prop' value }
 
-instance Attr everything AriaSelected (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr AriaSelected bothValues = unsafeAttribute $ Both (pure 
-    { key: "aria-selected", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "aria-selected", value: unset' })
-instance Attr everything AriaSelected (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr AriaSelected (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "aria-selected", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "aria-selected", value: unset' })
 instance Attr everything AriaSelected  Unit  where
-  attr AriaSelected _ = unsafeAttribute $ This $ pure $
+  attr AriaSelected _ = unsafeAttribute $ Left $  
     { key: "aria-selected", value: unset' }
 instance Attr everything AriaSelected (Event.Event  Unit ) where
-  attr AriaSelected eventValue = unsafeAttribute $ That $ eventValue <#>
-    \_ -> { key: "aria-selected", value: unset' }
-
-instance Attr everything AriaSelected (ST.ST Global.Global  Unit ) where
-  attr AriaSelected iValue = unsafeAttribute $ This $ iValue #
+  attr AriaSelected eventValue = unsafeAttribute $ Right $ eventValue <#>
     \_ -> { key: "aria-selected", value: unset' }

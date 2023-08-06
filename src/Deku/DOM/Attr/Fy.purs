@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -14,36 +14,15 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Fy = Fy
 
-instance Attr RadialGradient_ Fy (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Fy bothValues = unsafeAttribute $ Both (pure 
-    { key: "fy", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "fy", value: prop' value })
-instance Attr RadialGradient_ Fy (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Fy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "fy", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "fy", value: prop' value })
 instance Attr RadialGradient_ Fy  String  where
-  attr Fy value = unsafeAttribute $ This $ { key: "fy", value: prop' value }
+  attr Fy value = unsafeAttribute $ Left $  { key: "fy", value: prop' value }
 instance Attr RadialGradient_ Fy (Event.Event  String ) where
-  attr Fy eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr Fy eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "fy", value: prop' value }
 
-instance Attr RadialGradient_ Fy (ST.ST Global.Global  String ) where
-  attr Fy iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "fy", value: prop' value }
 
-instance Attr everything Fy (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Fy bothValues = unsafeAttribute $ Both (pure  { key: "fy", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "fy", value: unset' })
-instance Attr everything Fy (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Fy (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->   { key: "fy", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "fy", value: unset' })
 instance Attr everything Fy  Unit  where
-  attr Fy _ = unsafeAttribute $ This $ { key: "fy", value: unset' }
+  attr Fy _ = unsafeAttribute $ Left $  { key: "fy", value: unset' }
 instance Attr everything Fy (Event.Event  Unit ) where
-  attr Fy eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "fy", value: unset' }
-
-instance Attr everything Fy (ST.ST Global.Global  Unit ) where
-  attr Fy iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Fy eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "fy", value: unset' }

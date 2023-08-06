@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -54,800 +54,337 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data ClipPath = ClipPath
 
-instance Attr Circle_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Circle_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Circle_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Circle_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Circle_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr ClipPath_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr ClipPath_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr ClipPath_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr ClipPath_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr ClipPath_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Defs_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Defs_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Defs_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Defs_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Defs_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Ellipse_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Ellipse_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Ellipse_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Ellipse_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Ellipse_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeBlend_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeBlend_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeBlend_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeBlend_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeBlend_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeColorMatrix_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeColorMatrix_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeColorMatrix_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeColorMatrix_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeColorMatrix_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeComponentTransfer_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeComponentTransfer_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeComponentTransfer_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeComponentTransfer_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeComponentTransfer_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeComposite_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeComposite_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeComposite_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeComposite_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeComposite_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeConvolveMatrix_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeConvolveMatrix_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeConvolveMatrix_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeConvolveMatrix_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeConvolveMatrix_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeDiffuseLighting_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeDiffuseLighting_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeDiffuseLighting_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeDiffuseLighting_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeDiffuseLighting_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeDisplacementMap_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeDisplacementMap_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeDisplacementMap_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeDisplacementMap_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeDisplacementMap_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeFlood_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeFlood_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeFlood_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeFlood_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeFlood_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeGaussianBlur_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeGaussianBlur_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeGaussianBlur_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeGaussianBlur_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeGaussianBlur_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeImage_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeImage_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeImage_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeImage_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeImage_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeMerge_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeMerge_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeMerge_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeMerge_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeMerge_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeMorphology_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeMorphology_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeMorphology_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeMorphology_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeMorphology_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeOffset_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeOffset_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeOffset_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeOffset_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeOffset_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeSpecularLighting_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeSpecularLighting_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeSpecularLighting_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeSpecularLighting_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeSpecularLighting_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeTile_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeTile_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeTile_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeTile_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeTile_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeTurbulence_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr FeTurbulence_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr FeTurbulence_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr FeTurbulence_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr FeTurbulence_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Filter_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Filter_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Filter_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Filter_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Filter_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr ForeignObject_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr ForeignObject_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr ForeignObject_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr ForeignObject_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr ForeignObject_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr G_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr G_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr G_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr G_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr G_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Image_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Image_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Image_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Image_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Image_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Line_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Line_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Line_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Line_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Line_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr LinearGradient_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr LinearGradient_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr LinearGradient_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr LinearGradient_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr LinearGradient_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Marker_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Marker_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Marker_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Marker_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Marker_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Mask_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Mask_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Mask_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Mask_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Mask_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Path_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Path_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Path_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Path_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Path_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Pattern_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Pattern_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Pattern_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Pattern_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Pattern_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Polygon_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Polygon_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Polygon_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Polygon_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Polygon_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Polyline_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Polyline_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Polyline_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Polyline_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Polyline_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr RadialGradient_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr RadialGradient_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr RadialGradient_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr RadialGradient_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr RadialGradient_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Rect_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Rect_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Rect_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Rect_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Rect_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Svg_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Svg_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Svg_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Svg_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Svg_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Switch_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Switch_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Switch_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Switch_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Switch_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Symbol_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Symbol_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Symbol_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Symbol_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Symbol_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Text_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Text_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Text_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Text_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Text_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr TextPath_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr TextPath_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr TextPath_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr TextPath_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr TextPath_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Tspan_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Tspan_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Tspan_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Tspan_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Tspan_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Use_ ClipPath (NonEmpty.NonEmpty Event.Event  String ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "clip-path", value: prop' value })
-instance Attr Use_ ClipPath (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "clip-path", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "clip-path", value: prop' value })
 instance Attr Use_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute $ This $ pure $
+  attr ClipPath value = unsafeAttribute $ Left $  
     { key: "clip-path", value: prop' value }
 instance Attr Use_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "clip-path", value: prop' value }
 
-instance Attr Use_ ClipPath (ST.ST Global.Global  String ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "clip-path", value: prop' value }
 
-instance Attr everything ClipPath (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr ClipPath bothValues = unsafeAttribute $ Both (pure 
-    { key: "clip-path", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "clip-path", value: unset' })
-instance Attr everything ClipPath (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr ClipPath (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "clip-path", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "clip-path", value: unset' })
 instance Attr everything ClipPath  Unit  where
-  attr ClipPath _ = unsafeAttribute $ This $ pure $
+  attr ClipPath _ = unsafeAttribute $ Left $  
     { key: "clip-path", value: unset' }
 instance Attr everything ClipPath (Event.Event  Unit ) where
-  attr ClipPath eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "clip-path", value: unset' }
-
-instance Attr everything ClipPath (ST.ST Global.Global  Unit ) where
-  attr ClipPath iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr ClipPath eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "clip-path", value: unset' }

@@ -15,7 +15,7 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
-import Data.Foldable (for_)
+import Data.Foldable (for_, traverse_)
 import Data.List as List
 import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
@@ -23,11 +23,12 @@ import Data.Newtype (unwrap)
 import Data.Tuple (Tuple(..))
 import Deku.Control (deku)
 import Deku.Core (Node', Nut(..), NutF(..), flattenArgs)
-import Deku.Interpret (FFIDOMSnapshot, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Interpret (FFIDOMSnapshot, FunctionOfFFIDOMSnapshotU, EffectfulPayload, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Exception (error, throwException)
-import FRP.Event (subscribe)
+import FRP.Behavior (sample_)
+import FRP.Event (create, createPure, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as DOM
@@ -49,12 +50,13 @@ runInElement' elt eee = do
   cache <- liftST $ RRef.new Map.empty
   let
     executor f = f List.Nil ffi
-  Tuple sub (Tuple unsub evt) <- liftST $ deku elt eee
-    (fullDOMInterpret seed cache executor)
-  u <- liftST $ subscribe evt executor
-  for_ sub executor
+    bhv = deku elt eee (fullDOMInterpret seed cache executor)
+  bang <- liftST $ create
+  u <- liftST $ subscribe (sample_ bhv bang.event) executor
+  bang.push unit
   pure do
-    for_ unsub executor
+    o <- liftST $ RRef.read cache
+    for_ o (traverse_ executor)
     liftST u
     pure ffi
 
@@ -94,24 +96,29 @@ hydrate' children = do
   let me = "deku-root"
   root <- dekuRoot
   headRedecorator <- liftST $ (unwrap di).ids
-  Tuple sub (Tuple unsub evt) <- liftST $ __internalDekuFlatten
-    (unsafeCoerce children)
-    { parent: Just "deku-root"
-    , scope: Local "rootScope"
-    , raiseId: \_ -> pure unit
-    , ez: true
-    , pos: Nothing
-    , dynFamily: Nothing
-    }
-    di
+  let
+    bhv = __internalDekuFlatten
+      (unsafeCoerce children)
+      { parent: Just "deku-root"
+      , scope: Local "rootScope"
+      , raiseId: \_ -> pure unit
+      , ez: true
+      , pos: Nothing
+      , dynFamily: Nothing
+      }
+      di
   (unwrap di).makeRoot { id: me, root } List.Nil ffi
-  for_ sub executor
+  bang <- liftST $ create
   u <- liftST $ subscribe
-    (map ((unwrap di).redecorateDeferredPayload (pure headRedecorator)) evt)
+    ( map ((unwrap di).redecorateDeferredPayload (pure headRedecorator))
+        (sample_ bhv bang.event)
+    )
     executor
+  bang.push unit
   (coerce unSetHydrating :: _ -> _ Unit) ffi
   pure do
-    for_ unsub executor
+    o <- liftST $ RRef.read cache
+    for_ o (traverse_ executor)
     (unwrap di).forcePayload (pure headRedecorator) List.Nil ffi
     (unwrap di).deleteFromCache { id: me } List.Nil ffi
     liftST $ u
@@ -145,16 +152,20 @@ runSSR' topTag = go
     let di = ssrDOMInterpret seed cache mempty
     -- we thunk to create the head redecorator
     _ <- liftST $ (unwrap di).ids
-    Tuple subscr _ <- __internalDekuFlatten
-      children
-      { parent: Just "deku-root"
-      , scope: Local "rootScope"
-      , raiseId: \_ -> pure unit
-      , ez: true
-      , pos: Nothing
-      , dynFamily: Nothing
-      }
-      di
+    let
+      bhv = __internalDekuFlatten
+        children
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        , ez: true
+        , pos: Nothing
+        , dynFamily: Nothing
+        }
+        di
+    bang <- createPure
+    u <- subscribePure (sample_ bhv bang.event) executor
+    bang.push unit
     for_ subscr (\f -> f List.Nil instr)
     RRef.read instr
 
@@ -162,5 +173,7 @@ __internalDekuFlatten
   :: forall payload
    . NutF payload
   -> Node' payload
-__internalDekuFlatten a b c = BControl.flatten flattenArgs b c
+__internalDekuFlatten a b c = BControl.flatten flattenArgs
   ((\(NutF x) -> x) a)
+  b
+  c

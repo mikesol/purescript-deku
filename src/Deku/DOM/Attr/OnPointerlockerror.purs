@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 import Effect (Effect)
@@ -13,92 +13,34 @@ import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnPointerlockerror = OnPointerlockerror
 
-instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  Cb ) where
-  attr OnPointerlockerror bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointerlockerror", value: cb' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "pointerlockerror", value: cb' value })
-instance Attr anything OnPointerlockerror (Product.Product (ST.ST Global.Global) Event.Event  Cb ) where
-  attr OnPointerlockerror (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "pointerlockerror", value: cb' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "pointerlockerror", value: cb' value })
 instance Attr anything OnPointerlockerror  Cb  where
-  attr OnPointerlockerror value = unsafeAttribute $ This $ pure $
+  attr OnPointerlockerror value = unsafeAttribute $ Left $  
     { key: "pointerlockerror", value: cb' value }
 instance Attr anything OnPointerlockerror (Event.Event  Cb ) where
-  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+  attr OnPointerlockerror eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "pointerlockerror", value: cb' value }
 
-instance Attr anything OnPointerlockerror (ST.ST Global.Global  Cb ) where
-  attr OnPointerlockerror iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "pointerlockerror", value: cb' value }
 
-instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  (Effect Unit) ) where
-  attr OnPointerlockerror bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointerlockerror"
-    , value: cb' (Cb (const ((NonEmpty.head bothValues) $> true)))
-    })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
-    )
-instance Attr anything OnPointerlockerror (Product.Product (ST.ST Global.Global) Event.Event  (Effect Unit) ) where
-  attr OnPointerlockerror (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "pointerlockerror"
-    , value: cb' (Cb (const ((value) $> true)))
-    })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
-    )
 instance Attr anything OnPointerlockerror  (Effect Unit)  where
-  attr OnPointerlockerror value = unsafeAttribute $ This $ pure $
+  attr OnPointerlockerror value = unsafeAttribute $ Left $  
     { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
 instance Attr anything OnPointerlockerror (Event.Event  (Effect Unit) ) where
-  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+  attr OnPointerlockerror eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value ->
       { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
 
-instance Attr anything OnPointerlockerror (ST.ST Global.Global  (Effect Unit) ) where
-  attr OnPointerlockerror iValue = unsafeAttribute $ This $ iValue
-    <#> \value ->
-      { key: "pointerlockerror", value: cb' (Cb (const (value $> true))) }
 
-instance Attr anything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  (Effect Boolean) ) where
-  attr OnPointerlockerror bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointerlockerror", value: cb' (Cb (const (NonEmpty.head bothValues))) })
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "pointerlockerror", value: cb' (Cb (const value)) }
-    )
-instance Attr anything OnPointerlockerror (Product.Product (ST.ST Global.Global) Event.Event  (Effect Boolean) ) where
-  attr OnPointerlockerror (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "pointerlockerror", value: cb' (Cb (const (value))) })
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "pointerlockerror", value: cb' (Cb (const value)) }
-    )
 instance Attr anything OnPointerlockerror  (Effect Boolean)  where
-  attr OnPointerlockerror value = unsafeAttribute $ This $ pure $
+  attr OnPointerlockerror value = unsafeAttribute $ Left $  
     { key: "pointerlockerror", value: cb' (Cb (const value)) }
 instance Attr anything OnPointerlockerror (Event.Event  (Effect Boolean) ) where
-  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
+  attr OnPointerlockerror eventValue = unsafeAttribute $ Right $ eventValue
     <#> \value -> { key: "pointerlockerror", value: cb' (Cb (const value)) }
 
-instance Attr anything OnPointerlockerror (ST.ST Global.Global  (Effect Boolean) ) where
-  attr OnPointerlockerror iValue = unsafeAttribute $ This $ iValue
-    <#> \value -> { key: "pointerlockerror", value: cb' (Cb (const value)) }
 
-instance Attr everything OnPointerlockerror (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr OnPointerlockerror bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointerlockerror", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "pointerlockerror", value: unset' })
-instance Attr everything OnPointerlockerror (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr OnPointerlockerror (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "pointerlockerror", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "pointerlockerror", value: unset' })
 instance Attr everything OnPointerlockerror  Unit  where
-  attr OnPointerlockerror _ = unsafeAttribute $ This $ pure $
+  attr OnPointerlockerror _ = unsafeAttribute $ Left $  
     { key: "pointerlockerror", value: unset' }
 instance Attr everything OnPointerlockerror (Event.Event  Unit ) where
-  attr OnPointerlockerror eventValue = unsafeAttribute $ That $ eventValue
-    <#> \_ -> { key: "pointerlockerror", value: unset' }
-
-instance Attr everything OnPointerlockerror (ST.ST Global.Global  Unit ) where
-  attr OnPointerlockerror iValue = unsafeAttribute $ This $ iValue
+  attr OnPointerlockerror eventValue = unsafeAttribute $ Right $ eventValue
     <#> \_ -> { key: "pointerlockerror", value: unset' }

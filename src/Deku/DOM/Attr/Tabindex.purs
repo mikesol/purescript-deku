@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -180,3194 +180,1345 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Tabindex = Tabindex
 
-instance Attr A_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr A_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr A_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr A_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr A_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Abbr_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Abbr_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Abbr_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Abbr_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Abbr_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Acronym_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Acronym_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Acronym_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Acronym_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Acronym_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Address_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Address_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Address_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Address_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Address_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Applet_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Applet_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Applet_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Applet_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Applet_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Area_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Area_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Area_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Area_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Area_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Article_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Article_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Article_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Article_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Article_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Aside_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Aside_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Aside_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Aside_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Aside_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Audio_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Audio_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Audio_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Audio_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Audio_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr B_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr B_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr B_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr B_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr B_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Base_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Base_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Base_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Base_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Base_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Basefont_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Basefont_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Basefont_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Basefont_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Basefont_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Bdi_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Bdi_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Bdi_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Bdi_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Bdi_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Bdo_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Bdo_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Bdo_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Bdo_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Bdo_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Big_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Big_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Big_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Big_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Big_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Blockquote_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Blockquote_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Blockquote_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Blockquote_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Blockquote_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Body_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Body_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Body_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Body_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Body_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Br_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Br_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Br_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Br_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Br_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Button_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Button_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Button_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Button_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Button_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Canvas_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Canvas_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Canvas_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Canvas_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Canvas_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Caption_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Caption_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Caption_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Caption_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Caption_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Center_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Center_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Center_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Center_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Center_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Cite_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Cite_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Cite_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Cite_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Cite_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Code_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Code_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Code_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Code_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Code_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Col_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Col_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Col_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Col_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Col_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Colgroup_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Colgroup_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Colgroup_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Colgroup_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Colgroup_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Xdata_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Xdata_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Xdata_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Xdata_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Xdata_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Datalist_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Datalist_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Datalist_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Datalist_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Datalist_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dd_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dd_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dd_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dd_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dd_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Del_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Del_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Del_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Del_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Del_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Details_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Details_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Details_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Details_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Details_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dfn_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dfn_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dfn_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dfn_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dfn_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dialog_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dialog_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dialog_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dialog_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dialog_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dir_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dir_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dir_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dir_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dir_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Div_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Div_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Div_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Div_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Div_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dl_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dl_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dl_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dl_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dl_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dt_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Dt_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Dt_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Dt_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Dt_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Em_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Em_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Em_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Em_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Em_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Embed_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Embed_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Embed_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Embed_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Embed_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Fieldset_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Fieldset_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Fieldset_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Fieldset_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Fieldset_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Figcaption_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Figcaption_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Figcaption_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Figcaption_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Figcaption_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Figure_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Figure_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Figure_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Figure_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Figure_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Font_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Font_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Font_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Font_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Font_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Footer_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Footer_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Footer_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Footer_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Footer_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Form_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Form_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Form_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Form_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Form_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Frame_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Frame_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Frame_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Frame_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Frame_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Frameset_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Frameset_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Frameset_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Frameset_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Frameset_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H1_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H1_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H1_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H1_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H1_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H2_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H2_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H2_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H2_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H2_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H3_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H3_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H3_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H3_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H3_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H4_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H4_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H4_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H4_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H4_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H5_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H5_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H5_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H5_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H5_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H6_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr H6_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr H6_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr H6_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr H6_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Head_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Head_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Head_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Head_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Head_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Header_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Header_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Header_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Header_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Header_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Hr_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Hr_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Hr_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Hr_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Hr_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Html_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Html_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Html_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Html_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Html_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr I_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr I_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr I_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr I_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr I_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Iframe_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Iframe_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Iframe_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Iframe_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Iframe_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Img_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Img_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Img_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Img_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Img_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Input_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Input_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Input_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Input_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Input_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ins_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Ins_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Ins_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Ins_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ins_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Kbd_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Kbd_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Kbd_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Kbd_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Kbd_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Label_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Label_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Label_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Label_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Label_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Legend_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Legend_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Legend_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Legend_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Legend_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Li_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Li_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Li_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Li_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Li_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Link_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Link_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Link_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Link_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Link_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Main_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Main_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Main_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Main_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Main_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Map_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Map_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Map_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Map_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Map_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mark_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Mark_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Mark_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Mark_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mark_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Meta_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Meta_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Meta_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Meta_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Meta_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Meter_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Meter_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Meter_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Meter_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Meter_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Nav_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Nav_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Nav_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Nav_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Nav_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Noframes_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Noframes_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Noframes_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Noframes_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Noframes_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Noscript_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Noscript_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Noscript_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Noscript_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Noscript_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Object_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Object_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Object_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Object_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Object_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ol_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Ol_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Ol_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Ol_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ol_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Optgroup_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Optgroup_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Optgroup_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Optgroup_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Optgroup_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Option_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Option_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Option_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Option_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Option_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Output_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Output_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Output_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Output_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Output_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr P_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr P_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr P_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr P_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr P_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Param_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Param_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Param_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Param_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Param_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Picture_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Picture_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Picture_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Picture_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Picture_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Pre_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Pre_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Pre_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Pre_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Pre_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Progress_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Progress_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Progress_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Progress_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Progress_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Q_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Q_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Q_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Q_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Q_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Rp_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Rp_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Rp_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Rp_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Rp_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Rt_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Rt_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Rt_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Rt_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Rt_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ruby_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Ruby_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Ruby_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Ruby_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ruby_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr S_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr S_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr S_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr S_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr S_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Samp_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Samp_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Samp_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Samp_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Samp_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Script_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Script_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Script_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Script_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Script_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Section_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Section_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Section_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Section_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Section_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Select_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Select_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Select_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Select_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Select_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Small_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Small_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Small_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Small_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Small_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Source_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Source_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Source_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Source_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Source_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Span_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Span_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Span_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Span_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Span_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Strike_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Strike_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Strike_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Strike_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Strike_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Strong_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Strong_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Strong_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Strong_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Strong_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Style_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Style_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Style_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Style_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Style_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Sub_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Sub_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Sub_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Sub_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Sub_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Summary_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Summary_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Summary_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Summary_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Summary_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Sup_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Sup_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Sup_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Sup_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Sup_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Svg_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Svg_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Svg_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Svg_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Svg_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Table_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Table_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Table_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Table_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Table_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tbody_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Tbody_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Tbody_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Tbody_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tbody_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Td_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Td_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Td_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Td_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Td_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Template_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Template_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Template_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Template_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Template_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Textarea_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Textarea_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Textarea_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Textarea_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Textarea_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tfoot_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Tfoot_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Tfoot_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Tfoot_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tfoot_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Th_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Th_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Th_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Th_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Th_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Thead_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Thead_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Thead_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Thead_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Thead_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Time_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Time_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Time_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Time_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Time_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Title_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Title_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Title_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Title_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Title_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tr_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Tr_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Tr_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Tr_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tr_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Track_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Track_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Track_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Track_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Track_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tt_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Tt_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Tt_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Tt_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tt_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr U_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr U_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr U_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr U_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr U_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ul_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Ul_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Ul_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Ul_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Ul_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Var_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Var_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Var_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Var_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Var_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Video_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Video_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Video_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Video_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Video_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Wbr_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Wbr_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Wbr_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Wbr_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Wbr_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Animate_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Animate_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Animate_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Animate_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Animate_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr AnimateMotion_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr AnimateMotion_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr AnimateMotion_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr AnimateMotion_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr AnimateMotion_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr AnimateTransform_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr AnimateTransform_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr AnimateTransform_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr AnimateTransform_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr AnimateTransform_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr ClipPath_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr ClipPath_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr ClipPath_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr ClipPath_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr ClipPath_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Desc_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Desc_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Desc_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Desc_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Desc_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Discard_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Discard_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Discard_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Discard_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Discard_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeBlend_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeBlend_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeBlend_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeBlend_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeBlend_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeColorMatrix_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeColorMatrix_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeColorMatrix_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeColorMatrix_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeColorMatrix_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeComponentTransfer_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeComponentTransfer_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeComponentTransfer_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeComponentTransfer_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeComponentTransfer_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeComposite_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeComposite_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeComposite_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeComposite_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeComposite_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeConvolveMatrix_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeConvolveMatrix_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeConvolveMatrix_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeDiffuseLighting_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeDiffuseLighting_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeDiffuseLighting_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDisplacementMap_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeDisplacementMap_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeDisplacementMap_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeDisplacementMap_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDisplacementMap_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDistantLight_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeDistantLight_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeDistantLight_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeDistantLight_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDistantLight_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDropShadow_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeDropShadow_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeDropShadow_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeDropShadow_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeDropShadow_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFlood_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeFlood_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeFlood_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeFlood_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFlood_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncA_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeFuncA_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeFuncA_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeFuncA_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncA_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncB_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeFuncB_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeFuncB_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeFuncB_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncB_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncG_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeFuncG_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeFuncG_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeFuncG_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncG_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncR_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeFuncR_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeFuncR_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeFuncR_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeFuncR_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeGaussianBlur_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeGaussianBlur_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeGaussianBlur_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeGaussianBlur_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeGaussianBlur_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeImage_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeImage_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeImage_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeImage_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeImage_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMerge_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeMerge_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeMerge_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeMerge_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMerge_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMergeNode_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeMergeNode_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeMergeNode_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeMergeNode_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMergeNode_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMorphology_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeMorphology_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeMorphology_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeMorphology_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeMorphology_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeOffset_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeOffset_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeOffset_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeOffset_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeOffset_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FePointLight_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FePointLight_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FePointLight_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FePointLight_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FePointLight_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeSpecularLighting_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeSpecularLighting_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeSpecularLighting_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeSpecularLighting_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeSpecularLighting_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeSpotLight_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeSpotLight_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeSpotLight_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeSpotLight_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeSpotLight_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeTile_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeTile_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeTile_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeTile_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeTile_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeTurbulence_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr FeTurbulence_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr FeTurbulence_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr FeTurbulence_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr FeTurbulence_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Filter_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Filter_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Filter_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Filter_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Filter_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Image_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Image_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Image_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Image_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Image_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr LinearGradient_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr LinearGradient_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr LinearGradient_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr LinearGradient_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr LinearGradient_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mask_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Mask_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Mask_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Mask_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mask_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Metadata_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Metadata_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Metadata_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Metadata_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Metadata_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mpath_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Mpath_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Mpath_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Mpath_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Mpath_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr RadialGradient_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr RadialGradient_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr RadialGradient_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr RadialGradient_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr RadialGradient_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Set_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Set_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Set_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Set_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Set_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Stop_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Stop_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Stop_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Stop_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Stop_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Switch_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Switch_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Switch_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Switch_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Switch_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Symbol_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Symbol_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Symbol_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Symbol_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Symbol_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Text_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Text_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Text_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Text_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Text_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tspan_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr Tspan_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr Tspan_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr Tspan_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr Tspan_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr View_ Tabindex (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "tabindex", value: prop' value })
-instance Attr View_ Tabindex (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "tabindex", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "tabindex", value: prop' value })
 instance Attr View_ Tabindex  String  where
-  attr Tabindex value = unsafeAttribute $ This $ pure $
+  attr Tabindex value = unsafeAttribute $ Left $  
     { key: "tabindex", value: prop' value }
 instance Attr View_ Tabindex (Event.Event  String ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
 
-instance Attr View_ Tabindex (ST.ST Global.Global  String ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "tabindex", value: prop' value }
 
-instance Attr everything Tabindex (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Tabindex bothValues = unsafeAttribute $ Both (pure 
-    { key: "tabindex", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "tabindex", value: unset' })
-instance Attr everything Tabindex (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Tabindex (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "tabindex", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "tabindex", value: unset' })
 instance Attr everything Tabindex  Unit  where
-  attr Tabindex _ = unsafeAttribute $ This $ pure $
+  attr Tabindex _ = unsafeAttribute $ Left $  
     { key: "tabindex", value: unset' }
 instance Attr everything Tabindex (Event.Event  Unit ) where
-  attr Tabindex eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "tabindex", value: unset' }
-
-instance Attr everything Tabindex (ST.ST Global.Global  Unit ) where
-  attr Tabindex iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Tabindex eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "tabindex", value: unset' }

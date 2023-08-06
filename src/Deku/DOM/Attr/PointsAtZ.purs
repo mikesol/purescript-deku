@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -14,40 +14,17 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data PointsAtZ = PointsAtZ
 
-instance Attr FeSpotLight_ PointsAtZ (NonEmpty.NonEmpty Event.Event  String ) where
-  attr PointsAtZ bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointsAtZ", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "pointsAtZ", value: prop' value })
-instance Attr FeSpotLight_ PointsAtZ (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr PointsAtZ (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "pointsAtZ", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "pointsAtZ", value: prop' value })
 instance Attr FeSpotLight_ PointsAtZ  String  where
-  attr PointsAtZ value = unsafeAttribute $ This $ pure $
+  attr PointsAtZ value = unsafeAttribute $ Left $  
     { key: "pointsAtZ", value: prop' value }
 instance Attr FeSpotLight_ PointsAtZ (Event.Event  String ) where
-  attr PointsAtZ eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr PointsAtZ eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "pointsAtZ", value: prop' value }
 
-instance Attr FeSpotLight_ PointsAtZ (ST.ST Global.Global  String ) where
-  attr PointsAtZ iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "pointsAtZ", value: prop' value }
 
-instance Attr everything PointsAtZ (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr PointsAtZ bothValues = unsafeAttribute $ Both (pure 
-    { key: "pointsAtZ", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "pointsAtZ", value: unset' })
-instance Attr everything PointsAtZ (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr PointsAtZ (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "pointsAtZ", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "pointsAtZ", value: unset' })
 instance Attr everything PointsAtZ  Unit  where
-  attr PointsAtZ _ = unsafeAttribute $ This $ pure $
+  attr PointsAtZ _ = unsafeAttribute $ Left $  
     { key: "pointsAtZ", value: unset' }
 instance Attr everything PointsAtZ (Event.Event  Unit ) where
-  attr PointsAtZ eventValue = unsafeAttribute $ That $ eventValue <#>
-    \_ -> { key: "pointsAtZ", value: unset' }
-
-instance Attr everything PointsAtZ (ST.ST Global.Global  Unit ) where
-  attr PointsAtZ iValue = unsafeAttribute $ This $ iValue #
+  attr PointsAtZ eventValue = unsafeAttribute $ Right $ eventValue <#>
     \_ -> { key: "pointsAtZ", value: unset' }

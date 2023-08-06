@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -18,115 +18,48 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Offset = Offset
 
-instance Attr FeFuncA_ Offset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
-instance Attr FeFuncA_ Offset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "offset", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "offset", value: prop' value })
 instance Attr FeFuncA_ Offset  String  where
-  attr Offset value = unsafeAttribute $ This $ pure $
+  attr Offset value = unsafeAttribute $ Left $  
     { key: "offset", value: prop' value }
 instance Attr FeFuncA_ Offset (Event.Event  String ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncA_ Offset (ST.ST Global.Global  String ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncB_ Offset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
-instance Attr FeFuncB_ Offset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "offset", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "offset", value: prop' value })
 instance Attr FeFuncB_ Offset  String  where
-  attr Offset value = unsafeAttribute $ This $ pure $
+  attr Offset value = unsafeAttribute $ Left $  
     { key: "offset", value: prop' value }
 instance Attr FeFuncB_ Offset (Event.Event  String ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncB_ Offset (ST.ST Global.Global  String ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncG_ Offset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
-instance Attr FeFuncG_ Offset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "offset", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "offset", value: prop' value })
 instance Attr FeFuncG_ Offset  String  where
-  attr Offset value = unsafeAttribute $ This $ pure $
+  attr Offset value = unsafeAttribute $ Left $  
     { key: "offset", value: prop' value }
 instance Attr FeFuncG_ Offset (Event.Event  String ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncG_ Offset (ST.ST Global.Global  String ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncR_ Offset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
-instance Attr FeFuncR_ Offset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "offset", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "offset", value: prop' value })
 instance Attr FeFuncR_ Offset  String  where
-  attr Offset value = unsafeAttribute $ This $ pure $
+  attr Offset value = unsafeAttribute $ Left $  
     { key: "offset", value: prop' value }
 instance Attr FeFuncR_ Offset (Event.Event  String ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "offset", value: prop' value }
 
-instance Attr FeFuncR_ Offset (ST.ST Global.Global  String ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "offset", value: prop' value }
 
-instance Attr Stop_ Offset (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "offset", value: prop' value })
-instance Attr Stop_ Offset (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "offset", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "offset", value: prop' value })
 instance Attr Stop_ Offset  String  where
-  attr Offset value = unsafeAttribute $ This $ pure $
+  attr Offset value = unsafeAttribute $ Left $  
     { key: "offset", value: prop' value }
 instance Attr Stop_ Offset (Event.Event  String ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "offset", value: prop' value }
 
-instance Attr Stop_ Offset (ST.ST Global.Global  String ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "offset", value: prop' value }
 
-instance Attr everything Offset (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Offset bothValues = unsafeAttribute $ Both (pure 
-    { key: "offset", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "offset", value: unset' })
-instance Attr everything Offset (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Offset (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "offset", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "offset", value: unset' })
 instance Attr everything Offset  Unit  where
-  attr Offset _ = unsafeAttribute $ This $ { key: "offset", value: unset' }
+  attr Offset _ = unsafeAttribute $ Left $  { key: "offset", value: unset' }
 instance Attr everything Offset (Event.Event  Unit ) where
-  attr Offset eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "offset", value: unset' }
-
-instance Attr everything Offset (ST.ST Global.Global  Unit ) where
-  attr Offset iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Offset eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "offset", value: unset' }

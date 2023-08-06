@@ -1632,14 +1632,9 @@ import Deku.DOM.Attr.Enterkeyhint (Enterkeyhint(..))
 import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 
 import Effect (Effect)
-import Data.Tuple as Tuple
-import Control.Monad.ST as ST
-import Control.Monad.ST.Global as Global
-import Data.Functor.Product as Product
-import Prelude (Unit, ($), ($>), (<#>), pure)
-import Data.NonEmpty as NonEmpty
+import Prelude (Unit, ($), ($>), (<#>))
 import FRP.Event as Event
-import Data.These (These(..))
+import Data.Either (Either(..))
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
@@ -1902,50 +1897,17 @@ unsafeCustomElement name _ = elementify2 name
 data Self = Self
 
 instance Attr anything Self (DOM.Element -> Effect Unit) where
-  attr Self value = unsafeAttribute $ This $ pure $
+  attr Self value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
   attr Self eventValue = unsafeAttribute
-    $ That
+    $ Right
     $ eventValue <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr anything Self (ST.ST Global.Global (DOM.Element -> Effect Unit)) where
-  attr Self iValue = unsafeAttribute
-    $ This
-    $ iValue <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr anything
-    Self
-    (NonEmpty.NonEmpty Event.Event (DOM.Element -> Effect Unit)) where
-  attr Self bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr anything
-    Self
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (DOM.Element -> Effect Unit)
-    ) where
-  attr Self (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
 -- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
@@ -1953,1829 +1915,508 @@ instance
 data SelfT = SelfT
 
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance Attr anything SelfT (Event.Event (DOM.Element -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute
-    $ That
+    $ Right
     $ eventValue <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance Attr anything SelfT (ST.ST Global.Global (DOM.Element -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute
-    $ This
-    $ iValue <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr anything
-    SelfT
-    (NonEmpty.NonEmpty Event.Event (DOM.Element -> Effect Unit)) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr anything
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (DOM.Element -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr anything SelfT (Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true)) }
 
 instance Attr anything SelfT (Event.Event (Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute
-    $ That
+    $ Right
     $ eventValue <#> \value ->
         { key: "@self@"
         , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
         }
 
-instance Attr anything SelfT (ST.ST Global.Global (Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute
-    $ This
-    $ iValue <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
-        }
 
-instance Attr anything SelfT (NonEmpty.NonEmpty Event.Event (Effect Unit)) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
-        }
-    )
 
-instance
-  Attr anything
-    SelfT
-    (Product.Product (ST.ST Global.Global) Event.Event (Effect Unit)) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
-        }
-    )
 
-instance
-  Attr A_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr A_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr A_
     SelfT
     (Event.Event (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr A_
-    SelfT
-    (ST.ST Global.Global (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Area_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLAreaElement.HTMLAreaElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Area_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLAreaElement.HTMLAreaElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Area_
     SelfT
     (Event.Event (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Area_
-    SelfT
-    (ST.ST Global.Global (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Audio_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLAudioElement.HTMLAudioElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Audio_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLAudioElement.HTMLAudioElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Audio_
     SelfT
     (Event.Event (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Audio_
-    SelfT
-    (ST.ST Global.Global (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Base_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLBaseElement.HTMLBaseElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Base_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLBaseElement.HTMLBaseElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Base_
     SelfT
     (Event.Event (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Base_
-    SelfT
-    (ST.ST Global.Global (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Body_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLBodyElement.HTMLBodyElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Body_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLBodyElement.HTMLBodyElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Body_
     SelfT
     (Event.Event (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Body_
-    SelfT
-    (ST.ST Global.Global (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Br_
-    SelfT
-    (NonEmpty.NonEmpty Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Br_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLBRElement.HTMLBRElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Br_ SelfT (Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Br_
-    SelfT
-    (ST.ST Global.Global (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Button_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLButtonElement.HTMLButtonElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Button_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLButtonElement.HTMLButtonElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Button_
     SelfT
     (Event.Event (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Button_
-    SelfT
-    (ST.ST Global.Global (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Canvas_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Canvas_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Canvas_
     SelfT
     (Event.Event (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Canvas_
-    SelfT
-    (ST.ST Global.Global (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Div_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLDivElement.HTMLDivElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Div_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLDivElement.HTMLDivElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Div_ SelfT (Event.Event (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Div_
-    SelfT
-    (ST.ST Global.Global (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Embed_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Embed_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Embed_
     SelfT
     (Event.Event (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Embed_
-    SelfT
-    (ST.ST Global.Global (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Form_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLFormElement.HTMLFormElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Form_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLFormElement.HTMLFormElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Form_
     SelfT
     (Event.Event (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Form_
-    SelfT
-    (ST.ST Global.Global (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Head_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLHeadElement.HTMLHeadElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Head_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLHeadElement.HTMLHeadElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Head_
     SelfT
     (Event.Event (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Head_
-    SelfT
-    (ST.ST Global.Global (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Hr_
-    SelfT
-    (NonEmpty.NonEmpty Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Hr_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLHRElement.HTMLHRElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Hr_ SelfT (Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Hr_
-    SelfT
-    (ST.ST Global.Global (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Html_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Html_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Html_
     SelfT
     (Event.Event (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Html_
-    SelfT
-    (ST.ST Global.Global (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Input_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLInputElement.HTMLInputElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Input_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLInputElement.HTMLInputElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Input_
     SelfT
     (Event.Event (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Input_
-    SelfT
-    (ST.ST Global.Global (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Label_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLLabelElement.HTMLLabelElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Label_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLLabelElement.HTMLLabelElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Label_
     SelfT
     (Event.Event (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Label_
-    SelfT
-    (ST.ST Global.Global (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Legend_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLLegendElement.HTMLLegendElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Legend_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLLegendElement.HTMLLegendElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Legend_
     SelfT
     (Event.Event (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Legend_
-    SelfT
-    (ST.ST Global.Global (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Link_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLLinkElement.HTMLLinkElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Link_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLLinkElement.HTMLLinkElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Link_
     SelfT
     (Event.Event (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Link_
-    SelfT
-    (ST.ST Global.Global (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Map_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLMapElement.HTMLMapElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Map_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLMapElement.HTMLMapElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Map_ SelfT (Event.Event (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Map_
-    SelfT
-    (ST.ST Global.Global (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Meta_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLMetaElement.HTMLMetaElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Meta_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLMetaElement.HTMLMetaElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Meta_
     SelfT
     (Event.Event (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Meta_
-    SelfT
-    (ST.ST Global.Global (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Meter_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLMeterElement.HTMLMeterElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Meter_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLMeterElement.HTMLMeterElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Meter_
     SelfT
     (Event.Event (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Meter_
-    SelfT
-    (ST.ST Global.Global (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Object_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLObjectElement.HTMLObjectElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Object_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLObjectElement.HTMLObjectElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Object_
     SelfT
     (Event.Event (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Object_
-    SelfT
-    (ST.ST Global.Global (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Option_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLOptionElement.HTMLOptionElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Option_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLOptionElement.HTMLOptionElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Option_
     SelfT
     (Event.Event (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Option_
-    SelfT
-    (ST.ST Global.Global (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Output_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLOutputElement.HTMLOutputElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Output_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLOutputElement.HTMLOutputElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Output_
     SelfT
     (Event.Event (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Output_
-    SelfT
-    (ST.ST Global.Global (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr P_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr P_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance
   Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr P_
     SelfT
     (Event.Event (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr P_
-    SelfT
-    ( ST.ST Global.Global
-        (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)
-    ) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Param_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLParamElement.HTMLParamElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Param_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLParamElement.HTMLParamElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Param_
     SelfT
     (Event.Event (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Param_
-    SelfT
-    (ST.ST Global.Global (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Pre_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLPreElement.HTMLPreElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Pre_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLPreElement.HTMLPreElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Pre_ SelfT (Event.Event (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Pre_
-    SelfT
-    (ST.ST Global.Global (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Progress_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLProgressElement.HTMLProgressElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Progress_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLProgressElement.HTMLProgressElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance
   Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Progress_
     SelfT
     (Event.Event (HTMLProgressElement.HTMLProgressElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Progress_
-    SelfT
-    ( ST.ST Global.Global
-        (HTMLProgressElement.HTMLProgressElement -> Effect Unit)
-    ) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Script_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLScriptElement.HTMLScriptElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Script_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLScriptElement.HTMLScriptElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Script_
     SelfT
     (Event.Event (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Script_
-    SelfT
-    (ST.ST Global.Global (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Select_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLSelectElement.HTMLSelectElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Select_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLSelectElement.HTMLSelectElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Select_
     SelfT
     (Event.Event (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Select_
-    SelfT
-    (ST.ST Global.Global (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Source_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLSourceElement.HTMLSourceElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Source_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLSourceElement.HTMLSourceElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Source_
     SelfT
     (Event.Event (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Source_
-    SelfT
-    (ST.ST Global.Global (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Span_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLSpanElement.HTMLSpanElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Span_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLSpanElement.HTMLSpanElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Span_
     SelfT
     (Event.Event (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Span_
-    SelfT
-    (ST.ST Global.Global (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Style_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLStyleElement.HTMLStyleElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Style_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLStyleElement.HTMLStyleElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Style_
     SelfT
     (Event.Event (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Style_
-    SelfT
-    (ST.ST Global.Global (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Table_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTableElement.HTMLTableElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Table_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTableElement.HTMLTableElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Table_
     SelfT
     (Event.Event (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Table_
-    SelfT
-    (ST.ST Global.Global (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Td_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Td_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance
   Attr Td_
     SelfT
     (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
@@ -3784,320 +2425,91 @@ instance
     ( Event.Event
         (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
     ) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Td_
-    SelfT
-    ( ST.ST Global.Global
-        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
-    ) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Template_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Template_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance
   Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Template_
     SelfT
     (Event.Event (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Template_
-    SelfT
-    ( ST.ST Global.Global
-        (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)
-    ) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Textarea_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Textarea_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance
   Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Textarea_
     SelfT
     (Event.Event (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Textarea_
-    SelfT
-    ( ST.ST Global.Global
-        (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)
-    ) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Time_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTimeElement.HTMLTimeElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Time_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTimeElement.HTMLTimeElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Time_
     SelfT
     (Event.Event (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Time_
-    SelfT
-    (ST.ST Global.Global (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Title_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTitleElement.HTMLTitleElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Title_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTitleElement.HTMLTitleElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Title_
     SelfT
     (Event.Event (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Title_
-    SelfT
-    (ST.ST Global.Global (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Track_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLTrackElement.HTMLTrackElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Track_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLTrackElement.HTMLTrackElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Track_
     SelfT
     (Event.Event (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Track_
-    SelfT
-    (ST.ST Global.Global (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
-instance
-  Attr Video_
-    SelfT
-    ( NonEmpty.NonEmpty Event.Event
-        (HTMLVideoElement.HTMLVideoElement -> Effect Unit)
-    ) where
-  attr SelfT bothValues = unsafeAttribute $ Both
-    ( pure
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (NonEmpty.head bothValues)))
-        }
-    )
-    ( NonEmpty.tail bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
-instance
-  Attr Video_
-    SelfT
-    ( Product.Product (ST.ST Global.Global) Event.Event
-        (HTMLVideoElement.HTMLVideoElement -> Effect Unit)
-    ) where
-  attr SelfT (Product.Product bothValues) = unsafeAttribute $ Both
-    ( (Tuple.fst bothValues) <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (unsafeCoerce (value)))
-        }
-    )
-    ( Tuple.snd bothValues <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-    )
 
 instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute $ This $ pure $
+  attr SelfT value = unsafeAttribute $ Left $  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
 
 instance
   Attr Video_
     SelfT
     (Event.Event (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute $ That $ eventValue <#> \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-instance
-  Attr Video_
-    SelfT
-    (ST.ST Global.Global (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
-  attr SelfT iValue = unsafeAttribute $ This $ iValue # \value ->
+  attr SelfT eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }

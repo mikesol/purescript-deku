@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -30,343 +30,144 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Result = Result
 
-instance Attr FeBlend_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeBlend_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeBlend_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeBlend_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeBlend_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeColorMatrix_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeColorMatrix_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeColorMatrix_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeColorMatrix_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeColorMatrix_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeComponentTransfer_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeComponentTransfer_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeComponentTransfer_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeComponentTransfer_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeComponentTransfer_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeComposite_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeComposite_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeComposite_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeComposite_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeComposite_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeConvolveMatrix_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeConvolveMatrix_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeConvolveMatrix_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeConvolveMatrix_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeDiffuseLighting_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeDiffuseLighting_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeDiffuseLighting_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDiffuseLighting_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeDisplacementMap_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeDisplacementMap_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeDisplacementMap_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeDisplacementMap_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDisplacementMap_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeDropShadow_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeDropShadow_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeDropShadow_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeDropShadow_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeDropShadow_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeFlood_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeFlood_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeFlood_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeFlood_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeFlood_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeGaussianBlur_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeGaussianBlur_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeGaussianBlur_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeGaussianBlur_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeGaussianBlur_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeImage_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeImage_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeImage_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeImage_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeImage_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeMerge_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeMerge_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeMerge_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeMerge_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeMerge_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeMorphology_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeMorphology_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeMorphology_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeMorphology_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeMorphology_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeOffset_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeOffset_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeOffset_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeOffset_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeOffset_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeSpecularLighting_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeSpecularLighting_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeSpecularLighting_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeSpecularLighting_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeSpecularLighting_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeTile_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeTile_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeTile_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeTile_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeTile_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr FeTurbulence_ Result (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "result", value: prop' value })
-instance Attr FeTurbulence_ Result (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "result", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "result", value: prop' value })
 instance Attr FeTurbulence_ Result  String  where
-  attr Result value = unsafeAttribute $ This $ pure $
+  attr Result value = unsafeAttribute $ Left $  
     { key: "result", value: prop' value }
 instance Attr FeTurbulence_ Result (Event.Event  String ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "result", value: prop' value }
 
-instance Attr FeTurbulence_ Result (ST.ST Global.Global  String ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "result", value: prop' value }
 
-instance Attr everything Result (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Result bothValues = unsafeAttribute $ Both (pure 
-    { key: "result", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "result", value: unset' })
-instance Attr everything Result (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Result (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "result", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "result", value: unset' })
 instance Attr everything Result  Unit  where
-  attr Result _ = unsafeAttribute $ This $ { key: "result", value: unset' }
+  attr Result _ = unsafeAttribute $ Left $  { key: "result", value: unset' }
 instance Attr everything Result (Event.Event  Unit ) where
-  attr Result eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "result", value: unset' }
-
-instance Attr everything Result (ST.ST Global.Global  Unit ) where
-  attr Result iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Result eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "result", value: unset' }

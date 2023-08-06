@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -32,382 +32,161 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data WritingMode = WritingMode
 
-instance Attr FeBlend_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeBlend_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeBlend_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeBlend_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeBlend_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeColorMatrix_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeColorMatrix_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeColorMatrix_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeColorMatrix_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeColorMatrix_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeComponentTransfer_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeComponentTransfer_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeComponentTransfer_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeComponentTransfer_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeComponentTransfer_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeComposite_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeComposite_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeComposite_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeComposite_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeComposite_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeConvolveMatrix_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeConvolveMatrix_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeConvolveMatrix_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeConvolveMatrix_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeConvolveMatrix_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeDiffuseLighting_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeDiffuseLighting_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeDiffuseLighting_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeDiffuseLighting_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeDiffuseLighting_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeDisplacementMap_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeDisplacementMap_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeDisplacementMap_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeDisplacementMap_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeDisplacementMap_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeFlood_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeFlood_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeFlood_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeFlood_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeFlood_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeGaussianBlur_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeGaussianBlur_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeGaussianBlur_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeGaussianBlur_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeGaussianBlur_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeImage_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeImage_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeImage_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeImage_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeImage_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeMerge_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeMerge_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeMerge_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeMerge_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeMerge_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeMorphology_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeMorphology_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeMorphology_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeMorphology_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeMorphology_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeOffset_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeOffset_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeOffset_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeOffset_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeOffset_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeSpecularLighting_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeSpecularLighting_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeSpecularLighting_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeSpecularLighting_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeSpecularLighting_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeTile_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeTile_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeTile_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeTile_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeTile_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeTurbulence_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr FeTurbulence_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr FeTurbulence_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr FeTurbulence_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr FeTurbulence_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Filter_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr Filter_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr Filter_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr Filter_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Filter_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Image_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr Image_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr Image_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr Image_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Image_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Switch_ WritingMode (NonEmpty.NonEmpty Event.Event  String ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "writing-mode", value: prop' value })
-instance Attr Switch_ WritingMode (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "writing-mode", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "writing-mode", value: prop' value })
 instance Attr Switch_ WritingMode  String  where
-  attr WritingMode value = unsafeAttribute $ This $ pure $
+  attr WritingMode value = unsafeAttribute $ Left $  
     { key: "writing-mode", value: prop' value }
 instance Attr Switch_ WritingMode (Event.Event  String ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr Switch_ WritingMode (ST.ST Global.Global  String ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "writing-mode", value: prop' value }
 
-instance Attr everything WritingMode (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr WritingMode bothValues = unsafeAttribute $ Both (pure 
-    { key: "writing-mode", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "writing-mode", value: unset' })
-instance Attr everything WritingMode (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr WritingMode (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "writing-mode", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "writing-mode", value: unset' })
 instance Attr everything WritingMode  Unit  where
-  attr WritingMode _ = unsafeAttribute $ This $ pure $
+  attr WritingMode _ = unsafeAttribute $ Left $  
     { key: "writing-mode", value: unset' }
 instance Attr everything WritingMode (Event.Event  Unit ) where
-  attr WritingMode eventValue = unsafeAttribute $ That $ eventValue <#>
-    \_ -> { key: "writing-mode", value: unset' }
-
-instance Attr everything WritingMode (ST.ST Global.Global  Unit ) where
-  attr WritingMode iValue = unsafeAttribute $ This $ iValue #
+  attr WritingMode eventValue = unsafeAttribute $ Right $ eventValue <#>
     \_ -> { key: "writing-mode", value: unset' }

@@ -5,7 +5,7 @@ import Control.Monad.ST as ST
 import Control.Monad.ST.Global as Global
 import Data.Functor.Product as Product
 import Prelude
-import Data.These (These(..))
+import Data.Either (Either(..))
 import FRP.Event as Event
 import Data.NonEmpty as NonEmpty
 
@@ -135,2339 +135,985 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 
 data Itemprop = Itemprop
 
-instance Attr A_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr A_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr A_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr A_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr A_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Abbr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Abbr_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Abbr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Abbr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Abbr_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Acronym_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Acronym_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Acronym_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Acronym_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Acronym_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Address_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Address_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Address_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Address_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Address_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Applet_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Applet_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Applet_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Applet_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Applet_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Area_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Area_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Area_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Area_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Area_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Article_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Article_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Article_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Article_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Article_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Aside_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Aside_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Aside_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Aside_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Aside_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Audio_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Audio_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Audio_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Audio_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Audio_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr B_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr B_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr B_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr B_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr B_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Base_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Base_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Base_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Base_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Base_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Basefont_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Basefont_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Basefont_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Basefont_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Basefont_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdi_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Bdi_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Bdi_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Bdi_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdi_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdo_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Bdo_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Bdo_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Bdo_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Bdo_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Big_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Big_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Big_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Big_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Big_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Blockquote_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Blockquote_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Blockquote_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Blockquote_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Blockquote_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Body_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Body_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Body_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Body_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Body_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Br_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Br_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Br_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Br_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Br_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Button_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Button_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Button_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Button_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Button_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Canvas_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Canvas_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Canvas_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Canvas_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Canvas_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Caption_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Caption_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Caption_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Caption_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Caption_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Center_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Center_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Center_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Center_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Center_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Cite_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Cite_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Cite_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Cite_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Cite_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Code_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Code_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Code_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Code_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Code_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Col_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Col_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Col_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Col_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Col_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Colgroup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Colgroup_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Colgroup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Colgroup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Colgroup_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Xdata_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Xdata_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Xdata_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Xdata_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Xdata_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Datalist_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Datalist_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Datalist_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Datalist_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Datalist_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dd_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dd_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dd_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dd_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dd_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Del_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Del_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Del_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Del_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Del_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Details_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Details_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Details_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Details_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Details_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dfn_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dfn_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dfn_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dfn_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dfn_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dialog_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dialog_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dialog_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dialog_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dialog_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dir_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dir_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dir_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dir_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dir_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Div_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Div_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Div_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Div_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Div_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dl_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dl_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dl_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dl_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dl_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Dt_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Dt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Dt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Dt_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Em_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Em_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Em_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Em_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Em_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Embed_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Embed_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Embed_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Embed_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Embed_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Fieldset_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Fieldset_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Fieldset_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Fieldset_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Fieldset_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figcaption_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Figcaption_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Figcaption_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Figcaption_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figcaption_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figure_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Figure_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Figure_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Figure_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Figure_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Font_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Font_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Font_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Font_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Font_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Footer_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Footer_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Footer_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Footer_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Footer_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Form_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Form_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Form_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Form_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Form_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frame_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Frame_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Frame_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Frame_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frame_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frameset_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Frameset_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Frameset_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Frameset_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Frameset_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H1_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H1_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H1_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H1_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H1_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H2_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H2_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H2_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H2_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H2_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H3_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H3_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H3_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H3_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H3_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H4_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H4_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H4_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H4_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H4_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H5_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H5_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H5_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H5_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H5_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H6_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr H6_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr H6_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr H6_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr H6_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Head_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Head_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Head_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Head_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Head_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Header_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Header_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Header_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Header_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Header_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Hr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Hr_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Hr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Hr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Hr_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Html_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Html_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Html_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Html_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Html_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr I_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr I_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr I_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr I_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr I_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Iframe_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Iframe_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Iframe_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Iframe_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Iframe_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Img_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Img_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Img_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Img_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Img_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Input_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Input_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Input_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Input_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Input_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ins_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Ins_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Ins_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Ins_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ins_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Kbd_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Kbd_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Kbd_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Kbd_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Kbd_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Label_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Label_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Label_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Label_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Label_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Legend_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Legend_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Legend_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Legend_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Legend_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Li_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Li_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Li_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Li_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Li_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Link_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Link_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Link_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Link_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Link_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Main_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Main_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Main_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Main_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Main_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Map_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Map_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Map_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Map_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Map_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Mark_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Mark_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Mark_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Mark_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Mark_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meta_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Meta_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Meta_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Meta_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meta_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meter_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Meter_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Meter_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Meter_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Meter_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Nav_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Nav_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Nav_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Nav_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Nav_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noframes_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Noframes_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Noframes_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Noframes_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noframes_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noscript_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Noscript_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Noscript_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Noscript_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Noscript_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Object_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Object_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Object_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Object_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Object_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ol_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Ol_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Ol_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Ol_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ol_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Optgroup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Optgroup_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Optgroup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Optgroup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Optgroup_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Option_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Option_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Option_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Option_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Option_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Output_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Output_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Output_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Output_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Output_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr P_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr P_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr P_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr P_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr P_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Param_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Param_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Param_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Param_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Param_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Picture_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Picture_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Picture_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Picture_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Picture_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Pre_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Pre_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Pre_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Pre_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Pre_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Progress_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Progress_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Progress_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Progress_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Progress_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Q_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Q_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Q_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Q_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Q_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rp_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Rp_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Rp_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Rp_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rp_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Rt_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Rt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Rt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Rt_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ruby_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Ruby_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Ruby_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Ruby_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ruby_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr S_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr S_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr S_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr S_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr S_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Samp_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Samp_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Samp_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Samp_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Samp_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Script_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Script_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Script_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Script_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Script_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Section_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Section_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Section_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Section_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Section_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Select_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Select_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Select_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Select_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Select_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Small_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Small_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Small_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Small_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Small_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Source_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Source_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Source_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Source_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Source_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Span_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Span_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Span_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Span_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Span_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strike_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Strike_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Strike_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Strike_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strike_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strong_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Strong_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Strong_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Strong_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Strong_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Style_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Style_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Style_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Style_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Style_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sub_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Sub_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Sub_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Sub_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sub_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Summary_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Summary_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Summary_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Summary_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Summary_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sup_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Sup_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Sup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Sup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Sup_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Svg_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Svg_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Svg_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Svg_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Svg_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Table_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Table_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Table_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Table_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Table_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tbody_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Tbody_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Tbody_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Tbody_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tbody_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Td_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Td_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Td_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Td_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Td_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Template_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Template_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Template_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Template_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Template_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Textarea_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Textarea_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Textarea_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Textarea_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Textarea_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tfoot_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Tfoot_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Tfoot_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Tfoot_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tfoot_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Th_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Th_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Th_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Th_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Th_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Thead_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Thead_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Thead_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Thead_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Thead_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Time_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Time_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Time_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Time_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Time_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Title_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Title_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Title_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Title_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Title_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Tr_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Tr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Tr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tr_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Track_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Track_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Track_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Track_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Track_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tt_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Tt_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Tt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Tt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Tt_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr U_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr U_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr U_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr U_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr U_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ul_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Ul_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Ul_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Ul_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Ul_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Var_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Var_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Var_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Var_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Var_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Video_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Video_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Video_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Video_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Video_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Wbr_ Itemprop (NonEmpty.NonEmpty Event.Event  String ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: prop' (NonEmpty.head bothValues) })
-    (NonEmpty.tail bothValues <#> \value -> { key: "itemprop", value: prop' value })
-instance Attr Wbr_ Itemprop (Product.Product (ST.ST Global.Global) Event.Event  String ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \value ->  
-    { key: "itemprop", value: prop' (value) })
-    (Tuple.snd bothValues <#> \value -> { key: "itemprop", value: prop' value })
 instance Attr Wbr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute $ This $ pure $
+  attr Itemprop value = unsafeAttribute $ Left $  
     { key: "itemprop", value: prop' value }
 instance Attr Wbr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#>
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#>
     \value -> { key: "itemprop", value: prop' value }
 
-instance Attr Wbr_ Itemprop (ST.ST Global.Global  String ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue #
-    \value -> { key: "itemprop", value: prop' value }
 
-instance Attr everything Itemprop (NonEmpty.NonEmpty Event.Event  Unit ) where
-  attr Itemprop bothValues = unsafeAttribute $ Both (pure 
-    { key: "itemprop", value: unset' })
-    (NonEmpty.tail bothValues <#> \_ -> { key: "itemprop", value: unset' })
-instance Attr everything Itemprop (Product.Product (ST.ST Global.Global) Event.Event  Unit ) where
-  attr Itemprop (Product.Product bothValues) = unsafeAttribute $ Both (Tuple.fst bothValues # \_ ->  
-    { key: "itemprop", value: unset' })
-    (Tuple.snd bothValues <#> \_ -> { key: "itemprop", value: unset' })
 instance Attr everything Itemprop  Unit  where
-  attr Itemprop _ = unsafeAttribute $ This $ pure $
+  attr Itemprop _ = unsafeAttribute $ Left $  
     { key: "itemprop", value: unset' }
 instance Attr everything Itemprop (Event.Event  Unit ) where
-  attr Itemprop eventValue = unsafeAttribute $ That $ eventValue <#> \_ ->
-    { key: "itemprop", value: unset' }
-
-instance Attr everything Itemprop (ST.ST Global.Global  Unit ) where
-  attr Itemprop iValue = unsafeAttribute $ This $ iValue # \_ ->
+  attr Itemprop eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
     { key: "itemprop", value: unset' }
