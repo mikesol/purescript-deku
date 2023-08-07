@@ -60,7 +60,7 @@ import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node',
 import Deku.Do as Deku
 import Effect (Effect)
 import FRP.Behavior (sample)
-import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge, sampleOnRight)
+import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge)
 import FRP.Event.Class (once)
 
 flattenArgs
@@ -96,7 +96,11 @@ useState' f = Nut go'
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
     { event, push } <- create
-    let Nut nf = f (push /\ event)
+    let _ = spy "USESTATE" true
+    let Nut nf = f ((\i -> let _ = spy "STAGETOPUSH" i in do
+          pure unit
+          let _ = spy "RUNNINGPUSH" true
+          push i) /\ event)
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
 usePure
@@ -143,19 +147,21 @@ useEffect e f = Nut go'
   go
     :: forall payload
      . Node' payload
-  go i di@(DOMInterpret { oneOffEffect }) = behaving \ee _ subscribe -> do
+  go i di@(DOMInterpret { oneOffEffect }) = behaving' \ff ee _ subscribe -> do
     let Nut nf = f unit
     let
       exv = merge
         [ sample (__internalDekuFlatten nf i di) ee
-        , ( sampleOnRight ee
-              ( ( \effect ff -> let _ = spy "oneOffEffect" true in ff
-                    (oneOffEffect { effect })
-                ) <$> e
-              )
-          )
+        , ( \effect ->
+              let
+                _ = spy "oneOffEffect" true
+              in
+                ff
+                  (oneOffEffect { effect })
+          ) <$> e
+
         ]
-    subscribe exv
+    subscribe exv identity
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
 useMemoized :: forall a. Event a -> Hook (Event a)
@@ -167,7 +173,7 @@ useMemoized e f = Nut go'
   go
     :: forall payload
      . Node' payload
-  go i di = behaving' \ee _ subscribe -> do
+  go i di = behaving' \_ ee _ subscribe -> do
     { event, push } <- createPure
     subscribe e (\_ -> push)
     -- we `once e` in case it has an initial value
@@ -214,7 +220,7 @@ useRefST a e makeHook = Nut go'
   go
     :: forall payload
      . Node' payload
-  go i di = behaving' \ee _ subscribe -> do
+  go i di = behaving' \_ ee _ subscribe -> do
     rf <- STRef.new a
     let Nut nf = makeHook (STRef.read rf)
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
@@ -277,22 +283,23 @@ useDynWith e opts f = Nut go'
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
     c1 <- create
+    let _ = spy "USEDYNWITH CALLED" true
     let
-      mc cx (Tuple pos v) = Tuple
+      mc (Tuple pos v) = Tuple
         ( merge
             [ opts.remove v $> Child BCore.Remove
             , Child <<< BCore.Logic <$> opts.sendTo v
-            , cx.event
+            , c1.event
             ]
         )
         ( unsafeSetPos pos $ f
             { value: v
-            , remove: cx.push remove
-            , sendTo: cx.push <<< sendToPos
+            , remove: c1.push remove
+            , sendTo: c1.push <<< sendToPos
             }
         )
     let
-      Nut nf = dyn $ map (mc c1) e
+      Nut nf = dyn $ map mc e
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
 useDynAtBeginningWith

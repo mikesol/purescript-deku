@@ -11,7 +11,6 @@ import Data.Array as Array
 import Data.Filterable (compact, filter)
 import Data.Foldable (intercalate, oneOfMap)
 import Data.Functor (voidRight)
-import Data.List as List
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -78,11 +77,42 @@ elementsInCorrectOrder = do
           ]
   D.div [ id "div0-0" ] (l 1)
 
-
 usePureWorks :: Nut
 usePureWorks = Deku.do
   p <- usePure
   D.span [ id "hello" ] [ text (p $> "hello") ]
+
+useStateWorks :: Nut
+useStateWorks = Deku.do
+  _ /\ e <- useState "world"
+  D.span [ id "hello" ] [ text e ]
+
+useMemoizedWorks :: Nut
+useMemoizedWorks = Deku.do
+  _ /\ e <- useState "world"
+  x <- useMemoized e
+  D.span [ id "hello" ] [ text x ]
+
+twoElements :: Nut
+twoElements = Deku.do
+  D.div [ id "maindiv" ] [ D.div_ [ text "hello" ], D.div_ [ text "world" ] ]
+
+memoizedSwitcher :: Nut
+memoizedSwitcher = Deku.do
+  _ /\ e <- useState "world"
+  x <- useMemoized e
+  D.div [ id "maindiv" ] [ x <#~> text ]
+
+simpleSwitcher :: Nut
+simpleSwitcher = Deku.do
+  setSwitch /\ switch <- useState true
+  D.div [ id "external" ]
+    [ switch <#~>
+        if _ then D.span [ id "innertrue" ] [ text "trueswitch" ]
+        else D.span [ id "innerfalse" ] [ text "falseswitch" ]
+    , D.button [ id "doswitch", click $ switch <#> not >>> setSwitch ]
+        [ text "set switch" ]
+    ]
 
 dynAppearsCorrectlyAtBeginning :: Nut
 dynAppearsCorrectlyAtBeginning = Deku.do
@@ -199,7 +229,7 @@ switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (\a _ -> 1 + a) 0 event
+    counter event = fold (\a _ -> 1 + a) (-1) event
   setItem /\ item <- useState unit
   D.div [ id "div0" ]
     [ text "foo"
@@ -238,7 +268,7 @@ switchersCompose :: Nut
 switchersCompose = Deku.do
   let
     counter :: forall a. Event a -> Event Int
-    counter event = fold (\a _ -> a + 1) 0 event
+    counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item' <- useState unit
   item <- useMemoized (counter item')
   D.div [ id "maindiv" ]
@@ -291,10 +321,13 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
   let noDice = D.div_ [ text "no dice!" ]
   D.div_
     [ D.div [ id "outer-scope" ]
-        [ cycle (limitTo 2
-              ( (\tf p -> if not tf then p else noDice) <$> portalInContext <*>
-                  portedNut
-              ))
+        [ cycle
+            ( limitTo 2
+                ( (\tf p -> if not tf then p else noDice) <$> portalInContext
+                    <*>
+                      portedNut
+                )
+            )
         ]
     , ( globalPortal1 (D.div_ [ text "foo" ]) \e ->
           Deku.do
@@ -400,7 +433,7 @@ switcherSwitches = Deku.do
 unsetUnsets :: Nut
 unsetUnsets = Deku.do
   let initialAtt = "color:red;"
-  setAttIsPresent /\ attIsPresent <- useState false
+  setAttIsPresent /\ attIsPresent <- useState true
   D.div [ id "div0" ]
     [ text "foo"
     , D.span
@@ -421,10 +454,10 @@ useEffectWorks = Deku.do
   let startsAt = 0
   setCounter /\ counter <- useState startsAt
   let filt i = i `mod` 4 == 1
-  useEffect $ filter filt counter <#> setCounter <<< add 1
+  useEffect $ filter filt counter <#>  setCounter <<< add 1
   D.div_
     [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
+        [ click $ counter <#> setCounter <<< add 1 
         , id "counter"
         ]
         [ text "Increment" ]
@@ -457,42 +490,10 @@ refToHot = Deku.do
             ]
         ]
   D.div_
-    [ nest elt 0
-    --, D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
-    , D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
-    ]
-
-
-refToHot2 :: Nut
-refToHot2 = Deku.do
-  setLabel /\ label <- useState "foo"
-  cref <- useRef "foo" label
-  let
-    nest f n = Deku.do
-      setReveal /\ reveal <- useState'
-      D.div_
-        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
-            [ text "reveal" ]
-        , guard reveal $ f (n + 1)
-        ]
-    elt n = Deku.do
-      setReveal /\ reveal <- useState'
-      D.div_
-        [ D.button [ id $ ("button" <> show n), click $ setReveal true ]
-            [ text "reveal" ]
-        , D.span [ id "myspan" ]
-            [ guardWith
-                ( sampleBy voidRight (effectToBehavior cref)
-                    (Alt.guard <$> reveal)
-                )
-                text
-            ]
-        ]
-  D.div_
     [ nest (nest (nest (nest (nest (nest elt))))) 0
-    --, D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
     , D.button [ id "setlabel", click $ setLabel "bar" ] [ text "set label" ]
     ]
+
 useRefWorks :: Nut
 useRefWorks = Deku.do
   let startsAt = 0

@@ -46,10 +46,10 @@ import Prelude
 
 import Bolson.Control (Flatten, behaving)
 import Bolson.Control as BControl
-import Control.Monad.ST as ST
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
 import Control.Monad.ST (ST)
+import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Plus (empty)
@@ -60,6 +60,7 @@ import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
+import Debug (spy)
 import Deku.Attribute (Cb)
 import Effect (Effect)
 import FRP.Behavior (behavior, sample)
@@ -351,6 +352,7 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
           }
       ) = behaving \e kx subscribe -> do
     me <- ids
+    let _ = spy "DYNIFY CALLED" true
     raiseId $ show me
     -- `dyn`-s need to have a parent
     -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.

@@ -16,7 +16,7 @@ module Deku.Control
 
 import Prelude
 
-import Bolson.Control (behaving)
+import Bolson.Control (behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
@@ -111,7 +111,7 @@ elementify tag atts children = Node $ Element go
     di@
       ( DOMInterpret
           { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
-      ) = behaving \ee kx subscribe -> do
+      ) = behaving' \fff ee kx subscribe -> do
     me <- ids
     raiseId $ show me
     kx $ makeElement { id: show me, parent, scope, tag, pos, dynFamily }
@@ -136,12 +136,12 @@ elementify tag atts children = Node $ Element go
           )
           ee
       )
+      identity
     subscribe
-      ( sampleOnRight ee
-          ( map (\zzz fff -> fff $ unsafeSetAttribute di (show me) zzz)
-              (merge right)
-          )
+      ( map (\zzz -> fff $ unsafeSetAttribute di (show me) zzz)
+          (merge right)
       )
+      identity
 
 -- | Creates a portal.
 -- |
@@ -317,7 +317,7 @@ text_' t1 t2 = Nut go'
     di@
       ( DOMInterpret
           { ids, makeText, deferPayload, deleteFromCache, attributeParent }
-      ) = behaving \ee kx subscribe -> do
+      ) = behaving' \fff _ kx subscribe -> do
     me <- ids
     raiseId $ show me
     kx $ makeText { id: show me, parent, pos, scope, dynFamily }
@@ -328,11 +328,11 @@ text_' t1 t2 = Nut go'
     kx $ deferPayload deferralPath (deleteFromCache { id: show me })
     subscribe
       ( maybe empty
-          ( \iii -> sampleOnRight ee
-              ((\ttt fff -> fff $ unsafeSetText di (show me) ttt) <$> iii)
+          ( \iii -> 
+              ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
           )
           t2
-      )
+      ) identity
 
 -- | A class representing a conservative smattering of stuff that can turn into a text node
 class Textable text where

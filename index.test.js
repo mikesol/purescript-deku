@@ -39,6 +39,14 @@ describe("deku", () => {
     })
   );
 
+  doTest(
+    "two elements render",
+    (f) =>
+      f(tests.twoElements, () => {
+        const $ = require("jquery");
+        expect($("#maindiv").text()).toBe("helloworld");
+      })
+  );
   doTest("has elements in the correct order", (f) =>
     f(tests.elementsInCorrectOrder, () => {
       const $ = require("jquery");
@@ -369,46 +377,51 @@ describe("deku", () => {
     })
   );
 
-  doTest('useRef hook can simulate hot events', (f) => f(tests.refToHot, () => {
-    const $ = require('jquery');
-    // first, set the label to "bar"
-    $('#setlabel').trigger('click');
-    // then, click a bunch of stuff
-    $('#button0').trigger('click');
-    $('#button1').trigger('click');
-    $('#button2').trigger('click');
-    $('#button3').trigger('click');
-    $('#button4').trigger('click');
-    $('#button5').trigger('click');
-    $('#button6').trigger('click');
-    // as the behavior is hot, we get the most recent value
-    expect($('#myspan').text()).toBe('bar');
-  }));
+  doTest("useRef hook can simulate hot events", (f) =>
+    f(tests.refToHot, () => {
+      const $ = require("jquery");
+      // first, set the label to "bar"
+      $("#setlabel").trigger("click");
+      // then, click a bunch of stuff
+      $("#button0").trigger("click");
+      $("#button1").trigger("click");
+      $("#button2").trigger("click");
+      $("#button3").trigger("click");
+      $("#button4").trigger("click");
+      $("#button5").trigger("click");
+      $("#button6").trigger("click");
+      // as the behavior is hot, we get the most recent value
+      expect($("#myspan").text()).toBe("bar");
+    })
+  );
 
-  doTest('useRef hook can simulate hot events 2', (f) => f(tests.refToHot, () => {
-    const $ = require('jquery');
-    $('#setlabel').trigger('click');
-    $('#button0').trigger('click');
-    $('#button1').trigger('click');
-    expect($('#myspan').text()).toBe('bar');
-  }), false);
+  doTest("simple switcher", (f) =>
+    f(tests.simpleSwitcher, () => {
+      const $ = require("jquery");
+      expect($("#innertrue").text()).toBe("trueswitch");
+      $("#doswitch").trigger("click");
+      expect($("#innerfalse").text()).toBe("falseswitch");
+      $("#doswitch").trigger("click");
+      expect($("#innertrue").text()).toBe("trueswitch");
+    })
+  );
 
-  doTest('useEffect has correct behavior', (f) => f(tests.useEffectWorks, () => {
-    const $ = require('jquery');
-    expect($('#mydiv').text()).toBe('[0]');
-    $('#counter').trigger('click');
-    expect($('#mydiv').text()).toBe('[0,2,1]');
-    $('#counter').trigger('click');
-    // this test is a bit strange, but basically, what it's asserting
-    // is that the click effect is run after the `useEffect`, which
-    // effectively (ha!) wipes it out.
-    // `useEffect` is always run before anything in the DOM
-    expect($('#mydiv').text()).toBe('[0,2,1,2]');
-    $('#counter').trigger('click');
-    expect($('#mydiv').text()).toBe('[0,2,1,2,3]');
-    $('#counter').trigger('click');
-    expect($('#mydiv').text()).toBe('[0,2,1,2,3,4]');
-  }));
+  doTest("useEffect has correct behavior", (f) =>
+    f(tests.useEffectWorks, () => {
+      const $ = require("jquery");
+      expect($("#mydiv").text()).toBe("[0]");
+      $("#counter").trigger("click");
+      expect($("#mydiv").text()).toBe("[0,1,2]");
+      $("#counter").trigger("click");
+      expect($("#mydiv").text()).toBe("[0,1,2,3]");
+      $("#counter").trigger("click");
+      expect($("#mydiv").text()).toBe("[0,1,2,3,4]");
+      $("#counter").trigger("click");
+      expect($("#mydiv").text()).toBe("[0,1,2,3,4,5,6]");
+      $("#counter").trigger("click");
+      expect($("#mydiv").text()).toBe("[0,1,2,3,4,5,6,7]");
+    })
+  );
 
   doTest("useEffect with a ref has correct behavior", (f) =>
     f(tests.useEffectWorksWithRef, () => {
@@ -436,10 +449,31 @@ describe("deku", () => {
     })
   );
 
+  doTest("used state works", (f) =>
+    f(tests.useStateWorks, () => {
+      const $ = require("jquery");
+      expect($("#hello").text()).toBe("world");
+    })
+  );
+
+  doTest("used memoized works", (f) =>
+    f(tests.useMemoizedWorks, () => {
+      const $ = require("jquery");
+      expect($("#hello").text()).toBe("world");
+    })
+  );
+
+  doTest("a memoized switcher with an initial event triggers", (f) =>
+    f(tests.memoizedSwitcher, () => {
+      const $ = require("jquery");
+      expect($("#maindiv").text()).toBe("world");
+    })
+  );
+
   doTest("use pure works", (f) =>
-  f(tests.usePureWorks, () => {
-    const $ = require("jquery");
-    expect($("#hello").text()).toBe("hello");
-  })
-);
+    f(tests.usePureWorks, () => {
+      const $ = require("jquery");
+      expect($("#hello").text()).toBe("hello");
+    })
+  );
 });
