@@ -24,12 +24,11 @@ module Deku.Attribute
 import Prelude
 
 import Control.Plus (empty)
-import Data.Either (Either(..))
+import Data.Functor (voidRight)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Effect (Effect)
 import FRP.Event as FRP
-import Safe.Coerce (coerce)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -88,19 +87,19 @@ type Attribute' =
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 newtype Attribute (e :: Type) = Attribute
-  (Either Attribute' (FRP.Event Attribute'))
+  (forall b. FRP.Event b -> FRP.Event Attribute')
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
   :: forall e
    . Attribute e
-  -> Either Attribute' (FRP.Event Attribute')
-unsafeUnAttribute = coerce
+  -> (forall b. FRP.Event b -> FRP.Event Attribute')
+unsafeUnAttribute (Attribute a) = a
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
   :: forall e
-   . Either Attribute' (FRP.Event Attribute')
+   . (forall b. FRP.Event b -> FRP.Event Attribute')
   -> Attribute e
 unsafeAttribute = Attribute
 
@@ -114,7 +113,7 @@ class Attr e a b where
 
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute $ Left { key: "data-" <> k, value: Prop' v }
+xdata k v = unsafeAttribute (voidRight { key: "data-" <> k, value: Prop' v })
 
 -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
 -- | More commonly used in its alias `?:=`.
@@ -125,7 +124,7 @@ maybeAttr
   -> Maybe b
   -> Attribute e
 maybeAttr a (Just b) = a := b
-maybeAttr _ Nothing = Attribute $ Right empty
+maybeAttr _ Nothing = Attribute (const empty)
 
 infix 5 maybeAttr as ?:=
 infix 5 attr as :=
