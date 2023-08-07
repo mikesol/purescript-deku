@@ -2,7 +2,7 @@ module Deku.DOM.Attr.MarkerWidth where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Marker (Marker_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,16 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data MarkerWidth = MarkerWidth
 
 instance Attr Marker_ MarkerWidth  String  where
-  attr MarkerWidth value = unsafeAttribute $ Left $  
-    { key: "markerWidth", value: prop' value }
+  attr MarkerWidth value = unsafeAttribute (  
+    { key: "markerWidth", value: prop' value  } <$ _)
 instance Attr Marker_ MarkerWidth (Event.Event  String ) where
-  attr MarkerWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr MarkerWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "markerWidth", value: prop' value }
 
 
 instance Attr everything MarkerWidth  Unit  where
-  attr MarkerWidth _ = unsafeAttribute $ Left $  
-    { key: "markerWidth", value: unset' }
+  attr MarkerWidth _ = unsafeAttribute (  
+    { key: "markerWidth", value: unset'  } <$ _)
 instance Attr everything MarkerWidth (Event.Event  Unit ) where
-  attr MarkerWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr MarkerWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "markerWidth", value: unset' }

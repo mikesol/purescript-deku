@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Draggable where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,984 +131,984 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Draggable = Draggable
 
 instance Attr A_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr A_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Abbr_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Abbr_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Acronym_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Acronym_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Address_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Address_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Applet_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Applet_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Area_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Area_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Article_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Article_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Aside_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Aside_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Audio_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Audio_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr B_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr B_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Base_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Base_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Basefont_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Basefont_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Bdi_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Bdi_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Bdo_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Bdo_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Big_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Big_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Blockquote_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Blockquote_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Body_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Body_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Br_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Br_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Button_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Button_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Canvas_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Canvas_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Caption_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Caption_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Center_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Center_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Cite_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Cite_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Code_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Code_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Col_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Col_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Colgroup_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Colgroup_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Xdata_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Xdata_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Datalist_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Datalist_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dd_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dd_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Del_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Del_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Details_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Details_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dfn_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dfn_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dialog_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dialog_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dir_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dir_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Div_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Div_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dl_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dl_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Dt_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Dt_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Em_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Em_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Embed_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Embed_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Fieldset_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Fieldset_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Figcaption_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Figcaption_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Figure_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Figure_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Font_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Font_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Footer_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Footer_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Form_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Form_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Frame_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Frame_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Frameset_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Frameset_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H1_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H1_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H2_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H2_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H3_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H3_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H4_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H4_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H5_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H5_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr H6_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr H6_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Head_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Head_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Header_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Header_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Hr_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Hr_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Html_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Html_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr I_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr I_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Iframe_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Iframe_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Img_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Img_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Input_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Input_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Ins_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Ins_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Kbd_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Kbd_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Label_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Label_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Legend_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Legend_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Li_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Li_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Link_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Link_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Main_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Main_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Map_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Map_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Mark_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Mark_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Meta_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Meta_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Meter_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Meter_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Nav_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Nav_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Noframes_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Noframes_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Noscript_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Noscript_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Object_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Object_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Ol_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Ol_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Optgroup_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Optgroup_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Option_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Option_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Output_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Output_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr P_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr P_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Param_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Param_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Picture_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Picture_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Pre_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Pre_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Progress_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Progress_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Q_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Q_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Rp_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Rp_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Rt_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Rt_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Ruby_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Ruby_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr S_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr S_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Samp_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Samp_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Script_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Script_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Section_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Section_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Select_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Select_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Small_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Small_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Source_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Source_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Span_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Span_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Strike_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Strike_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Strong_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Strong_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Style_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Style_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Sub_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Sub_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Summary_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Summary_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Sup_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Sup_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Svg_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Svg_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Table_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Table_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Tbody_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Tbody_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Td_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Td_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Template_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Template_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Textarea_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Textarea_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Tfoot_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Tfoot_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Th_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Th_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Thead_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Thead_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Time_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Time_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Title_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Title_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Tr_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Tr_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Track_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Track_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Tt_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Tt_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr U_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr U_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Ul_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Ul_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Var_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Var_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Video_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Video_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr Wbr_ Draggable  String  where
-  attr Draggable value = unsafeAttribute $ Left $  
-    { key: "draggable", value: prop' value }
+  attr Draggable value = unsafeAttribute (  
+    { key: "draggable", value: prop' value  } <$ _)
 instance Attr Wbr_ Draggable (Event.Event  String ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "draggable", value: prop' value }
 
 
 instance Attr everything Draggable  Unit  where
-  attr Draggable _ = unsafeAttribute $ Left $  
-    { key: "draggable", value: unset' }
+  attr Draggable _ = unsafeAttribute (  
+    { key: "draggable", value: unset'  } <$ _)
 instance Attr everything Draggable (Event.Event  Unit ) where
-  attr Draggable eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Draggable eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "draggable", value: unset' }

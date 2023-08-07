@@ -2,7 +2,7 @@ module Deku.DOM.Attr.EdgeMode where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.FeGaussianBlur (FeGaussianBlur_)
 import Deku.DOM.Elt.FeConvolveMatrix (FeConvolveMatrix_)
@@ -11,24 +11,24 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data EdgeMode = EdgeMode
 
 instance Attr FeConvolveMatrix_ EdgeMode  String  where
-  attr EdgeMode value = unsafeAttribute $ Left $  
-    { key: "edgeMode", value: prop' value }
+  attr EdgeMode value = unsafeAttribute (  
+    { key: "edgeMode", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ EdgeMode (Event.Event  String ) where
-  attr EdgeMode eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr EdgeMode eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "edgeMode", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ EdgeMode  String  where
-  attr EdgeMode value = unsafeAttribute $ Left $  
-    { key: "edgeMode", value: prop' value }
+  attr EdgeMode value = unsafeAttribute (  
+    { key: "edgeMode", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ EdgeMode (Event.Event  String ) where
-  attr EdgeMode eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr EdgeMode eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "edgeMode", value: prop' value }
 
 
 instance Attr everything EdgeMode  Unit  where
-  attr EdgeMode _ = unsafeAttribute $ Left $  
-    { key: "edgeMode", value: unset' }
+  attr EdgeMode _ = unsafeAttribute (  
+    { key: "edgeMode", value: unset'  } <$ _)
 instance Attr everything EdgeMode (Event.Event  Unit ) where
-  attr EdgeMode eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr EdgeMode eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "edgeMode", value: unset' }

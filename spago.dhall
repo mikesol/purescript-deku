@@ -13,7 +13,6 @@
   , "filterable"
   , "foldable-traversable"
   , "foreign-object"
-  , "functors"
   , "hyrule"
   , "lists"
   , "maybe"

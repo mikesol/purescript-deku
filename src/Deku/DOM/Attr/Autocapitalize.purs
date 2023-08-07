@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Autocapitalize where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,984 +131,984 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Autocapitalize = Autocapitalize
 
 instance Attr A_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr A_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Abbr_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Abbr_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Acronym_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Acronym_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Address_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Address_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Applet_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Applet_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Area_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Area_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Article_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Article_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Aside_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Aside_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Audio_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Audio_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr B_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr B_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Base_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Base_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Basefont_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Basefont_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Bdi_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Bdi_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Bdo_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Bdo_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Big_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Big_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Blockquote_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Blockquote_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Body_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Body_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Br_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Br_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Button_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Button_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Canvas_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Canvas_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Caption_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Caption_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Center_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Center_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Cite_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Cite_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Code_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Code_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Col_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Col_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Colgroup_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Colgroup_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Xdata_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Xdata_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Datalist_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Datalist_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dd_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dd_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Del_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Del_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Details_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Details_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dfn_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dfn_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dialog_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dialog_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dir_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dir_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Div_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Div_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dl_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dl_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Dt_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Dt_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Em_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Em_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Embed_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Embed_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Fieldset_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Fieldset_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Figcaption_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Figcaption_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Figure_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Figure_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Font_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Font_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Footer_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Footer_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Form_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Form_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Frame_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Frame_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Frameset_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Frameset_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H1_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H1_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H2_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H2_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H3_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H3_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H4_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H4_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H5_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H5_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr H6_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr H6_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Head_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Head_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Header_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Header_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Hr_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Hr_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Html_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Html_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr I_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr I_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Iframe_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Iframe_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Img_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Img_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Input_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Input_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Ins_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Ins_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Kbd_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Kbd_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Label_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Label_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Legend_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Legend_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Li_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Li_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Link_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Link_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Main_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Main_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Map_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Map_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Mark_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Mark_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Meta_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Meta_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Meter_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Meter_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Nav_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Nav_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Noframes_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Noframes_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Noscript_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Noscript_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Object_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Object_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Ol_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Ol_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Optgroup_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Optgroup_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Option_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Option_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Output_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Output_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr P_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr P_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Param_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Param_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Picture_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Picture_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Pre_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Pre_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Progress_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Progress_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Q_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Q_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Rp_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Rp_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Rt_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Rt_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Ruby_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Ruby_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr S_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr S_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Samp_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Samp_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Script_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Script_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Section_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Section_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Select_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Select_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Small_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Small_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Source_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Source_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Span_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Span_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Strike_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Strike_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Strong_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Strong_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Style_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Style_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Sub_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Sub_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Summary_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Summary_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Sup_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Sup_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Svg_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Svg_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Table_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Table_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Tbody_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Tbody_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Td_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Td_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Template_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Template_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Textarea_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Textarea_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Tfoot_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Tfoot_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Th_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Th_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Thead_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Thead_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Time_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Time_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Title_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Title_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Tr_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Tr_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Track_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Track_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Tt_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Tt_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr U_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr U_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Ul_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Ul_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Var_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Var_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Video_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Video_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr Wbr_ Autocapitalize  String  where
-  attr Autocapitalize value = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: prop' value }
+  attr Autocapitalize value = unsafeAttribute (  
+    { key: "autocapitalize", value: prop' value  } <$ _)
 instance Attr Wbr_ Autocapitalize (Event.Event  String ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "autocapitalize", value: prop' value }
 
 
 instance Attr everything Autocapitalize  Unit  where
-  attr Autocapitalize _ = unsafeAttribute $ Left $  
-    { key: "autocapitalize", value: unset' }
+  attr Autocapitalize _ = unsafeAttribute (  
+    { key: "autocapitalize", value: unset'  } <$ _)
 instance Attr everything Autocapitalize (Event.Event  Unit ) where
-  attr Autocapitalize eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Autocapitalize eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "autocapitalize", value: unset' }

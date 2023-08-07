@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Radiogroup where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,984 +131,984 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Radiogroup = Radiogroup
 
 instance Attr A_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr A_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Abbr_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Abbr_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Acronym_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Acronym_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Address_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Address_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Applet_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Applet_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Area_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Area_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Article_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Article_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Aside_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Aside_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Audio_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Audio_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr B_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr B_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Base_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Base_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Basefont_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Basefont_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Bdi_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Bdi_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Bdo_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Bdo_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Big_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Big_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Blockquote_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Blockquote_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Body_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Body_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Br_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Br_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Button_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Button_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Canvas_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Canvas_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Caption_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Caption_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Center_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Center_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Cite_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Cite_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Code_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Code_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Col_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Col_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Colgroup_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Colgroup_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Xdata_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Xdata_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Datalist_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Datalist_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dd_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dd_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Del_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Del_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Details_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Details_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dfn_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dfn_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dialog_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dialog_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dir_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dir_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Div_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Div_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dl_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dl_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Dt_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Dt_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Em_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Em_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Embed_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Embed_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Fieldset_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Fieldset_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Figcaption_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Figcaption_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Figure_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Figure_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Font_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Font_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Footer_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Footer_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Form_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Form_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Frame_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Frame_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Frameset_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Frameset_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H1_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H1_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H2_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H2_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H3_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H3_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H4_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H4_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H5_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H5_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr H6_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr H6_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Head_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Head_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Header_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Header_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Hr_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Hr_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Html_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Html_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr I_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr I_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Iframe_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Iframe_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Img_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Img_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Input_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Input_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Ins_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Ins_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Kbd_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Kbd_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Label_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Label_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Legend_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Legend_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Li_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Li_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Link_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Link_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Main_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Main_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Map_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Map_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Mark_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Mark_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Meta_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Meta_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Meter_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Meter_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Nav_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Nav_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Noframes_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Noframes_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Noscript_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Noscript_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Object_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Object_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Ol_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Ol_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Optgroup_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Optgroup_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Option_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Option_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Output_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Output_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr P_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr P_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Param_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Param_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Picture_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Picture_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Pre_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Pre_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Progress_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Progress_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Q_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Q_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Rp_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Rp_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Rt_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Rt_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Ruby_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Ruby_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr S_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr S_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Samp_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Samp_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Script_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Script_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Section_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Section_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Select_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Select_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Small_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Small_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Source_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Source_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Span_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Span_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Strike_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Strike_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Strong_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Strong_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Style_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Style_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Sub_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Sub_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Summary_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Summary_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Sup_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Sup_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Svg_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Svg_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Table_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Table_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Tbody_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Tbody_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Td_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Td_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Template_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Template_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Textarea_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Textarea_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Tfoot_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Tfoot_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Th_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Th_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Thead_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Thead_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Time_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Time_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Title_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Title_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Tr_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Tr_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Track_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Track_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Tt_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Tt_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr U_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr U_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Ul_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Ul_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Var_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Var_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Video_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Video_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr Wbr_ Radiogroup  String  where
-  attr Radiogroup value = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: prop' value }
+  attr Radiogroup value = unsafeAttribute (  
+    { key: "radiogroup", value: prop' value  } <$ _)
 instance Attr Wbr_ Radiogroup (Event.Event  String ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "radiogroup", value: prop' value }
 
 
 instance Attr everything Radiogroup  Unit  where
-  attr Radiogroup _ = unsafeAttribute $ Left $  
-    { key: "radiogroup", value: unset' }
+  attr Radiogroup _ = unsafeAttribute (  
+    { key: "radiogroup", value: unset'  } <$ _)
 instance Attr everything Radiogroup (Event.Event  Unit ) where
-  attr Radiogroup eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Radiogroup eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "radiogroup", value: unset' }

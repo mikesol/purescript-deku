@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Codebase where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Applet (Applet_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,16 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Codebase = Codebase
 
 instance Attr Applet_ Codebase  String  where
-  attr Codebase value = unsafeAttribute $ Left $  
-    { key: "codebase", value: prop' value }
+  attr Codebase value = unsafeAttribute (  
+    { key: "codebase", value: prop' value  } <$ _)
 instance Attr Applet_ Codebase (Event.Event  String ) where
-  attr Codebase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Codebase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "codebase", value: prop' value }
 
 
 instance Attr everything Codebase  Unit  where
-  attr Codebase _ = unsafeAttribute $ Left $  
-    { key: "codebase", value: unset' }
+  attr Codebase _ = unsafeAttribute (  
+    { key: "codebase", value: unset'  } <$ _)
 instance Attr everything Codebase (Event.Event  Unit ) where
-  attr Codebase eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Codebase eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "codebase", value: unset' }

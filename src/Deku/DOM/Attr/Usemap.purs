@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Usemap where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Img (Img_)
 import Deku.DOM.Elt.Input (Input_)
@@ -12,31 +12,31 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Usemap = Usemap
 
 instance Attr Img_ Usemap  String  where
-  attr Usemap value = unsafeAttribute $ Left $  
-    { key: "usemap", value: prop' value }
+  attr Usemap value = unsafeAttribute (  
+    { key: "usemap", value: prop' value  } <$ _)
 instance Attr Img_ Usemap (Event.Event  String ) where
-  attr Usemap eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Usemap eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "usemap", value: prop' value }
 
 
 instance Attr Input_ Usemap  String  where
-  attr Usemap value = unsafeAttribute $ Left $  
-    { key: "usemap", value: prop' value }
+  attr Usemap value = unsafeAttribute (  
+    { key: "usemap", value: prop' value  } <$ _)
 instance Attr Input_ Usemap (Event.Event  String ) where
-  attr Usemap eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Usemap eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "usemap", value: prop' value }
 
 
 instance Attr Object_ Usemap  String  where
-  attr Usemap value = unsafeAttribute $ Left $  
-    { key: "usemap", value: prop' value }
+  attr Usemap value = unsafeAttribute (  
+    { key: "usemap", value: prop' value  } <$ _)
 instance Attr Object_ Usemap (Event.Event  String ) where
-  attr Usemap eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Usemap eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "usemap", value: prop' value }
 
 
 instance Attr everything Usemap  Unit  where
-  attr Usemap _ = unsafeAttribute $ Left $  { key: "usemap", value: unset' }
+  attr Usemap _ = unsafeAttribute (  { key: "usemap", value: unset'  } <$ _)
 instance Attr everything Usemap (Event.Event  Unit ) where
-  attr Usemap eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Usemap eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "usemap", value: unset' }

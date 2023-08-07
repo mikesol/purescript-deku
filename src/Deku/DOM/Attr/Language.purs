@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Language where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Script (Script_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,16 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Language = Language
 
 instance Attr Script_ Language  String  where
-  attr Language value = unsafeAttribute $ Left $  
-    { key: "language", value: prop' value }
+  attr Language value = unsafeAttribute (  
+    { key: "language", value: prop' value  } <$ _)
 instance Attr Script_ Language (Event.Event  String ) where
-  attr Language eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Language eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "language", value: prop' value }
 
 
 instance Attr everything Language  Unit  where
-  attr Language _ = unsafeAttribute $ Left $  
-    { key: "language", value: unset' }
+  attr Language _ = unsafeAttribute (  
+    { key: "language", value: unset'  } <$ _)
 instance Attr everything Language (Event.Event  Unit ) where
-  attr Language eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Language eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "language", value: unset' }

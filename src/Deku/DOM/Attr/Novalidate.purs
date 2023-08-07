@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Novalidate where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Form (Form_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,16 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Novalidate = Novalidate
 
 instance Attr Form_ Novalidate  String  where
-  attr Novalidate value = unsafeAttribute $ Left $  
-    { key: "novalidate", value: prop' value }
+  attr Novalidate value = unsafeAttribute (  
+    { key: "novalidate", value: prop' value  } <$ _)
 instance Attr Form_ Novalidate (Event.Event  String ) where
-  attr Novalidate eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Novalidate eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "novalidate", value: prop' value }
 
 
 instance Attr everything Novalidate  Unit  where
-  attr Novalidate _ = unsafeAttribute $ Left $  
-    { key: "novalidate", value: unset' }
+  attr Novalidate _ = unsafeAttribute (  
+    { key: "novalidate", value: unset'  } <$ _)
 instance Attr everything Novalidate (Event.Event  Unit ) where
-  attr Novalidate eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Novalidate eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "novalidate", value: unset' }

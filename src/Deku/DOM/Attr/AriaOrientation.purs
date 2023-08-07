@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaOrientation where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -26,144 +26,144 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaOrientation = AriaOrientation
 
 instance Attr Circle_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Circle_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Ellipse_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Ellipse_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr ForeignObject_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr ForeignObject_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr G_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr G_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Line_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Line_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Marker_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Marker_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Path_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Path_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Polygon_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Polygon_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Polyline_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Polyline_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Rect_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Rect_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Svg_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Svg_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Symbol_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Symbol_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Text_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Text_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr TextPath_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr TextPath_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Tspan_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Tspan_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr Use_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr Use_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr View_ AriaOrientation  String  where
-  attr AriaOrientation value = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: prop' value }
+  attr AriaOrientation value = unsafeAttribute (  
+    { key: "aria-orientation", value: prop' value  } <$ _)
 instance Attr View_ AriaOrientation (Event.Event  String ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-orientation", value: prop' value }
 
 
 instance Attr everything AriaOrientation  Unit  where
-  attr AriaOrientation _ = unsafeAttribute $ Left $  
-    { key: "aria-orientation", value: unset' }
+  attr AriaOrientation _ = unsafeAttribute (  
+    { key: "aria-orientation", value: unset'  } <$ _)
 instance Attr everything AriaOrientation (Event.Event  Unit ) where
-  attr AriaOrientation eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaOrientation eventValue = unsafeAttribute \_ -> eventValue
     <#> \_ -> { key: "aria-orientation", value: unset' }

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Width where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Symbol (Symbol_)
@@ -42,271 +42,271 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Width = Width
 
 instance Attr Canvas_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Canvas_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Embed_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Embed_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Iframe_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Iframe_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Img_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Img_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Input_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Input_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Object_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Object_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Video_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Video_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeBlend_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeBlend_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeColorMatrix_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeComposite_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeComposite_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeDropShadow_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeDropShadow_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeFlood_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeFlood_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeImage_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeImage_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeMerge_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeMerge_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeMorphology_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeMorphology_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeOffset_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeOffset_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeTile_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeTile_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr FeTurbulence_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Filter_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Filter_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr ForeignObject_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr ForeignObject_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Image_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Image_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Mask_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Mask_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Pattern_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Pattern_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Rect_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Rect_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Svg_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Svg_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Symbol_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Symbol_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr Use_ Width  String  where
-  attr Width value = unsafeAttribute $ Left $  
-    { key: "width", value: prop' value }
+  attr Width value = unsafeAttribute (  
+    { key: "width", value: prop' value  } <$ _)
 instance Attr Use_ Width (Event.Event  String ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "width", value: prop' value }
 
 
 instance Attr everything Width  Unit  where
-  attr Width _ = unsafeAttribute $ Left $  { key: "width", value: unset' }
+  attr Width _ = unsafeAttribute (  { key: "width", value: unset'  } <$ _)
 instance Attr everything Width (Event.Event  Unit ) where
-  attr Width eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Width eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "width", value: unset' }

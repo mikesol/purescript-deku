@@ -2,41 +2,41 @@ module Deku.DOM.Attr.OnSlotchange where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnSlotchange = OnSlotchange
 
 instance Attr anything OnSlotchange  Cb  where
-  attr OnSlotchange value = unsafeAttribute $ Left $  
-    { key: "slotchange", value: cb' value }
+  attr OnSlotchange value = unsafeAttribute (  
+    { key: "slotchange", value: cb' value  } <$ _)
 instance Attr anything OnSlotchange (Event.Event  Cb ) where
-  attr OnSlotchange eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnSlotchange eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "slotchange", value: cb' value }
 
 
 instance Attr anything OnSlotchange  (Effect Unit)  where
-  attr OnSlotchange value = unsafeAttribute $ Left $  
-    { key: "slotchange", value: cb' (Cb (const (value $> true))) }
+  attr OnSlotchange value = unsafeAttribute (  
+    { key: "slotchange", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnSlotchange (Event.Event  (Effect Unit) ) where
-  attr OnSlotchange eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnSlotchange eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "slotchange", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnSlotchange  (Effect Boolean)  where
-  attr OnSlotchange value = unsafeAttribute $ Left $  
-    { key: "slotchange", value: cb' (Cb (const value)) }
+  attr OnSlotchange value = unsafeAttribute (  
+    { key: "slotchange", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnSlotchange (Event.Event  (Effect Boolean) ) where
-  attr OnSlotchange eventValue = unsafeAttribute $ Right $ eventValue <#>
-    \value -> { key: "slotchange", value: cb' (Cb (const value)) }
+  attr OnSlotchange eventValue = unsafeAttribute \_ -> eventValue <#>
+    \value -> { key: "slotchange", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnSlotchange  Unit  where
-  attr OnSlotchange _ = unsafeAttribute $ Left $  
-    { key: "slotchange", value: unset' }
+  attr OnSlotchange _ = unsafeAttribute (  
+    { key: "slotchange", value: unset'  } <$ _)
 instance Attr everything OnSlotchange (Event.Event  Unit ) where
-  attr OnSlotchange eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnSlotchange eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "slotchange", value: unset' }

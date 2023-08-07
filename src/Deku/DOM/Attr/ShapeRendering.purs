@@ -2,7 +2,7 @@ module Deku.DOM.Attr.ShapeRendering where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -50,336 +50,336 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data ShapeRendering = ShapeRendering
 
 instance Attr Circle_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Circle_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr ClipPath_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr ClipPath_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Defs_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Defs_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Ellipse_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Ellipse_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeBlend_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeBlend_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeColorMatrix_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeComposite_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeComposite_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeFlood_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeFlood_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeImage_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeImage_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeMerge_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeMerge_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeMorphology_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeMorphology_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeOffset_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeOffset_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeTile_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeTile_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr FeTurbulence_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Filter_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Filter_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr ForeignObject_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr ForeignObject_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr G_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr G_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Image_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Image_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Line_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Line_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr LinearGradient_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr LinearGradient_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Marker_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Marker_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Mask_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Mask_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Path_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Path_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Pattern_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Pattern_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Polygon_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Polygon_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Polyline_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Polyline_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr RadialGradient_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr RadialGradient_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Rect_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Rect_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Svg_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Svg_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Switch_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Switch_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Symbol_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Symbol_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Text_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Text_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr TextPath_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr TextPath_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Tspan_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Tspan_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr Use_ ShapeRendering  String  where
-  attr ShapeRendering value = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: prop' value }
+  attr ShapeRendering value = unsafeAttribute (  
+    { key: "shape-rendering", value: prop' value  } <$ _)
 instance Attr Use_ ShapeRendering (Event.Event  String ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "shape-rendering", value: prop' value }
 
 
 instance Attr everything ShapeRendering  Unit  where
-  attr ShapeRendering _ = unsafeAttribute $ Left $  
-    { key: "shape-rendering", value: unset' }
+  attr ShapeRendering _ = unsafeAttribute (  
+    { key: "shape-rendering", value: unset'  } <$ _)
 instance Attr everything ShapeRendering (Event.Event  Unit ) where
-  attr ShapeRendering eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr ShapeRendering eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "shape-rendering", value: unset' }

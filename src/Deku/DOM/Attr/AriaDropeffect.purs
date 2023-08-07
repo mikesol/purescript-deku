@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaDropeffect where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -26,144 +26,144 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaDropeffect = AriaDropeffect
 
 instance Attr Circle_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Circle_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Ellipse_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Ellipse_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr ForeignObject_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr ForeignObject_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr G_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr G_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Line_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Line_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Marker_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Marker_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Path_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Path_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Polygon_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Polygon_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Polyline_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Polyline_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Rect_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Rect_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Svg_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Svg_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Symbol_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Symbol_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Text_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Text_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr TextPath_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr TextPath_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Tspan_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Tspan_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr Use_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr Use_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr View_ AriaDropeffect  String  where
-  attr AriaDropeffect value = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: prop' value }
+  attr AriaDropeffect value = unsafeAttribute (  
+    { key: "aria-dropeffect", value: prop' value  } <$ _)
 instance Attr View_ AriaDropeffect (Event.Event  String ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-dropeffect", value: prop' value }
 
 
 instance Attr everything AriaDropeffect  Unit  where
-  attr AriaDropeffect _ = unsafeAttribute $ Left $  
-    { key: "aria-dropeffect", value: unset' }
+  attr AriaDropeffect _ = unsafeAttribute (  
+    { key: "aria-dropeffect", value: unset'  } <$ _)
 instance Attr everything AriaDropeffect (Event.Event  Unit ) where
-  attr AriaDropeffect eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr AriaDropeffect eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "aria-dropeffect", value: unset' }

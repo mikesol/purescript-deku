@@ -12,7 +12,8 @@ module Deku.Control
   , portal1
   , text
   , unsafeSetAttribute
-  ) where
+  )
+  where
 
 import Prelude
 
@@ -21,17 +22,16 @@ import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
 import Control.Plus (empty)
-import Data.Either (Either(..))
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Foldable (foldl, for_)
+import Data.Foldable (for_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
 import FRP.Behavior (sample)
-import FRP.Event (Event, merge, sampleOnRight)
+import FRP.Event (Event, merge)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -97,14 +97,6 @@ elementify
   -> Node payload
 elementify tag atts children = Node $ Element go
   where
-  { left, right } = foldl
-    ( \b a -> case unsafeUnAttribute a of
-        Left l -> b { left = b.left <> [ l ] }
-        Right r -> b { right = b.right <> [ r ] }
-    )
-    { left: [], right: [] }
-    atts
-
   go :: Node' payload
   go
     { parent, scope, raiseId, pos, deferralPath, dynFamily, ez }
@@ -118,7 +110,6 @@ elementify tag atts children = Node $ Element go
     for_ parent \p ->
       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
 
-    for_ left \v -> kx (unsafeSetAttribute di (show me) v)
     kx $ deferPayload deferralPath $ deleteFromCache { id: show me }
     subscribe
       ( sample
@@ -139,7 +130,7 @@ elementify tag atts children = Node $ Element go
       identity
     subscribe
       ( map (\zzz -> fff $ unsafeSetAttribute di (show me) zzz)
-          (merge right)
+          (merge (map (unsafeUnAttribute >>> (_ $ (ee $> unit))) atts))
       )
       identity
 
@@ -302,10 +293,9 @@ portal v' c' =
     )
 
 text_'
-  :: Maybe String
-  -> Maybe (Event String)
+  :: (Event Unit -> Event String)
   -> Nut
-text_' t1 t2 = Nut go'
+text_' t2 = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -318,22 +308,18 @@ text_' t1 t2 = Nut go'
     di@
       ( DOMInterpret
           { ids, makeText, deferPayload, deleteFromCache, attributeParent }
-      ) = behaving' \fff _ kx subscribe -> do
+      ) = behaving' \fff ee kx subscribe -> do
     me <- ids
     raiseId $ show me
     kx $ makeText { id: show me, parent, pos, scope, dynFamily }
     for_ parent \p ->
       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
-    for_ t1 \t ->
-      kx $ unsafeSetText di (show me) t
     kx $ deferPayload deferralPath (deleteFromCache { id: show me })
     subscribe
-      ( maybe empty
-          ( \iii -> 
+          (( \iii -> 
               ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
           )
-          t2
-      ) identity
+          (t2 (ee $> unit)))  identity
 
 -- | A class representing a conservative smattering of stuff that can turn into a text node
 class Textable text where
@@ -342,10 +328,10 @@ class Textable text where
   text :: text -> Nut
 
 instance Textable (Event String) where
-  text = text_' Nothing <<< Just
+  text s = text_' (const s)
 
 instance Textable String where
-  text txt = text_' (Just txt) Nothing
+  text s = text_' (_ $> s)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

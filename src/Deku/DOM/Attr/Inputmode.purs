@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Inputmode where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Textarea (Textarea_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,16 +10,16 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Inputmode = Inputmode
 
 instance Attr Textarea_ Inputmode  String  where
-  attr Inputmode value = unsafeAttribute $ Left $  
-    { key: "inputmode", value: prop' value }
+  attr Inputmode value = unsafeAttribute (  
+    { key: "inputmode", value: prop' value  } <$ _)
 instance Attr Textarea_ Inputmode (Event.Event  String ) where
-  attr Inputmode eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Inputmode eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "inputmode", value: prop' value }
 
 
 instance Attr everything Inputmode  Unit  where
-  attr Inputmode _ = unsafeAttribute $ Left $  
-    { key: "inputmode", value: unset' }
+  attr Inputmode _ = unsafeAttribute (  
+    { key: "inputmode", value: unset'  } <$ _)
 instance Attr everything Inputmode (Event.Event  Unit ) where
-  attr Inputmode eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Inputmode eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "inputmode", value: unset' }

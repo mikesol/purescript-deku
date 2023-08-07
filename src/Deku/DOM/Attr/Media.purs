@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Media where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Area (Area_)
@@ -14,47 +14,47 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Media = Media
 
 instance Attr A_ Media  String  where
-  attr Media value = unsafeAttribute $ Left $  
-    { key: "media", value: prop' value }
+  attr Media value = unsafeAttribute (  
+    { key: "media", value: prop' value  } <$ _)
 instance Attr A_ Media (Event.Event  String ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "media", value: prop' value }
 
 
 instance Attr Area_ Media  String  where
-  attr Media value = unsafeAttribute $ Left $  
-    { key: "media", value: prop' value }
+  attr Media value = unsafeAttribute (  
+    { key: "media", value: prop' value  } <$ _)
 instance Attr Area_ Media (Event.Event  String ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "media", value: prop' value }
 
 
 instance Attr Link_ Media  String  where
-  attr Media value = unsafeAttribute $ Left $  
-    { key: "media", value: prop' value }
+  attr Media value = unsafeAttribute (  
+    { key: "media", value: prop' value  } <$ _)
 instance Attr Link_ Media (Event.Event  String ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "media", value: prop' value }
 
 
 instance Attr Source_ Media  String  where
-  attr Media value = unsafeAttribute $ Left $  
-    { key: "media", value: prop' value }
+  attr Media value = unsafeAttribute (  
+    { key: "media", value: prop' value  } <$ _)
 instance Attr Source_ Media (Event.Event  String ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "media", value: prop' value }
 
 
 instance Attr Style_ Media  String  where
-  attr Media value = unsafeAttribute $ Left $  
-    { key: "media", value: prop' value }
+  attr Media value = unsafeAttribute (  
+    { key: "media", value: prop' value  } <$ _)
 instance Attr Style_ Media (Event.Event  String ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "media", value: prop' value }
 
 
 instance Attr everything Media  Unit  where
-  attr Media _ = unsafeAttribute $ Left $  { key: "media", value: unset' }
+  attr Media _ = unsafeAttribute (  { key: "media", value: unset'  } <$ _)
 instance Attr everything Media (Event.Event  Unit ) where
-  attr Media eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Media eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "media", value: unset' }

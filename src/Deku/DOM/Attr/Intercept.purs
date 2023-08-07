@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Intercept where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.FeFuncR (FeFuncR_)
 import Deku.DOM.Elt.FeFuncG (FeFuncG_)
@@ -13,40 +13,40 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Intercept = Intercept
 
 instance Attr FeFuncA_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ Left $  
-    { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute (  
+    { key: "intercept", value: prop' value  } <$ _)
 instance Attr FeFuncA_ Intercept (Event.Event  String ) where
-  attr Intercept eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Intercept eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "intercept", value: prop' value }
 
 
 instance Attr FeFuncB_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ Left $  
-    { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute (  
+    { key: "intercept", value: prop' value  } <$ _)
 instance Attr FeFuncB_ Intercept (Event.Event  String ) where
-  attr Intercept eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Intercept eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "intercept", value: prop' value }
 
 
 instance Attr FeFuncG_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ Left $  
-    { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute (  
+    { key: "intercept", value: prop' value  } <$ _)
 instance Attr FeFuncG_ Intercept (Event.Event  String ) where
-  attr Intercept eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Intercept eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "intercept", value: prop' value }
 
 
 instance Attr FeFuncR_ Intercept  String  where
-  attr Intercept value = unsafeAttribute $ Left $  
-    { key: "intercept", value: prop' value }
+  attr Intercept value = unsafeAttribute (  
+    { key: "intercept", value: prop' value  } <$ _)
 instance Attr FeFuncR_ Intercept (Event.Event  String ) where
-  attr Intercept eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Intercept eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "intercept", value: prop' value }
 
 
 instance Attr everything Intercept  Unit  where
-  attr Intercept _ = unsafeAttribute $ Left $  
-    { key: "intercept", value: unset' }
+  attr Intercept _ = unsafeAttribute (  
+    { key: "intercept", value: unset'  } <$ _)
 instance Attr everything Intercept (Event.Event  Unit ) where
-  attr Intercept eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Intercept eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "intercept", value: unset' }

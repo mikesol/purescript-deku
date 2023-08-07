@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Pattern where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Input (Input_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
@@ -10,15 +10,15 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Pattern = Pattern
 
 instance Attr Input_ Pattern  String  where
-  attr Pattern value = unsafeAttribute $ Left $  
-    { key: "pattern", value: prop' value }
+  attr Pattern value = unsafeAttribute (  
+    { key: "pattern", value: prop' value  } <$ _)
 instance Attr Input_ Pattern (Event.Event  String ) where
-  attr Pattern eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Pattern eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pattern", value: prop' value }
 
 
 instance Attr everything Pattern  Unit  where
-  attr Pattern _ = unsafeAttribute $ Left $  { key: "pattern", value: unset' }
+  attr Pattern _ = unsafeAttribute (  { key: "pattern", value: unset'  } <$ _)
 instance Attr everything Pattern (Event.Event  Unit ) where
-  attr Pattern eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Pattern eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "pattern", value: unset' }

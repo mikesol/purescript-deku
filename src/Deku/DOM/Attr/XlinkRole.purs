@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XlinkRole where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Mpath (Mpath_)
 import Deku.DOM.Elt.Image (Image_)
@@ -14,48 +14,48 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XlinkRole = XlinkRole
 
 instance Attr AnimateTransform_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute (  
+    { key: "xlink:role", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ XlinkRole (Event.Event  String ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:role", value: prop' value }
 
 
 instance Attr FeImage_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute (  
+    { key: "xlink:role", value: prop' value  } <$ _)
 instance Attr FeImage_ XlinkRole (Event.Event  String ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:role", value: prop' value }
 
 
 instance Attr Filter_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute (  
+    { key: "xlink:role", value: prop' value  } <$ _)
 instance Attr Filter_ XlinkRole (Event.Event  String ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:role", value: prop' value }
 
 
 instance Attr Image_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute (  
+    { key: "xlink:role", value: prop' value  } <$ _)
 instance Attr Image_ XlinkRole (Event.Event  String ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:role", value: prop' value }
 
 
 instance Attr Mpath_ XlinkRole  String  where
-  attr XlinkRole value = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: prop' value }
+  attr XlinkRole value = unsafeAttribute (  
+    { key: "xlink:role", value: prop' value  } <$ _)
 instance Attr Mpath_ XlinkRole (Event.Event  String ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:role", value: prop' value }
 
 
 instance Attr everything XlinkRole  Unit  where
-  attr XlinkRole _ = unsafeAttribute $ Left $  
-    { key: "xlink:role", value: unset' }
+  attr XlinkRole _ = unsafeAttribute (  
+    { key: "xlink:role", value: unset'  } <$ _)
 instance Attr everything XlinkRole (Event.Event  Unit ) where
-  attr XlinkRole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkRole eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "xlink:role", value: unset' }

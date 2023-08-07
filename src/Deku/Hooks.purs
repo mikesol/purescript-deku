@@ -19,7 +19,6 @@ module Deku.Hooks
   , guardWith
   , switcher
   , switcherFlipped
-  , usePure
   , useDyn
   , useDynAtBeginning
   , useDynAtBeginningWith
@@ -35,7 +34,6 @@ module Deku.Hooks
   , useRefST
   , useRefSTNE
   , useState
-  , useState'
   ) where
 
 import Prelude
@@ -83,10 +81,10 @@ __internalDekuFlatten
 __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
-useState'
+useState
   :: forall a
    . Hook ((a -> Effect Unit) /\ Event a)
-useState' f = Nut go'
+useState f = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -103,34 +101,11 @@ useState' f = Nut go'
           push i) /\ event)
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
-usePure
-  :: Hook (Event Unit)
-usePure f = Nut go'
-  where
-  go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node (Element go)))
 
-  go
-    :: forall payload
-     . Node' payload
-  go i di = behaving \ee _ subscribe -> do
-    let Nut nf = f (ee $> unit)
-    subscribe (sample (__internalDekuFlatten nf i di) ee)
-
--- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
-useState
-  :: forall a
-   . a
-  -> Hook ((a -> Effect Unit) /\ Event a)
-useState a makeHook = Deku.do
-  push /\ event <- useState'
-  pe <- usePure
-  makeHook (push /\ merge [ pe $> a, event ])
-
-guard :: Event Boolean -> Nut -> Nut
+guard :: (forall b. Event b -> Event Boolean) -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b
 
-guardWith :: forall a. Event (Maybe a) -> (a -> Nut) -> Nut
+guardWith :: forall a. (forall b. Event b -> Event (Maybe a)) -> (a -> Nut) -> Nut
 guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
@@ -188,7 +163,7 @@ useMemoized'
   -> (Tuple (t -> Effect Unit) (Event a) -> Nut)
   -> Nut
 useMemoized' f0 makeHook = Deku.do
-  push /\ e <- useState'
+  push /\ e <- useState
   m <- useMemoized (f0 e)
   makeHook (push /\ m)
 
@@ -249,14 +224,14 @@ useMailboxed f = Nut go'
     subscribe (sample (__internalDekuFlatten nf i di) e)
 
 type DynOptions v =
-  { sendTo :: v -> Event Int, remove :: v -> Event Unit }
+  { sendTo :: v -> (forall b. Event b -> Event Int), remove :: v -> (forall b. Event b -> Event Unit) }
 
 dynOptions :: forall v. DynOptions v
-dynOptions = { sendTo: const empty, remove: const empty }
+dynOptions = { sendTo: \_ _ -> empty, remove: \_ _ -> empty }
 
 useDyn
   :: forall value
-   . Event (Tuple Int value)
+   . (forall b. Event b -> Event (Tuple Int value))
   -> Hook
        { value :: value
        , remove :: Effect Unit
@@ -266,7 +241,7 @@ useDyn y = useDynWith y dynOptions
 
 useDynWith
   :: forall value
-   . Event (Tuple Int value)
+   . (forall b. Event b -> Event (Tuple Int value))
   -> DynOptions value
   -> Hook
        { value :: value
@@ -287,8 +262,8 @@ useDynWith e opts f = Nut go'
     let
       mc (Tuple pos v) = Tuple
         ( merge
-            [ opts.remove v $> Child BCore.Remove
-            , Child <<< BCore.Logic <$> opts.sendTo v
+            [ opts.remove v ee $> Child BCore.Remove
+            , Child <<< BCore.Logic <$> opts.sendTo v ee
             , c1.event
             ]
         )
@@ -299,36 +274,36 @@ useDynWith e opts f = Nut go'
             }
         )
     let
-      Nut nf = dyn $ map mc e
+      Nut nf = dyn $ map mc (e ee)
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
 useDynAtBeginningWith
   :: forall value
-   . Event value
+   . (forall b. Event b -> Event value)
   -> DynOptions value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-useDynAtBeginningWith e = useDynWith ((0 /\ _) <$> e)
+useDynAtBeginningWith e = useDynWith (map (map (0 /\ _)) e)
 
 useDynAtBeginning
   :: forall value
-   . Event value
+   . (forall b. Event b -> Event value)
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtBeginning b = useDynAtBeginningWith b dynOptions
 
 useDynAtEndWith
   :: forall value
-   . Event value
+   . (forall b. Event b -> Event value)
   -> DynOptions value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtEndWith e = useDynWith
-  (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
+  (map (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0) e)
 
 useDynAtEnd
   :: forall value
-   . Event value
+   . (forall b. Event b -> Event value)
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtEnd b = useDynAtEndWith b dynOptions
@@ -339,13 +314,13 @@ useDynAtEnd b = useDynAtEndWith b dynOptions
 -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
-switcher :: forall a. (a -> Nut) -> Event a -> Nut
+switcher :: forall a. (a -> Nut) -> (forall b. Event b -> Event a) -> Nut
 switcher f event = Deku.do
-  ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith ctr $ dynOptions
-    { remove = \(Tuple oldV _) -> filterMap
+  --ctr <- useMemoized (counter event)
+  { value } <- useDynAtBeginningWith (counter <$> event) $ dynOptions
+    { remove = \(Tuple oldV _) ee -> filterMap
         (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr
+        (counter (event ee))
     }
   f (snd value)
   where
@@ -353,13 +328,13 @@ switcher f event = Deku.do
     where
     fn a b = (a + 1) /\ (a /\ b)
 
-cycle :: Event Nut -> Nut
+cycle :: (forall b. Event b -> Event Nut )-> Nut
 cycle = switcher identity
 
 infixl 4 switcher as <$~>
 
 -- | A flipped version of `switcher`.
-switcherFlipped :: forall a. Event a -> (a -> Nut) -> Nut
-switcherFlipped = flip switcher
+switcherFlipped :: forall a. (forall b. Event b -> Event a) -> (a -> Nut) -> Nut
+switcherFlipped a b = switcher b a
 
 infixl 1 switcherFlipped as <#~>

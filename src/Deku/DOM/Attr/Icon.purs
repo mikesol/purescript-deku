@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Icon where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,983 +131,983 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Icon = Icon
 
 instance Attr A_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr A_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Abbr_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Abbr_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Acronym_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Acronym_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Address_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Address_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Applet_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Applet_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Area_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Area_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Article_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Article_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Aside_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Aside_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Audio_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Audio_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr B_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr B_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Base_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Base_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Basefont_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Basefont_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Bdi_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Bdi_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Bdo_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Bdo_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Big_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Big_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Blockquote_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Blockquote_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Body_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Body_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Br_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Br_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Button_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Button_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Canvas_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Canvas_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Caption_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Caption_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Center_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Center_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Cite_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Cite_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Code_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Code_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Col_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Col_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Colgroup_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Colgroup_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Xdata_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Xdata_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Datalist_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Datalist_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dd_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dd_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Del_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Del_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Details_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Details_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dfn_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dfn_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dialog_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dialog_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dir_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dir_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Div_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Div_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dl_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dl_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Dt_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Dt_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Em_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Em_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Embed_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Embed_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Fieldset_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Fieldset_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Figcaption_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Figcaption_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Figure_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Figure_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Font_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Font_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Footer_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Footer_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Form_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Form_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Frame_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Frame_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Frameset_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Frameset_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H1_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H1_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H2_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H2_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H3_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H3_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H4_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H4_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H5_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H5_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr H6_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr H6_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Head_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Head_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Header_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Header_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Hr_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Hr_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Html_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Html_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr I_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr I_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Iframe_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Iframe_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Img_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Img_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Input_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Input_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Ins_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Ins_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Kbd_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Kbd_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Label_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Label_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Legend_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Legend_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Li_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Li_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Link_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Link_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Main_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Main_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Map_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Map_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Mark_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Mark_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Meta_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Meta_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Meter_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Meter_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Nav_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Nav_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Noframes_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Noframes_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Noscript_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Noscript_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Object_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Object_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Ol_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Ol_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Optgroup_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Optgroup_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Option_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Option_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Output_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Output_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr P_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr P_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Param_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Param_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Picture_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Picture_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Pre_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Pre_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Progress_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Progress_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Q_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Q_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Rp_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Rp_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Rt_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Rt_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Ruby_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Ruby_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr S_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr S_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Samp_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Samp_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Script_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Script_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Section_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Section_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Select_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Select_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Small_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Small_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Source_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Source_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Span_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Span_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Strike_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Strike_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Strong_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Strong_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Style_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Style_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Sub_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Sub_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Summary_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Summary_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Sup_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Sup_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Svg_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Svg_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Table_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Table_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Tbody_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Tbody_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Td_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Td_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Template_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Template_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Textarea_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Textarea_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Tfoot_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Tfoot_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Th_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Th_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Thead_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Thead_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Time_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Time_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Title_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Title_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Tr_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Tr_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Track_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Track_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Tt_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Tt_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr U_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr U_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Ul_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Ul_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Var_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Var_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Video_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Video_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr Wbr_ Icon  String  where
-  attr Icon value = unsafeAttribute $ Left $  
-    { key: "icon", value: prop' value }
+  attr Icon value = unsafeAttribute (  
+    { key: "icon", value: prop' value  } <$ _)
 instance Attr Wbr_ Icon (Event.Event  String ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "icon", value: prop' value }
 
 
 instance Attr everything Icon  Unit  where
-  attr Icon _ = unsafeAttribute $ Left $  { key: "icon", value: unset' }
+  attr Icon _ = unsafeAttribute (  { key: "icon", value: unset'  } <$ _)
 instance Attr everything Icon (Event.Event  Unit ) where
-  attr Icon eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Icon eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "icon", value: unset' }

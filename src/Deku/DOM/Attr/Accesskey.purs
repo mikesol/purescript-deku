@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Accesskey where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,984 +131,984 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Accesskey = Accesskey
 
 instance Attr A_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr A_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Abbr_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Abbr_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Acronym_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Acronym_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Address_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Address_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Applet_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Applet_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Area_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Area_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Article_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Article_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Aside_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Aside_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Audio_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Audio_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr B_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr B_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Base_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Base_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Basefont_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Basefont_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Bdi_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Bdi_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Bdo_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Bdo_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Big_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Big_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Blockquote_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Blockquote_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Body_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Body_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Br_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Br_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Button_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Button_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Canvas_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Canvas_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Caption_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Caption_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Center_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Center_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Cite_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Cite_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Code_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Code_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Col_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Col_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Colgroup_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Colgroup_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Xdata_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Xdata_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Datalist_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Datalist_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dd_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dd_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Del_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Del_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Details_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Details_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dfn_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dfn_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dialog_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dialog_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dir_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dir_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Div_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Div_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dl_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dl_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Dt_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Dt_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Em_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Em_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Embed_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Embed_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Fieldset_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Fieldset_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Figcaption_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Figcaption_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Figure_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Figure_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Font_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Font_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Footer_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Footer_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Form_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Form_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Frame_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Frame_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Frameset_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Frameset_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H1_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H1_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H2_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H2_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H3_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H3_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H4_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H4_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H5_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H5_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr H6_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr H6_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Head_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Head_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Header_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Header_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Hr_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Hr_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Html_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Html_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr I_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr I_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Iframe_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Iframe_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Img_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Img_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Input_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Input_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Ins_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Ins_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Kbd_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Kbd_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Label_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Label_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Legend_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Legend_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Li_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Li_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Link_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Link_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Main_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Main_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Map_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Map_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Mark_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Mark_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Meta_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Meta_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Meter_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Meter_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Nav_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Nav_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Noframes_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Noframes_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Noscript_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Noscript_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Object_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Object_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Ol_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Ol_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Optgroup_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Optgroup_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Option_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Option_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Output_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Output_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr P_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr P_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Param_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Param_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Picture_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Picture_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Pre_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Pre_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Progress_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Progress_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Q_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Q_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Rp_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Rp_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Rt_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Rt_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Ruby_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Ruby_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr S_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr S_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Samp_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Samp_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Script_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Script_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Section_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Section_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Select_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Select_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Small_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Small_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Source_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Source_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Span_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Span_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Strike_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Strike_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Strong_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Strong_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Style_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Style_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Sub_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Sub_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Summary_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Summary_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Sup_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Sup_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Svg_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Svg_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Table_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Table_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Tbody_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Tbody_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Td_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Td_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Template_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Template_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Textarea_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Textarea_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Tfoot_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Tfoot_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Th_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Th_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Thead_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Thead_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Time_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Time_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Title_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Title_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Tr_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Tr_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Track_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Track_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Tt_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Tt_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr U_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr U_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Ul_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Ul_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Var_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Var_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Video_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Video_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr Wbr_ Accesskey  String  where
-  attr Accesskey value = unsafeAttribute $ Left $  
-    { key: "accesskey", value: prop' value }
+  attr Accesskey value = unsafeAttribute (  
+    { key: "accesskey", value: prop' value  } <$ _)
 instance Attr Wbr_ Accesskey (Event.Event  String ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "accesskey", value: prop' value }
 
 
 instance Attr everything Accesskey  Unit  where
-  attr Accesskey _ = unsafeAttribute $ Left $  
-    { key: "accesskey", value: unset' }
+  attr Accesskey _ = unsafeAttribute (  
+    { key: "accesskey", value: unset'  } <$ _)
 instance Attr everything Accesskey (Event.Event  Unit ) where
-  attr Accesskey eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Accesskey eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "accesskey", value: unset' }

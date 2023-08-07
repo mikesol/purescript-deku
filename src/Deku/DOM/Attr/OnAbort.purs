@@ -2,40 +2,40 @@ module Deku.DOM.Attr.OnAbort where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnAbort = OnAbort
 
 instance Attr anything OnAbort  Cb  where
-  attr OnAbort value = unsafeAttribute $ Left $  
-    { key: "abort", value: cb' value }
+  attr OnAbort value = unsafeAttribute (  
+    { key: "abort", value: cb' value  } <$ _)
 instance Attr anything OnAbort (Event.Event  Cb ) where
-  attr OnAbort eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnAbort eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "abort", value: cb' value }
 
 
 instance Attr anything OnAbort  (Effect Unit)  where
-  attr OnAbort value = unsafeAttribute $ Left $  
-    { key: "abort", value: cb' (Cb (const (value $> true))) }
+  attr OnAbort value = unsafeAttribute (  
+    { key: "abort", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnAbort (Event.Event  (Effect Unit) ) where
-  attr OnAbort eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnAbort eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "abort", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnAbort  (Effect Boolean)  where
-  attr OnAbort value = unsafeAttribute $ Left $  
-    { key: "abort", value: cb' (Cb (const value)) }
+  attr OnAbort value = unsafeAttribute (  
+    { key: "abort", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnAbort (Event.Event  (Effect Boolean) ) where
-  attr OnAbort eventValue = unsafeAttribute $ Right $ eventValue <#>
-    \value -> { key: "abort", value: cb' (Cb (const value)) }
+  attr OnAbort eventValue = unsafeAttribute \_ -> eventValue <#>
+    \value -> { key: "abort", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnAbort  Unit  where
-  attr OnAbort _ = unsafeAttribute $ Left $  { key: "abort", value: unset' }
+  attr OnAbort _ = unsafeAttribute (  { key: "abort", value: unset'  } <$ _)
 instance Attr everything OnAbort (Event.Event  Unit ) where
-  attr OnAbort eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr OnAbort eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "abort", value: unset' }

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Headers where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
@@ -11,23 +11,23 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Headers = Headers
 
 instance Attr Td_ Headers  String  where
-  attr Headers value = unsafeAttribute $ Left $  
-    { key: "headers", value: prop' value }
+  attr Headers value = unsafeAttribute (  
+    { key: "headers", value: prop' value  } <$ _)
 instance Attr Td_ Headers (Event.Event  String ) where
-  attr Headers eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Headers eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "headers", value: prop' value }
 
 
 instance Attr Th_ Headers  String  where
-  attr Headers value = unsafeAttribute $ Left $  
-    { key: "headers", value: prop' value }
+  attr Headers value = unsafeAttribute (  
+    { key: "headers", value: prop' value  } <$ _)
 instance Attr Th_ Headers (Event.Event  String ) where
-  attr Headers eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Headers eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "headers", value: prop' value }
 
 
 instance Attr everything Headers  Unit  where
-  attr Headers _ = unsafeAttribute $ Left $  { key: "headers", value: unset' }
+  attr Headers _ = unsafeAttribute (  { key: "headers", value: unset'  } <$ _)
 instance Attr everything Headers (Event.Event  Unit ) where
-  attr Headers eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Headers eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "headers", value: unset' }

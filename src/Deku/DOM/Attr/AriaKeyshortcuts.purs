@@ -2,7 +2,7 @@ module Deku.DOM.Attr.AriaKeyshortcuts where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -26,144 +26,144 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data AriaKeyshortcuts = AriaKeyshortcuts
 
 instance Attr Circle_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Circle_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Ellipse_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Ellipse_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr ForeignObject_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr ForeignObject_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr G_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr G_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Line_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Line_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Marker_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Marker_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Path_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Path_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Polygon_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Polygon_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Polyline_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Polyline_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Rect_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Rect_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Svg_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Svg_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Symbol_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Symbol_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Text_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Text_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr TextPath_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr TextPath_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Tspan_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Tspan_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr Use_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr Use_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr View_ AriaKeyshortcuts  String  where
-  attr AriaKeyshortcuts value = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: prop' value }
+  attr AriaKeyshortcuts value = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: prop' value  } <$ _)
 instance Attr View_ AriaKeyshortcuts (Event.Event  String ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "aria-keyshortcuts", value: prop' value }
 
 
 instance Attr everything AriaKeyshortcuts  Unit  where
-  attr AriaKeyshortcuts _ = unsafeAttribute $ Left $  
-    { key: "aria-keyshortcuts", value: unset' }
+  attr AriaKeyshortcuts _ = unsafeAttribute (  
+    { key: "aria-keyshortcuts", value: unset'  } <$ _)
 instance Attr everything AriaKeyshortcuts (Event.Event  Unit ) where
-  attr AriaKeyshortcuts eventValue = unsafeAttribute $ Right $ eventValue
+  attr AriaKeyshortcuts eventValue = unsafeAttribute \_ -> eventValue
     <#> \_ -> { key: "aria-keyshortcuts", value: unset' }

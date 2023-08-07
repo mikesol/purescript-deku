@@ -2,7 +2,7 @@ module Deku.DOM.Attr.StrokeWidth where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -50,336 +50,336 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StrokeWidth = StrokeWidth
 
 instance Attr Circle_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Circle_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr ClipPath_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr ClipPath_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Defs_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Defs_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Ellipse_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Ellipse_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeBlend_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeBlend_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeColorMatrix_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeComposite_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeComposite_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeFlood_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeFlood_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeImage_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeImage_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeMerge_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeMerge_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeMorphology_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeMorphology_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeOffset_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeOffset_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeTile_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeTile_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr FeTurbulence_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Filter_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Filter_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr ForeignObject_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr ForeignObject_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr G_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr G_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Image_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Image_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Line_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Line_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr LinearGradient_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr LinearGradient_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Marker_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Marker_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Mask_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Mask_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Path_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Path_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Pattern_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Pattern_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Polygon_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Polygon_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Polyline_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Polyline_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr RadialGradient_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr RadialGradient_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Rect_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Rect_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Svg_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Svg_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Switch_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Switch_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Symbol_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Symbol_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Text_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Text_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr TextPath_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr TextPath_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Tspan_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Tspan_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr Use_ StrokeWidth  String  where
-  attr StrokeWidth value = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: prop' value }
+  attr StrokeWidth value = unsafeAttribute (  
+    { key: "stroke-width", value: prop' value  } <$ _)
 instance Attr Use_ StrokeWidth (Event.Event  String ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke-width", value: prop' value }
 
 
 instance Attr everything StrokeWidth  Unit  where
-  attr StrokeWidth _ = unsafeAttribute $ Left $  
-    { key: "stroke-width", value: unset' }
+  attr StrokeWidth _ = unsafeAttribute (  
+    { key: "stroke-width", value: unset'  } <$ _)
 instance Attr everything StrokeWidth (Event.Event  Unit ) where
-  attr StrokeWidth eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StrokeWidth eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "stroke-width", value: unset' }

@@ -2,7 +2,7 @@ module Deku.DOM.Attr.By where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
@@ -12,28 +12,28 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data By = By
 
 instance Attr Animate_ By  String  where
-  attr By value = unsafeAttribute $ Left $  { key: "by", value: prop' value }
+  attr By value = unsafeAttribute (  { key: "by", value: prop' value  } <$ _)
 instance Attr Animate_ By (Event.Event  String ) where
-  attr By eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr By eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "by", value: prop' value }
 
 
 instance Attr AnimateMotion_ By  String  where
-  attr By value = unsafeAttribute $ Left $  { key: "by", value: prop' value }
+  attr By value = unsafeAttribute (  { key: "by", value: prop' value  } <$ _)
 instance Attr AnimateMotion_ By (Event.Event  String ) where
-  attr By eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr By eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "by", value: prop' value }
 
 
 instance Attr AnimateTransform_ By  String  where
-  attr By value = unsafeAttribute $ Left $  { key: "by", value: prop' value }
+  attr By value = unsafeAttribute (  { key: "by", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ By (Event.Event  String ) where
-  attr By eventValue = unsafeAttribute $ Right $ eventValue <#> \value ->
+  attr By eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "by", value: prop' value }
 
 
 instance Attr everything By  Unit  where
-  attr By _ = unsafeAttribute $ Left $  { key: "by", value: unset' }
+  attr By _ = unsafeAttribute (  { key: "by", value: unset'  } <$ _)
 instance Attr everything By (Event.Event  Unit ) where
-  attr By eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr By eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "by", value: unset' }

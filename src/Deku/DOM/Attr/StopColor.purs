@@ -2,7 +2,7 @@ module Deku.DOM.Attr.StopColor where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Switch (Switch_)
 import Deku.DOM.Elt.Stop (Stop_)
@@ -29,168 +29,168 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data StopColor = StopColor
 
 instance Attr FeBlend_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeBlend_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeColorMatrix_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeComposite_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeComposite_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeFlood_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeFlood_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeImage_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeImage_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeMerge_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeMerge_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeMorphology_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeMorphology_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeOffset_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeOffset_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeTile_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeTile_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr FeTurbulence_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr Filter_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr Filter_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr Image_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr Image_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr Stop_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr Stop_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr Switch_ StopColor  String  where
-  attr StopColor value = unsafeAttribute $ Left $  
-    { key: "stop-color", value: prop' value }
+  attr StopColor value = unsafeAttribute (  
+    { key: "stop-color", value: prop' value  } <$ _)
 instance Attr Switch_ StopColor (Event.Event  String ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stop-color", value: prop' value }
 
 
 instance Attr everything StopColor  Unit  where
-  attr StopColor _ = unsafeAttribute $ Left $  
-    { key: "stop-color", value: unset' }
+  attr StopColor _ = unsafeAttribute (  
+    { key: "stop-color", value: unset'  } <$ _)
 instance Attr everything StopColor (Event.Event  Unit ) where
-  attr StopColor eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr StopColor eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "stop-color", value: unset' }

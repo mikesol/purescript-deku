@@ -2,41 +2,41 @@ module Deku.DOM.Attr.OnStalled where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnStalled = OnStalled
 
 instance Attr anything OnStalled  Cb  where
-  attr OnStalled value = unsafeAttribute $ Left $  
-    { key: "stalled", value: cb' value }
+  attr OnStalled value = unsafeAttribute (  
+    { key: "stalled", value: cb' value  } <$ _)
 instance Attr anything OnStalled (Event.Event  Cb ) where
-  attr OnStalled eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnStalled eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stalled", value: cb' value }
 
 
 instance Attr anything OnStalled  (Effect Unit)  where
-  attr OnStalled value = unsafeAttribute $ Left $  
-    { key: "stalled", value: cb' (Cb (const (value $> true))) }
+  attr OnStalled value = unsafeAttribute (  
+    { key: "stalled", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnStalled (Event.Event  (Effect Unit) ) where
-  attr OnStalled eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnStalled eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stalled", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnStalled  (Effect Boolean)  where
-  attr OnStalled value = unsafeAttribute $ Left $  
-    { key: "stalled", value: cb' (Cb (const value)) }
+  attr OnStalled value = unsafeAttribute (  
+    { key: "stalled", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnStalled (Event.Event  (Effect Boolean) ) where
-  attr OnStalled eventValue = unsafeAttribute $ Right $ eventValue <#>
-    \value -> { key: "stalled", value: cb' (Cb (const value)) }
+  attr OnStalled eventValue = unsafeAttribute \_ -> eventValue <#>
+    \value -> { key: "stalled", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnStalled  Unit  where
-  attr OnStalled _ = unsafeAttribute $ Left $  
-    { key: "stalled", value: unset' }
+  attr OnStalled _ = unsafeAttribute (  
+    { key: "stalled", value: unset'  } <$ _)
 instance Attr everything OnStalled (Event.Event  Unit ) where
-  attr OnStalled eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnStalled eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "stalled", value: unset' }

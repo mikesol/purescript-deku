@@ -452,14 +452,18 @@ describe("deku", () => {
   doTest("used state works", (f) =>
     f(tests.useStateWorks, () => {
       const $ = require("jquery");
-      expect($("#hello").text()).toBe("world");
+      expect($("#maindiv").text()).toBe("hello");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("world");
     })
   );
 
   doTest("used memoized works", (f) =>
     f(tests.useMemoizedWorks, () => {
       const $ = require("jquery");
-      expect($("#hello").text()).toBe("world");
+      expect($("#maindiv").text()).toBe("hello");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("world");
     })
   );
 

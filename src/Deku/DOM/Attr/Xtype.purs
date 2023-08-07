@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Xtype where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Button (Button_)
 import Deku.DOM.Elt.Input (Input_)
@@ -25,127 +25,127 @@ import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 data Xtype = Xtype
 
 instance Attr Button_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Button_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Input_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Input_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Embed_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Embed_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Object_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Object_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Script_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Script_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Source_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Source_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Style_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Style_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr Link_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr Link_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr AnimateTransform_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeColorMatrix_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeFuncA_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeFuncA_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeFuncB_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeFuncB_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeFuncG_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeFuncG_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeFuncR_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeFuncR_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr FeTurbulence_ Xtype  String  where
-  attr Xtype value = unsafeAttribute $ Left $  
-    { key: "type", value: prop' value }
+  attr Xtype value = unsafeAttribute (  
+    { key: "type", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ Xtype (Event.Event  String ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "type", value: prop' value }
 
 
 instance Attr everything Xtype  Unit  where
-  attr Xtype _ = unsafeAttribute $ Left $  { key: "type", value: unset' }
+  attr Xtype _ = unsafeAttribute (  { key: "type", value: unset'  } <$ _)
 instance Attr everything Xtype (Event.Event  Unit ) where
-  attr Xtype eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Xtype eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "type", value: unset' }

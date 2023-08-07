@@ -2,40 +2,40 @@ module Deku.DOM.Attr.OnWheel where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnWheel = OnWheel
 
 instance Attr anything OnWheel  Cb  where
-  attr OnWheel value = unsafeAttribute $ Left $  
-    { key: "wheel", value: cb' value }
+  attr OnWheel value = unsafeAttribute (  
+    { key: "wheel", value: cb' value  } <$ _)
 instance Attr anything OnWheel (Event.Event  Cb ) where
-  attr OnWheel eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnWheel eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "wheel", value: cb' value }
 
 
 instance Attr anything OnWheel  (Effect Unit)  where
-  attr OnWheel value = unsafeAttribute $ Left $  
-    { key: "wheel", value: cb' (Cb (const (value $> true))) }
+  attr OnWheel value = unsafeAttribute (  
+    { key: "wheel", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnWheel (Event.Event  (Effect Unit) ) where
-  attr OnWheel eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnWheel eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "wheel", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnWheel  (Effect Boolean)  where
-  attr OnWheel value = unsafeAttribute $ Left $  
-    { key: "wheel", value: cb' (Cb (const value)) }
+  attr OnWheel value = unsafeAttribute (  
+    { key: "wheel", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnWheel (Event.Event  (Effect Boolean) ) where
-  attr OnWheel eventValue = unsafeAttribute $ Right $ eventValue <#>
-    \value -> { key: "wheel", value: cb' (Cb (const value)) }
+  attr OnWheel eventValue = unsafeAttribute \_ -> eventValue <#>
+    \value -> { key: "wheel", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnWheel  Unit  where
-  attr OnWheel _ = unsafeAttribute $ Left $  { key: "wheel", value: unset' }
+  attr OnWheel _ = unsafeAttribute  ({ key: "wheel", value: unset' } <$ _)
 instance Attr everything OnWheel (Event.Event  Unit ) where
-  attr OnWheel eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr OnWheel eventValue = unsafeAttribute \_ -> eventValue <#> \_ -> 
     { key: "wheel", value: unset' }

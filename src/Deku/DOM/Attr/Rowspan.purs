@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Rowspan where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Td (Td_)
 import Deku.DOM.Elt.Th (Th_)
@@ -11,23 +11,23 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Rowspan = Rowspan
 
 instance Attr Td_ Rowspan  String  where
-  attr Rowspan value = unsafeAttribute $ Left $  
-    { key: "rowspan", value: prop' value }
+  attr Rowspan value = unsafeAttribute (  
+    { key: "rowspan", value: prop' value  } <$ _)
 instance Attr Td_ Rowspan (Event.Event  String ) where
-  attr Rowspan eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Rowspan eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "rowspan", value: prop' value }
 
 
 instance Attr Th_ Rowspan  String  where
-  attr Rowspan value = unsafeAttribute $ Left $  
-    { key: "rowspan", value: prop' value }
+  attr Rowspan value = unsafeAttribute (  
+    { key: "rowspan", value: prop' value  } <$ _)
 instance Attr Th_ Rowspan (Event.Event  String ) where
-  attr Rowspan eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Rowspan eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "rowspan", value: prop' value }
 
 
 instance Attr everything Rowspan  Unit  where
-  attr Rowspan _ = unsafeAttribute $ Left $  { key: "rowspan", value: unset' }
+  attr Rowspan _ = unsafeAttribute (  { key: "rowspan", value: unset'  } <$ _)
 instance Attr everything Rowspan (Event.Event  Unit ) where
-  attr Rowspan eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Rowspan eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "rowspan", value: unset' }

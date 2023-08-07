@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XlinkArcrole where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Mpath (Mpath_)
 import Deku.DOM.Elt.Image (Image_)
@@ -14,48 +14,48 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XlinkArcrole = XlinkArcrole
 
 instance Attr AnimateTransform_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: prop' value }
+  attr XlinkArcrole value = unsafeAttribute (  
+    { key: "xlink:arcrole", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ XlinkArcrole (Event.Event  String ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:arcrole", value: prop' value }
 
 
 instance Attr FeImage_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: prop' value }
+  attr XlinkArcrole value = unsafeAttribute (  
+    { key: "xlink:arcrole", value: prop' value  } <$ _)
 instance Attr FeImage_ XlinkArcrole (Event.Event  String ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:arcrole", value: prop' value }
 
 
 instance Attr Filter_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: prop' value }
+  attr XlinkArcrole value = unsafeAttribute (  
+    { key: "xlink:arcrole", value: prop' value  } <$ _)
 instance Attr Filter_ XlinkArcrole (Event.Event  String ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:arcrole", value: prop' value }
 
 
 instance Attr Image_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: prop' value }
+  attr XlinkArcrole value = unsafeAttribute (  
+    { key: "xlink:arcrole", value: prop' value  } <$ _)
 instance Attr Image_ XlinkArcrole (Event.Event  String ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:arcrole", value: prop' value }
 
 
 instance Attr Mpath_ XlinkArcrole  String  where
-  attr XlinkArcrole value = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: prop' value }
+  attr XlinkArcrole value = unsafeAttribute (  
+    { key: "xlink:arcrole", value: prop' value  } <$ _)
 instance Attr Mpath_ XlinkArcrole (Event.Event  String ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:arcrole", value: prop' value }
 
 
 instance Attr everything XlinkArcrole  Unit  where
-  attr XlinkArcrole _ = unsafeAttribute $ Left $  
-    { key: "xlink:arcrole", value: unset' }
+  attr XlinkArcrole _ = unsafeAttribute (  
+    { key: "xlink:arcrole", value: unset'  } <$ _)
 instance Attr everything XlinkArcrole (Event.Event  Unit ) where
-  attr XlinkArcrole eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XlinkArcrole eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "xlink:arcrole", value: unset' }

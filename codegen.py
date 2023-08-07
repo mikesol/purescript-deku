@@ -191,7 +191,7 @@ data {term} = {term}''')
             print_(f'''instance Attr anything {term} (Effect Unit) where
   attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const (value $> true))) }}''')
             print_(f'''instance Attr anything {term} (Effect Boolean) where
-  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) }}''')
+  attr {term} value = unsafeAttribute {{ key: "{x}", value: cb' (Cb (const value)) } }''')
           
     else:
       raise ValueError('wat' + str(CODEGEN_TARGET) )

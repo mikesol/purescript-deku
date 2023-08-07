@@ -2,7 +2,7 @@ module Deku.DOM.Attr.KeyTimes where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
@@ -12,32 +12,32 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data KeyTimes = KeyTimes
 
 instance Attr Animate_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ Left $  
-    { key: "keyTimes", value: prop' value }
+  attr KeyTimes value = unsafeAttribute (  
+    { key: "keyTimes", value: prop' value  } <$ _)
 instance Attr Animate_ KeyTimes (Event.Event  String ) where
-  attr KeyTimes eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr KeyTimes eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keyTimes", value: prop' value }
 
 
 instance Attr AnimateMotion_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ Left $  
-    { key: "keyTimes", value: prop' value }
+  attr KeyTimes value = unsafeAttribute (  
+    { key: "keyTimes", value: prop' value  } <$ _)
 instance Attr AnimateMotion_ KeyTimes (Event.Event  String ) where
-  attr KeyTimes eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr KeyTimes eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keyTimes", value: prop' value }
 
 
 instance Attr AnimateTransform_ KeyTimes  String  where
-  attr KeyTimes value = unsafeAttribute $ Left $  
-    { key: "keyTimes", value: prop' value }
+  attr KeyTimes value = unsafeAttribute (  
+    { key: "keyTimes", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ KeyTimes (Event.Event  String ) where
-  attr KeyTimes eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr KeyTimes eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keyTimes", value: prop' value }
 
 
 instance Attr everything KeyTimes  Unit  where
-  attr KeyTimes _ = unsafeAttribute $ Left $  
-    { key: "keyTimes", value: unset' }
+  attr KeyTimes _ = unsafeAttribute (  
+    { key: "keyTimes", value: unset'  } <$ _)
 instance Attr everything KeyTimes (Event.Event  Unit ) where
-  attr KeyTimes eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr KeyTimes eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "keyTimes", value: unset' }

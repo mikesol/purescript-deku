@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Spellcheck where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -131,984 +131,984 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Spellcheck = Spellcheck
 
 instance Attr A_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr A_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Abbr_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Abbr_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Acronym_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Acronym_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Address_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Address_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Applet_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Applet_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Area_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Area_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Article_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Article_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Aside_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Aside_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Audio_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Audio_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr B_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr B_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Base_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Base_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Basefont_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Basefont_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Bdi_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Bdi_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Bdo_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Bdo_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Big_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Big_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Blockquote_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Blockquote_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Body_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Body_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Br_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Br_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Button_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Button_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Canvas_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Canvas_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Caption_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Caption_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Center_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Center_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Cite_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Cite_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Code_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Code_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Col_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Col_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Colgroup_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Colgroup_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Xdata_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Xdata_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Datalist_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Datalist_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dd_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dd_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Del_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Del_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Details_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Details_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dfn_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dfn_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dialog_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dialog_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dir_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dir_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Div_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Div_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dl_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dl_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Dt_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Dt_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Em_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Em_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Embed_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Embed_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Fieldset_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Fieldset_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Figcaption_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Figcaption_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Figure_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Figure_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Font_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Font_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Footer_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Footer_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Form_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Form_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Frame_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Frame_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Frameset_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Frameset_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H1_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H1_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H2_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H2_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H3_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H3_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H4_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H4_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H5_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H5_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr H6_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr H6_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Head_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Head_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Header_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Header_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Hr_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Hr_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Html_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Html_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr I_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr I_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Iframe_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Iframe_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Img_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Img_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Input_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Input_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Ins_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Ins_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Kbd_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Kbd_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Label_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Label_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Legend_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Legend_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Li_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Li_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Link_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Link_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Main_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Main_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Map_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Map_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Mark_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Mark_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Meta_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Meta_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Meter_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Meter_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Nav_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Nav_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Noframes_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Noframes_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Noscript_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Noscript_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Object_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Object_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Ol_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Ol_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Optgroup_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Optgroup_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Option_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Option_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Output_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Output_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr P_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr P_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Param_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Param_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Picture_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Picture_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Pre_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Pre_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Progress_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Progress_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Q_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Q_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Rp_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Rp_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Rt_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Rt_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Ruby_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Ruby_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr S_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr S_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Samp_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Samp_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Script_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Script_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Section_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Section_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Select_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Select_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Small_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Small_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Source_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Source_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Span_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Span_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Strike_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Strike_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Strong_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Strong_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Style_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Style_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Sub_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Sub_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Summary_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Summary_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Sup_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Sup_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Svg_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Svg_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Table_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Table_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Tbody_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Tbody_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Td_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Td_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Template_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Template_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Textarea_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Textarea_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Tfoot_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Tfoot_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Th_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Th_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Thead_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Thead_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Time_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Time_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Title_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Title_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Tr_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Tr_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Track_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Track_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Tt_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Tt_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr U_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr U_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Ul_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Ul_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Var_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Var_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Video_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Video_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr Wbr_ Spellcheck  String  where
-  attr Spellcheck value = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: prop' value }
+  attr Spellcheck value = unsafeAttribute (  
+    { key: "spellcheck", value: prop' value  } <$ _)
 instance Attr Wbr_ Spellcheck (Event.Event  String ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "spellcheck", value: prop' value }
 
 
 instance Attr everything Spellcheck  Unit  where
-  attr Spellcheck _ = unsafeAttribute $ Left $  
-    { key: "spellcheck", value: unset' }
+  attr Spellcheck _ = unsafeAttribute (  
+    { key: "spellcheck", value: unset'  } <$ _)
 instance Attr everything Spellcheck (Event.Event  Unit ) where
-  attr Spellcheck eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Spellcheck eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "spellcheck", value: unset' }

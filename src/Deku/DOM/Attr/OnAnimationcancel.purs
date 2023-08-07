@@ -2,42 +2,42 @@ module Deku.DOM.Attr.OnAnimationcancel where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnAnimationcancel = OnAnimationcancel
 
 instance Attr anything OnAnimationcancel  Cb  where
-  attr OnAnimationcancel value = unsafeAttribute $ Left $  
-    { key: "animationcancel", value: cb' value }
+  attr OnAnimationcancel value = unsafeAttribute (  
+    { key: "animationcancel", value: cb' value  } <$ _)
 instance Attr anything OnAnimationcancel (Event.Event  Cb ) where
-  attr OnAnimationcancel eventValue = unsafeAttribute $ Right $ eventValue
+  attr OnAnimationcancel eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "animationcancel", value: cb' value }
 
 
 instance Attr anything OnAnimationcancel  (Effect Unit)  where
-  attr OnAnimationcancel value = unsafeAttribute $ Left $  
-    { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
+  attr OnAnimationcancel value = unsafeAttribute (  
+    { key: "animationcancel", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnAnimationcancel (Event.Event  (Effect Unit) ) where
-  attr OnAnimationcancel eventValue = unsafeAttribute $ Right $ eventValue
+  attr OnAnimationcancel eventValue = unsafeAttribute \_ -> eventValue
     <#> \value ->
       { key: "animationcancel", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnAnimationcancel  (Effect Boolean)  where
-  attr OnAnimationcancel value = unsafeAttribute $ Left $  
-    { key: "animationcancel", value: cb' (Cb (const value)) }
+  attr OnAnimationcancel value = unsafeAttribute (  
+    { key: "animationcancel", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnAnimationcancel (Event.Event  (Effect Boolean) ) where
-  attr OnAnimationcancel eventValue = unsafeAttribute $ Right $ eventValue
-    <#> \value -> { key: "animationcancel", value: cb' (Cb (const value)) }
+  attr OnAnimationcancel eventValue = unsafeAttribute \_ -> eventValue
+    <#> \value -> { key: "animationcancel", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnAnimationcancel  Unit  where
-  attr OnAnimationcancel _ = unsafeAttribute $ Left $  
-    { key: "animationcancel", value: unset' }
+  attr OnAnimationcancel _ = unsafeAttribute (  
+    { key: "animationcancel", value: unset'  } <$ _)
 instance Attr everything OnAnimationcancel (Event.Event  Unit ) where
-  attr OnAnimationcancel eventValue = unsafeAttribute $ Right $ eventValue
+  attr OnAnimationcancel eventValue = unsafeAttribute \_ -> eventValue
     <#> \_ -> { key: "animationcancel", value: unset' }

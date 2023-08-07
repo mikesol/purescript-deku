@@ -2,40 +2,40 @@ module Deku.DOM.Attr.OnInput where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
-import Data.NonEmpty as NonEmpty
+
 import Effect (Effect)
 import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
 
 data OnInput = OnInput
 
 instance Attr anything OnInput  Cb  where
-  attr OnInput value = unsafeAttribute $ Left $  
-    { key: "input", value: cb' value }
+  attr OnInput value = unsafeAttribute (  
+    { key: "input", value: cb' value  } <$ _)
 instance Attr anything OnInput (Event.Event  Cb ) where
-  attr OnInput eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnInput eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "input", value: cb' value }
 
 
 instance Attr anything OnInput  (Effect Unit)  where
-  attr OnInput value = unsafeAttribute $ Left $  
-    { key: "input", value: cb' (Cb (const (value $> true))) }
+  attr OnInput value = unsafeAttribute (  
+    { key: "input", value: cb' (Cb (const (value $> true)))  } <$ _)
 instance Attr anything OnInput (Event.Event  (Effect Unit) ) where
-  attr OnInput eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr OnInput eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "input", value: cb' (Cb (const (value $> true))) }
 
 
 instance Attr anything OnInput  (Effect Boolean)  where
-  attr OnInput value = unsafeAttribute $ Left $  
-    { key: "input", value: cb' (Cb (const value)) }
+  attr OnInput value = unsafeAttribute (  
+    { key: "input", value: cb' (Cb (const value))  } <$ _)
 instance Attr anything OnInput (Event.Event  (Effect Boolean) ) where
-  attr OnInput eventValue = unsafeAttribute $ Right $ eventValue <#>
-    \value -> { key: "input", value: cb' (Cb (const value)) }
+  attr OnInput eventValue = unsafeAttribute \_ -> eventValue <#>
+    \value -> { key: "input", value: cb' (Cb (const value)) } 
 
 
 instance Attr everything OnInput  Unit  where
-  attr OnInput _ = unsafeAttribute $ Left $  { key: "input", value: unset' }
+  attr OnInput _ = unsafeAttribute (  { key: "input", value: unset'  } <$ _)
 instance Attr everything OnInput (Event.Event  Unit ) where
-  attr OnInput eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr OnInput eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "input", value: unset' }

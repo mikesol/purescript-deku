@@ -87,19 +87,19 @@ type Attribute' =
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 newtype Attribute (e :: Type) = Attribute
-  (forall b. FRP.Event b -> FRP.Event Attribute')
+  (FRP.Event Unit -> FRP.Event Attribute')
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
   :: forall e
    . Attribute e
-  -> (forall b. FRP.Event b -> FRP.Event Attribute')
+  -> (FRP.Event Unit -> FRP.Event Attribute')
 unsafeUnAttribute (Attribute a) = a
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
   :: forall e
-   . (forall b. FRP.Event b -> FRP.Event Attribute')
+   . (FRP.Event Unit -> FRP.Event Attribute')
   -> Attribute e
 unsafeAttribute = Attribute
 

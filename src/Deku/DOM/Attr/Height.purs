@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Height where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Symbol (Symbol_)
@@ -42,271 +42,271 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Height = Height
 
 instance Attr Canvas_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Canvas_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Embed_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Embed_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Iframe_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Iframe_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Img_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Img_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Input_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Input_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Object_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Object_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Video_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Video_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeBlend_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeBlend_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeColorMatrix_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeComposite_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeComposite_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeDropShadow_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeDropShadow_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeFlood_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeFlood_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeImage_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeImage_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeMerge_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeMerge_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeMorphology_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeMorphology_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeOffset_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeOffset_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeTile_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeTile_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr FeTurbulence_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Filter_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Filter_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr ForeignObject_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr ForeignObject_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Image_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Image_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Mask_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Mask_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Pattern_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Pattern_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Rect_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Rect_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Svg_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Svg_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Symbol_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Symbol_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr Use_ Height  String  where
-  attr Height value = unsafeAttribute $ Left $  
-    { key: "height", value: prop' value }
+  attr Height value = unsafeAttribute (  
+    { key: "height", value: prop' value  } <$ _)
 instance Attr Use_ Height (Event.Event  String ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "height", value: prop' value }
 
 
 instance Attr everything Height  Unit  where
-  attr Height _ = unsafeAttribute $ Left $  { key: "height", value: unset' }
+  attr Height _ = unsafeAttribute (  { key: "height", value: unset'  } <$ _)
 instance Attr everything Height (Event.Event  Unit ) where
-  attr Height eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Height eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "height", value: unset' }

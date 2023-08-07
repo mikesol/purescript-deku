@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XmlBase where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -41,263 +41,263 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XmlBase = XmlBase
 
 instance Attr AnimateTransform_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Discard_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Discard_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeBlend_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeBlend_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeColorMatrix_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeComposite_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeComposite_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeDistantLight_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeDistantLight_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeFlood_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeFlood_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeFuncA_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeFuncA_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeFuncB_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeFuncB_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeFuncG_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeFuncG_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeFuncR_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeFuncR_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeImage_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeImage_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeMerge_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeMerge_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeMergeNode_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeMergeNode_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeMorphology_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeMorphology_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeOffset_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeOffset_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FePointLight_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FePointLight_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeSpotLight_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeSpotLight_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeTile_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeTile_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr FeTurbulence_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Filter_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Filter_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Image_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Image_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Metadata_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Metadata_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Mpath_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Mpath_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr Switch_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr Switch_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr View_ XmlBase  String  where
-  attr XmlBase value = unsafeAttribute $ Left $  
-    { key: "xml:base", value: prop' value }
+  attr XmlBase value = unsafeAttribute (  
+    { key: "xml:base", value: prop' value  } <$ _)
 instance Attr View_ XmlBase (Event.Event  String ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:base", value: prop' value }
 
 
 instance Attr everything XmlBase  Unit  where
-  attr XmlBase _ = unsafeAttribute $ Left $  { key: "xml:base", value: unset' }
+  attr XmlBase _ = unsafeAttribute (  { key: "xml:base", value: unset'  } <$ _)
 instance Attr everything XmlBase (Event.Event  Unit ) where
-  attr XmlBase eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr XmlBase eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "xml:base", value: unset' }

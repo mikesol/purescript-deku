@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Opacity where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -50,335 +50,335 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Opacity = Opacity
 
 instance Attr Circle_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Circle_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr ClipPath_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr ClipPath_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Defs_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Defs_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Ellipse_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Ellipse_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeBlend_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeBlend_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeColorMatrix_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeComposite_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeComposite_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeFlood_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeFlood_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeImage_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeImage_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeMerge_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeMerge_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeMorphology_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeMorphology_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeOffset_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeOffset_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeTile_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeTile_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr FeTurbulence_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Filter_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Filter_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr ForeignObject_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr ForeignObject_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr G_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr G_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Image_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Image_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Line_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Line_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr LinearGradient_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr LinearGradient_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Marker_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Marker_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Mask_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Mask_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Path_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Path_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Pattern_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Pattern_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Polygon_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Polygon_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Polyline_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Polyline_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr RadialGradient_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr RadialGradient_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Rect_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Rect_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Svg_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Svg_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Switch_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Switch_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Symbol_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Symbol_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Text_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Text_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr TextPath_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr TextPath_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Tspan_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Tspan_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr Use_ Opacity  String  where
-  attr Opacity value = unsafeAttribute $ Left $  
-    { key: "opacity", value: prop' value }
+  attr Opacity value = unsafeAttribute (  
+    { key: "opacity", value: prop' value  } <$ _)
 instance Attr Use_ Opacity (Event.Event  String ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "opacity", value: prop' value }
 
 
 instance Attr everything Opacity  Unit  where
-  attr Opacity _ = unsafeAttribute $ Left $  { key: "opacity", value: unset' }
+  attr Opacity _ = unsafeAttribute (  { key: "opacity", value: unset'  } <$ _)
 instance Attr everything Opacity (Event.Event  Unit ) where
-  attr Opacity eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr Opacity eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "opacity", value: unset' }

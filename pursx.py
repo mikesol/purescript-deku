@@ -5,15 +5,13 @@ WHITESPACE = [" ","\\t","\\n"]
 
 print_('''module Deku.Pursx where
 
-
 import Prelude
 
-import Bolson.Control (behaving)
+import Bolson.Control (behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
-import Data.Either (Either(..))
-import Data.Foldable (foldl, for_)
+import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
@@ -22,7 +20,7 @@ import Deku.Control (unsafeSetAttribute)
 import Deku.Core (DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), flattenArgs)
 import Deku.DOM (class TagToDeku)
 import FRP.Behavior (behavior, sample)
-import FRP.Event (merge, sampleOnRight)
+import FRP.Event (merge)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
 import Prim.Row as Row
@@ -142,6 +140,7 @@ instance (Sym.Cons x y tail, CloseOrRepeat  verb x y pursi purso trailing) => PX
 else instance (Sym.Cons x y tail, DoVerbForDOM  verb "" x y pursi pursx newTail, Sym.Cons xx yy newTail, PXBody  verb xx yy pursx purso trailing) => PXBody  verb verb tail pursi purso trailing
 else instance (Sym.Cons x y tail, PXBody  verb x y pursi purso trailing) => PXBody  verb anything tail pursi purso trailing''')
 print_('''
+
 class
   PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> r where
@@ -221,35 +220,18 @@ else instance pursxToElementConsAttr ::
       Node (Element rest) = domableToNode element
 
       elt :: forall payload. Node' payload
-      elt parent di = behaving \\ee kx subscribe -> do
-        let
-          { left, right } = foldl
-            ( \\b a -> case unsafeUnAttribute a of
-                Left l -> b { left = b.left <> [ l ] }
-                Right r -> b { right = b.right <> [ r ] }
-            )
-            { left: [], right: [] }
-            (get pxk r)
+      elt parent di = behaving' \\fff ee _ subscribe -> do
         let bhv = rest parent di
-        for_
-          ( ( map
-                ( unsafeSetAttribute di
-                    (reflectType pxk <> "@!%" <> pxScope)
-                )
-            )
-              left
-          )
-          kx
         subscribe
-          ( sampleOnRight ee
-              ( ( \\xx fff -> fff $ unsafeSetAttribute di
+          ( 
+              ( ( \\xx -> fff $ unsafeSetAttribute di
                     (reflectType pxk <> "@!%" <> pxScope)
                     xx
                 ) <$>
-                  (merge right)
+                  (merge (map (unsafeUnAttribute >>> (_ $ (ee $> unit))) (get pxk r)))
               )
-          )
-        subscribe (sample bhv ee)
+          ) identity
+        subscribe (sample bhv ee) identity
     { cache: Object.insert (reflectType pxk) true cache
     , element: Nut (NutF (Element' (Node (Element elt))))
     }
@@ -354,7 +336,7 @@ unsafeMakePursx' verb html r = Nut ee
         , html
         , verb
         }
-      for_ parent \p -> kx $ attributeParent
+      for_ parent \\p -> kx $ attributeParent
         { id: me, parent: p, pos, dynFamily, ez: false }
       kx (deferPayload deferralPath (deleteFromCache { id: me }))
       subscribe (sample bhv eee)
@@ -367,7 +349,6 @@ __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
-
 
 ''')
 with open('src/Deku/Pursx.purs', 'w') as f:

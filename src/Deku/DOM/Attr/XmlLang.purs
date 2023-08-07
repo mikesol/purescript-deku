@@ -2,7 +2,7 @@ module Deku.DOM.Attr.XmlLang where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -41,263 +41,263 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data XmlLang = XmlLang
 
 instance Attr AnimateTransform_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr AnimateTransform_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Discard_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Discard_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeBlend_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeBlend_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeColorMatrix_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeColorMatrix_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeComponentTransfer_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeComponentTransfer_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeComposite_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeComposite_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeConvolveMatrix_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeConvolveMatrix_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeDiffuseLighting_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeDiffuseLighting_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeDisplacementMap_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeDisplacementMap_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeDistantLight_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeDistantLight_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeFlood_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeFlood_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeFuncA_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeFuncA_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeFuncB_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeFuncB_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeFuncG_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeFuncG_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeFuncR_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeFuncR_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeGaussianBlur_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeGaussianBlur_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeImage_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeImage_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeMerge_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeMerge_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeMergeNode_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeMergeNode_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeMorphology_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeMorphology_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeOffset_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeOffset_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FePointLight_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FePointLight_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeSpecularLighting_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeSpecularLighting_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeSpotLight_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeSpotLight_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeTile_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeTile_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr FeTurbulence_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr FeTurbulence_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Filter_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Filter_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Image_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Image_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Metadata_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Metadata_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Mpath_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Mpath_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr Switch_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr Switch_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr View_ XmlLang  String  where
-  attr XmlLang value = unsafeAttribute $ Left $  
-    { key: "xml:lang", value: prop' value }
+  attr XmlLang value = unsafeAttribute (  
+    { key: "xml:lang", value: prop' value  } <$ _)
 instance Attr View_ XmlLang (Event.Event  String ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:lang", value: prop' value }
 
 
 instance Attr everything XmlLang  Unit  where
-  attr XmlLang _ = unsafeAttribute $ Left $  { key: "xml:lang", value: unset' }
+  attr XmlLang _ = unsafeAttribute (  { key: "xml:lang", value: unset'  } <$ _)
 instance Attr everything XmlLang (Event.Event  Unit ) where
-  attr XmlLang eventValue = unsafeAttribute $ Right $ eventValue <#> \_ ->
+  attr XmlLang eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "xml:lang", value: unset' }

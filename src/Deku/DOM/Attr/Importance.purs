@@ -2,7 +2,7 @@ module Deku.DOM.Attr.Importance where
 
 
 import Prelude
-import Data.Either (Either(..))
+
 import FRP.Event as Event
 import Deku.DOM.Elt.Iframe (Iframe_)
 import Deku.DOM.Elt.Img (Img_)
@@ -13,40 +13,40 @@ import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
 data Importance = Importance
 
 instance Attr Iframe_ Importance  String  where
-  attr Importance value = unsafeAttribute $ Left $  
-    { key: "importance", value: prop' value }
+  attr Importance value = unsafeAttribute (  
+    { key: "importance", value: prop' value  } <$ _)
 instance Attr Iframe_ Importance (Event.Event  String ) where
-  attr Importance eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Importance eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "importance", value: prop' value }
 
 
 instance Attr Img_ Importance  String  where
-  attr Importance value = unsafeAttribute $ Left $  
-    { key: "importance", value: prop' value }
+  attr Importance value = unsafeAttribute (  
+    { key: "importance", value: prop' value  } <$ _)
 instance Attr Img_ Importance (Event.Event  String ) where
-  attr Importance eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Importance eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "importance", value: prop' value }
 
 
 instance Attr Link_ Importance  String  where
-  attr Importance value = unsafeAttribute $ Left $  
-    { key: "importance", value: prop' value }
+  attr Importance value = unsafeAttribute (  
+    { key: "importance", value: prop' value  } <$ _)
 instance Attr Link_ Importance (Event.Event  String ) where
-  attr Importance eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Importance eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "importance", value: prop' value }
 
 
 instance Attr Script_ Importance  String  where
-  attr Importance value = unsafeAttribute $ Left $  
-    { key: "importance", value: prop' value }
+  attr Importance value = unsafeAttribute (  
+    { key: "importance", value: prop' value  } <$ _)
 instance Attr Script_ Importance (Event.Event  String ) where
-  attr Importance eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Importance eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "importance", value: prop' value }
 
 
 instance Attr everything Importance  Unit  where
-  attr Importance _ = unsafeAttribute $ Left $  
-    { key: "importance", value: unset' }
+  attr Importance _ = unsafeAttribute (  
+    { key: "importance", value: unset'  } <$ _)
 instance Attr everything Importance (Event.Event  Unit ) where
-  attr Importance eventValue = unsafeAttribute $ Right $ eventValue <#>
+  attr Importance eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "importance", value: unset' }
