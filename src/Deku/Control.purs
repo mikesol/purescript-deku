@@ -254,6 +254,7 @@ portal v' c' =
   -- for global portals, this is not needed as they use the global scope
   -- todo: this logic is a hack. try to get rid of it.
   -- dyn
+  -- THIS IS WHERE WE NEED THE INCOMING VALUE THUNKED
   --   ( Tuple
   --       [ Tuple empty
   --           ( Nut
