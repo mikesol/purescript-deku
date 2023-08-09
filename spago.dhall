@@ -10,6 +10,7 @@
   , "effect"
   , "either"
   , "exceptions"
+  , "exists"
   , "fast-vect"
   , "filterable"
   , "foldable-traversable"
