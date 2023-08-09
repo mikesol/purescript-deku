@@ -114,5 +114,5 @@ runKorok = case _ of
     (runKorok (flip runKorok e <$> ee) e)
   KOnce a -> EClass.once <<< runKorok a
 
-korokToApplicative :: Korok ~> Event
-korokToApplicative = flip runKorok empty
+korokToEvent :: Korok ~> Event
+korokToEvent = flip runKorok empty
