@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Stroke where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -46,339 +43,381 @@ import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Stroke = Stroke
-
 instance Attr Circle_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Circle_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Circle_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr ClipPath_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr ClipPath_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr ClipPath_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Defs_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Defs_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Defs_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Ellipse_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Ellipse_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Ellipse_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeBlend_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeBlend_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeBlend_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeComposite_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeComposite_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeComposite_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeFlood_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeFlood_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeFlood_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeImage_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeImage_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeImage_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeMerge_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeMerge_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeMerge_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeMorphology_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeOffset_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeOffset_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeOffset_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeTile_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeTile_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeTile_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr FeTurbulence_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Filter_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Filter_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Filter_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr ForeignObject_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr ForeignObject_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr ForeignObject_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr G_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr G_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr G_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Image_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Image_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Image_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Line_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Line_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Line_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr LinearGradient_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr LinearGradient_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr LinearGradient_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Marker_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Marker_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Marker_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Mask_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Mask_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Mask_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Path_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Path_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Path_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Pattern_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Pattern_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Pattern_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Polygon_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Polygon_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Polygon_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Polyline_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Polyline_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Polyline_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr RadialGradient_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr RadialGradient_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr RadialGradient_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Rect_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Rect_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Rect_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Svg_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Svg_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Svg_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Switch_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Switch_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Switch_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Symbol_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Symbol_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Symbol_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Text_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Text_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Text_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr TextPath_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr TextPath_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr TextPath_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Tspan_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Tspan_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Tspan_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr Use_ Stroke  String  where
   attr Stroke value = unsafeAttribute (  
     { key: "stroke", value: prop' value  } <$ _)
+instance Attr Use_ Stroke (Event.Event Unit -> Event.Event  String ) where
+  attr Stroke eventValue = unsafeAttribute (map (map (
+    \value -> { key: "stroke", value: prop' value })) eventValue)
 instance Attr Use_ Stroke (Event.Event  String ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "stroke", value: prop' value }
-
-
 instance Attr everything Stroke  Unit  where
   attr Stroke _ = unsafeAttribute (  { key: "stroke", value: unset'  } <$ _)
+instance Attr everything Stroke (Event.Event Unit -> Event.Event  Unit ) where
+  attr Stroke eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "stroke", value: unset' })) eventValue)
 instance Attr everything Stroke (Event.Event  Unit ) where
   attr Stroke eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "stroke", value: unset' }

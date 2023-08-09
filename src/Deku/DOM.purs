@@ -645,7 +645,6 @@ module Deku.DOM
   , module Deku.DOM.Attr.Contenteditable
   , unsafeCustomElement
   ) where
-
 import Web.Event.Internal.Types as WebEvent
 import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
 import Deku.Control (elementify2)
@@ -1630,9 +1629,9 @@ import Deku.DOM.Attr.OnPause (OnPause(..))
 import Deku.DOM.Attr.Span (Span(..))
 import Deku.DOM.Attr.Enterkeyhint (Enterkeyhint(..))
 import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
-
 import Effect (Effect)
 import Prelude (Unit, ($>), (<#>), (<$))
+import Prelude as Prelude
 import FRP.Event as Event
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
@@ -1678,9 +1677,7 @@ import Web.HTML.HTMLTimeElement as HTMLTimeElement
 import Web.HTML.HTMLTitleElement as HTMLTitleElement
 import Web.HTML.HTMLTrackElement as HTMLTrackElement
 import Web.HTML.HTMLVideoElement as HTMLVideoElement
-
 class TagToDeku (tag :: Symbol) (deku :: Type) | tag -> deku
-
 -- codegen 3
 instance tagToDekuTh_ :: TagToDeku "th" Th_
 instance tagToDekuImage_ :: TagToDeku "image" Image_
@@ -1738,7 +1735,6 @@ instance tagToDekuArticle_ :: TagToDeku "article" Article_
 instance tagToDekuBody_ :: TagToDeku "body" Body_
 instance tagToDekuFeDisplacementMap_ ::
   TagToDeku "feDisplacementMap" FeDisplacementMap_
-
 instance tagToDekuTextarea_ :: TagToDeku "textarea" Textarea_
 instance tagToDekuPattern_ :: TagToDeku "pattern" Pattern_
 instance tagToDekuIframe_ :: TagToDeku "iframe" Iframe_
@@ -1749,7 +1745,6 @@ instance tagToDekuFrame_ :: TagToDeku "frame" Frame_
 instance tagToDekuImg_ :: TagToDeku "img" Img_
 instance tagToDekuFeDiffuseLighting_ ::
   TagToDeku "feDiffuseLighting" FeDiffuseLighting_
-
 instance tagToDekuProgress_ :: TagToDeku "progress" Progress_
 instance tagToDekuTitle_ :: TagToDeku "title" Title_
 instance tagToDekuClipPath_ :: TagToDeku "clipPath" ClipPath_
@@ -1759,7 +1754,6 @@ instance tagToDekuCol_ :: TagToDeku "col" Col_
 instance tagToDekuDialog_ :: TagToDeku "dialog" Dialog_
 instance tagToDekuFeConvolveMatrix_ ::
   TagToDeku "feConvolveMatrix" FeConvolveMatrix_
-
 instance tagToDekuAddress_ :: TagToDeku "address" Address_
 instance tagToDekuVar_ :: TagToDeku "var" Var_
 instance tagToDekuFeGaussianBlur_ :: TagToDeku "feGaussianBlur" FeGaussianBlur_
@@ -1771,7 +1765,6 @@ instance tagToDekuH3_ :: TagToDeku "h3" H3_
 instance tagToDekuTime_ :: TagToDeku "time" Time_
 instance tagToDekuFeSpecularLighting_ ::
   TagToDeku "feSpecularLighting" FeSpecularLighting_
-
 instance tagToDekuLi_ :: TagToDeku "li" Li_
 instance tagToDekuFeMerge_ :: TagToDeku "feMerge" FeMerge_
 instance tagToDekuFeFlood_ :: TagToDeku "feFlood" FeFlood_
@@ -1810,7 +1803,6 @@ instance tagToDekuInput_ :: TagToDeku "input" Input_
 instance tagToDekuFeBlend_ :: TagToDeku "feBlend" FeBlend_
 instance tagToDekuFeComponentTransfer_ ::
   TagToDeku "feComponentTransfer" FeComponentTransfer_
-
 instance tagToDekuRect_ :: TagToDeku "rect" Rect_
 instance tagToDekuRuby_ :: TagToDeku "ruby" Ruby_
 instance tagToDekuDesc_ :: TagToDeku "desc" Desc_
@@ -1842,7 +1834,6 @@ instance tagToDekuSource_ :: TagToDeku "source" Source_
 instance tagToDekuColgroup_ :: TagToDeku "colgroup" Colgroup_
 instance tagToDekuAnimateTransform_ ::
   TagToDeku "animateTransform" AnimateTransform_
-
 instance tagToDekuTemplate_ :: TagToDeku "template" Template_
 instance tagToDekuAcronym_ :: TagToDeku "acronym" Acronym_
 instance tagToDekuFooter_ :: TagToDeku "footer" Footer_
@@ -1875,9 +1866,7 @@ instance tagToDekuNoframes_ :: TagToDeku "noframes" Noframes_
 instance tagToDekuSpan_ :: TagToDeku "span" Span_
 instance tagToDekuCanvas_ :: TagToDeku "canvas" Canvas_
 instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
-
 -- codegen 3
-
 -- | Unsafely create a custom element. This is useful when using Stencil-based
 -- | frameworks like Ionic in Deku.
 unsafeCustomElement
@@ -1888,533 +1877,561 @@ unsafeCustomElement
   -> Array Nut
   -> Nut
 unsafeCustomElement name _ = elementify2 name
-
 -- | Creates a special event where an Deku element can have its raw DOM element
 -- | injected into a closure. All bets are off type-safety wise. This is useful
 -- | when you need to manipualte the element itself, like for example attaching
 -- | properties to it, etc. 
 data Self = Self
-
 instance Attr anything Self (DOM.Element -> Effect Unit) where
   attr Self value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
-instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
+instance Attr anything Self (Event.Event Unit -> Event.Event (DOM.Element -> Effect Unit)) where
   attr Self eventValue = unsafeAttribute
-    \_ -> eventValue <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
+    (Prelude.map (Prelude.map ( \value ->
+        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
 -- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
 -- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
 data SelfT = SelfT
-
+instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
+  attr Self eventValue = unsafeAttribute
+    \_ -> eventValue <#> \value ->
+        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+-- | A slightly less permissive version of `Self` that associates Deku Elements to
+-- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
+-- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _) 
-
+instance Attr anything SelfT (Event.Event Unit -> Event.Event (DOM.Element -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute
+    (Prelude.map (Prelude.map ( \value ->
+        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance Attr anything SelfT (Event.Event (DOM.Element -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute
     \_ -> eventValue <#> \value ->
         { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr anything SelfT (Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true)) } <$ _)
-
+instance Attr anything SelfT (Event.Event Unit -> Event.Event (Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute
+    (Prelude.map (Prelude.map ( \value ->
+        { key: "@self@"
+        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
+        })) eventValue)
 instance Attr anything SelfT (Event.Event (Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute
     \_ -> eventValue <#> \value ->
         { key: "@self@"
         , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
         }
-
-
-
-
-
-
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr A_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr A_
     SelfT
     (Event.Event (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Area_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Area_
     SelfT
     (Event.Event (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Audio_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Audio_
     SelfT
     (Event.Event (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Base_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Base_
     SelfT
     (Event.Event (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Body_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Body_
     SelfT
     (Event.Event (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Br_ SelfT (Event.Event Unit -> Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Br_ SelfT (Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Button_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Button_
     SelfT
     (Event.Event (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Canvas_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Canvas_
     SelfT
     (Event.Event (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Div_ SelfT (Event.Event Unit -> Event.Event (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Div_ SelfT (Event.Event (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Embed_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Embed_
     SelfT
     (Event.Event (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Form_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Form_
     SelfT
     (Event.Event (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Head_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Head_
     SelfT
     (Event.Event (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Hr_ SelfT (Event.Event Unit -> Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Hr_ SelfT (Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Html_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Html_
     SelfT
     (Event.Event (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Input_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Input_
     SelfT
     (Event.Event (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Label_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Label_
     SelfT
     (Event.Event (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Legend_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Legend_
     SelfT
     (Event.Event (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Link_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Link_
     SelfT
     (Event.Event (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Map_ SelfT (Event.Event Unit -> Event.Event (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Map_ SelfT (Event.Event (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Meta_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Meta_
     SelfT
     (Event.Event (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Meter_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Meter_
     SelfT
     (Event.Event (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Object_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Object_
     SelfT
     (Event.Event (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Option_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Option_
     SelfT
     (Event.Event (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Output_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Output_
     SelfT
     (Event.Event (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance
   Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr P_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr P_
     SelfT
     (Event.Event (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Param_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Param_
     SelfT
     (Event.Event (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Pre_ SelfT (Event.Event Unit -> Event.Event (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Pre_ SelfT (Event.Event (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance
   Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Progress_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLProgressElement.HTMLProgressElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Progress_
     SelfT
     (Event.Event (HTMLProgressElement.HTMLProgressElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Script_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Script_
     SelfT
     (Event.Event (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Select_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Select_
     SelfT
     (Event.Event (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Source_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Source_
     SelfT
     (Event.Event (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Span_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Span_
     SelfT
     (Event.Event (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Style_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Style_
     SelfT
     (Event.Event (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Table_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Table_
     SelfT
     (Event.Event (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance
   Attr Td_
     SelfT
     (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Td_
+    SelfT
+    ( Event.Event Unit -> Event.Event
+        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
+    ) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Td_
     SelfT
@@ -2423,86 +2440,92 @@ instance
     ) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance
   Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Template_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Template_
     SelfT
     (Event.Event (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance
   Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Textarea_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Textarea_
     SelfT
     (Event.Event (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Time_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Time_
     SelfT
     (Event.Event (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Title_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Title_
     SelfT
     (Event.Event (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Track_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Track_
     SelfT
     (Event.Event (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
   attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
-
-
-
-
 instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
   attr SelfT value = unsafeAttribute (  
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-
+instance
+  Attr Video_
+    SelfT
+    (Event.Event Unit -> Event.Event (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
+  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
 instance
   Attr Video_
     SelfT

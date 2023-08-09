@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.PointerEvents where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -44,324 +41,364 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data PointerEvents = PointerEvents
-
 instance Attr Circle_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Circle_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Circle_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Defs_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Defs_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Defs_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Ellipse_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Ellipse_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Ellipse_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeBlend_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeBlend_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeBlend_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeColorMatrix_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeComposite_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeComposite_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeComposite_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeFlood_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeFlood_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeFlood_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeImage_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeImage_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeImage_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeMerge_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeMerge_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeMerge_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeMorphology_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeMorphology_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeMorphology_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeOffset_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeOffset_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeOffset_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeTile_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeTile_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeTile_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr FeTurbulence_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Filter_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Filter_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Filter_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr ForeignObject_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr ForeignObject_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr ForeignObject_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr G_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr G_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr G_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Image_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Image_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Image_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Line_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Line_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Line_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr LinearGradient_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr LinearGradient_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr LinearGradient_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Marker_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Marker_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Marker_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Path_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Path_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Path_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Pattern_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Pattern_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Pattern_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Polygon_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Polygon_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Polygon_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Polyline_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Polyline_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Polyline_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr RadialGradient_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr RadialGradient_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr RadialGradient_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Rect_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Rect_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Rect_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Svg_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Svg_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Svg_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Switch_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Switch_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Switch_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Symbol_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Symbol_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Symbol_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Text_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Text_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Text_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr TextPath_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr TextPath_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr TextPath_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Tspan_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Tspan_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Tspan_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr Use_ PointerEvents  String  where
   attr PointerEvents value = unsafeAttribute (  
     { key: "pointer-events", value: prop' value  } <$ _)
+instance Attr Use_ PointerEvents (Event.Event Unit -> Event.Event  String ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \value -> { key: "pointer-events", value: prop' value })) eventValue)
 instance Attr Use_ PointerEvents (Event.Event  String ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "pointer-events", value: prop' value }
-
-
 instance Attr everything PointerEvents  Unit  where
   attr PointerEvents _ = unsafeAttribute (  
     { key: "pointer-events", value: unset'  } <$ _)
+instance Attr everything PointerEvents (Event.Event Unit -> Event.Event  Unit ) where
+  attr PointerEvents eventValue = unsafeAttribute (map (map (
+    \_ -> { key: "pointer-events", value: unset' })) eventValue)
 instance Attr everything PointerEvents (Event.Event  Unit ) where
   attr PointerEvents eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "pointer-events", value: unset' }

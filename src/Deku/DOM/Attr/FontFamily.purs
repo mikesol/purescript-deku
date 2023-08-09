@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.FontFamily where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.Text (Text_)
@@ -26,180 +23,202 @@ import Deku.DOM.Elt.FeComponentTransfer (FeComponentTransfer_)
 import Deku.DOM.Elt.FeColorMatrix (FeColorMatrix_)
 import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data FontFamily = FontFamily
-
 instance Attr FeBlend_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeBlend_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeBlend_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeColorMatrix_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeComposite_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeComposite_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeComposite_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeFlood_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeFlood_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeFlood_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeImage_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeImage_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeImage_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeMerge_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeMerge_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeMerge_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeMorphology_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeMorphology_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeMorphology_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeOffset_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeOffset_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeOffset_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeTile_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeTile_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeTile_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr FeTurbulence_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr Filter_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr Filter_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr Filter_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr Image_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr Image_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr Image_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr Switch_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr Switch_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr Switch_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr Text_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr Text_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr Text_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr Tspan_ FontFamily  String  where
   attr FontFamily value = unsafeAttribute (  
     { key: "font-family", value: prop' value  } <$ _)
+instance Attr Tspan_ FontFamily (Event.Event Unit -> Event.Event  String ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \value -> { key: "font-family", value: prop' value })) eventValue)
 instance Attr Tspan_ FontFamily (Event.Event  String ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "font-family", value: prop' value }
-
-
 instance Attr everything FontFamily  Unit  where
   attr FontFamily _ = unsafeAttribute (  
     { key: "font-family", value: unset'  } <$ _)
+instance Attr everything FontFamily (Event.Event Unit -> Event.Event  Unit ) where
+  attr FontFamily eventValue = unsafeAttribute (map (map (
+    \_ -> { key: "font-family", value: unset' })) eventValue)
 instance Attr everything FontFamily (Event.Event  Unit ) where
   attr FontFamily eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "font-family", value: unset' }

@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.ColorInterpolation where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -44,324 +41,324 @@ import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data ColorInterpolation = ColorInterpolation
-
 instance Attr Circle_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Circle_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Circle_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Defs_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Defs_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Defs_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Ellipse_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Ellipse_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Ellipse_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeBlend_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeBlend_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeBlend_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeColorMatrix_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeComposite_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeComposite_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeComposite_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeFlood_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeFlood_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeFlood_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeImage_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeImage_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeImage_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeMerge_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeMerge_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeMerge_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeMorphology_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeMorphology_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeMorphology_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeOffset_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeOffset_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeOffset_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeTile_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeTile_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeTile_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr FeTurbulence_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Filter_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Filter_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Filter_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr ForeignObject_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr ForeignObject_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr ForeignObject_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr G_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr G_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr G_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Image_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Image_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Image_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Line_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Line_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Line_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr LinearGradient_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr LinearGradient_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr LinearGradient_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Marker_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Marker_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Marker_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Path_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Path_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Path_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Pattern_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Pattern_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Pattern_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Polygon_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Polygon_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Polygon_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Polyline_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Polyline_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Polyline_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr RadialGradient_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr RadialGradient_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr RadialGradient_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Rect_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Rect_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Rect_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Svg_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Svg_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Svg_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Switch_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Switch_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Switch_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Symbol_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Symbol_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Symbol_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Text_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Text_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Text_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr TextPath_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr TextPath_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr TextPath_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Tspan_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Tspan_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Tspan_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr Use_ ColorInterpolation  String  where
   attr ColorInterpolation value = unsafeAttribute (  
     { key: "color-interpolation", value: prop' value  } <$ _)
+instance Attr Use_ ColorInterpolation (Event.Event Unit -> Event.Event  String ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \value -> { key: "color-interpolation", value: prop' value })) eventValue)
 instance Attr Use_ ColorInterpolation (Event.Event  String ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \value -> { key: "color-interpolation", value: prop' value }
-
-
 instance Attr everything ColorInterpolation  Unit  where
   attr ColorInterpolation _ = unsafeAttribute (  
     { key: "color-interpolation", value: unset'  } <$ _)
+instance Attr everything ColorInterpolation (Event.Event Unit -> Event.Event  Unit ) where
+  attr ColorInterpolation eventValue = unsafeAttribute (map (map ( \_ -> { key: "color-interpolation", value: unset' })) eventValue)
 instance Attr everything ColorInterpolation (Event.Event  Unit ) where
   attr ColorInterpolation eventValue = unsafeAttribute \_ -> eventValue
     <#> \_ -> { key: "color-interpolation", value: unset' }

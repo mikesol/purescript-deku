@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Keytype where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -127,987 +124,1110 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Keytype = Keytype
-
 instance Attr A_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr A_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr A_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Abbr_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Abbr_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Abbr_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Acronym_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Acronym_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Acronym_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Address_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Address_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Address_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Applet_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Applet_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Applet_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Area_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Area_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Area_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Article_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Article_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Article_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Aside_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Aside_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Aside_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Audio_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Audio_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Audio_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr B_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr B_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr B_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Base_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Base_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Base_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Basefont_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Basefont_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Basefont_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Bdi_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Bdi_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Bdi_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Bdo_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Bdo_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Bdo_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Big_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Big_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Big_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Blockquote_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Blockquote_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Blockquote_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Body_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Body_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Body_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Br_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Br_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Br_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Button_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Button_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Button_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Canvas_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Canvas_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Canvas_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Caption_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Caption_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Caption_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Center_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Center_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Center_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Cite_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Cite_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Cite_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Code_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Code_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Code_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Col_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Col_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Col_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Colgroup_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Colgroup_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Colgroup_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Xdata_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Xdata_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Xdata_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Datalist_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Datalist_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Datalist_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dd_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dd_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dd_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Del_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Del_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Del_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Details_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Details_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Details_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dfn_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dfn_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dfn_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dialog_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dialog_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dialog_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dir_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dir_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dir_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Div_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Div_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Div_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dl_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dl_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dl_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Dt_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Dt_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Dt_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Em_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Em_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Em_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Embed_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Embed_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Embed_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Fieldset_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Fieldset_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Fieldset_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Figcaption_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Figcaption_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Figcaption_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Figure_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Figure_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Figure_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Font_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Font_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Font_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Footer_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Footer_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Footer_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Form_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Form_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Form_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Frame_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Frame_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Frame_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Frameset_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Frameset_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Frameset_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H1_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H1_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H1_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H2_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H2_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H2_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H3_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H3_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H3_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H4_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H4_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H4_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H5_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H5_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H5_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr H6_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr H6_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr H6_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Head_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Head_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Head_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Header_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Header_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Header_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Hr_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Hr_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Hr_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Html_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Html_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Html_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr I_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr I_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr I_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Iframe_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Iframe_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Iframe_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Img_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Img_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Img_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Input_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Input_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Input_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Ins_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Ins_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Ins_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Kbd_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Kbd_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Kbd_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Label_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Label_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Label_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Legend_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Legend_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Legend_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Li_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Li_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Li_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Link_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Link_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Link_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Main_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Main_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Main_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Map_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Map_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Map_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Mark_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Mark_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Mark_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Meta_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Meta_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Meta_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Meter_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Meter_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Meter_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Nav_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Nav_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Nav_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Noframes_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Noframes_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Noframes_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Noscript_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Noscript_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Noscript_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Object_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Object_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Object_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Ol_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Ol_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Ol_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Optgroup_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Optgroup_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Optgroup_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Option_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Option_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Option_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Output_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Output_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Output_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr P_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr P_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr P_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Param_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Param_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Param_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Picture_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Picture_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Picture_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Pre_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Pre_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Pre_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Progress_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Progress_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Progress_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Q_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Q_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Q_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Rp_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Rp_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Rp_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Rt_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Rt_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Rt_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Ruby_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Ruby_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Ruby_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr S_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr S_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr S_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Samp_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Samp_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Samp_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Script_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Script_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Script_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Section_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Section_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Section_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Select_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Select_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Select_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Small_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Small_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Small_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Source_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Source_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Source_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Span_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Span_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Span_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Strike_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Strike_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Strike_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Strong_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Strong_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Strong_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Style_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Style_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Style_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Sub_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Sub_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Sub_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Summary_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Summary_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Summary_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Sup_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Sup_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Sup_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Svg_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Svg_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Svg_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Table_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Table_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Table_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Tbody_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Tbody_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Tbody_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Td_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Td_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Td_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Template_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Template_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Template_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Textarea_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Textarea_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Textarea_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Tfoot_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Tfoot_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Tfoot_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Th_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Th_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Th_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Thead_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Thead_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Thead_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Time_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Time_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Time_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Title_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Title_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Title_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Tr_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Tr_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Tr_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Track_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Track_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Track_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Tt_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Tt_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Tt_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr U_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr U_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr U_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Ul_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Ul_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Ul_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Var_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Var_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Var_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Video_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Video_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Video_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr Wbr_ Keytype  String  where
   attr Keytype value = unsafeAttribute (  
     { key: "keytype", value: prop' value  } <$ _)
+instance Attr Wbr_ Keytype (Event.Event Unit -> Event.Event  String ) where
+  attr Keytype eventValue = unsafeAttribute (map (map (
+    \value -> { key: "keytype", value: prop' value })) eventValue)
 instance Attr Wbr_ Keytype (Event.Event  String ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "keytype", value: prop' value }
-
-
 instance Attr everything Keytype  Unit  where
   attr Keytype _ = unsafeAttribute (  { key: "keytype", value: unset'  } <$ _)
+instance Attr everything Keytype (Event.Event Unit -> Event.Event  Unit ) where
+  attr Keytype eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "keytype", value: unset' })) eventValue)
 instance Attr everything Keytype (Event.Event  Unit ) where
   attr Keytype eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "keytype", value: unset' }

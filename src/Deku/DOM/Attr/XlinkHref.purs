@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.XlinkHref where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.RadialGradient (RadialGradient_)
@@ -14,84 +11,94 @@ import Deku.DOM.Elt.Filter (Filter_)
 import Deku.DOM.Elt.FeImage (FeImage_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data XlinkHref = XlinkHref
-
 instance Attr AnimateTransform_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr AnimateTransform_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr AnimateTransform_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr FeImage_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr FeImage_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr FeImage_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr Filter_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr Filter_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr Filter_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr Image_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr Image_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr Image_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr LinearGradient_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr LinearGradient_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr LinearGradient_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr Mpath_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr Mpath_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr Mpath_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr Pattern_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr Pattern_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr Pattern_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr RadialGradient_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr RadialGradient_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr RadialGradient_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr Use_ XlinkHref  String  where
   attr XlinkHref value = unsafeAttribute (  
     { key: "xlink:href", value: prop' value  } <$ _)
+instance Attr Use_ XlinkHref (Event.Event Unit -> Event.Event  String ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xlink:href", value: prop' value })) eventValue)
 instance Attr Use_ XlinkHref (Event.Event  String ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xlink:href", value: prop' value }
-
-
 instance Attr everything XlinkHref  Unit  where
   attr XlinkHref _ = unsafeAttribute (  
     { key: "xlink:href", value: unset'  } <$ _)
+instance Attr everything XlinkHref (Event.Event Unit -> Event.Event  Unit ) where
+  attr XlinkHref eventValue = unsafeAttribute (map (map (
+    \_ -> { key: "xlink:href", value: unset' })) eventValue)
 instance Attr everything XlinkHref (Event.Event  Unit ) where
   attr XlinkHref eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "xlink:href", value: unset' }

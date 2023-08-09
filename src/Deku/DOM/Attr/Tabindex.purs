@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Tabindex where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -172,1348 +169,1516 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Tabindex = Tabindex
-
 instance Attr A_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr A_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr A_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Abbr_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Abbr_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Abbr_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Acronym_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Acronym_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Acronym_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Address_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Address_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Address_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Applet_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Applet_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Applet_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Area_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Area_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Area_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Article_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Article_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Article_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Aside_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Aside_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Aside_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Audio_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Audio_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Audio_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr B_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr B_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr B_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Base_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Base_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Base_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Basefont_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Basefont_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Basefont_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Bdi_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Bdi_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Bdi_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Bdo_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Bdo_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Bdo_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Big_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Big_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Big_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Blockquote_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Blockquote_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Blockquote_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Body_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Body_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Body_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Br_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Br_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Br_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Button_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Button_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Button_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Canvas_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Canvas_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Canvas_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Caption_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Caption_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Caption_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Center_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Center_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Center_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Cite_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Cite_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Cite_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Code_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Code_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Code_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Col_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Col_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Col_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Colgroup_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Colgroup_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Colgroup_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Xdata_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Xdata_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Xdata_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Datalist_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Datalist_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Datalist_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dd_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dd_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dd_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Del_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Del_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Del_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Details_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Details_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Details_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dfn_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dfn_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dfn_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dialog_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dialog_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dialog_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dir_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dir_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dir_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Div_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Div_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Div_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dl_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dl_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dl_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Dt_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Dt_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Dt_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Em_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Em_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Em_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Embed_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Embed_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Embed_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Fieldset_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Fieldset_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Fieldset_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Figcaption_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Figcaption_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Figcaption_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Figure_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Figure_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Figure_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Font_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Font_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Font_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Footer_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Footer_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Footer_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Form_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Form_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Form_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Frame_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Frame_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Frame_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Frameset_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Frameset_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Frameset_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H1_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H1_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H1_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H2_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H2_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H2_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H3_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H3_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H3_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H4_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H4_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H4_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H5_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H5_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H5_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr H6_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr H6_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr H6_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Head_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Head_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Head_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Header_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Header_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Header_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Hr_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Hr_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Hr_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Html_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Html_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Html_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr I_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr I_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr I_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Iframe_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Iframe_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Iframe_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Img_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Img_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Img_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Input_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Input_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Input_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Ins_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Ins_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Ins_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Kbd_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Kbd_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Kbd_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Label_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Label_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Label_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Legend_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Legend_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Legend_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Li_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Li_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Li_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Link_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Link_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Link_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Main_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Main_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Main_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Map_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Map_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Map_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Mark_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Mark_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Mark_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Meta_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Meta_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Meta_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Meter_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Meter_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Meter_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Nav_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Nav_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Nav_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Noframes_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Noframes_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Noframes_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Noscript_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Noscript_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Noscript_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Object_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Object_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Object_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Ol_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Ol_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Ol_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Optgroup_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Optgroup_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Optgroup_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Option_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Option_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Option_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Output_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Output_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Output_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr P_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr P_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr P_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Param_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Param_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Param_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Picture_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Picture_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Picture_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Pre_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Pre_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Pre_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Progress_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Progress_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Progress_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Q_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Q_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Q_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Rp_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Rp_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Rp_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Rt_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Rt_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Rt_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Ruby_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Ruby_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Ruby_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr S_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr S_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr S_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Samp_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Samp_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Samp_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Script_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Script_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Script_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Section_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Section_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Section_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Select_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Select_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Select_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Small_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Small_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Small_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Source_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Source_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Source_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Span_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Span_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Span_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Strike_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Strike_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Strike_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Strong_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Strong_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Strong_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Style_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Style_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Style_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Sub_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Sub_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Sub_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Summary_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Summary_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Summary_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Sup_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Sup_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Sup_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Svg_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Svg_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Svg_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Table_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Table_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Table_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Tbody_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Tbody_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Tbody_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Td_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Td_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Td_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Template_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Template_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Template_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Textarea_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Textarea_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Textarea_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Tfoot_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Tfoot_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Tfoot_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Th_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Th_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Th_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Thead_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Thead_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Thead_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Time_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Time_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Time_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Title_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Title_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Title_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Tr_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Tr_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Tr_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Track_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Track_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Track_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Tt_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Tt_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Tt_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr U_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr U_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr U_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Ul_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Ul_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Ul_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Var_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Var_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Var_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Video_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Video_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Video_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Wbr_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Wbr_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Wbr_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Animate_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Animate_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Animate_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr AnimateMotion_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr AnimateMotion_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr AnimateMotion_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr AnimateTransform_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr AnimateTransform_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr AnimateTransform_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr ClipPath_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr ClipPath_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr ClipPath_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Desc_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Desc_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Desc_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Discard_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Discard_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Discard_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeBlend_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeBlend_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeBlend_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeComposite_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeComposite_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeComposite_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeDistantLight_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeDistantLight_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeDistantLight_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeDropShadow_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeDropShadow_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeDropShadow_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeFlood_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeFlood_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeFlood_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeFuncA_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeFuncA_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeFuncA_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeFuncB_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeFuncB_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeFuncB_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeFuncG_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeFuncG_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeFuncG_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeFuncR_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeFuncR_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeFuncR_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeImage_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeImage_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeImage_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeMerge_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeMerge_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeMerge_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeMergeNode_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeMergeNode_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeMergeNode_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeMorphology_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeOffset_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeOffset_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeOffset_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FePointLight_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FePointLight_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FePointLight_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeSpotLight_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeSpotLight_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeSpotLight_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeTile_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeTile_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeTile_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr FeTurbulence_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Filter_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Filter_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Filter_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Image_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Image_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Image_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr LinearGradient_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr LinearGradient_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr LinearGradient_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Mask_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Mask_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Mask_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Metadata_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Metadata_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Metadata_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Mpath_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Mpath_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Mpath_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr RadialGradient_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr RadialGradient_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr RadialGradient_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Set_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Set_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Set_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Stop_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Stop_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Stop_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Switch_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Switch_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Switch_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Symbol_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Symbol_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Symbol_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Text_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Text_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Text_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr Tspan_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr Tspan_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr Tspan_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr View_ Tabindex  String  where
   attr Tabindex value = unsafeAttribute (  
     { key: "tabindex", value: prop' value  } <$ _)
+instance Attr View_ Tabindex (Event.Event Unit -> Event.Event  String ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map (
+    \value -> { key: "tabindex", value: prop' value })) eventValue)
 instance Attr View_ Tabindex (Event.Event  String ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "tabindex", value: prop' value }
-
-
 instance Attr everything Tabindex  Unit  where
   attr Tabindex _ = unsafeAttribute (  
     { key: "tabindex", value: unset'  } <$ _)
+instance Attr everything Tabindex (Event.Event Unit -> Event.Event  Unit ) where
+  attr Tabindex eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "tabindex", value: unset' })) eventValue)
 instance Attr everything Tabindex (Event.Event  Unit ) where
   attr Tabindex eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "tabindex", value: unset' }

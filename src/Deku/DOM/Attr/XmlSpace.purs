@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.XmlSpace where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -37,268 +34,301 @@ import Deku.DOM.Elt.FeBlend (FeBlend_)
 import Deku.DOM.Elt.Discard (Discard_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data XmlSpace = XmlSpace
-
 instance Attr AnimateTransform_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr AnimateTransform_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr AnimateTransform_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Discard_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Discard_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Discard_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeBlend_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeBlend_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeBlend_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeColorMatrix_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeComposite_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeComposite_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeComposite_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeDistantLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeDistantLight_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeDistantLight_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeFlood_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeFlood_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeFlood_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeFuncA_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeFuncA_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeFuncA_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeFuncB_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeFuncB_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeFuncB_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeFuncG_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeFuncG_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeFuncG_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeFuncR_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeFuncR_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeFuncR_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeImage_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeImage_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeImage_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeMerge_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeMerge_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeMerge_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeMergeNode_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeMergeNode_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeMergeNode_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeMorphology_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeMorphology_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeMorphology_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeOffset_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeOffset_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeOffset_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FePointLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FePointLight_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FePointLight_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeSpotLight_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeSpotLight_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeSpotLight_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeTile_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeTile_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeTile_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr FeTurbulence_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Filter_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Filter_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Filter_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Image_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Image_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Image_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Metadata_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Metadata_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Metadata_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Mpath_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Mpath_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Mpath_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr Switch_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr Switch_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr Switch_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr View_ XmlSpace  String  where
   attr XmlSpace value = unsafeAttribute (  
     { key: "xml:space", value: prop' value  } <$ _)
+instance Attr View_ XmlSpace (Event.Event Unit -> Event.Event  String ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map (
+    \value -> { key: "xml:space", value: prop' value })) eventValue)
 instance Attr View_ XmlSpace (Event.Event  String ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "xml:space", value: prop' value }
-
-
 instance Attr everything XmlSpace  Unit  where
   attr XmlSpace _ = unsafeAttribute (  
     { key: "xml:space", value: unset'  } <$ _)
+instance Attr everything XmlSpace (Event.Event Unit -> Event.Event  Unit ) where
+  attr XmlSpace eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "xml:space", value: unset' })) eventValue)
 instance Attr everything XmlSpace (Event.Event  Unit ) where
   attr XmlSpace eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "xml:space", value: unset' }

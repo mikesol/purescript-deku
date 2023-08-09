@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Challenge where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
@@ -127,988 +124,1111 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Challenge = Challenge
-
 instance Attr A_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr A_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr A_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Abbr_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Abbr_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Abbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Acronym_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Acronym_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Acronym_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Address_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Address_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Address_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Applet_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Applet_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Applet_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Area_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Area_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Area_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Article_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Article_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Article_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Aside_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Aside_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Aside_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Audio_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Audio_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Audio_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr B_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr B_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr B_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Base_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Base_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Base_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Basefont_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Basefont_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Basefont_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Bdi_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Bdi_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Bdi_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Bdo_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Bdo_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Bdo_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Big_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Big_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Big_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Blockquote_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Blockquote_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Blockquote_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Body_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Body_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Body_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Br_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Br_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Br_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Button_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Button_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Button_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Canvas_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Canvas_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Canvas_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Caption_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Caption_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Caption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Center_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Center_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Center_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Cite_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Cite_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Cite_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Code_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Code_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Code_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Col_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Col_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Col_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Colgroup_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Colgroup_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Colgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Xdata_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Xdata_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Xdata_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Datalist_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Datalist_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Datalist_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dd_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dd_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Del_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Del_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Del_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Details_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Details_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Details_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dfn_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dfn_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dfn_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dialog_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dialog_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dialog_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dir_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dir_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dir_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Div_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Div_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Div_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dl_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dl_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dl_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Dt_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Dt_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Dt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Em_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Em_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Em_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Embed_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Embed_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Embed_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Fieldset_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Fieldset_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Fieldset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Figcaption_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Figcaption_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Figcaption_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Figure_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Figure_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Figure_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Font_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Font_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Font_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Footer_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Footer_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Footer_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Form_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Form_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Form_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Frame_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Frame_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Frame_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Frameset_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Frameset_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Frameset_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H1_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H1_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H1_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H2_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H2_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H2_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H3_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H3_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H3_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H4_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H4_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H4_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H5_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H5_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H5_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr H6_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr H6_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr H6_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Head_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Head_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Head_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Header_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Header_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Header_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Hr_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Hr_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Hr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Html_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Html_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Html_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr I_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr I_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr I_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Iframe_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Iframe_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Iframe_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Img_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Img_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Img_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Input_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Input_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Input_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Ins_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Ins_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Ins_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Kbd_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Kbd_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Kbd_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Label_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Label_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Label_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Legend_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Legend_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Legend_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Li_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Li_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Li_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Link_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Link_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Link_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Main_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Main_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Main_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Map_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Map_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Map_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Mark_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Mark_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Mark_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Meta_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Meta_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Meta_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Meter_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Meter_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Meter_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Nav_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Nav_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Nav_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Noframes_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Noframes_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Noframes_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Noscript_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Noscript_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Noscript_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Object_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Object_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Object_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Ol_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Ol_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Ol_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Optgroup_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Optgroup_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Optgroup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Option_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Option_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Option_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Output_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Output_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Output_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr P_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr P_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr P_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Param_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Param_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Param_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Picture_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Picture_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Picture_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Pre_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Pre_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Pre_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Progress_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Progress_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Progress_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Q_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Q_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Q_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Rp_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Rp_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Rp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Rt_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Rt_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Rt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Ruby_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Ruby_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Ruby_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr S_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr S_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr S_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Samp_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Samp_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Samp_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Script_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Script_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Script_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Section_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Section_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Section_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Select_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Select_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Select_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Small_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Small_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Small_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Source_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Source_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Source_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Span_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Span_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Span_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Strike_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Strike_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Strike_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Strong_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Strong_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Strong_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Style_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Style_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Style_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Sub_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Sub_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Sub_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Summary_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Summary_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Summary_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Sup_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Sup_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Sup_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Svg_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Svg_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Svg_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Table_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Table_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Table_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Tbody_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Tbody_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Tbody_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Td_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Td_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Td_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Template_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Template_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Template_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Textarea_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Textarea_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Textarea_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Tfoot_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Tfoot_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Tfoot_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Th_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Th_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Th_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Thead_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Thead_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Thead_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Time_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Time_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Time_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Title_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Title_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Title_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Tr_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Tr_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Tr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Track_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Track_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Track_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Tt_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Tt_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Tt_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr U_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr U_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr U_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Ul_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Ul_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Ul_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Var_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Var_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Var_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Video_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Video_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Video_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr Wbr_ Challenge  String  where
   attr Challenge value = unsafeAttribute (  
     { key: "challenge", value: prop' value  } <$ _)
+instance Attr Wbr_ Challenge (Event.Event Unit -> Event.Event  String ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \value -> { key: "challenge", value: prop' value })) eventValue)
 instance Attr Wbr_ Challenge (Event.Event  String ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "challenge", value: prop' value }
-
-
 instance Attr everything Challenge  Unit  where
   attr Challenge _ = unsafeAttribute (  
     { key: "challenge", value: unset'  } <$ _)
+instance Attr everything Challenge (Event.Event Unit -> Event.Event  Unit ) where
+  attr Challenge eventValue = unsafeAttribute (map (map (
+    \_ -> { key: "challenge", value: unset' })) eventValue)
 instance Attr everything Challenge (Event.Event  Unit ) where
   attr Challenge eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "challenge", value: unset' }

@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Display where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -47,347 +44,390 @@ import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Display = Display
-
 instance Attr Circle_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Circle_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Circle_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr ClipPath_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr ClipPath_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr ClipPath_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Defs_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Defs_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Defs_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Ellipse_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Ellipse_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Ellipse_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeBlend_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeBlend_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeBlend_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeComposite_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeComposite_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeComposite_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeFlood_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeFlood_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeFlood_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeImage_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeImage_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeImage_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeMerge_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeMerge_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeMerge_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeMorphology_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeOffset_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeOffset_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeOffset_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeTile_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeTile_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeTile_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr FeTurbulence_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Filter_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Filter_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Filter_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr ForeignObject_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr ForeignObject_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr ForeignObject_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr G_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr G_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr G_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Image_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Image_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Image_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Line_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Line_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Line_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr LinearGradient_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr LinearGradient_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr LinearGradient_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Marker_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Marker_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Marker_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Mask_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Mask_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Mask_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Path_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Path_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Path_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Pattern_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Pattern_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Pattern_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Polygon_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Polygon_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Polygon_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Polyline_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Polyline_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Polyline_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr RadialGradient_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr RadialGradient_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr RadialGradient_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Rect_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Rect_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Rect_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Stop_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Stop_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Stop_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Svg_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Svg_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Svg_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Switch_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Switch_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Switch_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Symbol_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Symbol_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Symbol_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Text_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Text_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Text_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr TextPath_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr TextPath_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr TextPath_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Tspan_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Tspan_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Tspan_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr Use_ Display  String  where
   attr Display value = unsafeAttribute (  
     { key: "display", value: prop' value  } <$ _)
+instance Attr Use_ Display (Event.Event Unit -> Event.Event  String ) where
+  attr Display eventValue = unsafeAttribute (map (map (
+    \value -> { key: "display", value: prop' value })) eventValue)
 instance Attr Use_ Display (Event.Event  String ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "display", value: prop' value }
-
-
 instance Attr everything Display  Unit  where
   attr Display _ = unsafeAttribute (  { key: "display", value: unset'  } <$ _)
+instance Attr everything Display (Event.Event Unit -> Event.Event  Unit ) where
+  attr Display eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "display", value: unset' })) eventValue)
 instance Attr everything Display (Event.Event  Unit ) where
   attr Display eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "display", value: unset' }

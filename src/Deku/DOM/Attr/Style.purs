@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Style where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -173,1355 +170,1524 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Style = Style
-
 instance Attr A_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr A_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr A_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Abbr_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Abbr_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Abbr_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Acronym_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Acronym_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Acronym_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Address_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Address_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Address_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Applet_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Applet_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Applet_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Area_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Area_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Area_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Article_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Article_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Article_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Aside_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Aside_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Aside_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Audio_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Audio_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Audio_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr B_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr B_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr B_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Base_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Base_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Base_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Basefont_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Basefont_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Basefont_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Bdi_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Bdi_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Bdi_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Bdo_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Bdo_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Bdo_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Big_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Big_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Big_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Blockquote_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Blockquote_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Blockquote_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Body_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Body_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Body_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Br_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Br_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Br_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Button_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Button_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Button_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Canvas_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Canvas_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Canvas_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Caption_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Caption_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Caption_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Center_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Center_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Center_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Cite_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Cite_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Cite_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Code_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Code_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Code_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Col_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Col_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Col_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Colgroup_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Colgroup_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Colgroup_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Xdata_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Xdata_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Xdata_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Datalist_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Datalist_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Datalist_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dd_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dd_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dd_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Del_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Del_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Del_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Details_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Details_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Details_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dfn_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dfn_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dfn_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dialog_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dialog_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dialog_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dir_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dir_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dir_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Div_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Div_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Div_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dl_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dl_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dl_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Dt_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Dt_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Dt_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Em_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Em_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Em_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Embed_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Embed_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Embed_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Fieldset_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Fieldset_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Fieldset_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Figcaption_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Figcaption_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Figcaption_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Figure_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Figure_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Figure_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Font_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Font_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Font_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Footer_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Footer_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Footer_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Form_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Form_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Form_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Frame_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Frame_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Frame_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Frameset_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Frameset_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Frameset_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H1_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H1_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H1_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H2_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H2_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H2_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H3_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H3_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H3_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H4_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H4_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H4_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H5_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H5_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H5_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr H6_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr H6_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr H6_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Head_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Head_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Head_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Header_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Header_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Header_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Hr_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Hr_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Hr_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Html_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Html_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Html_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr I_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr I_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr I_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Iframe_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Iframe_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Iframe_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Img_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Img_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Img_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Input_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Input_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Input_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Ins_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Ins_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Ins_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Kbd_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Kbd_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Kbd_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Label_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Label_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Label_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Legend_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Legend_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Legend_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Li_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Li_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Li_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Link_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Link_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Link_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Main_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Main_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Main_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Map_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Map_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Map_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Mark_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Mark_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Mark_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Meta_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Meta_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Meta_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Meter_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Meter_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Meter_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Nav_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Nav_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Nav_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Noframes_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Noframes_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Noframes_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Noscript_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Noscript_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Noscript_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Object_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Object_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Object_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Ol_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Ol_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Ol_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Optgroup_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Optgroup_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Optgroup_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Option_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Option_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Option_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Output_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Output_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Output_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr P_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr P_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr P_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Param_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Param_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Param_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Picture_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Picture_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Picture_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Pre_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Pre_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Pre_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Progress_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Progress_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Progress_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Q_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Q_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Q_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Rp_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Rp_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Rp_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Rt_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Rt_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Rt_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Ruby_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Ruby_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Ruby_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr S_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr S_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr S_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Samp_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Samp_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Samp_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Script_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Script_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Script_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Section_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Section_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Section_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Select_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Select_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Select_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Small_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Small_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Small_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Source_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Source_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Source_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Span_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Span_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Span_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Strike_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Strike_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Strike_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Strong_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Strong_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Strong_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Style_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Style_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Style_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Sub_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Sub_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Sub_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Summary_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Summary_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Summary_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Sup_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Sup_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Sup_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Svg_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Svg_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Svg_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Table_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Table_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Table_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Tbody_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Tbody_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Tbody_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Td_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Td_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Td_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Template_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Template_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Template_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Textarea_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Textarea_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Textarea_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Tfoot_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Tfoot_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Tfoot_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Th_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Th_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Th_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Thead_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Thead_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Thead_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Time_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Time_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Time_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Title_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Title_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Title_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Tr_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Tr_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Tr_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Track_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Track_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Track_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Tt_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Tt_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Tt_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr U_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr U_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr U_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Ul_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Ul_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Ul_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Var_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Var_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Var_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Video_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Video_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Video_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Wbr_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Wbr_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Wbr_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Animate_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Animate_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Animate_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr AnimateMotion_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr AnimateMotion_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr AnimateMotion_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Circle_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Circle_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Circle_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr ClipPath_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr ClipPath_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr ClipPath_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Defs_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Defs_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Defs_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Desc_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Desc_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Desc_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Ellipse_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Ellipse_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Ellipse_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeBlend_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeBlend_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeBlend_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeComposite_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeComposite_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeComposite_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeDropShadow_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeDropShadow_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeDropShadow_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeFlood_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeFlood_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeFlood_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeImage_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeImage_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeImage_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeMerge_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeMerge_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeMerge_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeMorphology_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeOffset_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeOffset_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeOffset_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeTile_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeTile_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeTile_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr FeTurbulence_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Filter_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Filter_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Filter_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr ForeignObject_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr ForeignObject_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr ForeignObject_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr G_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr G_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr G_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Image_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Image_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Image_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Line_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Line_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Line_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr LinearGradient_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr LinearGradient_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr LinearGradient_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Marker_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Marker_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Marker_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Mask_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Mask_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Mask_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Path_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Path_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Path_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Pattern_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Pattern_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Pattern_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Polygon_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Polygon_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Polygon_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Polyline_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Polyline_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Polyline_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr RadialGradient_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr RadialGradient_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr RadialGradient_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Rect_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Rect_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Rect_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Set_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Set_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Set_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Stop_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Stop_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Stop_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Switch_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Switch_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Switch_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Symbol_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Symbol_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Symbol_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Text_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Text_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Text_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr TextPath_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr TextPath_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr TextPath_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Tspan_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Tspan_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Tspan_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr Use_ Style  String  where
   attr Style value = unsafeAttribute (  
     { key: "style", value: prop' value  } <$ _)
+instance Attr Use_ Style (Event.Event Unit -> Event.Event  String ) where
+  attr Style eventValue = unsafeAttribute (map (map (
+    \value -> { key: "style", value: prop' value })) eventValue)
 instance Attr Use_ Style (Event.Event  String ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "style", value: prop' value }
-
-
 instance Attr everything Style  Unit  where
   attr Style _ = unsafeAttribute (  { key: "style", value: unset'  } <$ _)
+instance Attr everything Style (Event.Event Unit -> Event.Event  Unit ) where
+  attr Style eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "style", value: unset' })) eventValue)
 instance Attr everything Style (Event.Event  Unit ) where
   attr Style eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "style", value: unset' }

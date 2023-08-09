@@ -333,6 +333,9 @@ instance Textable (Event String) where
 instance Textable String where
   text s = text_' (_ $> s)
 
+instance Textable (Event Unit -> Event String) where
+  text s = text_' s
+
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku

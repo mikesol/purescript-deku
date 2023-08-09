@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Color where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -49,363 +46,408 @@ import Deku.DOM.Elt.Circle (Circle_)
 import Deku.DOM.Elt.Font (Font_)
 import Deku.DOM.Elt.Hr (Hr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Color = Color
-
 instance Attr Font_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Font_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Font_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Hr_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Hr_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Hr_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Circle_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Circle_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Circle_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr ClipPath_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr ClipPath_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr ClipPath_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Defs_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Defs_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Defs_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Ellipse_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Ellipse_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Ellipse_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeBlend_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeBlend_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeBlend_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeComposite_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeComposite_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeComposite_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeFlood_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeFlood_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeFlood_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeImage_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeImage_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeImage_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeMerge_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeMerge_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeMerge_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeMorphology_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeOffset_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeOffset_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeOffset_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeTile_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeTile_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeTile_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr FeTurbulence_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Filter_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Filter_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Filter_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr ForeignObject_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr ForeignObject_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr ForeignObject_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr G_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr G_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr G_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Image_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Image_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Image_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Line_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Line_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Line_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr LinearGradient_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr LinearGradient_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr LinearGradient_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Marker_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Marker_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Marker_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Mask_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Mask_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Mask_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Path_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Path_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Path_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Pattern_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Pattern_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Pattern_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Polygon_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Polygon_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Polygon_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Polyline_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Polyline_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Polyline_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr RadialGradient_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr RadialGradient_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr RadialGradient_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Rect_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Rect_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Rect_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Stop_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Stop_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Stop_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Svg_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Svg_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Svg_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Switch_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Switch_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Switch_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Symbol_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Symbol_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Symbol_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Text_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Text_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Text_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr TextPath_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr TextPath_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr TextPath_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Tspan_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Tspan_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Tspan_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr Use_ Color  String  where
   attr Color value = unsafeAttribute (  
     { key: "color", value: prop' value  } <$ _)
+instance Attr Use_ Color (Event.Event Unit -> Event.Event  String ) where
+  attr Color eventValue = unsafeAttribute (map (map (
+    \value -> { key: "color", value: prop' value })) eventValue)
 instance Attr Use_ Color (Event.Event  String ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "color", value: prop' value }
-
-
 instance Attr everything Color  Unit  where
   attr Color _ = unsafeAttribute (  { key: "color", value: unset'  } <$ _)
+instance Attr everything Color (Event.Event Unit -> Event.Event  Unit ) where
+  attr Color eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "color", value: unset' })) eventValue)
 instance Attr everything Color (Event.Event  Unit ) where
   attr Color eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "color", value: unset' }

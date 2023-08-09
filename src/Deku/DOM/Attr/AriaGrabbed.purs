@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.AriaGrabbed where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
@@ -22,148 +19,166 @@ import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data AriaGrabbed = AriaGrabbed
-
 instance Attr Circle_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Circle_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Circle_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Ellipse_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Ellipse_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Ellipse_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr ForeignObject_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr ForeignObject_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr ForeignObject_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr G_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr G_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr G_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Line_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Line_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Line_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Marker_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Marker_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Marker_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Path_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Path_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Path_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Polygon_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Polygon_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Polygon_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Polyline_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Polyline_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Polyline_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Rect_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Rect_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Rect_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Svg_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Svg_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Svg_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Symbol_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Symbol_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Symbol_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Text_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Text_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Text_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr TextPath_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr TextPath_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr TextPath_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Tspan_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Tspan_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Tspan_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr Use_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr Use_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr Use_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr View_ AriaGrabbed  String  where
   attr AriaGrabbed value = unsafeAttribute (  
     { key: "aria-grabbed", value: prop' value  } <$ _)
+instance Attr View_ AriaGrabbed (Event.Event Unit -> Event.Event  String ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \value -> { key: "aria-grabbed", value: prop' value })) eventValue)
 instance Attr View_ AriaGrabbed (Event.Event  String ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \value -> { key: "aria-grabbed", value: prop' value }
-
-
 instance Attr everything AriaGrabbed  Unit  where
   attr AriaGrabbed _ = unsafeAttribute (  
     { key: "aria-grabbed", value: unset'  } <$ _)
+instance Attr everything AriaGrabbed (Event.Event Unit -> Event.Event  Unit ) where
+  attr AriaGrabbed eventValue = unsafeAttribute (map (map (
+    \_ -> { key: "aria-grabbed", value: unset' })) eventValue)
 instance Attr everything AriaGrabbed (Event.Event  Unit ) where
   attr AriaGrabbed eventValue = unsafeAttribute \_ -> eventValue <#>
     \_ -> { key: "aria-grabbed", value: unset' }

@@ -1,8 +1,5 @@
 module Deku.DOM.Attr.Lang where
-
-
 import Prelude
-
 import FRP.Event as Event
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Switch (Switch_)
@@ -160,1251 +157,1407 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
-
 data Lang = Lang
-
 instance Attr A_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr A_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr A_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Abbr_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Abbr_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Abbr_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Acronym_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Acronym_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Acronym_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Address_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Address_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Address_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Applet_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Applet_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Applet_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Area_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Area_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Area_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Article_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Article_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Article_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Aside_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Aside_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Aside_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Audio_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Audio_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Audio_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr B_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr B_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr B_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Base_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Base_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Base_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Basefont_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Basefont_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Basefont_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Bdi_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Bdi_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Bdi_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Bdo_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Bdo_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Bdo_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Big_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Big_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Big_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Blockquote_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Blockquote_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Blockquote_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Body_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Body_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Body_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Br_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Br_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Br_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Button_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Button_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Button_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Canvas_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Canvas_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Canvas_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Caption_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Caption_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Caption_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Center_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Center_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Center_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Cite_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Cite_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Cite_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Code_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Code_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Code_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Col_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Col_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Col_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Colgroup_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Colgroup_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Colgroup_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Xdata_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Xdata_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Xdata_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Datalist_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Datalist_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Datalist_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dd_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dd_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dd_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Del_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Del_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Del_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Details_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Details_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Details_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dfn_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dfn_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dfn_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dialog_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dialog_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dialog_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dir_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dir_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dir_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Div_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Div_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Div_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dl_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dl_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dl_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Dt_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Dt_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Dt_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Em_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Em_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Em_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Embed_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Embed_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Embed_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Fieldset_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Fieldset_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Fieldset_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Figcaption_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Figcaption_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Figcaption_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Figure_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Figure_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Figure_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Font_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Font_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Font_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Footer_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Footer_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Footer_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Form_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Form_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Form_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Frame_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Frame_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Frame_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Frameset_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Frameset_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Frameset_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H1_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H1_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H1_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H2_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H2_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H2_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H3_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H3_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H3_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H4_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H4_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H4_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H5_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H5_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H5_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr H6_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr H6_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr H6_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Head_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Head_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Head_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Header_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Header_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Header_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Hr_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Hr_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Hr_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Html_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Html_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Html_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr I_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr I_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr I_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Iframe_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Iframe_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Iframe_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Img_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Img_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Img_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Input_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Input_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Input_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Ins_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Ins_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Ins_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Kbd_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Kbd_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Kbd_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Label_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Label_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Label_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Legend_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Legend_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Legend_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Li_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Li_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Li_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Link_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Link_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Link_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Main_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Main_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Main_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Map_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Map_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Map_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Mark_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Mark_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Mark_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Meta_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Meta_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Meta_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Meter_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Meter_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Meter_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Nav_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Nav_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Nav_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Noframes_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Noframes_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Noframes_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Noscript_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Noscript_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Noscript_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Object_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Object_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Object_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Ol_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Ol_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Ol_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Optgroup_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Optgroup_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Optgroup_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Option_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Option_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Option_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Output_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Output_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Output_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr P_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr P_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr P_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Param_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Param_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Param_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Picture_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Picture_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Picture_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Pre_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Pre_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Pre_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Progress_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Progress_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Progress_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Q_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Q_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Q_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Rp_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Rp_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Rp_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Rt_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Rt_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Rt_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Ruby_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Ruby_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Ruby_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr S_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr S_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr S_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Samp_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Samp_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Samp_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Script_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Script_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Script_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Section_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Section_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Section_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Select_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Select_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Select_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Small_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Small_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Small_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Source_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Source_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Source_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Span_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Span_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Span_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Strike_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Strike_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Strike_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Strong_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Strong_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Strong_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Style_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Style_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Style_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Sub_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Sub_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Sub_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Summary_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Summary_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Summary_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Sup_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Sup_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Sup_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Svg_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Svg_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Svg_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Table_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Table_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Table_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Tbody_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Tbody_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Tbody_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Td_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Td_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Td_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Template_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Template_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Template_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Textarea_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Textarea_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Textarea_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Tfoot_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Tfoot_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Tfoot_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Th_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Th_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Th_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Thead_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Thead_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Thead_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Time_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Time_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Time_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Title_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Title_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Title_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Tr_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Tr_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Tr_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Track_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Track_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Track_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Tt_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Tt_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Tt_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr U_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr U_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr U_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Ul_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Ul_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Ul_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Var_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Var_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Var_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Video_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Video_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Video_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Wbr_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Wbr_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Wbr_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr AnimateTransform_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr AnimateTransform_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr AnimateTransform_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Defs_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Defs_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Defs_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Discard_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Discard_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Discard_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeBlend_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeBlend_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeBlend_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeColorMatrix_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeColorMatrix_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeColorMatrix_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeComponentTransfer_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeComponentTransfer_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeComponentTransfer_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeComposite_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeComposite_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeComposite_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeConvolveMatrix_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeConvolveMatrix_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeConvolveMatrix_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeDiffuseLighting_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeDiffuseLighting_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeDiffuseLighting_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeDisplacementMap_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeDisplacementMap_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeDisplacementMap_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeDistantLight_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeDistantLight_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeDistantLight_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeFlood_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeFlood_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeFlood_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeFuncA_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeFuncA_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeFuncA_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeFuncB_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeFuncB_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeFuncB_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeFuncG_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeFuncG_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeFuncG_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeFuncR_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeFuncR_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeFuncR_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeGaussianBlur_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeGaussianBlur_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeGaussianBlur_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeImage_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeImage_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeImage_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeMerge_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeMerge_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeMerge_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeMergeNode_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeMergeNode_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeMergeNode_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeMorphology_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeMorphology_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeMorphology_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeOffset_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeOffset_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeOffset_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FePointLight_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FePointLight_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FePointLight_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeSpecularLighting_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeSpecularLighting_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeSpecularLighting_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeSpotLight_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeSpotLight_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeSpotLight_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeTile_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeTile_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeTile_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr FeTurbulence_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr FeTurbulence_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr FeTurbulence_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Filter_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Filter_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Filter_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Image_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Image_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Image_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Metadata_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Metadata_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Metadata_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Mpath_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Mpath_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Mpath_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr Switch_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr Switch_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr Switch_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr View_ Lang  String  where
   attr Lang value = unsafeAttribute (  
     { key: "lang", value: prop' value  } <$ _)
+instance Attr View_ Lang (Event.Event Unit -> Event.Event  String ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \value ->
+    { key: "lang", value: prop' value })) eventValue)
 instance Attr View_ Lang (Event.Event  String ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
     { key: "lang", value: prop' value }
-
-
 instance Attr everything Lang  Unit  where
   attr Lang _ = unsafeAttribute (  { key: "lang", value: unset'  } <$ _)
+instance Attr everything Lang (Event.Event Unit -> Event.Event  Unit ) where
+  attr Lang eventValue = unsafeAttribute (map (map ( \_ ->
+    { key: "lang", value: unset' })) eventValue)
 instance Attr everything Lang (Event.Event  Unit ) where
   attr Lang eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
     { key: "lang", value: unset' }
