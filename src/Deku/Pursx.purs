@@ -8,6 +8,7 @@ import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
+import FRP.Poll (Poll, sample_)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
@@ -41,7 +42,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (Array (Attribute deku)) pursi purso
+  , Row.Cons acc (Array (Poll (Attribute deku))) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
@@ -2476,13 +2477,13 @@ instance pursxToElementConsInsert ::
     pxk = Proxy :: _ key
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Array (Attribute deku)) r' r
+  ( Row.Cons key (Array (Poll (Attribute deku))) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Array (Attribute deku)) rest)
+    (RL.Cons key (Array (Poll (Attribute deku))) rest)
     r where
   pursxToElement pxScope _ r = do
     let
@@ -2498,7 +2499,9 @@ else instance pursxToElementConsAttr ::
                   xx
               ) <$>
                 ( merge
-                    (map (unsafeUnAttribute >>> (_ $ (ee $> unit))) (get pxk r))
+                    ( map ((map unsafeUnAttribute) >>> flip sample_ ee)
+                        (get pxk r)
+                    )
                 )
             )
           )
@@ -2621,3 +2624,4 @@ __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
+

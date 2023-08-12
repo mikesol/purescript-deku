@@ -13,6 +13,7 @@ import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
+import FRP.Poll (Poll, sample_)
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
@@ -33,7 +34,7 @@ import Type.Proxy (Proxy(..))
 print_('pursx :: forall s. Proxy s')
 print_('pursx = Proxy')
 print_('class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | verb acc head tail pursi -> purso newTail')
-print_('instance (TagToDeku tag deku,  Row.Cons acc (Array (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail')
+print_('instance (TagToDeku tag deku,  Row.Cons acc (Array (Poll (Attribute deku))) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail')
 print_('else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail')
 print_('--')
 print_('class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) |  verb acc head tail pursi -> purso newTail')
@@ -206,13 +207,13 @@ instance pursxToElementConsInsert ::
     pxk = Proxy :: _ key
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Array (Attribute deku)) r' r
+  ( Row.Cons key (Array (Poll (Attribute deku))) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Array (Attribute deku)) rest)
+    (RL.Cons key (Array (Poll (Attribute deku))) rest)
     r where
   pursxToElement pxScope _ r = do
     let
@@ -228,7 +229,9 @@ else instance pursxToElementConsAttr ::
                     (reflectType pxk <> "@!%" <> pxScope)
                     xx
                 ) <$>
-                  (merge (map (unsafeUnAttribute >>> (_ $ (ee $> unit))) (get pxk r)))
+                    ( merge
+                        (map ((map unsafeUnAttribute) >>> flip sample_ ee) (get pxk r))
+                    )
               )
           ) identity
         subscribe (sample bhv ee) identity

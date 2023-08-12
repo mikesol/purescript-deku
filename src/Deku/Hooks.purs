@@ -23,6 +23,7 @@ module Deku.Hooks
   , useDynAtBeginning
   , useDynAtBeginningWith
   , useDynAtEnd
+  , useHot
   , useDynAtEndWith
   , useDynWith
   , useEffect
@@ -42,7 +43,7 @@ import Bolson.Control (Flatten, behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Bolson.Core as BCore
-import Control.Alt ((<|>))
+import Control.Alt (alt)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
@@ -54,13 +55,11 @@ import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge)
-import FRP.Event.Class (once)
-import FRP.Poll (Poll, sample)
+import FRP.Event (Event, filterMap, mailbox, mapAccum, merge)
+import FRP.Poll (Poll, sample, sample_, stToPoll)
 import FRP.Poll as Poll
 
 flattenArgs
@@ -83,10 +82,10 @@ __internalDekuFlatten
 __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
-useState
+useState'
   :: forall a
-   . Hook ((a -> Effect Unit) /\ Event a)
-useState f = Nut go'
+   . Hook ((a -> Effect Unit) /\ Poll a)
+useState' f = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -95,19 +94,32 @@ useState f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
-    { event, push } <- create
-    let _ = spy "USESTATE" true
-    let Nut nf = f ((\i -> let _ = spy "STAGETOPUSH" i in do
-          pure unit
-          let _ = spy "RUNNINGPUSH" true
-          push i) /\ event)
+    { poll, push } <- Poll.create
+    let
+      Nut nf = f (push /\ poll)
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
+useState
+  :: forall a
+   . a
+  -> Hook ((a -> Effect Unit) /\ Poll a)
+useState a f = Deku.do
+  p <- useState'
+  f (map (alt (pure a)) p)
 
-guard :: (Event Unit -> Event Boolean) -> Nut -> Nut
+useHot
+  :: forall a
+   . a
+  -> Hook ((a -> Effect Unit) /\ Poll a)
+useHot a f = Deku.do
+  push /\ poll <- useState'
+  r <- useRefST a poll
+  f (push /\ stToPoll r)
+
+guard :: Poll Boolean -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b
 
-guardWith :: forall a. (Event Unit -> Event (Maybe a)) -> (a -> Nut) -> Nut
+guardWith :: forall a. (Poll (Maybe a)) -> (a -> Nut) -> Nut
 guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
@@ -129,19 +141,13 @@ useEffect e f = Nut go'
     let
       exv = merge
         [ sample (__internalDekuFlatten nf i di) ee
-        , ( \effect ->
-              let
-                _ = spy "oneOffEffect" true
-              in
-                ff
-                  (oneOffEffect { effect })
-          ) <$> e
+        , (\effect -> ff (oneOffEffect { effect })) <$> e
 
         ]
     subscribe exv identity
 
 -- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
-useMemoized :: forall a. Event a -> Hook (Event a)
+useMemoized :: forall a. Poll a -> Hook (Poll a)
 useMemoized e f = Nut go'
   where
   go' :: forall payload. NutF payload
@@ -151,33 +157,32 @@ useMemoized e f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving' \_ ee _ subscribe -> do
-    { event, push } <- createPure
-    subscribe e (\_ -> push)
+    event <- Poll.memoize e
     -- we `once e` in case it has an initial value
-    let Nut nf = f (once e <|> event)
+    let Nut nf = f event
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
 -- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
 
 useMemoized'
   :: forall t a
-   . (Event t -> Event a)
-  -> (Tuple (t -> Effect Unit) (Event a) -> Nut)
+   . (Poll t -> Poll a)
+  -> (Tuple (t -> Effect Unit) (Poll a) -> Nut)
   -> Nut
 useMemoized' f0 makeHook = Deku.do
-  push /\ e <- useState
+  push /\ e <- useState'
   m <- useMemoized (f0 e)
   makeHook (push /\ m)
 
-useRef ∷ ∀ a. a → Event a → Hook (Effect a)
+useRef ∷ ∀ a. a → Poll a → Hook (Effect a)
 useRef a b f = useRefST a b \x -> f $ liftST x
 
-useRefNE ∷ ∀ a. NonEmpty Event a → Hook (Effect a)
+useRefNE ∷ ∀ a. NonEmpty Poll a → Hook (Effect a)
 useRefNE a f = useRefSTNE a \x -> f $ liftST x
 
 useRefSTNE
   :: forall a
-   . NonEmpty Event a
+   . NonEmpty Poll a
   -> Hook (ST Global a)
 useRefSTNE (NonEmpty x y) = useRefST x y
 
@@ -187,7 +192,7 @@ useRefSTNE (NonEmpty x y) = useRefST x y
 useRefST
   :: forall a
    . a
-  -> Event a
+  -> Poll a
   -> Hook (ST Global a)
 useRefST a e makeHook = Nut go'
   where
@@ -201,7 +206,7 @@ useRefST a e makeHook = Nut go'
     rf <- STRef.new a
     let Nut nf = makeHook (STRef.read rf)
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
-    subscribe e \_ x -> do
+    subscribe (sample_ e ee) \_ x -> do
       void $ liftST $ STRef.write x rf
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
@@ -233,7 +238,7 @@ dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
 useDyn
   :: forall value
-   .  Poll (Tuple Int value)
+   . Poll (Tuple Int value)
   -> Hook
        { value :: value
        , remove :: Effect Unit
@@ -260,7 +265,6 @@ useDynWith e opts f = Nut go'
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
     c1 <- Poll.create
-    let _ = spy "USEDYNWITH CALLED" true
     let
       mc (Tuple pos v) = Tuple
         ( oneOf
@@ -289,23 +293,23 @@ useDynAtBeginningWith e = useDynWith (map (0 /\ _) e)
 
 useDynAtBeginning
   :: forall value
-   . (Event Unit -> Event value)
+   . Poll value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtBeginning b = useDynAtBeginningWith b dynOptions
 
 useDynAtEndWith
   :: forall value
-   . (Event Unit -> Event value)
+   . Poll value
   -> DynOptions value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtEndWith e = useDynWith
-  (map (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0) e)
+  (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
 
 useDynAtEnd
   :: forall value
-   . (Event Unit -> Event value)
+   . Poll value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
 useDynAtEnd b = useDynAtEndWith b dynOptions
@@ -320,7 +324,7 @@ switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f event = Deku.do
   ctr <- useMemoized (counter event)
   { value } <- useDynAtBeginningWith ctr $ dynOptions
-    { remove = \(Tuple oldV _) ee -> filterMap
+    { remove = \(Tuple oldV _) -> filterMap
         (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
         ctr
     }
@@ -330,13 +334,13 @@ switcher f event = Deku.do
     where
     fn a b = (a + 1) /\ (a /\ b)
 
-cycle :: (Event Unit -> Event Nut )-> Nut
+cycle :: Poll Nut -> Nut
 cycle = switcher identity
 
 infixl 4 switcher as <$~>
 
 -- | A flipped version of `switcher`.
-switcherFlipped :: forall a. (Event Unit -> Event a) -> (a -> Nut) -> Nut
+switcherFlipped :: forall a. Poll a -> (a -> Nut) -> Nut
 switcherFlipped a b = switcher b a
 
 infixl 1 switcherFlipped as <#~>
