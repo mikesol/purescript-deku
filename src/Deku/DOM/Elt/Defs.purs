@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data Defs_
 
 defs
-  :: Array (Attribute Defs_)
+  :: Array (Event (Attribute Defs_))
   -> Array Nut
   -> Nut
 defs = DC.elementify2 "defs"
@@ -21,4 +22,4 @@ defs_ = defs empty
 defs__
   :: String
   -> Nut
-defs__ t = defs_ [ DC.text t ]
+defs__ t = defs_ [ DC.text_ t ]

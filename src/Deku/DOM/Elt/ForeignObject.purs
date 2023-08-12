@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data ForeignObject_
 
 foreignObject
-  :: Array (Attribute ForeignObject_)
+  :: Array (Event (Attribute ForeignObject_))
   -> Array Nut
   -> Nut
 foreignObject = DC.elementify2 "foreignObject"
@@ -21,4 +22,4 @@ foreignObject_ = foreignObject empty
 foreignObject__
   :: String
   -> Nut
-foreignObject__ t = foreignObject_ [ DC.text t ]
+foreignObject__ t = foreignObject_ [ DC.text_ t ]

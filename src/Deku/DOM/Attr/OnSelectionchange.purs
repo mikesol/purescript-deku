@@ -1,40 +1,29 @@
 module Deku.DOM.Attr.OnSelectionchange where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnSelectionchange = OnSelectionchange
-instance Attr anything OnSelectionchange  Cb  where
-  attr OnSelectionchange value = unsafeAttribute (  
-    { key: "selectionchange", value: cb' value  } <$ _)
-instance Attr anything OnSelectionchange (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnSelectionchange eventValue = unsafeAttribute (map (map ( \value -> { key: "selectionchange", value: cb' value })) eventValue)
-instance Attr anything OnSelectionchange (Event.Event  Cb ) where
-  attr OnSelectionchange eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "selectionchange", value: cb' value }
-instance Attr anything OnSelectionchange  (Effect Unit)  where
-  attr OnSelectionchange value = unsafeAttribute (  
-    { key: "selectionchange", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnSelectionchange (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnSelectionchange eventValue = unsafeAttribute (map (map ( \value ->
-      { key: "selectionchange", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnSelectionchange (Event.Event  (Effect Unit) ) where
-  attr OnSelectionchange eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value ->
-      { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnSelectionchange  (Effect Boolean)  where
-  attr OnSelectionchange value = unsafeAttribute (  
-    { key: "selectionchange", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnSelectionchange (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnSelectionchange eventValue = unsafeAttribute (map (map ( \value -> { key: "selectionchange", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnSelectionchange (Event.Event  (Effect Boolean) ) where
-  attr OnSelectionchange eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "selectionchange", value: cb' (Cb (const value)) } 
-instance Attr everything OnSelectionchange  Unit  where
-  attr OnSelectionchange _ = unsafeAttribute (  
-    { key: "selectionchange", value: unset'  } <$ _)
-instance Attr everything OnSelectionchange (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnSelectionchange eventValue = unsafeAttribute (map (map ( \_ -> { key: "selectionchange", value: unset' })) eventValue)
-instance Attr everything OnSelectionchange (Event.Event  Unit ) where
-  attr OnSelectionchange eventValue = unsafeAttribute \_ -> eventValue
-    <#> \_ -> { key: "selectionchange", value: unset' }
+
+instance Attr anything OnSelectionchange Cb where
+  attr OnSelectionchange value = unsafeAttribute
+    { key: "selectionchange", value: cb' value }
+
+instance Attr anything OnSelectionchange (Effect Unit) where
+  attr OnSelectionchange value = unsafeAttribute
+    { key: "selectionchange", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnSelectionchange (Effect Boolean) where
+  attr OnSelectionchange value = unsafeAttribute
+    { key: "selectionchange", value: cb' (Cb (const value)) }
+
+type OnSelectionchangeEffect =
+  forall element
+   . Attr element OnSelectionchange (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnSelectionchange Unit where
+  attr OnSelectionchange _ = unsafeAttribute
+    { key: "selectionchange", value: unset' }

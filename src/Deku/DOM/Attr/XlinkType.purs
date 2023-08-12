@@ -1,64 +1,36 @@
 module Deku.DOM.Attr.XlinkType where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.Mpath (Mpath_)
 import Deku.DOM.Elt.Image (Image_)
 import Deku.DOM.Elt.Filter (Filter_)
 import Deku.DOM.Elt.FeImage (FeImage_)
 import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data XlinkType = XlinkType
-instance Attr AnimateTransform_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute (  
-    { key: "xlink:type", value: prop' value  } <$ _)
-instance Attr AnimateTransform_ XlinkType (Event.Event Unit -> Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \value -> { key: "xlink:type", value: prop' value })) eventValue)
-instance Attr AnimateTransform_ XlinkType (Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "xlink:type", value: prop' value }
-instance Attr FeImage_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute (  
-    { key: "xlink:type", value: prop' value  } <$ _)
-instance Attr FeImage_ XlinkType (Event.Event Unit -> Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \value -> { key: "xlink:type", value: prop' value })) eventValue)
-instance Attr FeImage_ XlinkType (Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "xlink:type", value: prop' value }
-instance Attr Filter_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute (  
-    { key: "xlink:type", value: prop' value  } <$ _)
-instance Attr Filter_ XlinkType (Event.Event Unit -> Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \value -> { key: "xlink:type", value: prop' value })) eventValue)
-instance Attr Filter_ XlinkType (Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "xlink:type", value: prop' value }
-instance Attr Image_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute (  
-    { key: "xlink:type", value: prop' value  } <$ _)
-instance Attr Image_ XlinkType (Event.Event Unit -> Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \value -> { key: "xlink:type", value: prop' value })) eventValue)
-instance Attr Image_ XlinkType (Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "xlink:type", value: prop' value }
-instance Attr Mpath_ XlinkType  String  where
-  attr XlinkType value = unsafeAttribute (  
-    { key: "xlink:type", value: prop' value  } <$ _)
-instance Attr Mpath_ XlinkType (Event.Event Unit -> Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \value -> { key: "xlink:type", value: prop' value })) eventValue)
-instance Attr Mpath_ XlinkType (Event.Event  String ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "xlink:type", value: prop' value }
-instance Attr everything XlinkType  Unit  where
-  attr XlinkType _ = unsafeAttribute (  
-    { key: "xlink:type", value: unset'  } <$ _)
-instance Attr everything XlinkType (Event.Event Unit -> Event.Event  Unit ) where
-  attr XlinkType eventValue = unsafeAttribute (map (map (
-    \_ -> { key: "xlink:type", value: unset' })) eventValue)
-instance Attr everything XlinkType (Event.Event  Unit ) where
-  attr XlinkType eventValue = unsafeAttribute \_ -> eventValue <#>
-    \_ -> { key: "xlink:type", value: unset' }
+
+instance Attr AnimateTransform_ XlinkType String where
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
+instance Attr FeImage_ XlinkType String where
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
+instance Attr Filter_ XlinkType String where
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
+instance Attr Image_ XlinkType String where
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
+instance Attr Mpath_ XlinkType String where
+  attr XlinkType value = unsafeAttribute
+    { key: "xlink:type", value: prop' value }
+
+instance Attr everything XlinkType Unit where
+  attr XlinkType _ = unsafeAttribute
+    { key: "xlink:type", value: unset' }

@@ -645,8 +645,8 @@ module Deku.DOM
   , module Deku.DOM.Attr.Contenteditable
   , unsafeCustomElement
   ) where
-import Web.Event.Internal.Types as WebEvent
-import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute)
+
+import Deku.Attribute (class Attr, attr, Attribute, Cb(..), cb', unsafeAttribute)
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 -- import Deku.DOM.Attr.Accept (Accept(..))
@@ -1176,11 +1176,11 @@ import Deku.DOM.Attr.Fy (Fy(..))
 import Deku.DOM.Attr.AriaRowcount (AriaRowcount(..))
 import Deku.DOM.Attr.Colspan (Colspan(..))
 import Deku.DOM.Attr.Form (Form(..))
-import Deku.DOM.Attr.OnLostpointercapture (OnLostpointercapture(..))
-import Deku.DOM.Attr.OnEnded (OnEnded(..))
+import Deku.DOM.Attr.OnLostpointercapture (OnLostpointercapture(..), OnLostpointercaptureEffect)
+import Deku.DOM.Attr.OnEnded (OnEnded(..), OnEndedEffect)
 import Deku.DOM.Attr.BaseProfile (BaseProfile(..))
-import Deku.DOM.Attr.OnResize (OnResize(..))
-import Deku.DOM.Attr.OnDragstart (OnDragstart(..))
+import Deku.DOM.Attr.OnResize (OnResize(..), OnResizeEffect)
+import Deku.DOM.Attr.OnDragstart (OnDragstart(..), OnDragstartEffect)
 import Deku.DOM.Attr.Disabled (Disabled(..))
 import Deku.DOM.Attr.Novalidate (Novalidate(..))
 import Deku.DOM.Attr.K2 (K2(..))
@@ -1189,37 +1189,37 @@ import Deku.DOM.Attr.AriaChecked (AriaChecked(..))
 import Deku.DOM.Attr.FillRule (FillRule(..))
 import Deku.DOM.Attr.TextAnchor (TextAnchor(..))
 import Deku.DOM.Attr.MarkerWidth (MarkerWidth(..))
-import Deku.DOM.Attr.OnError (OnError(..))
+import Deku.DOM.Attr.OnError (OnError(..), OnErrorEffect)
 import Deku.DOM.Attr.Coords (Coords(..))
 import Deku.DOM.Attr.Poster (Poster(..))
 import Deku.DOM.Attr.Cite (Cite(..))
 import Deku.DOM.Attr.Fill (Fill(..))
 import Deku.DOM.Attr.XmlLang (XmlLang(..))
 import Deku.DOM.Attr.Minlength (Minlength(..))
-import Deku.DOM.Attr.OnFocus (OnFocus(..))
+import Deku.DOM.Attr.OnFocus (OnFocus(..), OnFocusEffect)
 import Deku.DOM.Attr.Order (Order(..))
 import Deku.DOM.Attr.ColorRendering (ColorRendering(..))
 import Deku.DOM.Attr.Autofocus (Autofocus(..))
 import Deku.DOM.Attr.FillOpacity (FillOpacity(..))
 import Deku.DOM.Attr.ZoomAndPan (ZoomAndPan(..))
-import Deku.DOM.Attr.OnPointerout (OnPointerout(..))
+import Deku.DOM.Attr.OnPointerout (OnPointerout(..), OnPointeroutEffect)
 import Deku.DOM.Attr.AriaGrabbed (AriaGrabbed(..))
 import Deku.DOM.Attr.AriaRoledescription (AriaRoledescription(..))
 import Deku.DOM.Attr.Size (Size(..))
 import Deku.DOM.Attr.Slope (Slope(..))
-import Deku.DOM.Attr.OnLoadeddata (OnLoadeddata(..))
+import Deku.DOM.Attr.OnLoadeddata (OnLoadeddata(..), OnLoadeddataEffect)
 import Deku.DOM.Attr.Seed (Seed(..))
-import Deku.DOM.Attr.OnFormdata (OnFormdata(..))
+import Deku.DOM.Attr.OnFormdata (OnFormdata(..), OnFormdataEffect)
 import Deku.DOM.Attr.BaselineShift (BaselineShift(..))
 import Deku.DOM.Attr.Accelerate (Accelerate(..))
-import Deku.DOM.Attr.OnPointerlockchange (OnPointerlockchange(..))
+import Deku.DOM.Attr.OnPointerlockchange (OnPointerlockchange(..), OnPointerlockchangeEffect)
 import Deku.DOM.Attr.AlignmentBaseline (AlignmentBaseline(..))
-import Deku.DOM.Attr.OnContextmenu (OnContextmenu(..))
-import Deku.DOM.Attr.OnDragenter (OnDragenter(..))
+import Deku.DOM.Attr.OnContextmenu (OnContextmenu(..), OnContextmenuEffect)
+import Deku.DOM.Attr.OnDragenter (OnDragenter(..), OnDragenterEffect)
 import Deku.DOM.Attr.FloodColor (FloodColor(..))
 import Deku.DOM.Attr.AriaLabel (AriaLabel(..))
 import Deku.DOM.Attr.AriaExpanded (AriaExpanded(..))
-import Deku.DOM.Attr.OnTouchmove (OnTouchmove(..))
+import Deku.DOM.Attr.OnTouchmove (OnTouchmove(..), OnTouchmoveEffect)
 import Deku.DOM.Attr.Dy (Dy(..))
 import Deku.DOM.Attr.AriaLive (AriaLive(..))
 import Deku.DOM.Attr.Low (Low(..))
@@ -1229,46 +1229,46 @@ import Deku.DOM.Attr.Integrity (Integrity(..))
 import Deku.DOM.Attr.Async (Async(..))
 import Deku.DOM.Attr.FontVariant (FontVariant(..))
 import Deku.DOM.Attr.Formnovalidate (Formnovalidate(..))
-import Deku.DOM.Attr.OnPlaying (OnPlaying(..))
+import Deku.DOM.Attr.OnPlaying (OnPlaying(..), OnPlayingEffect)
 import Deku.DOM.Attr.Spellcheck (Spellcheck(..))
 import Deku.DOM.Attr.AriaErrormessage (AriaErrormessage(..))
-import Deku.DOM.Attr.OnSeeked (OnSeeked(..))
+import Deku.DOM.Attr.OnSeeked (OnSeeked(..), OnSeekedEffect)
 import Deku.DOM.Attr.Srcset (Srcset(..))
 import Deku.DOM.Attr.Dx (Dx(..))
 import Deku.DOM.Attr.Accumulate (Accumulate(..))
 import Deku.DOM.Attr.LightingColor (LightingColor(..))
 import Deku.DOM.Attr.AriaBusy (AriaBusy(..))
 import Deku.DOM.Attr.SurfaceScale (SurfaceScale(..))
-import Deku.DOM.Attr.OnKeydown (OnKeydown(..))
+import Deku.DOM.Attr.OnKeydown (OnKeydown(..), OnKeydownEffect)
 import Deku.DOM.Attr.Bias (Bias(..))
 import Deku.DOM.Attr.AriaActivedescendant (AriaActivedescendant(..))
 import Deku.DOM.Attr.ContentStyleType (ContentStyleType(..))
 import Deku.DOM.Attr.Rows (Rows(..))
-import Deku.DOM.Attr.OnProgress (OnProgress(..))
+import Deku.DOM.Attr.OnProgress (OnProgress(..), OnProgressEffect)
 import Deku.DOM.Attr.Formenctype (Formenctype(..))
 import Deku.DOM.Attr.GlyphOrientationVertical (GlyphOrientationVertical(..))
 import Deku.DOM.Attr.VectorEffect (VectorEffect(..))
 import Deku.DOM.Attr.Required (Required(..))
 import Deku.DOM.Attr.ColorInterpolation (ColorInterpolation(..))
 import Deku.DOM.Attr.StrokeOpacity (StrokeOpacity(..))
-import Deku.DOM.Attr.OnSelectionchange (OnSelectionchange(..))
+import Deku.DOM.Attr.OnSelectionchange (OnSelectionchange(..), OnSelectionchangeEffect)
 import Deku.DOM.Attr.LengthAdjust (LengthAdjust(..))
 import Deku.DOM.Attr.Crossorigin (Crossorigin(..))
 import Deku.DOM.Attr.AriaOrientation (AriaOrientation(..))
 import Deku.DOM.Attr.Scoped (Scoped(..))
 import Deku.DOM.Attr.X1 (X1(..))
-import Deku.DOM.Attr.OnBlur (OnBlur(..))
+import Deku.DOM.Attr.OnBlur (OnBlur(..), OnBlurEffect)
 import Deku.DOM.Attr.Dirname (Dirname(..))
 import Deku.DOM.Attr.AriaSelected (AriaSelected(..))
-import Deku.DOM.Attr.OnAuxclick (OnAuxclick(..))
+import Deku.DOM.Attr.OnAuxclick (OnAuxclick(..), OnAuxclickEffect)
 import Deku.DOM.Attr.Id (Id(..))
-import Deku.DOM.Attr.OnWaiting (OnWaiting(..))
-import Deku.DOM.Attr.OnLoadedmetadata (OnLoadedmetadata(..))
-import Deku.DOM.Attr.OnPointercancel (OnPointercancel(..))
-import Deku.DOM.Attr.OnSeeking (OnSeeking(..))
+import Deku.DOM.Attr.OnWaiting (OnWaiting(..), OnWaitingEffect)
+import Deku.DOM.Attr.OnLoadedmetadata (OnLoadedmetadata(..), OnLoadedmetadataEffect)
+import Deku.DOM.Attr.OnPointercancel (OnPointercancel(..), OnPointercancelEffect)
+import Deku.DOM.Attr.OnSeeking (OnSeeking(..), OnSeekingEffect)
 import Deku.DOM.Attr.MaskUnits (MaskUnits(..))
 import Deku.DOM.Attr.Transform (Transform(..))
-import Deku.DOM.Attr.OnTransitionend (OnTransitionend(..))
+import Deku.DOM.Attr.OnTransitionend (OnTransitionend(..), OnTransitionendEffect)
 import Deku.DOM.Attr.TextDecoration (TextDecoration(..))
 import Deku.DOM.Attr.K3 (K3(..))
 import Deku.DOM.Attr.By (By(..))
@@ -1277,12 +1277,12 @@ import Deku.DOM.Attr.PreserveAspectRatio (PreserveAspectRatio(..))
 import Deku.DOM.Attr.Border (Border(..))
 import Deku.DOM.Attr.Alt (Alt(..))
 import Deku.DOM.Attr.Method (Method(..))
-import Deku.DOM.Attr.OnSuspend (OnSuspend(..))
+import Deku.DOM.Attr.OnSuspend (OnSuspend(..), OnSuspendEffect)
 import Deku.DOM.Attr.AriaDescribedby (AriaDescribedby(..))
 import Deku.DOM.Attr.AriaColcount (AriaColcount(..))
 import Deku.DOM.Attr.Default (Default(..))
 import Deku.DOM.Attr.AriaRelevant (AriaRelevant(..))
-import Deku.DOM.Attr.OnTransitioncancel (OnTransitioncancel(..))
+import Deku.DOM.Attr.OnTransitioncancel (OnTransitioncancel(..), OnTransitioncancelEffect)
 import Deku.DOM.Attr.AcceptCharset (AcceptCharset(..))
 import Deku.DOM.Attr.Fx (Fx(..))
 import Deku.DOM.Attr.PathLength (PathLength(..))
@@ -1295,15 +1295,15 @@ import Deku.DOM.Attr.Tabindex (Tabindex(..))
 import Deku.DOM.Attr.HttpEquiv (HttpEquiv(..))
 import Deku.DOM.Attr.Rel (Rel(..))
 import Deku.DOM.Attr.AriaRowindex (AriaRowindex(..))
-import Deku.DOM.Attr.OnGotpointercapture (OnGotpointercapture(..))
+import Deku.DOM.Attr.OnGotpointercapture (OnGotpointercapture(..), OnGotpointercaptureEffect)
 import Deku.DOM.Attr.PatternUnits (PatternUnits(..))
-import Deku.DOM.Attr.OnTransitionstart (OnTransitionstart(..))
+import Deku.DOM.Attr.OnTransitionstart (OnTransitionstart(..), OnTransitionstartEffect)
 import Deku.DOM.Attr.StrokeDasharray (StrokeDasharray(..))
-import Deku.DOM.Attr.OnPointerover (OnPointerover(..))
+import Deku.DOM.Attr.OnPointerover (OnPointerover(..), OnPointeroverEffect)
 import Deku.DOM.Attr.Mask (Mask(..))
 import Deku.DOM.Attr.KeySplines (KeySplines(..))
 import Deku.DOM.Attr.Kind (Kind(..))
-import Deku.DOM.Attr.OnSubmit (OnSubmit(..))
+import Deku.DOM.Attr.OnSubmit (OnSubmit(..), OnSubmitEffect)
 import Deku.DOM.Attr.FontStretch (FontStretch(..))
 import Deku.DOM.Attr.AriaPlaceholder (AriaPlaceholder(..))
 import Deku.DOM.Attr.EdgeMode (EdgeMode(..))
@@ -1311,18 +1311,18 @@ import Deku.DOM.Attr.D (D(..))
 import Deku.DOM.Attr.Defer (Defer(..))
 import Deku.DOM.Attr.Offset (Offset(..))
 import Deku.DOM.Attr.Visibility (Visibility(..))
-import Deku.DOM.Attr.OnMouseover (OnMouseover(..))
+import Deku.DOM.Attr.OnMouseover (OnMouseover(..), OnMouseoverEffect)
 import Deku.DOM.Attr.AriaRowspan (AriaRowspan(..))
-import Deku.DOM.Attr.OnDrop (OnDrop(..))
+import Deku.DOM.Attr.OnDrop (OnDrop(..), OnDropEffect)
 import Deku.DOM.Attr.Manifest (Manifest(..))
-import Deku.DOM.Attr.OnScroll (OnScroll(..))
+import Deku.DOM.Attr.OnScroll (OnScroll(..), OnScrollEffect)
 import Deku.DOM.Attr.AriaInvalid (AriaInvalid(..))
 import Deku.DOM.Attr.List (List(..))
 import Deku.DOM.Attr.Cx (Cx(..))
 import Deku.DOM.Attr.Charset (Charset(..))
 import Deku.DOM.Attr.Pattern (Pattern(..))
-import Deku.DOM.Attr.OnDragover (OnDragover(..))
-import Deku.DOM.Attr.OnClose (OnClose(..))
+import Deku.DOM.Attr.OnDragover (OnDragover(..), OnDragoverEffect)
+import Deku.DOM.Attr.OnClose (OnClose(..), OnCloseEffect)
 import Deku.DOM.Attr.Usemap (Usemap(..))
 import Deku.DOM.Attr.XlinkTitle (XlinkTitle(..))
 import Deku.DOM.Attr.PatternContentUnits (PatternContentUnits(..))
@@ -1333,21 +1333,21 @@ import Deku.DOM.Attr.Operator (Operator(..))
 import Deku.DOM.Attr.Mode (Mode(..))
 import Deku.DOM.Attr.BaseFrequency (BaseFrequency(..))
 import Deku.DOM.Attr.PreserveAlpha (PreserveAlpha(..))
-import Deku.DOM.Attr.OnStalled (OnStalled(..))
+import Deku.DOM.Attr.OnStalled (OnStalled(..), OnStalledEffect)
 import Deku.DOM.Attr.Ismap (Ismap(..))
-import Deku.DOM.Attr.OnDragleave (OnDragleave(..))
+import Deku.DOM.Attr.OnDragleave (OnDragleave(..), OnDragleaveEffect)
 import Deku.DOM.Attr.AriaValuetext (AriaValuetext(..))
 import Deku.DOM.Attr.AriaReadonly (AriaReadonly(..))
 import Deku.DOM.Attr.Restart (Restart(..))
-import Deku.DOM.Attr.OnClick (OnClick(..))
-import Deku.DOM.Attr.OnLoad (OnLoad(..))
+import Deku.DOM.Attr.OnClick (OnClick(..), OnClickEffect)
+import Deku.DOM.Attr.OnLoad (OnLoad(..), OnLoadEffect)
 import Deku.DOM.Attr.Title (Title(..))
-import Deku.DOM.Attr.OnTouchend (OnTouchend(..))
-import Deku.DOM.Attr.OnInput (OnInput(..))
+import Deku.DOM.Attr.OnTouchend (OnTouchend(..), OnTouchendEffect)
+import Deku.DOM.Attr.OnInput (OnInput(..), OnInputEffect)
 import Deku.DOM.Attr.Additive (Additive(..))
 import Deku.DOM.Attr.XlinkHref (XlinkHref(..))
 import Deku.DOM.Attr.FontWeight (FontWeight(..))
-import Deku.DOM.Attr.OnPlay (OnPlay(..))
+import Deku.DOM.Attr.OnPlay (OnPlay(..), OnPlayEffect)
 import Deku.DOM.Attr.AttributeType (AttributeType(..))
 import Deku.DOM.Attr.Sizes (Sizes(..))
 import Deku.DOM.Attr.StrokeDashoffset (StrokeDashoffset(..))
@@ -1357,7 +1357,7 @@ import Deku.DOM.Attr.Data (Data(..))
 import Deku.DOM.Attr.Y1 (Y1(..))
 import Deku.DOM.Attr.Accesskey (Accesskey(..))
 import Deku.DOM.Attr.Radiogroup (Radiogroup(..))
-import Deku.DOM.Attr.OnShow (OnShow(..))
+import Deku.DOM.Attr.OnShow (OnShow(..), OnShowEffect)
 import Deku.DOM.Attr.Accept (Accept(..))
 import Deku.DOM.Attr.Placeholder (Placeholder(..))
 import Deku.DOM.Attr.XlinkArcrole (XlinkArcrole(..))
@@ -1382,20 +1382,20 @@ import Deku.DOM.Attr.MaskContentUnits (MaskContentUnits(..))
 import Deku.DOM.Attr.Headers (Headers(..))
 import Deku.DOM.Attr.Start (Start(..))
 import Deku.DOM.Attr.Srclang (Srclang(..))
-import Deku.DOM.Attr.OnDrag (OnDrag(..))
+import Deku.DOM.Attr.OnDrag (OnDrag(..), OnDragEffect)
 import Deku.DOM.Attr.ContentScriptType (ContentScriptType(..))
-import Deku.DOM.Attr.OnVolumechange (OnVolumechange(..))
+import Deku.DOM.Attr.OnVolumechange (OnVolumechange(..), OnVolumechangeEffect)
 import Deku.DOM.Attr.In (In(..))
 import Deku.DOM.Attr.Codebase (Codebase(..))
-import Deku.DOM.Attr.OnPointerlockerror (OnPointerlockerror(..))
+import Deku.DOM.Attr.OnPointerlockerror (OnPointerlockerror(..), OnPointerlockerrorEffect)
 import Deku.DOM.Attr.Side (Side(..))
 import Deku.DOM.Attr.SpecularExponent (SpecularExponent(..))
 import Deku.DOM.Attr.AriaColindex (AriaColindex(..))
 import Deku.DOM.Attr.XlinkRole (XlinkRole(..))
 import Deku.DOM.Attr.AriaValuenow (AriaValuenow(..))
 import Deku.DOM.Attr.Media (Media(..))
-import Deku.DOM.Attr.OnKeypress (OnKeypress(..))
-import Deku.DOM.Attr.OnLoadend (OnLoadend(..))
+import Deku.DOM.Attr.OnKeypress (OnKeypress(..), OnKeypressEffect)
+import Deku.DOM.Attr.OnLoadend (OnLoadend(..), OnLoadendEffect)
 import Deku.DOM.Attr.Importance (Importance(..))
 import Deku.DOM.Attr.AriaAutocomplete (AriaAutocomplete(..))
 import Deku.DOM.Attr.SpreadMethod (SpreadMethod(..))
@@ -1411,8 +1411,8 @@ import Deku.DOM.Attr.FilterRes (FilterRes(..))
 import Deku.DOM.Attr.Capture (Capture(..))
 import Deku.DOM.Attr.XChannelSelector (XChannelSelector(..))
 import Deku.DOM.Attr.Max (Max(..))
-import Deku.DOM.Attr.OnMousedown (OnMousedown(..))
-import Deku.DOM.Attr.OnCancel (OnCancel(..))
+import Deku.DOM.Attr.OnMousedown (OnMousedown(..), OnMousedownEffect)
+import Deku.DOM.Attr.OnCancel (OnCancel(..), OnCancelEffect)
 import Deku.DOM.Attr.Height (Height(..))
 import Deku.DOM.Attr.AriaMultiline (AriaMultiline(..))
 import Deku.DOM.Attr.KernelUnitLength (KernelUnitLength(..))
@@ -1423,8 +1423,8 @@ import Deku.DOM.Attr.Preload (Preload(..))
 import Deku.DOM.Attr.Maxlength (Maxlength(..))
 import Deku.DOM.Attr.AutoReverse (AutoReverse(..))
 import Deku.DOM.Attr.DominantBaseline (DominantBaseline(..))
-import Deku.DOM.Attr.OnSelect (OnSelect(..))
-import Deku.DOM.Attr.OnPointerdown (OnPointerdown(..))
+import Deku.DOM.Attr.OnSelect (OnSelect(..), OnSelectEffect)
+import Deku.DOM.Attr.OnPointerdown (OnPointerdown(..), OnPointerdownEffect)
 import Deku.DOM.Attr.YChannelSelector (YChannelSelector(..))
 import Deku.DOM.Attr.Selected (Selected(..))
 import Deku.DOM.Attr.High (High(..))
@@ -1432,12 +1432,12 @@ import Deku.DOM.Attr.Slot (Slot(..))
 import Deku.DOM.Attr.AriaHidden (AriaHidden(..))
 import Deku.DOM.Attr.Challenge (Challenge(..))
 import Deku.DOM.Attr.AriaRequired (AriaRequired(..))
-import Deku.DOM.Attr.OnPointerleave (OnPointerleave(..))
+import Deku.DOM.Attr.OnPointerleave (OnPointerleave(..), OnPointerleaveEffect)
 import Deku.DOM.Attr.Enctype (Enctype(..))
 import Deku.DOM.Attr.Y2 (Y2(..))
 import Deku.DOM.Attr.LetterSpacing (LetterSpacing(..))
-import Deku.DOM.Attr.OnPointerup (OnPointerup(..))
-import Deku.DOM.Attr.OnMousewheel (OnMousewheel(..))
+import Deku.DOM.Attr.OnPointerup (OnPointerup(..), OnPointerupEffect)
+import Deku.DOM.Attr.OnMousewheel (OnMousewheel(..), OnMousewheelEffect)
 import Deku.DOM.Attr.MarkerStart (MarkerStart(..))
 import Deku.DOM.Attr.Rotate (Rotate(..))
 import Deku.DOM.Attr.AriaPosinset (AriaPosinset(..))
@@ -1447,7 +1447,7 @@ import Deku.DOM.Attr.AriaMultiselectable (AriaMultiselectable(..))
 import Deku.DOM.Attr.StopColor (StopColor(..))
 import Deku.DOM.Attr.RepeatCount (RepeatCount(..))
 import Deku.DOM.Attr.XlinkType (XlinkType(..))
-import Deku.DOM.Attr.OnLoadstart (OnLoadstart(..))
+import Deku.DOM.Attr.OnLoadstart (OnLoadstart(..), OnLoadstartEffect)
 import Deku.DOM.Attr.WritingMode (WritingMode(..))
 import Deku.DOM.Attr.TextLength (TextLength(..))
 import Deku.DOM.Attr.KeyPoints (KeyPoints(..))
@@ -1464,10 +1464,10 @@ import Deku.DOM.Attr.Name (Name(..))
 import Deku.DOM.Attr.WordSpacing (WordSpacing(..))
 import Deku.DOM.Attr.PointsAtZ (PointsAtZ(..))
 import Deku.DOM.Attr.Download (Download(..))
-import Deku.DOM.Attr.OnChange (OnChange(..))
+import Deku.DOM.Attr.OnChange (OnChange(..), OnChangeEffect)
 import Deku.DOM.Attr.TextRendering (TextRendering(..))
-import Deku.DOM.Attr.OnMouseup (OnMouseup(..))
-import Deku.DOM.Attr.OnAbort (OnAbort(..))
+import Deku.DOM.Attr.OnMouseup (OnMouseup(..), OnMouseupEffect)
+import Deku.DOM.Attr.OnAbort (OnAbort(..), OnAbortEffect)
 import Deku.DOM.Attr.Reversed (Reversed(..))
 import Deku.DOM.Attr.StrokeMiterlimit (StrokeMiterlimit(..))
 import Deku.DOM.Attr.Buffered (Buffered(..))
@@ -1477,10 +1477,10 @@ import Deku.DOM.Attr.RequiredExtensions (RequiredExtensions(..))
 import Deku.DOM.Attr.Csp (Csp(..))
 import Deku.DOM.Attr.Allow (Allow(..))
 import Deku.DOM.Attr.Scope (Scope(..))
-import Deku.DOM.Attr.OnTouchcancel (OnTouchcancel(..))
+import Deku.DOM.Attr.OnTouchcancel (OnTouchcancel(..), OnTouchcancelEffect)
 import Deku.DOM.Attr.R (R(..))
-import Deku.DOM.Attr.OnPointermove (OnPointermove(..))
-import Deku.DOM.Attr.OnTouchstart (OnTouchstart(..))
+import Deku.DOM.Attr.OnPointermove (OnPointermove(..), OnPointermoveEffect)
+import Deku.DOM.Attr.OnTouchstart (OnTouchstart(..), OnTouchstartEffect)
 import Deku.DOM.Attr.XlinkActuate (XlinkActuate(..))
 import Deku.DOM.Attr.StartOffset (StartOffset(..))
 import Deku.DOM.Attr.Ry (Ry(..))
@@ -1488,24 +1488,24 @@ import Deku.DOM.Attr.Multiple (Multiple(..))
 import Deku.DOM.Attr.PrimitiveUnits (PrimitiveUnits(..))
 import Deku.DOM.Attr.Sandbox (Sandbox(..))
 import Deku.DOM.Attr.Keytype (Keytype(..))
-import Deku.DOM.Attr.OnMouseleave (OnMouseleave(..))
-import Deku.DOM.Attr.OnTimeupdate (OnTimeupdate(..))
+import Deku.DOM.Attr.OnMouseleave (OnMouseleave(..), OnMouseleaveEffect)
+import Deku.DOM.Attr.OnTimeupdate (OnTimeupdate(..), OnTimeupdateEffect)
 import Deku.DOM.Attr.StdDeviation (StdDeviation(..))
 import Deku.DOM.Attr.Rowspan (Rowspan(..))
 import Deku.DOM.Attr.AriaDisabled (AriaDisabled(..))
 import Deku.DOM.Attr.Bgcolor (Bgcolor(..))
 import Deku.DOM.Attr.Muted (Muted(..))
 import Deku.DOM.Attr.Decoding (Decoding(..))
-import Deku.DOM.Attr.OnMousemove (OnMousemove(..))
+import Deku.DOM.Attr.OnMousemove (OnMousemove(..), OnMousemoveEffect)
 import Deku.DOM.Attr.FilterUnits (FilterUnits(..))
 import Deku.DOM.Attr.AriaCurrent (AriaCurrent(..))
-import Deku.DOM.Attr.OnRatechange (OnRatechange(..))
+import Deku.DOM.Attr.OnRatechange (OnRatechange(..), OnRatechangeEffect)
 import Deku.DOM.Attr.Min (Min(..))
 import Deku.DOM.Attr.Overflow (Overflow(..))
-import Deku.DOM.Attr.OnAnimationstart (OnAnimationstart(..))
+import Deku.DOM.Attr.OnAnimationstart (OnAnimationstart(..), OnAnimationstartEffect)
 import Deku.DOM.Attr.Draggable (Draggable(..))
-import Deku.DOM.Attr.OnDblclick (OnDblclick(..))
-import Deku.DOM.Attr.OnAnimationend (OnAnimationend(..))
+import Deku.DOM.Attr.OnDblclick (OnDblclick(..), OnDblclickEffect)
+import Deku.DOM.Attr.OnAnimationend (OnAnimationend(..), OnAnimationendEffect)
 import Deku.DOM.Attr.PointerEvents (PointerEvents(..))
 import Deku.DOM.Attr.X2 (X2(..))
 import Deku.DOM.Attr.AriaFlowto (AriaFlowto(..))
@@ -1516,27 +1516,27 @@ import Deku.DOM.Attr.Contextmenu (Contextmenu(..))
 import Deku.DOM.Attr.Src (Src(..))
 import Deku.DOM.Attr.Datetime (Datetime(..))
 import Deku.DOM.Attr.AriaLabelledby (AriaLabelledby(..))
-import Deku.DOM.Attr.OnAnimationcancel (OnAnimationcancel(..))
+import Deku.DOM.Attr.OnAnimationcancel (OnAnimationcancel(..), OnAnimationcancelEffect)
 import Deku.DOM.Attr.ViewBox (ViewBox(..))
 import Deku.DOM.Attr.Hidden (Hidden(..))
-import Deku.DOM.Attr.OnCanplay (OnCanplay(..))
+import Deku.DOM.Attr.OnCanplay (OnCanplay(..), OnCanplayEffect)
 import Deku.DOM.Attr.MarkerHeight (MarkerHeight(..))
-import Deku.DOM.Attr.OnSecuritypolicyviolation (OnSecuritypolicyviolation(..))
+import Deku.DOM.Attr.OnSecuritypolicyviolation (OnSecuritypolicyviolation(..), OnSecuritypolicyviolationEffect)
 import Deku.DOM.Attr.SystemLanguage (SystemLanguage(..))
 import Deku.DOM.Attr.FontFamily (FontFamily(..))
-import Deku.DOM.Attr.OnAnimationiteration (OnAnimationiteration(..))
-import Deku.DOM.Attr.OnMouseout (OnMouseout(..))
+import Deku.DOM.Attr.OnAnimationiteration (OnAnimationiteration(..), OnAnimationiterationEffect)
+import Deku.DOM.Attr.OnMouseout (OnMouseout(..), OnMouseoutEffect)
 import Deku.DOM.Attr.Result (Result(..))
 import Deku.DOM.Attr.In2 (In2(..))
 import Deku.DOM.Attr.Y (Y(..))
 import Deku.DOM.Attr.Language (Language(..))
 import Deku.DOM.Attr.Background (Background(..))
 import Deku.DOM.Attr.AriaSetsize (AriaSetsize(..))
-import Deku.DOM.Attr.OnTransitionrun (OnTransitionrun(..))
+import Deku.DOM.Attr.OnTransitionrun (OnTransitionrun(..), OnTransitionrunEffect)
 import Deku.DOM.Attr.StitchTiles (StitchTiles(..))
 import Deku.DOM.Attr.SpecularConstant (SpecularConstant(..))
 import Deku.DOM.Attr.RefX (RefX(..))
-import Deku.DOM.Attr.OnPointerenter (OnPointerenter(..))
+import Deku.DOM.Attr.OnPointerenter (OnPointerenter(..), OnPointerenterEffect)
 import Deku.DOM.Attr.Hreflang (Hreflang(..))
 import Deku.DOM.Attr.Decelerate (Decelerate(..))
 import Deku.DOM.Attr.Clip (Clip(..))
@@ -1559,10 +1559,10 @@ import Deku.DOM.Attr.RequiredFeatures (RequiredFeatures(..))
 import Deku.DOM.Attr.Code (Code(..))
 import Deku.DOM.Attr.From (From(..))
 import Deku.DOM.Attr.Readonly (Readonly(..))
-import Deku.DOM.Attr.OnCanplaythrough (OnCanplaythrough(..))
+import Deku.DOM.Attr.OnCanplaythrough (OnCanplaythrough(..), OnCanplaythroughEffect)
 import Deku.DOM.Attr.For (For(..))
 import Deku.DOM.Attr.NumOctaves (NumOctaves(..))
-import Deku.DOM.Attr.OnSelectstart (OnSelectstart(..))
+import Deku.DOM.Attr.OnSelectstart (OnSelectstart(..), OnSelectstartEffect)
 import Deku.DOM.Attr.KernelMatrix (KernelMatrix(..))
 import Deku.DOM.Attr.Cols (Cols(..))
 import Deku.DOM.Attr.Path (Path(..))
@@ -1571,14 +1571,14 @@ import Deku.DOM.Attr.Amplitude (Amplitude(..))
 import Deku.DOM.Attr.Content (Content(..))
 import Deku.DOM.Attr.Xtype (Xtype(..))
 import Deku.DOM.Attr.End (End(..))
-import Deku.DOM.Attr.OnReset (OnReset(..))
+import Deku.DOM.Attr.OnReset (OnReset(..), OnResetEffect)
 import Deku.DOM.Attr.FloodOpacity (FloodOpacity(..))
 import Deku.DOM.Attr.AriaColspan (AriaColspan(..))
 import Deku.DOM.Attr.Cursor (Cursor(..))
 import Deku.DOM.Attr.Filter (Filter(..))
 import Deku.DOM.Attr.ShapeRendering (ShapeRendering(..))
 import Deku.DOM.Attr.TargetY (TargetY(..))
-import Deku.DOM.Attr.OnInvalid (OnInvalid(..))
+import Deku.DOM.Attr.OnInvalid (OnInvalid(..), OnInvalidEffect)
 import Deku.DOM.Attr.Color (Color(..))
 import Deku.DOM.Attr.Summary (Summary(..))
 import Deku.DOM.Attr.FontSizeAdjust (FontSizeAdjust(..))
@@ -1594,7 +1594,7 @@ import Deku.DOM.Attr.Scale (Scale(..))
 import Deku.DOM.Attr.Width (Width(..))
 import Deku.DOM.Attr.Dir (Dir(..))
 import Deku.DOM.Attr.PatternTransform (PatternTransform(..))
-import Deku.DOM.Attr.OnKeyup (OnKeyup(..))
+import Deku.DOM.Attr.OnKeyup (OnKeyup(..), OnKeyupEffect)
 import Deku.DOM.Attr.Intrinsicsize (Intrinsicsize(..))
 import Deku.DOM.Attr.X (X(..))
 import Deku.DOM.Attr.Divisor (Divisor(..))
@@ -1603,8 +1603,8 @@ import Deku.DOM.Attr.AriaModal (AriaModal(..))
 import Deku.DOM.Attr.Href (Href(..))
 import Deku.DOM.Attr.Version (Version(..))
 import Deku.DOM.Attr.Begin (Begin(..))
-import Deku.DOM.Attr.OnWheel (OnWheel(..))
-import Deku.DOM.Attr.OnDragend (OnDragend(..))
+import Deku.DOM.Attr.OnWheel (OnWheel(..), OnWheelEffect)
+import Deku.DOM.Attr.OnDragend (OnDragend(..), OnDragendEffect)
 import Deku.DOM.Attr.Elevation (Elevation(..))
 import Deku.DOM.Attr.MarkerMid (MarkerMid(..))
 import Deku.DOM.Attr.K1 (K1(..))
@@ -1614,25 +1614,25 @@ import Deku.DOM.Attr.AriaKeyshortcuts (AriaKeyshortcuts(..))
 import Deku.DOM.Attr.AriaAtomic (AriaAtomic(..))
 import Deku.DOM.Attr.Opacity (Opacity(..))
 import Deku.DOM.Attr.StrokeLinecap (StrokeLinecap(..))
-import Deku.DOM.Attr.OnMouseenter (OnMouseenter(..))
-import Deku.DOM.Attr.OnEmptied (OnEmptied(..))
+import Deku.DOM.Attr.OnMouseenter (OnMouseenter(..), OnMouseenterEffect)
+import Deku.DOM.Attr.OnEmptied (OnEmptied(..), OnEmptiedEffect)
 import Deku.DOM.Attr.RepeatDur (RepeatDur(..))
 import Deku.DOM.Attr.Referrerpolicy (Referrerpolicy(..))
 import Deku.DOM.Attr.UnicodeBidi (UnicodeBidi(..))
 import Deku.DOM.Attr.TransformOrigin (TransformOrigin(..))
-import Deku.DOM.Attr.OnDurationchange (OnDurationchange(..))
+import Deku.DOM.Attr.OnDurationchange (OnDurationchange(..), OnDurationchangeEffect)
 import Deku.DOM.Attr.DiffuseConstant (DiffuseConstant(..))
-import Deku.DOM.Attr.OnSlotchange (OnSlotchange(..))
+import Deku.DOM.Attr.OnSlotchange (OnSlotchange(..), OnSlotchangeEffect)
 import Deku.DOM.Attr.Controls (Controls(..))
 import Deku.DOM.Attr.Autoplay (Autoplay(..))
-import Deku.DOM.Attr.OnPause (OnPause(..))
+import Deku.DOM.Attr.OnPause (OnPause(..), OnPauseEffect)
 import Deku.DOM.Attr.Span (Span(..))
 import Deku.DOM.Attr.Enterkeyhint (Enterkeyhint(..))
 import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
+
 import Effect (Effect)
-import Prelude (Unit, ($>), (<#>), (<$))
-import Prelude as Prelude
-import FRP.Event as Event
+import FRP.Event (Event)
+import Prelude (Unit)
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM as DOM
@@ -1677,7 +1677,9 @@ import Web.HTML.HTMLTimeElement as HTMLTimeElement
 import Web.HTML.HTMLTitleElement as HTMLTitleElement
 import Web.HTML.HTMLTrackElement as HTMLTrackElement
 import Web.HTML.HTMLVideoElement as HTMLVideoElement
+
 class TagToDeku (tag :: Symbol) (deku :: Type) | tag -> deku
+
 -- codegen 3
 instance tagToDekuTh_ :: TagToDeku "th" Th_
 instance tagToDekuImage_ :: TagToDeku "image" Image_
@@ -1735,6 +1737,7 @@ instance tagToDekuArticle_ :: TagToDeku "article" Article_
 instance tagToDekuBody_ :: TagToDeku "body" Body_
 instance tagToDekuFeDisplacementMap_ ::
   TagToDeku "feDisplacementMap" FeDisplacementMap_
+
 instance tagToDekuTextarea_ :: TagToDeku "textarea" Textarea_
 instance tagToDekuPattern_ :: TagToDeku "pattern" Pattern_
 instance tagToDekuIframe_ :: TagToDeku "iframe" Iframe_
@@ -1745,6 +1748,7 @@ instance tagToDekuFrame_ :: TagToDeku "frame" Frame_
 instance tagToDekuImg_ :: TagToDeku "img" Img_
 instance tagToDekuFeDiffuseLighting_ ::
   TagToDeku "feDiffuseLighting" FeDiffuseLighting_
+
 instance tagToDekuProgress_ :: TagToDeku "progress" Progress_
 instance tagToDekuTitle_ :: TagToDeku "title" Title_
 instance tagToDekuClipPath_ :: TagToDeku "clipPath" ClipPath_
@@ -1754,6 +1758,7 @@ instance tagToDekuCol_ :: TagToDeku "col" Col_
 instance tagToDekuDialog_ :: TagToDeku "dialog" Dialog_
 instance tagToDekuFeConvolveMatrix_ ::
   TagToDeku "feConvolveMatrix" FeConvolveMatrix_
+
 instance tagToDekuAddress_ :: TagToDeku "address" Address_
 instance tagToDekuVar_ :: TagToDeku "var" Var_
 instance tagToDekuFeGaussianBlur_ :: TagToDeku "feGaussianBlur" FeGaussianBlur_
@@ -1765,6 +1770,7 @@ instance tagToDekuH3_ :: TagToDeku "h3" H3_
 instance tagToDekuTime_ :: TagToDeku "time" Time_
 instance tagToDekuFeSpecularLighting_ ::
   TagToDeku "feSpecularLighting" FeSpecularLighting_
+
 instance tagToDekuLi_ :: TagToDeku "li" Li_
 instance tagToDekuFeMerge_ :: TagToDeku "feMerge" FeMerge_
 instance tagToDekuFeFlood_ :: TagToDeku "feFlood" FeFlood_
@@ -1803,6 +1809,7 @@ instance tagToDekuInput_ :: TagToDeku "input" Input_
 instance tagToDekuFeBlend_ :: TagToDeku "feBlend" FeBlend_
 instance tagToDekuFeComponentTransfer_ ::
   TagToDeku "feComponentTransfer" FeComponentTransfer_
+
 instance tagToDekuRect_ :: TagToDeku "rect" Rect_
 instance tagToDekuRuby_ :: TagToDeku "ruby" Ruby_
 instance tagToDekuDesc_ :: TagToDeku "desc" Desc_
@@ -1834,6 +1841,7 @@ instance tagToDekuSource_ :: TagToDeku "source" Source_
 instance tagToDekuColgroup_ :: TagToDeku "colgroup" Colgroup_
 instance tagToDekuAnimateTransform_ ::
   TagToDeku "animateTransform" AnimateTransform_
+
 instance tagToDekuTemplate_ :: TagToDeku "template" Template_
 instance tagToDekuAcronym_ :: TagToDeku "acronym" Acronym_
 instance tagToDekuFooter_ :: TagToDeku "footer" Footer_
@@ -1866,669 +1874,209 @@ instance tagToDekuNoframes_ :: TagToDeku "noframes" Noframes_
 instance tagToDekuSpan_ :: TagToDeku "span" Span_
 instance tagToDekuCanvas_ :: TagToDeku "canvas" Canvas_
 instance tagToDekuDefs_ :: TagToDeku "defs" Defs_
+
 -- codegen 3
+
 -- | Unsafely create a custom element. This is useful when using Stencil-based
 -- | frameworks like Ionic in Deku.
 unsafeCustomElement
   :: forall element
    . String
   -> Proxy element
-  -> Array (Attribute element)
+  -> Array (Event (Attribute element))
   -> Array Nut
   -> Nut
 unsafeCustomElement name _ = elementify2 name
+
 -- | Creates a special event where an Deku element can have its raw DOM element
 -- | injected into a closure. All bets are off type-safety wise. This is useful
 -- | when you need to manipualte the element itself, like for example attaching
 -- | properties to it, etc. 
 data Self = Self
+
 instance Attr anything Self (DOM.Element -> Effect Unit) where
-  attr Self value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance Attr anything Self (Event.Event Unit -> Event.Event (DOM.Element -> Effect Unit)) where
-  attr Self eventValue = unsafeAttribute
-    (Prelude.map (Prelude.map ( \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
+  attr Self value = unsafeAttribute
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
 -- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
 -- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
 data SelfT = SelfT
-instance Attr anything Self (Event.Event (DOM.Element -> Effect Unit)) where
-  attr Self eventValue = unsafeAttribute
-    \_ -> eventValue <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
--- | A slightly less permissive version of `Self` that associates Deku Elements to
--- | the primitive element definitions form `purescript-web`. For example, `A_` from `deku`
--- | gets translated to `HTMLAnchorElement` from `purescript-web`, etc.
+
 instance Attr anything SelfT (DOM.Element -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _) 
-instance Attr anything SelfT (Event.Event Unit -> Event.Event (DOM.Element -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute
-    (Prelude.map (Prelude.map ( \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance Attr anything SelfT (Event.Event (DOM.Element -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute
-    \_ -> eventValue <#> \value ->
-        { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+  attr SelfT value = unsafeAttribute
+    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr anything SelfT (Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true)) } <$ _)
-instance Attr anything SelfT (Event.Event Unit -> Event.Event (Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute
-    (Prelude.map (Prelude.map ( \value ->
-        { key: "@self@"
-        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
-        })) eventValue)
-instance Attr anything SelfT (Event.Event (Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute
-    \_ -> eventValue <#> \value ->
-        { key: "@self@"
-        , value: cb' (Cb (\(_ :: WebEvent.Event) -> value $> true))
-        }
+  attr SelfT value = attr SelfT (\(_ :: DOM.Element) -> value)
+
 instance Attr A_ SelfT (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr A_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr A_
-    SelfT
-    (Event.Event (HTMLAnchorElement.HTMLAnchorElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Area_ SelfT (HTMLAreaElement.HTMLAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Area_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Area_
-    SelfT
-    (Event.Event (HTMLAreaElement.HTMLAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Audio_ SelfT (HTMLAudioElement.HTMLAudioElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Audio_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Audio_
-    SelfT
-    (Event.Event (HTMLAudioElement.HTMLAudioElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Base_ SelfT (HTMLBaseElement.HTMLBaseElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Base_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Base_
-    SelfT
-    (Event.Event (HTMLBaseElement.HTMLBaseElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Body_ SelfT (HTMLBodyElement.HTMLBodyElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Body_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Body_
-    SelfT
-    (Event.Event (HTMLBodyElement.HTMLBodyElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Br_ SelfT (HTMLBRElement.HTMLBRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Br_ SelfT (Event.Event Unit -> Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Br_ SelfT (Event.Event (HTMLBRElement.HTMLBRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Button_ SelfT (HTMLButtonElement.HTMLButtonElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Button_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Button_
-    SelfT
-    (Event.Event (HTMLButtonElement.HTMLButtonElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Canvas_ SelfT (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Canvas_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Canvas_
-    SelfT
-    (Event.Event (HTMLCanvasElement.HTMLCanvasElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Div_ SelfT (HTMLDivElement.HTMLDivElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Div_ SelfT (Event.Event Unit -> Event.Event (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Div_ SelfT (Event.Event (HTMLDivElement.HTMLDivElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Embed_ SelfT (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Embed_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Embed_
-    SelfT
-    (Event.Event (HTMLEmbedElement.HTMLEmbedElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Form_ SelfT (HTMLFormElement.HTMLFormElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Form_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Form_
-    SelfT
-    (Event.Event (HTMLFormElement.HTMLFormElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Head_ SelfT (HTMLHeadElement.HTMLHeadElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Head_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Head_
-    SelfT
-    (Event.Event (HTMLHeadElement.HTMLHeadElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Hr_ SelfT (HTMLHRElement.HTMLHRElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Hr_ SelfT (Event.Event Unit -> Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Hr_ SelfT (Event.Event (HTMLHRElement.HTMLHRElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Html_ SelfT (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Html_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Html_
-    SelfT
-    (Event.Event (HTMLHtmlElement.HTMLHtmlElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Input_ SelfT (HTMLInputElement.HTMLInputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Input_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Input_
-    SelfT
-    (Event.Event (HTMLInputElement.HTMLInputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Label_ SelfT (HTMLLabelElement.HTMLLabelElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Label_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Label_
-    SelfT
-    (Event.Event (HTMLLabelElement.HTMLLabelElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Legend_ SelfT (HTMLLegendElement.HTMLLegendElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Legend_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Legend_
-    SelfT
-    (Event.Event (HTMLLegendElement.HTMLLegendElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Link_ SelfT (HTMLLinkElement.HTMLLinkElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Link_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Link_
-    SelfT
-    (Event.Event (HTMLLinkElement.HTMLLinkElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Map_ SelfT (HTMLMapElement.HTMLMapElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Map_ SelfT (Event.Event Unit -> Event.Event (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Map_ SelfT (Event.Event (HTMLMapElement.HTMLMapElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Meta_ SelfT (HTMLMetaElement.HTMLMetaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Meta_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Meta_
-    SelfT
-    (Event.Event (HTMLMetaElement.HTMLMetaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Meter_ SelfT (HTMLMeterElement.HTMLMeterElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Meter_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Meter_
-    SelfT
-    (Event.Event (HTMLMeterElement.HTMLMeterElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Object_ SelfT (HTMLObjectElement.HTMLObjectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Object_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Object_
-    SelfT
-    (Event.Event (HTMLObjectElement.HTMLObjectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Option_ SelfT (HTMLOptionElement.HTMLOptionElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Option_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Option_
-    SelfT
-    (Event.Event (HTMLOptionElement.HTMLOptionElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Output_ SelfT (HTMLOutputElement.HTMLOutputElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Output_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Output_
-    SelfT
-    (Event.Event (HTMLOutputElement.HTMLOutputElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance
   Attr P_ SelfT (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr P_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr P_
-    SelfT
-    (Event.Event (HTMLParagraphElement.HTMLParagraphElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Param_ SelfT (HTMLParamElement.HTMLParamElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Param_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Param_
-    SelfT
-    (Event.Event (HTMLParamElement.HTMLParamElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Pre_ SelfT (HTMLPreElement.HTMLPreElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Pre_ SelfT (Event.Event Unit -> Event.Event (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Pre_ SelfT (Event.Event (HTMLPreElement.HTMLPreElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance
   Attr Progress_ SelfT (HTMLProgressElement.HTMLProgressElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Progress_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLProgressElement.HTMLProgressElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Progress_
-    SelfT
-    (Event.Event (HTMLProgressElement.HTMLProgressElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Script_ SelfT (HTMLScriptElement.HTMLScriptElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Script_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Script_
-    SelfT
-    (Event.Event (HTMLScriptElement.HTMLScriptElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Select_ SelfT (HTMLSelectElement.HTMLSelectElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Select_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Select_
-    SelfT
-    (Event.Event (HTMLSelectElement.HTMLSelectElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Source_ SelfT (HTMLSourceElement.HTMLSourceElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Source_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Source_
-    SelfT
-    (Event.Event (HTMLSourceElement.HTMLSourceElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Span_ SelfT (HTMLSpanElement.HTMLSpanElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Span_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Span_
-    SelfT
-    (Event.Event (HTMLSpanElement.HTMLSpanElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Style_ SelfT (HTMLStyleElement.HTMLStyleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Style_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Style_
-    SelfT
-    (Event.Event (HTMLStyleElement.HTMLStyleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Table_ SelfT (HTMLTableElement.HTMLTableElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Table_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Table_
-    SelfT
-    (Event.Event (HTMLTableElement.HTMLTableElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance
   Attr Td_
     SelfT
     (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Td_
-    SelfT
-    ( Event.Event Unit -> Event.Event
-        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
-    ) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Td_
-    SelfT
-    ( Event.Event
-        (HTMLTableDataCellElement.HTMLTableDataCellElement -> Effect Unit)
-    ) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance
   Attr Template_ SelfT (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Template_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Template_
-    SelfT
-    (Event.Event (HTMLTemplateElement.HTMLTemplateElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance
   Attr Textarea_ SelfT (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Textarea_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Textarea_
-    SelfT
-    (Event.Event (HTMLTextAreaElement.HTMLTextAreaElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Time_ SelfT (HTMLTimeElement.HTMLTimeElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Time_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Time_
-    SelfT
-    (Event.Event (HTMLTimeElement.HTMLTimeElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Title_ SelfT (HTMLTitleElement.HTMLTitleElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Title_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Title_
-    SelfT
-    (Event.Event (HTMLTitleElement.HTMLTitleElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Track_ SelfT (HTMLTrackElement.HTMLTrackElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Track_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Track_
-    SelfT
-    (Event.Event (HTMLTrackElement.HTMLTrackElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }
+
 instance Attr Video_ SelfT (HTMLVideoElement.HTMLVideoElement -> Effect Unit) where
-  attr SelfT value = unsafeAttribute (  
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) } <$ _)
-instance
-  Attr Video_
-    SelfT
-    (Event.Event Unit -> Event.Event (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute (Prelude.map (Prelude.map ( \value ->
-    { key: "@self@", value: cb' (Cb (unsafeCoerce value)) })) eventValue)
-instance
-  Attr Video_
-    SelfT
-    (Event.Event (HTMLVideoElement.HTMLVideoElement -> Effect Unit)) where
-  attr SelfT eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
+  attr SelfT value = unsafeAttribute
     { key: "@self@", value: cb' (Cb (unsafeCoerce value)) }

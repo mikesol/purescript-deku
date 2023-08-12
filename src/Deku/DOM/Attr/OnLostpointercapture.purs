@@ -1,42 +1,29 @@
 module Deku.DOM.Attr.OnLostpointercapture where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnLostpointercapture = OnLostpointercapture
-instance Attr anything OnLostpointercapture  Cb  where
-  attr OnLostpointercapture value = unsafeAttribute (  
-    { key: "lostpointercapture", value: cb' value  } <$ _)
-instance Attr anything OnLostpointercapture (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute (map (map ( \value -> { key: "lostpointercapture", value: cb' value })) eventValue)
-instance Attr anything OnLostpointercapture (Event.Event  Cb ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute \_ ->
-    eventValue <#> \value -> { key: "lostpointercapture", value: cb' value }
-instance Attr anything OnLostpointercapture  (Effect Unit)  where
-  attr OnLostpointercapture value = unsafeAttribute (  
-    { key: "lostpointercapture", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnLostpointercapture (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute (map (map ( \value ->
-      { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnLostpointercapture (Event.Event  (Effect Unit) ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute \_ ->
-    eventValue <#> \value ->
-      { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnLostpointercapture  (Effect Boolean)  where
-  attr OnLostpointercapture value = unsafeAttribute (  
-    { key: "lostpointercapture", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnLostpointercapture (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute (map (map ( \value ->
-      { key: "lostpointercapture", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnLostpointercapture (Event.Event  (Effect Boolean) ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute \_ ->
-    eventValue <#> \value ->
-      { key: "lostpointercapture", value: cb' (Cb (const value)) } 
-instance Attr everything OnLostpointercapture  Unit  where
-  attr OnLostpointercapture _ = unsafeAttribute (  
-    { key: "lostpointercapture", value: unset'  } <$ _)
-instance Attr everything OnLostpointercapture (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute (map (map ( \_ -> { key: "lostpointercapture", value: unset' })) eventValue)
-instance Attr everything OnLostpointercapture (Event.Event  Unit ) where
-  attr OnLostpointercapture eventValue = unsafeAttribute \_ ->
-    eventValue <#> \_ -> { key: "lostpointercapture", value: unset' }
+
+instance Attr anything OnLostpointercapture Cb where
+  attr OnLostpointercapture value = unsafeAttribute
+    { key: "lostpointercapture", value: cb' value }
+
+instance Attr anything OnLostpointercapture (Effect Unit) where
+  attr OnLostpointercapture value = unsafeAttribute
+    { key: "lostpointercapture", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnLostpointercapture (Effect Boolean) where
+  attr OnLostpointercapture value = unsafeAttribute
+    { key: "lostpointercapture", value: cb' (Cb (const value)) }
+
+type OnLostpointercaptureEffect =
+  forall element
+   . Attr element OnLostpointercapture (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnLostpointercapture Unit where
+  attr OnLostpointercapture _ = unsafeAttribute
+    { key: "lostpointercapture", value: unset' }

@@ -1,40 +1,29 @@
 module Deku.DOM.Attr.OnLoadedmetadata where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnLoadedmetadata = OnLoadedmetadata
-instance Attr anything OnLoadedmetadata  Cb  where
-  attr OnLoadedmetadata value = unsafeAttribute (  
-    { key: "loadedmetadata", value: cb' value  } <$ _)
-instance Attr anything OnLoadedmetadata (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute (map (map ( \value -> { key: "loadedmetadata", value: cb' value })) eventValue)
-instance Attr anything OnLoadedmetadata (Event.Event  Cb ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "loadedmetadata", value: cb' value }
-instance Attr anything OnLoadedmetadata  (Effect Unit)  where
-  attr OnLoadedmetadata value = unsafeAttribute (  
-    { key: "loadedmetadata", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnLoadedmetadata (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute (map (map ( \value ->
-      { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnLoadedmetadata (Event.Event  (Effect Unit) ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value ->
-      { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnLoadedmetadata  (Effect Boolean)  where
-  attr OnLoadedmetadata value = unsafeAttribute (  
-    { key: "loadedmetadata", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnLoadedmetadata (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute (map (map ( \value -> { key: "loadedmetadata", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnLoadedmetadata (Event.Event  (Effect Boolean) ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "loadedmetadata", value: cb' (Cb (const value)) } 
-instance Attr everything OnLoadedmetadata  Unit  where
-  attr OnLoadedmetadata _ = unsafeAttribute (  
-    { key: "loadedmetadata", value: unset'  } <$ _)
-instance Attr everything OnLoadedmetadata (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute (map (map ( \_ -> { key: "loadedmetadata", value: unset' })) eventValue)
-instance Attr everything OnLoadedmetadata (Event.Event  Unit ) where
-  attr OnLoadedmetadata eventValue = unsafeAttribute \_ -> eventValue
-    <#> \_ -> { key: "loadedmetadata", value: unset' }
+
+instance Attr anything OnLoadedmetadata Cb where
+  attr OnLoadedmetadata value = unsafeAttribute
+    { key: "loadedmetadata", value: cb' value }
+
+instance Attr anything OnLoadedmetadata (Effect Unit) where
+  attr OnLoadedmetadata value = unsafeAttribute
+    { key: "loadedmetadata", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnLoadedmetadata (Effect Boolean) where
+  attr OnLoadedmetadata value = unsafeAttribute
+    { key: "loadedmetadata", value: cb' (Cb (const value)) }
+
+type OnLoadedmetadataEffect =
+  forall element
+   . Attr element OnLoadedmetadata (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnLoadedmetadata Unit where
+  attr OnLoadedmetadata _ = unsafeAttribute
+    { key: "loadedmetadata", value: unset' }

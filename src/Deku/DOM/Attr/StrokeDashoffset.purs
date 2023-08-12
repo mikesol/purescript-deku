@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.StrokeDashoffset where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -43,340 +44,173 @@ import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data StrokeDashoffset = StrokeDashoffset
-instance Attr Circle_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Circle_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Circle_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr ClipPath_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr ClipPath_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr ClipPath_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Defs_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Defs_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Defs_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Ellipse_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Ellipse_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Ellipse_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeBlend_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeBlend_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeBlend_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeColorMatrix_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeColorMatrix_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeColorMatrix_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeComponentTransfer_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeComponentTransfer_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeComponentTransfer_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeComposite_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeComposite_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeComposite_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeConvolveMatrix_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeConvolveMatrix_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeConvolveMatrix_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeDiffuseLighting_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeDiffuseLighting_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeDiffuseLighting_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeDisplacementMap_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeDisplacementMap_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeDisplacementMap_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeFlood_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeFlood_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeFlood_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeGaussianBlur_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeGaussianBlur_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeGaussianBlur_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeImage_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeImage_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeImage_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeMerge_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeMerge_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeMerge_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeMorphology_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeMorphology_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeMorphology_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeOffset_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeOffset_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeOffset_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeSpecularLighting_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeSpecularLighting_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeSpecularLighting_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeTile_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeTile_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeTile_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr FeTurbulence_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr FeTurbulence_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr FeTurbulence_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Filter_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Filter_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Filter_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr ForeignObject_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr ForeignObject_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr ForeignObject_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr G_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr G_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr G_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Image_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Image_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Image_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Line_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Line_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Line_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr LinearGradient_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr LinearGradient_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr LinearGradient_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Marker_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Marker_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Marker_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Mask_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Mask_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Mask_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Path_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Path_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Path_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Pattern_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Pattern_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Pattern_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Polygon_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Polygon_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Polygon_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Polyline_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Polyline_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Polyline_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr RadialGradient_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr RadialGradient_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr RadialGradient_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Rect_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Rect_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Rect_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Svg_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Svg_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Svg_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Switch_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Switch_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Switch_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Symbol_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Symbol_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Symbol_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Text_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Text_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Text_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr TextPath_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr TextPath_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr TextPath_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Tspan_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Tspan_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Tspan_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr Use_ StrokeDashoffset  String  where
-  attr StrokeDashoffset value = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: prop' value  } <$ _)
-instance Attr Use_ StrokeDashoffset (Event.Event Unit -> Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \value -> { key: "stroke-dashoffset", value: prop' value })) eventValue)
-instance Attr Use_ StrokeDashoffset (Event.Event  String ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "stroke-dashoffset", value: prop' value }
-instance Attr everything StrokeDashoffset  Unit  where
-  attr StrokeDashoffset _ = unsafeAttribute (  
-    { key: "stroke-dashoffset", value: unset'  } <$ _)
-instance Attr everything StrokeDashoffset (Event.Event Unit -> Event.Event  Unit ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute (map (map ( \_ -> { key: "stroke-dashoffset", value: unset' })) eventValue)
-instance Attr everything StrokeDashoffset (Event.Event  Unit ) where
-  attr StrokeDashoffset eventValue = unsafeAttribute \_ -> eventValue
-    <#> \_ -> { key: "stroke-dashoffset", value: unset' }
+
+instance Attr Circle_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr ClipPath_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Defs_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Ellipse_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeBlend_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeColorMatrix_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeComponentTransfer_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeComposite_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeConvolveMatrix_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeDiffuseLighting_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeDisplacementMap_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeFlood_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeGaussianBlur_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeImage_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeMerge_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeMorphology_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeOffset_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeSpecularLighting_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeTile_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr FeTurbulence_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Filter_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr ForeignObject_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr G_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Image_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Line_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr LinearGradient_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Marker_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Mask_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Path_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Pattern_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Polygon_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Polyline_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr RadialGradient_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Rect_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Svg_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Switch_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Symbol_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Text_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr TextPath_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Tspan_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr Use_ StrokeDashoffset String where
+  attr StrokeDashoffset value = unsafeAttribute
+    { key: "stroke-dashoffset", value: prop' value }
+
+instance Attr everything StrokeDashoffset Unit where
+  attr StrokeDashoffset _ = unsafeAttribute
+    { key: "stroke-dashoffset", value: unset' }

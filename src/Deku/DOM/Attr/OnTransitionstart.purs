@@ -1,40 +1,29 @@
 module Deku.DOM.Attr.OnTransitionstart where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnTransitionstart = OnTransitionstart
-instance Attr anything OnTransitionstart  Cb  where
-  attr OnTransitionstart value = unsafeAttribute (  
-    { key: "transitionstart", value: cb' value  } <$ _)
-instance Attr anything OnTransitionstart (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnTransitionstart eventValue = unsafeAttribute (map (map ( \value -> { key: "transitionstart", value: cb' value })) eventValue)
-instance Attr anything OnTransitionstart (Event.Event  Cb ) where
-  attr OnTransitionstart eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "transitionstart", value: cb' value }
-instance Attr anything OnTransitionstart  (Effect Unit)  where
-  attr OnTransitionstart value = unsafeAttribute (  
-    { key: "transitionstart", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnTransitionstart (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnTransitionstart eventValue = unsafeAttribute (map (map ( \value ->
-      { key: "transitionstart", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnTransitionstart (Event.Event  (Effect Unit) ) where
-  attr OnTransitionstart eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value ->
-      { key: "transitionstart", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnTransitionstart  (Effect Boolean)  where
-  attr OnTransitionstart value = unsafeAttribute (  
-    { key: "transitionstart", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnTransitionstart (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnTransitionstart eventValue = unsafeAttribute (map (map ( \value -> { key: "transitionstart", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnTransitionstart (Event.Event  (Effect Boolean) ) where
-  attr OnTransitionstart eventValue = unsafeAttribute \_ -> eventValue
-    <#> \value -> { key: "transitionstart", value: cb' (Cb (const value)) } 
-instance Attr everything OnTransitionstart  Unit  where
-  attr OnTransitionstart _ = unsafeAttribute (  
-    { key: "transitionstart", value: unset'  } <$ _)
-instance Attr everything OnTransitionstart (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnTransitionstart eventValue = unsafeAttribute (map (map ( \_ -> { key: "transitionstart", value: unset' })) eventValue)
-instance Attr everything OnTransitionstart (Event.Event  Unit ) where
-  attr OnTransitionstart eventValue = unsafeAttribute \_ -> eventValue
-    <#> \_ -> { key: "transitionstart", value: unset' }
+
+instance Attr anything OnTransitionstart Cb where
+  attr OnTransitionstart value = unsafeAttribute
+    { key: "transitionstart", value: cb' value }
+
+instance Attr anything OnTransitionstart (Effect Unit) where
+  attr OnTransitionstart value = unsafeAttribute
+    { key: "transitionstart", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnTransitionstart (Effect Boolean) where
+  attr OnTransitionstart value = unsafeAttribute
+    { key: "transitionstart", value: cb' (Cb (const value)) }
+
+type OnTransitionstartEffect =
+  forall element
+   . Attr element OnTransitionstart (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnTransitionstart Unit where
+  attr OnTransitionstart _ = unsafeAttribute
+    { key: "transitionstart", value: unset' }

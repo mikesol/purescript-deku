@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.AriaHaspopup where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.View (View_)
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
@@ -19,166 +20,77 @@ import Deku.DOM.Elt.ForeignObject (ForeignObject_)
 import Deku.DOM.Elt.Ellipse (Ellipse_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data AriaHaspopup = AriaHaspopup
-instance Attr Circle_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Circle_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Circle_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Ellipse_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Ellipse_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Ellipse_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr ForeignObject_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr ForeignObject_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr ForeignObject_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr G_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr G_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr G_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Line_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Line_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Line_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Marker_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Marker_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Marker_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Path_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Path_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Path_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Polygon_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Polygon_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Polygon_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Polyline_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Polyline_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Polyline_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Rect_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Rect_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Rect_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Svg_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Svg_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Svg_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Symbol_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Symbol_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Symbol_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Text_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Text_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Text_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr TextPath_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr TextPath_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr TextPath_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Tspan_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Tspan_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Tspan_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr Use_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr Use_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr Use_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr View_ AriaHaspopup  String  where
-  attr AriaHaspopup value = unsafeAttribute (  
-    { key: "aria-haspopup", value: prop' value  } <$ _)
-instance Attr View_ AriaHaspopup (Event.Event Unit -> Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \value -> { key: "aria-haspopup", value: prop' value })) eventValue)
-instance Attr View_ AriaHaspopup (Event.Event  String ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "aria-haspopup", value: prop' value }
-instance Attr everything AriaHaspopup  Unit  where
-  attr AriaHaspopup _ = unsafeAttribute (  
-    { key: "aria-haspopup", value: unset'  } <$ _)
-instance Attr everything AriaHaspopup (Event.Event Unit -> Event.Event  Unit ) where
-  attr AriaHaspopup eventValue = unsafeAttribute (map (map (
-    \_ -> { key: "aria-haspopup", value: unset' })) eventValue)
-instance Attr everything AriaHaspopup (Event.Event  Unit ) where
-  attr AriaHaspopup eventValue = unsafeAttribute \_ -> eventValue <#>
-    \_ -> { key: "aria-haspopup", value: unset' }
+
+instance Attr Circle_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Ellipse_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr ForeignObject_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr G_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Line_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Marker_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Path_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Polygon_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Polyline_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Rect_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Svg_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Symbol_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Text_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr TextPath_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Tspan_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr Use_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr View_ AriaHaspopup String where
+  attr AriaHaspopup value = unsafeAttribute
+    { key: "aria-haspopup", value: prop' value }
+
+instance Attr everything AriaHaspopup Unit where
+  attr AriaHaspopup _ = unsafeAttribute
+    { key: "aria-haspopup", value: unset' }

@@ -1,33 +1,19 @@
 module Deku.DOM.Attr.Path where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.TextPath (TextPath_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data Path = Path
-instance Attr AnimateMotion_ Path  String  where
-  attr Path value = unsafeAttribute (  
-    { key: "path", value: prop' value  } <$ _)
-instance Attr AnimateMotion_ Path (Event.Event Unit -> Event.Event  String ) where
-  attr Path eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "path", value: prop' value })) eventValue)
-instance Attr AnimateMotion_ Path (Event.Event  String ) where
-  attr Path eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "path", value: prop' value }
-instance Attr TextPath_ Path  String  where
-  attr Path value = unsafeAttribute (  
-    { key: "path", value: prop' value  } <$ _)
-instance Attr TextPath_ Path (Event.Event Unit -> Event.Event  String ) where
-  attr Path eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "path", value: prop' value })) eventValue)
-instance Attr TextPath_ Path (Event.Event  String ) where
-  attr Path eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "path", value: prop' value }
-instance Attr everything Path  Unit  where
-  attr Path _ = unsafeAttribute (  { key: "path", value: unset'  } <$ _)
-instance Attr everything Path (Event.Event Unit -> Event.Event  Unit ) where
-  attr Path eventValue = unsafeAttribute (map (map ( \_ ->
-    { key: "path", value: unset' })) eventValue)
-instance Attr everything Path (Event.Event  Unit ) where
-  attr Path eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
+
+instance Attr AnimateMotion_ Path String where
+  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+
+instance Attr TextPath_ Path String where
+  attr Path value = unsafeAttribute { key: "path", value: prop' value }
+
+instance Attr everything Path Unit where
+  attr Path _ = unsafeAttribute
     { key: "path", value: unset' }

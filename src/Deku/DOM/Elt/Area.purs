@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data Area_
 
 area
-  :: Array (Attribute Area_)
+  :: Array (Event (Attribute Area_))
   -> Array Nut
   -> Nut
 area = DC.elementify2 "area"
@@ -21,4 +22,4 @@ area_ = area empty
 area__
   :: String
   -> Nut
-area__ t = area_ [ DC.text t ]
+area__ t = area_ [ DC.text_ t ]

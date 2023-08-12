@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data Metadata_
 
 metadata
-  :: Array (Attribute Metadata_)
+  :: Array (Event (Attribute Metadata_))
   -> Array Nut
   -> Nut
 metadata = DC.elementify2 "metadata"
@@ -21,4 +22,4 @@ metadata_ = metadata empty
 metadata__
   :: String
   -> Nut
-metadata__ t = metadata_ [ DC.text t ]
+metadata__ t = metadata_ [ DC.text_ t ]

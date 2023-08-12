@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data Optgroup_
 
 optgroup
-  :: Array (Attribute Optgroup_)
+  :: Array (Event (Attribute Optgroup_))
   -> Array Nut
   -> Nut
 optgroup = DC.elementify2 "optgroup"
@@ -21,4 +22,4 @@ optgroup_ = optgroup empty
 optgroup__
   :: String
   -> Nut
-optgroup__ t = optgroup_ [ DC.text t ]
+optgroup__ t = optgroup_ [ DC.text_ t ]

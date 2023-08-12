@@ -1,42 +1,29 @@
 module Deku.DOM.Attr.OnMousewheel where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnMousewheel = OnMousewheel
-instance Attr anything OnMousewheel  Cb  where
-  attr OnMousewheel value = unsafeAttribute (  
-    { key: "mousewheel", value: cb' value  } <$ _)
-instance Attr anything OnMousewheel (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnMousewheel eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mousewheel", value: cb' value })) eventValue)
-instance Attr anything OnMousewheel (Event.Event  Cb ) where
-  attr OnMousewheel eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mousewheel", value: cb' value }
-instance Attr anything OnMousewheel  (Effect Unit)  where
-  attr OnMousewheel value = unsafeAttribute (  
-    { key: "mousewheel", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnMousewheel (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnMousewheel eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mousewheel", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnMousewheel (Event.Event  (Effect Unit) ) where
-  attr OnMousewheel eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnMousewheel  (Effect Boolean)  where
-  attr OnMousewheel value = unsafeAttribute (  
-    { key: "mousewheel", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnMousewheel (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnMousewheel eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mousewheel", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnMousewheel (Event.Event  (Effect Boolean) ) where
-  attr OnMousewheel eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mousewheel", value: cb' (Cb (const value)) } 
-instance Attr everything OnMousewheel  Unit  where
-  attr OnMousewheel _ = unsafeAttribute (  
-    { key: "mousewheel", value: unset'  } <$ _)
-instance Attr everything OnMousewheel (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnMousewheel eventValue = unsafeAttribute (map (map (
-    \_ -> { key: "mousewheel", value: unset' })) eventValue)
-instance Attr everything OnMousewheel (Event.Event  Unit ) where
-  attr OnMousewheel eventValue = unsafeAttribute \_ -> eventValue <#>
-    \_ -> { key: "mousewheel", value: unset' }
+
+instance Attr anything OnMousewheel Cb where
+  attr OnMousewheel value = unsafeAttribute
+    { key: "mousewheel", value: cb' value }
+
+instance Attr anything OnMousewheel (Effect Unit) where
+  attr OnMousewheel value = unsafeAttribute
+    { key: "mousewheel", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnMousewheel (Effect Boolean) where
+  attr OnMousewheel value = unsafeAttribute
+    { key: "mousewheel", value: cb' (Cb (const value)) }
+
+type OnMousewheelEffect =
+  forall element
+   . Attr element OnMousewheel (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnMousewheel Unit where
+  attr OnMousewheel _ = unsafeAttribute
+    { key: "mousewheel", value: unset' }

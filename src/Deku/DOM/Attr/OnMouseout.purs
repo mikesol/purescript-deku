@@ -1,42 +1,28 @@
 module Deku.DOM.Attr.OnMouseout where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnMouseout = OnMouseout
-instance Attr anything OnMouseout  Cb  where
-  attr OnMouseout value = unsafeAttribute (  
-    { key: "mouseout", value: cb' value  } <$ _)
-instance Attr anything OnMouseout (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnMouseout eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mouseout", value: cb' value })) eventValue)
-instance Attr anything OnMouseout (Event.Event  Cb ) where
-  attr OnMouseout eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mouseout", value: cb' value }
-instance Attr anything OnMouseout  (Effect Unit)  where
-  attr OnMouseout value = unsafeAttribute (  
-    { key: "mouseout", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnMouseout (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnMouseout eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mouseout", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnMouseout (Event.Event  (Effect Unit) ) where
-  attr OnMouseout eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mouseout", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnMouseout  (Effect Boolean)  where
-  attr OnMouseout value = unsafeAttribute (  
-    { key: "mouseout", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnMouseout (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnMouseout eventValue = unsafeAttribute (map (map (
-    \value -> { key: "mouseout", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnMouseout (Event.Event  (Effect Boolean) ) where
-  attr OnMouseout eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "mouseout", value: cb' (Cb (const value)) } 
-instance Attr everything OnMouseout  Unit  where
-  attr OnMouseout _ = unsafeAttribute (  
-    { key: "mouseout", value: unset'  } <$ _)
-instance Attr everything OnMouseout (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnMouseout eventValue = unsafeAttribute (map (map (
-    \_ -> { key: "mouseout", value: unset' })) eventValue)
-instance Attr everything OnMouseout (Event.Event  Unit ) where
-  attr OnMouseout eventValue = unsafeAttribute \_ -> eventValue <#>
-    \_ -> { key: "mouseout", value: unset' }
+
+instance Attr anything OnMouseout Cb where
+  attr OnMouseout value = unsafeAttribute { key: "mouseout", value: cb' value }
+
+instance Attr anything OnMouseout (Effect Unit) where
+  attr OnMouseout value = unsafeAttribute
+    { key: "mouseout", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnMouseout (Effect Boolean) where
+  attr OnMouseout value = unsafeAttribute
+    { key: "mouseout", value: cb' (Cb (const value)) }
+
+type OnMouseoutEffect =
+  forall element
+   . Attr element OnMouseout (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnMouseout Unit where
+  attr OnMouseout _ = unsafeAttribute
+    { key: "mouseout", value: unset' }

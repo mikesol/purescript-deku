@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data FeComposite_
 
 feComposite
-  :: Array (Attribute FeComposite_)
+  :: Array (Event (Attribute FeComposite_))
   -> Array Nut
   -> Nut
 feComposite = DC.elementify2 "feComposite"
@@ -21,4 +22,4 @@ feComposite_ = feComposite empty
 feComposite__
   :: String
   -> Nut
-feComposite__ t = feComposite_ [ DC.text t ]
+feComposite__ t = feComposite_ [ DC.text_ t ]

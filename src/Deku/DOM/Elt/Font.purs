@@ -4,11 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
+import FRP.Event (Event)
 
 data Font_
 
 font
-  :: Array (Attribute Font_)
+  :: Array (Event (Attribute Font_))
   -> Array Nut
   -> Nut
 font = DC.elementify2 "font"
@@ -21,4 +22,4 @@ font_ = font empty
 font__
   :: String
   -> Nut
-font__ t = font_ [ DC.text t ]
+font__ t = font_ [ DC.text_ t ]

@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.ClipPath where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -43,382 +44,132 @@ import Deku.DOM.Elt.Defs (Defs_)
 import Deku.DOM.Elt.ClipPath (ClipPath_)
 import Deku.DOM.Elt.Circle (Circle_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data ClipPath = ClipPath
-instance Attr Circle_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Circle_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Circle_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr ClipPath_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr ClipPath_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr ClipPath_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Defs_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Defs_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Defs_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Ellipse_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Ellipse_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Ellipse_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeBlend_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeBlend_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeBlend_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeColorMatrix_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeColorMatrix_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeColorMatrix_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeComponentTransfer_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeComponentTransfer_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeComponentTransfer_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeComposite_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeComposite_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeComposite_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeConvolveMatrix_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeConvolveMatrix_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeConvolveMatrix_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeDiffuseLighting_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeDiffuseLighting_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeDiffuseLighting_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeDisplacementMap_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeDisplacementMap_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeDisplacementMap_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeFlood_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeFlood_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeFlood_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeGaussianBlur_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeGaussianBlur_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeGaussianBlur_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeImage_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeImage_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeImage_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeMerge_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeMerge_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeMerge_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeMorphology_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeMorphology_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeMorphology_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeOffset_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeOffset_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeOffset_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeSpecularLighting_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeSpecularLighting_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeSpecularLighting_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeTile_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeTile_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeTile_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr FeTurbulence_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr FeTurbulence_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr FeTurbulence_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Filter_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Filter_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Filter_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr ForeignObject_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr ForeignObject_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr ForeignObject_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr G_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr G_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr G_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Image_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Image_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Image_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Line_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Line_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Line_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr LinearGradient_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr LinearGradient_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr LinearGradient_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Marker_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Marker_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Marker_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Mask_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Mask_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Mask_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Path_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Path_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Path_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Pattern_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Pattern_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Pattern_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Polygon_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Polygon_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Polygon_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Polyline_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Polyline_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Polyline_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr RadialGradient_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr RadialGradient_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr RadialGradient_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Rect_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Rect_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Rect_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Svg_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Svg_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Svg_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Switch_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Switch_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Switch_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Symbol_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Symbol_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Symbol_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Text_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Text_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Text_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr TextPath_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr TextPath_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr TextPath_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Tspan_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Tspan_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Tspan_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr Use_ ClipPath  String  where
-  attr ClipPath value = unsafeAttribute (  
-    { key: "clip-path", value: prop' value  } <$ _)
-instance Attr Use_ ClipPath (Event.Event Unit -> Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map (
-    \value -> { key: "clip-path", value: prop' value })) eventValue)
-instance Attr Use_ ClipPath (Event.Event  String ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "clip-path", value: prop' value }
-instance Attr everything ClipPath  Unit  where
-  attr ClipPath _ = unsafeAttribute (  
-    { key: "clip-path", value: unset'  } <$ _)
-instance Attr everything ClipPath (Event.Event Unit -> Event.Event  Unit ) where
-  attr ClipPath eventValue = unsafeAttribute (map (map ( \_ ->
-    { key: "clip-path", value: unset' })) eventValue)
-instance Attr everything ClipPath (Event.Event  Unit ) where
-  attr ClipPath eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
+
+instance Attr Circle_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr ClipPath_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Defs_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Ellipse_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeBlend_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeColorMatrix_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeComponentTransfer_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeComposite_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeConvolveMatrix_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeDiffuseLighting_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeDisplacementMap_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeFlood_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeGaussianBlur_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeImage_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeMerge_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeMorphology_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeOffset_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeSpecularLighting_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeTile_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr FeTurbulence_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Filter_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr ForeignObject_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr G_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Image_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Line_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr LinearGradient_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Marker_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Mask_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Path_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Pattern_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Polygon_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Polyline_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr RadialGradient_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Rect_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Svg_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Switch_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Symbol_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Text_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr TextPath_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Tspan_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr Use_ ClipPath String where
+  attr ClipPath value = unsafeAttribute { key: "clip-path", value: prop' value }
+
+instance Attr everything ClipPath Unit where
+  attr ClipPath _ = unsafeAttribute
     { key: "clip-path", value: unset' }

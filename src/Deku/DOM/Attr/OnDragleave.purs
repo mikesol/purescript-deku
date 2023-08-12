@@ -1,42 +1,29 @@
 module Deku.DOM.Attr.OnDragleave where
+
 import Prelude
-import FRP.Event as Event
 import Effect (Effect)
-import Deku.Attribute (class Attr, Cb(..), cb', unsafeAttribute, unset')
+import Deku.Attribute (class Attr, Attribute, Cb(..), cb', unsafeAttribute, unset')
+import FRP.Event (Event)
+
 data OnDragleave = OnDragleave
-instance Attr anything OnDragleave  Cb  where
-  attr OnDragleave value = unsafeAttribute (  
-    { key: "dragleave", value: cb' value  } <$ _)
-instance Attr anything OnDragleave (Event.Event Unit -> Event.Event  Cb ) where
-  attr OnDragleave eventValue = unsafeAttribute (map (map (
-    \value -> { key: "dragleave", value: cb' value })) eventValue)
-instance Attr anything OnDragleave (Event.Event  Cb ) where
-  attr OnDragleave eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "dragleave", value: cb' value }
-instance Attr anything OnDragleave  (Effect Unit)  where
-  attr OnDragleave value = unsafeAttribute (  
-    { key: "dragleave", value: cb' (Cb (const (value $> true)))  } <$ _)
-instance Attr anything OnDragleave (Event.Event Unit -> Event.Event  (Effect Unit) ) where
-  attr OnDragleave eventValue = unsafeAttribute (map (map (
-    \value -> { key: "dragleave", value: cb' (Cb (const (value $> true))) })) eventValue)
-instance Attr anything OnDragleave (Event.Event  (Effect Unit) ) where
-  attr OnDragleave eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "dragleave", value: cb' (Cb (const (value $> true))) }
-instance Attr anything OnDragleave  (Effect Boolean)  where
-  attr OnDragleave value = unsafeAttribute (  
-    { key: "dragleave", value: cb' (Cb (const value))  } <$ _)
-instance Attr anything OnDragleave (Event.Event Unit -> Event.Event  (Effect Boolean) ) where
-  attr OnDragleave eventValue = unsafeAttribute (map (map (
-    \value -> { key: "dragleave", value: cb' (Cb (const value)) })) eventValue) 
-instance Attr anything OnDragleave (Event.Event  (Effect Boolean) ) where
-  attr OnDragleave eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "dragleave", value: cb' (Cb (const value)) } 
-instance Attr everything OnDragleave  Unit  where
-  attr OnDragleave _ = unsafeAttribute (  
-    { key: "dragleave", value: unset'  } <$ _)
-instance Attr everything OnDragleave (Event.Event Unit -> Event.Event  Unit ) where
-  attr OnDragleave eventValue = unsafeAttribute (map (map (
-    \_ -> { key: "dragleave", value: unset' })) eventValue)
-instance Attr everything OnDragleave (Event.Event  Unit ) where
-  attr OnDragleave eventValue = unsafeAttribute \_ -> eventValue <#>
-    \_ -> { key: "dragleave", value: unset' }
+
+instance Attr anything OnDragleave Cb where
+  attr OnDragleave value = unsafeAttribute
+    { key: "dragleave", value: cb' value }
+
+instance Attr anything OnDragleave (Effect Unit) where
+  attr OnDragleave value = unsafeAttribute
+    { key: "dragleave", value: cb' (Cb (const (value $> true))) }
+
+instance Attr anything OnDragleave (Effect Boolean) where
+  attr OnDragleave value = unsafeAttribute
+    { key: "dragleave", value: cb' (Cb (const value)) }
+
+type OnDragleaveEffect =
+  forall element
+   . Attr element OnDragleave (Effect Unit)
+  => Event (Attribute element)
+
+instance Attr everything OnDragleave Unit where
+  attr OnDragleave _ = unsafeAttribute
+    { key: "dragleave", value: unset' }

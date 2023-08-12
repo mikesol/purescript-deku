@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.Fill where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.Use (Use_)
 import Deku.DOM.Elt.Tspan (Tspan_)
 import Deku.DOM.Elt.TextPath (TextPath_)
@@ -47,417 +48,144 @@ import Deku.DOM.Elt.AnimateTransform (AnimateTransform_)
 import Deku.DOM.Elt.AnimateMotion (AnimateMotion_)
 import Deku.DOM.Elt.Animate (Animate_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data Fill = Fill
-instance Attr Animate_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Animate_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Animate_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr AnimateMotion_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr AnimateMotion_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr AnimateMotion_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr AnimateTransform_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr AnimateTransform_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr AnimateTransform_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Circle_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Circle_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Circle_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr ClipPath_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr ClipPath_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr ClipPath_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Defs_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Defs_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Defs_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Ellipse_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Ellipse_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Ellipse_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeBlend_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeBlend_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeBlend_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeColorMatrix_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeColorMatrix_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeColorMatrix_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeComponentTransfer_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeComponentTransfer_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeComponentTransfer_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeComposite_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeComposite_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeComposite_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeConvolveMatrix_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeConvolveMatrix_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeConvolveMatrix_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeDiffuseLighting_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeDiffuseLighting_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeDiffuseLighting_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeDisplacementMap_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeDisplacementMap_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeDisplacementMap_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeFlood_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeFlood_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeFlood_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeGaussianBlur_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeGaussianBlur_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeGaussianBlur_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeImage_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeImage_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeImage_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeMerge_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeMerge_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeMerge_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeMorphology_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeMorphology_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeMorphology_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeOffset_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeOffset_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeOffset_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeSpecularLighting_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeSpecularLighting_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeSpecularLighting_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeTile_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeTile_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeTile_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr FeTurbulence_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr FeTurbulence_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr FeTurbulence_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Filter_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Filter_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Filter_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr ForeignObject_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr ForeignObject_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr ForeignObject_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr G_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr G_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr G_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Image_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Image_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Image_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Line_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Line_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Line_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr LinearGradient_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr LinearGradient_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr LinearGradient_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Marker_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Marker_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Marker_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Mask_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Mask_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Mask_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Path_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Path_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Path_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Pattern_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Pattern_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Pattern_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Polygon_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Polygon_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Polygon_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Polyline_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Polyline_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Polyline_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr RadialGradient_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr RadialGradient_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr RadialGradient_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Rect_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Rect_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Rect_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Set_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Set_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Set_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Svg_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Svg_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Svg_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Switch_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Switch_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Switch_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Symbol_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Symbol_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Symbol_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Text_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Text_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Text_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr TextPath_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr TextPath_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr TextPath_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Tspan_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Tspan_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Tspan_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr Use_ Fill  String  where
-  attr Fill value = unsafeAttribute (  
-    { key: "fill", value: prop' value  } <$ _)
-instance Attr Use_ Fill (Event.Event Unit -> Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \value ->
-    { key: "fill", value: prop' value })) eventValue)
-instance Attr Use_ Fill (Event.Event  String ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \value ->
-    { key: "fill", value: prop' value }
-instance Attr everything Fill  Unit  where
-  attr Fill _ = unsafeAttribute (  { key: "fill", value: unset'  } <$ _)
-instance Attr everything Fill (Event.Event Unit -> Event.Event  Unit ) where
-  attr Fill eventValue = unsafeAttribute (map (map ( \_ ->
-    { key: "fill", value: unset' })) eventValue)
-instance Attr everything Fill (Event.Event  Unit ) where
-  attr Fill eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
+
+instance Attr Animate_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr AnimateMotion_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr AnimateTransform_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Circle_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr ClipPath_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Defs_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Ellipse_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeBlend_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeColorMatrix_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeComponentTransfer_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeComposite_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeConvolveMatrix_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeDiffuseLighting_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeDisplacementMap_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeFlood_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeGaussianBlur_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeImage_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeMerge_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeMorphology_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeOffset_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeSpecularLighting_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeTile_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr FeTurbulence_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Filter_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr ForeignObject_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr G_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Image_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Line_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr LinearGradient_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Marker_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Mask_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Path_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Pattern_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Polygon_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Polyline_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr RadialGradient_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Rect_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Set_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Svg_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Switch_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Symbol_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Text_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr TextPath_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Tspan_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr Use_ Fill String where
+  attr Fill value = unsafeAttribute { key: "fill", value: prop' value }
+
+instance Attr everything Fill Unit where
+  attr Fill _ = unsafeAttribute
     { key: "fill", value: unset' }

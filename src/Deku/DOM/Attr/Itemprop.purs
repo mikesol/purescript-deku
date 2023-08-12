@@ -1,6 +1,7 @@
 module Deku.DOM.Attr.Itemprop where
+
 import Prelude
-import FRP.Event as Event
+
 import Deku.DOM.Elt.A (A_)
 import Deku.DOM.Elt.Abbr (Abbr_)
 import Deku.DOM.Elt.Acronym (Acronym_)
@@ -124,1111 +125,375 @@ import Deku.DOM.Elt.Var (Var_)
 import Deku.DOM.Elt.Video (Video_)
 import Deku.DOM.Elt.Wbr (Wbr_)
 import Deku.Attribute (class Attr, prop', unsafeAttribute, unset')
+
 data Itemprop = Itemprop
-instance Attr A_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr A_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr A_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Abbr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Abbr_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Abbr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Acronym_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Acronym_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Acronym_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Address_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Address_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Address_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Applet_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Applet_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Applet_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Area_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Area_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Area_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Article_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Article_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Article_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Aside_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Aside_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Aside_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Audio_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Audio_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Audio_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr B_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr B_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr B_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Base_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Base_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Base_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Basefont_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Basefont_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Basefont_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Bdi_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Bdi_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Bdi_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Bdo_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Bdo_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Bdo_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Big_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Big_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Big_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Blockquote_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Blockquote_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Blockquote_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Body_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Body_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Body_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Br_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Br_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Br_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Button_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Button_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Button_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Canvas_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Canvas_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Canvas_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Caption_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Caption_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Caption_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Center_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Center_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Center_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Cite_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Cite_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Cite_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Code_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Code_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Code_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Col_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Col_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Col_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Colgroup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Colgroup_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Colgroup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Xdata_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Xdata_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Xdata_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Datalist_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Datalist_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Datalist_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dd_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dd_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dd_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Del_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Del_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Del_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Details_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Details_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Details_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dfn_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dfn_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dfn_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dialog_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dialog_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dialog_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dir_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dir_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dir_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Div_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Div_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Div_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dl_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dl_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dl_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Dt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Dt_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Dt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Em_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Em_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Em_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Embed_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Embed_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Embed_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Fieldset_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Fieldset_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Fieldset_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Figcaption_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Figcaption_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Figcaption_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Figure_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Figure_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Figure_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Font_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Font_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Font_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Footer_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Footer_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Footer_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Form_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Form_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Form_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Frame_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Frame_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Frame_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Frameset_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Frameset_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Frameset_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H1_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H1_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H1_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H2_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H2_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H2_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H3_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H3_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H3_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H4_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H4_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H4_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H5_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H5_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H5_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr H6_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr H6_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr H6_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Head_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Head_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Head_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Header_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Header_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Header_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Hr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Hr_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Hr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Html_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Html_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Html_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr I_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr I_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr I_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Iframe_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Iframe_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Iframe_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Img_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Img_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Img_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Input_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Input_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Input_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Ins_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Ins_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Ins_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Kbd_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Kbd_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Kbd_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Label_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Label_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Label_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Legend_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Legend_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Legend_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Li_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Li_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Li_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Link_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Link_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Link_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Main_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Main_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Main_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Map_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Map_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Map_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Mark_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Mark_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Mark_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Meta_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Meta_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Meta_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Meter_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Meter_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Meter_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Nav_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Nav_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Nav_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Noframes_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Noframes_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Noframes_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Noscript_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Noscript_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Noscript_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Object_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Object_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Object_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Ol_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Ol_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Ol_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Optgroup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Optgroup_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Optgroup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Option_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Option_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Option_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Output_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Output_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Output_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr P_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr P_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr P_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Param_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Param_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Param_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Picture_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Picture_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Picture_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Pre_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Pre_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Pre_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Progress_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Progress_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Progress_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Q_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Q_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Q_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Rp_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Rp_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Rp_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Rt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Rt_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Rt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Ruby_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Ruby_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Ruby_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr S_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr S_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr S_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Samp_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Samp_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Samp_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Script_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Script_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Script_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Section_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Section_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Section_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Select_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Select_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Select_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Small_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Small_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Small_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Source_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Source_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Source_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Span_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Span_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Span_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Strike_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Strike_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Strike_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Strong_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Strong_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Strong_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Style_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Style_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Style_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Sub_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Sub_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Sub_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Summary_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Summary_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Summary_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Sup_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Sup_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Sup_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Svg_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Svg_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Svg_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Table_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Table_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Table_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Tbody_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Tbody_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Tbody_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Td_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Td_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Td_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Template_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Template_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Template_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Textarea_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Textarea_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Textarea_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Tfoot_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Tfoot_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Tfoot_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Th_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Th_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Th_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Thead_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Thead_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Thead_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Time_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Time_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Time_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Title_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Title_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Title_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Tr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Tr_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Tr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Track_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Track_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Track_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Tt_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Tt_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Tt_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr U_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr U_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr U_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Ul_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Ul_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Ul_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Var_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Var_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Var_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Video_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Video_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Video_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr Wbr_ Itemprop  String  where
-  attr Itemprop value = unsafeAttribute (  
-    { key: "itemprop", value: prop' value  } <$ _)
-instance Attr Wbr_ Itemprop (Event.Event Unit -> Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map (
-    \value -> { key: "itemprop", value: prop' value })) eventValue)
-instance Attr Wbr_ Itemprop (Event.Event  String ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#>
-    \value -> { key: "itemprop", value: prop' value }
-instance Attr everything Itemprop  Unit  where
-  attr Itemprop _ = unsafeAttribute (  
-    { key: "itemprop", value: unset'  } <$ _)
-instance Attr everything Itemprop (Event.Event Unit -> Event.Event  Unit ) where
-  attr Itemprop eventValue = unsafeAttribute (map (map ( \_ ->
-    { key: "itemprop", value: unset' })) eventValue)
-instance Attr everything Itemprop (Event.Event  Unit ) where
-  attr Itemprop eventValue = unsafeAttribute \_ -> eventValue <#> \_ ->
+
+instance Attr A_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Abbr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Acronym_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Address_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Applet_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Area_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Article_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Aside_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Audio_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr B_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Base_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Basefont_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Bdi_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Bdo_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Big_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Blockquote_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Body_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Br_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Button_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Canvas_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Caption_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Center_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Cite_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Code_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Col_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Colgroup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Xdata_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Datalist_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dd_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Del_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Details_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dfn_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dialog_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dir_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Div_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dl_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Dt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Em_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Embed_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Fieldset_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Figcaption_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Figure_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Font_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Footer_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Form_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Frame_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Frameset_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H1_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H2_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H3_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H4_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H5_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr H6_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Head_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Header_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Hr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Html_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr I_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Iframe_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Img_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Input_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Ins_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Kbd_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Label_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Legend_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Li_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Link_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Main_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Map_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Mark_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Meta_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Meter_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Nav_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Noframes_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Noscript_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Object_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Ol_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Optgroup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Option_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Output_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr P_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Param_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Picture_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Pre_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Progress_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Q_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Rp_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Rt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Ruby_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr S_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Samp_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Script_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Section_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Select_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Small_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Source_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Span_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Strike_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Strong_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Style_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Sub_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Summary_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Sup_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Svg_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Table_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Tbody_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Td_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Template_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Textarea_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Tfoot_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Th_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Thead_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Time_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Title_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Tr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Track_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Tt_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr U_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Ul_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Var_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Video_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr Wbr_ Itemprop String where
+  attr Itemprop value = unsafeAttribute { key: "itemprop", value: prop' value }
+
+instance Attr everything Itemprop Unit where
+  attr Itemprop _ = unsafeAttribute
     { key: "itemprop", value: unset' }
