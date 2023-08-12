@@ -46,7 +46,7 @@ import Data.String.Utils (includes)
 import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
 import Deku.Core as Core
 import Effect (Effect)
-import FRP.Behavior (sample)
+import FRP.Poll (sample)
 import FRP.Event (create, subscribe)
 import Safe.Coerce (coerce)
 

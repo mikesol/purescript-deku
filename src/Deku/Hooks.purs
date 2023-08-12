@@ -1,4 +1,4 @@
--- | Deku Hooks, modeled after React Hooks, are a way to have stateful behavior in Deku.
+-- | Deku Hooks, modeled after React Hooks, are a way to have stateful poll in Deku.
 -- | At a basic level, Deku hooks look very much like their react counterparts:
 -- |
 -- | ```purescript
@@ -57,7 +57,7 @@ import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Behavior (sample)
+import FRP.Poll (sample)
 import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge)
 import FRP.Event.Class (once)
 

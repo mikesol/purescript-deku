@@ -63,7 +63,7 @@ import Data.Tuple.Nested ((/\))
 import Debug (spy)
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Behavior (behavior, sample)
+import FRP.Poll (poll, sample)
 import FRP.Event (Event)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
@@ -115,7 +115,7 @@ instance Monoid Nut where
   mempty = Nut
     ( NutF
         ( Bolson.Element'
-            (Node (Bolson.Element \_ _ -> behavior \_ -> empty))
+            (Node (Bolson.Element \_ _ -> poll \_ -> empty))
         )
     )
 

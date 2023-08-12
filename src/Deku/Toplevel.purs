@@ -25,7 +25,7 @@ import Deku.Interpret (FFIDOMSnapshot, fullDOMInterpret, getAllComments, hydrati
 import Deku.SSR (ssr')
 import Effect (Effect)
 import Effect.Exception (error, throwException)
-import FRP.Behavior (sample_)
+import FRP.Poll (sample_)
 import FRP.Event (create, createPure, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)

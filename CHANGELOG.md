@@ -209,7 +209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2022-04-11
 
-- Updates event and behavior libraries.
+- Updates event and poll libraries.
 
 ## [0.2.1] - 2022-04-08
 
@@ -295,7 +295,7 @@ Fixes the sorting algorithm on insert of subgraphs.
 
 ### Added
 
-- Exposes the DOM API via a FRP Behavior by using induction on existentially-quantified and linearly-typed indexed cofree comonads that act as kan-extended natural transformations over embedded universal morphisms.
+- Exposes the DOM API via a FRP Poll by using induction on existentially-quantified and linearly-typed indexed cofree comonads that act as kan-extended natural transformations over embedded universal morphisms.
 - A README.
 - A CHANGELOG.
 - Several tests.

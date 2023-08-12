@@ -390,7 +390,7 @@ describe("deku", () => {
       $("#button4").trigger("click");
       $("#button5").trigger("click");
       $("#button6").trigger("click");
-      // as the behavior is hot, we get the most recent value
+      // as the poll is hot, we get the most recent value
       expect($("#myspan").text()).toBe("bar");
     })
   );

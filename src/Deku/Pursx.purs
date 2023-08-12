@@ -14,7 +14,7 @@ import Deku.Attribute (Attribute, unsafeUnAttribute)
 import Deku.Control (unsafeSetAttribute)
 import Deku.Core (DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), flattenArgs)
 import Deku.DOM (class TagToDeku)
-import FRP.Behavior (behavior, sample)
+import FRP.Poll (poll, sample)
 import FRP.Event (merge)
 import Foreign.Object as Object
 import Prim.Boolean (False, True)
@@ -2425,7 +2425,7 @@ domableToNode (Nut df) = step1 df
   where
   step1 :: forall payload. NutF payload -> Node payload
   step1 (NutF (Element' n)) = n
-  step1 _ = Node $ Element \_ _ -> behavior \_ -> empty
+  step1 _ = Node $ Element \_ _ -> poll \_ -> empty
 
 instance pursxToElementConsInsert ::
   ( Row.Cons key (Nut) r' r
@@ -2515,7 +2515,7 @@ instance pursxToElementNil ::
   pursxToElement _ _ _ =
     { cache: Object.empty
     , element: Nut
-        ( NutF $ Element' $ Node $ Element \_ _ -> behavior \_ -> empty
+        ( NutF $ Element' $ Node $ Element \_ _ -> poll \_ -> empty
         )
     }
 
@@ -2621,4 +2621,3 @@ __internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~
-

@@ -30,7 +30,7 @@ import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
 import Effect.Console (log)
-import FRP.Behavior (effectToBehavior, sampleBy)
+import FRP.Poll (effectToPoll, sampleBy)
 import FRP.Event (Event, fold, mapAccum, merge)
 import Type.Proxy (Proxy(..))
 
@@ -497,7 +497,7 @@ refToHot = Deku.do
             [ text "reveal" ]
         , D.span [ id "myspan" ]
             [ guardWith
-                ( const $ sampleBy vr (effectToBehavior cref)
+                ( const $ sampleBy vr (effectToPoll cref)
                     (Alt.guard <$> reveal)
                 )
                 text
