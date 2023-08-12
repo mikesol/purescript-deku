@@ -1632,6 +1632,7 @@ import Deku.DOM.Attr.Contenteditable (Contenteditable(..))
 
 import Effect (Effect)
 import FRP.Event (Event)
+import FRP.Poll (Poll)
 import Prelude (Unit)
 import Type.Proxy (Proxy)
 import Unsafe.Coerce (unsafeCoerce)
@@ -1883,7 +1884,7 @@ unsafeCustomElement
   :: forall element
    . String
   -> Proxy element
-  -> Array (Event (Attribute element))
+  -> Array (Poll (Attribute element))
   -> Array Nut
   -> Nut
 unsafeCustomElement name _ = elementify2 name

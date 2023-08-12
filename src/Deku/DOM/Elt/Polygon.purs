@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Polygon_
 
 polygon
-  :: Array (Event (Attribute Polygon_))
+  :: Array (Poll (Attribute Polygon_))
   -> Array Nut
   -> Nut
 polygon = DC.elementify2 "polygon"
@@ -22,4 +22,4 @@ polygon_ = polygon empty
 polygon__
   :: String
   -> Nut
-polygon__ t = polygon_ [ DC.text_ t ]
+polygon__ t = polygon_ [ DC.text t ]

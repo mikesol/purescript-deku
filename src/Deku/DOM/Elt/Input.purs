@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Input_
 
 input
-  :: Array (Event (Attribute Input_))
+  :: Array (Poll (Attribute Input_))
   -> Array Nut
   -> Nut
 input = DC.elementify2 "input"
@@ -22,4 +22,4 @@ input_ = input empty
 input__
   :: String
   -> Nut
-input__ t = input_ [ DC.text_ t ]
+input__ t = input_ [ DC.text t ]

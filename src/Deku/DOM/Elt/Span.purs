@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Span_
 
 span
-  :: Array (Event (Attribute Span_))
+  :: Array (Poll (Attribute Span_))
   -> Array Nut
   -> Nut
 span = DC.elementify2 "span"
@@ -22,4 +22,4 @@ span_ = span empty
 span__
   :: String
   -> Nut
-span__ t = span_ [ DC.text_ t ]
+span__ t = span_ [ DC.text t ]

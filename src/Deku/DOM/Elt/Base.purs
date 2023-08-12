@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Base_
 
 base
-  :: Array (Event (Attribute Base_))
+  :: Array (Poll (Attribute Base_))
   -> Array Nut
   -> Nut
 base = DC.elementify2 "base"
@@ -22,4 +22,4 @@ base_ = base empty
 base__
   :: String
   -> Nut
-base__ t = base_ [ DC.text_ t ]
+base__ t = base_ [ DC.text t ]

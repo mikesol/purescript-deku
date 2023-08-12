@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Mask_
 
 mask
-  :: Array (Event (Attribute Mask_))
+  :: Array (Poll (Attribute Mask_))
   -> Array Nut
   -> Nut
 mask = DC.elementify2 "mask"
@@ -22,4 +22,4 @@ mask_ = mask empty
 mask__
   :: String
   -> Nut
-mask__ t = mask_ [ DC.text_ t ]
+mask__ t = mask_ [ DC.text t ]

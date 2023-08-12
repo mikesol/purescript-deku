@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Template_
 
 template
-  :: Array (Event (Attribute Template_))
+  :: Array (Poll (Attribute Template_))
   -> Array Nut
   -> Nut
 template = DC.elementify2 "template"
@@ -22,4 +22,4 @@ template_ = template empty
 template__
   :: String
   -> Nut
-template__ t = template_ [ DC.text_ t ]
+template__ t = template_ [ DC.text t ]

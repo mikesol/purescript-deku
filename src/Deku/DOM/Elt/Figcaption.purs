@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Figcaption_
 
 figcaption
-  :: Array (Event (Attribute Figcaption_))
+  :: Array (Poll (Attribute Figcaption_))
   -> Array Nut
   -> Nut
 figcaption = DC.elementify2 "figcaption"
@@ -22,4 +22,4 @@ figcaption_ = figcaption empty
 figcaption__
   :: String
   -> Nut
-figcaption__ t = figcaption_ [ DC.text_ t ]
+figcaption__ t = figcaption_ [ DC.text t ]

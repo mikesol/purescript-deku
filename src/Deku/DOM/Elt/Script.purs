@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Script_
 
 script
-  :: Array (Event (Attribute Script_))
+  :: Array (Poll (Attribute Script_))
   -> Array Nut
   -> Nut
 script = DC.elementify2 "script"
@@ -22,4 +22,4 @@ script_ = script empty
 script__
   :: String
   -> Nut
-script__ t = script_ [ DC.text_ t ]
+script__ t = script_ [ DC.text t ]

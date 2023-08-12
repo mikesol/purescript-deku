@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data FeSpotLight_
 
 feSpotLight
-  :: Array (Event (Attribute FeSpotLight_))
+  :: Array (Poll (Attribute FeSpotLight_))
   -> Array Nut
   -> Nut
 feSpotLight = DC.elementify2 "feSpotLight"
@@ -22,4 +22,4 @@ feSpotLight_ = feSpotLight empty
 feSpotLight__
   :: String
   -> Nut
-feSpotLight__ t = feSpotLight_ [ DC.text_ t ]
+feSpotLight__ t = feSpotLight_ [ DC.text t ]

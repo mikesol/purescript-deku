@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Form_
 
 form
-  :: Array (Event (Attribute Form_))
+  :: Array (Poll (Attribute Form_))
   -> Array Nut
   -> Nut
 form = DC.elementify2 "form"
@@ -22,4 +22,4 @@ form_ = form empty
 form__
   :: String
   -> Nut
-form__ t = form_ [ DC.text_ t ]
+form__ t = form_ [ DC.text t ]

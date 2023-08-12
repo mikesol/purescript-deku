@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Center_
 
 center
-  :: Array (Event (Attribute Center_))
+  :: Array (Poll (Attribute Center_))
   -> Array Nut
   -> Nut
 center = DC.elementify2 "center"
@@ -22,4 +22,4 @@ center_ = center empty
 center__
   :: String
   -> Nut
-center__ t = center_ [ DC.text_ t ]
+center__ t = center_ [ DC.text t ]

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Abbr_
 
 abbr
-  :: Array (Event (Attribute Abbr_))
+  :: Array (Poll (Attribute Abbr_))
   -> Array Nut
   -> Nut
 abbr = DC.elementify2 "abbr"
@@ -22,4 +22,4 @@ abbr_ = abbr empty
 abbr__
   :: String
   -> Nut
-abbr__ t = abbr_ [ DC.text_ t ]
+abbr__ t = abbr_ [ DC.text t ]

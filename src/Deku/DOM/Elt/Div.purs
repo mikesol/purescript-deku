@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Div_
 
 div
-  :: Array (Event (Attribute Div_))
+  :: Array (Poll (Attribute Div_))
   -> Array Nut
   -> Nut
 div = DC.elementify2 "div"
@@ -22,4 +22,4 @@ div_ = div empty
 div__
   :: String
   -> Nut
-div__ t = div_ [ DC.text_ t ]
+div__ t = div_ [ DC.text t ]

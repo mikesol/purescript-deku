@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Datalist_
 
 datalist
-  :: Array (Event (Attribute Datalist_))
+  :: Array (Poll (Attribute Datalist_))
   -> Array Nut
   -> Nut
 datalist = DC.elementify2 "datalist"
@@ -22,4 +22,4 @@ datalist_ = datalist empty
 datalist__
   :: String
   -> Nut
-datalist__ t = datalist_ [ DC.text_ t ]
+datalist__ t = datalist_ [ DC.text t ]

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Filter_
 
 filter
-  :: Array (Event (Attribute Filter_))
+  :: Array (Poll (Attribute Filter_))
   -> Array Nut
   -> Nut
 filter = DC.elementify2 "filter"
@@ -22,4 +22,4 @@ filter_ = filter empty
 filter__
   :: String
   -> Nut
-filter__ t = filter_ [ DC.text_ t ]
+filter__ t = filter_ [ DC.text t ]

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data FeImage_
 
 feImage
-  :: Array (Event (Attribute FeImage_))
+  :: Array (Poll (Attribute FeImage_))
   -> Array Nut
   -> Nut
 feImage = DC.elementify2 "feImage"
@@ -22,4 +22,4 @@ feImage_ = feImage empty
 feImage__
   :: String
   -> Nut
-feImage__ t = feImage_ [ DC.text_ t ]
+feImage__ t = feImage_ [ DC.text t ]

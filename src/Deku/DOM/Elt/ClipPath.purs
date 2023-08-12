@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data ClipPath_
 
 clipPath
-  :: Array (Event (Attribute ClipPath_))
+  :: Array (Poll (Attribute ClipPath_))
   -> Array Nut
   -> Nut
 clipPath = DC.elementify2 "clipPath"
@@ -22,4 +22,4 @@ clipPath_ = clipPath empty
 clipPath__
   :: String
   -> Nut
-clipPath__ t = clipPath_ [ DC.text_ t ]
+clipPath__ t = clipPath_ [ DC.text t ]

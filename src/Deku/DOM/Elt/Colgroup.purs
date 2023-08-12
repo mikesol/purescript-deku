@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Colgroup_
 
 colgroup
-  :: Array (Event (Attribute Colgroup_))
+  :: Array (Poll (Attribute Colgroup_))
   -> Array Nut
   -> Nut
 colgroup = DC.elementify2 "colgroup"
@@ -22,4 +22,4 @@ colgroup_ = colgroup empty
 colgroup__
   :: String
   -> Nut
-colgroup__ t = colgroup_ [ DC.text_ t ]
+colgroup__ t = colgroup_ [ DC.text t ]

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Ellipse_
 
 ellipse
-  :: Array (Event (Attribute Ellipse_))
+  :: Array (Poll (Attribute Ellipse_))
   -> Array Nut
   -> Nut
 ellipse = DC.elementify2 "ellipse"
@@ -22,4 +22,4 @@ ellipse_ = ellipse empty
 ellipse__
   :: String
   -> Nut
-ellipse__ t = ellipse_ [ DC.text_ t ]
+ellipse__ t = ellipse_ [ DC.text t ]

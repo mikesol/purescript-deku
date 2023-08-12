@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Mark_
 
 mark
-  :: Array (Event (Attribute Mark_))
+  :: Array (Poll (Attribute Mark_))
   -> Array Nut
   -> Nut
 mark = DC.elementify2 "mark"
@@ -22,4 +22,4 @@ mark_ = mark empty
 mark__
   :: String
   -> Nut
-mark__ t = mark_ [ DC.text_ t ]
+mark__ t = mark_ [ DC.text t ]

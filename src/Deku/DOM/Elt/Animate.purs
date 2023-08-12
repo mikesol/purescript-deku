@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Animate_
 
 animate
-  :: Array (Event (Attribute Animate_))
+  :: Array (Poll (Attribute Animate_))
   -> Array Nut
   -> Nut
 animate = DC.elementify2 "animate"
@@ -22,4 +22,4 @@ animate_ = animate empty
 animate__
   :: String
   -> Nut
-animate__ t = animate_ [ DC.text_ t ]
+animate__ t = animate_ [ DC.text t ]

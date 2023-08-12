@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Address_
 
 address
-  :: Array (Event (Attribute Address_))
+  :: Array (Poll (Attribute Address_))
   -> Array Nut
   -> Nut
 address = DC.elementify2 "address"
@@ -22,4 +22,4 @@ address_ = address empty
 address__
   :: String
   -> Nut
-address__ t = address_ [ DC.text_ t ]
+address__ t = address_ [ DC.text t ]

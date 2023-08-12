@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data View_
 
 view
-  :: Array (Event (Attribute View_))
+  :: Array (Poll (Attribute View_))
   -> Array Nut
   -> Nut
 view = DC.elementify2 "view"
@@ -22,4 +22,4 @@ view_ = view empty
 view__
   :: String
   -> Nut
-view__ t = view_ [ DC.text_ t ]
+view__ t = view_ [ DC.text t ]

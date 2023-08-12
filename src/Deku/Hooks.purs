@@ -48,6 +48,7 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
+import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
@@ -57,9 +58,10 @@ import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Poll (sample)
 import FRP.Event (Event, create, createPure, filterMap, mailbox, mapAccum, merge)
 import FRP.Event.Class (once)
+import FRP.Poll (Poll, sample)
+import FRP.Poll as Poll
 
 flattenArgs
   :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
@@ -224,14 +226,14 @@ useMailboxed f = Nut go'
     subscribe (sample (__internalDekuFlatten nf i di) e)
 
 type DynOptions v =
-  { sendTo :: v -> (Event Unit -> Event Int), remove :: v -> (Event Unit -> Event Unit) }
+  { sendTo :: v -> Poll Int, remove :: v -> Poll Unit }
 
 dynOptions :: forall v. DynOptions v
-dynOptions = { sendTo: \_ _ -> empty, remove: \_ _ -> empty }
+dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
 useDyn
   :: forall value
-   . (Event Unit -> Event (Tuple Int value))
+   .  Poll (Tuple Int value)
   -> Hook
        { value :: value
        , remove :: Effect Unit
@@ -241,7 +243,7 @@ useDyn y = useDynWith y dynOptions
 
 useDynWith
   :: forall value
-   . (Event Unit -> Event (Tuple Int value))
+   . (Poll (Tuple Int value))
   -> DynOptions value
   -> Hook
        { value :: value
@@ -257,14 +259,14 @@ useDynWith e opts f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
-    c1 <- create
+    c1 <- Poll.create
     let _ = spy "USEDYNWITH CALLED" true
     let
       mc (Tuple pos v) = Tuple
-        ( merge
-            [ opts.remove v (ee $> unit) $> Child BCore.Remove
-            , Child <<< BCore.Logic <$> opts.sendTo v (ee $> unit)
-            , c1.event
+        ( oneOf
+            [ opts.remove v $> Child BCore.Remove
+            , Child <<< BCore.Logic <$> opts.sendTo v
+            , c1.poll
             ]
         )
         ( unsafeSetPos pos $ f
@@ -274,16 +276,16 @@ useDynWith e opts f = Nut go'
             }
         )
     let
-      Nut nf = dyn $ map mc (e (ee $> unit))
+      Nut nf = dyn $ map mc e
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
 useDynAtBeginningWith
   :: forall value
-   . (Event Unit -> Event value)
+   . Poll value
   -> DynOptions value
   -> Hook
        { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-useDynAtBeginningWith e = useDynWith (map (map (0 /\ _)) e)
+useDynAtBeginningWith e = useDynWith (map (0 /\ _) e)
 
 useDynAtBeginning
   :: forall value
@@ -314,13 +316,13 @@ useDynAtEnd b = useDynAtEndWith b dynOptions
 -- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
-switcher :: forall a. (a -> Nut) -> (Event Unit -> Event a) -> Nut
+switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f event = Deku.do
-  --ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith (counter <$> event) $ dynOptions
+  ctr <- useMemoized (counter event)
+  { value } <- useDynAtBeginningWith ctr $ dynOptions
     { remove = \(Tuple oldV _) ee -> filterMap
         (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
-        (counter (event ee))
+        ctr
     }
   f (snd value)
   where

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data FeGaussianBlur_
 
 feGaussianBlur
-  :: Array (Event (Attribute FeGaussianBlur_))
+  :: Array (Poll (Attribute FeGaussianBlur_))
   -> Array Nut
   -> Nut
 feGaussianBlur = DC.elementify2 "feGaussianBlur"
@@ -22,4 +22,4 @@ feGaussianBlur_ = feGaussianBlur empty
 feGaussianBlur__
   :: String
   -> Nut
-feGaussianBlur__ t = feGaussianBlur_ [ DC.text_ t ]
+feGaussianBlur__ t = feGaussianBlur_ [ DC.text t ]

@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Html_
 
 html
-  :: Array (Event (Attribute Html_))
+  :: Array (Poll (Attribute Html_))
   -> Array Nut
   -> Nut
 html = DC.elementify2 "html"
@@ -22,4 +22,4 @@ html_ = html empty
 html__
   :: String
   -> Nut
-html__ t = html_ [ DC.text_ t ]
+html__ t = html_ [ DC.text t ]

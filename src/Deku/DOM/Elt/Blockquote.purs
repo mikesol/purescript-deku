@@ -4,12 +4,12 @@ import Control.Plus (empty)
 import Deku.Attribute (Attribute)
 import Deku.Control as DC
 import Deku.Core (Nut)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 
 data Blockquote_
 
 blockquote
-  :: Array (Event (Attribute Blockquote_))
+  :: Array (Poll (Attribute Blockquote_))
   -> Array Nut
   -> Nut
 blockquote = DC.elementify2 "blockquote"
@@ -22,4 +22,4 @@ blockquote_ = blockquote empty
 blockquote__
   :: String
   -> Nut
-blockquote__ t = blockquote_ [ DC.text_ t ]
+blockquote__ t = blockquote_ [ DC.text t ]
