@@ -29,6 +29,7 @@ module Deku.Hooks
   , useEffect
   , useMailboxed
   , useMemoized
+  , useState'
   , useMemoized'
   , useRef
   , useRefNE
@@ -125,7 +126,7 @@ guardWith m f = m <#~> case _ of
   Nothing -> mempty
 
 useEffect
-  :: Event (Effect Unit)
+  :: Poll (Effect Unit)
   -> (Unit -> Nut)
   -> Nut
 useEffect e f = Nut go'
@@ -141,7 +142,7 @@ useEffect e f = Nut go'
     let
       exv = merge
         [ sample (__internalDekuFlatten nf i di) ee
-        , (\effect -> ff (oneOffEffect { effect })) <$> e
+        , sample_ ((\effect -> ff (oneOffEffect { effect })) <$> e) ee
 
         ]
     subscribe exv identity
