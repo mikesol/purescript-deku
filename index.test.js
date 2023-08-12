@@ -45,8 +45,9 @@ describe("deku", () => {
       f(tests.twoElements, () => {
         const $ = require("jquery");
         expect($("#maindiv").text()).toBe("helloworld");
-      })
+      }), false
   );
+
   doTest("has elements in the correct order", (f) =>
     f(tests.elementsInCorrectOrder, () => {
       const $ = require("jquery");

@@ -11,7 +11,7 @@ import Data.Filterable (filter)
 import Data.Foldable (intercalate, oneOfMap)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute ((!:=), (:=))
+import Deku.Attribute ((:=))
 import Deku.Attributes (id_)
 import Deku.Control (globalPortal1, portal1, text)
 import Deku.Core (Hook, Nut, fixed)
@@ -23,7 +23,8 @@ import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import FRP.Event (Event, fold, mapAccum)
+import FRP.Event (fold, mapAccum)
+import FRP.Poll (Poll)
 import Type.Proxy (Proxy(..))
 
 
@@ -76,7 +77,7 @@ elementsInCorrectOrder = do
 dynAppearsCorrectlyAtBeginning :: Nut
 dynAppearsCorrectlyAtBeginning = Deku.do
   let
-    counter :: forall a. Event a -> Event Int
+    counter :: forall a. Poll a -> Poll Int
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
   D.div [ id_ "div0" ]
@@ -91,7 +92,7 @@ dynAppearsCorrectlyAtBeginning = Deku.do
 dynAppearsCorrectlyAtEnd :: Nut
 dynAppearsCorrectlyAtEnd = Deku.do
   let
-    counter :: forall a. Event a -> Event Int
+    counter :: forall a. Poll a -> Poll Int
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
   D.div [ id_ "div0" ]
@@ -106,7 +107,7 @@ dynAppearsCorrectlyAtEnd = Deku.do
 deeplyNestedPreservesOrder :: Nut
 deeplyNestedPreservesOrder = Deku.do
   let
-    counter :: forall a. Event a -> Event Int
+    counter :: forall a. Poll a -> Poll Int
     counter event = fold (\a _ -> a + 1) (-1) event
   setItem /\ item <- useState'
   let
@@ -139,7 +140,7 @@ sendsToPosition = Deku.do
     , D.span [ id_ "div1" ] [ text "bar" ]
     , Deku.do
         { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then posIdx else empty) sendTo
+        useEffect (if i == 3 then (sendTo <$> posIdx) else empty)
         D.span [ id_ ("dyn" <> show i) ] [ text (show i) ]
     , D.button [ id_ "pos", click_ (setPosIdx 1) ]
         [ text "send to pos" ]
@@ -153,7 +154,7 @@ sendsToPositionFixed = Deku.do
     , D.span [ id_ "div1" ] [ text "bar" ]
     , Deku.do
         { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then posIdx else empty) sendTo
+        useEffect (if i == 3 then sendTo <$> posIdx else empty)
         fixed
           [ D.span [ id_ ("dyn" <> show i <> "a") ]
               [ text (show i <> "a") ]
@@ -182,7 +183,7 @@ insertsAtCorrectPositions = D.div [ id_ "div0" ]
 switcherWorksForCompositionalElements :: Nut
 switcherWorksForCompositionalElements = Deku.do
   let
-    counter :: forall a. Event a -> Event Int
+    counter :: forall a. Poll a -> Poll Int
     counter event = fold (\a _ -> 1 + a) (-1) event
   setItem /\ item <- useState unit
   D.div [ id_ "div0" ]
@@ -221,7 +222,7 @@ tabbedNavigationWithPursx = Deku.do
 portalsCompose :: Nut
 portalsCompose = Deku.do
   let
-    counter :: forall a. Event a -> Event Int
+    counter :: forall a. Poll a -> Poll Int
     counter event = fold (\a _ -> a + 1) 0 event
   setItem /\ item' <- useState'
   item <- useMemoized (counter item' <|> pure 0)
@@ -248,10 +249,10 @@ portalsCompose = Deku.do
 globalPortalsRetainPortalnessWhenSentOutOfScope :: Nut
 globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
   let
-    counter :: forall a. Event a -> Event (Int /\ a)
+    counter :: forall a. Poll a -> Poll (Int /\ a)
     counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
 
-    limitTo :: Int -> Event ~> Event
+    limitTo :: Int -> Poll ~> Poll
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState true
   setPortedNut /\ portedNut <- useState'
@@ -263,7 +264,7 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
         ]
     , ( globalPortal1 (D.div_ [ text "foo" ]) \e ->
           Deku.do
-            useEffect (pure unit) (const (setPortedNut e))
+            useEffect (pure (setPortedNut e))
             D.div [ id_ "inner-scope" ]
               [ (Tuple <$> portalInContext <*> portedNut)
                   <#~> \(Tuple tf p) ->
@@ -281,10 +282,10 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
 localPortalsLosePortalnessWhenSentOutOfScope :: Nut
 localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
   let
-    counter :: forall a. Event a -> Event (Int /\ a)
+    counter :: forall a. Poll a -> Poll (Int /\ a)
     counter event = mapAccum (\a b -> (a + 1) /\ ((a + 1) /\ b)) (-1) event
 
-    limitTo :: Int -> Event ~> Event
+    limitTo :: Int -> Poll ~> Poll
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState true
   setPortedNut /\ portedNut <- useState'
@@ -296,7 +297,7 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
         ]
     , portal1 (D.div_ [ text "foo" ]) \e ->
         Deku.do
-          useEffect (pure unit) (const (setPortedNut e))
+          useEffect (pure (setPortedNut e))
           D.div [ id_ "inner-scope" ]
             [ (Tuple <$> portalInContext <*> portedNut)
                 <#~> \(Tuple tf p) ->
@@ -361,7 +362,7 @@ unsetUnsets = Deku.do
     ]
 
 emptyTextIsSet :: Nut
-emptyTextIsSet = text mempty
+emptyTextIsSet = text (empty :: Poll String)
 
 useRefWorks :: Nut
 useRefWorks = Deku.do
@@ -391,8 +392,8 @@ useEffectWorks :: Nut
 useEffectWorks = Deku.do
   let startsAt = 0
   setCounter /\ counter <- useState startsAt
-  useEffect counter \i -> when (i `mod` 4 == 1) do
-    setCounter (i + 1)
+  let filt i = i `mod` 4 == 1
+  useEffect $ filter filt counter <#> setCounter <<< add 1
   D.div_
     [ D.button
         [ click $ counter <#> add 1 >>> setCounter
@@ -416,7 +417,7 @@ customHooksDoTheirThing = Deku.do
     , D.div [ id_ "mydiv2" ] [ text (show <$> e2) ]
     ]
   where
-  myHook :: Event Int -> Hook (Tuple (Event Int) (Event Int))
+  myHook :: Poll Int -> Hook (Tuple (Poll Int) (Poll Int))
   myHook e makeHook = Deku.do
     e1 <- useMemoized (add 42 <$> e)
     e2 <- useMemoized (add 48 <$> e)
