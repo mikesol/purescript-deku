@@ -12,8 +12,7 @@ module Deku.Control
   , portal1
   , text
   , unsafeSetAttribute
-  )
-  where
+  ) where
 
 import Prelude
 
@@ -30,8 +29,8 @@ import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
-import FRP.Poll (sample)
 import FRP.Event (Event, merge)
+import FRP.Poll (Poll, sample, sample_, sham)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -74,7 +73,7 @@ unsafeSetAttribute
 elementify2
   :: forall element
    . String
-  -> Array (Attribute element)
+  -> Array (Poll (Attribute element))
   -> Array Nut
   -> Nut
 elementify2 en attributes kids = Nut
@@ -92,7 +91,7 @@ elementify2 en attributes kids = Nut
 elementify
   :: forall payload element
    . String
-  -> Array (Attribute element)
+  -> Array (Poll (Attribute element))
   -> NutF payload
   -> Node payload
 elementify tag atts children = Node $ Element go
@@ -130,7 +129,7 @@ elementify tag atts children = Node $ Element go
       identity
     subscribe
       ( map (\zzz -> fff $ unsafeSetAttribute di (show me) zzz)
-          (merge (map (unsafeUnAttribute >>> (_ $ (ee $> unit))) atts))
+          (merge (map (map unsafeUnAttribute >>> flip sample_ ee) atts))
       )
       identity
 
@@ -292,35 +291,6 @@ portal v' c' =
         (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
     )
 
-text_'
-  :: (Event Unit -> Event String)
-  -> Nut
-text_' t2 = Nut go'
-  where
-  go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node (Element go)))
-
-  go
-    :: forall payload
-     . Node' payload
-  go
-    { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
-    di@
-      ( DOMInterpret
-          { ids, makeText, deferPayload, deleteFromCache, attributeParent }
-      ) = behaving' \fff ee kx subscribe -> do
-    me <- ids
-    raiseId $ show me
-    kx $ makeText { id: show me, parent, pos, scope, dynFamily }
-    for_ parent \p ->
-      kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
-    kx $ deferPayload deferralPath (deleteFromCache { id: show me })
-    subscribe
-          (( \iii -> 
-              ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
-          )
-          (t2 (ee $> unit)))  identity
-
 -- | A class representing a conservative smattering of stuff that can turn into a text node
 class Textable text where
   -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
@@ -328,13 +298,39 @@ class Textable text where
   text :: text -> Nut
 
 instance Textable (Event String) where
-  text s = text_' (const s)
+  text s = text (sham s)
 
 instance Textable String where
-  text s = text_' (_ $> s)
+  text s = text (pure s :: Poll String)
 
-instance Textable (Event Unit -> Event String) where
-  text s = text_' s
+instance Textable (Poll String) where
+  text t2 = Nut go'
+    where
+    go' :: forall payload. NutF payload
+    go' = NutF (Element' (Node (Element go)))
+
+    go
+      :: forall payload
+       . Node' payload
+    go
+      { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
+      di@
+        ( DOMInterpret
+            { ids, makeText, deferPayload, deleteFromCache, attributeParent }
+        ) = behaving' \fff ee kx subscribe -> do
+      me <- ids
+      raiseId $ show me
+      kx $ makeText { id: show me, parent, pos, scope, dynFamily }
+      for_ parent \p ->
+        kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+      kx $ deferPayload deferralPath (deleteFromCache { id: show me })
+      subscribe
+        ( ( \iii ->
+              ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
+          )
+            (sample_ t2 ee)
+        )
+        identity
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.

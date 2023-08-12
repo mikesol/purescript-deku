@@ -17,18 +17,22 @@ module Deku.Attribute
   , cb
   , Cb(..)
   , xdata
+  , pureAttr
+  , (!:=)
   , maybeAttr
   , (?:=)
+  , mapAttr
+  , (<:=>)
   ) where
 
 import Prelude
 
 import Control.Plus (empty)
-import Data.Functor (voidRight)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
 import Effect (Effect)
-import FRP.Event as FRP
+import FRP.Poll (Poll)
+import Safe.Coerce (coerce)
 import Web.Event.Internal.Types (Event)
 
 -- | A callback function that can be used as a value for a listener.
@@ -86,21 +90,15 @@ type Attribute' =
 -- | Low level representation of key-value pairs for attributes and listeners.
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
-newtype Attribute (e :: Type) = Attribute
-  (FRP.Event Unit -> FRP.Event Attribute')
-
+newtype Attribute (e :: Type) = Attribute Attribute'
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
-  :: forall e
-   . Attribute e
-  -> (FRP.Event Unit -> FRP.Event Attribute')
-unsafeUnAttribute (Attribute a) = a
+  :: forall e. Attribute e -> { key :: String, value :: AttributeValue }
+unsafeUnAttribute = coerce
 
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeAttribute
-  :: forall e
-   . (FRP.Event Unit -> FRP.Event Attribute')
-  -> Attribute e
+  :: forall e. { key :: String, value :: AttributeValue } -> Attribute e
 unsafeAttribute = Attribute
 
 -- | Guarantees type-safe creation of attribute `a` with type `b` for element `e`.
@@ -111,9 +109,23 @@ class Attr e a b where
   -- | aka `D.Style := "color: red;"` is a valid attribute or listener for any element.
   attr :: a -> b -> Attribute e
 
+infixr 5 attr as :=
+
 -- | Construct a [data attribute](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
 xdata :: forall e. String -> String -> Attribute e
-xdata k v = unsafeAttribute (voidRight { key: "data-" <> k, value: Prop' v })
+xdata k v = unsafeAttribute { key: "data-" <> k, value: Prop' v }
+
+-- | A version of `attr` that creates a `pure` event fired immediately
+-- | upon the element's creation. More commonly used in its alias `!:=`,
+pureAttr
+  :: forall a b e
+   . Attr e a b
+  => a
+  -> b
+  -> Poll (Attribute e)
+pureAttr a b = pure (a := b)
+
+infixr 5 pureAttr as !:=
 
 -- | A version of `attr` that sets an attribute or listener only if the value is `Just`.
 -- | More commonly used in its alias `?:=`.
@@ -122,9 +134,16 @@ maybeAttr
    . Attr e a b
   => a
   -> Maybe b
-  -> Attribute e
-maybeAttr a (Just b) = a := b
-maybeAttr _ Nothing = Attribute (const empty)
+  -> Poll (Attribute e)
+maybeAttr a (Just b) = pure (a := b)
+maybeAttr _ Nothing = empty
 
 infix 5 maybeAttr as ?:=
-infix 5 attr as :=
+
+-- | A version of `attr` that maps a value to an attribute or listener.
+-- | More commonly used in its alias `<:=>`.
+mapAttr
+  :: forall m a b e. Functor m => Attr e a b => a -> m b -> m (Attribute e)
+mapAttr a b = (a := _) <$> b
+
+infix 5 mapAttr as <:=>

@@ -60,11 +60,10 @@ import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
-import Debug (spy)
 import Deku.Attribute (Cb)
 import Effect (Effect)
-import FRP.Poll (poll, sample)
 import FRP.Event (Event)
+import FRP.Poll (Poll, poll, sample)
 import Foreign.Object (Object)
 import Web.DOM as Web.DOM
 
@@ -352,7 +351,6 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
           }
       ) = behaving \e kx subscribe -> do
     me <- ids
-    let _ = spy "DYNIFY CALLED" true
     raiseId $ show me
     -- `dyn`-s need to have a parent
     -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
@@ -416,27 +414,27 @@ dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
-  :: Event (Tuple (Event Child) Nut)
+  :: Poll (Tuple (Poll Child) Nut)
   -> Nut
 dyn = dynify myDyn
   where
   bolsonify
     :: forall payload
-     . Tuple (Event Child) Nut
-    -> Tuple (Event (Bolson.Child Int)) (Bolson.Entity Int (Node payload))
+     . Tuple (Poll Child) Nut
+    -> Tuple (Poll (Bolson.Child Int)) (Bolson.Entity Int (Node payload))
   bolsonify (Tuple child (Nut nut)) = Tuple (map (\(Child x) -> x) child)
     ((\(NutF n) -> n) nut)
 
   myDyn
-    :: (Event (Tuple (Event Child) Nut))
+    :: (Poll (Tuple (Poll Child) Nut))
     -> Nut
   myDyn e = Nut
     (myDyn' (map bolsonify e))
 
   myDyn'
     :: forall payload
-     . Event
-         ( Tuple (Event (Bolson.Child Int))
+     . Poll
+         ( Tuple (Poll (Bolson.Child Int))
              (Bolson.Entity Int (Node payload))
          )
     -> NutF payload
