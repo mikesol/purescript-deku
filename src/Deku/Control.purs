@@ -27,8 +27,9 @@ import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
+import Data.Tuple (Tuple(..))
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
 import FRP.Event (merge)
 import FRP.Poll (Poll, sample, sample_)
 import Prim.Int (class Compare)
@@ -238,28 +239,16 @@ portal
   -> (Vect n Nut -> Nut)
   -> Nut
 portal v' c' =
-  -- all local portals are wrapped in a `dyn`
-  -- otherwise, they would have no unique scope, which would not
-  -- allow us to determine if they've exacped their scope
-  -- for global portals, this is not needed as they use the global scope
-  -- todo: this logic is a hack. try to get rid of it.
-  -- dyn
-  -- THIS IS WHERE WE NEED THE INCOMING VALUE THUNKED
-  --   ( Tuple
-  --       [ Tuple empty
-  --           ( Nut
-  --               ( go (map (\(Nut df) -> df) v')
-  --                   (shouldBeSafe c')
-  --               )
-  --           )
-  --       ]
-  --       empty
-  --   )
-  ( Nut
-      ( go (map (\(Nut df) -> df) v')
-          (shouldBeSafe c')
-      )
-  )
+  dyn
+    ( pure
+        ( Tuple empty
+            ( Nut
+                ( go (map (\(Nut df) -> df) v')
+                    (shouldBeSafe c')
+                )
+            )
+        )
+    )
 
   where
   shouldBeSafe
@@ -296,32 +285,32 @@ text_ s = text (pure s)
 
 text :: Poll String -> Nut
 text t2 = Nut go'
-    where
-    go' :: forall payload. NutF payload
-    go' = NutF (Element' (Node (Element go)))
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
 
-    go
-      :: forall payload
-       . Node' payload
-    go
-      { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
-      di@
-        ( DOMInterpret
-            { ids, makeText, deferPayload, deleteFromCache, attributeParent }
-        ) = behaving' \fff ee kx subscribe -> do
-      me <- ids
-      raiseId $ show me
-      kx $ makeText { id: show me, parent, pos, scope, dynFamily }
-      for_ parent \p ->
-        kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
-      kx $ deferPayload deferralPath (deleteFromCache { id: show me })
-      subscribe
-        ( ( \iii ->
-              ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
-          )
-            (sample_ t2 ee)
+  go
+    :: forall payload
+     . Node' payload
+  go
+    { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
+    di@
+      ( DOMInterpret
+          { ids, makeText, deferPayload, deleteFromCache, attributeParent }
+      ) = behaving' \fff ee kx subscribe -> do
+    me <- ids
+    raiseId $ show me
+    kx $ makeText { id: show me, parent, pos, scope, dynFamily }
+    for_ parent \p ->
+      kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+    kx $ deferPayload deferralPath (deleteFromCache { id: show me })
+    subscribe
+      ( ( \iii ->
+            ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
         )
-        identity
+          (sample_ t2 ee)
+      )
+      identity
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
