@@ -22,4 +22,4 @@ meter_ = meter empty
 meter__
   :: String
   -> Nut
-meter__ t = meter_ [ DC.text t ]
+meter__ t = meter_ [ DC.text_ t ]

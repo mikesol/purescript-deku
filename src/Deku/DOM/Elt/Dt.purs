@@ -22,4 +22,4 @@ dt_ = dt empty
 dt__
   :: String
   -> Nut
-dt__ t = dt_ [ DC.text t ]
+dt__ t = dt_ [ DC.text_ t ]

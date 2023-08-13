@@ -22,4 +22,4 @@ source_ = source empty
 source__
   :: String
   -> Nut
-source__ t = source_ [ DC.text t ]
+source__ t = source_ [ DC.text_ t ]

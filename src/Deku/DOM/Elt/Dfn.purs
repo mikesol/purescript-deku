@@ -22,4 +22,4 @@ dfn_ = dfn empty
 dfn__
   :: String
   -> Nut
-dfn__ t = dfn_ [ DC.text t ]
+dfn__ t = dfn_ [ DC.text_ t ]

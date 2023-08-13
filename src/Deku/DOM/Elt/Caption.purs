@@ -22,4 +22,4 @@ caption_ = caption empty
 caption__
   :: String
   -> Nut
-caption__ t = caption_ [ DC.text t ]
+caption__ t = caption_ [ DC.text_ t ]

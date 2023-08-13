@@ -22,4 +22,4 @@ cite_ = cite empty
 cite__
   :: String
   -> Nut
-cite__ t = cite_ [ DC.text t ]
+cite__ t = cite_ [ DC.text_ t ]

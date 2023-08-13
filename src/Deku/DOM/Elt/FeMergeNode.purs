@@ -22,4 +22,4 @@ feMergeNode_ = feMergeNode empty
 feMergeNode__
   :: String
   -> Nut
-feMergeNode__ t = feMergeNode_ [ DC.text t ]
+feMergeNode__ t = feMergeNode_ [ DC.text_ t ]

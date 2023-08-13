@@ -22,4 +22,4 @@ figcaption_ = figcaption empty
 figcaption__
   :: String
   -> Nut
-figcaption__ t = figcaption_ [ DC.text t ]
+figcaption__ t = figcaption_ [ DC.text_ t ]

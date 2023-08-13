@@ -22,4 +22,4 @@ label_ = label empty
 label__
   :: String
   -> Nut
-label__ t = label_ [ DC.text t ]
+label__ t = label_ [ DC.text_ t ]

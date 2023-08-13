@@ -22,4 +22,4 @@ meta_ = meta empty
 meta__
   :: String
   -> Nut
-meta__ t = meta_ [ DC.text t ]
+meta__ t = meta_ [ DC.text_ t ]

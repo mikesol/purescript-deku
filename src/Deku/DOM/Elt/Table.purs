@@ -22,4 +22,4 @@ table_ = table empty
 table__
   :: String
   -> Nut
-table__ t = table_ [ DC.text t ]
+table__ t = table_ [ DC.text_ t ]

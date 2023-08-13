@@ -22,4 +22,4 @@ body_ = body empty
 body__
   :: String
   -> Nut
-body__ t = body_ [ DC.text t ]
+body__ t = body_ [ DC.text_ t ]

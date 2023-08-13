@@ -22,4 +22,4 @@ feDistantLight_ = feDistantLight empty
 feDistantLight__
   :: String
   -> Nut
-feDistantLight__ t = feDistantLight_ [ DC.text t ]
+feDistantLight__ t = feDistantLight_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ summary_ = summary empty
 summary__
   :: String
   -> Nut
-summary__ t = summary_ [ DC.text t ]
+summary__ t = summary_ [ DC.text_ t ]

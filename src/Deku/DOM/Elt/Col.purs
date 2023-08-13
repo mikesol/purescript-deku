@@ -22,4 +22,4 @@ col_ = col empty
 col__
   :: String
   -> Nut
-col__ t = col_ [ DC.text t ]
+col__ t = col_ [ DC.text_ t ]

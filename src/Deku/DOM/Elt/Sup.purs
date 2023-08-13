@@ -22,4 +22,4 @@ sup_ = sup empty
 sup__
   :: String
   -> Nut
-sup__ t = sup_ [ DC.text t ]
+sup__ t = sup_ [ DC.text_ t ]

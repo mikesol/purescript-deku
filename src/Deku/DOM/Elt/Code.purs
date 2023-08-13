@@ -22,4 +22,4 @@ code_ = code empty
 code__
   :: String
   -> Nut
-code__ t = code_ [ DC.text t ]
+code__ t = code_ [ DC.text_ t ]

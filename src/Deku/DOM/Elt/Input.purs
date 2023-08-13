@@ -22,4 +22,4 @@ input_ = input empty
 input__
   :: String
   -> Nut
-input__ t = input_ [ DC.text t ]
+input__ t = input_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ switch_ = switch empty
 switch__
   :: String
   -> Nut
-switch__ t = switch_ [ DC.text t ]
+switch__ t = switch_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ output_ = output empty
 output__
   :: String
   -> Nut
-output__ t = output_ [ DC.text t ]
+output__ t = output_ [ DC.text_ t ]

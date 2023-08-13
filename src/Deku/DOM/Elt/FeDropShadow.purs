@@ -22,4 +22,4 @@ feDropShadow_ = feDropShadow empty
 feDropShadow__
   :: String
   -> Nut
-feDropShadow__ t = feDropShadow_ [ DC.text t ]
+feDropShadow__ t = feDropShadow_ [ DC.text_ t ]

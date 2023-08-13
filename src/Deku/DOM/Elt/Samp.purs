@@ -22,4 +22,4 @@ samp_ = samp empty
 samp__
   :: String
   -> Nut
-samp__ t = samp_ [ DC.text t ]
+samp__ t = samp_ [ DC.text_ t ]

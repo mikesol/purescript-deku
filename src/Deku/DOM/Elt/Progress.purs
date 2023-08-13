@@ -22,4 +22,4 @@ progress_ = progress empty
 progress__
   :: String
   -> Nut
-progress__ t = progress_ [ DC.text t ]
+progress__ t = progress_ [ DC.text_ t ]

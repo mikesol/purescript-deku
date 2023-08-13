@@ -22,4 +22,4 @@ hr_ = hr empty
 hr__
   :: String
   -> Nut
-hr__ t = hr_ [ DC.text t ]
+hr__ t = hr_ [ DC.text_ t ]

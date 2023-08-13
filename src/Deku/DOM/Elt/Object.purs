@@ -22,4 +22,4 @@ object_ = object empty
 object__
   :: String
   -> Nut
-object__ t = object_ [ DC.text t ]
+object__ t = object_ [ DC.text_ t ]

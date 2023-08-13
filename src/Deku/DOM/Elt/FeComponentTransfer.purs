@@ -22,4 +22,4 @@ feComponentTransfer_ = feComponentTransfer empty
 feComponentTransfer__
   :: String
   -> Nut
-feComponentTransfer__ t = feComponentTransfer_ [ DC.text t ]
+feComponentTransfer__ t = feComponentTransfer_ [ DC.text_ t ]

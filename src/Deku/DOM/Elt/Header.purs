@@ -22,4 +22,4 @@ header_ = header empty
 header__
   :: String
   -> Nut
-header__ t = header_ [ DC.text t ]
+header__ t = header_ [ DC.text_ t ]

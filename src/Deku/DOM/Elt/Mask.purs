@@ -22,4 +22,4 @@ mask_ = mask empty
 mask__
   :: String
   -> Nut
-mask__ t = mask_ [ DC.text t ]
+mask__ t = mask_ [ DC.text_ t ]

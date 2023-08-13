@@ -22,4 +22,4 @@ basefont_ = basefont empty
 basefont__
   :: String
   -> Nut
-basefont__ t = basefont_ [ DC.text t ]
+basefont__ t = basefont_ [ DC.text_ t ]

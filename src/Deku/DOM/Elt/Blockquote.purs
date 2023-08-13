@@ -22,4 +22,4 @@ blockquote_ = blockquote empty
 blockquote__
   :: String
   -> Nut
-blockquote__ t = blockquote_ [ DC.text t ]
+blockquote__ t = blockquote_ [ DC.text_ t ]

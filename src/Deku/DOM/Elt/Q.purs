@@ -22,4 +22,4 @@ q_ = q empty
 q__
   :: String
   -> Nut
-q__ t = q_ [ DC.text t ]
+q__ t = q_ [ DC.text_ t ]

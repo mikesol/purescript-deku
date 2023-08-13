@@ -22,4 +22,4 @@ style_ = style empty
 style__
   :: String
   -> Nut
-style__ t = style_ [ DC.text t ]
+style__ t = style_ [ DC.text_ t ]

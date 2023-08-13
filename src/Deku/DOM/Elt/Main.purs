@@ -22,4 +22,4 @@ main_ = main empty
 main__
   :: String
   -> Nut
-main__ t = main_ [ DC.text t ]
+main__ t = main_ [ DC.text_ t ]

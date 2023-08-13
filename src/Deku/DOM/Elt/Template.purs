@@ -22,4 +22,4 @@ template_ = template empty
 template__
   :: String
   -> Nut
-template__ t = template_ [ DC.text t ]
+template__ t = template_ [ DC.text_ t ]

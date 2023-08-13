@@ -22,4 +22,4 @@ feComposite_ = feComposite empty
 feComposite__
   :: String
   -> Nut
-feComposite__ t = feComposite_ [ DC.text t ]
+feComposite__ t = feComposite_ [ DC.text_ t ]

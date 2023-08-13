@@ -22,4 +22,4 @@ address_ = address empty
 address__
   :: String
   -> Nut
-address__ t = address_ [ DC.text t ]
+address__ t = address_ [ DC.text_ t ]

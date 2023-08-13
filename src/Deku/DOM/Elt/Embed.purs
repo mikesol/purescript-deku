@@ -22,4 +22,4 @@ embed_ = embed empty
 embed__
   :: String
   -> Nut
-embed__ t = embed_ [ DC.text t ]
+embed__ t = embed_ [ DC.text_ t ]

@@ -246,7 +246,7 @@ describe("deku", () => {
       $("#incr").trigger("click");
       expect($("#div1a").index()).toBeGreaterThan($("#div0").index());
       expect($("#div1a").index()).toBeLessThan($("#div2").index());
-    }), false
+    })
   );
 
   doTest("portals compose", (f) =>
@@ -260,7 +260,7 @@ describe("deku", () => {
       $("#incr").trigger("click");
       // shifts the portal
       expect($("#maindiv").text()).toBe("d0d1d2abcincr");
-    })
+    }), false
   );
 
   doTest(

@@ -22,4 +22,4 @@ iframe_ = iframe empty
 iframe__
   :: String
   -> Nut
-iframe__ t = iframe_ [ DC.text t ]
+iframe__ t = iframe_ [ DC.text_ t ]

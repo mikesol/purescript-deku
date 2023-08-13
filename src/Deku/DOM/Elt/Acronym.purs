@@ -22,4 +22,4 @@ acronym_ = acronym empty
 acronym__
   :: String
   -> Nut
-acronym__ t = acronym_ [ DC.text t ]
+acronym__ t = acronym_ [ DC.text_ t ]

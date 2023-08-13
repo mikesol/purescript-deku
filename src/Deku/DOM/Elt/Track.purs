@@ -22,4 +22,4 @@ track_ = track empty
 track__
   :: String
   -> Nut
-track__ t = track_ [ DC.text t ]
+track__ t = track_ [ DC.text_ t ]

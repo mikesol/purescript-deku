@@ -22,4 +22,4 @@ li_ = li empty
 li__
   :: String
   -> Nut
-li__ t = li_ [ DC.text t ]
+li__ t = li_ [ DC.text_ t ]

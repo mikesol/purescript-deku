@@ -22,4 +22,4 @@ svg_ = svg empty
 svg__
   :: String
   -> Nut
-svg__ t = svg_ [ DC.text t ]
+svg__ t = svg_ [ DC.text_ t ]

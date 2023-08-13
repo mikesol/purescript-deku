@@ -22,4 +22,4 @@ h2_ = h2 empty
 h2__
   :: String
   -> Nut
-h2__ t = h2_ [ DC.text t ]
+h2__ t = h2_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ section_ = section empty
 section__
   :: String
   -> Nut
-section__ t = section_ [ DC.text t ]
+section__ t = section_ [ DC.text_ t ]

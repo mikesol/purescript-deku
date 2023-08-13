@@ -22,4 +22,4 @@ audio_ = audio empty
 audio__
   :: String
   -> Nut
-audio__ t = audio_ [ DC.text t ]
+audio__ t = audio_ [ DC.text_ t ]

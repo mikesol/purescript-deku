@@ -22,4 +22,4 @@ aside_ = aside empty
 aside__
   :: String
   -> Nut
-aside__ t = aside_ [ DC.text t ]
+aside__ t = aside_ [ DC.text_ t ]

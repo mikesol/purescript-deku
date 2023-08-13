@@ -22,4 +22,4 @@ defs_ = defs empty
 defs__
   :: String
   -> Nut
-defs__ t = defs_ [ DC.text t ]
+defs__ t = defs_ [ DC.text_ t ]

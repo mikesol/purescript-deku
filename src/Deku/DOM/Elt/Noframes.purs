@@ -22,4 +22,4 @@ noframes_ = noframes empty
 noframes__
   :: String
   -> Nut
-noframes__ t = noframes_ [ DC.text t ]
+noframes__ t = noframes_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ textPath_ = textPath empty
 textPath__
   :: String
   -> Nut
-textPath__ t = textPath_ [ DC.text t ]
+textPath__ t = textPath_ [ DC.text_ t ]

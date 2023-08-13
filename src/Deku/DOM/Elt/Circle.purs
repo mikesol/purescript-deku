@@ -22,4 +22,4 @@ circle_ = circle empty
 circle__
   :: String
   -> Nut
-circle__ t = circle_ [ DC.text t ]
+circle__ t = circle_ [ DC.text_ t ]

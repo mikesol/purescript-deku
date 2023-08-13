@@ -22,4 +22,4 @@ base_ = base empty
 base__
   :: String
   -> Nut
-base__ t = base_ [ DC.text t ]
+base__ t = base_ [ DC.text_ t ]

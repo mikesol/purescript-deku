@@ -22,4 +22,4 @@ thead_ = thead empty
 thead__
   :: String
   -> Nut
-thead__ t = thead_ [ DC.text t ]
+thead__ t = thead_ [ DC.text_ t ]

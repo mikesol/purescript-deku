@@ -22,4 +22,4 @@ head_ = head empty
 head__
   :: String
   -> Nut
-head__ t = head_ [ DC.text t ]
+head__ t = head_ [ DC.text_ t ]

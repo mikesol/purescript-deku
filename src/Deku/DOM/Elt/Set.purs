@@ -22,4 +22,4 @@ set_ = set empty
 set__
   :: String
   -> Nut
-set__ t = set_ [ DC.text t ]
+set__ t = set_ [ DC.text_ t ]

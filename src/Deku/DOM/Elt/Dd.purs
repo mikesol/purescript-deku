@@ -22,4 +22,4 @@ dd_ = dd empty
 dd__
   :: String
   -> Nut
-dd__ t = dd_ [ DC.text t ]
+dd__ t = dd_ [ DC.text_ t ]

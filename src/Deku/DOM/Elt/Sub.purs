@@ -22,4 +22,4 @@ sub_ = sub empty
 sub__
   :: String
   -> Nut
-sub__ t = sub_ [ DC.text t ]
+sub__ t = sub_ [ DC.text_ t ]

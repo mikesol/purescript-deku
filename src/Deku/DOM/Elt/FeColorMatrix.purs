@@ -22,4 +22,4 @@ feColorMatrix_ = feColorMatrix empty
 feColorMatrix__
   :: String
   -> Nut
-feColorMatrix__ t = feColorMatrix_ [ DC.text t ]
+feColorMatrix__ t = feColorMatrix_ [ DC.text_ t ]

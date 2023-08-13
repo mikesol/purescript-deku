@@ -22,4 +22,4 @@ image_ = image empty
 image__
   :: String
   -> Nut
-image__ t = image_ [ DC.text t ]
+image__ t = image_ [ DC.text_ t ]

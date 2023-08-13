@@ -22,4 +22,4 @@ figure_ = figure empty
 figure__
   :: String
   -> Nut
-figure__ t = figure_ [ DC.text t ]
+figure__ t = figure_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ script_ = script empty
 script__
   :: String
   -> Nut
-script__ t = script_ [ DC.text t ]
+script__ t = script_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ line_ = line empty
 line__
   :: String
   -> Nut
-line__ t = line_ [ DC.text t ]
+line__ t = line_ [ DC.text_ t ]

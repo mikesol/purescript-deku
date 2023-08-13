@@ -22,4 +22,4 @@ feOffset_ = feOffset empty
 feOffset__
   :: String
   -> Nut
-feOffset__ t = feOffset_ [ DC.text t ]
+feOffset__ t = feOffset_ [ DC.text_ t ]

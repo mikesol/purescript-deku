@@ -22,4 +22,4 @@ discard_ = discard empty
 discard__
   :: String
   -> Nut
-discard__ t = discard_ [ DC.text t ]
+discard__ t = discard_ [ DC.text_ t ]

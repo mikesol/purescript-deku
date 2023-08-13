@@ -22,4 +22,4 @@ stop_ = stop empty
 stop__
   :: String
   -> Nut
-stop__ t = stop_ [ DC.text t ]
+stop__ t = stop_ [ DC.text_ t ]

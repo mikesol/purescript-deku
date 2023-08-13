@@ -22,4 +22,4 @@ tspan_ = tspan empty
 tspan__
   :: String
   -> Nut
-tspan__ t = tspan_ [ DC.text t ]
+tspan__ t = tspan_ [ DC.text_ t ]

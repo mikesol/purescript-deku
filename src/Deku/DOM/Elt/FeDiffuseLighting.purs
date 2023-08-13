@@ -22,4 +22,4 @@ feDiffuseLighting_ = feDiffuseLighting empty
 feDiffuseLighting__
   :: String
   -> Nut
-feDiffuseLighting__ t = feDiffuseLighting_ [ DC.text t ]
+feDiffuseLighting__ t = feDiffuseLighting_ [ DC.text_ t ]

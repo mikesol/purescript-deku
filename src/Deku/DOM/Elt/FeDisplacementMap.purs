@@ -22,4 +22,4 @@ feDisplacementMap_ = feDisplacementMap empty
 feDisplacementMap__
   :: String
   -> Nut
-feDisplacementMap__ t = feDisplacementMap_ [ DC.text t ]
+feDisplacementMap__ t = feDisplacementMap_ [ DC.text_ t ]

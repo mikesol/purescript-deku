@@ -22,4 +22,4 @@ s_ = s empty
 s__
   :: String
   -> Nut
-s__ t = s_ [ DC.text t ]
+s__ t = s_ [ DC.text_ t ]

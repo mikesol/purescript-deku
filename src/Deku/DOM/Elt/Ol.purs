@@ -22,4 +22,4 @@ ol_ = ol empty
 ol__
   :: String
   -> Nut
-ol__ t = ol_ [ DC.text t ]
+ol__ t = ol_ [ DC.text_ t ]

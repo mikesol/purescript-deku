@@ -22,4 +22,4 @@ fePointLight_ = fePointLight empty
 fePointLight__
   :: String
   -> Nut
-fePointLight__ t = fePointLight_ [ DC.text t ]
+fePointLight__ t = fePointLight_ [ DC.text_ t ]

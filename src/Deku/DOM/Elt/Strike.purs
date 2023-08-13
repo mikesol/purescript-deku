@@ -22,4 +22,4 @@ strike_ = strike empty
 strike__
   :: String
   -> Nut
-strike__ t = strike_ [ DC.text t ]
+strike__ t = strike_ [ DC.text_ t ]

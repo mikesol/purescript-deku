@@ -3,14 +3,14 @@
 -- | the DOM, and basic text creation. It also has several internal functions used for
 -- | DOM element creation.
 module Deku.Control
-  ( class Textable
-  , deku
+  ( deku
   , elementify2
   , globalPortal
   , globalPortal1
   , portal
   , portal1
   , text
+  , text_
   , unsafeSetAttribute
   ) where
 
@@ -29,8 +29,8 @@ import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), flattenArgs, unsafeSetPos)
-import FRP.Event (Event, merge)
-import FRP.Poll (Poll, sample, sample_, sham)
+import FRP.Event (merge)
+import FRP.Poll (Poll, sample, sample_)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -291,20 +291,11 @@ portal v' c' =
         (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
     )
 
--- | A class representing a conservative smattering of stuff that can turn into a text node
-class Textable text where
-  -- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
-  -- | the emitted strings. Each emitted string replaces the previous string.
-  text :: text -> Nut
+text_ :: String -> Nut
+text_ s = text (pure s)
 
-instance Textable (Event String) where
-  text s = text (sham s)
-
-instance Textable String where
-  text s = text (pure s :: Poll String)
-
-instance Textable (Poll String) where
-  text t2 = Nut go'
+text :: Poll String -> Nut
+text t2 = Nut go'
     where
     go' :: forall payload. NutF payload
     go' = NutF (Element' (Node (Element go)))

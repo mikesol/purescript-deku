@@ -22,4 +22,4 @@ animate_ = animate empty
 animate__
   :: String
   -> Nut
-animate__ t = animate_ [ DC.text t ]
+animate__ t = animate_ [ DC.text_ t ]

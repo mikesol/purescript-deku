@@ -22,4 +22,4 @@ view_ = view empty
 view__
   :: String
   -> Nut
-view__ t = view_ [ DC.text t ]
+view__ t = view_ [ DC.text_ t ]

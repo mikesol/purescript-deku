@@ -22,4 +22,4 @@ ellipse_ = ellipse empty
 ellipse__
   :: String
   -> Nut
-ellipse__ t = ellipse_ [ DC.text t ]
+ellipse__ t = ellipse_ [ DC.text_ t ]

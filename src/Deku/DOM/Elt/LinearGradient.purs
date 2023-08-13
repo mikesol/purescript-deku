@@ -22,4 +22,4 @@ linearGradient_ = linearGradient empty
 linearGradient__
   :: String
   -> Nut
-linearGradient__ t = linearGradient_ [ DC.text t ]
+linearGradient__ t = linearGradient_ [ DC.text_ t ]

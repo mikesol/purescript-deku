@@ -22,4 +22,4 @@ feGaussianBlur_ = feGaussianBlur empty
 feGaussianBlur__
   :: String
   -> Nut
-feGaussianBlur__ t = feGaussianBlur_ [ DC.text t ]
+feGaussianBlur__ t = feGaussianBlur_ [ DC.text_ t ]

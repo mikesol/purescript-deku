@@ -22,4 +22,4 @@ frameset_ = frameset empty
 frameset__
   :: String
   -> Nut
-frameset__ t = frameset_ [ DC.text t ]
+frameset__ t = frameset_ [ DC.text_ t ]

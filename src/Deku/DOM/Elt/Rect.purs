@@ -22,4 +22,4 @@ rect_ = rect empty
 rect__
   :: String
   -> Nut
-rect__ t = rect_ [ DC.text t ]
+rect__ t = rect_ [ DC.text_ t ]

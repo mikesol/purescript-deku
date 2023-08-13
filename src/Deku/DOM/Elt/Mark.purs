@@ -22,4 +22,4 @@ mark_ = mark empty
 mark__
   :: String
   -> Nut
-mark__ t = mark_ [ DC.text t ]
+mark__ t = mark_ [ DC.text_ t ]

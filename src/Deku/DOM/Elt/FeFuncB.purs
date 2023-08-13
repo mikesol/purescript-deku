@@ -22,4 +22,4 @@ feFuncB_ = feFuncB empty
 feFuncB__
   :: String
   -> Nut
-feFuncB__ t = feFuncB_ [ DC.text t ]
+feFuncB__ t = feFuncB_ [ DC.text_ t ]

@@ -22,4 +22,4 @@ pattern_ = pattern empty
 pattern__
   :: String
   -> Nut
-pattern__ t = pattern_ [ DC.text t ]
+pattern__ t = pattern_ [ DC.text_ t ]

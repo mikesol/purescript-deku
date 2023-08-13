@@ -22,4 +22,4 @@ button_ = button empty
 button__
   :: String
   -> Nut
-button__ t = button_ [ DC.text t ]
+button__ t = button_ [ DC.text_ t ]

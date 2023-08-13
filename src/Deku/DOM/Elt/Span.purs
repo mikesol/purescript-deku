@@ -22,4 +22,4 @@ span_ = span empty
 span__
   :: String
   -> Nut
-span__ t = span_ [ DC.text t ]
+span__ t = span_ [ DC.text_ t ]

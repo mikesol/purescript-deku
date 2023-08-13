@@ -22,4 +22,4 @@ link_ = link empty
 link__
   :: String
   -> Nut
-link__ t = link_ [ DC.text t ]
+link__ t = link_ [ DC.text_ t ]
