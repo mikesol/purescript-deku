@@ -57,6 +57,7 @@ import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
@@ -325,10 +326,10 @@ useDynAtEnd b = useDynAtEndWith b dynOptions
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
 switcher f event = Deku.do
   ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith ctr $ dynOptions
+  { value } <- useDynAtBeginningWith (map (spy "helloCTR0") ctr) $ dynOptions
     { remove = \(Tuple oldV _) -> filterMap
-        (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
-        ctr
+        (\(Tuple newV _) -> let _ = spy "switcherFILT" {newV,oldV} in  if newV == oldV + 1 then Just unit else Nothing)
+        (map (spy "helloCTR1") ctr)
     }
   f (snd value)
   where

@@ -11,6 +11,7 @@ import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
+import Debug (spy)
 import Deku.Attribute ((:=))
 import Deku.Attributes (id_)
 import Deku.Control (globalPortal1, portal1, text, text_)
@@ -264,7 +265,11 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
             D.div [ id_ "inner-scope" ]
               [ (Tuple <$> portalInContext <*> portedNut)
                   <#~> \(Tuple tf p) ->
-                    if tf then p else D.div_ [ text_ "no dice!" ]
+                    let
+                      _ = spy "applyTRIG" tf
+                    in
+                      if tf then p
+                      else D.div [ id_ "inner-switch" ] [ text_ "no dice!" ]
               ]
       )
     , D.button
@@ -508,7 +513,8 @@ refToHot = Deku.do
             [ text_ "reveal" ]
         , D.span [ id_ "myspan" ]
             [ guardWith
-                ( (\rr vv -> if rr then Just vv else Nothing) <$> reveal <*> (effectToPoll cref)
+                ( (\rr vv -> if rr then Just vv else Nothing) <$> reveal <*>
+                    (effectToPoll cref)
                 )
                 text_
             ]
@@ -536,7 +542,8 @@ hotIsHot = Deku.do
             [ text_ "reveal" ]
         , D.span [ id_ "myspan" ]
             [ guardWith
-                ( (\rr vv -> if rr then Just vv else Nothing) <$> reveal <*> label
+                ( (\rr vv -> if rr then Just vv else Nothing) <$> reveal <*>
+                    label
                 )
                 text_
             ]
@@ -569,8 +576,17 @@ switcherSwitches = Deku.do
         [ text $ oneOf
             [ filter (_ == 1) item $> "hello", compact goodbyeC $> "goodbye" ]
         ]
-    , item <#~> case _ of
-        0 -> D.span_ [ text_ "a" ]
-        1 -> D.span_ [ text_ "b" ]
-        _ -> D.span_ [ text_ "c" ]
+    ]
+
+lotsOfSwitching :: Nut
+lotsOfSwitching = Deku.do
+  setItem /\ item <- useState true
+  D.div_
+    [ D.div_
+        [ D.button [ id_ "home-btn", click $ item <#> not >>> setItem ]
+            [ text_ "home" ]
+        ]
+    , D.span [ id_ "hack" ]
+        [ item <#~> if _ then text_ "hello" else text_ "goodbye"
+        ]
     ]

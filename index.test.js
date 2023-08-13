@@ -45,13 +45,11 @@ describe("deku", () => {
     })
   );
 
-  doTest(
-    "two elements render",
-    (f) =>
-      f(tests.twoElements, () => {
-        const $ = require("jquery");
-        expect($("#maindiv").text()).toBe("helloworld");
-      })
+  doTest("two elements render", (f) =>
+    f(tests.twoElements, () => {
+      const $ = require("jquery");
+      expect($("#maindiv").text()).toBe("helloworld");
+    })
   );
 
   doTest("has elements in the correct order", (f) =>
@@ -152,7 +150,13 @@ describe("deku", () => {
   doTest("sends to position correctly", (f) =>
     f(tests.sendsToPosition, () => {
       const $ = require("jquery");
-      console.log($("#dyn0").index(),$("#dyn1").index(),$("#dyn2").index(),$("#dyn3").index(),$("#dyn4").index());
+      console.log(
+        $("#dyn0").index(),
+        $("#dyn1").index(),
+        $("#dyn2").index(),
+        $("#dyn3").index(),
+        $("#dyn4").index()
+      );
       expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
       expect($("#dyn2").index()).toBeLessThan($("#dyn3").index());
@@ -162,7 +166,13 @@ describe("deku", () => {
       $("#pos").trigger("click");
       // 3 is now at 1
       // so the order is 0, 3, 1, 2, 4
-      console.log($("#dyn0").index(),$("#dyn1").index(),$("#dyn2").index(),$("#dyn3").index(),$("#dyn4").index());
+      console.log(
+        $("#dyn0").index(),
+        $("#dyn1").index(),
+        $("#dyn2").index(),
+        $("#dyn3").index(),
+        $("#dyn4").index()
+      );
       expect($("#dyn0").index()).toBeLessThan($("#dyn3").index());
       expect($("#dyn3").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
@@ -263,51 +273,59 @@ describe("deku", () => {
     })
   );
 
-  doTest('global portals retain portalness when sent out of scope', (f) => f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
-    const $ = require('jquery');
-    expect($('#outer-scope').text()).toBe('no dice!');
-    expect($('#inner-scope').text()).toBe('foo');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('foo');
-    expect($('#inner-scope').text()).toBe('no dice!');
-    $('#portal-btn').trigger("click");
-    // starting from the second click, the top stops receiving events
-    // which means that the portal should never flip back to it
-    // we do this in the test to make sure that the portal is
-    // referentially opaque, meaning that even without an event
-    // firing it still disappears from its old setting
-    expect($('#outer-scope').text()).toBe('');
-    expect($('#inner-scope').text()).toBe('foo');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('');
-    expect($('#inner-scope').text()).toBe('no dice!');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('');
-    expect($('#inner-scope').text()).toBe('foo');
-  }), false);
+  doTest("global portals retain portalness when sent out of scope", (f) =>
+    f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
+      const $ = require("jquery");
+      expect($("#outer-scope").text()).toBe("no dice!");
+      expect($("#inner-scope").text()).toBe("foo");
+      console.log("preCLICK 1");
+      $("#portal-btn").trigger("click");
+      console.log("postCLICK 1");
+      expect($("#outer-scope").text()).toBe("foo");
+      expect($("#inner-scope").text()).toBe("no dice!");
+      console.log("preCLICK 2");
+      $("#portal-btn").trigger("click");
+      console.log("postCLICK 2");
+      // starting from the second click, the top stops receiving events
+      // which means that the portal should never flip back to it
+      // we do this in the test to make sure that the portal is
+      // referentially opaque, meaning that even without an event
+      // firing it still disappears from its old setting
+      expect($("#outer-scope").text()).toBe("");
+      expect($("#inner-scope").text()).toBe("foo");
+      $("#portal-btn").trigger("click");
+      expect($("#outer-scope").text()).toBe("");
+      expect($("#inner-scope").text()).toBe("no dice!");
+      $("#portal-btn").trigger("click");
+      expect($("#outer-scope").text()).toBe("");
+      expect($("#inner-scope").text()).toBe("foo");
+    })
+  );
 
-  doTest('local portals lose portalness when sent out of scope', (f) => f(tests.localPortalsLosePortalnessWhenSentOutOfScope, () => {
-    const $ = require('jquery');
-    expect($('#outer-scope').text()).toBe('no dice!');
-    expect($('#inner-scope').text()).toBe('foo');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('foo');
-    expect($('#inner-scope').text()).toBe('no dice!');
-    $('#portal-btn').trigger("click");
-    // starting from the second click, the top stops receiving events
-    // unlike the test above, which is identical except for the
-    // local/global portal split
-    // the "foo" should linger in the outer scope
-    // because a fresh constructor is used
-    expect($('#outer-scope').text()).toBe('foo');
-    expect($('#inner-scope').text()).toBe('foo');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('foo');
-    expect($('#inner-scope').text()).toBe('no dice!');
-    $('#portal-btn').trigger("click");
-    expect($('#outer-scope').text()).toBe('foo');
-    expect($('#inner-scope').text()).toBe('foo');
-  }));
+  doTest("local portals lose portalness when sent out of scope", (f) =>
+    f(tests.localPortalsLosePortalnessWhenSentOutOfScope, () => {
+      const $ = require("jquery");
+      expect($("#outer-scope").text()).toBe("no dice!");
+      expect($("#inner-scope").text()).toBe("foo");
+      $("#portal-btn").trigger("click");
+      expect($("#outer-scope").text()).toBe("foo");
+      expect($("#inner-scope").text()).toBe("no dice!");
+      $("#portal-btn").trigger("click");
+      // starting from the second click, the top stops receiving events
+      // unlike the test above, which is identical except for the
+      // local/global portal split
+      // the "foo" should linger in the outer scope
+      // because a fresh constructor is used
+      expect($("#outer-scope").text()).toBe("foo");
+      expect($("#inner-scope").text()).toBe("foo");
+      $("#portal-btn").trigger("click");
+      expect($("#outer-scope").text()).toBe("foo");
+      expect($("#inner-scope").text()).toBe("no dice!");
+      $("#portal-btn").trigger("click");
+      expect($("#outer-scope").text()).toBe("foo");
+      expect($("#inner-scope").text()).toBe("foo");
+    })
+  );
 
   doTest("pursx composes", (f) =>
     f(tests.pursXComposes, () => {
@@ -326,6 +344,33 @@ describe("deku", () => {
       $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("goodbye");
     })
+  );
+
+  doTest(
+    "lots of switching!",
+    (f) =>
+      f(tests.lotsOfSwitching, () => {
+        const $ = require("jquery");
+        expect($("#hack").text()).toBe("hello");
+        ////
+        console.log('preCLICK1');
+        $("#home-btn").trigger("click");
+        console.log('postCLICK1');
+        expect($("#hack").text()).toBe("goodbye");
+        console.log('preCLICK2');
+        $("#home-btn").trigger("click");
+        console.log('postCLICK2');
+        expect($("#hack").text()).toBe("hello");
+        ////
+        console.log('preCLICK3');
+        $("#home-btn").trigger("click");
+        console.log('postCLICK3');
+        expect($("#hack").text()).toBe("goodbye");
+        $("#home-btn").trigger("click");
+        expect($("#hack").text()).toBe("hello");
+
+      }),
+    true
   );
 
   doTest("attributes are correctly unset", (f) =>
