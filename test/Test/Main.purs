@@ -6,8 +6,8 @@ import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
 import Data.Array ((..))
-import Data.Filterable (filter)
-import Data.Foldable (intercalate, oneOfMap)
+import Data.Filterable (compact, filter)
+import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -544,4 +544,33 @@ hotIsHot = Deku.do
   D.div_
     [ nest (nest (nest (nest (nest (nest elt))))) 0
     , D.button [ id_ "setlabel", click_ $ setLabel "bar" ] [ text_ "set label" ]
+    ]
+
+switcherSwitches :: Nut
+switcherSwitches = Deku.do
+  setItem /\ item <- useState 0
+  setGoodbyeC /\ goodbyeC <- useState'
+  iref <- useRef (-1) item
+  let
+    gc = do
+      i <- iref
+      when (i == 2) do
+        setGoodbyeC (Just unit)
+  D.div [ id_ "div0" ]
+    [ D.div_
+        [ D.button [ id_ "home-btn", click_ $ gc *> setItem 0 ]
+            [ text_ "home" ]
+        , D.button [ id_ "about-btn", click_ $ gc *> setItem 1 ]
+            [ text_ "about" ]
+        , D.button [ id_ "contact-btn", click_ $ gc *> setItem 2 ]
+            [ text_ "contact" ]
+        ]
+    , D.span [ id_ "hack" ]
+        [ text $ oneOf
+            [ filter (_ == 1) item $> "hello", compact goodbyeC $> "goodbye" ]
+        ]
+    , item <#~> case _ of
+        0 -> D.span_ [ text_ "a" ]
+        1 -> D.span_ [ text_ "b" ]
+        _ -> D.span_ [ text_ "c" ]
     ]
