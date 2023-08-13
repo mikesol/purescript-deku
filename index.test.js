@@ -404,6 +404,24 @@ describe("deku", () => {
     })
   );
 
+  doTest("useHot is hotttt", (f) =>
+    f(tests.hotIsHot, () => {
+      const $ = require("jquery");
+      // first, set the label to "bar"
+      $("#setlabel").trigger("click");
+      // then, click a bunch of stuff
+      $("#button0").trigger("click");
+      $("#button1").trigger("click");
+      $("#button2").trigger("click");
+      $("#button3").trigger("click");
+      $("#button4").trigger("click");
+      $("#button5").trigger("click");
+      $("#button6").trigger("click");
+      // as the poll is hot, we get the most recent value
+      expect($("#myspan").text()).toBe("bar");
+    })
+  );
+
   doTest("simple switcher", (f) =>
     f(tests.simpleSwitcher, () => {
       const $ = require("jquery");
