@@ -260,7 +260,7 @@ describe("deku", () => {
       $("#incr").trigger("click");
       // shifts the portal
       expect($("#maindiv").text()).toBe("d0d1d2abcincr");
-    }), false
+    })
   );
 
   doTest(

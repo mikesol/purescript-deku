@@ -17,7 +17,7 @@ import Deku.Control (globalPortal1, portal1, text, text_)
 import Deku.Core (Hook, Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (useDyn, (<#~>), useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState')
+import Deku.Hooks (guard, useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useMemoized, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -227,18 +227,12 @@ portalsCompose :: Nut
 portalsCompose = Deku.do
   let
     counter :: forall a. Poll a -> Poll Int
-    counter event = fold (\a _ -> a + 1) 0 event
-  setItem /\ item' <- useState'
-  item <- useMemoized (counter item' <|> pure 0)
+    counter event = fold (\a _ -> a + 1) (-1) event
+  setItem /\ item <- useState unit
   globalPortal1 (D.div_ [ text_ "a", D.span_ [ text_ "b" ], text_ "c" ]) \e ->
     do
       let
-        switchMe n = item <#~>
-          ( (_ `mod` 3) >>> case _ of
-              i
-                | i == n -> e
-                | otherwise -> mempty
-          )
+        switchMe n = guard (counter item <#> (_ `mod` 3) >>> eq n) e
       D.div [ id_ "maindiv" ]
         [ D.div_ [ text_ "d0" ]
         , switchMe 0
