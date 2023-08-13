@@ -26,7 +26,6 @@ import FRP.Event (fold, mapAccum)
 import FRP.Poll (Poll)
 import Type.Proxy (Proxy(..))
 
-
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 foreign import doStateAssertionsForTests_
   :: FFIDOMSnapshot -> Int -> Effect Unit
@@ -44,7 +43,6 @@ runWithSSR n i = do
   pure do
     ffi <- x
     doStateAssertionsForTests_ ffi i
-
 
 ssr :: Nut -> ST Global String
 ssr i = pure "<head></head>" <> runSSR i
@@ -314,7 +312,6 @@ pursXComposes = Deku.do
         { me: fixed [ text_ "milieu", text_ " ", text_ "après-milieu" ] }
     ]
 
-
 switchersCompose :: Nut
 switchersCompose = Deku.do
   let
@@ -329,6 +326,7 @@ switchersCompose = Deku.do
     , D.div [ id_ "div2" ] [ text_ "d2" ]
     , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "click" ]
     ]
+
 -- lifecycle :: Nut
 -- lifecycle = Deku.do
 --   setItem /\ item <- useState 0
@@ -450,4 +448,25 @@ simpleSwitcher = Deku.do
         else D.span [ id_ "innerfalse" ] [ text_ "falseswitch" ]
     , D.button [ id_ "doswitch", click $ switch <#> not >>> setSwitch ]
         [ text_ "set switch" ]
+    ]
+
+pureWorks :: Nut
+pureWorks = Deku.do
+  D.span [ id_ "hello" ] [ text $ pure "hello" ]
+
+useStateWorks :: Nut
+useStateWorks = Deku.do
+  p /\ e <- useState "hello"
+  D.div_
+    [ D.span [ id_ "maindiv" ] [ text e ]
+    , D.button [ id_ "button", click_ $ p "world" ] [ text_ "Switch" ]
+    ]
+
+useMemoizedWorks :: Nut
+useMemoizedWorks = Deku.do
+  p /\ e <- useState "hello"
+  x <- useMemoized e
+  D.div_
+    [ D.span [ id_ "maindiv" ] [ text x ]
+    , D.button [ id_ "button", click_ $ p "world" ] [ text_ "Switch" ]
     ]

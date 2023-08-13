@@ -483,8 +483,8 @@ describe("deku", () => {
     })
   );
 
-  doTest("use pure works", (f) =>
-    f(tests.usePureWorks, () => {
+  doTest("pure works", (f) =>
+    f(tests.pureWorks, () => {
       const $ = require("jquery");
       expect($("#hello").text()).toBe("hello");
     })
