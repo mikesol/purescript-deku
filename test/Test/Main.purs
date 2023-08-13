@@ -470,3 +470,20 @@ useMemoizedWorks = Deku.do
     [ D.span [ id_ "maindiv" ] [ text x ]
     , D.button [ id_ "button", click_ $ p "world" ] [ text_ "Switch" ]
     ]
+
+useEffectWorksWithRef :: Nut
+useEffectWorksWithRef = Deku.do
+  let startsAt = 0
+  setCounter /\ counter <- useState startsAt
+  let counter' = counter <#> \i -> if i `mod` 4 == 1 then i + 1 else i
+  cref <- useRef startsAt counter'
+  D.div_
+    [ D.button
+        [ click_ do
+            cref <#> add 1 >>= setCounter
+        , id_ "counter"
+        ]
+        [ text_ "Increment" ]
+    , D.div [ id_ "mydiv" ]
+        [ text (map show counter') ]
+    ]

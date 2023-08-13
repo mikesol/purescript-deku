@@ -418,17 +418,17 @@ describe("deku", () => {
   doTest("useEffect has correct behavior", (f) =>
     f(tests.useEffectWorks, () => {
       const $ = require("jquery");
-      expect($("#mydiv").text()).toBe("[0]");
+      expect($("#mydiv").text()).toBe("0");
       $("#counter").trigger("click");
-      expect($("#mydiv").text()).toBe("[0,1,2]");
+      expect($("#mydiv").text()).toBe("2");
       $("#counter").trigger("click");
-      expect($("#mydiv").text()).toBe("[0,1,2,3]");
+      expect($("#mydiv").text()).toBe("3");
       $("#counter").trigger("click");
-      expect($("#mydiv").text()).toBe("[0,1,2,3,4]");
+      expect($("#mydiv").text()).toBe("4");
       $("#counter").trigger("click");
-      expect($("#mydiv").text()).toBe("[0,1,2,3,4,5,6]");
+      expect($("#mydiv").text()).toBe("6");
       $("#counter").trigger("click");
-      expect($("#mydiv").text()).toBe("[0,1,2,3,4,5,6,7]");
+      expect($("#mydiv").text()).toBe("7");
     })
   );
 
