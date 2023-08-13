@@ -3,6 +3,9 @@ const tests = require("./output/Test.Main");
 const doTest = (name, closure, onlyWithSSR) => {
   (onlyWithSSR === false ? it.only : it)(name + " without SSR", () => {
     closure((myTest, myScript) => {
+      if (!myTest) {
+        throw new Error(`Cannot find test named ${name}`);
+      }
       document.getElementsByTagName("html")[0].innerHTML =
         '<head></head><body id="mybody"></body>';
       const finished = tests.runNoSSR(myTest)(
@@ -14,6 +17,9 @@ const doTest = (name, closure, onlyWithSSR) => {
   });
   (onlyWithSSR === true ? it.only : it)(name + " with SSR", () => {
     closure((myTest, myScript) => {
+      if (!myTest) {
+        throw new Error(`Cannot find test named ${name}`);
+      }
       const myHtml = tests.ssr(myTest)();
       document.getElementsByTagName("html")[0].innerHTML = myHtml;
       const $ = require("jquery");
@@ -45,7 +51,7 @@ describe("deku", () => {
       f(tests.twoElements, () => {
         const $ = require("jquery");
         expect($("#maindiv").text()).toBe("helloworld");
-      }), false
+      })
   );
 
   doTest("has elements in the correct order", (f) =>
@@ -146,6 +152,7 @@ describe("deku", () => {
   doTest("sends to position correctly", (f) =>
     f(tests.sendsToPosition, () => {
       const $ = require("jquery");
+      console.log($("#dyn0").index(),$("#dyn1").index(),$("#dyn2").index(),$("#dyn3").index(),$("#dyn4").index());
       expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
       expect($("#dyn2").index()).toBeLessThan($("#dyn3").index());
@@ -155,6 +162,7 @@ describe("deku", () => {
       $("#pos").trigger("click");
       // 3 is now at 1
       // so the order is 0, 3, 1, 2, 4
+      console.log($("#dyn0").index(),$("#dyn1").index(),$("#dyn2").index(),$("#dyn3").index(),$("#dyn4").index());
       expect($("#dyn0").index()).toBeLessThan($("#dyn3").index());
       expect($("#dyn3").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
@@ -238,7 +246,7 @@ describe("deku", () => {
       $("#incr").trigger("click");
       expect($("#div1a").index()).toBeGreaterThan($("#div0").index());
       expect($("#div1a").index()).toBeLessThan($("#div2").index());
-    })
+    }), false
   );
 
   doTest("portals compose", (f) =>

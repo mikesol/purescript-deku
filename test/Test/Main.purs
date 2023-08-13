@@ -53,6 +53,10 @@ ssr i = pure "<head></head>" <> runSSR i
 sanityCheck :: Nut
 sanityCheck = D.span [ id_ "hello" ] [ text "Hello" ]
 
+twoElements :: Nut
+twoElements = Deku.do
+  D.div [ id_ "maindiv" ] [ D.div_ [ text "hello" ], D.div_ [ text "world" ] ]
+
 elementsInCorrectOrder :: Nut
 elementsInCorrectOrder = do
   let

@@ -51,6 +51,7 @@ import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
 import Control.Plus (empty)
 import Data.Foldable (oneOf)
+import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
@@ -265,23 +266,23 @@ useDynWith e opts f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving \ee _ subscribe -> do
-    c1 <- Poll.create
+    c1 <- Poll.mailbox
     let
-      mc (Tuple pos v) = Tuple
+      mc ix (Tuple pos v) = Tuple
         ( oneOf
             [ opts.remove v $> Child BCore.Remove
             , Child <<< BCore.Logic <$> opts.sendTo v
-            , c1.poll
+            , c1.poll ix
             ]
         )
         ( unsafeSetPos pos $ f
             { value: v
-            , remove: c1.push remove
-            , sendTo: c1.push <<< sendToPos
+            , remove: c1.push { address: ix, payload: remove }
+            , sendTo: c1.push <<< { address: ix, payload: _ } <<< sendToPos
             }
         )
     let
-      Nut nf = dyn $ map mc e
+      Nut nf = dyn $ mapWithIndex mc e
     subscribe (sample (__internalDekuFlatten nf i di) ee)
 
 useDynAtBeginningWith
