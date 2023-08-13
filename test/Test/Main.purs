@@ -2,7 +2,6 @@ module Test.Main where
 
 import Prelude
 
-import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
@@ -435,3 +434,20 @@ customHooksDoTheirThing = Deku.do
     e1 <- useMemoized (add 42 <$> e)
     e2 <- useMemoized (add 48 <$> e)
     makeHook (Tuple e1 e2)
+
+memoizedSwitcher :: Nut
+memoizedSwitcher = Deku.do
+  _ /\ e <- useState "world"
+  x <- useMemoized e
+  D.div [ id_ "maindiv" ] [ text x ]
+
+simpleSwitcher :: Nut
+simpleSwitcher = Deku.do
+  setSwitch /\ switch <- useState true
+  D.div [ id_ "external" ]
+    [ switch <#~>
+        if _ then D.span [ id_ "innertrue" ] [ text_ "trueswitch" ]
+        else D.span [ id_ "innerfalse" ] [ text_ "falseswitch" ]
+    , D.button [ id_ "doswitch", click $ switch <#> not >>> setSwitch ]
+        [ text_ "set switch" ]
+    ]
