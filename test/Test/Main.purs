@@ -12,14 +12,13 @@ import Data.Foldable (intercalate, oneOf, oneOfMap)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Attribute ((:=))
 import Deku.Attributes (id_)
 import Deku.Control (globalPortal1, portal1, text, text_)
 import Deku.Core (Hook, Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useHot, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useRant, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -143,8 +142,9 @@ sendsToPosition = Deku.do
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then (sendTo <$> posIdx) else empty)
+        { value: i } <-
+          useDynAtEndWith (oneOfMap pure [ 0, 1, 2, 3, 4 ])
+            $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         D.span [ id_ ("dyn" <> show i) ] [ text_ (show i) ]
     , D.button [ id_ "pos", click_ (setPosIdx 1) ]
         [ text_ "send to pos" ]
@@ -157,8 +157,9 @@ sendsToPositionFixed = Deku.do
     [ text_ "foo"
     , D.span [ id_ "div1" ] [ text_ "bar" ]
     , Deku.do
-        { value: i, sendTo } <- useDynAtEnd (oneOfMap pure [ 0, 1, 2, 3, 4 ])
-        useEffect (if i == 3 then sendTo <$> posIdx else empty)
+        { value: i } <-
+          useDynAtEndWith (oneOfMap pure [ 0, 1, 2, 3, 4 ])
+            $ dynOptions { sendTo = \i -> if i == 3 then posIdx else empty }
         fixed
           [ D.span [ id_ ("dyn" <> show i <> "a") ]
               [ text_ (show i <> "a") ]
@@ -406,21 +407,6 @@ useRefWorks = Deku.do
         )
     ]
 
-useEffectWorks :: Nut
-useEffectWorks = Deku.do
-  let startsAt = 0
-  setCounter /\ counter <- useState startsAt
-  let filt i = i `mod` 4 == 1
-  useEffect $ filter filt counter <#> setCounter <<< add 1
-  D.div_
-    [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
-        , id_ "counter"
-        ]
-        [ text_ "Increment" ]
-    , D.div [ id_ "mydiv" ] [ text (show <$> counter) ]
-    ]
-
 customHooksDoTheirThing :: Nut
 customHooksDoTheirThing = Deku.do
   setCounter /\ counter <- useState'
@@ -474,8 +460,8 @@ useRantWorks = Deku.do
     , D.button [ id_ "button", click_ $ p unit ] [ text_ "Switch" ]
     ]
 
-useEffectWorksWithRef :: Nut
-useEffectWorksWithRef = Deku.do
+useEffectCanBeSimulatedWithRef :: Nut
+useEffectCanBeSimulatedWithRef = Deku.do
   let startsAt = 0
   setCounter /\ counter <- useState startsAt
   let counter' = counter <#> \i -> if i `mod` 4 == 1 then i + 1 else i

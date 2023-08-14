@@ -26,7 +26,6 @@ module Deku.Hooks
   , useHot
   , useDynAtEndWith
   , useDynWith
-  , useEffect
   , useMailboxed
   , useRant
   , useDeflect
@@ -61,7 +60,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, filterMap, mailbox, mapAccum, merge)
+import FRP.Event (Event, filterMap, mailbox, mapAccum)
 import FRP.Poll (Poll, sample, sample_, stToPoll)
 import FRP.Poll as Poll
 
@@ -126,28 +125,6 @@ guardWith :: forall a. (Poll (Maybe a)) -> (a -> Nut) -> Nut
 guardWith m f = m <#~> case _ of
   Just x -> f x
   Nothing -> mempty
-
-useEffect
-  :: Poll (Effect Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useEffect e f = Nut go'
-  where
-  go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node (Element go)))
-
-  go
-    :: forall payload
-     . Node' payload
-  go i di@(DOMInterpret { oneOffEffect }) = behaving' \ff ee _ subscribe -> do
-    let Nut nf = f unit
-    let
-      exv = merge
-        [ sample (__internalDekuFlatten nf i di) ee
-        , sample_ ((\effect -> ff (oneOffEffect { effect })) <$> e) ee
-
-        ]
-    subscribe exv identity
 
 useRant :: forall a. Poll a -> Hook (Poll a)
 useRant e f = Nut go'

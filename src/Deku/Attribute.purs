@@ -91,6 +91,7 @@ type Attribute' =
 -- | In general, this type is for internal use only. In practice, you'll use
 -- | the `:=` family of operators and helpers like `style` and `klass` instead.
 newtype Attribute (e :: Type) = Attribute Attribute'
+
 -- | For internal use only, exported to be used by other modules. Ignore this.
 unsafeUnAttribute
   :: forall e. Attribute e -> { key :: String, value :: AttributeValue }

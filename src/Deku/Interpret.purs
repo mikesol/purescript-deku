@@ -233,29 +233,28 @@ fullDOMInterpret seed deferredCache executor =
           s <- Ref.read seed
           void $ Ref.modify (add 1) seed
           pure s
-      , associateWithUnsubscribe:  associateWithUnsubscribe_
+      , associateWithUnsubscribe: associateWithUnsubscribe_
       , deferPayload: deferPayloadE deferredCache
-      , oneOffEffect: \{ effect } _ -> effect
-      , forcePayload:  forcePayloadE deferredCache executor
-      , makeElement:  makeElement_ runOnJust false
-      , makeDynBeacon:  makeDynBeacon_ runOnJust false
-      , attributeParent:  attributeParent_ runOnJust
-      , makeRoot:  makeRoot_
-      , makeText:  makeText_ runOnJust false (maybe unit)
-      , makePursx:  makePursx_ runOnJust false (maybe unit)
-      , setProp:  setProp_ false
-      , setCb:  setCb_ false
-      , unsetAttribute:  unsetAttribute_ false
-      , setText:  setText_
-      , sendToPos:  sendToPos
-      , removeDynBeacon: 
+      , forcePayload: forcePayloadE deferredCache executor
+      , makeElement: makeElement_ runOnJust false
+      , makeDynBeacon: makeDynBeacon_ runOnJust false
+      , attributeParent: attributeParent_ runOnJust
+      , makeRoot: makeRoot_
+      , makeText: makeText_ runOnJust false (maybe unit)
+      , makePursx: makePursx_ runOnJust false (maybe unit)
+      , setProp: setProp_ false
+      , setCb: setCb_ false
+      , unsetAttribute: unsetAttribute_ false
+      , setText: setText_
+      , sendToPos: sendToPos
+      , removeDynBeacon:
           removeDynBeacon_
-      , deleteFromCache: 
+      , deleteFromCache:
           deleteFromCache_
       , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
           runOnJust
           gnp
-      , disconnectElement: 
+      , disconnectElement:
           disconnectElement_
       }
   in
@@ -394,11 +393,10 @@ deferPayloadE
 deferPayloadE deferredCache l p _ = do
   void $ liftST $ Ref.modify
     ( flip Map.alter l case _ of
-        Nothing ->Just [ p ]
+        Nothing -> Just [ p ]
         Just x -> Just (x <> [ p ])
     )
     deferredCache
-
 
 forcePayloadE
   :: forall i o
@@ -452,8 +450,7 @@ ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
       pure s
   , associateWithUnsubscribe: \_ _ -> pure unit
   , deferPayload: deferPayloadE deferredCache
-  , oneOffEffect: \_ _ -> pure unit
-  , forcePayload:  forcePayloadE deferredCache executor
+  , forcePayload: forcePayloadE deferredCache executor
   , makeElement: ssrMakeElement
   , attributeParent: \_ _ -> pure unit
   , makeRoot: ssrMakeRoot
@@ -503,29 +500,28 @@ hydratingDOMInterpret seed deferredCache executor =
           s <- Ref.read seed
           void $ Ref.modify (add 1) seed
           pure s
-      , associateWithUnsubscribe:  associateWithUnsubscribe_
+      , associateWithUnsubscribe: associateWithUnsubscribe_
       , deferPayload: deferPayloadE deferredCache
-      , oneOffEffect: \{ effect } _ -> effect
-      , forcePayload:  forcePayloadE deferredCache executor
-      , makeElement:  makeElement_ runOnJust true
-      , makeDynBeacon:  makeDynBeacon_ runOnJust true
-      , attributeParent:  attributeParent_ runOnJust
-      , makeRoot:  makeRoot_
-      , makeText:  makeText_ runOnJust true (maybe unit)
-      , makePursx:  makePursx_ runOnJust true (maybe unit)
-      , setProp:  setProp_ true
-      , setCb:  setCb_ true
-      , unsetAttribute:  unsetAttribute_ true
-      , setText:  setText_
-      , sendToPos:  sendToPos
-      , deleteFromCache: 
+      , forcePayload: forcePayloadE deferredCache executor
+      , makeElement: makeElement_ runOnJust true
+      , makeDynBeacon: makeDynBeacon_ runOnJust true
+      , attributeParent: attributeParent_ runOnJust
+      , makeRoot: makeRoot_
+      , makeText: makeText_ runOnJust true (maybe unit)
+      , makePursx: makePursx_ runOnJust true (maybe unit)
+      , setProp: setProp_ true
+      , setCb: setCb_ true
+      , unsetAttribute: unsetAttribute_ true
+      , setText: setText_
+      , sendToPos: sendToPos
+      , deleteFromCache:
           deleteFromCache_
-      , removeDynBeacon: 
+      , removeDynBeacon:
           removeDynBeacon_
       , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
           runOnJust
           gnp
-      , disconnectElement: 
+      , disconnectElement:
           disconnectElement_
       }
   in
