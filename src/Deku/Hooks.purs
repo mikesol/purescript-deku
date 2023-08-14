@@ -28,9 +28,10 @@ module Deku.Hooks
   , useDynWith
   , useEffect
   , useMailboxed
-  , useMemoized
+  , useRant
+  , useDeflect
   , useState'
-  , useMemoized'
+  , useRant'
   , useRef
   , useRefNE
   , useRefST
@@ -44,7 +45,7 @@ import Bolson.Control (Flatten, behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Bolson.Core as BCore
-import Control.Alt (alt)
+import Control.Alt (alt, (<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
@@ -57,7 +58,6 @@ import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Debug (spy)
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
@@ -149,9 +149,8 @@ useEffect e f = Nut go'
         ]
     subscribe exv identity
 
--- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
-useMemoized :: forall a. Poll a -> Hook (Poll a)
-useMemoized e f = Nut go'
+useRant :: forall a. Poll a -> Hook (Poll a)
+useRant e f = Nut go'
   where
   go' :: forall payload. NutF payload
   go' = NutF (Element' (Node (Element go)))
@@ -160,21 +159,38 @@ useMemoized e f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving' \_ ee _ subscribe -> do
-    event <- Poll.memoize e
+    -- todo: should we incorporate the unsub?
+    { poll: p } <- Poll.rant e
     -- we `once e` in case it has an initial value
-    let Nut nf = f event
+    let Nut nf = f p
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
--- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
+useDeflect :: forall a. Poll a -> Hook (Poll a)
+useDeflect e f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
 
-useMemoized'
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving' \_ ee _ subscribe -> do
+    -- todo: should we incorporate the unsub?
+    p <- Poll.deflect e
+    -- we `once e` in case it has an initial value
+    let Nut nf = f p
+    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
+
+-- | A hook to work with memoized values that lack an initial value. See [`useRant'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
+
+useRant'
   :: forall t a
    . (Poll t -> Poll a)
   -> (Tuple (t -> Effect Unit) (Poll a) -> Nut)
   -> Nut
-useMemoized' f0 makeHook = Deku.do
+useRant' f0 makeHook = Deku.do
   push /\ e <- useState'
-  m <- useMemoized (f0 e)
+  m <- useRant (f0 e)
   makeHook (push /\ m)
 
 useRef ∷ ∀ a. a → Poll a → Hook (Effect a)
@@ -324,12 +340,13 @@ useDynAtEnd b = useDynAtEndWith b dynOptions
 -- | and should be used when the content needs to be replaced wholesale. For a more efficient
 -- | approach, see the `useDyn` hook.
 switcher :: forall a. (a -> Nut) -> Poll a -> Nut
-switcher f event = Deku.do
-  ctr <- useMemoized (counter event)
-  { value } <- useDynAtBeginningWith (map (spy "helloCTR0") ctr) $ dynOptions
+switcher f poll = Deku.do
+  ctr <- useRant (counter poll)
+  dctr <- useDeflect (counter poll)
+  { value } <- useDynAtBeginningWith (ctr <|> dctr) $ dynOptions
     { remove = \(Tuple oldV _) -> filterMap
-        (\(Tuple newV _) -> let _ = spy "switcherFILT" {newV,oldV} in  if newV == oldV + 1 then Just unit else Nothing)
-        (map (spy "helloCTR1") ctr)
+        (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+        ctr
     }
   f (snd value)
   where

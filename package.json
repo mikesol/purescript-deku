@@ -28,6 +28,7 @@
 		"jest": "^29.0.3",
 		"jest-environment-jsdom": "^29.0.3",
 		"jquery": "^3.6.1",
+		"jsdom": "^22.1.0",
 		"netlify-cli": "^8.0.1",
 		"psc-package": "^4.0.1",
 		"pulp": "^16.0.2",

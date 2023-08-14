@@ -2,6 +2,7 @@ module Test.Main where
 
 import Prelude
 
+import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
@@ -18,7 +19,7 @@ import Deku.Control (globalPortal1, portal1, text, text_)
 import Deku.Core (Hook, Nut, fixed)
 import Deku.DOM as D
 import Deku.Do as Deku
-import Deku.Hooks (guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useHot, useMemoized, useRef, useState, useState', (<#~>))
+import Deku.Hooks (guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useEffect, useHot, useRant, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
@@ -253,7 +254,7 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState true
   setPortedNut /\ portedNut <- useState'
-  D.div_
+  D.div [id_ "test-frame" ]
     [ D.div [ id_ "outer-scope" ]
         [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
             <#~> \(Tuple tf p) ->
@@ -265,16 +266,13 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
             D.div [ id_ "inner-scope" ]
               [ (Tuple <$> portalInContext <*> portedNut)
                   <#~> \(Tuple tf p) ->
-                    let
-                      _ = spy "applyTRIG" tf
-                    in
                       if tf then p
                       else D.div [ id_ "inner-switch" ] [ text_ "no dice!" ]
               ]
       )
     , D.button
         [ id_ "portal-btn"
-        , click $ portalInContext <#> not >>> setPortalInContext
+        , click $ portalInContext <#> setPortalInContext <<< not
         ]
 
         [ text_ "switch" ]
@@ -421,11 +419,11 @@ useEffectWorks = Deku.do
 
 customHooksDoTheirThing :: Nut
 customHooksDoTheirThing = Deku.do
-  setCounter /\ counter <- useState 0
+  setCounter /\ counter <- useState'
   e1 /\ e2 <- myHook counter
   D.div_
     [ D.button
-        [ click $ counter <#> add 1 >>> setCounter
+        [ click $ (counter <|> pure 0) <#> add 1 >>> setCounter
         , id_ "counter"
         ]
         [ text_ "Increment" ]
@@ -435,15 +433,9 @@ customHooksDoTheirThing = Deku.do
   where
   myHook :: Poll Int -> Hook (Tuple (Poll Int) (Poll Int))
   myHook e makeHook = Deku.do
-    e1 <- useMemoized (add 42 <$> e)
-    e2 <- useMemoized (add 48 <$> e)
+    e1 <- useRant (add 42 <$> e)
+    e2 <- useRant (add 48 <$> e)
     makeHook (Tuple e1 e2)
-
-memoizedSwitcher :: Nut
-memoizedSwitcher = Deku.do
-  _ /\ e <- useState "world"
-  x <- useMemoized e
-  D.div [ id_ "maindiv" ] [ text x ]
 
 simpleSwitcher :: Nut
 simpleSwitcher = Deku.do
@@ -468,13 +460,14 @@ useStateWorks = Deku.do
     , D.button [ id_ "button", click_ $ p "world" ] [ text_ "Switch" ]
     ]
 
-useMemoizedWorks :: Nut
-useMemoizedWorks = Deku.do
-  p /\ e <- useState "hello"
-  x <- useMemoized e
+useRantWorks :: Nut
+useRantWorks = Deku.do
+  p /\ e <- useState'
+  x <- useRant (fold (\b _ -> b + 1) (-1) e)
   D.div_
-    [ D.span [ id_ "maindiv" ] [ text x ]
-    , D.button [ id_ "button", click_ $ p "world" ] [ text_ "Switch" ]
+    [ D.span [ id_ "maindiv" ] [ text (show <$> x) ]
+    , D.span [ id_ "maindiv2" ] [ text (show <$> x) ]
+    , D.button [ id_ "button", click_ $ p unit ] [ text_ "Switch" ]
     ]
 
 useEffectWorksWithRef :: Nut

@@ -150,13 +150,6 @@ describe("deku", () => {
   doTest("sends to position correctly", (f) =>
     f(tests.sendsToPosition, () => {
       const $ = require("jquery");
-      console.log(
-        $("#dyn0").index(),
-        $("#dyn1").index(),
-        $("#dyn2").index(),
-        $("#dyn3").index(),
-        $("#dyn4").index()
-      );
       expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
       expect($("#dyn2").index()).toBeLessThan($("#dyn3").index());
@@ -166,13 +159,6 @@ describe("deku", () => {
       $("#pos").trigger("click");
       // 3 is now at 1
       // so the order is 0, 3, 1, 2, 4
-      console.log(
-        $("#dyn0").index(),
-        $("#dyn1").index(),
-        $("#dyn2").index(),
-        $("#dyn3").index(),
-        $("#dyn4").index()
-      );
       expect($("#dyn0").index()).toBeLessThan($("#dyn3").index());
       expect($("#dyn3").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
@@ -278,14 +264,10 @@ describe("deku", () => {
       const $ = require("jquery");
       expect($("#outer-scope").text()).toBe("no dice!");
       expect($("#inner-scope").text()).toBe("foo");
-      console.log("preCLICK 1");
       $("#portal-btn").trigger("click");
-      console.log("postCLICK 1");
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("no dice!");
-      console.log("preCLICK 2");
       $("#portal-btn").trigger("click");
-      console.log("postCLICK 2");
       // starting from the second click, the top stops receiving events
       // which means that the portal should never flip back to it
       // we do this in the test to make sure that the portal is
@@ -353,24 +335,16 @@ describe("deku", () => {
         const $ = require("jquery");
         expect($("#hack").text()).toBe("hello");
         ////
-        console.log('preCLICK1');
         $("#home-btn").trigger("click");
-        console.log('postCLICK1');
         expect($("#hack").text()).toBe("goodbye");
-        console.log('preCLICK2');
         $("#home-btn").trigger("click");
-        console.log('postCLICK2');
         expect($("#hack").text()).toBe("hello");
         ////
-        console.log('preCLICK3');
         $("#home-btn").trigger("click");
-        console.log('postCLICK3');
         expect($("#hack").text()).toBe("goodbye");
         $("#home-btn").trigger("click");
         expect($("#hack").text()).toBe("hello");
-
-      }),
-    true
+      })
   );
 
   doTest("attributes are correctly unset", (f) =>
@@ -501,8 +475,6 @@ describe("deku", () => {
   doTest("custom hooks do their thing", (f) =>
     f(tests.customHooksDoTheirThing, () => {
       const $ = require("jquery");
-      expect($("#mydiv1").text()).toBe("42");
-      expect($("#mydiv2").text()).toBe("48");
       $("#counter").trigger("click");
       expect($("#mydiv1").text()).toBe("43");
       expect($("#mydiv2").text()).toBe("49");
@@ -518,19 +490,24 @@ describe("deku", () => {
     })
   );
 
-  doTest("used memoized works", (f) =>
-    f(tests.useMemoizedWorks, () => {
+  doTest("use rant works", (f) =>
+    f(tests.useRantWorks, () => {
       const $ = require("jquery");
-      expect($("#maindiv").text()).toBe("hello");
       $("#button").trigger("click");
-      expect($("#maindiv").text()).toBe("world");
-    })
-  );
-
-  doTest("a memoized switcher with an initial event triggers", (f) =>
-    f(tests.memoizedSwitcher, () => {
-      const $ = require("jquery");
-      expect($("#maindiv").text()).toBe("world");
+      expect($("#maindiv").text()).toBe("0");
+      expect($("#maindiv2").text()).toBe("0");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("1");
+      expect($("#maindiv2").text()).toBe("1");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("2");
+      expect($("#maindiv2").text()).toBe("2");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("3");
+      expect($("#maindiv2").text()).toBe("3");
+      $("#button").trigger("click");
+      expect($("#maindiv").text()).toBe("4");
+      expect($("#maindiv2").text()).toBe("4");
     })
   );
 
