@@ -280,6 +280,7 @@ describe("deku", () => {
   doTest("global portals retain portalness when sent out of scope", (f) =>
     f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
       const $ = $$;
+      $("#push-ported-nut").click();
       expect($("#outer-scope").text()).toBe("no dice!");
       expect($("#inner-scope").text()).toBe("foo");
       $("#portal-btn").click();
@@ -305,6 +306,7 @@ describe("deku", () => {
   doTest("local portals lose portalness when sent out of scope", (f) =>
     f(tests.localPortalsLosePortalnessWhenSentOutOfScope, () => {
       const $ = $$;
+      $("#push-ported-nut").click();
       expect($("#outer-scope").text()).toBe("no dice!");
       expect($("#inner-scope").text()).toBe("foo");
       $("#portal-btn").click();

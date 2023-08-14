@@ -254,21 +254,23 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
     limitTo i e = map snd $ filter (\(n /\ _) -> n < i) $ counter e
   setPortalInContext /\ portalInContext <- useState true
   setPortedNut /\ portedNut <- useState'
-  D.div [id_ "test-frame" ]
+  D.div [ id_ "test-frame" ]
     [ D.div [ id_ "outer-scope" ]
         [ limitTo 2 (Tuple <$> portalInContext <*> portedNut)
             <#~> \(Tuple tf p) ->
               if not tf then p else D.div_ [ text_ "no dice!" ]
         ]
     , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
-          Deku.do
-            useEffect (pure (setPortedNut e))
-            D.div [ id_ "inner-scope" ]
-              [ (Tuple <$> portalInContext <*> portedNut)
-                  <#~> \(Tuple tf p) ->
+          D.div_
+            [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+                [ text_ "push ported nut" ]
+            , D.div [ id_ "inner-scope" ]
+                [ (Tuple <$> portalInContext <*> portedNut)
+                    <#~> \(Tuple tf p) ->
                       if tf then p
                       else D.div [ id_ "inner-switch" ] [ text_ "no dice!" ]
-              ]
+                ]
+            ]
       )
     , D.button
         [ id_ "portal-btn"
@@ -295,13 +297,15 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
               if not tf then p else D.div_ [ text_ "no dice!" ]
         ]
     , portal1 (D.div_ [ text_ "foo" ]) \e ->
-        Deku.do
-          useEffect (pure (setPortedNut e))
-          D.div [ id_ "inner-scope" ]
-            [ (Tuple <$> portalInContext <*> portedNut)
-                <#~> \(Tuple tf p) ->
-                  if tf then p else D.div_ [ text_ "no dice!" ]
-            ]
+        D.div_
+          [ D.button [ id_ "push-ported-nut", click_ (setPortedNut e) ]
+              [ text_ "push ported nut" ]
+          , D.div [ id_ "inner-scope" ]
+              [ (Tuple <$> portalInContext <*> portedNut)
+                  <#~> \(Tuple tf p) ->
+                    if tf then p else D.div_ [ text_ "no dice!" ]
+              ]
+          ]
     , D.button
         [ id_ "portal-btn"
         , click $ portalInContext <#> not >>> setPortalInContext
