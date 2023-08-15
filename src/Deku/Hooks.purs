@@ -60,7 +60,7 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
 import Effect (Effect)
-import FRP.Event (Event, filterMap, mailbox, mapAccum)
+import FRP.Event (filterMap, mapAccum)
 import FRP.Poll (Poll, sample, sample_, stToPoll)
 import FRP.Poll as Poll
 
@@ -212,7 +212,7 @@ useRefST a e makeHook = Nut go'
 useMailboxed
   :: forall a b
    . Ord a
-  => Hook (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Event b))
+  => Hook (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
 useMailboxed f = Nut go'
   where
   go' :: forall payload. NutF payload
@@ -222,8 +222,8 @@ useMailboxed f = Nut go'
     :: forall payload
      . Node' payload
   go i di = behaving \e _ subscribe -> do
-    { event, push } <- mailbox
-    let Nut nf = f (push /\ event)
+    { poll, push } <- Poll.mailbox
+    let Nut nf = f (push /\ poll)
     subscribe (sample (__internalDekuFlatten nf i di) e)
 
 type DynOptions v =
