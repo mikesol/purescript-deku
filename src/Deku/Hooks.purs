@@ -44,7 +44,7 @@ import Bolson.Control (Flatten, behaving, behaving')
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
 import Bolson.Core as BCore
-import Control.Alt (alt, (<|>))
+import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
@@ -106,8 +106,8 @@ useState
    . a
   -> Hook ((a -> Effect Unit) /\ Poll a)
 useState a f = Deku.do
-  p <- useState'
-  f (map (alt (pure a)) p)
+  push /\ event <- useState'
+  f (push /\ (pure a <|> event))
 
 useHot
   :: forall a
