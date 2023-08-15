@@ -116,7 +116,7 @@ useHot
 useHot a f = Deku.do
   push /\ poll <- useState'
   r <- useRefST a poll
-  f (push /\ stToPoll r)
+  f (push /\ (stToPoll r <|> poll))
 
 guard :: Poll Boolean -> Nut -> Nut
 guard b e = switcher (if _ then e else mempty) b

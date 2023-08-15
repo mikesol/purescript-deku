@@ -460,6 +460,18 @@ describe("deku", () => {
     })
   );
 
+  doTest("useHot changes its value", (f) =>
+    f(tests.useHotWorks, () => {
+      const $ = $$;
+      expect($("#hotdiv").text()).toBe("0.42");
+      $("#ba").click();
+      const nw = $("#hotdiv").text();
+      expect(nw).not.toBe("0.42");
+      $("#bb").click();
+      expect($("#newdiv").text()).toBe(nw);
+    })
+  );
+
   doTest("useEffect with a ref has correct behavior", (f) =>
     f(tests.useEffectCanBeSimulatedWithRef, () => {
       const $ = $$;

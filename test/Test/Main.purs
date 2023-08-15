@@ -24,6 +24,7 @@ import Deku.Listeners (click, click_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
+import Effect.Random (random)
 import FRP.Event (fold, mapAccum)
 import FRP.Poll (Poll, effectToPoll)
 import Type.Proxy (Proxy(..))
@@ -505,6 +506,33 @@ refToHot = Deku.do
   D.div_
     [ nest (nest (nest (nest (nest (nest elt))))) 0
     , D.button [ id_ "setlabel", click_ $ setLabel "bar" ] [ text_ "set label" ]
+    ]
+
+useHotWorks :: Nut
+useHotWorks = Deku.do
+  setNumber /\ number <- useHot 0.42
+  setPresence /\ presence <- useState false
+  D.div_
+    [ D.div [ id_ "hotdiv" ]
+        [ text $ number <#> show
+        ]
+    , D.div_
+        [ D.button
+            [ id_ "ba"
+            , click_ $ random >>= setNumber
+            ]
+            [ text_ "A" ]
+        , D.button
+            [ id_ "bb"
+            , click $ presence <#> not >>> setPresence
+            ]
+            [ text_ "B" ]
+        ]
+    , D.div [ id_ "newdiv" ]
+        [ guard presence
+            $ text
+            $ number <#> show
+        ]
     ]
 
 hotIsHot :: Nut
