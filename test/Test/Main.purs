@@ -535,6 +535,33 @@ useHotWorks = Deku.do
         ]
     ]
 
+useStateWorks2 :: Nut
+useStateWorks2 = Deku.do
+  setNumber /\ number <- useState 0.42
+  setPresence /\ presence <- useState false
+  D.div_
+    [ D.div [ id_ "hotdiv" ]
+        [ text $ number <#> show
+        ]
+    , D.div_
+        [ D.button
+            [ id_ "ba"
+            , click_ $ random >>= setNumber
+            ]
+            [ text_ "A" ]
+        , D.button
+            [ id_ "bb"
+            , click $ presence <#> not >>> setPresence
+            ]
+            [ text_ "B" ]
+        ]
+    , D.div [ id_ "newdiv" ]
+        [ guard presence
+            $ text
+            $ number <#> show
+        ]
+    ]
+
 hotIsHot :: Nut
 hotIsHot = Deku.do
   setLabel /\ label <- useHot "bar"

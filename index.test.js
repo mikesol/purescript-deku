@@ -35,12 +35,13 @@ const doTest = (name, closure, onlyWithSSR) => {
 const getChildIndex = (child) => {
   let i = 0;
   while ((child = child.previousElementSibling) !== null) {
-      i++;
+    i++;
   }
   return i;
-}
+};
 
-const resolveIdentish = (ident) => typeof ident === "string" ? document.querySelector(ident) : ident;
+const resolveIdentish = (ident) =>
+  typeof ident === "string" ? document.querySelector(ident) : ident;
 
 const $$ = (ident) => ({
   text: () => resolveIdentish(ident).textContent,
@@ -48,7 +49,7 @@ const $$ = (ident) => ({
   index: () => getChildIndex(resolveIdentish(ident)),
   attr: (key) => resolveIdentish(ident).getAttribute(key),
   contents: () => resolveIdentish(ident).childNodes,
-  selectorIsNull: () => resolveIdentish(ident) === null
+  selectorIsNull: () => resolveIdentish(ident) === null,
 });
 
 describe("deku", () => {
@@ -348,23 +349,21 @@ describe("deku", () => {
     })
   );
 
-  doTest(
-    "lots of switching!",
-    (f) =>
-      f(tests.lotsOfSwitching, () => {
-        const $ = $$;
-        expect($("#hack").text()).toBe("hello");
-        ////
-        $("#home-btn").click();
-        expect($("#hack").text()).toBe("goodbye");
-        $("#home-btn").click();
-        expect($("#hack").text()).toBe("hello");
-        ////
-        $("#home-btn").click();
-        expect($("#hack").text()).toBe("goodbye");
-        $("#home-btn").click();
-        expect($("#hack").text()).toBe("hello");
-      })
+  doTest("lots of switching!", (f) =>
+    f(tests.lotsOfSwitching, () => {
+      const $ = $$;
+      expect($("#hack").text()).toBe("hello");
+      ////
+      $("#home-btn").click();
+      expect($("#hack").text()).toBe("goodbye");
+      $("#home-btn").click();
+      expect($("#hack").text()).toBe("hello");
+      ////
+      $("#home-btn").click();
+      expect($("#hack").text()).toBe("goodbye");
+      $("#home-btn").click();
+      expect($("#hack").text()).toBe("hello");
+    })
   );
 
   doTest("attributes are correctly unset", (f) =>
@@ -469,6 +468,18 @@ describe("deku", () => {
       expect(nw).not.toBe("0.42");
       $("#bb").click();
       expect($("#newdiv").text()).toBe(nw);
+    })
+  );
+
+  doTest("useState works #2", (f) =>
+    f(tests.useStateWorks2, () => {
+      const $ = $$;
+      expect($("#hotdiv").text()).toBe("0.42");
+      $("#ba").click();
+      const nw = $("#hotdiv").text();
+      expect(nw).not.toBe("0.42");
+      $("#bb").click();
+      expect($("#newdiv").text()).toBe("0.42");
     })
   );
 
