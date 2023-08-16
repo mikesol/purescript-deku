@@ -269,69 +269,6 @@ export const makeDynBeacon_ =
     }
   };
 
-const svgTags = new Set([
-  "animate",
-  "animateMotion",
-  "animateTransform",
-  "circle",
-  "clipPath",
-  "defs",
-  "desc",
-  "discard",
-  "ellipse",
-  "feBlend",
-  "feColorMatrix",
-  "feComponentTransfer",
-  "feComposite",
-  "feConvolveMatrix",
-  "feDiffuseLighting",
-  "feDisplacementMap",
-  "feDistantLight",
-  "feDropShadow",
-  "feFlood",
-  "feFuncA",
-  "feFuncB",
-  "feFuncG",
-  "feFuncR",
-  "feGaussianBlur",
-  "feImage",
-  "feMerge",
-  "feMergeNode",
-  "feMorphology",
-  "feOffset",
-  "fePointLight",
-  "feSpecularLighting",
-  "feSpotLight",
-  "feTile",
-  "feTurbulence",
-  "filter",
-  "foreignObject",
-  "g",
-  "image",
-  "line",
-  "linearGradient",
-  "marker",
-  "mask",
-  "metadata",
-  "mpath",
-  "path",
-  "pattern",
-  "polygon",
-  "polyline",
-  "radialGradient",
-  "rect",
-  "set",
-  "stop",
-  "svg",
-  "switch",
-  "symbol",
-  "text",
-  "textPath",
-  "title",
-  "tspan",
-  "use",
-  "view",
-]);
 export const getPos = (id) => (state) => () =>
   state.units[id] && state.units[id].pos
     ? state.units[id].pos
@@ -397,9 +334,11 @@ export const makeElement_ =
       return false;
     })();
     if (!iRan) {
-      const main = svgTags.has(a.tag)
-        ? document.createElementNS("http://www.w3.org/2000/svg", a.tag)
-        : document.createElement(a.tag);
+      const namespace = null;
+      runOnJust(a.ns)( ns => () => { namespace = ns; return true; } )();
+      const main = namespace === null 
+        ? document.createElement(a.tag)
+        : document.createElementNS( namespace, a.tag);
       state.units[ptr] = {
         listeners: {},
         parent: a.parent,

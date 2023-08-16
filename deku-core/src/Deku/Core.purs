@@ -248,6 +248,7 @@ type MakeElement =
   { id :: String
   , scope :: Scope
   , parent :: Maybe String
+  , ns :: Maybe String
   , tag :: String
   , pos :: Maybe Int
   , dynFamily :: Maybe String
@@ -462,6 +463,7 @@ dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
                           { id: dummyParent
                           , parent: Nothing
                           , scope
+                          , ns : Nothing
                           , tag: "div"
                           , pos: Nothing
                           , dynFamily: Nothing

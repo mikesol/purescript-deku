@@ -1346,6 +1346,7 @@ import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
 import FRP.Event as FRP.Event
+import Data.Maybe (Maybe(..))
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
@@ -2664,187 +2665,187 @@ class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
 instance TagToDeku "html" (HTMLHtmlElement ())
 
 html :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLHtmlElement ()))) -> Array Nut -> Nut
-html = elementify2 {-  -} "html"
+html = elementify2 Nothing "html"
 
 html_ :: Array Nut -> Nut
-html_ = elementify2 {-  -} "html" []
+html_ = html []
 
 instance TagToDeku "head" (HTMLHeadElement ())
 
 head :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLHeadElement ()))) -> Array Nut -> Nut
-head = elementify2 {-  -} "head"
+head = elementify2 Nothing "head"
 
 head_ :: Array Nut -> Nut
-head_ = elementify2 {-  -} "head" []
+head_ = head []
 
 instance TagToDeku "title" (HTMLTitleElement ())
 
 title
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTitleElement ()))) -> Array Nut -> Nut
-title = elementify2 {-  -} "title"
+title = elementify2 Nothing "title"
 
 title_ :: Array Nut -> Nut
-title_ = elementify2 {-  -} "title" []
+title_ = title []
 
 instance TagToDeku "base" (HTMLBaseElement ())
 
 base :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBaseElement ()))) -> Array Nut -> Nut
-base = elementify2 {-  -} "base"
+base = elementify2 Nothing "base"
 
 base_ :: Array Nut -> Nut
-base_ = elementify2 {-  -} "base" []
+base_ = base []
 
 instance TagToDeku "link" (HTMLLinkElement ())
 
 link :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLLinkElement ()))) -> Array Nut -> Nut
-link = elementify2 {-  -} "link"
+link = elementify2 Nothing "link"
 
 link_ :: Array Nut -> Nut
-link_ = elementify2 {-  -} "link" []
+link_ = link []
 
 instance TagToDeku "meta" (HTMLMetaElement ())
 
 meta :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMetaElement ()))) -> Array Nut -> Nut
-meta = elementify2 {-  -} "meta"
+meta = elementify2 Nothing "meta"
 
 meta_ :: Array Nut -> Nut
-meta_ = elementify2 {-  -} "meta" []
+meta_ = meta []
 
 instance TagToDeku "style" (HTMLStyleElement ())
 
 style
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLStyleElement ()))) -> Array Nut -> Nut
-style = elementify2 {-  -} "style"
+style = elementify2 Nothing "style"
 
 style_ :: Array Nut -> Nut
-style_ = elementify2 {-  -} "style" []
+style_ = style []
 
 instance TagToDeku "body" (HTMLBodyElement ())
 
 body :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBodyElement ()))) -> Array Nut -> Nut
-body = elementify2 {-  -} "body"
+body = elementify2 Nothing "body"
 
 body_ :: Array Nut -> Nut
-body_ = elementify2 {-  -} "body" []
+body_ = body []
 
 instance TagToDeku "article" (HTMLArticleElement ())
 
 article
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLArticleElement ()))) -> Array Nut -> Nut
-article = elementify2 {-  -} "article"
+article = elementify2 Nothing "article"
 
 article_ :: Array Nut -> Nut
-article_ = elementify2 {-  -} "article" []
+article_ = article []
 
 instance TagToDeku "section" (HTMLSectionElement ())
 
 section
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSectionElement ()))) -> Array Nut -> Nut
-section = elementify2 {-  -} "section"
+section = elementify2 Nothing "section"
 
 section_ :: Array Nut -> Nut
-section_ = elementify2 {-  -} "section" []
+section_ = section []
 
 instance TagToDeku "nav" (HTMLNavElement ())
 
 nav :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNavElement ()))) -> Array Nut -> Nut
-nav = elementify2 {-  -} "nav"
+nav = elementify2 Nothing "nav"
 
 nav_ :: Array Nut -> Nut
-nav_ = elementify2 {-  -} "nav" []
+nav_ = nav []
 
 instance TagToDeku "aside" (HTMLAsideElement ())
 
 aside
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAsideElement ()))) -> Array Nut -> Nut
-aside = elementify2 {-  -} "aside"
+aside = elementify2 Nothing "aside"
 
 aside_ :: Array Nut -> Nut
-aside_ = elementify2 {-  -} "aside" []
+aside_ = aside []
 
 instance TagToDeku "h1" (HTMLH1Element ())
 
 h1 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH1Element ()))) -> Array Nut -> Nut
-h1 = elementify2 {-  -} "h1"
+h1 = elementify2 Nothing "h1"
 
 h1_ :: Array Nut -> Nut
-h1_ = elementify2 {-  -} "h1" []
+h1_ = h1 []
 
 instance TagToDeku "h2" (HTMLH2Element ())
 
 h2 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH2Element ()))) -> Array Nut -> Nut
-h2 = elementify2 {-  -} "h2"
+h2 = elementify2 Nothing "h2"
 
 h2_ :: Array Nut -> Nut
-h2_ = elementify2 {-  -} "h2" []
+h2_ = h2 []
 
 instance TagToDeku "h3" (HTMLH3Element ())
 
 h3 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH3Element ()))) -> Array Nut -> Nut
-h3 = elementify2 {-  -} "h3"
+h3 = elementify2 Nothing "h3"
 
 h3_ :: Array Nut -> Nut
-h3_ = elementify2 {-  -} "h3" []
+h3_ = h3 []
 
 instance TagToDeku "h4" (HTMLH4Element ())
 
 h4 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH4Element ()))) -> Array Nut -> Nut
-h4 = elementify2 {-  -} "h4"
+h4 = elementify2 Nothing "h4"
 
 h4_ :: Array Nut -> Nut
-h4_ = elementify2 {-  -} "h4" []
+h4_ = h4 []
 
 instance TagToDeku "h5" (HTMLH5Element ())
 
 h5 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH5Element ()))) -> Array Nut -> Nut
-h5 = elementify2 {-  -} "h5"
+h5 = elementify2 Nothing "h5"
 
 h5_ :: Array Nut -> Nut
-h5_ = elementify2 {-  -} "h5" []
+h5_ = h5 []
 
 instance TagToDeku "h6" (HTMLH6Element ())
 
 h6 :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLH6Element ()))) -> Array Nut -> Nut
-h6 = elementify2 {-  -} "h6"
+h6 = elementify2 Nothing "h6"
 
 h6_ :: Array Nut -> Nut
-h6_ = elementify2 {-  -} "h6" []
+h6_ = h6 []
 
 instance TagToDeku "hgroup" (HTMLHgroupElement ())
 
 hgroup
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLHgroupElement ()))) -> Array Nut -> Nut
-hgroup = elementify2 {-  -} "hgroup"
+hgroup = elementify2 Nothing "hgroup"
 
 hgroup_ :: Array Nut -> Nut
-hgroup_ = elementify2 {-  -} "hgroup" []
+hgroup_ = hgroup []
 
 instance TagToDeku "header" (HTMLHeaderElement ())
 
 header
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLHeaderElement ()))) -> Array Nut -> Nut
-header = elementify2 {-  -} "header"
+header = elementify2 Nothing "header"
 
 header_ :: Array Nut -> Nut
-header_ = elementify2 {-  -} "header" []
+header_ = header []
 
 instance TagToDeku "footer" (HTMLFooterElement ())
 
 footer
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFooterElement ()))) -> Array Nut -> Nut
-footer = elementify2 {-  -} "footer"
+footer = elementify2 Nothing "footer"
 
 footer_ :: Array Nut -> Nut
-footer_ = elementify2 {-  -} "footer" []
+footer_ = footer []
 
 instance TagToDeku "address" (HTMLAddressElement ())
 
 address
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAddressElement ()))) -> Array Nut -> Nut
-address = elementify2 {-  -} "address"
+address = elementify2 Nothing "address"
 
 address_ :: Array Nut -> Nut
-address_ = elementify2 {-  -} "address" []
+address_ = address []
 
 instance TagToDeku "p" (HTMLParagraphElement ())
 
@@ -2852,26 +2853,26 @@ p
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLParagraphElement ())))
   -> Array Nut
   -> Nut
-p = elementify2 {-  -} "p"
+p = elementify2 Nothing "p"
 
 p_ :: Array Nut -> Nut
-p_ = elementify2 {-  -} "p" []
+p_ = p []
 
 instance TagToDeku "hr" (HTMLHRElement ())
 
 hr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLHRElement ()))) -> Array Nut -> Nut
-hr = elementify2 {-  -} "hr"
+hr = elementify2 Nothing "hr"
 
 hr_ :: Array Nut -> Nut
-hr_ = elementify2 {-  -} "hr" []
+hr_ = hr []
 
 instance TagToDeku "pre" (HTMLPreElement ())
 
 pre :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLPreElement ()))) -> Array Nut -> Nut
-pre = elementify2 {-  -} "pre"
+pre = elementify2 Nothing "pre"
 
 pre_ :: Array Nut -> Nut
-pre_ = elementify2 {-  -} "pre" []
+pre_ = pre []
 
 instance TagToDeku "blockquote" (HTMLBlockquoteElement ())
 
@@ -2879,75 +2880,75 @@ blockquote
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBlockquoteElement ())))
   -> Array Nut
   -> Nut
-blockquote = elementify2 {-  -} "blockquote"
+blockquote = elementify2 Nothing "blockquote"
 
 blockquote_ :: Array Nut -> Nut
-blockquote_ = elementify2 {-  -} "blockquote" []
+blockquote_ = blockquote []
 
 instance TagToDeku "ol" (HTMLOlElement ())
 
 ol :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLOlElement ()))) -> Array Nut -> Nut
-ol = elementify2 {-  -} "ol"
+ol = elementify2 Nothing "ol"
 
 ol_ :: Array Nut -> Nut
-ol_ = elementify2 {-  -} "ol" []
+ol_ = ol []
 
 instance TagToDeku "ul" (HTMLUlElement ())
 
 ul :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLUlElement ()))) -> Array Nut -> Nut
-ul = elementify2 {-  -} "ul"
+ul = elementify2 Nothing "ul"
 
 ul_ :: Array Nut -> Nut
-ul_ = elementify2 {-  -} "ul" []
+ul_ = ul []
 
 instance TagToDeku "menu" (HTMLMenuElement ())
 
 menu :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMenuElement ()))) -> Array Nut -> Nut
-menu = elementify2 {-  -} "menu"
+menu = elementify2 Nothing "menu"
 
 menu_ :: Array Nut -> Nut
-menu_ = elementify2 {-  -} "menu" []
+menu_ = menu []
 
 instance TagToDeku "li" (HTMLLiElement ())
 
 li :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLLiElement ()))) -> Array Nut -> Nut
-li = elementify2 {-  -} "li"
+li = elementify2 Nothing "li"
 
 li_ :: Array Nut -> Nut
-li_ = elementify2 {-  -} "li" []
+li_ = li []
 
 instance TagToDeku "dl" (HTMLDlElement ())
 
 dl :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDlElement ()))) -> Array Nut -> Nut
-dl = elementify2 {-  -} "dl"
+dl = elementify2 Nothing "dl"
 
 dl_ :: Array Nut -> Nut
-dl_ = elementify2 {-  -} "dl" []
+dl_ = dl []
 
 instance TagToDeku "dt" (HTMLDtElement ())
 
 dt :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDtElement ()))) -> Array Nut -> Nut
-dt = elementify2 {-  -} "dt"
+dt = elementify2 Nothing "dt"
 
 dt_ :: Array Nut -> Nut
-dt_ = elementify2 {-  -} "dt" []
+dt_ = dt []
 
 instance TagToDeku "dd" (HTMLDdElement ())
 
 dd :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDdElement ()))) -> Array Nut -> Nut
-dd = elementify2 {-  -} "dd"
+dd = elementify2 Nothing "dd"
 
 dd_ :: Array Nut -> Nut
-dd_ = elementify2 {-  -} "dd" []
+dd_ = dd []
 
 instance TagToDeku "figure" (HTMLFigureElement ())
 
 figure
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFigureElement ()))) -> Array Nut -> Nut
-figure = elementify2 {-  -} "figure"
+figure = elementify2 Nothing "figure"
 
 figure_ :: Array Nut -> Nut
-figure_ = elementify2 {-  -} "figure" []
+figure_ = figure []
 
 instance TagToDeku "figcaption" (HTMLFigcaptionElement ())
 
@@ -2955,452 +2956,452 @@ figcaption
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFigcaptionElement ())))
   -> Array Nut
   -> Nut
-figcaption = elementify2 {-  -} "figcaption"
+figcaption = elementify2 Nothing "figcaption"
 
 figcaption_ :: Array Nut -> Nut
-figcaption_ = elementify2 {-  -} "figcaption" []
+figcaption_ = figcaption []
 
 instance TagToDeku "main" (HTMLMainElement ())
 
 main :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMainElement ()))) -> Array Nut -> Nut
-main = elementify2 {-  -} "main"
+main = elementify2 Nothing "main"
 
 main_ :: Array Nut -> Nut
-main_ = elementify2 {-  -} "main" []
+main_ = main []
 
 instance TagToDeku "search" (HTMLSearchElement ())
 
 search
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSearchElement ()))) -> Array Nut -> Nut
-search = elementify2 {-  -} "search"
+search = elementify2 Nothing "search"
 
 search_ :: Array Nut -> Nut
-search_ = elementify2 {-  -} "search" []
+search_ = search []
 
 instance TagToDeku "div" (HTMLDivElement ())
 
 div :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDivElement ()))) -> Array Nut -> Nut
-div = elementify2 {-  -} "div"
+div = elementify2 Nothing "div"
 
 div_ :: Array Nut -> Nut
-div_ = elementify2 {-  -} "div" []
+div_ = div []
 
 instance TagToDeku "a" (HTMLAnchorElement ())
 
 a :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAnchorElement ()))) -> Array Nut -> Nut
-a = elementify2 {-  -} "a"
+a = elementify2 Nothing "a"
 
 a_ :: Array Nut -> Nut
-a_ = elementify2 {-  -} "a" []
+a_ = a []
 
 instance TagToDeku "em" (HTMLEmElement ())
 
 em :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLEmElement ()))) -> Array Nut -> Nut
-em = elementify2 {-  -} "em"
+em = elementify2 Nothing "em"
 
 em_ :: Array Nut -> Nut
-em_ = elementify2 {-  -} "em" []
+em_ = em []
 
 instance TagToDeku "strong" (HTMLStrongElement ())
 
 strong
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLStrongElement ()))) -> Array Nut -> Nut
-strong = elementify2 {-  -} "strong"
+strong = elementify2 Nothing "strong"
 
 strong_ :: Array Nut -> Nut
-strong_ = elementify2 {-  -} "strong" []
+strong_ = strong []
 
 instance TagToDeku "small" (HTMLSmallElement ())
 
 small
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSmallElement ()))) -> Array Nut -> Nut
-small = elementify2 {-  -} "small"
+small = elementify2 Nothing "small"
 
 small_ :: Array Nut -> Nut
-small_ = elementify2 {-  -} "small" []
+small_ = small []
 
 instance TagToDeku "s" (HTMLSElement ())
 
 s :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSElement ()))) -> Array Nut -> Nut
-s = elementify2 {-  -} "s"
+s = elementify2 Nothing "s"
 
 s_ :: Array Nut -> Nut
-s_ = elementify2 {-  -} "s" []
+s_ = s []
 
 instance TagToDeku "cite" (HTMLCiteElement ())
 
 cite :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLCiteElement ()))) -> Array Nut -> Nut
-cite = elementify2 {-  -} "cite"
+cite = elementify2 Nothing "cite"
 
 cite_ :: Array Nut -> Nut
-cite_ = elementify2 {-  -} "cite" []
+cite_ = cite []
 
 instance TagToDeku "q" (HTMLQElement ())
 
 q :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLQElement ()))) -> Array Nut -> Nut
-q = elementify2 {-  -} "q"
+q = elementify2 Nothing "q"
 
 q_ :: Array Nut -> Nut
-q_ = elementify2 {-  -} "q" []
+q_ = q []
 
 instance TagToDeku "dfn" (HTMLDfnElement ())
 
 dfn :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDfnElement ()))) -> Array Nut -> Nut
-dfn = elementify2 {-  -} "dfn"
+dfn = elementify2 Nothing "dfn"
 
 dfn_ :: Array Nut -> Nut
-dfn_ = elementify2 {-  -} "dfn" []
+dfn_ = dfn []
 
 instance TagToDeku "abbr" (HTMLAbbrElement ())
 
 abbr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAbbrElement ()))) -> Array Nut -> Nut
-abbr = elementify2 {-  -} "abbr"
+abbr = elementify2 Nothing "abbr"
 
 abbr_ :: Array Nut -> Nut
-abbr_ = elementify2 {-  -} "abbr" []
+abbr_ = abbr []
 
 instance TagToDeku "ruby" (HTMLRubyElement ())
 
 ruby :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLRubyElement ()))) -> Array Nut -> Nut
-ruby = elementify2 {-  -} "ruby"
+ruby = elementify2 Nothing "ruby"
 
 ruby_ :: Array Nut -> Nut
-ruby_ = elementify2 {-  -} "ruby" []
+ruby_ = ruby []
 
 instance TagToDeku "rt" (HTMLRtElement ())
 
 rt :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLRtElement ()))) -> Array Nut -> Nut
-rt = elementify2 {-  -} "rt"
+rt = elementify2 Nothing "rt"
 
 rt_ :: Array Nut -> Nut
-rt_ = elementify2 {-  -} "rt" []
+rt_ = rt []
 
 instance TagToDeku "rp" (HTMLRpElement ())
 
 rp :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLRpElement ()))) -> Array Nut -> Nut
-rp = elementify2 {-  -} "rp"
+rp = elementify2 Nothing "rp"
 
 rp_ :: Array Nut -> Nut
-rp_ = elementify2 {-  -} "rp" []
+rp_ = rp []
 
 instance TagToDeku "data" (HTMLDataElement ())
 
 xdata
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDataElement ()))) -> Array Nut -> Nut
-xdata = elementify2 {-  -} "data"
+xdata = elementify2 Nothing "data"
 
 xdata_ :: Array Nut -> Nut
-xdata_ = elementify2 {-  -} "data" []
+xdata_ = xdata []
 
 instance TagToDeku "time" (HTMLTimeElement ())
 
 time :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTimeElement ()))) -> Array Nut -> Nut
-time = elementify2 {-  -} "time"
+time = elementify2 Nothing "time"
 
 time_ :: Array Nut -> Nut
-time_ = elementify2 {-  -} "time" []
+time_ = time []
 
 instance TagToDeku "code" (HTMLCodeElement ())
 
 code :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLCodeElement ()))) -> Array Nut -> Nut
-code = elementify2 {-  -} "code"
+code = elementify2 Nothing "code"
 
 code_ :: Array Nut -> Nut
-code_ = elementify2 {-  -} "code" []
+code_ = code []
 
 instance TagToDeku "var" (HTMLVarElement ())
 
 var :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLVarElement ()))) -> Array Nut -> Nut
-var = elementify2 {-  -} "var"
+var = elementify2 Nothing "var"
 
 var_ :: Array Nut -> Nut
-var_ = elementify2 {-  -} "var" []
+var_ = var []
 
 instance TagToDeku "samp" (HTMLSampElement ())
 
 samp :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSampElement ()))) -> Array Nut -> Nut
-samp = elementify2 {-  -} "samp"
+samp = elementify2 Nothing "samp"
 
 samp_ :: Array Nut -> Nut
-samp_ = elementify2 {-  -} "samp" []
+samp_ = samp []
 
 instance TagToDeku "kbd" (HTMLKbdElement ())
 
 kbd :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLKbdElement ()))) -> Array Nut -> Nut
-kbd = elementify2 {-  -} "kbd"
+kbd = elementify2 Nothing "kbd"
 
 kbd_ :: Array Nut -> Nut
-kbd_ = elementify2 {-  -} "kbd" []
+kbd_ = kbd []
 
 instance TagToDeku "sub" (HTMLSubElement ())
 
 sub :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSubElement ()))) -> Array Nut -> Nut
-sub = elementify2 {-  -} "sub"
+sub = elementify2 Nothing "sub"
 
 sub_ :: Array Nut -> Nut
-sub_ = elementify2 {-  -} "sub" []
+sub_ = sub []
 
 instance TagToDeku "sup" (HTMLSupElement ())
 
 sup :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSupElement ()))) -> Array Nut -> Nut
-sup = elementify2 {-  -} "sup"
+sup = elementify2 Nothing "sup"
 
 sup_ :: Array Nut -> Nut
-sup_ = elementify2 {-  -} "sup" []
+sup_ = sup []
 
 instance TagToDeku "i" (HTMLIElement ())
 
 i :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLIElement ()))) -> Array Nut -> Nut
-i = elementify2 {-  -} "i"
+i = elementify2 Nothing "i"
 
 i_ :: Array Nut -> Nut
-i_ = elementify2 {-  -} "i" []
+i_ = i []
 
 instance TagToDeku "b" (HTMLBElement ())
 
 b :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBElement ()))) -> Array Nut -> Nut
-b = elementify2 {-  -} "b"
+b = elementify2 Nothing "b"
 
 b_ :: Array Nut -> Nut
-b_ = elementify2 {-  -} "b" []
+b_ = b []
 
 instance TagToDeku "u" (HTMLUElement ())
 
 u :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLUElement ()))) -> Array Nut -> Nut
-u = elementify2 {-  -} "u"
+u = elementify2 Nothing "u"
 
 u_ :: Array Nut -> Nut
-u_ = elementify2 {-  -} "u" []
+u_ = u []
 
 instance TagToDeku "mark" (HTMLMarkElement ())
 
 mark :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMarkElement ()))) -> Array Nut -> Nut
-mark = elementify2 {-  -} "mark"
+mark = elementify2 Nothing "mark"
 
 mark_ :: Array Nut -> Nut
-mark_ = elementify2 {-  -} "mark" []
+mark_ = mark []
 
 instance TagToDeku "bdi" (HTMLBdiElement ())
 
 bdi :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBdiElement ()))) -> Array Nut -> Nut
-bdi = elementify2 {-  -} "bdi"
+bdi = elementify2 Nothing "bdi"
 
 bdi_ :: Array Nut -> Nut
-bdi_ = elementify2 {-  -} "bdi" []
+bdi_ = bdi []
 
 instance TagToDeku "bdo" (HTMLBdoElement ())
 
 bdo :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBdoElement ()))) -> Array Nut -> Nut
-bdo = elementify2 {-  -} "bdo"
+bdo = elementify2 Nothing "bdo"
 
 bdo_ :: Array Nut -> Nut
-bdo_ = elementify2 {-  -} "bdo" []
+bdo_ = bdo []
 
 instance TagToDeku "span" (HTMLSpanElement ())
 
 span :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSpanElement ()))) -> Array Nut -> Nut
-span = elementify2 {-  -} "span"
+span = elementify2 Nothing "span"
 
 span_ :: Array Nut -> Nut
-span_ = elementify2 {-  -} "span" []
+span_ = span []
 
 instance TagToDeku "br" (HTMLBRElement ())
 
 br :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBRElement ()))) -> Array Nut -> Nut
-br = elementify2 {-  -} "br"
+br = elementify2 Nothing "br"
 
 br_ :: Array Nut -> Nut
-br_ = elementify2 {-  -} "br" []
+br_ = br []
 
 instance TagToDeku "wbr" (HTMLWbrElement ())
 
 wbr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLWbrElement ()))) -> Array Nut -> Nut
-wbr = elementify2 {-  -} "wbr"
+wbr = elementify2 Nothing "wbr"
 
 wbr_ :: Array Nut -> Nut
-wbr_ = elementify2 {-  -} "wbr" []
+wbr_ = wbr []
 
 instance TagToDeku "ins" (HTMLInsElement ())
 
 ins :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLInsElement ()))) -> Array Nut -> Nut
-ins = elementify2 {-  -} "ins"
+ins = elementify2 Nothing "ins"
 
 ins_ :: Array Nut -> Nut
-ins_ = elementify2 {-  -} "ins" []
+ins_ = ins []
 
 instance TagToDeku "del" (HTMLDelElement ())
 
 del :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDelElement ()))) -> Array Nut -> Nut
-del = elementify2 {-  -} "del"
+del = elementify2 Nothing "del"
 
 del_ :: Array Nut -> Nut
-del_ = elementify2 {-  -} "del" []
+del_ = del []
 
 instance TagToDeku "picture" (HTMLPictureElement ())
 
 picture
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLPictureElement ()))) -> Array Nut -> Nut
-picture = elementify2 {-  -} "picture"
+picture = elementify2 Nothing "picture"
 
 picture_ :: Array Nut -> Nut
-picture_ = elementify2 {-  -} "picture" []
+picture_ = picture []
 
 instance TagToDeku "source" (HTMLSourceElement ())
 
 source
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSourceElement ()))) -> Array Nut -> Nut
-source = elementify2 {-  -} "source"
+source = elementify2 Nothing "source"
 
 source_ :: Array Nut -> Nut
-source_ = elementify2 {-  -} "source" []
+source_ = source []
 
 instance TagToDeku "img" (HTMLImgElement ())
 
 img :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLImgElement ()))) -> Array Nut -> Nut
-img = elementify2 {-  -} "img"
+img = elementify2 Nothing "img"
 
 img_ :: Array Nut -> Nut
-img_ = elementify2 {-  -} "img" []
+img_ = img []
 
 instance TagToDeku "iframe" (HTMLIframeElement ())
 
 iframe
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLIframeElement ()))) -> Array Nut -> Nut
-iframe = elementify2 {-  -} "iframe"
+iframe = elementify2 Nothing "iframe"
 
 iframe_ :: Array Nut -> Nut
-iframe_ = elementify2 {-  -} "iframe" []
+iframe_ = iframe []
 
 instance TagToDeku "embed" (HTMLEmbedElement ())
 
 embed
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLEmbedElement ()))) -> Array Nut -> Nut
-embed = elementify2 {-  -} "embed"
+embed = elementify2 Nothing "embed"
 
 embed_ :: Array Nut -> Nut
-embed_ = elementify2 {-  -} "embed" []
+embed_ = embed []
 
 instance TagToDeku "object" (HTMLObjectElement ())
 
 object
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLObjectElement ()))) -> Array Nut -> Nut
-object = elementify2 {-  -} "object"
+object = elementify2 Nothing "object"
 
 object_ :: Array Nut -> Nut
-object_ = elementify2 {-  -} "object" []
+object_ = object []
 
 instance TagToDeku "video" (HTMLVideoElement ())
 
 video
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLVideoElement ()))) -> Array Nut -> Nut
-video = elementify2 {-  -} "video"
+video = elementify2 Nothing "video"
 
 video_ :: Array Nut -> Nut
-video_ = elementify2 {-  -} "video" []
+video_ = video []
 
 instance TagToDeku "audio" (HTMLAudioElement ())
 
 audio
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAudioElement ()))) -> Array Nut -> Nut
-audio = elementify2 {-  -} "audio"
+audio = elementify2 Nothing "audio"
 
 audio_ :: Array Nut -> Nut
-audio_ = elementify2 {-  -} "audio" []
+audio_ = audio []
 
 instance TagToDeku "track" (HTMLTrackElement ())
 
 track
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTrackElement ()))) -> Array Nut -> Nut
-track = elementify2 {-  -} "track"
+track = elementify2 Nothing "track"
 
 track_ :: Array Nut -> Nut
-track_ = elementify2 {-  -} "track" []
+track_ = track []
 
 instance TagToDeku "map" (HTMLMapElement ())
 
 map :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMapElement ()))) -> Array Nut -> Nut
-map = elementify2 {-  -} "map"
+map = elementify2 Nothing "map"
 
 map_ :: Array Nut -> Nut
-map_ = elementify2 {-  -} "map" []
+map_ = map []
 
 instance TagToDeku "area" (HTMLAreaElement ())
 
 area :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAreaElement ()))) -> Array Nut -> Nut
-area = elementify2 {-  -} "area"
+area = elementify2 Nothing "area"
 
 area_ :: Array Nut -> Nut
-area_ = elementify2 {-  -} "area" []
+area_ = area []
 
 instance TagToDeku "table" (HTMLTableElement ())
 
 table
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTableElement ()))) -> Array Nut -> Nut
-table = elementify2 {-  -} "table"
+table = elementify2 Nothing "table"
 
 table_ :: Array Nut -> Nut
-table_ = elementify2 {-  -} "table" []
+table_ = table []
 
 instance TagToDeku "caption" (HTMLCaptionElement ())
 
 caption
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLCaptionElement ()))) -> Array Nut -> Nut
-caption = elementify2 {-  -} "caption"
+caption = elementify2 Nothing "caption"
 
 caption_ :: Array Nut -> Nut
-caption_ = elementify2 {-  -} "caption" []
+caption_ = caption []
 
 instance TagToDeku "colgroup" (HTMLColgroupElement ())
 
 colgroup
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLColgroupElement ()))) -> Array Nut -> Nut
-colgroup = elementify2 {-  -} "colgroup"
+colgroup = elementify2 Nothing "colgroup"
 
 colgroup_ :: Array Nut -> Nut
-colgroup_ = elementify2 {-  -} "colgroup" []
+colgroup_ = colgroup []
 
 instance TagToDeku "col" (HTMLColElement ())
 
 col :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLColElement ()))) -> Array Nut -> Nut
-col = elementify2 {-  -} "col"
+col = elementify2 Nothing "col"
 
 col_ :: Array Nut -> Nut
-col_ = elementify2 {-  -} "col" []
+col_ = col []
 
 instance TagToDeku "tbody" (HTMLTbodyElement ())
 
 tbody
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTbodyElement ()))) -> Array Nut -> Nut
-tbody = elementify2 {-  -} "tbody"
+tbody = elementify2 Nothing "tbody"
 
 tbody_ :: Array Nut -> Nut
-tbody_ = elementify2 {-  -} "tbody" []
+tbody_ = tbody []
 
 instance TagToDeku "thead" (HTMLTheadElement ())
 
 thead
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTheadElement ()))) -> Array Nut -> Nut
-thead = elementify2 {-  -} "thead"
+thead = elementify2 Nothing "thead"
 
 thead_ :: Array Nut -> Nut
-thead_ = elementify2 {-  -} "thead" []
+thead_ = thead []
 
 instance TagToDeku "tfoot" (HTMLTfootElement ())
 
 tfoot
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTfootElement ()))) -> Array Nut -> Nut
-tfoot = elementify2 {-  -} "tfoot"
+tfoot = elementify2 Nothing "tfoot"
 
 tfoot_ :: Array Nut -> Nut
-tfoot_ = elementify2 {-  -} "tfoot" []
+tfoot_ = tfoot []
 
 instance TagToDeku "tr" (HTMLTrElement ())
 
 tr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTrElement ()))) -> Array Nut -> Nut
-tr = elementify2 {-  -} "tr"
+tr = elementify2 Nothing "tr"
 
 tr_ :: Array Nut -> Nut
-tr_ = elementify2 {-  -} "tr" []
+tr_ = tr []
 
 instance TagToDeku "td" (HTMLTableDataCellElement ())
 
@@ -3408,321 +3409,321 @@ td
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTableDataCellElement ())))
   -> Array Nut
   -> Nut
-td = elementify2 {-  -} "td"
+td = elementify2 Nothing "td"
 
 td_ :: Array Nut -> Nut
-td_ = elementify2 {-  -} "td" []
+td_ = td []
 
 instance TagToDeku "th" (HTMLThElement ())
 
 th :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLThElement ()))) -> Array Nut -> Nut
-th = elementify2 {-  -} "th"
+th = elementify2 Nothing "th"
 
 th_ :: Array Nut -> Nut
-th_ = elementify2 {-  -} "th" []
+th_ = th []
 
 instance TagToDeku "form" (HTMLFormElement ())
 
 form :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFormElement ()))) -> Array Nut -> Nut
-form = elementify2 {-  -} "form"
+form = elementify2 Nothing "form"
 
 form_ :: Array Nut -> Nut
-form_ = elementify2 {-  -} "form" []
+form_ = form []
 
 instance TagToDeku "label" (HTMLLabelElement ())
 
 label
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLLabelElement ()))) -> Array Nut -> Nut
-label = elementify2 {-  -} "label"
+label = elementify2 Nothing "label"
 
 label_ :: Array Nut -> Nut
-label_ = elementify2 {-  -} "label" []
+label_ = label []
 
 instance TagToDeku "input" (HTMLInputElement ())
 
 input
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLInputElement ()))) -> Array Nut -> Nut
-input = elementify2 {-  -} "input"
+input = elementify2 Nothing "input"
 
 input_ :: Array Nut -> Nut
-input_ = elementify2 {-  -} "input" []
+input_ = input []
 
 instance TagToDeku "button" (HTMLButtonElement ())
 
 button
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLButtonElement ()))) -> Array Nut -> Nut
-button = elementify2 {-  -} "button"
+button = elementify2 Nothing "button"
 
 button_ :: Array Nut -> Nut
-button_ = elementify2 {-  -} "button" []
+button_ = button []
 
 instance TagToDeku "select" (HTMLSelectElement ())
 
 select
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSelectElement ()))) -> Array Nut -> Nut
-select = elementify2 {-  -} "select"
+select = elementify2 Nothing "select"
 
 select_ :: Array Nut -> Nut
-select_ = elementify2 {-  -} "select" []
+select_ = select []
 
 instance TagToDeku "datalist" (HTMLDatalistElement ())
 
 datalist
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDatalistElement ()))) -> Array Nut -> Nut
-datalist = elementify2 {-  -} "datalist"
+datalist = elementify2 Nothing "datalist"
 
 datalist_ :: Array Nut -> Nut
-datalist_ = elementify2 {-  -} "datalist" []
+datalist_ = datalist []
 
 instance TagToDeku "optgroup" (HTMLOptgroupElement ())
 
 optgroup
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLOptgroupElement ()))) -> Array Nut -> Nut
-optgroup = elementify2 {-  -} "optgroup"
+optgroup = elementify2 Nothing "optgroup"
 
 optgroup_ :: Array Nut -> Nut
-optgroup_ = elementify2 {-  -} "optgroup" []
+optgroup_ = optgroup []
 
 instance TagToDeku "option" (HTMLOptionElement ())
 
 option
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLOptionElement ()))) -> Array Nut -> Nut
-option = elementify2 {-  -} "option"
+option = elementify2 Nothing "option"
 
 option_ :: Array Nut -> Nut
-option_ = elementify2 {-  -} "option" []
+option_ = option []
 
 instance TagToDeku "textarea" (HTMLTextAreaElement ())
 
 textarea
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTextAreaElement ()))) -> Array Nut -> Nut
-textarea = elementify2 {-  -} "textarea"
+textarea = elementify2 Nothing "textarea"
 
 textarea_ :: Array Nut -> Nut
-textarea_ = elementify2 {-  -} "textarea" []
+textarea_ = textarea []
 
 instance TagToDeku "output" (HTMLOutputElement ())
 
 output
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLOutputElement ()))) -> Array Nut -> Nut
-output = elementify2 {-  -} "output"
+output = elementify2 Nothing "output"
 
 output_ :: Array Nut -> Nut
-output_ = elementify2 {-  -} "output" []
+output_ = output []
 
 instance TagToDeku "progress" (HTMLProgressElement ())
 
 progress
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLProgressElement ()))) -> Array Nut -> Nut
-progress = elementify2 {-  -} "progress"
+progress = elementify2 Nothing "progress"
 
 progress_ :: Array Nut -> Nut
-progress_ = elementify2 {-  -} "progress" []
+progress_ = progress []
 
 instance TagToDeku "meter" (HTMLMeterElement ())
 
 meter
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMeterElement ()))) -> Array Nut -> Nut
-meter = elementify2 {-  -} "meter"
+meter = elementify2 Nothing "meter"
 
 meter_ :: Array Nut -> Nut
-meter_ = elementify2 {-  -} "meter" []
+meter_ = meter []
 
 instance TagToDeku "fieldset" (HTMLFieldsetElement ())
 
 fieldset
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFieldsetElement ()))) -> Array Nut -> Nut
-fieldset = elementify2 {-  -} "fieldset"
+fieldset = elementify2 Nothing "fieldset"
 
 fieldset_ :: Array Nut -> Nut
-fieldset_ = elementify2 {-  -} "fieldset" []
+fieldset_ = fieldset []
 
 instance TagToDeku "legend" (HTMLLegendElement ())
 
 legend
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLLegendElement ()))) -> Array Nut -> Nut
-legend = elementify2 {-  -} "legend"
+legend = elementify2 Nothing "legend"
 
 legend_ :: Array Nut -> Nut
-legend_ = elementify2 {-  -} "legend" []
+legend_ = legend []
 
 instance TagToDeku "details" (HTMLDetailsElement ())
 
 details
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDetailsElement ()))) -> Array Nut -> Nut
-details = elementify2 {-  -} "details"
+details = elementify2 Nothing "details"
 
 details_ :: Array Nut -> Nut
-details_ = elementify2 {-  -} "details" []
+details_ = details []
 
 instance TagToDeku "summary" (HTMLSummaryElement ())
 
 summary
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSummaryElement ()))) -> Array Nut -> Nut
-summary = elementify2 {-  -} "summary"
+summary = elementify2 Nothing "summary"
 
 summary_ :: Array Nut -> Nut
-summary_ = elementify2 {-  -} "summary" []
+summary_ = summary []
 
 instance TagToDeku "dialog" (HTMLDialogElement ())
 
 dialog
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDialogElement ()))) -> Array Nut -> Nut
-dialog = elementify2 {-  -} "dialog"
+dialog = elementify2 Nothing "dialog"
 
 dialog_ :: Array Nut -> Nut
-dialog_ = elementify2 {-  -} "dialog" []
+dialog_ = dialog []
 
 instance TagToDeku "script" (HTMLScriptElement ())
 
 script
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLScriptElement ()))) -> Array Nut -> Nut
-script = elementify2 {-  -} "script"
+script = elementify2 Nothing "script"
 
 script_ :: Array Nut -> Nut
-script_ = elementify2 {-  -} "script" []
+script_ = script []
 
 instance TagToDeku "noscript" (HTMLNoscriptElement ())
 
 noscript
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNoscriptElement ()))) -> Array Nut -> Nut
-noscript = elementify2 {-  -} "noscript"
+noscript = elementify2 Nothing "noscript"
 
 noscript_ :: Array Nut -> Nut
-noscript_ = elementify2 {-  -} "noscript" []
+noscript_ = noscript []
 
 instance TagToDeku "template" (HTMLTemplateElement ())
 
 template
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTemplateElement ()))) -> Array Nut -> Nut
-template = elementify2 {-  -} "template"
+template = elementify2 Nothing "template"
 
 template_ :: Array Nut -> Nut
-template_ = elementify2 {-  -} "template" []
+template_ = template []
 
 instance TagToDeku "slot" (HTMLSlotElement ())
 
 slot :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSlotElement ()))) -> Array Nut -> Nut
-slot = elementify2 {-  -} "slot"
+slot = elementify2 Nothing "slot"
 
 slot_ :: Array Nut -> Nut
-slot_ = elementify2 {-  -} "slot" []
+slot_ = slot []
 
 instance TagToDeku "canvas" (HTMLCanvasElement ())
 
 canvas
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLCanvasElement ()))) -> Array Nut -> Nut
-canvas = elementify2 {-  -} "canvas"
+canvas = elementify2 Nothing "canvas"
 
 canvas_ :: Array Nut -> Nut
-canvas_ = elementify2 {-  -} "canvas" []
+canvas_ = canvas []
 
 instance TagToDeku "applet" (HTMLAppletElement ())
 
 applet
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAppletElement ()))) -> Array Nut -> Nut
-applet = elementify2 {-  -} "applet"
+applet = elementify2 Nothing "applet"
 
 applet_ :: Array Nut -> Nut
-applet_ = elementify2 {-  -} "applet" []
+applet_ = applet []
 
 instance TagToDeku "acronym" (HTMLAcronymElement ())
 
 acronym
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAcronymElement ()))) -> Array Nut -> Nut
-acronym = elementify2 {-  -} "acronym"
+acronym = elementify2 Nothing "acronym"
 
 acronym_ :: Array Nut -> Nut
-acronym_ = elementify2 {-  -} "acronym" []
+acronym_ = acronym []
 
 instance TagToDeku "bgsound" (HTMLBgsoundElement ())
 
 bgsound
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBgsoundElement ()))) -> Array Nut -> Nut
-bgsound = elementify2 {-  -} "bgsound"
+bgsound = elementify2 Nothing "bgsound"
 
 bgsound_ :: Array Nut -> Nut
-bgsound_ = elementify2 {-  -} "bgsound" []
+bgsound_ = bgsound []
 
 instance TagToDeku "dir" (HTMLDirElement ())
 
 dir :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLDirElement ()))) -> Array Nut -> Nut
-dir = elementify2 {-  -} "dir"
+dir = elementify2 Nothing "dir"
 
 dir_ :: Array Nut -> Nut
-dir_ = elementify2 {-  -} "dir" []
+dir_ = dir []
 
 instance TagToDeku "noframes" (HTMLNoframesElement ())
 
 noframes
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNoframesElement ()))) -> Array Nut -> Nut
-noframes = elementify2 {-  -} "noframes"
+noframes = elementify2 Nothing "noframes"
 
 noframes_ :: Array Nut -> Nut
-noframes_ = elementify2 {-  -} "noframes" []
+noframes_ = noframes []
 
 instance TagToDeku "isindex" (HTMLIsindexElement ())
 
 isindex
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLIsindexElement ()))) -> Array Nut -> Nut
-isindex = elementify2 {-  -} "isindex"
+isindex = elementify2 Nothing "isindex"
 
 isindex_ :: Array Nut -> Nut
-isindex_ = elementify2 {-  -} "isindex" []
+isindex_ = isindex []
 
 instance TagToDeku "keygen" (HTMLKeygenElement ())
 
 keygen
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLKeygenElement ()))) -> Array Nut -> Nut
-keygen = elementify2 {-  -} "keygen"
+keygen = elementify2 Nothing "keygen"
 
 keygen_ :: Array Nut -> Nut
-keygen_ = elementify2 {-  -} "keygen" []
+keygen_ = keygen []
 
 instance TagToDeku "listing" (HTMLListingElement ())
 
 listing
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLListingElement ()))) -> Array Nut -> Nut
-listing = elementify2 {-  -} "listing"
+listing = elementify2 Nothing "listing"
 
 listing_ :: Array Nut -> Nut
-listing_ = elementify2 {-  -} "listing" []
+listing_ = listing []
 
 instance TagToDeku "menuitem" (HTMLMenuitemElement ())
 
 menuitem
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMenuitemElement ()))) -> Array Nut -> Nut
-menuitem = elementify2 {-  -} "menuitem"
+menuitem = elementify2 Nothing "menuitem"
 
 menuitem_ :: Array Nut -> Nut
-menuitem_ = elementify2 {-  -} "menuitem" []
+menuitem_ = menuitem []
 
 instance TagToDeku "nextid" (HTMLNextidElement ())
 
 nextid
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNextidElement ()))) -> Array Nut -> Nut
-nextid = elementify2 {-  -} "nextid"
+nextid = elementify2 Nothing "nextid"
 
 nextid_ :: Array Nut -> Nut
-nextid_ = elementify2 {-  -} "nextid" []
+nextid_ = nextid []
 
 instance TagToDeku "noembed" (HTMLNoembedElement ())
 
 noembed
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNoembedElement ()))) -> Array Nut -> Nut
-noembed = elementify2 {-  -} "noembed"
+noembed = elementify2 Nothing "noembed"
 
 noembed_ :: Array Nut -> Nut
-noembed_ = elementify2 {-  -} "noembed" []
+noembed_ = noembed []
 
 instance TagToDeku "param" (HTMLParamElement ())
 
 param
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLParamElement ()))) -> Array Nut -> Nut
-param = elementify2 {-  -} "param"
+param = elementify2 Nothing "param"
 
 param_ :: Array Nut -> Nut
-param_ = elementify2 {-  -} "param" []
+param_ = param []
 
 instance TagToDeku "plaintext" (HTMLPlaintextElement ())
 
@@ -3730,147 +3731,147 @@ plaintext
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLPlaintextElement ())))
   -> Array Nut
   -> Nut
-plaintext = elementify2 {-  -} "plaintext"
+plaintext = elementify2 Nothing "plaintext"
 
 plaintext_ :: Array Nut -> Nut
-plaintext_ = elementify2 {-  -} "plaintext" []
+plaintext_ = plaintext []
 
 instance TagToDeku "rb" (HTMLRbElement ())
 
 rb :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLRbElement ()))) -> Array Nut -> Nut
-rb = elementify2 {-  -} "rb"
+rb = elementify2 Nothing "rb"
 
 rb_ :: Array Nut -> Nut
-rb_ = elementify2 {-  -} "rb" []
+rb_ = rb []
 
 instance TagToDeku "rtc" (HTMLRtcElement ())
 
 rtc :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLRtcElement ()))) -> Array Nut -> Nut
-rtc = elementify2 {-  -} "rtc"
+rtc = elementify2 Nothing "rtc"
 
 rtc_ :: Array Nut -> Nut
-rtc_ = elementify2 {-  -} "rtc" []
+rtc_ = rtc []
 
 instance TagToDeku "strike" (HTMLStrikeElement ())
 
 strike
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLStrikeElement ()))) -> Array Nut -> Nut
-strike = elementify2 {-  -} "strike"
+strike = elementify2 Nothing "strike"
 
 strike_ :: Array Nut -> Nut
-strike_ = elementify2 {-  -} "strike" []
+strike_ = strike []
 
 instance TagToDeku "xmp" (HTMLXmpElement ())
 
 xmp :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLXmpElement ()))) -> Array Nut -> Nut
-xmp = elementify2 {-  -} "xmp"
+xmp = elementify2 Nothing "xmp"
 
 xmp_ :: Array Nut -> Nut
-xmp_ = elementify2 {-  -} "xmp" []
+xmp_ = xmp []
 
 instance TagToDeku "basefont" (HTMLBasefontElement ())
 
 basefont
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBasefontElement ()))) -> Array Nut -> Nut
-basefont = elementify2 {-  -} "basefont"
+basefont = elementify2 Nothing "basefont"
 
 basefont_ :: Array Nut -> Nut
-basefont_ = elementify2 {-  -} "basefont" []
+basefont_ = basefont []
 
 instance TagToDeku "big" (HTMLBigElement ())
 
 big :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBigElement ()))) -> Array Nut -> Nut
-big = elementify2 {-  -} "big"
+big = elementify2 Nothing "big"
 
 big_ :: Array Nut -> Nut
-big_ = elementify2 {-  -} "big" []
+big_ = big []
 
 instance TagToDeku "blink" (HTMLBlinkElement ())
 
 blink
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLBlinkElement ()))) -> Array Nut -> Nut
-blink = elementify2 {-  -} "blink"
+blink = elementify2 Nothing "blink"
 
 blink_ :: Array Nut -> Nut
-blink_ = elementify2 {-  -} "blink" []
+blink_ = blink []
 
 instance TagToDeku "center" (HTMLCenterElement ())
 
 center
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLCenterElement ()))) -> Array Nut -> Nut
-center = elementify2 {-  -} "center"
+center = elementify2 Nothing "center"
 
 center_ :: Array Nut -> Nut
-center_ = elementify2 {-  -} "center" []
+center_ = center []
 
 instance TagToDeku "font" (HTMLFontElement ())
 
 font :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFontElement ()))) -> Array Nut -> Nut
-font = elementify2 {-  -} "font"
+font = elementify2 Nothing "font"
 
 font_ :: Array Nut -> Nut
-font_ = elementify2 {-  -} "font" []
+font_ = font []
 
 instance TagToDeku "multicol" (HTMLMulticolElement ())
 
 multicol
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMulticolElement ()))) -> Array Nut -> Nut
-multicol = elementify2 {-  -} "multicol"
+multicol = elementify2 Nothing "multicol"
 
 multicol_ :: Array Nut -> Nut
-multicol_ = elementify2 {-  -} "multicol" []
+multicol_ = multicol []
 
 instance TagToDeku "nobr" (HTMLNobrElement ())
 
 nobr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLNobrElement ()))) -> Array Nut -> Nut
-nobr = elementify2 {-  -} "nobr"
+nobr = elementify2 Nothing "nobr"
 
 nobr_ :: Array Nut -> Nut
-nobr_ = elementify2 {-  -} "nobr" []
+nobr_ = nobr []
 
 instance TagToDeku "spacer" (HTMLSpacerElement ())
 
 spacer
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLSpacerElement ()))) -> Array Nut -> Nut
-spacer = elementify2 {-  -} "spacer"
+spacer = elementify2 Nothing "spacer"
 
 spacer_ :: Array Nut -> Nut
-spacer_ = elementify2 {-  -} "spacer" []
+spacer_ = spacer []
 
 instance TagToDeku "tt" (HTMLTtElement ())
 
 tt :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLTtElement ()))) -> Array Nut -> Nut
-tt = elementify2 {-  -} "tt"
+tt = elementify2 Nothing "tt"
 
 tt_ :: Array Nut -> Nut
-tt_ = elementify2 {-  -} "tt" []
+tt_ = tt []
 
 instance TagToDeku "marquee" (HTMLMarqueeElement ())
 
 marquee
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLMarqueeElement ()))) -> Array Nut -> Nut
-marquee = elementify2 {-  -} "marquee"
+marquee = elementify2 Nothing "marquee"
 
 marquee_ :: Array Nut -> Nut
-marquee_ = elementify2 {-  -} "marquee" []
+marquee_ = marquee []
 
 instance TagToDeku "frameset" (HTMLFramesetElement ())
 
 frameset
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFramesetElement ()))) -> Array Nut -> Nut
-frameset = elementify2 {-  -} "frameset"
+frameset = elementify2 Nothing "frameset"
 
 frameset_ :: Array Nut -> Nut
-frameset_ = elementify2 {-  -} "frameset" []
+frameset_ = frameset []
 
 instance TagToDeku "frame" (HTMLFrameElement ())
 
 frame
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLFrameElement ()))) -> Array Nut -> Nut
-frame = elementify2 {-  -} "frame"
+frame = elementify2 Nothing "frame"
 
 frame_ :: Array Nut -> Nut
-frame_ = elementify2 {-  -} "frame" []
+frame_ = frame []
 
 class IsCrossorigin (v :: Type) (a :: Type) | v -> a where
   isCrossorigin :: v -> Deku.Attribute.AttributeValue

@@ -82,17 +82,18 @@ unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
 elementify2
   :: forall element
-   . String
+   . Maybe String
+  -> String
   -> Array (Event (Attribute element))
   -> Array Nut
   -> Nut
-elementify2 en attributes kids = Nut
+elementify2 ns en attributes kids = Nut
   (step1 (mapWithIndex ((map <<< map) (\(Nut df) -> df) unsafeSetPos) kids))
   where
   step1 :: forall payload. Array (NutF payload) -> NutF payload
   step1 arr = NutF
     ( Element'
-        ( elementify en (aa attributes)
+        ( elementify ns en (aa attributes)
             ( NutF (BCore.fixed (coerce arr))
             )
         )
@@ -103,11 +104,12 @@ elementify2 en attributes kids = Nut
 
 elementify
   :: forall payload element
-   . String
+   . Maybe String
+  -> String
   -> Event (Attribute element)
   -> NutF payload
   -> Node payload
-elementify tag atts children = Node go
+elementify ns tag atts children = Node go
   where
   go
     { parent, scope, raiseId, pos, dynFamily, ez }
@@ -119,7 +121,7 @@ elementify tag atts children = Node go
         ( ( merge
               ( [ pure
                     ( makeElement
-                        { id: me, parent, scope, tag, pos, dynFamily }
+                        { id: me, parent, scope, ns, tag, pos, dynFamily }
                     )
                 , unsafeSetAttribute di me atts
                 ] <> maybe []
@@ -199,7 +201,7 @@ globalPortal v' c' =
         , toElt: coerce
         -- stuck here
         -- coerce won't work
-        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , wrapElt: \i -> Element' ((elementify Nothing "div" empty (coerce i)))
         , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
             (b `union` { ctor: coerce ctor })
         , deleteFromCache: unwrap >>> _.deleteFromCache
@@ -321,7 +323,7 @@ portal v' c' =
         , toElt: coerce
         -- stuck here
         -- coerce won't work
-        , wrapElt: \i -> Element' ((elementify "div" empty (coerce i)))
+        , wrapElt: \i -> Element' ((elementify Nothing "div" empty (coerce i)))
         , giveNewParent: \a b ctor _ -> (unwrap a).giveNewParent
             (b `union` { ctor: coerce ctor })
         , deleteFromCache: unwrap >>> _.deleteFromCache

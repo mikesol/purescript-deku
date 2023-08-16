@@ -145,6 +145,7 @@ import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
 import FRP.Event as FRP.Event
+import Data.Maybe (Maybe(..))
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
@@ -302,114 +303,114 @@ instance TagToDeku "math" (MathMLMathElement ())
 
 math
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMathElement ()))) -> Array Nut -> Nut
-math = elementify2 {- http://www.w3.org/1998/Math/MathML -} "math"
+math = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "math"
 
 math_ :: Array Nut -> Nut
-math_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "math" []
+math_ = math []
 
 instance TagToDeku "mtext" (MathMLMtextElement ())
 
 mtext
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMtextElement ()))) -> Array Nut -> Nut
-mtext = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtext"
+mtext = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mtext"
 
 mtext_ :: Array Nut -> Nut
-mtext_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtext" []
+mtext_ = mtext []
 
 instance TagToDeku "mi" (MathMLMiElement ())
 
 mi :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMiElement ()))) -> Array Nut -> Nut
-mi = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mi"
+mi = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mi"
 
 mi_ :: Array Nut -> Nut
-mi_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mi" []
+mi_ = mi []
 
 instance TagToDeku "mn" (MathMLMnElement ())
 
 mn :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMnElement ()))) -> Array Nut -> Nut
-mn = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mn"
+mn = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mn"
 
 mn_ :: Array Nut -> Nut
-mn_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mn" []
+mn_ = mn []
 
 instance TagToDeku "mo" (MathMLMoElement ())
 
 mo :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMoElement ()))) -> Array Nut -> Nut
-mo = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mo"
+mo = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mo"
 
 mo_ :: Array Nut -> Nut
-mo_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mo" []
+mo_ = mo []
 
 instance TagToDeku "mspace" (MathMLMspaceElement ())
 
 mspace
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMspaceElement ()))) -> Array Nut -> Nut
-mspace = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mspace"
+mspace = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mspace"
 
 mspace_ :: Array Nut -> Nut
-mspace_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mspace" []
+mspace_ = mspace []
 
 instance TagToDeku "ms" (MathMLMsElement ())
 
 ms :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMsElement ()))) -> Array Nut -> Nut
-ms = elementify2 {- http://www.w3.org/1998/Math/MathML -} "ms"
+ms = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "ms"
 
 ms_ :: Array Nut -> Nut
-ms_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "ms" []
+ms_ = ms []
 
 instance TagToDeku "mrow" (MathMLMrowElement ())
 
 mrow
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMrowElement ()))) -> Array Nut -> Nut
-mrow = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mrow"
+mrow = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mrow"
 
 mrow_ :: Array Nut -> Nut
-mrow_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mrow" []
+mrow_ = mrow []
 
 instance TagToDeku "mfrac" (MathMLMfracElement ())
 
 mfrac
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMfracElement ()))) -> Array Nut -> Nut
-mfrac = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mfrac"
+mfrac = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mfrac"
 
 mfrac_ :: Array Nut -> Nut
-mfrac_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mfrac" []
+mfrac_ = mfrac []
 
 instance TagToDeku "msqrt" (MathMLMsqrtElement ())
 
 msqrt
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMsqrtElement ()))) -> Array Nut -> Nut
-msqrt = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msqrt"
+msqrt = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "msqrt"
 
 msqrt_ :: Array Nut -> Nut
-msqrt_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msqrt" []
+msqrt_ = msqrt []
 
 instance TagToDeku "mroot" (MathMLMrootElement ())
 
 mroot
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMrootElement ()))) -> Array Nut -> Nut
-mroot = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mroot"
+mroot = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mroot"
 
 mroot_ :: Array Nut -> Nut
-mroot_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mroot" []
+mroot_ = mroot []
 
 instance TagToDeku "mstyle" (MathMLMstyleElement ())
 
 mstyle
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMstyleElement ()))) -> Array Nut -> Nut
-mstyle = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mstyle"
+mstyle = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mstyle"
 
 mstyle_ :: Array Nut -> Nut
-mstyle_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mstyle" []
+mstyle_ = mstyle []
 
 instance TagToDeku "merror" (MathMLMerrorElement ())
 
 merror
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMerrorElement ()))) -> Array Nut -> Nut
-merror = elementify2 {- http://www.w3.org/1998/Math/MathML -} "merror"
+merror = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "merror"
 
 merror_ :: Array Nut -> Nut
-merror_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "merror" []
+merror_ = merror []
 
 instance TagToDeku "mpadded" (MathMLMpaddedElement ())
 
@@ -417,10 +418,10 @@ mpadded
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMpaddedElement ())))
   -> Array Nut
   -> Nut
-mpadded = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mpadded"
+mpadded = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mpadded"
 
 mpadded_ :: Array Nut -> Nut
-mpadded_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mpadded" []
+mpadded_ = mpadded []
 
 instance TagToDeku "mphantom" (MathMLMphantomElement ())
 
@@ -428,28 +429,28 @@ mphantom
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMphantomElement ())))
   -> Array Nut
   -> Nut
-mphantom = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mphantom"
+mphantom = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mphantom"
 
 mphantom_ :: Array Nut -> Nut
-mphantom_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mphantom" []
+mphantom_ = mphantom []
 
 instance TagToDeku "msub" (MathMLMsubElement ())
 
 msub
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMsubElement ()))) -> Array Nut -> Nut
-msub = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msub"
+msub = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "msub"
 
 msub_ :: Array Nut -> Nut
-msub_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msub" []
+msub_ = msub []
 
 instance TagToDeku "msup" (MathMLMsupElement ())
 
 msup
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMsupElement ()))) -> Array Nut -> Nut
-msup = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msup"
+msup = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "msup"
 
 msup_ :: Array Nut -> Nut
-msup_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msup" []
+msup_ = msup []
 
 instance TagToDeku "msubsup" (MathMLMsubsupElement ())
 
@@ -457,28 +458,28 @@ msubsup
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMsubsupElement ())))
   -> Array Nut
   -> Nut
-msubsup = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msubsup"
+msubsup = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "msubsup"
 
 msubsup_ :: Array Nut -> Nut
-msubsup_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "msubsup" []
+msubsup_ = msubsup []
 
 instance TagToDeku "munder" (MathMLMunderElement ())
 
 munder
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMunderElement ()))) -> Array Nut -> Nut
-munder = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munder"
+munder = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "munder"
 
 munder_ :: Array Nut -> Nut
-munder_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munder" []
+munder_ = munder []
 
 instance TagToDeku "mover" (MathMLMoverElement ())
 
 mover
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMoverElement ()))) -> Array Nut -> Nut
-mover = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mover"
+mover = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mover"
 
 mover_ :: Array Nut -> Nut
-mover_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mover" []
+mover_ = mover []
 
 instance TagToDeku "munderover" (MathMLMunderoverElement ())
 
@@ -486,10 +487,10 @@ munderover
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMunderoverElement ())))
   -> Array Nut
   -> Nut
-munderover = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munderover"
+munderover = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "munderover"
 
 munderover_ :: Array Nut -> Nut
-munderover_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "munderover" []
+munderover_ = munderover []
 
 instance TagToDeku "mmultiscripts" (MathMLMmultiscriptsElement ())
 
@@ -497,10 +498,10 @@ mmultiscripts
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMmultiscriptsElement ())))
   -> Array Nut
   -> Nut
-mmultiscripts = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mmultiscripts"
+mmultiscripts = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mmultiscripts"
 
 mmultiscripts_ :: Array Nut -> Nut
-mmultiscripts_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mmultiscripts" []
+mmultiscripts_ = mmultiscripts []
 
 instance TagToDeku "mprescripts" (MathMLMprescriptsElement ())
 
@@ -508,35 +509,35 @@ mprescripts
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMprescriptsElement ())))
   -> Array Nut
   -> Nut
-mprescripts = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mprescripts"
+mprescripts = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mprescripts"
 
 mprescripts_ :: Array Nut -> Nut
-mprescripts_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mprescripts" []
+mprescripts_ = mprescripts []
 
 instance TagToDeku "mtable" (MathMLMtableElement ())
 
 mtable
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMtableElement ()))) -> Array Nut -> Nut
-mtable = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtable"
+mtable = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mtable"
 
 mtable_ :: Array Nut -> Nut
-mtable_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtable" []
+mtable_ = mtable []
 
 instance TagToDeku "mtr" (MathMLMtrElement ())
 
 mtr :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMtrElement ()))) -> Array Nut -> Nut
-mtr = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtr"
+mtr = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mtr"
 
 mtr_ :: Array Nut -> Nut
-mtr_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtr" []
+mtr_ = mtr []
 
 instance TagToDeku "mtd" (MathMLMtdElement ())
 
 mtd :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMtdElement ()))) -> Array Nut -> Nut
-mtd = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtd"
+mtd = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "mtd"
 
 mtd_ :: Array Nut -> Nut
-mtd_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "mtd" []
+mtd_ = mtd []
 
 instance TagToDeku "maction" (MathMLMactionElement ())
 
@@ -544,10 +545,10 @@ maction
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLMactionElement ())))
   -> Array Nut
   -> Nut
-maction = elementify2 {- http://www.w3.org/1998/Math/MathML -} "maction"
+maction = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "maction"
 
 maction_ :: Array Nut -> Nut
-maction_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "maction" []
+maction_ = maction []
 
 instance TagToDeku "semantics" (MathMLSemanticsElement ())
 
@@ -555,10 +556,10 @@ semantics
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLSemanticsElement ())))
   -> Array Nut
   -> Nut
-semantics = elementify2 {- http://www.w3.org/1998/Math/MathML -} "semantics"
+semantics = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "semantics"
 
 semantics_ :: Array Nut -> Nut
-semantics_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "semantics" []
+semantics_ = semantics []
 
 instance TagToDeku "annotation" (MathMLAnnotationElement ())
 
@@ -566,10 +567,10 @@ annotation
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLAnnotationElement ())))
   -> Array Nut
   -> Nut
-annotation = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation"
+annotation = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "annotation"
 
 annotation_ :: Array Nut -> Nut
-annotation_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation" []
+annotation_ = annotation []
 
 instance TagToDeku "annotation-xml" (MathMLAnnotationXmlElement ())
 
@@ -577,10 +578,10 @@ annotationXml
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (MathMLAnnotationXmlElement ())))
   -> Array Nut
   -> Nut
-annotationXml = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation-xml"
+annotationXml = elementify2 (Just "http://www.w3.org/1998/Math/MathML") "annotation-xml"
 
 annotationXml_ :: Array Nut -> Nut
-annotationXml_ = elementify2 {- http://www.w3.org/1998/Math/MathML -} "annotation-xml" []
+annotationXml_ = annotationXml []
 
 _alttext
   :: forall r

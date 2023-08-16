@@ -16,6 +16,7 @@ requires =
     , declImport "Control.Category" [ importOp "<<<" ]
     , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
     , declImportAs "FRP.Event" [] "FRP.Event"
+    , declImport "Data.Maybe" [ importTypeAll "Maybe" ]
     
     , declImport "Deku.Control" [ importValue "elementify2" ]
     , declImport "Deku.Core" [ importType "Nut" ]

@@ -627,6 +627,7 @@ import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
 import FRP.Event as FRP.Event
+import Data.Maybe (Maybe(..))
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
@@ -1348,190 +1349,190 @@ class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
 instance TagToDeku "svg" (SVGSvgElement ())
 
 svg :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGSvgElement ()))) -> Array Nut -> Nut
-svg = elementify2 {- http://www.w3.org/2000/svg -} "svg"
+svg = elementify2 (Just "http://www.w3.org/2000/svg") "svg"
 
 svg_ :: Array Nut -> Nut
-svg_ = elementify2 {- http://www.w3.org/2000/svg -} "svg" []
+svg_ = svg []
 
 instance TagToDeku "g" (SVGGElement ())
 
 g :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGGElement ()))) -> Array Nut -> Nut
-g = elementify2 {- http://www.w3.org/2000/svg -} "g"
+g = elementify2 (Just "http://www.w3.org/2000/svg") "g"
 
 g_ :: Array Nut -> Nut
-g_ = elementify2 {- http://www.w3.org/2000/svg -} "g" []
+g_ = g []
 
 instance TagToDeku "defs" (SVGDefsElement ())
 
 defs :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGDefsElement ()))) -> Array Nut -> Nut
-defs = elementify2 {- http://www.w3.org/2000/svg -} "defs"
+defs = elementify2 (Just "http://www.w3.org/2000/svg") "defs"
 
 defs_ :: Array Nut -> Nut
-defs_ = elementify2 {- http://www.w3.org/2000/svg -} "defs" []
+defs_ = defs []
 
 instance TagToDeku "symbol" (SVGSymbolElement ())
 
 symbol
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGSymbolElement ()))) -> Array Nut -> Nut
-symbol = elementify2 {- http://www.w3.org/2000/svg -} "symbol"
+symbol = elementify2 (Just "http://www.w3.org/2000/svg") "symbol"
 
 symbol_ :: Array Nut -> Nut
-symbol_ = elementify2 {- http://www.w3.org/2000/svg -} "symbol" []
+symbol_ = symbol []
 
 instance TagToDeku "use" (SVGUseElement ())
 
 use :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGUseElement ()))) -> Array Nut -> Nut
-use = elementify2 {- http://www.w3.org/2000/svg -} "use"
+use = elementify2 (Just "http://www.w3.org/2000/svg") "use"
 
 use_ :: Array Nut -> Nut
-use_ = elementify2 {- http://www.w3.org/2000/svg -} "use" []
+use_ = use []
 
 instance TagToDeku "switch" (SVGSwitchElement ())
 
 switch
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGSwitchElement ()))) -> Array Nut -> Nut
-switch = elementify2 {- http://www.w3.org/2000/svg -} "switch"
+switch = elementify2 (Just "http://www.w3.org/2000/svg") "switch"
 
 switch_ :: Array Nut -> Nut
-switch_ = elementify2 {- http://www.w3.org/2000/svg -} "switch" []
+switch_ = switch []
 
 instance TagToDeku "title" (SVGTitleElement ())
 
 title
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGTitleElement ()))) -> Array Nut -> Nut
-title = elementify2 {- http://www.w3.org/2000/svg -} "title"
+title = elementify2 (Just "http://www.w3.org/2000/svg") "title"
 
 title_ :: Array Nut -> Nut
-title_ = elementify2 {- http://www.w3.org/2000/svg -} "title" []
+title_ = title []
 
 instance TagToDeku "desc" (SVGDescElement ())
 
 desc :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGDescElement ()))) -> Array Nut -> Nut
-desc = elementify2 {- http://www.w3.org/2000/svg -} "desc"
+desc = elementify2 (Just "http://www.w3.org/2000/svg") "desc"
 
 desc_ :: Array Nut -> Nut
-desc_ = elementify2 {- http://www.w3.org/2000/svg -} "desc" []
+desc_ = desc []
 
 instance TagToDeku "metadata" (SVGMetadataElement ())
 
 metadata
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGMetadataElement ()))) -> Array Nut -> Nut
-metadata = elementify2 {- http://www.w3.org/2000/svg -} "metadata"
+metadata = elementify2 (Just "http://www.w3.org/2000/svg") "metadata"
 
 metadata_ :: Array Nut -> Nut
-metadata_ = elementify2 {- http://www.w3.org/2000/svg -} "metadata" []
+metadata_ = metadata []
 
 instance TagToDeku "style" (SVGStyleElement ())
 
 style
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGStyleElement ()))) -> Array Nut -> Nut
-style = elementify2 {- http://www.w3.org/2000/svg -} "style"
+style = elementify2 (Just "http://www.w3.org/2000/svg") "style"
 
 style_ :: Array Nut -> Nut
-style_ = elementify2 {- http://www.w3.org/2000/svg -} "style" []
+style_ = style []
 
 instance TagToDeku "link" (SVGLinkElement ())
 
 link :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGLinkElement ()))) -> Array Nut -> Nut
-link = elementify2 {- http://www.w3.org/2000/svg -} "link"
+link = elementify2 (Just "http://www.w3.org/2000/svg") "link"
 
 link_ :: Array Nut -> Nut
-link_ = elementify2 {- http://www.w3.org/2000/svg -} "link" []
+link_ = link []
 
 instance TagToDeku "path" (SVGPathElement ())
 
 path :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGPathElement ()))) -> Array Nut -> Nut
-path = elementify2 {- http://www.w3.org/2000/svg -} "path"
+path = elementify2 (Just "http://www.w3.org/2000/svg") "path"
 
 path_ :: Array Nut -> Nut
-path_ = elementify2 {- http://www.w3.org/2000/svg -} "path" []
+path_ = path []
 
 instance TagToDeku "rect" (SVGRectElement ())
 
 rect :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGRectElement ()))) -> Array Nut -> Nut
-rect = elementify2 {- http://www.w3.org/2000/svg -} "rect"
+rect = elementify2 (Just "http://www.w3.org/2000/svg") "rect"
 
 rect_ :: Array Nut -> Nut
-rect_ = elementify2 {- http://www.w3.org/2000/svg -} "rect" []
+rect_ = rect []
 
 instance TagToDeku "circle" (SVGCircleElement ())
 
 circle
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGCircleElement ()))) -> Array Nut -> Nut
-circle = elementify2 {- http://www.w3.org/2000/svg -} "circle"
+circle = elementify2 (Just "http://www.w3.org/2000/svg") "circle"
 
 circle_ :: Array Nut -> Nut
-circle_ = elementify2 {- http://www.w3.org/2000/svg -} "circle" []
+circle_ = circle []
 
 instance TagToDeku "ellipse" (SVGEllipseElement ())
 
 ellipse
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGEllipseElement ()))) -> Array Nut -> Nut
-ellipse = elementify2 {- http://www.w3.org/2000/svg -} "ellipse"
+ellipse = elementify2 (Just "http://www.w3.org/2000/svg") "ellipse"
 
 ellipse_ :: Array Nut -> Nut
-ellipse_ = elementify2 {- http://www.w3.org/2000/svg -} "ellipse" []
+ellipse_ = ellipse []
 
 instance TagToDeku "line" (SVGLineElement ())
 
 line :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGLineElement ()))) -> Array Nut -> Nut
-line = elementify2 {- http://www.w3.org/2000/svg -} "line"
+line = elementify2 (Just "http://www.w3.org/2000/svg") "line"
 
 line_ :: Array Nut -> Nut
-line_ = elementify2 {- http://www.w3.org/2000/svg -} "line" []
+line_ = line []
 
 instance TagToDeku "polyline" (SVGPolylineElement ())
 
 polyline
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGPolylineElement ()))) -> Array Nut -> Nut
-polyline = elementify2 {- http://www.w3.org/2000/svg -} "polyline"
+polyline = elementify2 (Just "http://www.w3.org/2000/svg") "polyline"
 
 polyline_ :: Array Nut -> Nut
-polyline_ = elementify2 {- http://www.w3.org/2000/svg -} "polyline" []
+polyline_ = polyline []
 
 instance TagToDeku "polygon" (SVGPolygonElement ())
 
 polygon
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGPolygonElement ()))) -> Array Nut -> Nut
-polygon = elementify2 {- http://www.w3.org/2000/svg -} "polygon"
+polygon = elementify2 (Just "http://www.w3.org/2000/svg") "polygon"
 
 polygon_ :: Array Nut -> Nut
-polygon_ = elementify2 {- http://www.w3.org/2000/svg -} "polygon" []
+polygon_ = polygon []
 
 instance TagToDeku "text" (SVGTextElement ())
 
 text :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGTextElement ()))) -> Array Nut -> Nut
-text = elementify2 {- http://www.w3.org/2000/svg -} "text"
+text = elementify2 (Just "http://www.w3.org/2000/svg") "text"
 
 text_ :: Array Nut -> Nut
-text_ = elementify2 {- http://www.w3.org/2000/svg -} "text" []
+text_ = text []
 
 instance TagToDeku "tspan" (SVGTspanElement ())
 
 tspan
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGTspanElement ()))) -> Array Nut -> Nut
-tspan = elementify2 {- http://www.w3.org/2000/svg -} "tspan"
+tspan = elementify2 (Just "http://www.w3.org/2000/svg") "tspan"
 
 tspan_ :: Array Nut -> Nut
-tspan_ = elementify2 {- http://www.w3.org/2000/svg -} "tspan" []
+tspan_ = tspan []
 
 instance TagToDeku "textPath" (SVGTextPathElement ())
 
 textPath
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGTextPathElement ()))) -> Array Nut -> Nut
-textPath = elementify2 {- http://www.w3.org/2000/svg -} "textPath"
+textPath = elementify2 (Just "http://www.w3.org/2000/svg") "textPath"
 
 textPath_ :: Array Nut -> Nut
-textPath_ = elementify2 {- http://www.w3.org/2000/svg -} "textPath" []
+textPath_ = textPath []
 
 instance TagToDeku "image" (SVGImageElement ())
 
 image
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGImageElement ()))) -> Array Nut -> Nut
-image = elementify2 {- http://www.w3.org/2000/svg -} "image"
+image = elementify2 (Just "http://www.w3.org/2000/svg") "image"
 
 image_ :: Array Nut -> Nut
-image_ = elementify2 {- http://www.w3.org/2000/svg -} "image" []
+image_ = image []
 
 instance TagToDeku "foreignObject" (SVGForeignObjectElement ())
 
@@ -1539,19 +1540,19 @@ foreignObject
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGForeignObjectElement ())))
   -> Array Nut
   -> Nut
-foreignObject = elementify2 {- http://www.w3.org/2000/svg -} "foreignObject"
+foreignObject = elementify2 (Just "http://www.w3.org/2000/svg") "foreignObject"
 
 foreignObject_ :: Array Nut -> Nut
-foreignObject_ = elementify2 {- http://www.w3.org/2000/svg -} "foreignObject" []
+foreignObject_ = foreignObject []
 
 instance TagToDeku "marker" (SVGMarkerElement ())
 
 marker
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGMarkerElement ()))) -> Array Nut -> Nut
-marker = elementify2 {- http://www.w3.org/2000/svg -} "marker"
+marker = elementify2 (Just "http://www.w3.org/2000/svg") "marker"
 
 marker_ :: Array Nut -> Nut
-marker_ = elementify2 {- http://www.w3.org/2000/svg -} "marker" []
+marker_ = marker []
 
 instance TagToDeku "linearGradient" (SVGLinearGradientElement ())
 
@@ -1559,10 +1560,10 @@ linearGradient
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGLinearGradientElement ())))
   -> Array Nut
   -> Nut
-linearGradient = elementify2 {- http://www.w3.org/2000/svg -} "linearGradient"
+linearGradient = elementify2 (Just "http://www.w3.org/2000/svg") "linearGradient"
 
 linearGradient_ :: Array Nut -> Nut
-linearGradient_ = elementify2 {- http://www.w3.org/2000/svg -} "linearGradient" []
+linearGradient_ = linearGradient []
 
 instance TagToDeku "radialGradient" (SVGRadialGradientElement ())
 
@@ -1570,52 +1571,52 @@ radialGradient
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGRadialGradientElement ())))
   -> Array Nut
   -> Nut
-radialGradient = elementify2 {- http://www.w3.org/2000/svg -} "radialGradient"
+radialGradient = elementify2 (Just "http://www.w3.org/2000/svg") "radialGradient"
 
 radialGradient_ :: Array Nut -> Nut
-radialGradient_ = elementify2 {- http://www.w3.org/2000/svg -} "radialGradient" []
+radialGradient_ = radialGradient []
 
 instance TagToDeku "stop" (SVGStopElement ())
 
 stop :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGStopElement ()))) -> Array Nut -> Nut
-stop = elementify2 {- http://www.w3.org/2000/svg -} "stop"
+stop = elementify2 (Just "http://www.w3.org/2000/svg") "stop"
 
 stop_ :: Array Nut -> Nut
-stop_ = elementify2 {- http://www.w3.org/2000/svg -} "stop" []
+stop_ = stop []
 
 instance TagToDeku "pattern" (SVGPatternElement ())
 
 pattern
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGPatternElement ()))) -> Array Nut -> Nut
-pattern = elementify2 {- http://www.w3.org/2000/svg -} "pattern"
+pattern = elementify2 (Just "http://www.w3.org/2000/svg") "pattern"
 
 pattern_ :: Array Nut -> Nut
-pattern_ = elementify2 {- http://www.w3.org/2000/svg -} "pattern" []
+pattern_ = pattern []
 
 instance TagToDeku "script" (SVGScriptElement ())
 
 script
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGScriptElement ()))) -> Array Nut -> Nut
-script = elementify2 {- http://www.w3.org/2000/svg -} "script"
+script = elementify2 (Just "http://www.w3.org/2000/svg") "script"
 
 script_ :: Array Nut -> Nut
-script_ = elementify2 {- http://www.w3.org/2000/svg -} "script" []
+script_ = script []
 
 instance TagToDeku "a" (HTMLAnchorElement ())
 
 a :: Array (FRP.Event.Event (Deku.Attribute.Attribute (HTMLAnchorElement ()))) -> Array Nut -> Nut
-a = elementify2 {- http://www.w3.org/2000/svg -} "a"
+a = elementify2 (Just "http://www.w3.org/2000/svg") "a"
 
 a_ :: Array Nut -> Nut
-a_ = elementify2 {- http://www.w3.org/2000/svg -} "a" []
+a_ = a []
 
 instance TagToDeku "view" (SVGViewElement ())
 
 view :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGViewElement ()))) -> Array Nut -> Nut
-view = elementify2 {- http://www.w3.org/2000/svg -} "view"
+view = elementify2 (Just "http://www.w3.org/2000/svg") "view"
 
 view_ :: Array Nut -> Nut
-view_ = elementify2 {- http://www.w3.org/2000/svg -} "view" []
+view_ = view []
 
 instance TagToDeku "filter-primitive" (SVGFilterPrimitiveElement ())
 
@@ -1623,28 +1624,28 @@ filterPrimitive
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFilterPrimitiveElement ())))
   -> Array Nut
   -> Nut
-filterPrimitive = elementify2 {- http://www.w3.org/2000/svg -} "filter-primitive"
+filterPrimitive = elementify2 (Just "http://www.w3.org/2000/svg") "filter-primitive"
 
 filterPrimitive_ :: Array Nut -> Nut
-filterPrimitive_ = elementify2 {- http://www.w3.org/2000/svg -} "filter-primitive" []
+filterPrimitive_ = filterPrimitive []
 
 instance TagToDeku "filter" (SVGFilterElement ())
 
 filter
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFilterElement ()))) -> Array Nut -> Nut
-filter = elementify2 {- http://www.w3.org/2000/svg -} "filter"
+filter = elementify2 (Just "http://www.w3.org/2000/svg") "filter"
 
 filter_ :: Array Nut -> Nut
-filter_ = elementify2 {- http://www.w3.org/2000/svg -} "filter" []
+filter_ = filter []
 
 instance TagToDeku "feBlend" (SVGFeBlendElement ())
 
 feBlend
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeBlendElement ()))) -> Array Nut -> Nut
-feBlend = elementify2 {- http://www.w3.org/2000/svg -} "feBlend"
+feBlend = elementify2 (Just "http://www.w3.org/2000/svg") "feBlend"
 
 feBlend_ :: Array Nut -> Nut
-feBlend_ = elementify2 {- http://www.w3.org/2000/svg -} "feBlend" []
+feBlend_ = feBlend []
 
 instance TagToDeku "feColorMatrix" (SVGFeColorMatrixElement ())
 
@@ -1652,10 +1653,10 @@ feColorMatrix
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeColorMatrixElement ())))
   -> Array Nut
   -> Nut
-feColorMatrix = elementify2 {- http://www.w3.org/2000/svg -} "feColorMatrix"
+feColorMatrix = elementify2 (Just "http://www.w3.org/2000/svg") "feColorMatrix"
 
 feColorMatrix_ :: Array Nut -> Nut
-feColorMatrix_ = elementify2 {- http://www.w3.org/2000/svg -} "feColorMatrix" []
+feColorMatrix_ = feColorMatrix []
 
 instance TagToDeku "feComponentTransfer" (SVGFeComponentTransferElement ())
 
@@ -1663,46 +1664,46 @@ feComponentTransfer
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeComponentTransferElement ())))
   -> Array Nut
   -> Nut
-feComponentTransfer = elementify2 {- http://www.w3.org/2000/svg -} "feComponentTransfer"
+feComponentTransfer = elementify2 (Just "http://www.w3.org/2000/svg") "feComponentTransfer"
 
 feComponentTransfer_ :: Array Nut -> Nut
-feComponentTransfer_ = elementify2 {- http://www.w3.org/2000/svg -} "feComponentTransfer" []
+feComponentTransfer_ = feComponentTransfer []
 
 instance TagToDeku "feFuncR" (SVGFeFuncRElement ())
 
 feFuncR
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeFuncRElement ()))) -> Array Nut -> Nut
-feFuncR = elementify2 {- http://www.w3.org/2000/svg -} "feFuncR"
+feFuncR = elementify2 (Just "http://www.w3.org/2000/svg") "feFuncR"
 
 feFuncR_ :: Array Nut -> Nut
-feFuncR_ = elementify2 {- http://www.w3.org/2000/svg -} "feFuncR" []
+feFuncR_ = feFuncR []
 
 instance TagToDeku "feFuncG" (SVGFeFuncGElement ())
 
 feFuncG
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeFuncGElement ()))) -> Array Nut -> Nut
-feFuncG = elementify2 {- http://www.w3.org/2000/svg -} "feFuncG"
+feFuncG = elementify2 (Just "http://www.w3.org/2000/svg") "feFuncG"
 
 feFuncG_ :: Array Nut -> Nut
-feFuncG_ = elementify2 {- http://www.w3.org/2000/svg -} "feFuncG" []
+feFuncG_ = feFuncG []
 
 instance TagToDeku "feFuncB" (SVGFeFuncBElement ())
 
 feFuncB
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeFuncBElement ()))) -> Array Nut -> Nut
-feFuncB = elementify2 {- http://www.w3.org/2000/svg -} "feFuncB"
+feFuncB = elementify2 (Just "http://www.w3.org/2000/svg") "feFuncB"
 
 feFuncB_ :: Array Nut -> Nut
-feFuncB_ = elementify2 {- http://www.w3.org/2000/svg -} "feFuncB" []
+feFuncB_ = feFuncB []
 
 instance TagToDeku "feFuncA" (SVGFeFuncAElement ())
 
 feFuncA
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeFuncAElement ()))) -> Array Nut -> Nut
-feFuncA = elementify2 {- http://www.w3.org/2000/svg -} "feFuncA"
+feFuncA = elementify2 (Just "http://www.w3.org/2000/svg") "feFuncA"
 
 feFuncA_ :: Array Nut -> Nut
-feFuncA_ = elementify2 {- http://www.w3.org/2000/svg -} "feFuncA" []
+feFuncA_ = feFuncA []
 
 instance TagToDeku "feComposite" (SVGFeCompositeElement ())
 
@@ -1710,10 +1711,10 @@ feComposite
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeCompositeElement ())))
   -> Array Nut
   -> Nut
-feComposite = elementify2 {- http://www.w3.org/2000/svg -} "feComposite"
+feComposite = elementify2 (Just "http://www.w3.org/2000/svg") "feComposite"
 
 feComposite_ :: Array Nut -> Nut
-feComposite_ = elementify2 {- http://www.w3.org/2000/svg -} "feComposite" []
+feComposite_ = feComposite []
 
 instance TagToDeku "feConvolveMatrix" (SVGFeConvolveMatrixElement ())
 
@@ -1721,10 +1722,10 @@ feConvolveMatrix
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeConvolveMatrixElement ())))
   -> Array Nut
   -> Nut
-feConvolveMatrix = elementify2 {- http://www.w3.org/2000/svg -} "feConvolveMatrix"
+feConvolveMatrix = elementify2 (Just "http://www.w3.org/2000/svg") "feConvolveMatrix"
 
 feConvolveMatrix_ :: Array Nut -> Nut
-feConvolveMatrix_ = elementify2 {- http://www.w3.org/2000/svg -} "feConvolveMatrix" []
+feConvolveMatrix_ = feConvolveMatrix []
 
 instance TagToDeku "feDiffuseLighting" (SVGFeDiffuseLightingElement ())
 
@@ -1732,10 +1733,10 @@ feDiffuseLighting
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeDiffuseLightingElement ())))
   -> Array Nut
   -> Nut
-feDiffuseLighting = elementify2 {- http://www.w3.org/2000/svg -} "feDiffuseLighting"
+feDiffuseLighting = elementify2 (Just "http://www.w3.org/2000/svg") "feDiffuseLighting"
 
 feDiffuseLighting_ :: Array Nut -> Nut
-feDiffuseLighting_ = elementify2 {- http://www.w3.org/2000/svg -} "feDiffuseLighting" []
+feDiffuseLighting_ = feDiffuseLighting []
 
 instance TagToDeku "feDisplacementMap" (SVGFeDisplacementMapElement ())
 
@@ -1743,10 +1744,10 @@ feDisplacementMap
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeDisplacementMapElement ())))
   -> Array Nut
   -> Nut
-feDisplacementMap = elementify2 {- http://www.w3.org/2000/svg -} "feDisplacementMap"
+feDisplacementMap = elementify2 (Just "http://www.w3.org/2000/svg") "feDisplacementMap"
 
 feDisplacementMap_ :: Array Nut -> Nut
-feDisplacementMap_ = elementify2 {- http://www.w3.org/2000/svg -} "feDisplacementMap" []
+feDisplacementMap_ = feDisplacementMap []
 
 instance TagToDeku "feDropShadow" (SVGFeDropShadowElement ())
 
@@ -1754,19 +1755,19 @@ feDropShadow
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeDropShadowElement ())))
   -> Array Nut
   -> Nut
-feDropShadow = elementify2 {- http://www.w3.org/2000/svg -} "feDropShadow"
+feDropShadow = elementify2 (Just "http://www.w3.org/2000/svg") "feDropShadow"
 
 feDropShadow_ :: Array Nut -> Nut
-feDropShadow_ = elementify2 {- http://www.w3.org/2000/svg -} "feDropShadow" []
+feDropShadow_ = feDropShadow []
 
 instance TagToDeku "feFlood" (SVGFeFloodElement ())
 
 feFlood
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeFloodElement ()))) -> Array Nut -> Nut
-feFlood = elementify2 {- http://www.w3.org/2000/svg -} "feFlood"
+feFlood = elementify2 (Just "http://www.w3.org/2000/svg") "feFlood"
 
 feFlood_ :: Array Nut -> Nut
-feFlood_ = elementify2 {- http://www.w3.org/2000/svg -} "feFlood" []
+feFlood_ = feFlood []
 
 instance TagToDeku "feGaussianBlur" (SVGFeGaussianBlurElement ())
 
@@ -1774,28 +1775,28 @@ feGaussianBlur
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeGaussianBlurElement ())))
   -> Array Nut
   -> Nut
-feGaussianBlur = elementify2 {- http://www.w3.org/2000/svg -} "feGaussianBlur"
+feGaussianBlur = elementify2 (Just "http://www.w3.org/2000/svg") "feGaussianBlur"
 
 feGaussianBlur_ :: Array Nut -> Nut
-feGaussianBlur_ = elementify2 {- http://www.w3.org/2000/svg -} "feGaussianBlur" []
+feGaussianBlur_ = feGaussianBlur []
 
 instance TagToDeku "feImage" (SVGFeImageElement ())
 
 feImage
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeImageElement ()))) -> Array Nut -> Nut
-feImage = elementify2 {- http://www.w3.org/2000/svg -} "feImage"
+feImage = elementify2 (Just "http://www.w3.org/2000/svg") "feImage"
 
 feImage_ :: Array Nut -> Nut
-feImage_ = elementify2 {- http://www.w3.org/2000/svg -} "feImage" []
+feImage_ = feImage []
 
 instance TagToDeku "feMerge" (SVGFeMergeElement ())
 
 feMerge
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeMergeElement ()))) -> Array Nut -> Nut
-feMerge = elementify2 {- http://www.w3.org/2000/svg -} "feMerge"
+feMerge = elementify2 (Just "http://www.w3.org/2000/svg") "feMerge"
 
 feMerge_ :: Array Nut -> Nut
-feMerge_ = elementify2 {- http://www.w3.org/2000/svg -} "feMerge" []
+feMerge_ = feMerge []
 
 instance TagToDeku "feMergeNode" (SVGFeMergeNodeElement ())
 
@@ -1803,10 +1804,10 @@ feMergeNode
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeMergeNodeElement ())))
   -> Array Nut
   -> Nut
-feMergeNode = elementify2 {- http://www.w3.org/2000/svg -} "feMergeNode"
+feMergeNode = elementify2 (Just "http://www.w3.org/2000/svg") "feMergeNode"
 
 feMergeNode_ :: Array Nut -> Nut
-feMergeNode_ = elementify2 {- http://www.w3.org/2000/svg -} "feMergeNode" []
+feMergeNode_ = feMergeNode []
 
 instance TagToDeku "feMorphology" (SVGFeMorphologyElement ())
 
@@ -1814,19 +1815,19 @@ feMorphology
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeMorphologyElement ())))
   -> Array Nut
   -> Nut
-feMorphology = elementify2 {- http://www.w3.org/2000/svg -} "feMorphology"
+feMorphology = elementify2 (Just "http://www.w3.org/2000/svg") "feMorphology"
 
 feMorphology_ :: Array Nut -> Nut
-feMorphology_ = elementify2 {- http://www.w3.org/2000/svg -} "feMorphology" []
+feMorphology_ = feMorphology []
 
 instance TagToDeku "feOffset" (SVGFeOffsetElement ())
 
 feOffset
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeOffsetElement ()))) -> Array Nut -> Nut
-feOffset = elementify2 {- http://www.w3.org/2000/svg -} "feOffset"
+feOffset = elementify2 (Just "http://www.w3.org/2000/svg") "feOffset"
 
 feOffset_ :: Array Nut -> Nut
-feOffset_ = elementify2 {- http://www.w3.org/2000/svg -} "feOffset" []
+feOffset_ = feOffset []
 
 instance TagToDeku "feSpecularLighting" (SVGFeSpecularLightingElement ())
 
@@ -1834,19 +1835,19 @@ feSpecularLighting
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeSpecularLightingElement ())))
   -> Array Nut
   -> Nut
-feSpecularLighting = elementify2 {- http://www.w3.org/2000/svg -} "feSpecularLighting"
+feSpecularLighting = elementify2 (Just "http://www.w3.org/2000/svg") "feSpecularLighting"
 
 feSpecularLighting_ :: Array Nut -> Nut
-feSpecularLighting_ = elementify2 {- http://www.w3.org/2000/svg -} "feSpecularLighting" []
+feSpecularLighting_ = feSpecularLighting []
 
 instance TagToDeku "feTile" (SVGFeTileElement ())
 
 feTile
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeTileElement ()))) -> Array Nut -> Nut
-feTile = elementify2 {- http://www.w3.org/2000/svg -} "feTile"
+feTile = elementify2 (Just "http://www.w3.org/2000/svg") "feTile"
 
 feTile_ :: Array Nut -> Nut
-feTile_ = elementify2 {- http://www.w3.org/2000/svg -} "feTile" []
+feTile_ = feTile []
 
 instance TagToDeku "feTurbulence" (SVGFeTurbulenceElement ())
 
@@ -1854,10 +1855,10 @@ feTurbulence
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeTurbulenceElement ())))
   -> Array Nut
   -> Nut
-feTurbulence = elementify2 {- http://www.w3.org/2000/svg -} "feTurbulence"
+feTurbulence = elementify2 (Just "http://www.w3.org/2000/svg") "feTurbulence"
 
 feTurbulence_ :: Array Nut -> Nut
-feTurbulence_ = elementify2 {- http://www.w3.org/2000/svg -} "feTurbulence" []
+feTurbulence_ = feTurbulence []
 
 instance TagToDeku "feDistantLight" (SVGFeDistantLightElement ())
 
@@ -1865,10 +1866,10 @@ feDistantLight
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeDistantLightElement ())))
   -> Array Nut
   -> Nut
-feDistantLight = elementify2 {- http://www.w3.org/2000/svg -} "feDistantLight"
+feDistantLight = elementify2 (Just "http://www.w3.org/2000/svg") "feDistantLight"
 
 feDistantLight_ :: Array Nut -> Nut
-feDistantLight_ = elementify2 {- http://www.w3.org/2000/svg -} "feDistantLight" []
+feDistantLight_ = feDistantLight []
 
 instance TagToDeku "fePointLight" (SVGFePointLightElement ())
 
@@ -1876,10 +1877,10 @@ fePointLight
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFePointLightElement ())))
   -> Array Nut
   -> Nut
-fePointLight = elementify2 {- http://www.w3.org/2000/svg -} "fePointLight"
+fePointLight = elementify2 (Just "http://www.w3.org/2000/svg") "fePointLight"
 
 fePointLight_ :: Array Nut -> Nut
-fePointLight_ = elementify2 {- http://www.w3.org/2000/svg -} "fePointLight" []
+fePointLight_ = fePointLight []
 
 instance TagToDeku "feSpotLight" (SVGFeSpotLightElement ())
 
@@ -1887,36 +1888,36 @@ feSpotLight
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGFeSpotLightElement ())))
   -> Array Nut
   -> Nut
-feSpotLight = elementify2 {- http://www.w3.org/2000/svg -} "feSpotLight"
+feSpotLight = elementify2 (Just "http://www.w3.org/2000/svg") "feSpotLight"
 
 feSpotLight_ :: Array Nut -> Nut
-feSpotLight_ = elementify2 {- http://www.w3.org/2000/svg -} "feSpotLight" []
+feSpotLight_ = feSpotLight []
 
 instance TagToDeku "animate" (SVGAnimateElement ())
 
 animate
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGAnimateElement ()))) -> Array Nut -> Nut
-animate = elementify2 {- http://www.w3.org/2000/svg -} "animate"
+animate = elementify2 (Just "http://www.w3.org/2000/svg") "animate"
 
 animate_ :: Array Nut -> Nut
-animate_ = elementify2 {- http://www.w3.org/2000/svg -} "animate" []
+animate_ = animate []
 
 instance TagToDeku "set" (SVGSetElement ())
 
 set :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGSetElement ()))) -> Array Nut -> Nut
-set = elementify2 {- http://www.w3.org/2000/svg -} "set"
+set = elementify2 (Just "http://www.w3.org/2000/svg") "set"
 
 set_ :: Array Nut -> Nut
-set_ = elementify2 {- http://www.w3.org/2000/svg -} "set" []
+set_ = set []
 
 instance TagToDeku "discard" (SVGDiscardElement ())
 
 discard
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGDiscardElement ()))) -> Array Nut -> Nut
-discard = elementify2 {- http://www.w3.org/2000/svg -} "discard"
+discard = elementify2 (Just "http://www.w3.org/2000/svg") "discard"
 
 discard_ :: Array Nut -> Nut
-discard_ = elementify2 {- http://www.w3.org/2000/svg -} "discard" []
+discard_ = discard []
 
 instance TagToDeku "animateMotion" (SVGAnimateMotionElement ())
 
@@ -1924,19 +1925,19 @@ animateMotion
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGAnimateMotionElement ())))
   -> Array Nut
   -> Nut
-animateMotion = elementify2 {- http://www.w3.org/2000/svg -} "animateMotion"
+animateMotion = elementify2 (Just "http://www.w3.org/2000/svg") "animateMotion"
 
 animateMotion_ :: Array Nut -> Nut
-animateMotion_ = elementify2 {- http://www.w3.org/2000/svg -} "animateMotion" []
+animateMotion_ = animateMotion []
 
 instance TagToDeku "mpath" (SVGMpathElement ())
 
 mpath
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGMpathElement ()))) -> Array Nut -> Nut
-mpath = elementify2 {- http://www.w3.org/2000/svg -} "mpath"
+mpath = elementify2 (Just "http://www.w3.org/2000/svg") "mpath"
 
 mpath_ :: Array Nut -> Nut
-mpath_ = elementify2 {- http://www.w3.org/2000/svg -} "mpath" []
+mpath_ = mpath []
 
 instance TagToDeku "animateTransform" (SVGAnimateTransformElement ())
 
@@ -1944,10 +1945,10 @@ animateTransform
   :: Array (FRP.Event.Event (Deku.Attribute.Attribute (SVGAnimateTransformElement ())))
   -> Array Nut
   -> Nut
-animateTransform = elementify2 {- http://www.w3.org/2000/svg -} "animateTransform"
+animateTransform = elementify2 (Just "http://www.w3.org/2000/svg") "animateTransform"
 
 animateTransform_ :: Array Nut -> Nut
-animateTransform_ = elementify2 {- http://www.w3.org/2000/svg -} "animateTransform" []
+animateTransform_ = animateTransform []
 
 class IsOperator (v :: Type) (a :: Type) | v -> a where
   isOperator :: v -> Deku.Attribute.AttributeValue

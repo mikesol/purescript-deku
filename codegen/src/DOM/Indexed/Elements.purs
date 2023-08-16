@@ -3,13 +3,13 @@ module DOM.Indexed.Elements where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Element, typeArrayed, typeAttributed, typeEvented, typeNut, xhtmlNamespace)
+import DOM.Common (Element, TagNS, typeArrayed, typeAttributed, typeEvented, typeNut, xhtmlNamespace)
 import DOM.Indexed.Common (tagCtor)
 import Data.Array.NonEmpty as NEA
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Tuple.Nested ((/\))
-import PureScript.CST.Types (ClassFundep(..), Comment(..), Declaration, Export, Expr(..))
-import Tidy.Codegen (declClass, declInstance, declSignature, declValue, exportValue, exprApp, exprArray, exprIdent, exprString, typeApp, typeArrow, typeCtor, typeRowEmpty, typeString, typeVarKinded)
+import PureScript.CST.Types (ClassFundep(..), Declaration, Export, Expr)
+import Tidy.Codegen (declClass, declInstance, declSignature, declValue, exportValue, exprApp, exprArray, exprCtor, exprIdent, exprString, typeApp, typeArrow, typeCtor, typeRowEmpty, typeString, typeVarKinded)
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
@@ -18,11 +18,6 @@ exports tags =
     bind tags \{ ctor } -> do
         let tag /\ shortHand = tagCtor ctor
         [ exportValue tag, exportValue shortHand ]
-
-addComment :: String -> Expr Void -> Expr Void
-addComment comment ( ExprString src v ) = 
-    ExprString src { leadingComments = [ Comment $ "{- " <> comment <> " -}" ] } v
-addComment _ expr = expr
 
 generate :: Partial => Array Element -> Array ( Declaration Void )
 generate tags =
@@ -43,7 +38,8 @@ generate tags =
                 ]
                 typeNut
         , declValue ctor [] $ exprApp ( exprIdent "elementify2" )
-            [ addComment ( fromMaybe "" $ xhtmlNamespace ns ) $ exprString tag
+            [ exprNamespace ns
+            , exprString tag
             ]
 
         , declSignature shortHand
@@ -51,8 +47,16 @@ generate tags =
                 [ typeApp ( typeCtor "Array" ) [ typeNut ]
                 ]
                 typeNut
-        , declValue shortHand [] $ exprApp ( exprIdent "elementify2" )
-            [ addComment ( fromMaybe "" $ xhtmlNamespace ns ) $ exprString tag
-            , exprArray []
+        , declValue shortHand [] $ exprApp ( exprIdent ctor )
+            [ exprArray []
             ]
         ]
+
+    where
+
+    exprNamespace :: Partial => TagNS -> Expr Void
+    exprNamespace ns =
+         maybe
+            ( exprCtor "Nothing" )
+            ( exprApp ( exprCtor "Just" ) <<< pure <<< exprString )
+            ( xhtmlNamespace ns )
