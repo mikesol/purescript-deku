@@ -1,3 +1,4 @@
+-- | Module to generate the Attribute-modules of the old DOM implementation. 
 module DOM.Attr where
 
 import Prelude

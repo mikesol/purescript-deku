@@ -1,3 +1,4 @@
+-- | Module to generate the Element-modules of the old DOM implementation.
 module DOM.Elt where
 
 import Prelude

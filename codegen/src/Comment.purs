@@ -1,3 +1,4 @@
+-- | Enables commenting blocks of code.
 module Comment where
 
 import Prelude

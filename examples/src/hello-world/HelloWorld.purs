@@ -4,11 +4,11 @@ import Prelude
 
 import Control.Alt (alt)
 import Control.Plus (empty)
-import Data.Foldable (oneOfMap)
+import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
 import Data.Tuple (Tuple(..))
-import Deku.Attribute (cb, xdata, (:=))
+import Deku.Attribute (xdata)
 import Deku.Control as C
 import Deku.Core (Nut, bus)
 import Deku.Core as CC
@@ -34,18 +34,18 @@ scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
                     (\(Tuple x y) -> if y < 4 then Just x else Nothing)
                 # map
                     ( \e ->
-                        oneOfMap pure
-                          [ D.Style := "background-color: rgb(160,234,203);"
-                          , D.OnClick := cb (const $ push (not e))
-                          , xdata "hello" "world"
-                          ]
+                        oneOf
+                        [ D._style_ $ "background-color: rgb(160,234,203);"
+                        , D._onClick_ $ const $ push (not e)
+                        , pure $ xdata "hello" "world"
+                        ]
 
                     )
                 # keepLatest
             ]
             [ C.text_ "me" ]
         ]
-    , D.input [pure $ D.Autofocus := ""] []
+    , D.input [ D._autofocus_ "" ] []
     ]
 
 main :: Effect Unit

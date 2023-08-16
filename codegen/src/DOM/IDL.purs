@@ -1,4 +1,4 @@
--- | Utilities to work with the IDL types
+-- | Utilities to work with the IDL types. This can be used to implement properties instead of attributes.
 module DOM.IDL where
 
 import Prelude

@@ -8,7 +8,7 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (ImportDecl, Type)
-import Tidy.Codegen (declImport, declImportAs, importOp, importType, importTypeAll, importValue, typeApp, typeCtor, typeRow, typeVar)
+import Tidy.Codegen (declImport, declImportAs, importOp, importType, importTypeAll, importValue, typeRow, typeVar)
 
 requires :: Partial => Array ( ImportDecl Void )
 requires =
@@ -20,21 +20,12 @@ requires =
     , declImport "Deku.Control" [ importValue "elementify2" ]
     , declImport "Deku.Core" [ importType "Nut" ]
     , declImport "Type.Proxy" [ importType "Proxy" ]
-    , declImportAs "Deku.DOM.Indexed.Index"
-        [ importType "Attribute"
-        , importType "Indexed"
-        , importTypeAll "Keyword"
-        ]
-        "Index"
+    , declImportAs "Deku.DOM.Types" [ importValue "_unset", importTypeAll "Keyword", importType "EventEffect" ] "Types"
     ]
-
-typeIndexed :: Type Void -> Type Void
-typeIndexed t =
-    unsafePartial $ typeApp ( typeCtor "Index.Indexed" ) $ pure t
 
 typeIndexedAt :: Ctor -> Type Void -> Type Void
 typeIndexedAt n t =
-    unsafePartial $ typeIndexed $ typeRow [ n /\ t ] $ Just $ typeVar "r"
+    unsafePartial $ typeRow [ n /\ t ] $ Just $ typeVar "r"
 
 tagCtor :: Ctor -> String /\ String
 tagCtor ( Ctor src ) = do

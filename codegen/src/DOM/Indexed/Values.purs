@@ -21,6 +21,6 @@ generate :: Partial => Array Keyword -> Array ( Declaration Void )
 generate keywords = 
     bind keywords \{ ctor, value } -> do
         let name = valueCtor ctor
-        [ declSignature name $ typeApp ( typeCtor "Index.Keyword" ) [ typeString value ]
-        , declValue name [] $ exprApp ( exprCtor "Index.Keyword" ) [ exprString value ]
+        [ declSignature name $ typeApp ( typeCtor "Types.Keyword" ) [ typeString value ]
+        , declValue name [] $ exprApp ( exprCtor "Types.Keyword" ) [ exprString value ]
         ]

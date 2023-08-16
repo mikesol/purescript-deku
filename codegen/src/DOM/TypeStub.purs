@@ -10,7 +10,7 @@ import PureScript.CST.Types (Expr, ImportDecl, Type)
 import Tidy.Codegen (binaryOp, declImportAs, exprCtor, exprIdent, typeApp, typeArrow, typeCtor, typeString)
 import Tidy.Codegen.Types (BinaryOp)
 
--- | Intermediate type between `IDLType` and `Type Void` so we can generate an `Ord` and `Eq` instance for deduping. 
+-- | Intermediate type between `IDLType` and `Type a` so we can implement an `Ord` and `Eq` instance for deduping. 
 data TypeStub 
     = TypeInt
     | TypeString
@@ -20,11 +20,12 @@ data TypeStub
     | TypeKeyword String
     | TypeUnit
     | TypeSelfHandler
+    | TypeEventEffect
 derive instance Eq TypeStub
 derive instance Ord TypeStub
 derive instance Generic TypeStub _
 
-construct :: forall e . TypeStub -> Type e
+construct :: forall a . TypeStub -> Type a
 construct = unsafePartial case _ of
     TypeInt -> typeCtor "Int"
     TypeString -> typeCtor "String"
@@ -37,12 +38,15 @@ construct = unsafePartial case _ of
             $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
     
     TypeKeyword ix ->
-        typeApp ( typeCtor "Index.Keyword" ) [ typeString ix ]
+        typeApp ( typeCtor "Types.Keyword" ) [ typeString ix ]
     
     TypeUnit ->
         typeCtor "Data.Unit.Unit"
 
--- | Generates the necessary imports for the given types.
+    TypeEventEffect ->
+        typeCtor "Types.EventEffect"
+
+-- | Generates the necessary imports for the given `TypeStub`s.
 typeImports :: forall e . Array TypeStub -> Array ( ImportDecl e )
 typeImports stubs =
     unsafePartial $ flip map ( Array.nub $ bind stubs modules ) \mod ->
@@ -74,7 +78,10 @@ typeImports stubs =
             , "Unsafe.Coerce" -- unsafeCoerce
             ]
 
+        TypeEventEffect ->
+            [ "Deku.DOM.Types", "Deku.Attribute" ]
 
+-- | Generates a handler that can convert the type indicated by the `TypeStub` to an `AttributeValue` 
 handler :: forall e . TypeStub -> Array ( BinaryOp ( Expr e ) ) 
 handler = unsafePartial case _ of
     TypeInt ->
@@ -109,4 +116,9 @@ handler = unsafePartial case _ of
         [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
         , binaryOp "<<<" $ exprCtor "Deku.Attribute.Cb"
         , binaryOp "<<<" $ exprIdent "Unsafe.Coerce.unsafeCoerce" 
+        ]
+
+    TypeEventEffect ->
+        [ binaryOp "<<<" $ exprIdent "Deku.Attribute.cb'"
+        , binaryOp "<<<" $ exprIdent "Deku.Attribute.cb"
         ]

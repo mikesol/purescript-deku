@@ -4,8 +4,6 @@ import Prelude
 
 import Control.Alt ((<|>))
 import Control.Plus (empty)
-import Deku.Attribute (cb, (:=))
-import Deku.Attributes (style_)
 import Deku.Control (text_)
 import Deku.Control as C
 import Deku.Core (Nut, bus, envy)
@@ -33,11 +31,10 @@ myPxInception
   -> Nut
   -> Nut
 myPxInception push aThirdThing = myPx ~~
-  { btn: pure (D.Style := "background-color: rgb(133,151,217)")
+  { btn: D._style_ "background-color: rgb(133,151,217)"
   , somethingElse:
       ( D.button
-          [pure $ D.OnClick :=
-              (cb (const $ push false))
+          [ D._onClick_ \_ -> push false
           ]
           [ C.text_ "I was dynamically inserted " ]
       )
@@ -56,16 +53,16 @@ scene = bus \push event ->
         $ myPxInception push (C.text_ "boo")
     , C.text ((event <|> pure true) <#> if _ then "Oh hi" else "Oh bye")
     , px (Proxy :: _ "<h1>hi</h1>") xp
-    , px (Proxy :: _ "<div><h1 ") (style_ "color:red;")
+    , px (Proxy :: _ "<div><h1 ") (D._style_ "color:red;")
         (Proxy :: _ ">hello!</h1><h1 ")
-        (style_ "color:red;")
+        (D._style_ "color:red;")
         (Proxy :: _ ">hello!</h1></div>")
         xp
     , px (Proxy :: _ "<div>") ((D.h1_ [ text_ "more stuff" ]))
         (Proxy :: _ "</div>")
         xp
     , px (Proxy :: _ "<div>")
-        ( ( px (Proxy :: _ "<h1 ") (style_ "color:red;")
+        ( ( px (Proxy :: _ "<h1 ") (D._style_ "color:red;")
               (Proxy :: _ ">hello!</h1>")
               xp
           )

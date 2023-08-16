@@ -71,7 +71,7 @@ declAttr attributes =
                     [ typeVarKinded "v" $ typeCtor "Type" 
                     , typeVarKinded "a" $ typeCtor "Type"
                     ]
-                    [ FundepDetermines ( NEA.singleton ( toName "v") ) tokRightArrow ( NEA.singleton ( toName "a" ) )
+                    [ FundepDetermines ( NEA.singleton ( toName "v" ) ) tokRightArrow ( NEA.singleton ( toName "a" ) )
                     ]
                     [ classMember overloadedHandler $ typeArrow [ typeVar "v" ] $ typeCtor "Deku.Attribute.AttributeValue"
                     ]

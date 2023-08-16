@@ -10,7 +10,6 @@ import Data.Maybe (Maybe(..))
 import Data.Set as Set
 import Data.Tuple (snd)
 import Data.Tuple.Nested ((/\))
-import Deku.Attribute ((:=))
 import Deku.Control (text_)
 import Deku.Core (Nut, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
@@ -106,7 +105,7 @@ containerD initialState = Deku.do
       )
   D.div_
     [ D.button
-        [ pure $ D.Id := Shared.addNewId
+        [ D._id_ Shared.addNewId
         , click $ state <#> \st -> do
             newState <- liftEffect $ Shared.createTodo st
             setUndo (PushUndo (UndoAdd newState.lastIndex))
@@ -116,7 +115,7 @@ containerD initialState = Deku.do
         ]
         [ text_ "Add New" ]
     , D.button
-        [ pure $ D.Id := Shared.undoId
+        [ D._id_ Shared.undoId
         , click $ undos <#> \uu ->
             for_ (head uu) \u -> do
               case u of
@@ -146,7 +145,7 @@ containerD initialState = Deku.do
               setUndo PopUndo
         ]
         [ text_ "Undo" ]
-    , D.div [ pure $ D.Id := Shared.todosId ]
+    , D.div [ D._id_ Shared.todosId ]
         [ dyn
             ( toDyn # map
                 \td -> do
@@ -189,15 +188,17 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   let name = name' <|> pure description
   D.div_
     [ D.input
-        [ pure $ D.Id := Shared.editId id
-        , (pure description <|> newName) <#> (D.Value := _)
-        , name <#> setName >>> (D.OnInput := _)
+        [ D._id_ $ Shared.editId id
+        , D._value $ pure description <|> newName
+        , D._onInput $ name <#> \n _ -> setName n
         ]
-    
+
         []
     , checkboxD { id } completeStatus doChecked
     , D.button
-        [ pure $ D.Id := Shared.saveId id, click (name <#> doEditName) ]
+        [ D._id_ $ Shared.saveId id
+        , click (name <#> doEditName)
+        ]
         [ text_ "Save Changes" ]
     ]
 
@@ -210,12 +211,11 @@ checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus
   D.input
-    
-    [ pure $ D.Id := (Shared.checkId id)
-        , pure $ D.Type := "checkbox"
-        , completeStatus <#> show >>> (D.Checked := _)
-        , (checked <|> localChecked) <#>
-            (\x -> doChecked x *> localSetChecked (not x)) >>> (D.OnInput := _)
+    [ D._id_ (Shared.checkId id)
+    , D._type_ "checkbox"
+    , D._checked $ completeStatus <#> show
+    , D._onInput $ (checked <|> localChecked) <#>
+        (\x _ -> doChecked x *> localSetChecked (not x))
     ]
-    
+
     []

@@ -1,3 +1,6 @@
+-- | Reads the existing implementation from `Parser/Pursx.purs_` and augments it with more cases covering all necessary
+-- | codepoints.
+-- TODO: implement parser generator for the type level
 module Parser where
 
 import Parser.Symbols

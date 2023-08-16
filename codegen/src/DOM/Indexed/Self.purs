@@ -22,7 +22,6 @@ imports es =
             , declImport "Control.Category" [ importOp "<<<" ]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
             , declImportAs "FRP.Event" [] "FRP.Event"
-            , declImportAs "Deku.DOM.Indexed.Index" [] "Index"
             , declImport "Type.Proxy" [ importType "Proxy" ]
             , declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             ]

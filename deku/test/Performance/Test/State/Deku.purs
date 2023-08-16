@@ -6,8 +6,6 @@ import Control.Alt ((<|>))
 import Data.Array.NonEmpty (replicate)
 import Data.Foldable (sequence_, traverse_)
 import Data.Maybe (Maybe(..))
-import Deku.Attribute ((:=))
-import Deku.Control (text, text_)
 import Deku.Core (Nut, bussed)
 import Deku.DOM as D
 import Deku.Toplevel (runInElement')
@@ -67,8 +65,8 @@ scene notifyEnd =
       in
         ( D.div_
             [ D.button
-                [ pure $ D.Id := (testToString StateDeku <> startSuffix)
-                , stateE <#> \state -> D.OnClick := do
+                [ D._id_ (testToString StateDeku <> startSuffix)
+                , D._onClick $ stateE <#> \state _ -> do
                     ref <- Ref.new state
                     let modify = flip Ref.modify ref
                     sequence_ $ replicate stateUpdates' $ modify
@@ -88,8 +86,8 @@ scene notifyEnd =
                     Ref.read ref >>= setState
                     notifyEnd
                 ]
-                [ text_ "Start Test" ]
-            , text (show <$> stateE)
+                [ D.text_ "Start Test" ]
+            , D.text (show <$> stateE)
             ]
         )
   )

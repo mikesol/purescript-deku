@@ -2,6 +2,7 @@ package:
   name: examples
   dependencies:
   - deku
+  - deku-css
   - web-html
   - canvas
   - exceptions

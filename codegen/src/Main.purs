@@ -3,7 +3,6 @@ module Main where
 import Prelude
 
 import Control.Monad.Except (ExceptT, runExceptT)
-import DOM as DOM
 import DOM.Common (Ctor(..), Interface, TagNS(..), mkAttribute)
 import DOM.Indexed as Indexed
 import DOM.Parse as Parse
@@ -75,8 +74,7 @@ generate = do
         ]
 
     Indexed.generate html svg mathml
-    DOM.generate html svg
-
+    
     Parser.generate
 
 

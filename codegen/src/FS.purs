@@ -1,3 +1,4 @@
+-- | Some helpers to generate folders and cache files.
 module FS where
 
 import Prelude

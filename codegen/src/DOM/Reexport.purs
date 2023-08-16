@@ -1,3 +1,4 @@
+-- | Generates the central module for the old DOM implementation.
 module DOM.Reexport where
 
 import Prelude

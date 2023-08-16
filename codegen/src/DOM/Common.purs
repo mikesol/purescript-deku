@@ -120,7 +120,7 @@ mkAttribute name =
 
 mkHandler :: String -> Maybe Attribute
 mkHandler name =
-    Just { name : name, index: Ctor $ "on" <> capitalize ( unSnake name ), type : TypeEventHandler }
+    Just { name : name, index: Ctor $ "on" <> capitalize ( unSnake name ), type : TypeEventEffect }
 
 mkElement :: TagNS -> String -> Maybe Element
 mkElement ns name =

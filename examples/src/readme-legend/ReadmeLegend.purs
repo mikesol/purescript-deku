@@ -5,7 +5,6 @@ import Prelude
 import CSS (bold, color, fontWeight, rgb)
 import Data.Tuple.Nested ((/\))
 import Deku.Attribute (xdata)
-import Deku.Attributes (klass_, style_)
 import Deku.CSS (render)
 import Deku.Control (text)
 import Deku.Core (Nut)
@@ -41,12 +40,9 @@ main =
             -- `Deku.Listeners` contains helper functions for various common
             -- listeners like `click` and `keyUp`
             click $ counter <#> add 1 >>> setCounter
-          -- `Deku.Attributes` contains helper functions for various common
-          -- attributes like `style` and `klass` (an alias for `class`)
-          , klass_ "color: crimson;"
           -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
           -- `purescript-css` and use it in a Deku application
-          , style_ $ render do
+          , D._style_ $ render do
               color (rgb 42 142 242)
               fontWeight bold
           -- `Deku.Attribute` contains constructors for

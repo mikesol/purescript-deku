@@ -5,7 +5,7 @@ import Data.Symbol (class IsSymbol)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Core (Nut)
 import Deku.Pursx (class PXStart, (~~))
-import Deku.Pursx.Unsafe(class PursxToElement)
+import Deku.Pursx.Unsafe (class PursxToElement)
 import Prim.Row (class Cons, class Lacks)
 import Prim.RowList as RL
 import Prim.Symbol (class Append)

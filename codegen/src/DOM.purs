@@ -1,3 +1,4 @@
+-- | Contains an implementation to generate the old DOM modules.
 module DOM where
 
 import Prelude
@@ -28,7 +29,7 @@ import Safe.Coerce (coerce)
 import Tidy.Codegen (module_, printModule)
 
 -- | Crawls through the spec finding all attributes for given interface and all inheriting interfaces. Uses the fact
--- | currently all interfaces only have a inheritance depth of 1.
+-- | currently all interfaces only have an inheritance depth of 1.
 crawlInterfaces :: TagNS -> Map Ctor Interface -> Ctor -> Array Attribute
 crawlInterfaces ns interfaces intf@( Ctor name ) =
     if name `Array.elem` namespaceBases ns then
