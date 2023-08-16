@@ -8,11 +8,13 @@ import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
 import Data.Array ((..))
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, oneOf, oneOfMap)
+import Data.Foldable (for_, intercalate, oneOf, oneOfMap, traverse_)
+import Data.FunctorWithIndex (mapWithIndex)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Attribute ((:=))
+import Debug (spy)
+import Deku.Attribute ((!:=), (:=))
 import Deku.Attributes (id_)
 import Deku.Control (globalPortal1, portal1, text, text_)
 import Deku.Core (Hook, Nut, fixed)
@@ -20,7 +22,7 @@ import Deku.DOM as D
 import Deku.Do as Deku
 import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useRant, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
-import Deku.Listeners (click, click_)
+import Deku.Listeners (click, click_, keyUp_)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
@@ -28,6 +30,12 @@ import Effect.Random (random)
 import FRP.Event (fold, mapAccum)
 import FRP.Poll (Poll, effectToPoll)
 import Type.Proxy (Proxy(..))
+import Web.Event.Event as WebEvent
+import Web.HTML (window)
+import Web.HTML.HTMLInputElement as HTMLInputElement
+import Web.HTML.HTMLInputElement as InputElement
+import Web.HTML.Window (alert)
+import Web.UIEvent.KeyboardEvent as KeyboardEvent
 
 foreign import hackyInnerHTML :: String -> String -> Effect Unit
 foreign import doStateAssertionsForTests_
@@ -337,35 +345,45 @@ switchersCompose = Deku.do
     , D.button [ id_ "incr", click_ (setItem unit) ] [ text_ "click" ]
     ]
 
--- lifecycle :: Nut
--- lifecycle = Deku.do
---   setItem /\ item <- useState 0
---   D.div [ id_ "div0" ]
---     [ D.div_
---         [ D.button [ id_ "home-btn", click_ (setItem 0) ]
---             [ text_ "home" ]
---         , D.button [ id_ "about-btn", click_ (setItem 1) ]
---             [ text_ "about" ]
---         , D.button [ id_ "contact-btn", click_ (setItem 2) ]
---             [ text_ "contact" ]
---         ]
---     , D.span [ D.Id !:= "hack" ] []
---     , item <#~> case _ of
---         0 -> D.span_ [ text_ "a" ]
---         1 -> onWillMount (hackyInnerHTML "hack" "hello") $ D.span_ [ text_ "b" ]
---         _ -> onDismount (hackyInnerHTML "hack" "goodbye") $ D.span_
---           [ text_ "c" ]
---     ]
-
--- lifecycleWillAndDidMount :: Nut
--- lifecycleWillAndDidMount = D.div_
---   [ Deku.do
---       setInt /\ int <- useState'
---       onWillMount (setInt 42) (D.span [ id_ "span1" ] [ text (show <$> int) ])
---   , Deku.do
---       setInt /\ int <- useState'
---       onDidMount (setInt 42) (D.span [ id_ "span2" ] [ text (show <$> int) ])
---   ]
+todoMVC :: Nut
+todoMVC = Deku.do
+  setItem /\ item <- useState'
+  setInput /\ input <- useState'
+  iref <- useRef Nothing (Just <$> input)
+  let
+    guardAgainstEmpty e = do
+      v <- InputElement.value e
+      if v == "" then
+        window >>= alert "Item cannot be empty"
+      else setItem v
+    top =
+      D.div_
+        [ D.input
+            [ D.Value !:= "Tasko primo"
+            , keyUp_ \evt -> do
+                when (KeyboardEvent.code evt == "Enter") $
+                  for_
+                    ( (WebEvent.target >=> HTMLInputElement.fromEventTarget)
+                        (KeyboardEvent.toEvent evt)
+                    )
+                    guardAgainstEmpty
+            , D.SelfT !:= \k -> do
+                setInput k
+            ]
+            []
+        , D.button
+            [ id_ "add"
+            , click_ do
+                iref >>= traverse_ guardAgainstEmpty
+            ]
+            [ text_ "Add" ]
+        ]
+  D.div_
+    [ top
+    , Deku.do
+        { value: Tuple i t } <- useDynAtBeginning (mapWithIndex Tuple item)
+        D.div [ id_ $ "item" <> show i ] [ text_ t ]
+    ]
 
 unsetUnsets :: Nut
 unsetUnsets = Deku.do

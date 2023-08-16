@@ -201,9 +201,9 @@ useRefST a e makeHook = Nut go'
   go i di = behaving' \_ ee _ subscribe -> do
     rf <- STRef.new a
     let Nut nf = makeHook (STRef.read rf)
-    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
     subscribe (sample_ e ee) \_ x -> do
       void $ liftST $ STRef.write x rf
+    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
 -- | given an address, at which point they listen for a payload. This is useful when listening to

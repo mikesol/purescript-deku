@@ -32,26 +32,6 @@ const doTest = (name, closure, onlyWithSSR) => {
   });
 };
 
-const getChildIndex = (child) => {
-  let i = 0;
-  while ((child = child.previousElementSibling) !== null) {
-    i++;
-  }
-  return i;
-};
-
-const resolveIdentish = (ident) =>
-  typeof ident === "string" ? document.querySelector(ident) : ident;
-
-const $$ = (ident) => ({
-  text: () => resolveIdentish(ident).textContent,
-  click: () => resolveIdentish(ident).click(),
-  index: () => getChildIndex(resolveIdentish(ident)),
-  attr: (key) => resolveIdentish(ident).getAttribute(key),
-  contents: () => resolveIdentish(ident).childNodes,
-  selectorIsNull: () => resolveIdentish(ident) === null,
-});
-
 describe("deku", () => {
   afterEach(() => {
     document.getElementsByTagName("html")[0].innerHTML = "";
@@ -59,21 +39,21 @@ describe("deku", () => {
 
   doTest("is sane", (f) =>
     f(tests.sanityCheck, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#hello").text()).toBe("Hello");
     })
   );
 
   doTest("two elements render", (f) =>
     f(tests.twoElements, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#maindiv").text()).toBe("helloworld");
     })
   );
 
   doTest("has elements in the correct order", (f) =>
     f(tests.elementsInCorrectOrder, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#span1-0").text()).toBe("span1-0A");
       expect($("#span7-1").text()).toBe("span7-1B");
       expect($("#span9-3").text()).toBe("span9-3D");
@@ -84,21 +64,21 @@ describe("deku", () => {
     "has dyn appearing in the correct composable order when used at beginning",
     (f) =>
       f(tests.dynAppearsCorrectlyAtBeginning, (usingSSR) => {
-        const $ = $$;
+        const $ = require("jquery");
         // text, span, start beacon, end beacon, button
         const base = usingSSR ? 6 : 5;
         expect($("#div0").contents().length).toBe(base);
         expect($($("#div0").contents()[0]).text()).toBe("foo");
         expect($($("#div0").contents()[base - 4]).text()).toBe("bar");
         expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-        $($("#div0").contents()[base - 1]).click();
+        $($("#div0").contents()[base - 1]).trigger("click");
         expect($("#div0").contents().length).toBe(base + 1);
         // has shifted button by 1
         expect($($("#div0").contents()[base]).text()).toBe("incr");
         // there's a new node now with the number "0" as its text
         expect($($("#div0").contents()[base - 2]).text()).toBe("0");
         // index is now 5 as it has moved back by 1
-        $($("#div0").contents()[base]).click();
+        $($("#div0").contents()[base]).trigger("click");
         expect($("#div0").contents().length).toBe(base + 2);
         // has again shifted button by 1
         expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
@@ -113,21 +93,21 @@ describe("deku", () => {
     "has dyn appearing in the correct composable order when used at end",
     (f) =>
       f(tests.dynAppearsCorrectlyAtEnd, (usingSSR) => {
-        const $ = $$;
+        const $ = require("jquery");
         // text, span, start beacon, end beacon, button
         const base = usingSSR ? 6 : 5;
         expect($("#div0").contents().length).toBe(base);
         expect($($("#div0").contents()[0]).text()).toBe("foo");
         expect($($("#div0").contents()[base - 4]).text()).toBe("bar");
         expect($($("#div0").contents()[base - 1]).text()).toBe("incr");
-        $($("#div0").contents()[base - 1]).click();
+        $($("#div0").contents()[base - 1]).trigger("click");
         expect($("#div0").contents().length).toBe(base + 1);
         // has shifted button by 1
         expect($($("#div0").contents()[base]).text()).toBe("incr");
         // there's a new node now with the number "0" as its text
         expect($($("#div0").contents()[base - 2]).text()).toBe("0");
         // index is now 5 as it has moved back by 1
-        $($("#div0").contents()[base]).click();
+        $($("#div0").contents()[base]).trigger("click");
         expect($("#div0").contents().length).toBe(base + 2);
         // has again shifted button by 1
         expect($($("#div0").contents()[base + 1]).text()).toBe("incr");
@@ -140,18 +120,18 @@ describe("deku", () => {
 
   doTest("deeply nested", (f) =>
     f(tests.deeplyNestedPreservesOrder, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#incr-0").text()).toBe("incr-0");
-      $("#incr-0").click();
-      $("#incr-0").click();
+      $("#incr-0").trigger("click");
+      $("#incr-0").trigger("click");
       expect($("#incr-1").text()).toBe("incr-1");
-      $("#incr-1").click();
-      $("#incr-1").click();
+      $("#incr-1").trigger("click");
+      $("#incr-1").trigger("click");
       expect($("#incr-2").text()).toBe("incr-2");
-      $("#incr-2").click();
-      $("#incr-2").click();
+      $("#incr-2").trigger("click");
+      $("#incr-2").trigger("click");
       // add dyn0-2 with the third click on incr-0
-      $("#incr-0").click();
+      $("#incr-0").trigger("click");
       // incr-1 is inserted _above_ incr-0 in the test
       expect($("#incr-1").index()).toBeLessThan($("#incr-0").index());
       expect($("#incr-2").index()).toBeLessThan($("#incr-1").index());
@@ -161,21 +141,21 @@ describe("deku", () => {
 
   doTest("domable is a monoid", (f) =>
     f(tests.isAMonoid, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#mybody").text()).toBe("monoid");
     })
   );
 
   doTest("sends to position correctly", (f) =>
     f(tests.sendsToPosition, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
       expect($("#dyn2").index()).toBeLessThan($("#dyn3").index());
       expect($("#dyn3").index()).toBeLessThan($("#dyn4").index());
       // for kicks
       expect($("#dyn4").index()).toBeGreaterThan($("#dyn0").index());
-      $("#pos").click();
+      $("#pos").trigger("click");
       // 3 is now at 1
       // so the order is 0, 3, 1, 2, 4
       expect($("#dyn0").index()).toBeLessThan($("#dyn3").index());
@@ -189,14 +169,14 @@ describe("deku", () => {
 
   doTest("sends to position correctly when elt is fixed", (f) =>
     f(tests.sendsToPositionFixed, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#dyn0a").index()).toBeLessThan($("#dyn1a").index());
       expect($("#dyn1a").index()).toBeLessThan($("#dyn2a").index());
       expect($("#dyn2a").index()).toBeLessThan($("#dyn3a").index());
       expect($("#dyn3a").index()).toBeLessThan($("#dyn4a").index());
       // for kicks
       expect($("#dyn4a").index()).toBeGreaterThan($("#dyn0a").index());
-      $("#pos").click();
+      $("#pos").trigger("click");
       // 3 is now at 1
       // so the order is 0, 3, 1, 2, 4
       expect($("#dyn0a").index()).toBeLessThan($("#dyn3a").index());
@@ -210,7 +190,7 @@ describe("deku", () => {
 
   doTest("sends to position correctly", (f) =>
     f(tests.insertsAtCorrectPositions, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#dyn0").index()).toBeLessThan($("#dyn1").index());
       expect($("#dyn1").index()).toBeLessThan($("#dyn2").index());
       expect($("#dyn2").index()).toBeLessThan($("#dyn3").index());
@@ -222,15 +202,15 @@ describe("deku", () => {
 
   doTest("switcher works for compositional elements", (f) =>
     f(tests.switcherWorksForCompositionalElements, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#id0").text()).toBe("0-0");
       expect($("#id1").text()).toBe("0-1");
       expect($("#id2").text()).toBe("0-2");
-      $("#incr").click();
+      $("#incr").trigger("click");
       expect($("#id0").text()).toBe("1-0");
       expect($("#id1").text()).toBe("1-1");
       expect($("#id2").text()).toBe("1-2");
-      $("#incr").click();
+      $("#incr").trigger("click");
       expect($("#id0").text()).toBe("2-0");
       expect($("#id1").text()).toBe("2-1");
       expect($("#id2").text()).toBe("2-2");
@@ -239,26 +219,26 @@ describe("deku", () => {
 
   doTest("tabbed navigation with pursx has correct layout", (f) =>
     f(tests.tabbedNavigationWithPursx, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#home").text()).toBe("home");
-      $("#about-btn").click();
-      expect($("#home").selectorIsNull());
+      $("#about-btn").trigger("click");
+      expect($("#home").length === 0);
       expect($("#about").text()).toBe("about deku");
-      $("#contact-btn").click();
-      expect($("#about").selectorIsNull());
+      $("#contact-btn").trigger("click");
+      expect($("#about").length === 0);
       expect($("#contact").text()).toBe("contact mike at site.com thanks");
     })
   );
 
   doTest("switchers compose", (f) =>
     f(tests.switchersCompose, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#div1a").index()).toBeGreaterThan($("#div0").index());
       expect($("#div1a").index()).toBeLessThan($("#div2").index());
-      $("#incr").click();
+      $("#incr").trigger("click");
       expect($("#div1b").index()).toBeGreaterThan($("#div0").index());
       expect($("#div1b").index()).toBeLessThan($("#div2").index());
-      $("#incr").click();
+      $("#incr").trigger("click");
       expect($("#div1a").index()).toBeGreaterThan($("#div0").index());
       expect($("#div1a").index()).toBeLessThan($("#div2").index());
     })
@@ -266,13 +246,13 @@ describe("deku", () => {
 
   doTest("portals compose", (f) =>
     f(tests.portalsCompose, () => {
-      const $ = $$;
+      const $ = require("jquery");
       // d0, then abc, then d1, then d2, then the button
       expect($("#maindiv").text()).toBe("d0abcd1d2incr");
-      $("#incr").click();
+      $("#incr").trigger("click");
       // shifts the portal
       expect($("#maindiv").text()).toBe("d0d1abcd2incr");
-      $("#incr").click();
+      $("#incr").trigger("click");
       // shifts the portal
       expect($("#maindiv").text()).toBe("d0d1d2abcincr");
     })
@@ -280,14 +260,14 @@ describe("deku", () => {
 
   doTest("global portals retain portalness when sent out of scope", (f) =>
     f(tests.globalPortalsRetainPortalnessWhenSentOutOfScope, () => {
-      const $ = $$;
-      $("#push-ported-nut").click();
+      const $ = require("jquery");
+      $("#push-ported-nut").trigger("click");
       expect($("#outer-scope").text()).toBe("no dice!");
       expect($("#inner-scope").text()).toBe("foo");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("no dice!");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       // starting from the second click, the top stops receiving events
       // which means that the portal should never flip back to it
       // we do this in the test to make sure that the portal is
@@ -295,10 +275,10 @@ describe("deku", () => {
       // firing it still disappears from its old setting
       expect($("#outer-scope").text()).toBe("");
       expect($("#inner-scope").text()).toBe("foo");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("");
       expect($("#inner-scope").text()).toBe("no dice!");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("");
       expect($("#inner-scope").text()).toBe("foo");
     })
@@ -306,14 +286,14 @@ describe("deku", () => {
 
   doTest("local portals lose portalness when sent out of scope", (f) =>
     f(tests.localPortalsLosePortalnessWhenSentOutOfScope, () => {
-      const $ = $$;
-      $("#push-ported-nut").click();
+      const $ = require("jquery");
+      $("#push-ported-nut").trigger("click");
       expect($("#outer-scope").text()).toBe("no dice!");
       expect($("#inner-scope").text()).toBe("foo");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("no dice!");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       // starting from the second click, the top stops receiving events
       // unlike the test above, which is identical except for the
       // local/global portal split
@@ -321,10 +301,10 @@ describe("deku", () => {
       // because a fresh constructor is used
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("foo");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("no dice!");
-      $("#portal-btn").click();
+      $("#portal-btn").trigger("click");
       expect($("#outer-scope").text()).toBe("foo");
       expect($("#inner-scope").text()).toBe("foo");
     })
@@ -332,46 +312,46 @@ describe("deku", () => {
 
   doTest("pursx composes", (f) =>
     f(tests.pursXComposes, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#div0").text()).toBe("début milieu après-milieu fin");
     })
   );
 
   doTest("switcher switches", (f) =>
     f(tests.switcherSwitches, () => {
-      const $ = $$;
-      $("#about-btn").click();
+      const $ = require("jquery");
+      $("#about-btn").trigger("click");
       expect($("#hack").text()).toBe("hello");
-      $("#contact-btn").click();
+      $("#contact-btn").trigger("click");
       expect($("#hack").text()).toBe("hello");
-      $("#home-btn").click();
+      $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("goodbye");
     })
   );
 
   doTest("lots of switching!", (f) =>
     f(tests.lotsOfSwitching, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#hack").text()).toBe("hello");
       ////
-      $("#home-btn").click();
+      $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("goodbye");
-      $("#home-btn").click();
+      $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("hello");
       ////
-      $("#home-btn").click();
+      $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("goodbye");
-      $("#home-btn").click();
+      $("#home-btn").trigger("click");
       expect($("#hack").text()).toBe("hello");
     })
   );
 
   doTest("attributes are correctly unset", (f) =>
     f(tests.unsetUnsets, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#span1").attr("style")).toBe("color:red;");
-      $("#unsetter").click();
-      expect($("#span1").attr("style")).toBe(null);
+      $("#unsetter").trigger("click");
+      expect($("#span1").attr("style")).toBe(undefined);
     })
   );
 
@@ -383,27 +363,27 @@ describe("deku", () => {
 
   doTest("useRef has correct behavior", (f) =>
     f(tests.useRefWorks, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#b0").text()).toBe("");
       expect($("#b1").text()).toBe("");
       expect($("#b2").text()).toBe("");
       expect($("#b3").text()).toBe("");
       expect($("#b4").text()).toBe("");
-      $("#b3").click();
+      $("#b3").trigger("click");
       expect($("#b0").text()).toBe("");
       expect($("#b1").text()).toBe("");
       expect($("#b2").text()).toBe("");
       expect($("#b3").text()).toBe("0");
       expect($("#b4").text()).toBe("");
-      $("#counter").click();
-      $("#counter").click();
-      $("#b1").click();
+      $("#counter").trigger("click");
+      $("#counter").trigger("click");
+      $("#b1").trigger("click");
       expect($("#b0").text()).toBe("");
       expect($("#b1").text()).toBe("2");
       expect($("#b2").text()).toBe("");
       expect($("#b3").text()).toBe("0");
       expect($("#b4").text()).toBe("");
-      $("#b3").click();
+      $("#b3").trigger("click");
       expect($("#b0").text()).toBe("");
       expect($("#b1").text()).toBe("2");
       expect($("#b2").text()).toBe("");
@@ -414,17 +394,17 @@ describe("deku", () => {
 
   doTest("useRef hook can simulate hot events", (f) =>
     f(tests.refToHot, () => {
-      const $ = $$;
+      const $ = require("jquery");
       // first, set the label to "bar"
-      $("#setlabel").click();
+      $("#setlabel").trigger("click");
       // then, click a bunch of stuff
-      $("#button0").click();
-      $("#button1").click();
-      $("#button2").click();
-      $("#button3").click();
-      $("#button4").click();
-      $("#button5").click();
-      $("#button6").click();
+      $("#button0").trigger("click");
+      $("#button1").trigger("click");
+      $("#button2").trigger("click");
+      $("#button3").trigger("click");
+      $("#button4").trigger("click");
+      $("#button5").trigger("click");
+      $("#button6").trigger("click");
       // as the poll is hot, we get the most recent value
       expect($("#myspan").text()).toBe("bar");
     })
@@ -432,17 +412,17 @@ describe("deku", () => {
 
   doTest("useHot is hotttt", (f) =>
     f(tests.hotIsHot, () => {
-      const $ = $$;
+      const $ = require("jquery");
       // first, set the label to "bar"
-      $("#setlabel").click();
+      $("#setlabel").trigger("click");
       // then, click a bunch of stuff
-      $("#button0").click();
-      $("#button1").click();
-      $("#button2").click();
-      $("#button3").click();
-      $("#button4").click();
-      $("#button5").click();
-      $("#button6").click();
+      $("#button0").trigger("click");
+      $("#button1").trigger("click");
+      $("#button2").trigger("click");
+      $("#button3").trigger("click");
+      $("#button4").trigger("click");
+      $("#button5").trigger("click");
+      $("#button6").trigger("click");
       // as the poll is hot, we get the most recent value
       expect($("#myspan").text()).toBe("bar");
     })
@@ -450,58 +430,66 @@ describe("deku", () => {
 
   doTest("simple switcher", (f) =>
     f(tests.simpleSwitcher, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#innertrue").text()).toBe("trueswitch");
-      $("#doswitch").click();
+      $("#doswitch").trigger("click");
       expect($("#innerfalse").text()).toBe("falseswitch");
-      $("#doswitch").click();
+      $("#doswitch").trigger("click");
       expect($("#innertrue").text()).toBe("trueswitch");
     })
   );
 
   doTest("useHot changes its value", (f) =>
     f(tests.useHotWorks, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#hotdiv").text()).toBe("0.42");
-      $("#ba").click();
+      $("#ba").trigger("click");
       const nw = $("#hotdiv").text();
       expect(nw).not.toBe("0.42");
-      $("#bb").click();
+      $("#bb").trigger("click");
       expect($("#newdiv").text()).toBe(nw);
     })
   );
 
   doTest("useState works #2", (f) =>
     f(tests.useStateWorks2, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#hotdiv").text()).toBe("0.42");
-      $("#ba").click();
+      $("#ba").trigger("click");
       const nw = $("#hotdiv").text();
       expect(nw).not.toBe("0.42");
-      $("#bb").click();
+      $("#bb").trigger("click");
       expect($("#newdiv").text()).toBe("0.42");
+    })
+  );
+
+  doTest("todo mvc", (f) =>
+    f(tests.todoMVC, () => {
+      const $ = require("jquery");
+      $("#add").trigger("click");
+      expect($("#item0").text()).toBe("Tasko primo");
     })
   );
 
   doTest("useEffect with a ref has correct behavior", (f) =>
     f(tests.useEffectCanBeSimulatedWithRef, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#mydiv").text()).toBe("0");
-      $("#counter").click();
+      $("#counter").trigger("click");
       expect($("#mydiv").text()).toBe("2");
-      $("#counter").click();
+      $("#counter").trigger("click");
       expect($("#mydiv").text()).toBe("3");
-      $("#counter").click();
+      $("#counter").trigger("click");
       expect($("#mydiv").text()).toBe("4");
-      $("#counter").click();
+      $("#counter").trigger("click");
       expect($("#mydiv").text()).toBe("6");
     })
   );
 
   doTest("custom hooks do their thing", (f) =>
     f(tests.customHooksDoTheirThing, () => {
-      const $ = $$;
-      $("#counter").click();
+      const $ = require("jquery");
+      $("#counter").trigger("click");
       expect($("#mydiv1").text()).toBe("43");
       expect($("#mydiv2").text()).toBe("49");
     })
@@ -509,29 +497,29 @@ describe("deku", () => {
 
   doTest("used state works", (f) =>
     f(tests.useStateWorks, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#maindiv").text()).toBe("hello");
-      $("#button").click();
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("world");
     })
   );
 
   doTest("use rant works", (f) =>
     f(tests.useRantWorks, () => {
-      const $ = $$;
-      $("#button").click();
+      const $ = require("jquery");
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("0");
       expect($("#maindiv2").text()).toBe("0");
-      $("#button").click();
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("1");
       expect($("#maindiv2").text()).toBe("1");
-      $("#button").click();
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("2");
       expect($("#maindiv2").text()).toBe("2");
-      $("#button").click();
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("3");
       expect($("#maindiv2").text()).toBe("3");
-      $("#button").click();
+      $("#button").trigger("click");
       expect($("#maindiv").text()).toBe("4");
       expect($("#maindiv2").text()).toBe("4");
     })
@@ -539,7 +527,7 @@ describe("deku", () => {
 
   doTest("pure works", (f) =>
     f(tests.pureWorks, () => {
-      const $ = $$;
+      const $ = require("jquery");
       expect($("#hello").text()).toBe("hello");
     })
   );
