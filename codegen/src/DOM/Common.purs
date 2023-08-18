@@ -104,9 +104,10 @@ mkAttribute keywords name =
 
 -- | Creates a valid event definition. Invalid definitions get converted to `Nothing`.
 mkHandler :: String -> String -> Maybe Event
--- blur has been defined multiple times, once in html.json and once in uievents.json, the one we care about has type 
--- "FocusEvent"
+-- blur and focus have been defined multiple times, once in html.json and once in uievents.json, the one we care about
+-- has type "FocusEvent"
 mkHandler "Event" "blur" = Nothing
+mkHandler "Event" "focus" = Nothing
 mkHandler type_ name = case String.stripPrefix ( String.Pattern "DOM" ) name of
     Just mutEvent ->
         Just

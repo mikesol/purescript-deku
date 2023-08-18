@@ -471,7 +471,6 @@ type HTMLElement (r :: Row Type) =
   , translate :: String
   , lang :: String
   , load :: Web.Event.Internal.Types.Event
-  , focus :: Web.Event.Internal.Types.Event
   , error :: Web.Event.Internal.Types.Event
   , beforetoggle :: Web.Event.Internal.Types.Event
   , beforematch :: Web.Event.Internal.Types.Event
