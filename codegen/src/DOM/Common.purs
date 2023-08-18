@@ -54,10 +54,13 @@ type Attribute =
     { name :: String -- name in document
     , index :: Ctor -- name in source and row index
     , type :: TypeStub -- type of this attribute
-    , keywords :: Array { original :: String, name :: String } -- valid values for this attribute
+    , keywords :: Array Keyword -- valid values for this attribute
     }
 
-type Keyword = { value :: String }
+type Keyword =
+    { original :: String
+    , name :: String
+    }
 
 data TagNS = HTML | SVG | MathML
 derive instance Eq TagNS
@@ -178,22 +181,6 @@ capitalize :: String -> String
 capitalize = 
     String.splitAt 1 >>> \{ before, after } -> String.toUpper before <> after
 
-eltModule :: Ctor -> String
-eltModule ( Ctor name ) =
-    "Deku.DOM.Elt." <> capitalize name
-
-eltType :: Ctor -> String
-eltType ( Ctor name ) =
-    capitalize name <> "_"
-
-attrModule :: Ctor -> String
-attrModule ( Ctor name ) =
-    "Deku.DOM.Attr." <> capitalize name
-
-attrType :: Ctor -> String
-attrType ( Ctor name ) =
-    capitalize name
-
 declHandler :: String -> String -> Array ( BinaryOp ( Expr Void ) ) -> Declaration Void
 declHandler name key ops =
     unsafePartial
@@ -225,16 +212,6 @@ typeIndexedAt :: Ctor -> Type Void -> Type Void
 typeIndexedAt n t =
     unsafePartial $ typeRow [ n /\ t ] $ Just $ typeVar "r"
 
-tagCtor :: Ctor -> String /\ String
-tagCtor ( Ctor src ) = do
-    let short = src <> "_"
-    src /\ short
-
-attributeCtor :: Ctor -> String /\ String
-attributeCtor ( Ctor src ) = do
-    let short = src <> "_"
-    src /\ short
-
 nominal :: Ctor
 nominal =
     Ctor "__tag"
@@ -243,7 +220,7 @@ selfKey :: String
 selfKey =
     "@self@"
     
--- | Elements that have an implementation in the current web-html package
+-- | Elements that have an implementation in the current web-html package.
 webElements :: Array TypeStub
 webElements = map (\intf -> TypeEvent intf ( "Web.HTML." <> intf ) )
     [ "HTMLAnchorElement"

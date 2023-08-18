@@ -14,6 +14,7 @@ import Web.DOM (Element)
 import Web.Event.Event as Web
 import Web.HTML.HTMLInputElement (checked, fromEventTarget, value, valueAsNumber)
 
+-- | Runs an effect when the element triggers the given event. 
 runOn :: forall e r
    . ( Event ( e -> Effect Unit ) -> Event ( Attribute r ) )
   -> Event ( Effect Unit )
@@ -21,6 +22,7 @@ runOn :: forall e r
 runOn listener =
   listener <<< map const 
 
+-- | Shorthand version of `runOn`.
 runOn_ :: forall e r
    . ( Event ( e -> Effect Unit ) -> Event ( Attribute r ) )
   -> Effect Unit
@@ -28,6 +30,7 @@ runOn_ :: forall e r
 runOn_ listener =
   runOn listener <<< pure
 
+-- | Runs an effect with the `checked` value of the target element when it triggers the given event. 
 checkedOn :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> Event ( Boolean -> Effect Unit )
@@ -35,6 +38,7 @@ checkedOn :: forall r
 checkedOn listener =
   listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ checked >=> push
 
+-- | Shorthand version of `checkedOn`.
 checkedOn_ :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> ( Boolean -> Effect Unit )
@@ -42,6 +46,7 @@ checkedOn_ :: forall r
 checkedOn_ listener = 
   checkedOn listener <<< pure
 
+-- | Runs an effect with the `valueAsNumber` property of the target element when it triggers the given event.
 numberOn :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> Event ( Number -> Effect Unit )
@@ -49,6 +54,7 @@ numberOn :: forall r
 numberOn listener =
   listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ valueAsNumber >=> push
 
+-- | Shorthand version of `numberOn`.
 numberOn_ :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> ( Number -> Effect Unit )
@@ -56,6 +62,7 @@ numberOn_ :: forall r
 numberOn_ listener =
   numberOn listener <<< pure
 
+-- | Runs an effect with the `value` property of the target element when it triggers the given event.
 valueOn :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> Event ( String -> Effect Unit )
@@ -63,6 +70,7 @@ valueOn :: forall r
 valueOn listener =
   listener <<< map \push e -> for_ ( Web.target e >>= fromEventTarget ) $ value >=> push
 
+-- | Shorthand version of `valueOn`.
 valueOn_ :: forall r
    . ( Event ( Web.Event -> Effect Unit ) -> Event ( Attribute r ) )
   -> ( String -> Effect Unit )

@@ -50,7 +50,7 @@ constructArg = unsafePartial case _ of
     TypeEvent t mod ->
         typeArrow [ typeCtor $ mod <> "." <> t ] $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
 
--- | Generates the necessary imports for the handler of a `TypeStub`s.
+-- | Generates the necessary imports for the handler of collection of `TypeStub`s.
 handlerImports :: forall e . Array TypeStub -> Array ( ImportDecl e )
 handlerImports stubs =
     unsafePartial $ flip map ( Array.nub $ bind stubs modules ) \mod ->
@@ -82,7 +82,7 @@ handlerImports stubs =
         TypeUnit ->
             [ "Deku.Attribute", "Data.Unit" ] -- unset'
 
--- | Generates the necessary imports for the index of a `TypeStub`.
+-- | Generates the necessary imports for the index of a collection of `TypeStub`s.
 indexImports :: forall e . Array TypeStub -> Array ( ImportDecl e )
 indexImports stubs =
     unsafePartial $ flip map ( Array.nub $ bind stubs modules ) \mod ->
@@ -109,7 +109,7 @@ indexImports stubs =
         TypeUnit ->
             [ "Data.Unit" ] -- unset'
 
--- | Generates a handler that can convert the type indicated by the `TypeStub` to an `AttributeValue` 
+-- | Generates a handler that can convert the type indicated by the `TypeStub` to an `AttributeValue`.
 handler :: forall e . TypeStub -> Array ( BinaryOp ( Expr e ) ) 
 handler = unsafePartial case _ of
     TypeInt ->

@@ -61,12 +61,6 @@ type Interface =
     , fragment :: String
     }
 
-mergeIDL :: IDL -> IDL -> IDL
-mergeIDL { idlNames : nl, idlExtendedNames : enl } { idlNames : nr, idlExtendedNames : enr } =
-    { idlNames : Foreign.union nl nr
-    , idlExtendedNames : Foreign.unionWith append enl enr
-    }
-
 data Member 
     = Constructor
     | Operation { name :: String }

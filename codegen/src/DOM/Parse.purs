@@ -149,7 +149,7 @@ parse ns sources = do
                         []
             where
 
-            -- dfn contain some pseudo interfaces which we have to map
+            -- dfn contains some pseudo interfaces which we have to map
             tagToInterface :: String -> Ctor
             tagToInterface "global" = Ctor "Element"
             tagToInterface "html-global" = Ctor "HTMLElement"

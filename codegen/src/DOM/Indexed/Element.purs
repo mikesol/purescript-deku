@@ -3,7 +3,7 @@ module DOM.Indexed.Element where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Element, Interface, TagNS, typeArrayed, typeAttributed, typeEvented, typeNut, xhtmlNamespace, nominal, tagCtor)
+import DOM.Common (Ctor(..), Element, Interface, TagNS, typeArrayed, typeAttributed, typeEvented, typeNut, xhtmlNamespace, nominal)
 import DOM.TypeStub (constructIndex, indexImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
@@ -50,10 +50,10 @@ exports :: Partial => Foreign.Object Interface -> Array Element -> Array ( Expor
 exports interfaces tags = do
     Array.concat
         [ pure $ exportClass "TagToDeku"
-        , bind tags \{ ctor } -> do
-            let tag /\ shortHand = tagCtor ctor
+        , bind tags \{ ctor : Ctor tag } -> do
+            let shortHand = tag <> "_"
             [ exportValue tag, exportValue shortHand ]
-        , map ( exportType <<< _.name ) $ Foreign.values interfaces
+        , map exportType $ Foreign.keys interfaces
         ]
 
 generate :: Partial => Foreign.Object Interface -> Array Element -> Array ( Declaration Void )
@@ -77,8 +77,8 @@ generate interfaces tags = do
             ]
 
         -- elements
-        , bind tags \{ ctor, tag, ns, interface } -> do
-            let ctor /\ shortHand = tagCtor ctor
+        , bind tags \{ ctor : Ctor ctor, tag, ns, interface } -> do
+            let shortHand = ctor <> "_"
             [ declInstance Nothing [] "TagToDeku" [ typeString tag, typeApp ( typeCtor interface ) [ typeRowEmpty ] ] []
             , declSignature ctor
                 $ typeArrow

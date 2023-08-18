@@ -3,10 +3,9 @@ module DOM.Indexed.Listener where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Event, attributeCtor, declHandler, typeAttributed, typeEvented, typeIndexedAt)
+import DOM.Common (Ctor(..), Event, declHandler, typeAttributed, typeEvented, typeIndexedAt)
 import DOM.TypeStub (constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
-import Data.Tuple.Nested ((/\))
 import PureScript.CST.Types (Declaration, Export, ImportDecl)
 import Tidy.Codegen (binaryOp, declImport, declImportAs, declSignature, declValue, exportModule, exportValue, exprIdent, exprOp, importOp, importValue, typeArrow, typeForall, typeVar)
 
@@ -41,15 +40,15 @@ exports :: Partial => Array Event -> Array ( Export Void )
 exports events =
     Array.concat
         [ pure $ exportModule "Combinators" 
-        , bind events \{ index } ->
-            let ctor /\ shortHand = attributeCtor index
+        , bind events \{ index : Ctor ctor } ->
+            let shortHand = ctor <> "_"
             in [ exportValue ctor, exportValue shortHand ]
         ]
 
 generate :: Partial => Array Event -> Array ( Declaration Void )
 generate events =
-    bind events \{ index, type : t, name } ->
-        let ctor /\ shortHand = attributeCtor index
+    bind events \{ index : index@( Ctor ctor ), type : t, name } ->
+        let shortHand = ctor <> "_"
             indexType = constructIndex t
         in
             -- generate simple function definition

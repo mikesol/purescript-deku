@@ -3,7 +3,6 @@ module Deku.Example.HelloWorld where
 import Prelude
 
 import Control.Alt (alt)
-import Control.Plus (empty)
 import Data.Foldable (oneOf)
 import Data.Maybe (Maybe(..))
 import Data.Profunctor (lcmap)
@@ -18,6 +17,7 @@ import Deku.DOM.Listeners as DL
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, filterMap, keepLatest, mapAccum)
+import Web.HTML (HTMLDivElement)
 
 counter :: forall a. Event a → Event (Tuple a Int)
 counter event = mapAccum f 0 event
@@ -28,10 +28,13 @@ scene :: Nut
 scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
   D.div_
     [ D.div_
-        [ D.div empty [ C.text (pure "Stops after 4 clicks") ]
+        [ D.div
+            [ DL.injectElementT \( _ :: HTMLDivElement ) -> pure unit
+            ]
+            [ C.text (pure "Stops after 4 clicks") ]
         , C.text (event <#> if _ then "click " else "kcilc ")
         , D.button
-            [counter event
+            [ counter event
                 # filterMap
                     (\(Tuple x y) -> if y < 4 then Just x else Nothing)
                 # map

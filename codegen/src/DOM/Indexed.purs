@@ -4,7 +4,7 @@ import Prelude
 
 import Comment (commentModule)
 import Control.Monad.Except (ExceptT(..))
-import DOM.Common (webElements)
+import DOM.Common (Interface, webElements)
 import DOM.Indexed.Attribute as Attribute
 import DOM.Indexed.Element as Element
 import DOM.Indexed.Listener as Listener
@@ -15,6 +15,7 @@ import Data.Maybe (maybe)
 import Data.String as String
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
+import Foreign.Object as Foreign
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
 import Node.Path as Path
@@ -31,9 +32,15 @@ generateSpec ::
     -> ExceptT Error Aff Unit
 generateSpec path baseMod imports exports { elements, interfaces : all, attributes, events } = do
     let
-        listenerMod = baseMod <> ".Listeners"
-        attributeMod = baseMod <> ".Attributes"
+        listenerMod :: String
+        listenerMod =
+            baseMod <> ".Listeners"
+        
+        attributeMod :: String
+        attributeMod =
+            baseMod <> ".Attributes"
 
+        modPath :: String -> String
         modPath modName = do
             let segments = String.split ( String.Pattern "." ) modName
             Path.concat $ Array.concat
@@ -42,11 +49,11 @@ generateSpec path baseMod imports exports { elements, interfaces : all, attribut
                 , Array.fromFoldable $ map ( _ <> ".purs" ) $ Array.last segments
                 ]
 
-    FS.createDir $ Path.concat [ path, String.replaceAll ( String.Pattern "." ) ( String.Replacement "/" ) baseMod ]
-
-    let
+        interfaces :: Foreign.Object Interface
         interfaces =
             Element.crawlInterfaces elements all
+
+    FS.createDir $ Path.concat [ path, String.replaceAll ( String.Pattern "." ) ( String.Replacement "/" ) baseMod ]
 
     ExceptT $ attempt
         $ writeTextFile UTF8 ( modPath baseMod )
