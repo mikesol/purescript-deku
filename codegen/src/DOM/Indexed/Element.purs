@@ -24,7 +24,7 @@ imports baseMod interfaces =
         [ identity 
             [ declImportAs "FRP.Event" [] "FRP.Event"
             , declImport "Data.Maybe" [ importTypeAll "Maybe" ]
-            , declImportAs "Deku.Attribute" [] "Deku.Attribute"
+            , declImportAs "Deku.Attribute" [ importType "Attribute" ] "Deku.Attribute"
             
             , declImport "Deku.Control" [ importValue "elementify2" ]
             , declImport "Deku.Core" [ importType "Nut" ]

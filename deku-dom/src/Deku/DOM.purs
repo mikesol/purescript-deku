@@ -2,6 +2,7 @@
 -- | Any changes may be overwritten.
 module Deku.DOM
   ( module Deku.Control
+  , module Deku.Attribute
   , class TagToDeku
   , html
   , html_
@@ -375,7 +376,7 @@ module Deku.DOM
 import Deku.Control (text, text_) as Deku.Control
 import FRP.Event as FRP.Event
 import Data.Maybe (Maybe(..))
-import Deku.Attribute as Deku.Attribute
+import Deku.Attribute (Attribute) as Deku.Attribute
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)

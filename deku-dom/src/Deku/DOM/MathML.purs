@@ -67,7 +67,7 @@ module Deku.DOM.MathML
 
 import FRP.Event as FRP.Event
 import Data.Maybe (Maybe(..))
-import Deku.Attribute as Deku.Attribute
+import Deku.Attribute (Attribute) as Deku.Attribute
 import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)

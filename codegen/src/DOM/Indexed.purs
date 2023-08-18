@@ -108,8 +108,11 @@ generate html svg mathml = do
             ( Self.generate webElements )
 
     generateSpec "deku-dom/src" "Deku.DOM"
-        [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control" ]
-        [ unsafePartial $ exportModule "Deku.Control" ]
+        [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control"
+        ]
+        [ unsafePartial $ exportModule "Deku.Control"
+        , unsafePartial $ exportModule "Deku.Attribute"
+        ]
         html
 
     generateSpec "deku-dom/src" "Deku.DOM.SVG"
