@@ -334,7 +334,7 @@ export const makeElement_ =
       return false;
     })();
     if (!iRan) {
-      const namespace = null;
+      let namespace = null;
       runOnJust(a.ns)( ns => () => { namespace = ns; return true; } )();
       const main = namespace === null 
         ? document.createElement(a.tag)
