@@ -5,6 +5,14 @@ import Prelude
 
 import PureScript.CST.Types (Comment(..), Declaration(..), Expr(..), Labeled(..), LineFeed(..), Module(..), ModuleHeader(..), Name(..), SourceToken)
 
+documentModule :: forall e . Array String -> Module e -> Module e
+documentModule txt ( Module mod@{ header : ModuleHeader header } ) =
+    Module mod { header = ModuleHeader header { keyword = commentToken comment header.keyword } }
+    
+    where
+
+    comment = mkBlockDoc txt
+
 commentModule :: forall e . Array String -> Module e -> Module e
 commentModule txt ( Module mod@{ header : ModuleHeader header } ) =
     Module mod { header = ModuleHeader header { keyword = commentToken comment header.keyword } }
@@ -25,8 +33,8 @@ inlineComment txt = case _ of
     
     comment = mkInlineComment txt
 
-commentDecl :: forall e . Array String -> Declaration e -> Declaration e
-commentDecl txt = case _ of
+documentDecl :: forall e . Array String -> Declaration e -> Declaration e
+documentDecl txt = case _ of
     DeclData head vs ->
         DeclData head { keyword = commentToken comment head.keyword } vs
 
@@ -38,7 +46,7 @@ commentDecl txt = case _ of
 
     where
 
-    comment = mkBlockComment txt
+    comment = mkBlockDoc txt
 
 commentName :: forall a . Array ( Comment LineFeed ) -> Name a -> Name a
 commentName cs ( Name name ) = Name name { token = commentToken cs name.token }
@@ -47,9 +55,13 @@ commentToken :: Array ( Comment LineFeed ) -> SourceToken -> SourceToken
 commentToken comments tok@{ leadingComments } =
     tok { leadingComments = leadingComments <> comments }
 
+mkBlockDoc :: Array String -> Array ( Comment LineFeed ) 
+mkBlockDoc ls =
+    bind ls \l -> [ Comment $ "-- | " <> l, Line LF 1 ]
+
 mkBlockComment :: Array String -> Array ( Comment LineFeed ) 
 mkBlockComment ls =
-    bind ls \l -> [ Comment $ "-- | " <> l, Line LF 1 ]
+    bind ls \l -> [ Comment $ "-- " <> l, Line LF 1 ]
 
 mkInlineComment :: forall l . String -> Array ( Comment l )
 mkInlineComment =

@@ -2,7 +2,7 @@ module DOM.Indexed where
 
 import Prelude
 
-import Comment (commentModule)
+import Comment (commentModule, documentModule)
 import Control.Monad.Except (ExceptT(..))
 import DOM.Common (Interface, webElements)
 import DOM.Indexed.Attribute as Attribute
@@ -60,6 +60,7 @@ generateSpec path baseMod imports exports { elements, interfaces : all, attribut
         $ printModule
         $ unsafePartial
         $ warnCodegen
+        $ documentModule [ "This module contains reexports of all the DOM elements." ]
         $ module_ baseMod
             ( exports <> Element.exports interfaces elements )
             ( imports <> Element.imports "Deku.DOM" interfaces )
@@ -71,6 +72,7 @@ generateSpec path baseMod imports exports { elements, interfaces : all, attribut
             $ printModule
             $ unsafePartial
             $ warnCodegen
+            $ documentModule [ "This module contains reexports of all the attributes." ]
             $ module_ attributeMod
                 ( Attribute.exports attributes )
                 ( Attribute.imports attributes )
@@ -82,6 +84,7 @@ generateSpec path baseMod imports exports { elements, interfaces : all, attribut
             $ printModule
             $ unsafePartial
             $ warnCodegen
+            $ documentModule [ "This module contains reexports of all the event listeners." ]
             $ module_ listenerMod
                 ( Listener.exports events )
                 ( Listener.imports events )

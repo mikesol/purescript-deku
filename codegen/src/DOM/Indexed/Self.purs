@@ -3,7 +3,8 @@ module DOM.Indexed.Self where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented,nominal, typeIndexedAt)
+import Comment (documentDecl)
+import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented, nominal, typeIndexedAt)
 import DOM.TypeStub (TypeStub(..), constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
@@ -38,26 +39,39 @@ generate es =
             ]
             []
 
-        , declSignature "self"
+        , documentDecl
+            [ "Creates a special event where an Deku element can have its raw DOM element"
+            , "injected into a closure. All bets are off type-safety wise. This is useful"
+            , "when you need to manipulate the element itself, like for example attaching"
+            , "properties to it, etc."
+            ]
+            $ declSignature "self"
             $ typeForall [ typeVar "r" ]
             $ typeArrow [ typeEvented $ constructArg rawSelf ]
             $ typeEvented $ typeAttributed $ typeVar "r"
         , declHandler "self" selfKey $ handler $ rawSelf
 
-        , declSignature "self_"
+        , documentDecl [ "Shorthand version of `self`" ]
+            $ declSignature "self_"
             $ typeForall [ typeVar "r" ]
             $ typeArrow [ constructArg rawSelf ]
             $ typeEvented $ typeAttributed $ typeVar "r"
         , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
         
-        , declSignature "selfT"
+        , documentDecl 
+            [ "A slightly less permissive version of `Self` that associates Deku Elements to"
+            , "the primitive element definitions form `purescript-web`. For example, `A_` from `deku`"
+            , "gets translated to `HTMLAnchorElement` from `purescript-web`, etc."
+            ] 
+            $ declSignature "selfT"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ typeEvented $ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declHandler "selfT" selfKey $ handler rawSelf
 
-        , declSignature "selfT_"
+        , documentDecl [ "Shorthand version of `selfT`" ]
+            $ declSignature "selfT_"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
