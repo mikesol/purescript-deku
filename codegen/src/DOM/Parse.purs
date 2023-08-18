@@ -9,13 +9,12 @@ import DOM.Spec as Spec
 import DOM.TypeStub (TypeStub)
 import Data.Array as Array
 import Data.Function (on)
-import Data.Maybe (Maybe(..), fromJust, fromMaybe, maybe)
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.String as String
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\), (/\))
 import Data.Variant (Variant, match)
 import Foreign.Object as Foreign
-import Partial.Unsafe (unsafePartial)
 import Safe.Coerce (coerce)
 
 type Source = Variant
