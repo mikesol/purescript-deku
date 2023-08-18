@@ -5,3 +5,5 @@ package:
   - hyrule
   - web-html
   - web-uievents
+  - web-pointerevents
+  - web-touchevents

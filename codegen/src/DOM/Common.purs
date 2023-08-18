@@ -277,5 +277,7 @@ webEvents ev = case ev of
     "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
     "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
     "TrackEvent" -> TypeEvent "TrackEvent" "Web.HTML.Event.TrackEvent"
+    "PointerEvent" -> TypeEvent "PointerEvent" "Web.PointerEvent.PointerEvent"
+    "TouchEvent" -> TypeEvent "TouchEvent" "Web.TouchEvent.TouchEvent"
 
     _ -> TypeEvent "Event" "Web.Event.Internal.Types"

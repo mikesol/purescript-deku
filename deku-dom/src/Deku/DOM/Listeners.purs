@@ -295,7 +295,9 @@ import Effect as Effect
 import Data.Unit as Data.Unit
 import Unsafe.Coerce as Unsafe.Coerce
 import Web.HTML.Event.TrackEvent as Web.HTML.Event.TrackEvent
+import Web.PointerEvent.PointerEvent as Web.PointerEvent.PointerEvent
 import Web.HTML.Event.DragEvent as Web.HTML.Event.DragEvent
+import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.UIEvent.FocusEvent as Web.UIEvent.FocusEvent
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Web.UIEvent.UIEvent as Web.UIEvent.UIEvent
@@ -937,9 +939,11 @@ animationstart_ = animationstart <<< Applicative.pure
 
 lostpointercapture
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (lostpointercapture :: Web.Event.Internal.Types.Event | r))
+       ( Deku.Attribute.Attribute
+           (lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
+       )
 lostpointercapture = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "lostpointercapture", value: _ }
       <<< Deku.Attribute.cb'
@@ -949,16 +953,20 @@ lostpointercapture = Functor.map
 
 lostpointercapture_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (lostpointercapture :: Web.Event.Internal.Types.Event | r))
+       ( Deku.Attribute.Attribute
+           (lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
+       )
 lostpointercapture_ = lostpointercapture <<< Applicative.pure
 
 gotpointercapture
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (gotpointercapture :: Web.Event.Internal.Types.Event | r))
+       ( Deku.Attribute.Attribute
+           (gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
+       )
 gotpointercapture = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "gotpointercapture", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -967,15 +975,18 @@ gotpointercapture = Functor.map
 
 gotpointercapture_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (gotpointercapture :: Web.Event.Internal.Types.Event | r))
+       ( Deku.Attribute.Attribute
+           (gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent | r)
+       )
 gotpointercapture_ = gotpointercapture <<< Applicative.pure
 
 pointerleave
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerleave :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerleave = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerleave", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -984,14 +995,16 @@ pointerleave = Functor.map
 
 pointerleave_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerleave :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerleave_ = pointerleave <<< Applicative.pure
 
 pointerout
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerout :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerout = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerout", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1000,15 +1013,16 @@ pointerout = Functor.map
 
 pointerout_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerout :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerout :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerout_ = pointerout <<< Applicative.pure
 
 pointercancel
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (pointercancel :: Web.Event.Internal.Types.Event | r))
+       (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointercancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointercancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1017,15 +1031,16 @@ pointercancel = Functor.map
 
 pointercancel_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (pointercancel :: Web.Event.Internal.Types.Event | r))
+       (Deku.Attribute.Attribute (pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointercancel_ = pointercancel <<< Applicative.pure
 
 pointerup
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerup :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerup = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerup", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1034,15 +1049,16 @@ pointerup = Functor.map
 
 pointerup_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerup :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerup :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerup_ = pointerup <<< Applicative.pure
 
 pointerrawupdate
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (pointerrawupdate :: Web.Event.Internal.Types.Event | r))
+       (Deku.Attribute.Attribute (pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerrawupdate = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerrawupdate", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1051,15 +1067,16 @@ pointerrawupdate = Functor.map
 
 pointerrawupdate_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event
-       (Deku.Attribute.Attribute (pointerrawupdate :: Web.Event.Internal.Types.Event | r))
+       (Deku.Attribute.Attribute (pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerrawupdate_ = pointerrawupdate <<< Applicative.pure
 
 pointermove
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointermove :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointermove = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointermove", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1068,14 +1085,16 @@ pointermove = Functor.map
 
 pointermove_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointermove :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointermove :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointermove_ = pointermove <<< Applicative.pure
 
 pointerdown
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerdown :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerdown = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerdown", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1084,14 +1103,16 @@ pointerdown = Functor.map
 
 pointerdown_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerdown :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerdown_ = pointerdown <<< Applicative.pure
 
 pointerenter
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerenter :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerenter = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerenter", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1100,14 +1121,16 @@ pointerenter = Functor.map
 
 pointerenter_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerenter :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerenter_ = pointerenter <<< Applicative.pure
 
 pointerover
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerover :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerover = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "pointerover", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1116,8 +1139,9 @@ pointerover = Functor.map
 
 pointerover_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pointerover :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (pointerover :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 pointerover_ = pointerover <<< Applicative.pure
 
 dragend
@@ -1368,8 +1392,9 @@ unload_ = unload <<< Applicative.pure
 
 touchcancel
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchcancel :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchcancel = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchcancel", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1378,14 +1403,16 @@ touchcancel = Functor.map
 
 touchcancel_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchcancel :: Web.Event.Internal.Types.Event | r))
+   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchcancel_ = touchcancel <<< Applicative.pure
 
 touchmove
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchmove :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchmove = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchmove", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1394,14 +1421,16 @@ touchmove = Functor.map
 
 touchmove_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchmove :: Web.Event.Internal.Types.Event | r))
+   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchmove :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchmove_ = touchmove <<< Applicative.pure
 
 touchend
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchend :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchend = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchend", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1410,14 +1439,16 @@ touchend = Functor.map
 
 touchend_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchend :: Web.Event.Internal.Types.Event | r))
+   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchend :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchend_ = touchend <<< Applicative.pure
 
 touchstart
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchstart :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchstart = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "touchstart", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -1426,8 +1457,9 @@ touchstart = Functor.map
 
 touchstart_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (touchstart :: Web.Event.Internal.Types.Event | r))
+   . (Web.TouchEvent.TouchEvent.TouchEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (touchstart :: Web.TouchEvent.TouchEvent.TouchEvent | r))
 touchstart_ = touchstart <<< Applicative.pure
 
 visibilitychange
@@ -2181,8 +2213,9 @@ dblclick_ = dblclick <<< Applicative.pure
 
 contextmenu
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (contextmenu :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 contextmenu = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "contextmenu", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2191,8 +2224,9 @@ contextmenu = Functor.map
 
 contextmenu_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (contextmenu :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 contextmenu_ = contextmenu <<< Applicative.pure
 
 compositionend
@@ -2263,8 +2297,9 @@ compositionstart_ = compositionstart <<< Applicative.pure
 
 click
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (click :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 click = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "click", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2273,8 +2308,9 @@ click = Functor.map
 
 click_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (click :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (click :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 click_ = click <<< Applicative.pure
 
 beforeinput
@@ -2295,8 +2331,9 @@ beforeinput_ = beforeinput <<< Applicative.pure
 
 auxclick
   :: forall r
-   . FRP.Event.Event (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (auxclick :: Web.Event.Internal.Types.Event | r))
+   . FRP.Event.Event (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "auxclick", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -2305,8 +2342,9 @@ auxclick = Functor.map
 
 auxclick_
   :: forall r
-   . (Web.Event.Internal.Types.Event -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (auxclick :: Web.Event.Internal.Types.Event | r))
+   . (Web.PointerEvent.PointerEvent.PointerEvent -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Event.Event
+       (Deku.Attribute.Attribute (auxclick :: Web.PointerEvent.PointerEvent.PointerEvent | r))
 auxclick_ = auxclick <<< Applicative.pure
 
 connect

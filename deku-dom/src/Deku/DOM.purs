@@ -380,12 +380,14 @@ import Deku.Control (elementify2)
 import Deku.Core (Nut)
 import Type.Proxy (Proxy)
 import Web.Event.Internal.Types as Web.Event.Internal.Types
+import Web.PointerEvent.PointerEvent as Web.PointerEvent.PointerEvent
 import Web.HTML.Event.DragEvent as Web.HTML.Event.DragEvent
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Web.UIEvent.FocusEvent as Web.UIEvent.FocusEvent
 import Web.UIEvent.UIEvent as Web.UIEvent.UIEvent
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import Web.UIEvent.CompositionEvent as Web.UIEvent.CompositionEvent
+import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 
 class TagToDeku (tag :: Symbol) (interface :: Row Type) | tag -> interface
 type ARIAMixin (r :: Row Type) =
@@ -1137,17 +1139,17 @@ type GlobalEventHandlers (r :: Row Type) =
   , animationend :: Web.Event.Internal.Types.Event
   , animationiteration :: Web.Event.Internal.Types.Event
   , animationstart :: Web.Event.Internal.Types.Event
-  , lostpointercapture :: Web.Event.Internal.Types.Event
-  , gotpointercapture :: Web.Event.Internal.Types.Event
-  , pointerleave :: Web.Event.Internal.Types.Event
-  , pointerout :: Web.Event.Internal.Types.Event
-  , pointercancel :: Web.Event.Internal.Types.Event
-  , pointerup :: Web.Event.Internal.Types.Event
-  , pointerrawupdate :: Web.Event.Internal.Types.Event
-  , pointermove :: Web.Event.Internal.Types.Event
-  , pointerdown :: Web.Event.Internal.Types.Event
-  , pointerenter :: Web.Event.Internal.Types.Event
-  , pointerover :: Web.Event.Internal.Types.Event
+  , lostpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent
+  , gotpointercapture :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerleave :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerout :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointercancel :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerup :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerrawupdate :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointermove :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerdown :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerenter :: Web.PointerEvent.PointerEvent.PointerEvent
+  , pointerover :: Web.PointerEvent.PointerEvent.PointerEvent
   , dragend :: Web.HTML.Event.DragEvent.DragEvent
   , drop :: Web.HTML.Event.DragEvent.DragEvent
   , dragover :: Web.HTML.Event.DragEvent.DragEvent
@@ -1215,19 +1217,19 @@ type Element (r :: Row Type) =
   , focus :: Web.UIEvent.FocusEvent.FocusEvent
   , error :: Web.Event.Internal.Types.Event
   , dblclick :: Web.UIEvent.MouseEvent.MouseEvent
-  , contextmenu :: Web.Event.Internal.Types.Event
+  , contextmenu :: Web.PointerEvent.PointerEvent.PointerEvent
   , compositionend :: Web.UIEvent.CompositionEvent.CompositionEvent
   , compositionupdate :: Web.UIEvent.CompositionEvent.CompositionEvent
   , compositionstart :: Web.UIEvent.CompositionEvent.CompositionEvent
-  , click :: Web.Event.Internal.Types.Event
+  , click :: Web.PointerEvent.PointerEvent.PointerEvent
   , blur :: Web.UIEvent.FocusEvent.FocusEvent
   , beforeinput :: Web.Event.Internal.Types.Event
-  , auxclick :: Web.Event.Internal.Types.Event
+  , auxclick :: Web.PointerEvent.PointerEvent.PointerEvent
   , abort :: Web.Event.Internal.Types.Event
-  , touchcancel :: Web.Event.Internal.Types.Event
-  , touchmove :: Web.Event.Internal.Types.Event
-  , touchend :: Web.Event.Internal.Types.Event
-  , touchstart :: Web.Event.Internal.Types.Event
+  , touchcancel :: Web.TouchEvent.TouchEvent.TouchEvent
+  , touchmove :: Web.TouchEvent.TouchEvent.TouchEvent
+  , touchend :: Web.TouchEvent.TouchEvent.TouchEvent
+  , touchstart :: Web.TouchEvent.TouchEvent.TouchEvent
   | ARIAMixin (Slottable (ChildNode (NonDocumentTypeChildNode (ParentNode (Node r)))))
   )
 
