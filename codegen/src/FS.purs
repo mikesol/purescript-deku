@@ -18,7 +18,7 @@ import Node.Encoding (Encoding(..))
 import Node.FS.Aff (mkdir, readTextFile, stat, writeTextFile)
 import Node.Path as Path
 
-cachedFetch :: forall t . DecodeJson t => String -> String -> ExceptT Error Aff t
+cachedFetch :: forall @t . DecodeJson t => String -> String -> ExceptT Error Aff t
 cachedFetch cacheName url = do
     file <- liftAff $ attempt $ readTextFile UTF8 cacheName
     text <- case file of

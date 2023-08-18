@@ -9,9 +9,10 @@ import Deku.CSS (render)
 import Deku.Control (text)
 import Deku.Core (Nut)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (useState)
-import Deku.Listeners (click)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
@@ -37,12 +38,12 @@ main =
       -- attributes, and event handlers
       D.div
           [
-            -- `Deku.Listeners` contains helper functions for various common
+            -- `Deku.Listeners` contains functions for various common
             -- listeners like `click` and `keyUp`
-            click $ counter <#> add 1 >>> setCounter
+            DL.runOn DL.click $ counter <#> add 1 >>> setCounter
           -- `Deku.CSS` contains `render`, which allows you to take `CSS` from
           -- `purescript-css` and use it in a Deku application
-          , D._style_ $ render do
+          , DA.style_ $ render do
               color (rgb 42 142 242)
               fontWeight bold
           -- `Deku.Attribute` contains constructors for

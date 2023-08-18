@@ -3,23 +3,28 @@ module Main where
 import Prelude
 
 import Control.Monad.Except (ExceptT, runExceptT)
-import DOM.Common (Ctor(..), Interface, TagNS(..), mkAttribute)
+import DOM.Common (Ctor(..), Interface, TagNS(..))
 import DOM.Indexed as Indexed
 import DOM.Parse as Parse
-import DOM.Spec (Definition, KeywordSpec)
 import DOM.TypeStub (TypeStub(..))
+import Data.Argonaut.Decode (class DecodeJson)
 import Data.Array as Array
 import Data.Either (blush)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.String as String
-import Data.Traversable (traverse)
+import Data.Symbol (class IsSymbol, reflectSymbol)
+import Data.Traversable (sequence)
+import Data.Tuple.Nested ((/\))
+import Data.Variant (Variant, inj)
 import Effect (Effect)
 import Effect.Aff (Aff, Error, launchAff_, message)
 import Effect.Class.Console as Console
 import FS as FS
 import Node.Path as Path
 import Parser as Parser
+import Prim.Row (class Cons)
+import Type.Proxy (Proxy(..))
 
 main :: Effect Unit
 main = launchAff_ do
@@ -27,50 +32,82 @@ main = launchAff_ do
     for_ ( blush r ) \e -> do
         Console.log $ message e
 
+
+cachePath = "codegen/cache" :: String
+
+fetch :: forall @label @spec r1 r2
+     . IsSymbol label
+    => Cons label spec r1 r2
+    => DecodeJson spec
+    => String -> ExceptT Error Aff ( Variant r2 )
+fetch url = inj ( Proxy @label ) <$> do
+    let urlFilename = Path.basename url
+        cacheName = reflectSymbol ( Proxy @label )
+        localFilename = Path.concat [ cachePath, cacheName, urlFilename ]
+    FS.cachedFetch @spec localFilename url
+
 generate :: ExceptT Error Aff Unit
 generate = do
-    let cachePath = "codegen/cache"
-        
-        keywordFetch url = do
-            let urlFilename = Path.basename url
-                localFilename = Path.concat [ cachePath, urlFilename ]
-            FS.cachedFetch localFilename url :: _ KeywordSpec
 
-        mergeSpec :: Array KeywordSpec -> Array Definition
-        mergeSpec =
-            flip bind _.dfns 
+    FS.createDir $ cachePath <> "/dfn"
+    FS.createDir $ cachePath <> "/events"
+    FS.createDir $ cachePath <> "/idlparsed"
+    FS.createDir $ cachePath <> "/elements"
 
-    FS.createDir cachePath
+    html <- Parse.parse HTML <$> sequence
+        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerlock-2.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.2.json"
 
-    html <- Parse.parse HTML <<< mergeSpec <$> traverse keywordFetch
-        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/html-media-capture.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/html.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/touch-events.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/uievents.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/pointerevents3.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-animations-1.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/css-transitions-1.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-handle-actions.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediacapture-streams.json"
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/mediastream-recording.json"
 
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerevents3.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/pointerlock-2.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/touch-events.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/selection-api.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/dom.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/html.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/wai-aria-1.2.json"
 
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-1.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-transitions-2.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/css-animations-1.json"
-
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/wai-aria-1.2.json" 
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/html.json"
         ]
     
-    svg <- fixSVG <<< Parse.parse SVG <<< mergeSpec <$> traverse keywordFetch
-        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/fill-stroke-3.json"
-        
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
+    svg <- fixSVG <<< Parse.parse SVG <$> sequence
+        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/SVG2.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-integration.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-strokes.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/fill-stroke-3.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/filter-effects-1.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/svg-animations.json"
+
+        , fetch @"events" "https://raw.githubusercontent.com/w3c/webref/curated/ed/events/svg-animations.json"
+
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/SVG2.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/svg-animations.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/filter-effects-1.json"
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/css-masking-1.json"
+
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/SVG2.json"
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/svg-animations.json"
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/filter-effects-1.json"
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/css-masking-1.json"
         ]
 
-    mathml <- Parse.parse MathML <<< mergeSpec <$> traverse keywordFetch
-        [ "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
-        , "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-aam.json"
+    mathml <- Parse.parse MathML <$> sequence
+        [ fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-core.json"
+        , fetch @"dfn" "https://raw.githubusercontent.com/w3c/webref/curated/ed/dfns/mathml-aam.json"
+
+        , fetch @"idlparsed" "https://raw.githubusercontent.com/w3c/webref/curated/ed/idlparsed/mathml-core.json"
+
+        , fetch @"elements" "https://raw.githubusercontent.com/w3c/webref/curated/ed/elements/mathml-core.json"
         ]
 
     Indexed.generate html svg mathml
@@ -96,13 +133,13 @@ missingPresentationProperties = case _ of
         fe { bases = fe.bases <> [ svgPresentation.ctor, Ctor "SVGFilterPrimitiveElement" ] }
 
     animate@{ name : "SVGAnimateElement" } ->
-        animate { members = animate.members <> [ { index : Ctor "by", name : "by", type : TypeString } ] }
+        animate { members = animate.members <> [ Ctor "by" /\ TypeString ] }
 
-    svg@{ name : "SVGSvgElement" } ->
+    svg@{ name : "SVGSVGElement" } ->
         svg
             { members = svg.members <>
-                [ { index : Ctor "height", name : "height", type : TypeString }
-                , { index : Ctor "width", name : "width", type : TypeString }
+                [ Ctor "height" /\ TypeString
+                , Ctor "width" /\ TypeString
                 ]
             , bases = svg.bases <> [ svgPresentation.ctor ]
             }
@@ -113,7 +150,7 @@ missingPresentationProperties = case _ of
     clippath@{ name : "SVGClipPathElement" } ->
         clippath
             { members = clippath.members <>
-                [ { index : Ctor "clipPathUnits", name : "clipPathUnits", type : TypeString } ] 
+                [ Ctor "clipPathUnits" /\ TypeString ] 
             }
 
     id ->
@@ -125,7 +162,7 @@ svgText =
     , name : "SvgText"
     , bases : []
     , members :
-        Array.mapMaybe mkAttribute
+        map ( ( _ /\ TypeString ) <<< Ctor )
             [ "alignment-baseline"
             , "baseline-shift"
             , "dominant-baseline"
@@ -150,7 +187,7 @@ svgPresentation =
     , name : "SvgPresentation"
     , bases : []
     , members :
-        Array.mapMaybe mkAttribute
+        map ( ( _ /\ TypeString ) <<< Ctor )
             [ "pathLength"
             , "mask"
             , "opacity"

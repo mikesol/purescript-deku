@@ -8,6 +8,8 @@ import Data.Foldable (sequence_, traverse_)
 import Data.Maybe (Maybe(..))
 import Deku.Core (Nut, bussed)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Toplevel (runInElement')
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
@@ -65,8 +67,8 @@ scene notifyEnd =
       in
         ( D.div_
             [ D.button
-                [ D._id_ (testToString StateDeku <> startSuffix)
-                , D._onClick $ stateE <#> \state _ -> do
+                [ DA.id_ (testToString StateDeku <> startSuffix)
+                , DL.click $ stateE <#> \state _ -> do
                     ref <- Ref.new state
                     let modify = flip Ref.modify ref
                     sequence_ $ replicate stateUpdates' $ modify

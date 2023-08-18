@@ -4,8 +4,8 @@ module DOM.IDL where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Spec (IDL, IDLType(..), Interface, Member(..), Mixin(..), Tag)
-import DOM.TypeStub(TypeStub(..))
+import DOM.Spec (IDLType(..), Member(..), Mixin(..), Tag)
+import DOM.TypeStub (TypeStub(..))
 import Data.Array as Array
 import Data.Maybe (Maybe(..), fromMaybe, maybe)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -18,46 +18,30 @@ validTag { interface : Just interface, name } = Just $ name /\ interface
 
 attributeMember :: Member -> Array ( String /\ IDLType )
 attributeMember = case _ of
-        -- only emit writeable(not readonly attributes)
-        Attribute { idlType, name : attrName, readonly } | maybe true not readonly ->
-            [ attrName /\ idlType ]
-        
-        _ ->
-            []
+    -- only emit writeable(not readonly attributes)
+    Attribute { idlType, name : attrName, readonly } | maybe true not readonly ->
+        [ attrName /\ idlType ]
+    
+    _ ->
+        []
             
 -- | Looks up an interface and returns all inherited and mixed in interfaces.
-resolveInterface :: IDL -> String -> Maybe ( Interface /\ Array String )
-resolveInterface spec name = do
+resolveInterface :: Foreign.Object ( Array String )
+    -> Foreign.Object ( Array Mixin )
+    -> String
+    -> Array String
+resolveInterface inheritance extended name = do
     let
         extensions :: Array Mixin
         extensions =
             fromMaybe []
-                $ Foreign.lookup name spec.idlExtendedNames
+                $ Foreign.lookup name extended
 
-        extendSuper :: Array String
-        extendSuper = 
-            Array.mapMaybe included extensions
-
-        extendAttr :: Array Member
-        extendAttr =
-            bind extensions case _ of
-                Interface { members : Just m } ->
-                    m
-
-                _ ->
-                    []
-
-    intf <- Foreign.lookup name spec.idlNames
-    let
         bases :: Array String
-        bases = 
-            maybe extendSuper ( Array.snoc extendSuper ) intf.inheritance
+        bases =
+            maybe mempty identity ( Foreign.lookup name inheritance )
 
-        members :: Array Member
-        members =
-            maybe extendAttr ( append extendAttr ) intf.members
-
-    pure $ intf { members = Just members } /\ bases
+    bases <> Array.mapMaybe included extensions
 
     where
 
@@ -104,7 +88,7 @@ mapType = case _ of
         pure TypeNumber
 
     Primitive "EventHandler" ->
-        pure TypeEventHandler
+        pure $ TypeEvent "Event" "Web.Event.Internal.Types"
 
     Primitive "any" ->
         pure TypeString

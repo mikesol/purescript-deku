@@ -8,6 +8,8 @@ import Deku.Control (text_)
 import Deku.Control as C
 import Deku.Core (Nut, bus, envy)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Pursx ((~~))
 import Deku.Pursx.Anonymous (px, xp)
 import Deku.Toplevel (runInBody)
@@ -31,10 +33,10 @@ myPxInception
   -> Nut
   -> Nut
 myPxInception push aThirdThing = myPx ~~
-  { btn: D._style_ "background-color: rgb(133,151,217)"
+  { btn: DA.style_ "background-color: rgb(133,151,217)"
   , somethingElse:
       ( D.button
-          [ D._onClick_ \_ -> push false
+          [ DL.click_ \_ -> push false
           ]
           [ C.text_ "I was dynamically inserted " ]
       )
@@ -53,16 +55,16 @@ scene = bus \push event ->
         $ myPxInception push (C.text_ "boo")
     , C.text ((event <|> pure true) <#> if _ then "Oh hi" else "Oh bye")
     , px (Proxy :: _ "<h1>hi</h1>") xp
-    , px (Proxy :: _ "<div><h1 ") (D._style_ "color:red;")
+    , px (Proxy :: _ "<div><h1 ") (DA.style_ "color:red;")
         (Proxy :: _ ">hello!</h1><h1 ")
-        (D._style_ "color:red;")
+        (DA.style_ "color:red;")
         (Proxy :: _ ">hello!</h1></div>")
         xp
     , px (Proxy :: _ "<div>") ((D.h1_ [ text_ "more stuff" ]))
         (Proxy :: _ "</div>")
         xp
     , px (Proxy :: _ "<div>")
-        ( ( px (Proxy :: _ "<h1 ") (D._style_ "color:red;")
+        ( ( px (Proxy :: _ "<h1 ") (DA.style_ "color:red;")
               (Proxy :: _ ">hello!</h1>")
               xp
           )

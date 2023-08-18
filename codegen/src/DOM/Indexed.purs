@@ -4,60 +4,81 @@ import Prelude
 
 import Comment (commentModule)
 import Control.Monad.Except (ExceptT(..))
-import DOM.Common (Ctor, TagNS(..), namespaceBases, webElements)
-import DOM.Indexed.Common (requires)
-import DOM.Indexed.Elements as Elements
-import DOM.Indexed.Interfaces as Interfaces
-import DOM.Indexed.Props as Props
+import DOM.Common (webElements)
+import DOM.Indexed.Attribute as Attribute
+import DOM.Indexed.Element as Element
+import DOM.Indexed.Listener as Listener
 import DOM.Indexed.Self as Self
-import DOM.Indexed.Values as Values
 import DOM.Parse (Specification)
-import DOM.TypeStub (typeImports, TypeStub(..))
 import Data.Array as Array
-import Data.Maybe (Maybe(..))
-import Data.Tuple.Nested (type (/\))
+import Data.Maybe (maybe)
+import Data.String as String
 import Effect.Aff (Aff, Error, attempt)
 import FS as FS
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff (writeTextFile)
+import Node.Path as Path
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Export, ImportDecl, Module)
-import Tidy.Codegen (declImport, declImportAs, exportClass, exportModule, importType, importValue, module_, printModule)
+import Tidy.Codegen (declImportAs, exportModule, importValue, module_, printModule)
 
-generateSpec :: String -> String -> Array ( ImportDecl Void ) -> Array ( Export Void ) -> Specification -> ExceptT Error Aff Unit
-generateSpec path mod imports exports { keywords, elements, interfaces } = do
+generateSpec ::
+    String
+    -> String
+    -> Array ( ImportDecl Void )
+    -> Array ( Export Void )
+    -> Specification
+    -> ExceptT Error Aff Unit
+generateSpec path baseMod imports exports { elements, interfaces : all, attributes, events } = do
     let
-        uniqueValues :: Array Values.Keyword
-        uniqueValues =
-            Array.nub $ map (\{ ctor, value } -> { ctor, value } ) keywords
+        listenerMod = baseMod <> ".Listeners"
+        attributeMod = baseMod <> ".Attributes"
 
-        attributes :: Array ( Ctor /\ Array Props.AttributeType )
-        attributes =
-            Props.coalesceAttributes keywords interfaces
+        modPath modName = do
+            let segments = String.split ( String.Pattern "." ) modName
+            Path.concat $ Array.concat
+                [ pure path
+                , maybe mempty identity $ Array.init segments
+                , Array.fromFoldable $ map ( _ <> ".purs" ) $ Array.last segments
+                ]
+
+    FS.createDir $ Path.concat [ path, String.replaceAll ( String.Pattern "." ) ( String.Replacement "/" ) baseMod ]
+
+    let
+        interfaces =
+            Element.crawlInterfaces elements all
 
     ExceptT $ attempt
-        $ writeTextFile UTF8 path
+        $ writeTextFile UTF8 ( modPath baseMod )
         $ printModule
         $ unsafePartial
         $ warnCodegen
-        $ module_ mod
-            ( Array.concat
-                [ Interfaces.exports interfaces
-                , Elements.exports elements
-                , Props.exports attributes
-                , Values.exports uniqueValues
-                , pure $ exportClass "TagToDeku"
-                , exports
-                ]
-            )
-            ( requires <> imports )
-            ( Array.concat 
-                [ Interfaces.generate interfaces
-                , Elements.generate elements
-                , Props.generate attributes
-                , Values.generate uniqueValues
-                ]
-            )
+        $ module_ baseMod
+            ( exports <> Element.exports interfaces elements )
+            ( imports <> Element.imports "Deku.DOM" interfaces )
+            ( Element.generate interfaces elements )
+
+    when ( Array.length attributes /= 0 ) do
+        ExceptT $ attempt
+            $ writeTextFile UTF8 ( modPath attributeMod )
+            $ printModule
+            $ unsafePartial
+            $ warnCodegen
+            $ module_ attributeMod
+                ( Attribute.exports attributes )
+                ( Attribute.imports attributes )
+                ( Attribute.generate attributes )
+
+    when ( Array.length events /= 0 ) do
+        ExceptT $ attempt
+            $ writeTextFile UTF8 ( modPath listenerMod )
+            $ printModule
+            $ unsafePartial
+            $ warnCodegen
+            $ module_ listenerMod
+                ( Listener.exports events )
+                ( Listener.imports events )
+                ( Listener.generate events )
 
 warnCodegen :: forall a . Module a -> Module a
 warnCodegen =
@@ -79,34 +100,17 @@ generate html svg mathml = do
             ( Self.imports webElements )
             ( Self.generate webElements )
 
-    generateSpec "./deku-dom/src/Deku/DOM.purs" "Deku.DOM"
-        ( typeImports [ TypeString, TypeKeyword "" ]
-            <> [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control" ]
-        )
-        [ unsafePartial $ exportModule "Deku.Control"
-        , unsafePartial $ exportModule "Types"
-        ]
+    generateSpec "deku-dom/src" "Deku.DOM"
+        [ unsafePartial $ declImportAs "Deku.Control" [ importValue "text", importValue "text_" ] "Deku.Control" ]
+        [ unsafePartial $ exportModule "Deku.Control" ]
         html
 
-    let
-        globalImport :: Array String -> ImportDecl Void
-        globalImport ctors =
-            unsafePartial $ declImport "Deku.DOM" $ map importType ctors
-
-        svgDeps :: String -> Maybe String
-        svgDeps "SvgGlobal" = Nothing
-        svgDeps ctor = Just ctor
-
-    generateSpec "./deku-dom/src/Deku/DOM/SVG.purs" "Deku.DOM.SVG"
-        ( Array.cons ( globalImport $ Array.mapMaybe svgDeps $ namespaceBases SVG )
-            $ typeImports [ TypeString, TypeKeyword "" ] 
-        )
-        [ unsafePartial $ exportModule "Types" ]
+    generateSpec "deku-dom/src" "Deku.DOM.SVG"
+        []
+        []
         svg
 
-    generateSpec "./deku-dom/src/Deku/DOM/MathML.purs" "Deku.DOM.MathML"
-        ( Array.cons ( globalImport $ namespaceBases MathML )
-            $ typeImports [ TypeString ]
-        )
-        [ unsafePartial $ exportModule "Types" ]
+    generateSpec "deku-dom/src" "Deku.DOM.MathML"
+        []
+        []
         mathml

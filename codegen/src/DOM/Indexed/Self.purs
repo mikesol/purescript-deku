@@ -3,9 +3,8 @@ module DOM.Indexed.Self where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented)
-import DOM.Indexed.Common (nominal, typeIndexedAt)
-import DOM.TypeStub (TypeStub(..), handler, typeImports)
+import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented,nominal, typeIndexedAt)
+import DOM.TypeStub (TypeStub(..), constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
 import Data.Maybe (Maybe(..))
@@ -14,7 +13,8 @@ import Tidy.Codegen (binaryOp, declClass, declImport, declImportAs, declInstance
 import Tidy.Codegen.Class (toName)
 import Tidy.Codegen.Common (tokRightArrow)
 
-imports :: Partial => Array String -> Array ( ImportDecl Void )
+
+imports :: Partial => Array TypeStub -> Array ( ImportDecl Void )
 imports es =
     Array.concat
         [ identity 
@@ -23,14 +23,11 @@ imports es =
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
             , declImportAs "FRP.Event" [] "FRP.Event"
             , declImport "Type.Proxy" [ importType "Proxy" ]
-            , declImportAs ( "Web.DOM.Element" ) [ importType "Element" ] "Web"
             ]
-        , bind es \e ->
-            [ declImportAs ( "Web.HTML." <> e ) [ importType e ] "Web" ]
-        , typeImports [ TypeSelfHandler ]
+        , handlerImports $ Array.cons rawSelf es
         ]
 
-generate :: Partial => Array String -> Array ( Declaration Void )
+generate :: Partial => Array TypeStub -> Array ( Declaration Void )
 generate es =
     append 
         [ declClass [] "IsSelf"
@@ -41,44 +38,49 @@ generate es =
             ]
             []
 
-        , declSignature "_self"
+        , declSignature "self"
             $ typeForall [ typeVar "r" ]
-            $ typeArrow [ typeEvented $ selfHandler $ typeCtor "Web.Element" ]
+            $ typeArrow [ typeEvented $ constructArg rawSelf ]
             $ typeEvented $ typeAttributed $ typeVar "r"
-        , declHandler "_self" selfKey $ handler TypeSelfHandler
+        , declHandler "self" selfKey $ handler $ rawSelf
 
-        , declSignature "_self_"
+        , declSignature "self_"
             $ typeForall [ typeVar "r" ]
-            $ typeArrow [ selfHandler $ typeCtor "Web.Element" ]
+            $ typeArrow [ constructArg rawSelf ]
             $ typeEvented $ typeAttributed $ typeVar "r"
-        , declValue "_self_" [] $ exprOp ( exprIdent "_self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
+        , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
         
-        , declSignature "_selfT"
+        , declSignature "selfT"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ typeEvented $ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declHandler "_selfT" selfKey $ handler TypeSelfHandler
+        , declHandler "selfT" selfKey $ handler rawSelf
 
-        , declSignature "_selfT_"
+        , declSignature "selfT_"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
             $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
-        , declValue "_selfT_" [] $ exprOp ( exprIdent "_selfT" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
+        , declValue "selfT_" [] $ exprOp ( exprIdent "selfT" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
 
         ]
-        $ bind es \e ->
-            [ declInstance Nothing []
-                "IsSelf"
-                [ typeCtor ( "Web." <> e )
-                , typeString e
+        $ bind es case _ of
+            TypeEvent t mod  ->
+                [ declInstance Nothing []
+                    "IsSelf"
+                    [ constructIndex $ TypeEvent t mod
+                    , typeString t
+                    ]
+                    []
                 ]
-                []
-            ]
 
     where
 
     selfHandler :: Partial => Type Void -> Type Void
     selfHandler intf =
         typeArrow [ intf ] $ typeApp ( typeCtor "Effect.Effect" ) [ typeCtor "Data.Unit.Unit" ]
+
+rawSelf :: TypeStub
+rawSelf = 
+    TypeEvent "Element" "Web.DOM.Element"

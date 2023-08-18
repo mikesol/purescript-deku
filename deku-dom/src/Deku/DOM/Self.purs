@@ -7,127 +7,129 @@ import Control.Category ((<<<))
 import Data.Functor (map) as Functor
 import FRP.Event as FRP.Event
 import Type.Proxy (Proxy)
-import Web.DOM.Element (Element) as Web
-import Web.HTML.HTMLAnchorElement (HTMLAnchorElement) as Web
-import Web.HTML.HTMLAreaElement (HTMLAreaElement) as Web
-import Web.HTML.HTMLAudioElement (HTMLAudioElement) as Web
-import Web.HTML.HTMLBRElement (HTMLBRElement) as Web
-import Web.HTML.HTMLBaseElement (HTMLBaseElement) as Web
-import Web.HTML.HTMLBodyElement (HTMLBodyElement) as Web
-import Web.HTML.HTMLButtonElement (HTMLButtonElement) as Web
-import Web.HTML.HTMLCanvasElement (HTMLCanvasElement) as Web
-import Web.HTML.HTMLDivElement (HTMLDivElement) as Web
-import Web.HTML.HTMLEmbedElement (HTMLEmbedElement) as Web
-import Web.HTML.HTMLFormElement (HTMLFormElement) as Web
-import Web.HTML.HTMLHRElement (HTMLHRElement) as Web
-import Web.HTML.HTMLHeadElement (HTMLHeadElement) as Web
-import Web.HTML.HTMLHtmlElement (HTMLHtmlElement) as Web
-import Web.HTML.HTMLInputElement (HTMLInputElement) as Web
-import Web.HTML.HTMLLabelElement (HTMLLabelElement) as Web
-import Web.HTML.HTMLLegendElement (HTMLLegendElement) as Web
-import Web.HTML.HTMLLinkElement (HTMLLinkElement) as Web
-import Web.HTML.HTMLMapElement (HTMLMapElement) as Web
-import Web.HTML.HTMLMetaElement (HTMLMetaElement) as Web
-import Web.HTML.HTMLMeterElement (HTMLMeterElement) as Web
-import Web.HTML.HTMLObjectElement (HTMLObjectElement) as Web
-import Web.HTML.HTMLOptionElement (HTMLOptionElement) as Web
-import Web.HTML.HTMLOutputElement (HTMLOutputElement) as Web
-import Web.HTML.HTMLParagraphElement (HTMLParagraphElement) as Web
-import Web.HTML.HTMLParamElement (HTMLParamElement) as Web
-import Web.HTML.HTMLPreElement (HTMLPreElement) as Web
-import Web.HTML.HTMLProgressElement (HTMLProgressElement) as Web
-import Web.HTML.HTMLScriptElement (HTMLScriptElement) as Web
-import Web.HTML.HTMLSelectElement (HTMLSelectElement) as Web
-import Web.HTML.HTMLSourceElement (HTMLSourceElement) as Web
-import Web.HTML.HTMLSpanElement (HTMLSpanElement) as Web
-import Web.HTML.HTMLStyleElement (HTMLStyleElement) as Web
-import Web.HTML.HTMLTableDataCellElement (HTMLTableDataCellElement) as Web
-import Web.HTML.HTMLTableElement (HTMLTableElement) as Web
-import Web.HTML.HTMLTemplateElement (HTMLTemplateElement) as Web
-import Web.HTML.HTMLTextAreaElement (HTMLTextAreaElement) as Web
-import Web.HTML.HTMLTimeElement (HTMLTimeElement) as Web
-import Web.HTML.HTMLTitleElement (HTMLTitleElement) as Web
-import Web.HTML.HTMLTrackElement (HTMLTrackElement) as Web
-import Web.HTML.HTMLVideoElement (HTMLVideoElement) as Web
+import Deku.Attribute as Deku.Attribute
+import Web.DOM.Element as Web.DOM.Element
 import Effect as Effect
 import Data.Unit as Data.Unit
-import Deku.Attribute as Deku.Attribute
 import Unsafe.Coerce as Unsafe.Coerce
+import Web.HTML.HTMLAnchorElement as Web.HTML.HTMLAnchorElement
+import Web.HTML.HTMLAreaElement as Web.HTML.HTMLAreaElement
+import Web.HTML.HTMLAudioElement as Web.HTML.HTMLAudioElement
+import Web.HTML.HTMLBRElement as Web.HTML.HTMLBRElement
+import Web.HTML.HTMLBaseElement as Web.HTML.HTMLBaseElement
+import Web.HTML.HTMLBodyElement as Web.HTML.HTMLBodyElement
+import Web.HTML.HTMLButtonElement as Web.HTML.HTMLButtonElement
+import Web.HTML.HTMLCanvasElement as Web.HTML.HTMLCanvasElement
+import Web.HTML.HTMLDivElement as Web.HTML.HTMLDivElement
+import Web.HTML.HTMLEmbedElement as Web.HTML.HTMLEmbedElement
+import Web.HTML.HTMLFormElement as Web.HTML.HTMLFormElement
+import Web.HTML.HTMLHRElement as Web.HTML.HTMLHRElement
+import Web.HTML.HTMLHeadElement as Web.HTML.HTMLHeadElement
+import Web.HTML.HTMLHtmlElement as Web.HTML.HTMLHtmlElement
+import Web.HTML.HTMLInputElement as Web.HTML.HTMLInputElement
+import Web.HTML.HTMLLabelElement as Web.HTML.HTMLLabelElement
+import Web.HTML.HTMLLegendElement as Web.HTML.HTMLLegendElement
+import Web.HTML.HTMLLinkElement as Web.HTML.HTMLLinkElement
+import Web.HTML.HTMLMapElement as Web.HTML.HTMLMapElement
+import Web.HTML.HTMLMetaElement as Web.HTML.HTMLMetaElement
+import Web.HTML.HTMLMeterElement as Web.HTML.HTMLMeterElement
+import Web.HTML.HTMLObjectElement as Web.HTML.HTMLObjectElement
+import Web.HTML.HTMLOptionElement as Web.HTML.HTMLOptionElement
+import Web.HTML.HTMLOutputElement as Web.HTML.HTMLOutputElement
+import Web.HTML.HTMLParagraphElement as Web.HTML.HTMLParagraphElement
+import Web.HTML.HTMLParamElement as Web.HTML.HTMLParamElement
+import Web.HTML.HTMLPreElement as Web.HTML.HTMLPreElement
+import Web.HTML.HTMLProgressElement as Web.HTML.HTMLProgressElement
+import Web.HTML.HTMLScriptElement as Web.HTML.HTMLScriptElement
+import Web.HTML.HTMLSelectElement as Web.HTML.HTMLSelectElement
+import Web.HTML.HTMLSourceElement as Web.HTML.HTMLSourceElement
+import Web.HTML.HTMLSpanElement as Web.HTML.HTMLSpanElement
+import Web.HTML.HTMLStyleElement as Web.HTML.HTMLStyleElement
+import Web.HTML.HTMLTableDataCellElement as Web.HTML.HTMLTableDataCellElement
+import Web.HTML.HTMLTableElement as Web.HTML.HTMLTableElement
+import Web.HTML.HTMLTemplateElement as Web.HTML.HTMLTemplateElement
+import Web.HTML.HTMLTextAreaElement as Web.HTML.HTMLTextAreaElement
+import Web.HTML.HTMLTimeElement as Web.HTML.HTMLTimeElement
+import Web.HTML.HTMLTitleElement as Web.HTML.HTMLTitleElement
+import Web.HTML.HTMLTrackElement as Web.HTML.HTMLTrackElement
+import Web.HTML.HTMLVideoElement as Web.HTML.HTMLVideoElement
 
 class IsSelf (element :: Type) (name :: Symbol) | element -> name
 
-_self
+self
   :: forall r
-   . FRP.Event.Event (Web.Element -> Effect.Effect Data.Unit.Unit)
+   . FRP.Event.Event (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event (Deku.Attribute.Attribute r)
-_self = Functor.map
+self = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.Cb
+      <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
-_self_
+self_
   :: forall r
-   . (Web.Element -> Effect.Effect Data.Unit.Unit)
+   . (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
   -> FRP.Event.Event (Deku.Attribute.Attribute r)
-_self_ = _self <<< Applicative.pure
+self_ = self <<< Applicative.pure
 
-_selfT
+selfT
   :: forall name e r
    . IsSelf e name
   => FRP.Event.Event (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (__nominal :: Proxy name | r))
-_selfT = Functor.map
+  -> FRP.Event.Event (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+selfT = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
-      <<< Deku.Attribute.Cb
+      <<< Deku.Attribute.cb
       <<< Unsafe.Coerce.unsafeCoerce
   )
 
-_selfT_
+selfT_
   :: forall name e r
    . IsSelf e name
   => (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (__nominal :: Proxy name | r))
-_selfT_ = _selfT <<< Applicative.pure
+  -> FRP.Event.Event (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+selfT_ = selfT <<< Applicative.pure
 
-instance IsSelf Web.HTMLAnchorElement "HTMLAnchorElement"
-instance IsSelf Web.HTMLAreaElement "HTMLAreaElement"
-instance IsSelf Web.HTMLAudioElement "HTMLAudioElement"
-instance IsSelf Web.HTMLBRElement "HTMLBRElement"
-instance IsSelf Web.HTMLBaseElement "HTMLBaseElement"
-instance IsSelf Web.HTMLBodyElement "HTMLBodyElement"
-instance IsSelf Web.HTMLButtonElement "HTMLButtonElement"
-instance IsSelf Web.HTMLCanvasElement "HTMLCanvasElement"
-instance IsSelf Web.HTMLDivElement "HTMLDivElement"
-instance IsSelf Web.HTMLEmbedElement "HTMLEmbedElement"
-instance IsSelf Web.HTMLFormElement "HTMLFormElement"
-instance IsSelf Web.HTMLHRElement "HTMLHRElement"
-instance IsSelf Web.HTMLHeadElement "HTMLHeadElement"
-instance IsSelf Web.HTMLHtmlElement "HTMLHtmlElement"
-instance IsSelf Web.HTMLInputElement "HTMLInputElement"
-instance IsSelf Web.HTMLLabelElement "HTMLLabelElement"
-instance IsSelf Web.HTMLLegendElement "HTMLLegendElement"
-instance IsSelf Web.HTMLLinkElement "HTMLLinkElement"
-instance IsSelf Web.HTMLMapElement "HTMLMapElement"
-instance IsSelf Web.HTMLMetaElement "HTMLMetaElement"
-instance IsSelf Web.HTMLMeterElement "HTMLMeterElement"
-instance IsSelf Web.HTMLObjectElement "HTMLObjectElement"
-instance IsSelf Web.HTMLOptionElement "HTMLOptionElement"
-instance IsSelf Web.HTMLOutputElement "HTMLOutputElement"
-instance IsSelf Web.HTMLParagraphElement "HTMLParagraphElement"
-instance IsSelf Web.HTMLParamElement "HTMLParamElement"
-instance IsSelf Web.HTMLPreElement "HTMLPreElement"
-instance IsSelf Web.HTMLProgressElement "HTMLProgressElement"
-instance IsSelf Web.HTMLScriptElement "HTMLScriptElement"
-instance IsSelf Web.HTMLSelectElement "HTMLSelectElement"
-instance IsSelf Web.HTMLSourceElement "HTMLSourceElement"
-instance IsSelf Web.HTMLSpanElement "HTMLSpanElement"
-instance IsSelf Web.HTMLStyleElement "HTMLStyleElement"
-instance IsSelf Web.HTMLTableDataCellElement "HTMLTableDataCellElement"
-instance IsSelf Web.HTMLTableElement "HTMLTableElement"
-instance IsSelf Web.HTMLTemplateElement "HTMLTemplateElement"
-instance IsSelf Web.HTMLTextAreaElement "HTMLTextAreaElement"
-instance IsSelf Web.HTMLTimeElement "HTMLTimeElement"
-instance IsSelf Web.HTMLTitleElement "HTMLTitleElement"
-instance IsSelf Web.HTMLTrackElement "HTMLTrackElement"
-instance IsSelf Web.HTMLVideoElement "HTMLVideoElement"
+instance IsSelf Web.HTML.HTMLAnchorElement.HTMLAnchorElement "HTMLAnchorElement"
+instance IsSelf Web.HTML.HTMLAreaElement.HTMLAreaElement "HTMLAreaElement"
+instance IsSelf Web.HTML.HTMLAudioElement.HTMLAudioElement "HTMLAudioElement"
+instance IsSelf Web.HTML.HTMLBRElement.HTMLBRElement "HTMLBRElement"
+instance IsSelf Web.HTML.HTMLBaseElement.HTMLBaseElement "HTMLBaseElement"
+instance IsSelf Web.HTML.HTMLBodyElement.HTMLBodyElement "HTMLBodyElement"
+instance IsSelf Web.HTML.HTMLButtonElement.HTMLButtonElement "HTMLButtonElement"
+instance IsSelf Web.HTML.HTMLCanvasElement.HTMLCanvasElement "HTMLCanvasElement"
+instance IsSelf Web.HTML.HTMLDivElement.HTMLDivElement "HTMLDivElement"
+instance IsSelf Web.HTML.HTMLEmbedElement.HTMLEmbedElement "HTMLEmbedElement"
+instance IsSelf Web.HTML.HTMLFormElement.HTMLFormElement "HTMLFormElement"
+instance IsSelf Web.HTML.HTMLHRElement.HTMLHRElement "HTMLHRElement"
+instance IsSelf Web.HTML.HTMLHeadElement.HTMLHeadElement "HTMLHeadElement"
+instance IsSelf Web.HTML.HTMLHtmlElement.HTMLHtmlElement "HTMLHtmlElement"
+instance IsSelf Web.HTML.HTMLInputElement.HTMLInputElement "HTMLInputElement"
+instance IsSelf Web.HTML.HTMLLabelElement.HTMLLabelElement "HTMLLabelElement"
+instance IsSelf Web.HTML.HTMLLegendElement.HTMLLegendElement "HTMLLegendElement"
+instance IsSelf Web.HTML.HTMLLinkElement.HTMLLinkElement "HTMLLinkElement"
+instance IsSelf Web.HTML.HTMLMapElement.HTMLMapElement "HTMLMapElement"
+instance IsSelf Web.HTML.HTMLMetaElement.HTMLMetaElement "HTMLMetaElement"
+instance IsSelf Web.HTML.HTMLMeterElement.HTMLMeterElement "HTMLMeterElement"
+instance IsSelf Web.HTML.HTMLObjectElement.HTMLObjectElement "HTMLObjectElement"
+instance IsSelf Web.HTML.HTMLOptionElement.HTMLOptionElement "HTMLOptionElement"
+instance IsSelf Web.HTML.HTMLOutputElement.HTMLOutputElement "HTMLOutputElement"
+instance IsSelf Web.HTML.HTMLParagraphElement.HTMLParagraphElement "HTMLParagraphElement"
+instance IsSelf Web.HTML.HTMLParamElement.HTMLParamElement "HTMLParamElement"
+instance IsSelf Web.HTML.HTMLPreElement.HTMLPreElement "HTMLPreElement"
+instance IsSelf Web.HTML.HTMLProgressElement.HTMLProgressElement "HTMLProgressElement"
+instance IsSelf Web.HTML.HTMLScriptElement.HTMLScriptElement "HTMLScriptElement"
+instance IsSelf Web.HTML.HTMLSelectElement.HTMLSelectElement "HTMLSelectElement"
+instance IsSelf Web.HTML.HTMLSourceElement.HTMLSourceElement "HTMLSourceElement"
+instance IsSelf Web.HTML.HTMLSpanElement.HTMLSpanElement "HTMLSpanElement"
+instance IsSelf Web.HTML.HTMLStyleElement.HTMLStyleElement "HTMLStyleElement"
+instance
+  IsSelf Web.HTML.HTMLTableDataCellElement.HTMLTableDataCellElement "HTMLTableDataCellElement"
+
+instance IsSelf Web.HTML.HTMLTableElement.HTMLTableElement "HTMLTableElement"
+instance IsSelf Web.HTML.HTMLTemplateElement.HTMLTemplateElement "HTMLTemplateElement"
+instance IsSelf Web.HTML.HTMLTextAreaElement.HTMLTextAreaElement "HTMLTextAreaElement"
+instance IsSelf Web.HTML.HTMLTimeElement.HTMLTimeElement "HTMLTimeElement"
+instance IsSelf Web.HTML.HTMLTitleElement.HTMLTitleElement "HTMLTitleElement"
+instance IsSelf Web.HTML.HTMLTrackElement.HTMLTrackElement "HTMLTrackElement"
+instance IsSelf Web.HTML.HTMLVideoElement.HTMLVideoElement "HTMLVideoElement"

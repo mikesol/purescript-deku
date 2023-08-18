@@ -26,6 +26,19 @@ type Tag =
     , obsolete :: Maybe Boolean
     }
 
+type EventSpec =
+    { spec :: { title :: String, url :: String }
+    , events :: Array EventDef
+    }
+
+type EventDef =
+    { href :: Maybe String
+    , src :: { format :: String, href :: Maybe String }
+    , type :: String
+    , targets :: Array String
+    , interface :: String
+    , bubbles :: Maybe Boolean
+    }
 
 type InterfaceSpec =
     {  spec :: 

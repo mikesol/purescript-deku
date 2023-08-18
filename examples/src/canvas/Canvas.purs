@@ -6,7 +6,9 @@ import Control.Monad.ST.Class (liftST)
 import Data.Foldable (traverse_)
 import Deku.Core (Nut)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
 import Deku.DOM.SVG as SVG
+import Deku.DOM.SVG.Attributes as SA
 import Deku.DOM.Self as Self
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate, runInBody, runSSR)
@@ -18,14 +20,14 @@ import Web.HTML.HTMLCanvasElement as HTMLCanvasElement
 
 mySVG :: Nut
 mySVG = D.div_
-  [ SVG.svg [ D._height_ "100", D._width_ "100" ]
+  [ SVG.svg [ DA.height_ "100", DA.width_ "100" ]
       [ SVG.circle
-          [ SVG._cx_ "50"
-          , SVG._cy_ "50"
-          , SVG._r_ "40"
-          , SVG._stroke_ "black"
-          , SVG._strokeWidth_ "3"
-          , SVG._fill_ "red"
+          [ SA.cx_ "50"
+          , SA.cy_ "50"
+          , SA.r_ "40"
+          , SA.stroke_ "black"
+          , SA.strokeWidth_ "3"
+          , SA.fill_ "red"
           ]
       
           []
@@ -34,9 +36,9 @@ mySVG = D.div_
 
 myCanvas :: Nut
 myCanvas = D.canvas
-  [ D._width_ "400px"
-  , D._height_ "400px"
-  , Self._self_ $ HTMLCanvasElement.fromElement >>> traverse_ \e -> do
+  [ DA.width_ "400px"
+  , DA.height_ "400px"
+  , Self.self_ $ HTMLCanvasElement.fromElement >>> traverse_ \e -> do
       ctx <- getContext2D
         ( ( unsafeCoerce
               :: HTMLCanvasElement.HTMLCanvasElement -> CanvasElement

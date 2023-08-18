@@ -9,6 +9,8 @@ import Data.Profunctor (lcmap)
 import Deku.Control (portal, switcher, text_)
 import Deku.Core (bus, dyn, insert_)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (fold)
@@ -27,9 +29,9 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [ D._controls_ "true", D._width_ "250" ]
+                              [ DA.controls_ "true", DA.width_ "250" ]
                               [ D.source
-                                [ D._src_ i, D._type_ "video/mp4" ]
+                                [ DA.src_ i, DA.xtype_ "video/mp4" ]
                                 []
                               ]
                           )
@@ -48,7 +50,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [ D._onClick_ $ const $ push unit ]
+                              [ DL.click_ \_ -> push unit ]
                               [ text_ "Switch videos" ]
                           , D.div_
                               [ flips true, flips false ]
@@ -64,9 +66,9 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [ D._controls_ "true", D._width_ "250" ]
+                              [ DA.controls_ "true", DA.width_ "250" ]
                               [ D.source
-                                [ D._src_ i, D._type_ "video/mp4" ]
+                                [ DA.src_ i, DA.xtype_ "video/mp4" ]
                                 []
                               ]
                           )
@@ -85,7 +87,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [ D._onClick_ $ const $ push unit ]
+                              [ DL.click_ \_ -> push unit ]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]
@@ -100,9 +102,9 @@ main = runInBody
                   $ portal
                       ( map
                           ( \i -> D.video
-                              [ D._controls_ "true", D._width_ "250" ]
+                              [ DA.controls_ "true", DA.width_ "250" ]
                               [ D.source
-                                  [ D._src_ i, D._type_ "video/mp4" ]
+                                  [ DA.src_ i, DA.xtype_ "video/mp4" ]
                                   []
                               ]
                           )
@@ -119,7 +121,7 @@ main = runInBody
                             <<< ev
                         D.div_
                           [ D.button
-                              [ D._onClick_ (const $ push unit)]
+                              [ DL.click_ \_ -> push unit ]
                               [ text_ "Toggle videos" ]
                           , flips true
                           ]

@@ -13,6 +13,7 @@ import Deku.Control (portal, switcher)
 import Deku.Control as C
 import Deku.Core (Nut, dyn, fixed, insert_, remove, sendToTop)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import Effect.Random as Random
@@ -54,10 +55,10 @@ scene :: Array Nut
 scene =
   [ D.div_
       [ portal
-          ( D.video [ D._controls_ "true", D._width_ "250"]
+          ( D.video [ DA.controls_ "true", DA.width_ "250"]
               [ D.source
-                  [ D._src_ "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
-                  , D._type_ "video/webm"
+                  [ DA.src_ "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+                  , DA.xtype_ "video/webm"
                   ]
                   []
               ]
@@ -65,7 +66,7 @@ scene =
           )
           ( \i -> switcher
               ( \rgb -> D.div
-                  [ D._style_ $ "background-color: " <> rgb <> ";" ]
+                  [ DA.style_ $ "background-color: " <> rgb <> ";" ]
                   [ V.index (Proxy :: _ 0) i ]
               )
               (sample_ rdm (interval 1000))
@@ -75,7 +76,7 @@ scene =
       ( \rgb ->
           pure
             ( insert_ $ D.div
-                [ D._style_ $ "background-color: " <> rgb <> ";" ]
+                [ DA.style_ $ "background-color: " <> rgb <> ";" ]
                 [ C.text_ "hello" ]
             ) <|> delay 1432 (pure sendToTop) <|> delay 2000 (pure remove)
       )

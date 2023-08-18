@@ -10,6 +10,7 @@ package:
   - foreign-object
   - tuples
   - fetch
+  - argonaut-core
   - argonaut-codecs
   - console
   - tidy-codegen
@@ -20,6 +21,7 @@ package:
   - argonaut-core
   - argonaut-generic
   - either
+  - variant
   - foldable-traversable
   - maybe
   - partial

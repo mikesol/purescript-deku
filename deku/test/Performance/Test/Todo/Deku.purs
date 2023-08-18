@@ -13,9 +13,10 @@ import Data.Tuple.Nested ((/\))
 import Deku.Control (text_)
 import Deku.Core (Nut, dyn, bussedUncurried, insert_, remove)
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
 import Deku.Hooks (useMailboxed, useMemoized, useMemoized', useState')
-import Deku.Listeners (click)
 import Deku.Toplevel (runInElement')
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
@@ -105,8 +106,8 @@ containerD initialState = Deku.do
       )
   D.div_
     [ D.button
-        [ D._id_ Shared.addNewId
-        , click $ state <#> \st -> do
+        [ DA.id_ Shared.addNewId
+        , DL.runOn DL.click $ state <#> \st -> do
             newState <- liftEffect $ Shared.createTodo st
             setUndo (PushUndo (UndoAdd newState.lastIndex))
             setState
@@ -115,8 +116,8 @@ containerD initialState = Deku.do
         ]
         [ text_ "Add New" ]
     , D.button
-        [ D._id_ Shared.undoId
-        , click $ undos <#> \uu ->
+        [ DA.id_ Shared.undoId
+        , DL.runOn DL.click $ undos <#> \uu ->
             for_ (head uu) \u -> do
               case u of
                 UndoRename id s -> do
@@ -145,7 +146,7 @@ containerD initialState = Deku.do
               setUndo PopUndo
         ]
         [ text_ "Undo" ]
-    , D.div [ D._id_ Shared.todosId ]
+    , D.div [ DA.id_ Shared.todosId ]
         [ dyn
             ( toDyn # map
                 \td -> do
@@ -188,16 +189,15 @@ todoD { id, description } completeStatus newName doEditName doChecked = Deku.do
   let name = name' <|> pure description
   D.div_
     [ D.input
-        [ D._id_ $ Shared.editId id
-        , D._value $ pure description <|> newName
-        , D._onInput $ name <#> \n _ -> setName n
-        ]
-
+        [ DA.id_ $ Shared.editId id
+        , DA.value $ pure description <|> newName
+        , DL.runOn DL.input $ name <#> setName        ]
         []
+
     , checkboxD { id } completeStatus doChecked
     , D.button
-        [ D._id_ $ Shared.saveId id
-        , click (name <#> doEditName)
+        [ DA.id_ $ Shared.saveId id
+        , DL.runOn DL.click (name <#> doEditName)
         ]
         [ text_ "Save Changes" ]
     ]
@@ -211,11 +211,9 @@ checkboxD { id } completeStatus doChecked = Deku.do
   localSetChecked /\ localChecked <- bussedUncurried
   let checked = pure true <|> completeStatus
   D.input
-    [ D._id_ (Shared.checkId id)
-    , D._type_ "checkbox"
-    , D._checked $ completeStatus <#> show
-    , D._onInput $ (checked <|> localChecked) <#>
-        (\x _ -> doChecked x *> localSetChecked (not x))
+    [ DA.id_ (Shared.checkId id)
+    , DA.xtype_ "checkbox"
+    , DA.checked $ completeStatus <#> show
+    , DL.input $ (checked <|> localChecked) <#> (\x _ -> doChecked x *> localSetChecked (not x))
     ]
-
     []

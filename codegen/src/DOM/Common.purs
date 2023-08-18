@@ -3,20 +3,21 @@ module DOM.Common where
 import Prelude
 import Prim hiding (Type)
 
+import DOM.TypeStub (TypeStub(..))
 import Data.Array as Array
 import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, un)
 import Data.Set (Set)
 import Data.Set as Set
+import Data.String (codePointFromChar)
 import Data.String as String
 import Data.String.CodeUnits as CU
-import Data.Tuple.Nested ((/\))
-import DOM.TypeStub(TypeStub(..))
+import Data.Tuple.Nested (type (/\), (/\))
 import Partial.Unsafe (unsafePartial)
 import PureScript.CST.Types (Declaration, Expr, Ident(..), Label, Proper(..), Type)
 import Safe.Coerce (coerce)
-import Tidy.Codegen (binaryOp, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeCtor)
+import Tidy.Codegen (binaryOp, declValue, exprApp, exprIdent, exprOp, exprRecord, exprSection, exprString, typeApp, typeCtor, typeRow, typeVar)
 import Tidy.Codegen.Class (class ToName, class ToQualifiedName, defaultToName, toName, toQualifiedName)
 import Tidy.Codegen.Types (BinaryOp, Qualified(..))
 
@@ -33,7 +34,7 @@ type Interface =
     { ctor :: Ctor
     , name :: String
     , bases :: Array Ctor
-    , members :: Array Attribute
+    , members :: Array ( Ctor /\ TypeStub )
     }
 
 type Element =
@@ -43,18 +44,20 @@ type Element =
     , interface :: Ctor
     }
 
-type Keyword =
-    { ctor :: Ctor
-    , value :: String
-    , index :: Ctor -- name in source and row index
-    , attribute :: String 
+type Event =
+    { name :: String
+    , index :: Ctor
+    , type :: TypeStub
     }
 
 type Attribute =
-    { name :: String
+    { name :: String -- name in document
     , index :: Ctor -- name in source and row index
-    , type :: TypeStub
+    , type :: TypeStub -- type of this attribute
+    , keywords :: Array { original :: String, name :: String } -- valid values for this attribute
     }
+
+type Keyword = { value :: String }
 
 data TagNS = HTML | SVG | MathML
 derive instance Eq TagNS
@@ -71,109 +74,90 @@ xhtmlNamespace = case _ of
     MathML ->
         Just "http://www.w3.org/1998/Math/MathML"
 
-namespaceBases :: TagNS -> Array String
-namespaceBases = case _ of
-    HTML ->
-        [ "HtmlsvgGlobal"
-        , "HtmlGlobal"
-        , "Global"
-        , "GlobalEventHandlers"
-        , "ARIAMixin"
-        ]
+-- | Creates a valid attribute definition. Invalid definitions get converted to `Nothing`.
+mkAttribute :: Array String -> String -> Maybe Attribute
+mkAttribute keywords name =
+    Just
+        { name
+        , index : Ctor $ unSnake $ escape name
+        , type : TypeString
+        , keywords : flip map keywords case _ of
+            "I" ->
+                { original : "I", name : "UpperI" }
+            
+            "i" ->
+                { original : "i", name : "LowerI" }
 
-    SVG ->
-        [ "HtmlsvgGlobal"
-        , "SvgGlobal"
-        , "Global"
-        , "GlobalEventHandlers"
-        , "ARIAMixin"
-        ]
+            "A" ->
+                { original : "A", name : "UpperA" }
 
-    MathML ->
-        [ "Global"
-        , "GlobalEventHandlers"
-        , "ARIAMixin"
-        ]
+            "a" ->
+                { original : "a", name : "LowerA" }
 
-baseInterfaces :: Array String
-baseInterfaces =
-    Array.nub $ bind [ HTML, SVG, MathML ] namespaceBases
+            original ->
+                { original, name :  capitalize $ unSnake original }
+        
+        }
 
-mkKeyword :: String -> String -> Maybe Keyword
-mkKeyword attribute value = case value of
-    "section-" -> Nothing
-    "1" -> Just { ctor : Ctor "x1", value : "1", index, attribute }
-    "A" -> Just { ctor : Ctor "xA", value : "A", index, attribute }
-    "I" -> Just { ctor : Ctor "xI", value : "I", index, attribute }
+-- | Creates a valid event definition. Invalid definitions get converted to `Nothing`.
+mkHandler :: String -> String -> Maybe Event
+mkHandler type_ name = case String.stripPrefix ( String.Pattern "DOM" ) name of
+    Just mutEvent ->
+        Just
+            { name
+            , index : Ctor $ "dom" <> mutEvent
+            , type : webEvents type_
+            } 
+    
+    _ ->
+        Just
+            { name : name
+            , index: Ctor $ unSnake name
+            , type : webEvents type_ 
+            }
 
-    _ -> Just { ctor : Ctor $ unSnake value, value : value, index, attribute }
-
-    where
-
-    index :: Ctor
-    index =
-        Ctor $ unSnake attribute
-
-mkAttribute :: String -> Maybe Attribute
-mkAttribute name =
-    Just { name, index : Ctor $ unSnake name, type : TypeString }
-
-mkHandler :: String -> Maybe Attribute
-mkHandler name =
-    Just { name : name, index: Ctor $ "on" <> capitalize ( unSnake name ), type : TypeEventEffect }
-
-mkElement :: TagNS -> String -> Maybe Element
-mkElement ns name =
+-- | Creates a valid element Invalid definitions get converted to `Nothing`.
+mkElement :: TagNS -> String -> String -> Maybe Element
+mkElement ns interface name =
     Just
         { ctor : Ctor $ unSnake $ escape name
         , ns : ns
         , tag : name
-        , interface : Ctor $ tagToInterface ns name
+        , interface : Ctor interface
         }
 
-mkInterface :: TagNS -> String -> Array Attribute -> Maybe Interface
-mkInterface ns name members =
-    if name `Array.elem` baseInterfaces then
-        Just { name, ctor : Ctor name, members, bases : [] }
-    else
-        Just { name, ctor : Ctor name, members, bases : coerce $ namespaceBases ns }
+-- | Creates a valid interface definition. Invalid definitions get converted to `Nothing`.
+mkInterface :: Array String -> Array ( Ctor /\ TypeStub ) -> String -> Maybe Interface
+mkInterface _ _ "LinkStyle" = Nothing -- does not seem to exist
+mkInterface bases members name =
+    Just { name, ctor : Ctor name, members, bases : coerce bases }
 
 escape :: String -> String
-escape n = 
-    if Set.member n reserved then "x" <> n else n
+escape n =
+    if not $ Set.member n reserved then n else case String.uncons n of
+        -- c -> k
+        Just { head, tail } | head == c ->
+            String.singleton k <> tail
+
+        -- else prefix with x
+        _ ->
+            "x" <> n
+
+    where
+
+    c = codePointFromChar 'c'
+    k = codePointFromChar 'k'
 
 reserved :: Set String
 reserved =
     Set.fromFoldable
         [ "data"
         , "if"
+        , "in"
         , "class"
         , "type"
         , "module"
         ]
-        
-tagToInterface :: TagNS -> String -> String
-tagToInterface ns tag = case tag of 
-    "a" -> "HTMLAnchorElement"
-    "textarea" -> "HTMLTextAreaElement"
-    "br" -> "HTMLBRElement"
-    "hr" -> "HTMLHRElement"
-    "td" -> "HTMLTableDataCellElement"
-    "p" -> "HTMLParagraphElement"
-
-    _ -> do
-        let formatted = capitalize $ unSnake tag
-        if formatted `Array.elem` baseInterfaces then
-            formatted
-        else
-            prefix <> formatted <> "Element"
-        
-    where
-
-    prefix = case ns of
-        SVG -> "SVG"
-        HTML -> "HTML"
-        MathML -> "MathML"
 
 unSnake :: String -> String
 unSnake =
@@ -237,13 +221,31 @@ typeNut :: Type Void
 typeNut =
     unsafePartial $ typeCtor "Nut"
 
+typeIndexedAt :: Ctor -> Type Void -> Type Void
+typeIndexedAt n t =
+    unsafePartial $ typeRow [ n /\ t ] $ Just $ typeVar "r"
+
+tagCtor :: Ctor -> String /\ String
+tagCtor ( Ctor src ) = do
+    let short = src <> "_"
+    src /\ short
+
+attributeCtor :: Ctor -> String /\ String
+attributeCtor ( Ctor src ) = do
+    let short = src <> "_"
+    src /\ short
+
+nominal :: Ctor
+nominal =
+    Ctor "__tag"
+
 selfKey :: String
 selfKey =
     "@self@"
     
 -- | Elements that have an implementation in the current web-html package
-webElements :: Array String
-webElements =
+webElements :: Array TypeStub
+webElements = map (\intf -> TypeEvent intf ( "Web.HTML." <> intf ) )
     [ "HTMLAnchorElement"
     , "HTMLAreaElement"
     , "HTMLAudioElement"
@@ -286,3 +288,17 @@ webElements =
     , "HTMLTrackElement"
     , "HTMLVideoElement"
     ]
+
+-- | Looks up the name of an event interface name and returns the best fitting `TypeStub`.
+webEvents :: String -> TypeStub
+webEvents ev = case ev of
+    "CompositionEvent" -> TypeEvent "CompositionEvent" "Web.UIEvent.CompositionEvent"
+    "FocusEvent" -> TypeEvent "FocusEvent" "Web.UIEvent.FocusEvent"
+    "MouseEvent" -> TypeEvent "MouseEvent" "Web.UIEvent.MouseEvent"
+    "KeyboardEvent" -> TypeEvent "KeyboardEvent" "Web.UIEvent.KeyboardEvent"
+    "UIEvent" -> TypeEvent "UIEvent" "Web.UIEvent.UIEvent"
+    "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
+    "DragEvent" -> TypeEvent "DragEvent" "Web.HTML.Event.DragEvent"
+    "TrackEvent" -> TypeEvent "TrackEvent" "Web.HTML.Event.TrackEvent"
+
+    _ -> TypeEvent "Event" "Web.Event.Internal.Types"

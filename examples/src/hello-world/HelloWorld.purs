@@ -13,6 +13,8 @@ import Deku.Control as C
 import Deku.Core (Nut, bus)
 import Deku.Core as CC
 import Deku.DOM as D
+import Deku.DOM.Attributes as DA
+import Deku.DOM.Listeners as DL
 import Deku.Toplevel (runInBody)
 import Effect (Effect)
 import FRP.Event (Event, filterMap, keepLatest, mapAccum)
@@ -35,8 +37,8 @@ scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
                 # map
                     ( \e ->
                         oneOf
-                        [ D._style_ $ "background-color: rgb(160,234,203);"
-                        , D._onClick_ $ const $ push (not e)
+                        [ DA.style_ $ "background-color: rgb(160,234,203);"
+                        , DL.click_ \_ -> push (not e)
                         , pure $ xdata "hello" "world"
                         ]
 
@@ -45,7 +47,7 @@ scene = CC.envy $ bus $ \push -> lcmap (alt (pure true)) \event -> do
             ]
             [ C.text_ "me" ]
         ]
-    , D.input [ D._autofocus_ "" ] []
+    , D.input [ DA.autofocus_ "" ] []
     ]
 
 main :: Effect Unit

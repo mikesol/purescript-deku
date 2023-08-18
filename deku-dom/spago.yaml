@@ -3,3 +3,5 @@ package:
   dependencies:
   - deku-core
   - hyrule
+  - web-html
+  - web-uievents
