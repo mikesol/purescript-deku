@@ -12,19 +12,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Cache purescript dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            .spago
-            ${{ env.spago_global_cache }}
-            output
-          key: >-
-            ${{ hashFiles('package-lock.json') }}-
-            ${{ hashFiles('spago.dhall') }}-
-            ${{ hashFiles('packages.dhall') }}-
-            ${{ hashFiles('test.dhall') }}
       - name: Install dependencies
         run: npm ci
       - name: Test
