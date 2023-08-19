@@ -1,0 +1,9 @@
+package:
+  name: deku-dom
+  dependencies:
+  - deku-core
+  - hyrule
+  - web-html
+  - web-uievents
+  - web-pointerevents
+  - web-touchevents

@@ -1,8 +1,8 @@
 const tests = require("./output/Test.Main");
 
 const doTest = (name, closure, onlyWithSSR) => {
-  (onlyWithSSR === false ? it.only : it)(name + " without SSR", () => {
-    closure((myTest, myScript) => {
+  (onlyWithSSR === false ? it.only : it)(name + " without SSR", async () => {
+    await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
       }
@@ -11,12 +11,12 @@ const doTest = (name, closure, onlyWithSSR) => {
       const finished = tests.runNoSSR(myTest)(
         isNaN(onlyWithSSR) ? 0 : onlyWithSSR
       )();
-      myScript(false);
+      await myScript(false);
       finished();
     });
   });
-  (onlyWithSSR === true ? it.only : it)(name + " with SSR", () => {
-    closure((myTest, myScript) => {
+  (onlyWithSSR === true ? it.only : it)(name + " with SSR", async () => {
+    await closure(async (myTest, myScript) => {
       if (!myTest) {
         throw new Error(`Cannot find test named ${name}`);
       }
@@ -26,7 +26,7 @@ const doTest = (name, closure, onlyWithSSR) => {
       const finished = tests.runWithSSR(myTest)(
         isNaN(onlyWithSSR) ? 0 : onlyWithSSR
       )();
-      myScript(true);
+      await myScript(true);
       finished();
     });
   });
@@ -464,8 +464,10 @@ describe("deku", () => {
   );
 
   doTest("todo mvc", (f) =>
-    f(tests.todoMVC, () => {
+    f(tests.todoMVC, async () => {
       const $ = require("jquery");
+      // because of the injectElementT
+      await new Promise(resolve => setTimeout(resolve, 42.0));
       $("#add").trigger("click");
       expect($("#item0").text()).toBe("Tasko primo");
     })
