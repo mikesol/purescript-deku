@@ -1,0 +1,6 @@
+package:
+  name: deku-css
+  dependencies:
+  - deku-core
+  - hyrule
+  - css

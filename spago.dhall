@@ -1,4 +1,5 @@
 { name = "deku"
+, sources = [ "deku/src/**/*.purs", "deku-core/**/*.purs", "deku-dom/**/*.purs", "deku-css/**/*.purs" ]
 , dependencies =
   [ "aff"
   , "arrays"
@@ -36,5 +37,4 @@
 , license = "Apache-2.0"
 , packages = ./packages.dhall
 , repository = "https://github.com/mikesol/purescript-deku"
-, sources = [ "src/**/*.purs" ]
 }

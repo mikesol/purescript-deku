@@ -1,0 +1,34 @@
+package:
+  name: deku-core
+  dependencies:
+  - aff
+  - arrays
+  - bolson
+  - catenable-lists
+  - control
+  - effect
+  - either
+  - fast-vect
+  - filterable
+  - foldable-traversable
+  - foreign-object
+  - free
+  - hyrule
+  - maybe
+  - newtype
+  - ordered-collections
+  - prelude
+  - profunctor
+  - quickcheck
+  - record
+  - safe-coerce
+  - st
+  - strings
+  - stringutils
+  - transformers
+  - tuples
+  - unsafe-coerce
+  - web-dom
+  - web-events
+  - web-html
+  - web-uievents
