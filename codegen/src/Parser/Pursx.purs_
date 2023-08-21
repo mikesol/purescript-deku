@@ -5,7 +5,7 @@ import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
 import Deku.Pursx.Unsafe (class PursxToElement, unsafeMakePursx, unsafeMakePursx')
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -16,7 +16,7 @@ pursx :: forall s. Proxy s
 pursx = Proxy
 
 class DoVerbForAttr (verb :: Symbol) (tag :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) | verb acc head tail pursi -> purso newTail
-instance (TagToDeku tag deku,  Row.Cons acc (Event (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail
+instance (TagToDeku tag deku,  Row.Cons acc (Poll (Attribute deku)) pursi purso) => DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance (Sym.Append acc anything acc2, Sym.Cons x y tail, DoVerbForAttr verb tag acc2 x y pursi purso newTail) => DoVerbForAttr verb tag acc anything tail pursi purso newTail
 --
 class DoVerbForDOM (verb :: Symbol) (acc :: Symbol) (head :: Symbol) (tail :: Symbol) (pursi :: Row Type) (purso :: Row Type) (newTail :: Symbol) |  verb acc head tail pursi -> purso newTail

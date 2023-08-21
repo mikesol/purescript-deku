@@ -5,7 +5,7 @@ import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
 import Deku.Pursx.Unsafe (class PursxToElement, unsafeMakePursx, unsafeMakePursx')
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event)
+import FRP.Poll (Poll)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -29,7 +29,7 @@ class
 
 instance
   ( TagToDeku tag deku
-  , Row.Cons acc (Event (Attribute deku)) pursi purso
+  , Row.Cons acc (Poll (Attribute deku)) pursi purso
   ) =>
   DoVerbForAttr verb tag acc verb tail pursi purso tail
 else instance
