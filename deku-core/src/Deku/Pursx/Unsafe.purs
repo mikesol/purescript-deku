@@ -3,26 +3,21 @@ module Deku.Pursx.Unsafe where
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR)
-import Control.Alt ((<|>))
+import Bolson.Core (Element(..), Entity(..))
 import Data.Traversable (for_)
 import FRP.Poll (poll, Poll, sample, sample_)
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
-import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (unwrap)
-import Data.Profunctor (lcmap)
+import Data.Maybe (Maybe(..))
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), Node(..), flattenArgs)
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), Node', Nut(..), NutF(..), Node(..), flattenArgs)
+import FRP.Event (merge)
 import Foreign.Object as Object
 import Deku.Control (unsafeSetAttribute)
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record (get)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 class
   PursxToElement (rl :: RL.RowList Type) (r :: Row Type)

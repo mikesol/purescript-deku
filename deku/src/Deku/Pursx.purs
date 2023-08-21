@@ -1,17 +1,11 @@
 module Deku.Pursx where
 
-import Prelude
-
-import Bolson.Core (Entity(..), PSR)
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
-import Control.Plus (empty)
-import Data.Maybe (Maybe, maybe)
 import Data.Reflectable (class Reflectable, reflectType)
 import Deku.Attribute (Attribute)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..))
-import Deku.Pursx.Unsafe (unsafeMakePursx, unsafeMakePursx', class PursxToElement, pursxToElement, domableToNode)
+import Deku.Core (Nut)
+import Deku.Pursx.Unsafe (unsafeMakePursx, unsafeMakePursx', class PursxToElement)
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
+import FRP.Event (Event)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
