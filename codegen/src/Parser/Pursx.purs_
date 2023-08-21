@@ -1,17 +1,11 @@
 module Deku.Pursx where
 
-import Prelude
-
-import Bolson.Core (Entity(..), PSR)
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
-import Control.Plus (empty)
-import Data.Maybe (Maybe, maybe)
 import Data.Reflectable (class Reflectable, reflectType)
 import Deku.Attribute (Attribute)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..))
-import Deku.Pursx.Unsafe(unsafeMakePursx,class PursxToElement,pursxToElement,domableToNode)
+import Deku.Core (Nut)
+import Deku.Pursx.Unsafe (class PursxToElement, unsafeMakePursx, unsafeMakePursx')
 import Deku.DOM (class TagToDeku)
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
+import FRP.Event (Event)
 import Prim.Boolean (False, True)
 import Prim.Row as Row
 import Prim.RowList as RL
@@ -126,56 +120,7 @@ makePursx'
   -> Proxy html
   -> { | r }
   -> Nut
-makePursx' verb html r = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF (Element' (Node go))
-
-  go
-    :: forall payload
-     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
-  go
-    z@{ parent, scope, raiseId, dynFamily, pos }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
-      me <- ids
-      pxScope <- ids
-      raiseId me
-      let
-        { cache, element: element' } = pursxToElement
-          pxScope
-          (Proxy :: _ rl)
-          r
-      let Node element = domableToNode element'
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ pure $
-                mpx
-                  { id: me
-                  , parent
-                  , cache
-                  , dynFamily
-                  , pos
-                  , pxScope: pxScope
-                  , scope
-                  , html: reflectType html
-                  , verb: reflectType verb
-                  }
-            , element z di
-            , maybe empty
-                ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily, ez: false }
-                )
-                parent
-            ]
-        )
-        k1
-      pure do
-        runSTFn1 k1 (deleteFromCache { id: me })
-        unsub
+makePursx' verb html = unsafeMakePursx' (reflectType verb) (reflectType html)
 
 infixr 5 makePursx as ~~
 infixr 5 unsafeMakePursx as ~!~

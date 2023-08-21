@@ -3,7 +3,7 @@ module Deku.Pursx where
 import Data.Reflectable (class Reflectable, reflectType)
 import Deku.Attribute (Attribute)
 import Deku.Core (Nut)
-import Deku.Pursx.Unsafe (unsafeMakePursx, unsafeMakePursx', class PursxToElement)
+import Deku.Pursx.Unsafe (class PursxToElement, unsafeMakePursx, unsafeMakePursx')
 import Deku.DOM (class TagToDeku)
 import FRP.Event (Event)
 import Prim.Boolean (False, True)
