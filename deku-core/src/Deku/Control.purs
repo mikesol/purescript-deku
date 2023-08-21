@@ -105,26 +105,6 @@ elementify ns tag atts children = Node $ Element go
   where
   go :: Node' payload
   go
-    -- <<<<<<< HEAD:src/Deku/Control.purs
-    --     { parent, scope, raiseId, pos, deferralPath, dynFamily, ez }
-    --     di@
-    --       ( DOMInterpret
-    --           { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
-    --       ) = behaving' \fff ee kx subscribe -> do
-    --     me <- ids
-    --     raiseId $ show me
-    --     kx $ makeElement { id: show me, parent, scope, tag, pos, dynFamily }
-    --     for_ parent \p ->
-    --       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
-
-    --     kx $ deferPayload deferralPath $ deleteFromCache { id: show me }
-    --     subscribe
-    --       ( sample
-    --           ( __internalDekuFlatten
-    --               children
-    --               { parent: Just $ show me
-    --               , deferralPath
-    -- =======
     { parent, scope, raiseId, pos, deferralPath, dynFamily, ez }
     di@
       ( DOMInterpret
