@@ -16,7 +16,7 @@ module Deku.Control
 
 import Prelude
 
-import Bolson.Control (behaving, behaving')
+import Bolson.Control (behaving)
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
@@ -32,7 +32,7 @@ import Data.Foldable (oneOf)
 import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
 import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
 import FRP.Event (merge)
-import FRP.Poll (Poll, sample, sample_)
+import FRP.Poll (Poll, sample, sampleBy, sample_)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -109,7 +109,7 @@ elementify ns tag atts children = Node $ Element go
     di@
       ( DOMInterpret
           { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
-      ) = behaving' \fff ee kx subscribe ->
+      ) = behaving \ee kx subscribe ->
     do
       me <- ids
       raiseId $ show me
@@ -134,12 +134,8 @@ elementify ns tag atts children = Node $ Element go
             )
             ee
         )
-        identity
       subscribe
-        ( map (\zzz -> fff $ unsafeSetAttribute di (show me) zzz)
-            (sample_ (map unsafeUnAttribute atts) ee)
-        )
-        identity
+        (sampleBy (\zzz fff -> fff $ unsafeSetAttribute di (show me) (unsafeUnAttribute zzz)) atts ee)
 
 -- | Creates a portal.
 -- |
@@ -304,7 +300,7 @@ text t2 = Nut go'
     di@
       ( DOMInterpret
           { ids, makeText, deferPayload, deleteFromCache, attributeParent }
-      ) = behaving' \fff ee kx subscribe -> do
+      ) = behaving \e kx subscribe -> do
     me <- ids
     raiseId $ show me
     kx $ makeText { id: show me, parent, pos, scope, dynFamily }
@@ -312,12 +308,7 @@ text t2 = Nut go'
       kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
     kx $ deferPayload deferralPath (deleteFromCache { id: show me })
     subscribe
-      ( ( \iii ->
-            ((\ttt -> fff $ unsafeSetText di (show me) ttt) <$> iii)
-        )
-          (sample_ t2 ee)
-      )
-      identity
+      (sampleBy (\ttt fff -> fff $ unsafeSetText di (show me) ttt) t2 e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
