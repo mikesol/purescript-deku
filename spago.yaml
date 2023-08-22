@@ -4,7 +4,7 @@ workspace:
   extra_packages:
     hyrule:
       git: "https://github.com/mikesol/purescript-hyrule.git"
-      ref: "8557fa8"
+      ref: "4be76a5"
       dependencies:
         - effect
         - js-timers
@@ -33,7 +33,7 @@ workspace:
       - tuples
     tidy-codegen:
       repo: "https://github.com/natefaubion/purescript-tidy-codegen"
-      version: "type-applications"
+      version: "main"
       dependencies:
       - aff
       - ansi
