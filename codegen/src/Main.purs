@@ -125,7 +125,7 @@ fixSVG svgBase =
                 <> [ svgText, svgPresentation ]
         , attributes = do
             let existing = Set.fromFoldable $ _.name <$> svgBase.attributes
-                patched = flip Array.mapMaybe ( svgText.members <> svgPresentation.members ) \( Ctor member /\ _ ) -> 
+                patched = flip Array.mapMaybe ( svgTextMembers <> svgPresentationMembers ) \member -> 
                     if Set.member member existing then Nothing else mkAttribute mempty member
             svgBase.attributes <> patched
         }
@@ -167,43 +167,47 @@ svgText =
     { ctor : Ctor "SvgText"
     , name : "SvgText"
     , bases : []
-    , members :
-        map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake )
-            [ "alignment-baseline"
-            , "baseline-shift"
-            , "dominant-baseline"
-            , "font-family"
-            , "font-size"
-            , "font-size-adjust"
-            , "font-stretch"
-            , "font-style"
-            , "font-variant"
-            , "font-weight"
-            , "letter-spacing"
-            , "text-decoration"
-            , "word-spacing"
-            , "writing-mode"
-            , "unicode-bidi" 
-            ]
+    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgTextMembers
     }
+
+svgTextMembers :: Array String
+svgTextMembers =
+    [ "alignment-baseline"
+    , "baseline-shift"
+    , "dominant-baseline"
+    , "font-family"
+    , "font-size"
+    , "font-size-adjust"
+    , "font-stretch"
+    , "font-style"
+    , "font-variant"
+    , "font-weight"
+    , "letter-spacing"
+    , "text-decoration"
+    , "word-spacing"
+    , "writing-mode"
+    , "unicode-bidi" 
+    ]
 
 svgPresentation :: Interface
 svgPresentation =
     { ctor : Ctor "SvgPresentation"
     , name : "SvgPresentation"
     , bases : []
-    , members :
-        map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake )
-            [ "pathLength"
-            , "mask"
-            , "opacity"
-            , "overflow"
-            , "clip-path"
-            , "clip-rule"
-            , "cursor"
-            , "display"
-            , "transform"
-            , "transform-origin"
-            , "visibility"
-            ]
+    , members : map ( ( _ /\ TypeString ) <<< Ctor <<< unSnake ) svgPresentationMembers
     }
+
+svgPresentationMembers :: Array String
+svgPresentationMembers =
+    [ "pathLength"
+    , "mask"
+    , "opacity"
+    , "overflow"
+    , "clip-path"
+    , "clip-rule"
+    , "cursor"
+    , "display"
+    , "transform"
+    , "transform-origin"
+    , "visibility"
+    ]
