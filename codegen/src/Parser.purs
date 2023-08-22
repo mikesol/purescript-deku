@@ -29,7 +29,7 @@ generate = do
     classBase <- except $ fromParseResult $ parseModule classBaseText
 
     ExceptT $ attempt
-        $ writeTextFile UTF8 "./deku/src/Deku/Pursx.purs"
+        $ writeTextFile UTF8 "./deku-dom/src/Deku/Pursx.purs"
         $ printModule
         $ unsafePartial
         $ rewriteModule classBase
