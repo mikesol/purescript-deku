@@ -467,7 +467,7 @@ describe("deku", () => {
     f(tests.todoMVC, async () => {
       const $ = require("jquery");
       // because of the injectElementT
-      await new Promise(resolve => setTimeout(resolve, 42.0));
+      await new Promise((resolve) => setTimeout(resolve, 42.0));
       $("#add").trigger("click");
       expect($("#item0").text()).toBe("Tasko primo");
     })
@@ -531,6 +531,22 @@ describe("deku", () => {
     f(tests.pureWorks, () => {
       const $ = require("jquery");
       expect($("#hello").text()).toBe("hello");
+    })
+  );
+  doTest("useRant works", (f) =>
+    f(tests.useHotRantWorks, () => {
+      const $ = require("jquery");
+      expect($("#da").text()).toBe("1");
+      $("#update").trigger("click");
+      expect($("#da").text()).toBe("2");
+      $("#update").trigger("click");
+      expect($("#da").text()).toBe("3");
+      $("#reveal").trigger("click");
+      expect($("#da").text()).toBe("3");
+      expect($("#db").text()).toBe("3");
+      $("#update").trigger("click");
+      expect($("#da").text()).toBe("4");
+      expect($("#db").text()).toBe("4");
     })
   );
 });

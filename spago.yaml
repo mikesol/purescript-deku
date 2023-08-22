@@ -3,11 +3,14 @@ workspace:
     registry: 31.0.0
   extra_packages:
     hyrule:
-      repo: "https://github.com/mikesol/purescript-hyrule.git"
-      version: "fantasy-land2"
+      git: "https://github.com/mikesol/purescript-hyrule.git"
+      ref: "8557fa8"
       dependencies:
         - effect
         - js-timers
+        - web-html
+        - unsafe-reference
+        - web-uievents
     bolson:
       repo: "https://github.com/mikesol/purescript-bolson.git"
       version: "fantasy-land2"

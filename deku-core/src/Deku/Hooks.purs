@@ -28,6 +28,7 @@ module Deku.Hooks
   , useDynWith
   , useMailboxed
   , useRant
+  , useHotRant
   , useDeflect
   , useState'
   , useRant'
@@ -142,6 +143,13 @@ useRant e f = Nut go'
     let Nut nf = f p
     subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
+useHotRant :: forall a. Poll a -> Hook (Poll a)
+useHotRant e f = Deku.do
+    r <- useRefST Nothing (Just <$> e)
+    p <- useRant e
+    -- we `once e` in case it has an initial value
+    f $ filterMap identity (stToPoll r <|> (Just <$> p))
+    
 useDeflect :: forall a. Poll a -> Hook (Poll a)
 useDeflect e f = Nut go'
   where

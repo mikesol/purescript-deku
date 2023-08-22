@@ -3,7 +3,6 @@ module Test.Main where
 import Prelude
 
 import Control.Alt ((<|>))
-import Deku.DOM.Combinators (injectElementT)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
@@ -18,9 +17,10 @@ import Deku.Control (globalPortal1, portal1, text, text_)
 import Deku.Core (Hook, Nut, fixed)
 import Deku.DOM as D
 import Deku.DOM.Attributes as DA
+import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
@@ -59,7 +59,8 @@ sanityCheck = D.span [ DA.id_ "hello" ] [ text_ "Hello" ]
 
 twoElements :: Nut
 twoElements = Deku.do
-  D.div [ DA.id_ "maindiv" ] [ D.div_ [ text_ "hello" ], D.div_ [ text_ "world" ] ]
+  D.div [ DA.id_ "maindiv" ]
+    [ D.div_ [ text_ "hello" ], D.div_ [ text_ "world" ] ]
 
 elementsInCorrectOrder :: Nut
 elementsInCorrectOrder = do
@@ -268,7 +269,8 @@ globalPortalsRetainPortalnessWhenSentOutOfScope = Deku.do
         ]
     , ( globalPortal1 (D.div_ [ text_ "foo" ]) \e ->
           D.div_
-            [ D.button [ DA.id_ "push-ported-nut", DL.click_ \_ -> setPortedNut e ]
+            [ D.button
+                [ DA.id_ "push-ported-nut", DL.click_ \_ -> setPortedNut e ]
                 [ text_ "push ported nut" ]
             , D.div [ DA.id_ "inner-scope" ]
                 [ (Tuple <$> portalInContext <*> portedNut)
@@ -304,7 +306,8 @@ localPortalsLosePortalnessWhenSentOutOfScope = Deku.do
         ]
     , portal1 (D.div_ [ text_ "foo" ]) \e ->
         D.div_
-          [ D.button [ DA.id_ "push-ported-nut", DL.click_ \_ -> setPortedNut e ]
+          [ D.button
+              [ DA.id_ "push-ported-nut", DL.click_ \_ -> setPortedNut e ]
               [ text_ "push ported nut" ]
           , D.div [ DA.id_ "inner-scope" ]
               [ (Tuple <$> portalInContext <*> portedNut)
@@ -442,7 +445,8 @@ simpleSwitcher = Deku.do
     [ switch <#~>
         if _ then D.span [ DA.id_ "innertrue" ] [ text_ "trueswitch" ]
         else D.span [ DA.id_ "innerfalse" ] [ text_ "falseswitch" ]
-    , D.button [ DA.id_ "doswitch", DL.click $ switch <#> not >>> setSwitch >>> pure ]
+    , D.button
+        [ DA.id_ "doswitch", DL.click $ switch <#> not >>> setSwitch >>> pure ]
         [ text_ "set switch" ]
     ]
 
@@ -455,7 +459,7 @@ useStateWorks = Deku.do
   p /\ e <- useState "hello"
   D.div_
     [ D.span [ DA.id_ "maindiv" ] [ text e ]
-    , D.button [ DA.id_ "button",  DL.click_ \_ -> p "world" ] [ text_ "Switch" ]
+    , D.button [ DA.id_ "button", DL.click_ \_ -> p "world" ] [ text_ "Switch" ]
     ]
 
 useRantWorks :: Nut
@@ -465,7 +469,7 @@ useRantWorks = Deku.do
   D.div_
     [ D.span [ DA.id_ "maindiv" ] [ text (show <$> x) ]
     , D.span [ DA.id_ "maindiv2" ] [ text (show <$> x) ]
-    , D.button [ DA.id_ "button",  DL.click_ \_ -> p unit ] [ text_ "Switch" ]
+    , D.button [ DA.id_ "button", DL.click_ \_ -> p unit ] [ text_ "Switch" ]
     ]
 
 useEffectCanBeSimulatedWithRef :: Nut
@@ -493,14 +497,16 @@ refToHot = Deku.do
     nest f n = Deku.do
       setReveal /\ reveal <- useState false
       D.div_
-        [ D.button [ DA.id_ $ ("button" <> show n),  DL.click_ \_ -> setReveal true ]
+        [ D.button
+            [ DA.id_ $ ("button" <> show n), DL.click_ \_ -> setReveal true ]
             [ text_ "reveal" ]
         , guard reveal $ f (n + 1)
         ]
     elt n = Deku.do
       setReveal /\ reveal <- useState false
       D.div_
-        [ D.button [ DA.id_ $ ("button" <> show n),  DL.click_ \_ -> setReveal true ]
+        [ D.button
+            [ DA.id_ $ ("button" <> show n), DL.click_ \_ -> setReveal true ]
             [ text_ "reveal" ]
         , D.span [ DA.id_ "myspan" ]
             [ guardWith
@@ -512,7 +518,8 @@ refToHot = Deku.do
         ]
   D.div_
     [ nest (nest (nest (nest (nest (nest elt))))) 0
-    , D.button [ DA.id_ "setlabel",  DL.click_ \_ -> setLabel "bar" ] [ text_ "set label" ]
+    , D.button [ DA.id_ "setlabel", DL.click_ \_ -> setLabel "bar" ]
+        [ text_ "set label" ]
     ]
 
 useHotWorks :: Nut
@@ -526,7 +533,7 @@ useHotWorks = Deku.do
     , D.div_
         [ D.button
             [ DA.id_ "ba"
-            ,  DL.click_ \_ -> random >>= setNumber
+            , DL.click_ \_ -> random >>= setNumber
             ]
             [ text_ "A" ]
         , D.button
@@ -553,7 +560,7 @@ useStateWorks2 = Deku.do
     , D.div_
         [ D.button
             [ DA.id_ "ba"
-            ,  DL.click_ \_ -> random >>= setNumber
+            , DL.click_ \_ -> random >>= setNumber
             ]
             [ text_ "A" ]
         , D.button
@@ -576,14 +583,16 @@ hotIsHot = Deku.do
     nest f n = Deku.do
       setReveal /\ reveal <- useState false
       D.div_
-        [ D.button [ DA.id_ $ ("button" <> show n),  DL.click_ \_ -> setReveal true ]
+        [ D.button
+            [ DA.id_ $ ("button" <> show n), DL.click_ \_ -> setReveal true ]
             [ text_ "reveal" ]
         , guard reveal $ f (n + 1)
         ]
     elt n = Deku.do
       setReveal /\ reveal <- useState false
       D.div_
-        [ D.button [ DA.id_ $ ("button" <> show n),  DL.click_ \_ -> setReveal true ]
+        [ D.button
+            [ DA.id_ $ ("button" <> show n), DL.click_ \_ -> setReveal true ]
             [ text_ "reveal" ]
         , D.span [ DA.id_ "myspan" ]
             [ guardWith
@@ -595,7 +604,8 @@ hotIsHot = Deku.do
         ]
   D.div_
     [ nest (nest (nest (nest (nest (nest elt))))) 0
-    , D.button [ DA.id_ "setlabel",  DL.click_ \_ -> setLabel "bar" ] [ text_ "set label" ]
+    , D.button [ DA.id_ "setlabel", DL.click_ \_ -> setLabel "bar" ]
+        [ text_ "set label" ]
     ]
 
 switcherSwitches :: Nut
@@ -610,11 +620,11 @@ switcherSwitches = Deku.do
         setGoodbyeC (Just unit)
   D.div [ DA.id_ "div0" ]
     [ D.div_
-        [ D.button [ DA.id_ "home-btn",  DL.click_ \_ -> gc *> setItem 0 ]
+        [ D.button [ DA.id_ "home-btn", DL.click_ \_ -> gc *> setItem 0 ]
             [ text_ "home" ]
-        , D.button [ DA.id_ "about-btn",  DL.click_ \_ -> gc *> setItem 1 ]
+        , D.button [ DA.id_ "about-btn", DL.click_ \_ -> gc *> setItem 1 ]
             [ text_ "about" ]
-        , D.button [ DA.id_ "contact-btn",  DL.click_ \_ -> gc *> setItem 2 ]
+        , D.button [ DA.id_ "contact-btn", DL.click_ \_ -> gc *> setItem 2 ]
             [ text_ "contact" ]
         ]
     , D.span [ DA.id_ "hack" ]
@@ -628,10 +638,36 @@ lotsOfSwitching = Deku.do
   setItem /\ item <- useState true
   D.div_
     [ D.div_
-        [ D.button [ DA.id_ "home-btn", DL.click $ item <#> not >>> setItem >>> pure ]
+        [ D.button
+            [ DA.id_ "home-btn", DL.click $ item <#> not >>> setItem >>> pure ]
             [ text_ "home" ]
         ]
     , D.span [ DA.id_ "hack" ]
         [ item <#~> if _ then text_ "hello" else text_ "goodbye"
         ]
+    ]
+
+useHotRantWorks :: Nut
+useHotRantWorks = Deku.do
+  thunkMe /\ thunked <- useState unit
+  setPresence /\ presence <- useState false
+  let counter = fold (\a _ -> a + 1) 0 thunked
+  ranted <- useHotRant counter
+  let
+    framed id = D.div [ DA.id_ id ]
+      [ text $ show <$> ranted
+      ]
+  D.div_
+    [ D.button
+        [ DA.id_ "update"
+        , DL.click_ \_ -> thunkMe unit
+        ]
+        [ text_ "Update number" ]
+    , D.button
+        [ DA.id_ "reveal"
+        , DL.runOn DL.click $ presence <#> not >>> setPresence
+        ]
+        [ text_ "Show another version" ]
+    , framed "da"
+    , guard presence $ framed "db"
     ]
