@@ -3,7 +3,7 @@ module DOM.Indexed.Listener where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Ctor(..), Event, declHandler, typeAttributed, typeEvented, typeIndexedAt)
+import DOM.Common (Ctor(..), Event, declHandler, typeAttributed, typePolled, typeIndexedAt)
 import DOM.TypeStub (constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import PureScript.CST.Types (Declaration, Export, ImportDecl)
@@ -16,7 +16,7 @@ imports events =
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Event" [] "FRP.Event"
+            , declImportAs "FRP.Poll" [] "FRP.Poll"
             , declImportAs "Deku.DOM.Combinators"
                 ( map importValue
                     [ "unset"
@@ -54,13 +54,13 @@ generate events =
             -- generate simple function definition
             [ declSignature ctor
                 $ typeForall [ typeVar "r" ]
-                $ typeArrow [ typeEvented $ constructArg t ]
-                $ typeEvented $ typeAttributed $ typeIndexedAt index indexType
+                $ typeArrow [ typePolled $ constructArg t ]
+                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
             , declHandler ctor name $ handler t
 
             , declSignature shortHand 
                 $ typeForall [ typeVar "r" ]
                 $ typeArrow [ constructArg t ]
-                $ typeEvented $ typeAttributed $ typeIndexedAt index indexType
+                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
             , declValue shortHand [] $ exprOp ( exprIdent ctor ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ] 
             ]

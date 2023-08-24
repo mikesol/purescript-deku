@@ -1,138 +1,216 @@
--- | Deku Hooks, modeled after React Hooks, are a way to have stateful behavior in Deku.
+-- | Deku Hooks, modeled after React Hooks, are a way to have stateful poll in Deku.
 -- | At a basic level, Deku hooks look very much like their react counterparts:
 -- |
 -- | ```purescript
 -- | Deku.do
 -- |  setCount /\ count <- useState 0
--- |  Deku.button (click $ counter <#> add 1 >>> setCount) [ text (show count) ]
+-- |  Deku.button (click' $ counter <#> add 1 >>> setCount) [ textShow' count ]
 -- | ```
 -- |
 -- | Deku hooks are covered more extensively in the
 -- | [Deku guide section on state](https://purescript-deku.netlify.app/core-concepts/state)
 -- | and the [Deku guide section on collections](https://purescript-deku.netlify.app/core-concepts/collections).
 module Deku.Hooks
-  ( useState'
-  , useState
-  , useRef
-  , useMemoized'
-  , useMemoized
-  , useMailboxed
-  , useEffect
-  , useAff
-  , useAffWithCancellation
-  , useAffSequentially
-  , useAffSequentiallyOrDie
-  , useAffOrDie
-  , useHot
-  , useHot'
+  ( (<#~>)
+  , (<$~>)
+  , cycle
+  , dynOptions
+  , guard
+  , guardWith
+  , switcher
+  , switcherFlipped
   , useDyn
   , useDynAtBeginning
+  , useDynAtBeginningWith
   , useDynAtEnd
+  , useHot
+  , useDynAtEndWith
+  , useDynWith
+  , useMailboxed
+  , useRant
+  , useHotRant
+  , useDeflect
+  , useState'
+  , useRant'
+  , useRef
+  , useRefNE
+  , useRefST
+  , useRefSTNE
+  , useState
   ) where
 
 import Prelude
 
-import Bolson.Core (envy, Entity)
+import Bolson.Control (Flatten, behaving, behaving')
+import Bolson.Control as Bolson
+import Bolson.Core (Element(..), Entity(..))
+import Bolson.Core as BCore
 import Control.Alt ((<|>))
 import Control.Monad.ST.Class (liftST)
+import Control.Monad.ST.Global (Global)
+import Control.Monad.ST.Internal (ST)
 import Control.Monad.ST.Internal as STRef
-import Control.Monad.ST.Uncurried (mkSTFn1, mkSTFn2, runSTFn1, runSTFn2)
-import Data.Array as Array
-import Data.Either (Either(..))
-import Data.Foldable (for_)
-import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Tuple (Tuple(..), curry)
+import Control.Plus (empty)
+import Data.FunctorWithIndex (mapWithIndex)
+import Data.Maybe (Maybe(..))
+import Data.Newtype (unwrap)
+import Data.NonEmpty (NonEmpty(..))
+import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
-import Deku.Core (Nut(..), NutF(..), Node, Child, bus, bussedUncurried, insert, remove, sendToPos, dyn)
+import Deku.Core (Child(..), DOMInterpret(..), DekuExtra, Hook, Node(..), Node', Nut(..), NutF(..), dyn, remove, sendToPos, unsafeSetPos)
 import Deku.Do as Deku
-import Effect (Effect, foreachE)
-import Effect.Aff (Aff, Error, error, joinFiber, killFiber, launchAff, launchAff_)
-import Effect.Uncurried (mkEffectFn1, runEffectFn1, runEffectFn2)
-import FRP.Event (Event, Subscriber(..), createPure, keepLatest, mailboxed, makeEventO, makeLemmingEvent, makeLemmingEventO, mapAccum, memoize, subscribeO)
-import Safe.Coerce (coerce)
+import Effect (Effect)
+import FRP.Event (filterMap, mapAccum)
+import FRP.Poll (Poll, merge, sample, sample_, stToPoll)
+import FRP.Poll as Poll
 
--- | A state hook for states without initial values. See [`useState'`](https://purescript-deku.netlify.app/core-concepts/state#state-without-initial-values) in the Deku guide for example usage.
-useState'
-  :: forall a
-   . ( ((a -> Effect Unit) /\ Event a)
-       -> Nut
-     )
-  -> Nut
-useState' = bussedUncurried
+flattenArgs
+  :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
+flattenArgs =
+  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
+  , ids: unwrap >>> _.ids
+  , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
+  , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
+  , disconnectElement:
+      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
+        disconnectElement { id, scope, parent, scopeEq: eq }
+  , toElt: \(Node e) -> e
+  }
 
--- | A hook to work with memoized values. See [`useMemoized`](https://purescript-deku.netlify.app/core-concepts/more-hooks#the-case-for-memoization) in the Deku guide for example usage.
-useMemoized
-  :: forall a
-   . (Event a)
-  -> (Event a -> Nut)
-  -> Nut
-useMemoized e f1 = Nut eeee
-  where
-  eeee :: forall payload. NutF payload
-  eeee = NutF (envy (map (\(NutF x) -> x) eee))
-
-  eee :: forall payload. Event (NutF payload)
-  eee = map (\(Nut df) -> df) ee
-
-  ee :: Event Nut
-  ee = memoize e f1
-
--- | A hook to work with memoized values that lack an initial value. See [`useMemoized'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
-useMemoized'
-  :: forall a b
-   . (Event a -> Event b)
-  -> ( ((a -> Effect Unit) /\ Event b)
-       -> Nut
-     )
-  -> Nut
-useMemoized' f0 f1 = bussedUncurried fx
-  where
-  fx (a /\ b) = Nut eeee
-    where
-    eeee :: forall payload. NutF payload
-    eeee = NutF (envy (map (\(NutF x) -> x) eee))
-
-    eee :: forall payload. Event (NutF payload)
-    eee = map (\(Nut df) -> df) ee
-
-    ee :: Event Nut
-    ee = memoize (f0 b) \c -> f1 (a /\ c)
+__internalDekuFlatten
+  :: forall payload
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b
 
 -- | A state hook. See [`useState`](https://purescript-deku.netlify.app/core-concepts/state#the-state-hook) in the Deku guide for example usage.
+useState'
+  :: forall a
+   . Hook ((a -> Effect Unit) /\ Poll a)
+useState' f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving \ee _ subscribe -> do
+    { poll, push } <- Poll.create
+    let
+      Nut nf = f (push /\ poll)
+    subscribe (sample (__internalDekuFlatten nf i di) ee)
+
 useState
   :: forall a
    . a
-  -> ( ((a -> Effect Unit) /\ Event a)
-       -> Nut
-     )
-  -> Nut
+  -> Hook ((a -> Effect Unit) /\ Poll a)
 useState a f = Deku.do
-  x /\ y <- useState'
-  m <- useMemoized (y <|> pure a)
-  f (x /\ m)
+  push /\ event <- useState'
+  f (push /\ (pure a <|> event))
+
+useHot
+  :: forall a
+   . a
+  -> Hook ((a -> Effect Unit) /\ Poll a)
+useHot a f = Deku.do
+  push /\ poll <- useState'
+  r <- useRefST a poll
+  f (push /\ (stToPoll r <|> poll))
+
+guard :: Poll Boolean -> Nut -> Nut
+guard b e = switcher (if _ then e else mempty) b
+
+guardWith :: forall a. (Poll (Maybe a)) -> (a -> Nut) -> Nut
+guardWith m f = m <#~> case _ of
+  Just x -> f x
+  Nothing -> mempty
+
+useRant :: forall a. Poll a -> Hook (Poll a)
+useRant e f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving' \_ ee _ subscribe -> do
+    -- todo: should we incorporate the unsub?
+    { poll: p } <- Poll.rant e
+    -- we `once e` in case it has an initial value
+    let Nut nf = f p
+    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
+
+useHotRant :: forall a. Poll a -> Hook (Poll a)
+useHotRant e f = Deku.do
+    r <- useRefST Nothing (Just <$> e)
+    p <- useRant e
+    -- we `once e` in case it has an initial value
+    f $ filterMap identity (stToPoll r <|> (Just <$> p))
+    
+useDeflect :: forall a. Poll a -> Hook (Poll a)
+useDeflect e f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving' \_ ee _ subscribe -> do
+    -- todo: should we incorporate the unsub?
+    p <- Poll.deflect e
+    -- we `once e` in case it has an initial value
+    let Nut nf = f p
+    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
+
+-- | A hook to work with memoized values that lack an initial value. See [`useRant'`](https://purescript-deku.netlify.app/core-concepts/more-hooks#memoizing-without-an-initial-event) in the Deku guid for example usage.
+
+useRant'
+  :: forall t a
+   . (Poll t -> Poll a)
+  -> (Tuple (t -> Effect Unit) (Poll a) -> Nut)
+  -> Nut
+useRant' f0 makeHook = Deku.do
+  push /\ e <- useState'
+  m <- useRant (f0 e)
+  makeHook (push /\ m)
+
+useRef ∷ ∀ a. a → Poll a → Hook (Effect a)
+useRef a b f = useRefST a b \x -> f $ liftST x
+
+useRefNE ∷ ∀ a. NonEmpty Poll a → Hook (Effect a)
+useRefNE a f = useRefSTNE a \x -> f $ liftST x
+
+useRefSTNE
+  :: forall a
+   . NonEmpty Poll a
+  -> Hook (ST Global a)
+useRefSTNE (NonEmpty x y) = useRefST x y
 
 -- | A hook that takes an initial value and an event and produces
 -- | a reference to the value that can be used in listeners. While the value
 -- | itself is mutable, it cannot be changed by the consumer of the ref.
-useRef
+useRefST
   :: forall a
    . a
-  -> Event a
-  -> (Effect a -> Nut)
-  -> Nut
-useRef a e f = Nut eeee
+  -> Poll a
+  -> Hook (ST Global a)
+useRefST a e makeHook = Nut go'
   where
-  eeee :: forall payload. NutF payload
-  eeee = NutF (envy (map (\(NutF x) -> x) eee))
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
 
-  eee :: forall payload. Event (NutF payload)
-  eee = map (\(Nut df) -> df) ee
-
-  ee :: Event Nut
-  ee = makeLemmingEvent \s k -> do
-    r <- STRef.new a
-    k $ f (liftST $ STRef.read r)
-    s e \i -> void $ STRef.write i r
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving' \_ ee _ subscribe -> do
+    rf <- STRef.new a
+    let Nut nf = makeHook (STRef.read rf)
+    subscribe (sample_ e ee) \_ x -> do
+      void $ liftST $ STRef.write x rf
+    subscribe (sample (__internalDekuFlatten nf i di) ee) identity
 
 -- | A hook that provides an event creator instead of events. Event creators turn into events when
 -- | given an address, at which point they listen for a payload. This is useful when listening to
@@ -141,304 +219,132 @@ useRef a e f = Nut eeee
 useMailboxed
   :: forall a b
    . Ord a
-  => ( ( ({ address :: a, payload :: b } -> Effect Unit) /\
-           (a -> Event b)
-       )
-       -> Nut
-     )
-  -> Nut
-useMailboxed f = bussedUncurried fx
+  => Hook (({ address :: a, payload :: b } -> Effect Unit) /\ (a -> Poll b))
+useMailboxed f = Nut go'
   where
-  fx (a /\ b) = Nut eeee
-    where
-    eeee :: forall payload. NutF payload
-    eeee = NutF (envy (map (\(NutF x) -> x) eee))
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
 
-    eee :: forall payload. Event (NutF payload)
-    eee = map (\(Nut df) -> df) ee
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving \e _ subscribe -> do
+    { poll, push } <- Poll.mailbox
+    let Nut nf = f (push /\ poll)
+    subscribe (sample (__internalDekuFlatten nf i di) e)
 
-    ee :: Event Nut
-    ee = mailboxed b \c -> f (a /\ c)
+type DynOptions v =
+  { sendTo :: v -> Poll Int, remove :: v -> Poll Unit }
+
+dynOptions :: forall v. DynOptions v
+dynOptions = { sendTo: \_ -> empty, remove: \_ -> empty }
 
 useDyn
   :: forall value
-   . Event (Tuple Int value)
-  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Nut
-useDyn e f = dyn $ map
-  ( \(Tuple pos value) -> Deku.do
-      { remove, sendTo } <- useDyn' pos
-      f { remove, sendTo, value }
-  )
-  e
+   . Poll (Tuple Int value)
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDyn y = useDynWith y dynOptions
+
+useDynWith
+  :: forall value
+   . (Poll (Tuple Int value))
+  -> DynOptions value
+  -> Hook
+       { value :: value
+       , remove :: Effect Unit
+       , sendTo :: Int -> Effect Unit
+       }
+useDynWith e opts f = Nut go'
+  where
+  go' :: forall payload. NutF payload
+  go' = NutF (Element' (Node (Element go)))
+
+  go
+    :: forall payload
+     . Node' payload
+  go i di = behaving \ee _ subscribe -> do
+    c1 <- Poll.mailbox
+    let
+      mc ix (Tuple pos v) = Tuple
+        ( merge
+            [ opts.remove v $> Child BCore.Remove
+            , Child <<< BCore.Logic <$> opts.sendTo v
+            , c1.poll ix
+            ]
+        )
+        ( unsafeSetPos pos $ f
+            { value: v
+            , remove: c1.push { address: ix, payload: remove }
+            , sendTo: c1.push <<< { address: ix, payload: _ } <<< sendToPos
+            }
+        )
+    let
+      Nut nf = dyn $ mapWithIndex mc e
+    subscribe (sample (__internalDekuFlatten nf i di) ee)
+
+useDynAtBeginningWith
+  :: forall value
+   . Poll value
+  -> DynOptions value
+  -> Hook
+       { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+useDynAtBeginningWith e = useDynWith (map (0 /\ _) e)
 
 useDynAtBeginning
   :: forall value
-   . Event value
-  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Nut
-useDynAtBeginning e = useDyn ((0 /\ _) <$> e)
+   . Poll value
+  -> Hook
+       { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+useDynAtBeginning b = useDynAtBeginningWith b dynOptions
+
+useDynAtEndWith
+  :: forall value
+   . Poll value
+  -> DynOptions value
+  -> Hook
+       { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+useDynAtEndWith e = useDynWith
+  (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
 
 useDynAtEnd
   :: forall value
-   . Event value
-  -> ( { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Nut
-useDynAtEnd e = useDyn (mapAccum (\a b -> (a + 1) /\ (a /\ b)) 0 e)
+   . Poll value
+  -> Hook
+       { value :: value, remove :: Effect Unit, sendTo :: Int -> Effect Unit }
+useDynAtEnd b = useDynAtEndWith b dynOptions
 
-useDyn'
-  :: Int
-  -> ( { remove :: Effect Unit, sendTo :: Int -> Effect Unit }
-       -> Nut
-     )
-  -> Event Child
-useDyn' i f = keepLatest Deku.do
-  setChildLogic /\ childLogic <- bus <<< curry
-  pure
-    ( insert i
-        ( f
-            { remove: setChildLogic remove
-            , sendTo: setChildLogic <<< sendToPos
-            }
-        )
-    ) <|> childLogic
-
--- | A hook that remembers its most recent value and plays it back upon subscription _without_ an initial value. See [`useHot'`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
-useHot'
-  :: forall a. ((a -> Effect Unit) /\ Event a -> Nut) -> Nut
-useHot' f = Nut ee
+-- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
+-- | and creates a `Nut`. This allows you to use an event to switch between different
+-- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
+-- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
+-- | and should be used when the content needs to be replaced wholesale. For a more efficient
+-- | approach, see the `useDyn` hook.
+switcher :: forall a. (a -> Nut) -> Poll a -> Nut
+switcher f poll = Deku.do
+  ctr <- useRant (counter poll)
+  dctr <- useDeflect (counter poll)
+  { value } <- useDynAtBeginningWith (ctr <|> dctr) $ dynOptions
+    { remove = \(Tuple oldV _) -> filterMap
+        (\(Tuple newV _) -> if newV == oldV + 1 then Just unit else Nothing)
+        ctr
+    }
+  f (snd value)
   where
-  ee :: forall payload. NutF payload
-  ee = NutF $ envy
-    $
-      ( coerce
-          :: Event (NutF payload) -> Event (Entity Int (Node payload))
-      )
-    $ makeLemmingEventO
-        ( mkSTFn2 \(Subscriber s) k -> do
-            { push, event } <- createPure
-            current <- STRef.new Nothing
-            let writeVal v = STRef.write (Just v) current
-            let
-              push'' i = liftST do
-                _ <- writeVal i
-                push i
-            -- push' i = do
-            --   _ <- writeVal i
-            --   push i
-            let
-              event' = makeLemmingEventO
-                ( mkSTFn2 \_ k' -> do
-                    val <- STRef.read current
-                    for_ val \x -> runSTFn1 k' x
-                    runSTFn2 s event k'
-                )
-            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
-            runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
-        )
+  counter = mapAccum fn 0
+    where
+    fn a b = (a + 1) /\ (a /\ b)
 
--- | A hook that remembers its most recent value and plays it back upon subscription. See [`useHot`](https://purescript-deku.netlify.app/core-concepts/state#memoization-and-usehot) in the Deku guide for more info.
-useHot
-  :: forall a
-   . a
-  -> ((a -> Effect Unit) /\ Event a -> Nut)
-  -> Nut
-useHot a f = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF $ envy
-    $
-      ( coerce
-          :: Event (NutF payload) -> Event (Entity Int (Node payload))
-      )
-    $ makeLemmingEventO
-        ( mkSTFn2 \(Subscriber s) k -> do
-            { push, event } <- createPure
-            current <- STRef.new Nothing
-            let writeVal v = STRef.write (Just v) current
-            let
-              push'' i = liftST do
-                _ <- writeVal i
-                push i
-            -- push' i = do
-            --   _ <- writeVal i
-            --   push i
-            let
-              event' = makeLemmingEventO
-                ( mkSTFn2 \_ k' -> do
-                    val <- STRef.read current
-                    runSTFn1 k' (fromMaybe a val)
-                    runSTFn2 s event k'
-                )
-            runSTFn1 k ((\(Nut x) -> x) (f (push'' /\ event')))
-            runSTFn2 s event (mkSTFn1 \v -> void $ writeVal v)
-        )
+cycle :: Poll Nut -> Nut
+cycle = switcher identity
 
--- | A hook that runs an arbitrary effect when an event's value changes.
-useEffect
-  :: forall a
-   . Event a
-  -> (a -> Effect Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useEffect e f1 f2 = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF $ envy eeeee
+infixl 4 switcher as <$~>
 
-  eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(NutF d) -> d) eeee
+-- | A flipped version of `switcher`.
+switcherFlipped :: forall a. Poll a -> (a -> Nut) -> Nut
+switcherFlipped a b = switcher b a
 
-  eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
-
-  eee :: Event Nut
-  eee = pure (f2 unit) <|> makeEventO
-    ( mkEffectFn1 \_ -> do
-        runEffectFn2 subscribeO e $ mkEffectFn1 f1
-    )
-
--- | A hook that runs an arbitrary aff when an event's value changes.
-useAff
-  :: forall a
-   . Event a
-  -> (a -> Aff Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useAff e = useEffect e <<< map launchAff_
-
--- | A hook that runs an arbitrary aff when an event's value changes, cancelling the previous aff.
-useAffWithCancellation
-  :: forall a
-   . Event a
-  -> (a -> Aff Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useAffWithCancellation e f1 f2 = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF (envy eeeee)
-
-  eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(NutF d) -> d) eeee
-
-  eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
-
-  eee :: Event Nut
-  eee =
-    makeEventO $ mkEffectFn1 \k -> do
-      r <- liftST $ STRef.new (pure unit)
-      runEffectFn1 k (f2 unit)
-      runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
-        r' <- liftST $ STRef.read r
-        r'' <- launchAff do
-          killFiber (error "useAffWithCancellation") r'
-          f1 a
-        liftST $ void $ STRef.write r'' r
-
--- | A hook that runs an arbitrary aff when an event's value changes, only running after all previous computations from this hook done.
-useAffSequentially
-  :: forall a
-   . Event a
-  -> (a -> Aff Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useAffSequentially e f1 f2 = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF (envy eeeee)
-
-  eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(NutF d) -> d) eeee
-
-  eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
-
-  eee :: Event Nut
-  eee =
-    makeEventO $ mkEffectFn1 \k -> do
-      r <- liftST $ STRef.new (pure unit)
-      runEffectFn1 k (f2 unit)
-      runEffectFn2 subscribeO e $ mkEffectFn1 \a -> do
-        r' <- liftST $ STRef.read r
-        r'' <- launchAff do
-          _ <- joinFiber r'
-          f1 a
-        liftST $ void $ STRef.write r'' r
-
--- | A hook that runs an arbitrary aff when an event's value changes, only running after all previous computations from this hook done. A `Left Error` value kills the sequence, allowing you to start fresh if desired.
-useAffSequentiallyOrDie
-  :: forall a
-   . Event (Either Error a)
-  -> (a -> Aff Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useAffSequentiallyOrDie e f1 f2 = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF (envy eeeee)
-
-  eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(NutF d) -> d) eeee
-
-  eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
-
-  eee :: Event Nut
-  eee =
-    makeEventO $ mkEffectFn1 \k -> do
-      r <- liftST $ STRef.new (pure unit)
-      runEffectFn1 k (f2 unit)
-      runEffectFn2 subscribeO e $ mkEffectFn1 $ case _ of
-        Right a -> do
-          r' <- liftST $ STRef.read r
-          r'' <- launchAff do
-            _ <- joinFiber r'
-            f1 a
-          liftST $ void $ STRef.write r'' r
-        Left err -> do
-          r' <- liftST $ STRef.read r
-          _ <- launchAff do
-            killFiber err r'
-          liftST $ void $ STRef.write (pure unit) r
-
--- | A hook that runs an arbitrary aff when an event's value changes. A `Left Error` value kills the sequence, allowing you to start fresh if desired.
-useAffOrDie
-  :: forall a
-   . Event (Either Error a)
-  -> (a -> Aff Unit)
-  -> (Unit -> Nut)
-  -> Nut
-useAffOrDie e f1 f2 = Nut ee
-  where
-  ee :: forall payload. NutF payload
-  ee = NutF (envy eeeee)
-
-  eeeee :: forall payload. Event (Entity Int (Node payload))
-  eeeee = map (\(NutF d) -> d) eeee
-
-  eeee :: forall payload. Event (NutF payload)
-  eeee = map (\(Nut d) -> d) eee
-
-  eee :: Event Nut
-  eee =
-    makeEventO $ mkEffectFn1 \k -> do
-      r <- liftST $ STRef.new []
-      runEffectFn1 k (f2 unit)
-      runEffectFn2 subscribeO e $ mkEffectFn1 $ case _ of
-        Right a -> do
-          r' <- launchAff do
-            f1 a
-          liftST $ void $ STRef.modify (Array.cons r') r
-        Left err -> do
-          arr <- liftST $ STRef.read r
-          liftST $ void $ STRef.write [] r
-          foreachE arr \r' -> launchAff_ do
-            killFiber err r'
+infixl 1 switcherFlipped as <#~>

@@ -3,42 +3,34 @@
 -- | the DOM, and basic text creation. It also has several internal functions used for
 -- | DOM element creation.
 module Deku.Control
-  ( (<#~>)
-  , (<$~>)
-  , blank
-  , deku
+  ( deku
   , elementify2
-  , toDeku
   , globalPortal
   , globalPortal1
-  , guard
   , portal
   , portal1
-  , switcher
-  , switcherFlipped
   , text
   , text_
+  , unsafeSetAttribute
   ) where
 
 import Prelude
 
+import Bolson.Control (behaving)
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR, Scope(..))
+import Bolson.Core (Element(..), Entity(..), Scope(..))
 import Bolson.Core as BCore
-import Control.Alt ((<|>))
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
 import Data.FastVect.FastVect (Vect, singleton, index)
-import Data.Filterable (filter)
+import Data.Foldable (for_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (class Newtype, unwrap, wrap)
+import Data.Maybe (Maybe(..))
+import Data.Newtype (unwrap, wrap)
 import Data.Profunctor (dimap, lcmap)
-import Data.Tuple (snd)
-import Data.Tuple.Nested ((/\))
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Node(..), Nut(..), NutF(..), dyn, envy, insert_, remove, unsafeSetPos)
-import FRP.Event (Event, Subscriber(..), keepLatest, makeLemmingEventO, mapAccum, memoize, merge)
+import Data.Tuple (Tuple(..))
+import Deku.Attribute (Attribute, Attribute', AttributeValue(..), unsafeUnAttribute)
+import Deku.Core (DOMInterpret(..), HeadNode', Node(..), Node', Nut(..), NutF(..), dyn, flattenArgs, unsafeSetPos)
+import FRP.Poll (Poll, merge, sample, sampleBy)
 import Prim.Int (class Compare)
 import Prim.Ordering (GT)
 import Record (union)
@@ -55,28 +47,26 @@ unsafeSetText
   :: forall payload
    . DOMInterpret payload
   -> String
-  -> Event String
-  -> Event payload
-unsafeSetText (DOMInterpret { setText }) id txt = map
+  -> String
+  -> payload
+unsafeSetText (DOMInterpret { setText }) id txt =
   (setText <<< { id, text: _ })
-  txt
+    txt
 
 unsafeSetAttribute
-  :: forall element payload
+  :: forall payload
    . DOMInterpret payload
   -> String
-  -> Event (Attribute element)
-  -> Event payload
-unsafeSetAttribute (DOMInterpret { setProp, setCb, unsetAttribute }) id atts =
-  map
-    ( ( \{ key, value } -> case value of
-          Prop' s -> setProp { id, key, value: s }
-          Cb' c -> setCb { id, key, value: c }
-          Unset' -> unsetAttribute { id, key }
-      ) <<<
-        unsafeUnAttribute
-    )
-    (atts)
+  -> Attribute'
+  -> payload
+unsafeSetAttribute
+  (DOMInterpret { setProp, setCb, unsetAttribute })
+  id
+  { key, value } =
+  case value of
+    Prop' s -> setProp { id, key, value: s }
+    Cb' c -> setCb { id, key, value: c }
+    Unset' -> unsetAttribute { id, key }
 
 -- | Used internally to create new [`Element`-s](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 -- | Do not use this directly. Instead, use `unsafeCustomElement` from `Deku.DOM`.
@@ -84,7 +74,7 @@ elementify2
   :: forall element
    . Maybe String
   -> String
-  -> Array (Event (Attribute element))
+  -> Array (Poll (Attribute element))
   -> Array Nut
   -> Nut
 elementify2 ns en attributes kids = Nut
@@ -106,48 +96,44 @@ elementify
   :: forall payload element
    . Maybe String
   -> String
-  -> Event (Attribute element)
+  -> Poll (Attribute element)
   -> NutF payload
   -> Node payload
-elementify ns tag atts children = Node go
+elementify ns tag atts children = Node $ Element go
   where
+  go :: Node' payload
   go
-    { parent, scope, raiseId, pos, dynFamily, ez }
-    di@(DOMInterpret { ids, deleteFromCache, makeElement, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
+    { parent, scope, raiseId, pos, deferralPath, dynFamily, ez }
+    di@
+      ( DOMInterpret
+          { ids, deferPayload, deleteFromCache, makeElement, attributeParent }
+      ) = behaving \ee kx subscribe ->
+    do
       me <- ids
-      raiseId me
-      unsub <- runSTFn2 mySub
-        ( ( merge
-              ( [ pure
-                    ( makeElement
-                        { id: me, parent, scope, ns, tag, pos, dynFamily }
-                    )
-                , unsafeSetAttribute di me atts
-                ] <> maybe []
-                  ( \p ->
-                      [ pure $ attributeParent
-                          { id: me, parent: p, pos, dynFamily, ez }
-                      ]
-                  )
-                  parent
-              )
-          )
-            <|> __internalDekuFlatten
-              { parent: Just me
-              , scope
-              , ez: true
-              , raiseId: \_ -> pure unit
-              , pos: Nothing
-              , dynFamily: Nothing
-              }
-              di
-              children
+      raiseId $ show me
+      kx $ makeElement { id: show me, parent, scope, ns, tag, pos, dynFamily }
+      for_ parent \p ->
+        kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+
+      kx $ deferPayload deferralPath $ deleteFromCache { id: show me }
+      subscribe
+        ( sample
+            ( __internalDekuFlatten
+                children
+                { parent: Just $ show me
+                , deferralPath
+                , scope
+                , ez: true
+                , raiseId: \_ -> pure unit
+                , pos: Nothing
+                , dynFamily: Nothing
+                }
+                di
+            )
+            ee
         )
-        k
-      pure do
-        runSTFn1 k (deleteFromCache { id: me })
-        unsub
+      subscribe
+        (sampleBy (\zzz fff -> fff $ unsafeSetAttribute di (show me) (unsafeUnAttribute zzz)) atts ee)
 
 -- | Creates a portal.
 -- |
@@ -195,7 +181,7 @@ globalPortal v' c' =
     -> NutF payload
   go v c = NutF
     ( Bolson.globalPortalComplexComplex
-        portalFlatten
+        flattenArgs
         { fromEltO1: coerce
         , fromEltO2: coerce
         , toElt: coerce
@@ -216,41 +202,6 @@ globalPortal1
   -> (Nut -> Nut)
   -> Nut
 globalPortal1 i f = globalPortal (singleton i) (lcmap (index (Proxy :: _ 0)) f)
-
--- ugh, this isn't sacred, delete it and regenerate if something changes
-portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 payload171
-   . Newtype b143
-       { ids :: d145
-       | t149
-       }
-  => { disconnectElement ::
-         DOMInterpret t157
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t159
-            }
-         -> t157
-     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
-     , ids :: b143 -> d145
-     , toElt ::
-         Node payload171
-         -> Element (DOMInterpret payload171)
-              ( pos :: Maybe Int
-              , dynFamily :: Maybe String
-              , ez :: Boolean
-              )
-              payload171
-     }
-portalFlatten =
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
 
 -- | A variation of portal that takes a single element instead of a vector of elements.
 portal1
@@ -289,19 +240,17 @@ portal
   -> (Vect n Nut -> Nut)
   -> Nut
 portal v' c' =
-  -- all local portals are wrapped in a `dyn`
-  -- otherwise, they would have no unique scope, which would not
-  -- allow us to determine if they've exacped their scope
-  -- for global portals, this is not needed as they use the global scope
   dyn
-    ( pure unit <#> \_ -> pure
-        $ insert_
+    ( pure
+        ( Tuple empty
             ( Nut
                 ( go (map (\(Nut df) -> df) v')
                     (shouldBeSafe c')
                 )
             )
+        )
     )
+
   where
   shouldBeSafe
     :: forall payload
@@ -317,7 +266,7 @@ portal v' c' =
     -> NutF payload
   go v c = NutF
     ( Bolson.portalComplexComplex
-        portalFlatten
+        flattenArgs
         { fromEltO1: coerce
         , fromEltO2: coerce
         , toElt: coerce
@@ -332,141 +281,86 @@ portal v' c' =
         (dimap (map ((_ $ unit) >>> wrap)) unwrap c)
     )
 
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | the emitted strings. Each emitted string replaces the previous string.
-text
-  :: Event String
-  -> Nut
-text txt = Nut go'
+text_ :: String -> Nut
+text_ s = text (pure s)
+
+text :: Poll String -> Nut
+text t2 = Nut go'
   where
   go' :: forall payload. NutF payload
-  go' = NutF (Element' (Node go))
+  go' = NutF (Element' (Node (Element go)))
 
   go
     :: forall payload
-     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+     . Node' payload
   go
-    { parent, scope, raiseId, dynFamily, pos, ez }
-    di@(DOMInterpret { ids, makeText, deleteFromCache, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k -> do
-      me <- ids
-      raiseId me
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ pure (makeText { id: me, parent, pos, scope, dynFamily })
-            , unsafeSetText di me txt
-            , maybe empty
-                ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily, ez }
-                )
-                parent
-            ]
-        )
-        k
-      pure do
-        runSTFn1 k (deleteFromCache { id: me })
-        unsub
-
--- | Create a [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) node from
--- | a string. The node is set immediately with the string and does not change.
-text_ :: String -> Nut
-text_ txt = text (pure txt)
+    { parent, scope, raiseId, deferralPath, dynFamily, pos, ez }
+    di@
+      ( DOMInterpret
+          { ids, makeText, deferPayload, deleteFromCache, attributeParent }
+      ) = behaving \e kx subscribe -> do
+    me <- ids
+    raiseId $ show me
+    kx $ makeText { id: show me, parent, pos, scope, dynFamily }
+    for_ parent \p ->
+      kx $ attributeParent { id: show me, parent: p, pos, dynFamily, ez }
+    kx $ deferPayload deferralPath (deleteFromCache { id: show me })
+    subscribe
+      (sampleBy (\ttt fff -> fff $ unsafeSetText di (show me) ttt) t2 e)
 
 -- | A low-level function that creates a Deku application.
 -- | In most situations this should not be used. Instead, use functions from `Deku.Toplevel`.
 deku
   :: Web.DOM.Element
   -> Nut
-  -> ( forall payload
-        . DOMInterpret payload
-       -> Event payload
-     )
+  -> (forall payload. HeadNode' payload)
 deku root (Nut cc) = go cc
   where
   go
     :: forall payload
      . NutF payload
-    -> DOMInterpret payload
-    -> Event payload
-  go children di@(DOMInterpret { makeRoot }) = makeLemmingEventO $ mkSTFn2
-    \(Subscriber mySub) k -> do
-      let me = "deku-root" -- <- ids
-      runSTFn2 mySub
-        ( pure (makeRoot { id: me, root })
-            <|> __internalDekuFlatten
-              { parent: Just me
-              , scope: Local "rootScope"
-              , raiseId: \_ -> pure unit
-              , ez: true
-              , pos: Nothing
-              , dynFamily: Nothing
-              }
-              di
-              children
+    -> HeadNode' payload
+  go
+    children
+    di@
+      ( DOMInterpret
+          { ids
+          , makeRoot
+          , forcePayload
+          , deferPayload
+          , deleteFromCache
+          }
+      ) = behaving \ee kx subscribe -> do
+    let me = "deku-root"
+    headRedecorator <- ids
+    kx $ makeRoot { id: me, root }
+    for_
+      [ forcePayload (pure headRedecorator)
+      , deleteFromCache { id: me }
+      ]
+      (kx <<< deferPayload (pure headRedecorator))
+    subscribe
+      ( ( sample
+            ( __internalDekuFlatten
+                children
+                { parent: Just me
+                , deferralPath: pure headRedecorator
+                , scope: Local "rootScope"
+                , raiseId: \_ -> pure unit
+                , ez: true
+                , pos: Nothing
+                , dynFamily: Nothing
+                }
+                di
+            )
+            ee
         )
-        k
+      )
 
 data Stage = Begin | Middle | End
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b (NutF c) = Bolson.flatten portalFlatten a b c
-
--- | Like `bindFlipped`, except instead of working with a monad, it dipts into an `Event`
--- | and creates a `Nut`. This allows you to use an event to switch between different
--- | bits of DOM. This is how a [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM) works
--- | in its most basic, unoptimized form. As a result, `switcher`, while convenient, is inefficient
--- | and should be used when the content needs to be replaced wholesale. For a more efficient
--- | approach, see the `useDyn` hook.
-switcher
-  :: forall a
-   . (a -> Nut)
-  -> Event a
-  -> Nut
-switcher f event = dyn $ keepLatest
-  $ memoize (counter event) \cenv -> map
-      ( \(p /\ n) -> merge
-          [ ((const remove) <$> filter (eq (n + 1) <<< snd) cenv)
-          , pure (insert_ $ coerce (f p))
-          ]
-      )
-      cenv
-  where
-  counter = mapAccum fn 0
-    where
-    fn a b = (a + 1) /\ (b /\ a)
-
-infixl 4 switcher as <$~>
-
--- | A flipped version of `switcher`.
-switcherFlipped
-  :: forall a
-   . Event a
-  -> (a -> Nut)
-  -> Nut
-switcherFlipped = flip switcher
-
-infixl 1 switcherFlipped as <#~>
-
--- | Inserts the Deku Nut when an event emits `true`, otherwise destroys the element.
-guard
-  :: Event Boolean
-  -> Nut
-  -> Nut
-guard eb d = switcher
-  (if _ then d else blank)
-  eb
-
--- | An empty domable. `mempty` also works.
-blank :: Nut
-blank = mempty
-
-toDeku :: forall a. (a -> Event Nut) -> a -> Nut
-toDeku = compose envy
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b

@@ -9,23 +9,24 @@ module Deku.Toplevel where
 
 import Prelude
 
-import Bolson.Control as Bolson
-import Bolson.Core (Element(..), PSR, Scope(..))
-import Control.Alt ((<|>))
-import Control.Monad.Free (resume)
+import Bolson.Control as BControl
+import Bolson.Core (Scope(..))
 import Control.Monad.ST (ST)
 import Control.Monad.ST.Class (liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal as RRef
-import Data.Either (Either(..))
+import Data.Foldable (for_, traverse_)
+import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Deku.Control (deku)
-import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
-import Deku.Interpret (EFunctionOfFFIDOMSnapshot(..), FFIDOMSnapshot, FreeEFunctionOfFFIDOMSnapshotU, FunctionOfFFIDOMSnapshotU, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
+import Deku.Core (Node', Nut(..), NutF(..), flattenArgs)
+import Deku.Interpret (FFIDOMSnapshot, fullDOMInterpret, getAllComments, hydratingDOMInterpret, makeFFIDOMSnapshot, setHydrating, ssrDOMInterpret, unSetHydrating)
 import Deku.SSR (ssr')
 import Effect (Effect)
-import FRP.Event (Event, keepLatest, makeEvent, subscribe, subscribePure)
+import Effect.Exception (error, throwException)
+import FRP.Poll (sample_)
+import FRP.Event (create, createPure, subscribe, subscribePure)
 import Safe.Coerce (coerce)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Element as DOM
@@ -35,47 +36,38 @@ import Web.HTML.HTMLDocument (body)
 import Web.HTML.HTMLElement (toElement)
 import Web.HTML.Window (document)
 
-flattenToSingleEvent
-  :: FFIDOMSnapshot
-  -> Event FreeEFunctionOfFFIDOMSnapshotU
-  -> Event FunctionOfFFIDOMSnapshotU
-flattenToSingleEvent ffi = go' 0
-  where
-  go' n = keepLatest <<< map (go n)
-
-  go :: Int -> FreeEFunctionOfFFIDOMSnapshotU -> Event FunctionOfFFIDOMSnapshotU
-  go n = resume >>> case _ of
-    Left (EFunctionOfFFIDOMSnapshot l) -> keepLatest (map (f n) l)
-    Right _ -> mempty
-
-  f
-    :: Int
-    -> (FFIDOMSnapshot -> Effect FreeEFunctionOfFFIDOMSnapshotU)
-    -> Event FunctionOfFFIDOMSnapshotU
-  f n i = go' (n + 1) $ makeEvent \k -> do
-    pure unit
-    i ffi >>= k
-    pure (pure unit)
-
 -- | Runs a deku application in a DOM element, returning a canceler that can
 -- | be used to cancel the application.
 runInElement'
   :: Web.DOM.Element
   -> Nut
-  -> Effect (Effect Unit)
+  -> Effect (Effect FFIDOMSnapshot)
 runInElement' elt eee = do
   ffi <- makeFFIDOMSnapshot
-  evt <- liftST (RRef.new 0) <#> (deku elt eee <<< fullDOMInterpret)
-  subscribe (flattenToSingleEvent ffi evt) \i -> i ffi
+  seed <- liftST $ RRef.new 0
+  cache <- liftST $ RRef.new Map.empty
+  let
+    executor f = f ffi
+    bhv = deku elt eee (fullDOMInterpret seed cache executor)
+  bang <- liftST $ create
+  u <- liftST $ subscribe (sample_ bhv bang.event) executor
+  bang.push unit
+  pure do
+    o <- liftST $ RRef.read cache
+    for_ o (traverse_ executor)
+    liftST u
+    pure ffi
 
 -- | Runs a deku application in the body of a document, returning a canceler that can
 -- | be used to cancel the application.
 runInBody'
   :: Nut
-  -> Effect (Effect Unit)
+  -> Effect (Effect FFIDOMSnapshot)
 runInBody' eee = do
   b' <- window >>= document >>= body
-  maybe mempty (\elt -> runInElement' elt eee) (toElement <$> b')
+  maybe (throwException (error "Could not find element"))
+    (flip runInElement' eee)
+    (toElement <$> b')
 
 -- | Runs a deku application in the body of a document
 runInBody
@@ -89,31 +81,43 @@ foreign import dekuRoot :: Effect DOM.Element
 
 -- | Hydrates an application created using `runSSR`, returning a canceler that can
 -- | be used to end the application.
-hydrate' :: Nut -> Effect (Effect Unit)
+hydrate' :: Nut -> Effect (Effect FFIDOMSnapshot)
 hydrate' children = do
   ffi <- makeFFIDOMSnapshot
   getAllComments ffi
-  di <- liftST (RRef.new 0) <#> hydratingDOMInterpret
+  seed <- liftST $ RRef.new 0
+  cache <- liftST $ RRef.new Map.empty
+  let
+    executor f = f ffi
+    di = hydratingDOMInterpret seed cache executor
   (coerce setHydrating :: _ -> _ Unit) ffi
   let me = "deku-root"
   root <- dekuRoot
-  u <- subscribe
-    ( flattenToSingleEvent ffi
-        ( pure ((unwrap di).makeRoot { id: me, root }) <|> __internalDekuFlatten
-            { parent: Just "deku-root"
-            , scope: Local "rootScope"
-            , raiseId: \_ -> pure unit
-            , ez: true
-            , pos: Nothing
-            , dynFamily: Nothing
-            }
-            di
-            (unsafeCoerce children)
-        )
-    )
-    \i -> i ffi
+  headRedecorator <- liftST $ (unwrap di).ids
+  let
+    bhv = __internalDekuFlatten
+      (unsafeCoerce children)
+      { parent: Just "deku-root"
+      , scope: Local "rootScope"
+      , deferralPath: pure headRedecorator
+      , raiseId: \_ -> pure unit
+      , ez: true
+      , pos: Nothing
+      , dynFamily: Nothing
+      }
+      di
+  (unwrap di).makeRoot { id: me, root } ffi
+  bang <- liftST $ create
+  u <- liftST $ subscribe (sample_ bhv bang.event) executor
+  bang.push unit
   (coerce unSetHydrating :: _ -> _ Unit) ffi
-  pure u
+  pure do
+    o <- liftST $ RRef.read cache
+    for_ o (traverse_ executor)
+    (unwrap di).forcePayload (pure headRedecorator) ffi
+    (unwrap di).deleteFromCache { id: me } ffi
+    liftST $ u
+    pure ffi
 
 -- | Hydrates an application created using `runSSR`.
 hydrate :: Nut -> Effect Unit
@@ -121,9 +125,8 @@ hydrate a = void (hydrate' a)
 
 -- | Creates a static site from a deku application. The top-level element for this site is `body`.
 runSSR
-  :: forall r
-   . Nut
-  -> ST r String
+  :: Nut
+  -> ST Global String
 
 runSSR = runSSR' "body"
 
@@ -131,54 +134,41 @@ runSSR = runSSR' "body"
 -- | passed to this function as a first argument.
 runSSR'
   :: String
-  -> (forall r. Nut -> ST r String)
+  -> Nut
+  -> ST Global String
 runSSR' topTag = go
   where
   go
-    :: forall r. Nut -> ST r String
-  go (Nut children) = do
+    :: Nut -> ST Global String
+  go (Nut children) = ssr' topTag <$> do
+    seed <- RRef.new 0
+    instr <- RRef.new []
+    cache <- liftST $ RRef.new Map.empty
+    let di = ssrDOMInterpret seed cache mempty
+    -- we thunk to create the head redecorator
+    headRedecorator <- liftST $ (unwrap di).ids
     let
-      unglobal = unsafeCoerce :: ST Global String -> ST r String
-
-    unglobal
-      ( ssr' topTag
-          <$>
-            ( do
-                seed <- RRef.new 0
-                instr <- RRef.new []
-                let di = ssrDOMInterpret seed
-                void $ subscribePure
-                  ( ( __internalDekuFlatten
-                        { parent: Just "deku-root"
-                        , scope: Local "rootScope"
-                        , raiseId: \_ -> pure unit
-                        , ez: true
-                        , pos: Nothing
-                        , dynFamily: Nothing
-                        }
-                        di
-                        children
-                    )
-                  )
-                  \i -> i instr
-                RRef.read instr
-            )
-      )
+      bhv = __internalDekuFlatten
+        children
+        { parent: Just "deku-root"
+        , scope: Local "rootScope"
+        , raiseId: \_ -> pure unit
+        , deferralPath: pure headRedecorator
+        , ez: true
+        , pos: Nothing
+        , dynFamily: Nothing
+        }
+        di
+    bang <- createPure
+    _ <- subscribePure (sample_ bhv bang.event) (\f -> f instr)
+    bang.push unit
+    RRef.read instr
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = Bolson.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
-  a
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten a b c = BControl.flatten flattenArgs
+  ((\(NutF x) -> x) a)
   b
-  ((coerce :: NutF payload -> Nut' payload) c)
+  c

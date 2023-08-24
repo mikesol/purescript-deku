@@ -10,14 +10,6 @@
 /.psa*
 /.spago
 /output-es/
-/examples/docs/Examples.js
-/examples/docs/Examples.purs
-/examples/**/index.js
-/examples/**/bundle.js
-/examples/**/main.js
-/examples/**/make.mjs
-/examples/**/config.json
-/examples/docs/Static/**.html
 packages.json
 .venv
 /test-results/

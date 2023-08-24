@@ -387,8 +387,6 @@ module Deku.DOM.Attributes
   , autocompleteBilling
   , autocompleteShipping
   , autocompleteSection
-  , dirname
-  , dirname_
   , form
   , form_
   , xdata
@@ -488,6 +486,8 @@ module Deku.DOM.Attributes
   , minlength_
   , maxlength
   , maxlength_
+  , dirname
+  , dirname_
   , placeholder
   , placeholder_
   , list
@@ -687,65 +687,59 @@ module Deku.DOM.Attributes
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
-import FRP.Event as FRP.Event
+import FRP.Poll as FRP.Poll
 import Deku.DOM.Combinators (unset) as Combinators
 import Deku.Attribute as Deku.Attribute
 
 tabindex
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (tabindex :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (tabindex :: String | r))
 tabindex = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "tabindex", value: _ } <<< Deku.Attribute.prop')
 
-tabindex_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (tabindex :: String | r))
+tabindex_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (tabindex :: String | r))
 tabindex_ = tabindex <<< Applicative.pure
 
 nonce
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (nonce :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (nonce :: String | r))
 nonce = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "nonce", value: _ } <<< Deku.Attribute.prop')
 
-nonce_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (nonce :: String | r))
+nonce_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (nonce :: String | r))
 nonce_ = nonce <<< Applicative.pure
 
 slot
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (slot :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (slot :: String | r))
 slot = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "slot", value: _ } <<< Deku.Attribute.prop')
 
-slot_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (slot :: String | r))
+slot_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (slot :: String | r))
 slot_ = slot <<< Applicative.pure
 
-id
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (id :: String | r))
+id :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (id :: String | r))
 id = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "id", value: _ } <<< Deku.Attribute.prop')
 
-id_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (id :: String | r))
+id_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (id :: String | r))
 id_ = id <<< Applicative.pure
 
 klass
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (klass :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (klass :: String | r))
 klass = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "class", value: _ } <<< Deku.Attribute.prop')
 
-klass_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (klass :: String | r))
+klass_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (klass :: String | r))
 klass_ = klass <<< Applicative.pure
 
 popovertargetaction
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (popovertargetaction :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popovertargetaction :: String | r))
 popovertargetaction = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "popovertargetaction", value: _ } <<<
       Deku.Attribute.prop'
@@ -754,2737 +748,2625 @@ popovertargetaction = Functor.map
 popovertargetaction_
   :: forall r
    . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (popovertargetaction :: String | r))
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popovertargetaction :: String | r))
 popovertargetaction_ = popovertargetaction <<< Applicative.pure
 
 popovertargetactionHide
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (popovertargetaction :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (popovertargetaction :: String | r))
 popovertargetactionHide = popovertargetaction_ "hide"
 
 popovertargetactionShow
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (popovertargetaction :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (popovertargetaction :: String | r))
 popovertargetactionShow = popovertargetaction_ "show"
 
 popovertargetactionToggle
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (popovertargetaction :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (popovertargetaction :: String | r))
 popovertargetactionToggle = popovertargetaction_ "toggle"
 
 popovertarget
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (popovertarget :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popovertarget :: String | r))
 popovertarget = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "popovertarget", value: _ } <<< Deku.Attribute.prop')
 
 popovertarget_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (popovertarget :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (popovertarget :: String | r))
 popovertarget_ = popovertarget <<< Applicative.pure
 
 popover
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (popover :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (popover :: String | r))
 popover = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "popover", value: _ } <<< Deku.Attribute.prop')
 
-popover_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (popover :: String | r))
+popover_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (popover :: String | r))
 popover_ = popover <<< Applicative.pure
 
-popoverManual :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (popover :: String | r))
+popoverManual :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (popover :: String | r))
 popoverManual = popover_ "manual"
 
-popoverAuto :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (popover :: String | r))
+popoverAuto :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (popover :: String | r))
 popoverAuto = popover_ "auto"
 
 draggable
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (draggable :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (draggable :: String | r))
 draggable = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "draggable", value: _ } <<< Deku.Attribute.prop')
 
 draggable_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (draggable :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (draggable :: String | r))
 draggable_ = draggable <<< Applicative.pure
 
 enterkeyhint
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhint = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "enterkeyhint", value: _ } <<< Deku.Attribute.prop')
 
 enterkeyhint_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhint_ = enterkeyhint <<< Applicative.pure
 
-enterkeyhintSend
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+enterkeyhintSend :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintSend = enterkeyhint_ "send"
 
 enterkeyhintSearch
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintSearch = enterkeyhint_ "search"
 
 enterkeyhintPrevious
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintPrevious = enterkeyhint_ "previous"
 
-enterkeyhintNext
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+enterkeyhintNext :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintNext = enterkeyhint_ "next"
 
-enterkeyhintGo :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+enterkeyhintGo :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintGo = enterkeyhint_ "go"
 
-enterkeyhintDone
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+enterkeyhintDone :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintDone = enterkeyhint_ "done"
 
 enterkeyhintEnter
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enterkeyhint :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enterkeyhint :: String | r))
 enterkeyhintEnter = enterkeyhint_ "enter"
 
 inputmode
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmode = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "inputmode", value: _ } <<< Deku.Attribute.prop')
 
 inputmode_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmode_ = inputmode <<< Applicative.pure
 
-inputmodeSearch :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeSearch :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeSearch = inputmode_ "search"
 
-inputmodeDecimal :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeDecimal :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeDecimal = inputmode_ "decimal"
 
-inputmodeNumeric :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeNumeric :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeNumeric = inputmode_ "numeric"
 
-inputmodeEmail :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeEmail :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeEmail = inputmode_ "email"
 
-inputmodeUrl :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeUrl :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeUrl = inputmode_ "url"
 
-inputmodeTel :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeTel :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeTel = inputmode_ "tel"
 
-inputmodeText :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeText :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeText = inputmode_ "text"
 
-inputmodeNone :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (inputmode :: String | r))
+inputmodeNone :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (inputmode :: String | r))
 inputmodeNone = inputmode_ "none"
 
 autocapitalize
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalize = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "autocapitalize", value: _ } <<< Deku.Attribute.prop')
 
 autocapitalize_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalize_ = autocapitalize <<< Applicative.pure
 
 autocapitalizeCharacters
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeCharacters = autocapitalize_ "characters"
 
 autocapitalizeWords
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeWords = autocapitalize_ "words"
 
 autocapitalizeSentences
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeSentences = autocapitalize_ "sentences"
 
 autocapitalizeOn
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeOn = autocapitalize_ "on"
 
 autocapitalizeNone
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeNone = autocapitalize_ "none"
 
 autocapitalizeOff
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocapitalize :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocapitalize :: String | r))
 autocapitalizeOff = autocapitalize_ "off"
 
 spellcheck
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (spellcheck :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (spellcheck :: String | r))
 spellcheck = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "spellcheck", value: _ } <<< Deku.Attribute.prop')
 
 spellcheck_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (spellcheck :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (spellcheck :: String | r))
 spellcheck_ = spellcheck <<< Applicative.pure
 
 contenteditable
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (contenteditable :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (contenteditable :: String | r))
 contenteditable = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "contenteditable", value: _ } <<< Deku.Attribute.prop')
 
 contenteditable_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (contenteditable :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (contenteditable :: String | r))
 contenteditable_ = contenteditable <<< Applicative.pure
 
 accesskey
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (accesskey :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (accesskey :: String | r))
 accesskey = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "accesskey", value: _ } <<< Deku.Attribute.prop')
 
 accesskey_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (accesskey :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (accesskey :: String | r))
 accesskey_ = accesskey <<< Applicative.pure
 
 autofocus
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (autofocus :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (autofocus :: String | r))
 autofocus = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "autofocus", value: _ } <<< Deku.Attribute.prop')
 
 autofocus_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (autofocus :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (autofocus :: String | r))
 autofocus_ = autofocus <<< Applicative.pure
 
 hidden
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (hidden :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (hidden :: String | r))
 hidden = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "hidden", value: _ } <<< Deku.Attribute.prop')
 
-hidden_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (hidden :: String | r))
+hidden_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (hidden :: String | r))
 hidden_ = hidden <<< Applicative.pure
 
-hiddenHidden :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (hidden :: String | r))
+hiddenHidden :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (hidden :: String | r))
 hiddenHidden = hidden_ "hidden"
 
-hiddenUntilFound :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (hidden :: String | r))
+hiddenUntilFound :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (hidden :: String | r))
 hiddenUntilFound = hidden_ "until-found"
 
 itemprop
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (itemprop :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemprop :: String | r))
 itemprop = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "itemprop", value: _ } <<< Deku.Attribute.prop')
 
-itemprop_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (itemprop :: String | r))
+itemprop_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemprop :: String | r))
 itemprop_ = itemprop <<< Applicative.pure
 
 itemref
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (itemref :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemref :: String | r))
 itemref = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "itemref", value: _ } <<< Deku.Attribute.prop')
 
-itemref_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (itemref :: String | r))
+itemref_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemref :: String | r))
 itemref_ = itemref <<< Applicative.pure
 
 itemid
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (itemid :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemid :: String | r))
 itemid = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "itemid", value: _ } <<< Deku.Attribute.prop')
 
-itemid_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (itemid :: String | r))
+itemid_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemid :: String | r))
 itemid_ = itemid <<< Applicative.pure
 
 itemtype
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (itemtype :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemtype :: String | r))
 itemtype = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "itemtype", value: _ } <<< Deku.Attribute.prop')
 
-itemtype_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (itemtype :: String | r))
+itemtype_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemtype :: String | r))
 itemtype_ = itemtype <<< Applicative.pure
 
 itemscope
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (itemscope :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemscope :: String | r))
 itemscope = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "itemscope", value: _ } <<< Deku.Attribute.prop')
 
 itemscope_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (itemscope :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (itemscope :: String | r))
 itemscope_ = itemscope <<< Applicative.pure
 
-is
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (is :: String | r))
+is :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (is :: String | r))
 is = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "is", value: _ } <<< Deku.Attribute.prop')
 
-is_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (is :: String | r))
+is_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (is :: String | r))
 is_ = is <<< Applicative.pure
 
 title
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (title :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (title :: String | r))
 title = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "title", value: _ } <<< Deku.Attribute.prop')
 
-title_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (title :: String | r))
+title_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (title :: String | r))
 title_ = title <<< Applicative.pure
 
 style
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (style :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (style :: String | r))
 style = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "style", value: _ } <<< Deku.Attribute.prop')
 
-style_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (style :: String | r))
+style_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (style :: String | r))
 style_ = style <<< Applicative.pure
 
 dir
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (dir :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dir :: String | r))
 dir = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "dir", value: _ } <<< Deku.Attribute.prop')
 
-dir_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (dir :: String | r))
+dir_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dir :: String | r))
 dir_ = dir <<< Applicative.pure
 
-dirAuto :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (dir :: String | r))
+dirAuto :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (dir :: String | r))
 dirAuto = dir_ "auto"
 
-dirRtl :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (dir :: String | r))
+dirRtl :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (dir :: String | r))
 dirRtl = dir_ "rtl"
 
-dirLtr :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (dir :: String | r))
+dirLtr :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (dir :: String | r))
 dirLtr = dir_ "ltr"
 
 translate
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (translate :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (translate :: String | r))
 translate = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "translate", value: _ } <<< Deku.Attribute.prop')
 
 translate_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (translate :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (translate :: String | r))
 translate_ = translate <<< Applicative.pure
 
 lang
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (lang :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (lang :: String | r))
 lang = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "lang", value: _ } <<< Deku.Attribute.prop')
 
-lang_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (lang :: String | r))
+lang_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (lang :: String | r))
 lang_ = lang <<< Applicative.pure
 
 target
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (target :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (target :: String | r))
 target = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "target", value: _ } <<< Deku.Attribute.prop')
 
-target_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (target :: String | r))
+target_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (target :: String | r))
 target_ = target <<< Applicative.pure
 
 href
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (href :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (href :: String | r))
 href = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "href", value: _ } <<< Deku.Attribute.prop')
 
-href_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (href :: String | r))
+href_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (href :: String | r))
 href_ = href <<< Applicative.pure
 
 urn
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (urn :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (urn :: String | r))
 urn = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "urn", value: _ } <<< Deku.Attribute.prop')
 
-urn_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (urn :: String | r))
+urn_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (urn :: String | r))
 urn_ = urn <<< Applicative.pure
 
 rev
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rev :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rev :: String | r))
 rev = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rev", value: _ } <<< Deku.Attribute.prop')
 
-rev_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rev :: String | r))
+rev_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rev :: String | r))
 rev_ = rev <<< Applicative.pure
 
 methods
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (methods :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (methods :: String | r))
 methods = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "methods", value: _ } <<< Deku.Attribute.prop')
 
-methods_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (methods :: String | r))
+methods_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (methods :: String | r))
 methods_ = methods <<< Applicative.pure
 
 charset
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (charset :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (charset :: String | r))
 charset = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "charset", value: _ } <<< Deku.Attribute.prop')
 
-charset_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (charset :: String | r))
+charset_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (charset :: String | r))
 charset_ = charset <<< Applicative.pure
 
 fetchpriority
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (fetchpriority :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (fetchpriority :: String | r))
 fetchpriority = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "fetchpriority", value: _ } <<< Deku.Attribute.prop')
 
 fetchpriority_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (fetchpriority :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (fetchpriority :: String | r))
 fetchpriority_ = fetchpriority <<< Applicative.pure
 
 fetchpriorityAuto
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (fetchpriority :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (fetchpriority :: String | r))
 fetchpriorityAuto = fetchpriority_ "auto"
 
 fetchpriorityLow
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (fetchpriority :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (fetchpriority :: String | r))
 fetchpriorityLow = fetchpriority_ "low"
 
 fetchpriorityHigh
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (fetchpriority :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (fetchpriority :: String | r))
 fetchpriorityHigh = fetchpriority_ "high"
 
 disabled
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (disabled :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (disabled :: String | r))
 disabled = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "disabled", value: _ } <<< Deku.Attribute.prop')
 
-disabled_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (disabled :: String | r))
+disabled_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (disabled :: String | r))
 disabled_ = disabled <<< Applicative.pure
 
 color
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (color :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (color :: String | r))
 color = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "color", value: _ } <<< Deku.Attribute.prop')
 
-color_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (color :: String | r))
+color_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (color :: String | r))
 color_ = color <<< Applicative.pure
 
 blocking
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (blocking :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (blocking :: String | r))
 blocking = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "blocking", value: _ } <<< Deku.Attribute.prop')
 
-blocking_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (blocking :: String | r))
+blocking_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (blocking :: String | r))
 blocking_ = blocking <<< Applicative.pure
 
-as
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (as :: String | r))
+as :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (as :: String | r))
 as = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "as", value: _ } <<< Deku.Attribute.prop')
 
-as_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (as :: String | r))
+as_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (as :: String | r))
 as_ = as <<< Applicative.pure
 
 sizes
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (sizes :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (sizes :: String | r))
 sizes = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "sizes", value: _ } <<< Deku.Attribute.prop')
 
-sizes_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (sizes :: String | r))
+sizes_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (sizes :: String | r))
 sizes_ = sizes <<< Applicative.pure
 
 imagesizes
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (imagesizes :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (imagesizes :: String | r))
 imagesizes = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "imagesizes", value: _ } <<< Deku.Attribute.prop')
 
 imagesizes_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (imagesizes :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (imagesizes :: String | r))
 imagesizes_ = imagesizes <<< Applicative.pure
 
 imagesrcset
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (imagesrcset :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (imagesrcset :: String | r))
 imagesrcset = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "imagesrcset", value: _ } <<< Deku.Attribute.prop')
 
 imagesrcset_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (imagesrcset :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (imagesrcset :: String | r))
 imagesrcset_ = imagesrcset <<< Applicative.pure
 
 referrerpolicy
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (referrerpolicy :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (referrerpolicy :: String | r))
 referrerpolicy = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "referrerpolicy", value: _ } <<< Deku.Attribute.prop')
 
 referrerpolicy_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (referrerpolicy :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (referrerpolicy :: String | r))
 referrerpolicy_ = referrerpolicy <<< Applicative.pure
 
 xtype
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtype = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "type", value: _ } <<< Deku.Attribute.prop')
 
-xtype_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtype_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtype_ = xtype <<< Applicative.pure
 
-xtypeButton :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeButton :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeButton = xtype_ "button"
 
-xtypeReset :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeReset :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeReset = xtype_ "reset"
 
-xtypeSubmit :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeSubmit :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeSubmit = xtype_ "submit"
 
-xtypeImage :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeImage :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeImage = xtype_ "image"
 
-xtypeFile :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeFile :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeFile = xtype_ "file"
 
-xtypeRadio :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeRadio :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeRadio = xtype_ "radio"
 
-xtypeCheckbox :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeCheckbox :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeCheckbox = xtype_ "checkbox"
 
-xtypeColor :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeColor :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeColor = xtype_ "color"
 
-xtypeRange :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeRange :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeRange = xtype_ "range"
 
-xtypeNumber :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeNumber :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeNumber = xtype_ "number"
 
-xtypeDatetimeLocal :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeDatetimeLocal :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeDatetimeLocal = xtype_ "datetime-local"
 
-xtypeTime :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeTime :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeTime = xtype_ "time"
 
-xtypeWeek :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeWeek :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeWeek = xtype_ "week"
 
-xtypeMonth :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeMonth :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeMonth = xtype_ "month"
 
-xtypeDate :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeDate :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeDate = xtype_ "date"
 
-xtypePassword :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypePassword :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypePassword = xtype_ "password"
 
-xtypeEmail :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeEmail :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeEmail = xtype_ "email"
 
-xtypeUrl :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeUrl :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeUrl = xtype_ "url"
 
-xtypeTel :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeTel :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeTel = xtype_ "tel"
 
-xtypeSearch :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeSearch :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeSearch = xtype_ "search"
 
-xtypeText :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeText :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeText = xtype_ "text"
 
-xtypeHidden :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeHidden :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeHidden = xtype_ "hidden"
 
-xtypeUpperI :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeUpperI :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeUpperI = xtype_ "I"
 
-xtypeLowerI :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeLowerI :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeLowerI = xtype_ "i"
 
-xtypeUpperA :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeUpperA :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeUpperA = xtype_ "A"
 
-xtypeLowerA :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtypeLowerA :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtypeLowerA = xtype_ "a"
 
-xtype1 :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (xtype :: String | r))
+xtype1 :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (xtype :: String | r))
 xtype1 = xtype_ "1"
 
 hreflang
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (hreflang :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (hreflang :: String | r))
 hreflang = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "hreflang", value: _ } <<< Deku.Attribute.prop')
 
-hreflang_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (hreflang :: String | r))
+hreflang_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (hreflang :: String | r))
 hreflang_ = hreflang <<< Applicative.pure
 
 integrity
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (integrity :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (integrity :: String | r))
 integrity = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "integrity", value: _ } <<< Deku.Attribute.prop')
 
 integrity_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (integrity :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (integrity :: String | r))
 integrity_ = integrity <<< Applicative.pure
 
 media
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (media :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (media :: String | r))
 media = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "media", value: _ } <<< Deku.Attribute.prop')
 
-media_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (media :: String | r))
+media_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (media :: String | r))
 media_ = media <<< Applicative.pure
 
 crossorigin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (crossorigin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (crossorigin :: String | r))
 crossorigin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "crossorigin", value: _ } <<< Deku.Attribute.prop')
 
 crossorigin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (crossorigin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (crossorigin :: String | r))
 crossorigin_ = crossorigin <<< Applicative.pure
 
 crossoriginUseCredentials
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (crossorigin :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (crossorigin :: String | r))
 crossoriginUseCredentials = crossorigin_ "use-credentials"
 
 crossoriginAnonymous
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (crossorigin :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (crossorigin :: String | r))
 crossoriginAnonymous = crossorigin_ "anonymous"
 
 rel
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 rel = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rel", value: _ } <<< Deku.Attribute.prop')
 
-rel_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+rel_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 rel_ = rel <<< Applicative.pure
 
-relPrev :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relPrev :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relPrev = rel_ "prev"
 
-relNext :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relNext :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relNext = rel_ "next"
 
-relTag :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relTag :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relTag = rel_ "tag"
 
-relStylesheet :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relStylesheet :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relStylesheet = rel_ "stylesheet"
 
-relSearch :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relSearch :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relSearch = rel_ "search"
 
-relPreload :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relPreload :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relPreload = rel_ "preload"
 
-relPrefetch :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relPrefetch :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relPrefetch = rel_ "prefetch"
 
-relPreconnect :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relPreconnect :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relPreconnect = rel_ "preconnect"
 
-relPingback :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relPingback :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relPingback = rel_ "pingback"
 
-relOpener :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relOpener :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relOpener = rel_ "opener"
 
-relNoreferrer :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relNoreferrer :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relNoreferrer = rel_ "noreferrer"
 
-relNoopener :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relNoopener :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relNoopener = rel_ "noopener"
 
-relNofollow :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relNofollow :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relNofollow = rel_ "nofollow"
 
-relModulepreload :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relModulepreload :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relModulepreload = rel_ "modulepreload"
 
-relManifest :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relManifest :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relManifest = rel_ "manifest"
 
-relLicense :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relLicense :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relLicense = rel_ "license"
 
-relIcon :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relIcon :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relIcon = rel_ "icon"
 
-relHelp :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relHelp :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relHelp = rel_ "help"
 
-relExternal :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relExternal :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relExternal = rel_ "external"
 
-relDnsPrefetch :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relDnsPrefetch :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relDnsPrefetch = rel_ "dns-prefetch"
 
-relCanonical :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relCanonical :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relCanonical = rel_ "canonical"
 
-relBookmark :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relBookmark :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relBookmark = rel_ "bookmark"
 
-relAuthor :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relAuthor :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relAuthor = rel_ "author"
 
-relAlternate :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (rel :: String | r))
+relAlternate :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (rel :: String | r))
 relAlternate = rel_ "alternate"
 
 scheme
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (scheme :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (scheme :: String | r))
 scheme = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "scheme", value: _ } <<< Deku.Attribute.prop')
 
-scheme_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (scheme :: String | r))
+scheme_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (scheme :: String | r))
 scheme_ = scheme <<< Applicative.pure
 
 httpEquiv
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquiv = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "http-equiv", value: _ } <<< Deku.Attribute.prop')
 
 httpEquiv_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquiv_ = httpEquiv <<< Applicative.pure
 
 httpEquivContentSecurityPolicy
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivContentSecurityPolicy = httpEquiv_ "content-security-policy"
 
 httpEquivXUaCompatible
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivXUaCompatible = httpEquiv_ "x-ua-compatible"
 
-httpEquivSetCookie
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+httpEquivSetCookie :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivSetCookie = httpEquiv_ "set-cookie"
 
-httpEquivRefresh :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+httpEquivRefresh :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivRefresh = httpEquiv_ "refresh"
 
 httpEquivDefaultStyle
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivDefaultStyle = httpEquiv_ "default-style"
 
 httpEquivContentType
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivContentType = httpEquiv_ "content-type"
 
 httpEquivContentLanguage
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (httpEquiv :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (httpEquiv :: String | r))
 httpEquivContentLanguage = httpEquiv_ "content-language"
 
 name
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 name = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "name", value: _ } <<< Deku.Attribute.prop')
 
-name_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+name_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 name_ = name <<< Applicative.pure
 
-nameColorScheme :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameColorScheme :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameColorScheme = name_ "color-scheme"
 
-nameThemeColor :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameThemeColor :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameThemeColor = name_ "theme-color"
 
-nameReferrer :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameReferrer :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameReferrer = name_ "referrer"
 
-nameKeywords :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameKeywords :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameKeywords = name_ "keywords"
 
-nameGenerator :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameGenerator :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameGenerator = name_ "generator"
 
-nameDescription :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameDescription :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameDescription = name_ "description"
 
-nameAuthor :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameAuthor :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameAuthor = name_ "author"
 
-nameApplicationName :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (name :: String | r))
+nameApplicationName :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (name :: String | r))
 nameApplicationName = name_ "application-name"
 
 content
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (content :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (content :: String | r))
 content = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "content", value: _ } <<< Deku.Attribute.prop')
 
-content_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (content :: String | r))
+content_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (content :: String | r))
 content_ = content <<< Applicative.pure
 
 cite
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (cite :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cite :: String | r))
 cite = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "cite", value: _ } <<< Deku.Attribute.prop')
 
-cite_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (cite :: String | r))
+cite_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cite :: String | r))
 cite_ = cite <<< Applicative.pure
 
 compact
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (compact :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (compact :: String | r))
 compact = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "compact", value: _ } <<< Deku.Attribute.prop')
 
-compact_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (compact :: String | r))
+compact_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (compact :: String | r))
 compact_ = compact <<< Applicative.pure
 
 start
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (start :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (start :: String | r))
 start = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "start", value: _ } <<< Deku.Attribute.prop')
 
-start_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (start :: String | r))
+start_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (start :: String | r))
 start_ = start <<< Applicative.pure
 
 reversed
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (reversed :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (reversed :: String | r))
 reversed = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "reversed", value: _ } <<< Deku.Attribute.prop')
 
-reversed_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (reversed :: String | r))
+reversed_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (reversed :: String | r))
 reversed_ = reversed <<< Applicative.pure
 
 value
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (value :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (value :: String | r))
 value = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "value", value: _ } <<< Deku.Attribute.prop')
 
-value_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (value :: String | r))
+value_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (value :: String | r))
 value_ = value <<< Applicative.pure
 
 datetime
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (datetime :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (datetime :: String | r))
 datetime = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "datetime", value: _ } <<< Deku.Attribute.prop')
 
-datetime_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (datetime :: String | r))
+datetime_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (datetime :: String | r))
 datetime_ = datetime <<< Applicative.pure
 
 shape
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shape = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "shape", value: _ } <<< Deku.Attribute.prop')
 
-shape_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+shape_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shape_ = shape <<< Applicative.pure
 
-shapeRectangleState :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+shapeRectangleState :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shapeRectangleState = shape_ "rectangle state"
 
-shapePolygonState :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+shapePolygonState :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shapePolygonState = shape_ "polygon state"
 
-shapeDefaultState :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+shapeDefaultState :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shapeDefaultState = shape_ "default state"
 
-shapeCircleState :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (shape :: String | r))
+shapeCircleState :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (shape :: String | r))
 shapeCircleState = shape_ "circle state"
 
 coords
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (coords :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (coords :: String | r))
 coords = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "coords", value: _ } <<< Deku.Attribute.prop')
 
-coords_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (coords :: String | r))
+coords_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (coords :: String | r))
 coords_ = coords <<< Applicative.pure
 
 ping
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ping :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ping :: String | r))
 ping = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "ping", value: _ } <<< Deku.Attribute.prop')
 
-ping_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ping :: String | r))
+ping_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ping :: String | r))
 ping_ = ping <<< Applicative.pure
 
 download
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (download :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (download :: String | r))
 download = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "download", value: _ } <<< Deku.Attribute.prop')
 
-download_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (download :: String | r))
+download_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (download :: String | r))
 download_ = download <<< Applicative.pure
 
 nohref
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (nohref :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (nohref :: String | r))
 nohref = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "nohref", value: _ } <<< Deku.Attribute.prop')
 
-nohref_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (nohref :: String | r))
+nohref_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (nohref :: String | r))
 nohref_ = nohref <<< Applicative.pure
 
 alt
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (alt :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (alt :: String | r))
 alt = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "alt", value: _ } <<< Deku.Attribute.prop')
 
-alt_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (alt :: String | r))
+alt_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (alt :: String | r))
 alt_ = alt <<< Applicative.pure
 
 height
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (height :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (height :: String | r))
 height = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "height", value: _ } <<< Deku.Attribute.prop')
 
-height_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (height :: String | r))
+height_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (height :: String | r))
 height_ = height <<< Applicative.pure
 
 width
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (width :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (width :: String | r))
 width = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "width", value: _ } <<< Deku.Attribute.prop')
 
-width_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (width :: String | r))
+width_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (width :: String | r))
 width_ = width <<< Applicative.pure
 
 src
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (src :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (src :: String | r))
 src = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "src", value: _ } <<< Deku.Attribute.prop')
 
-src_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (src :: String | r))
+src_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (src :: String | r))
 src_ = src <<< Applicative.pure
 
 srcset
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (srcset :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (srcset :: String | r))
 srcset = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "srcset", value: _ } <<< Deku.Attribute.prop')
 
-srcset_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (srcset :: String | r))
+srcset_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (srcset :: String | r))
 srcset_ = srcset <<< Applicative.pure
 
 vspace
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (vspace :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (vspace :: String | r))
 vspace = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "vspace", value: _ } <<< Deku.Attribute.prop')
 
-vspace_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (vspace :: String | r))
+vspace_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (vspace :: String | r))
 vspace_ = vspace <<< Applicative.pure
 
 hspace
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (hspace :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (hspace :: String | r))
 hspace = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "hspace", value: _ } <<< Deku.Attribute.prop')
 
-hspace_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (hspace :: String | r))
+hspace_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (hspace :: String | r))
 hspace_ = hspace <<< Applicative.pure
 
 border
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (border :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (border :: String | r))
 border = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "border", value: _ } <<< Deku.Attribute.prop')
 
-border_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (border :: String | r))
+border_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (border :: String | r))
 border_ = border <<< Applicative.pure
 
 align
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (align :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (align :: String | r))
 align = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "align", value: _ } <<< Deku.Attribute.prop')
 
-align_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (align :: String | r))
+align_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (align :: String | r))
 align_ = align <<< Applicative.pure
 
 lowsrc
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (lowsrc :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (lowsrc :: String | r))
 lowsrc = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "lowsrc", value: _ } <<< Deku.Attribute.prop')
 
-lowsrc_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (lowsrc :: String | r))
+lowsrc_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (lowsrc :: String | r))
 lowsrc_ = lowsrc <<< Applicative.pure
 
 longdesc
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (longdesc :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (longdesc :: String | r))
 longdesc = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "longdesc", value: _ } <<< Deku.Attribute.prop')
 
-longdesc_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (longdesc :: String | r))
+longdesc_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (longdesc :: String | r))
 longdesc_ = longdesc <<< Applicative.pure
 
 usemap
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (usemap :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (usemap :: String | r))
 usemap = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "usemap", value: _ } <<< Deku.Attribute.prop')
 
-usemap_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (usemap :: String | r))
+usemap_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (usemap :: String | r))
 usemap_ = usemap <<< Applicative.pure
 
 ismap
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ismap :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ismap :: String | r))
 ismap = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "ismap", value: _ } <<< Deku.Attribute.prop')
 
-ismap_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ismap :: String | r))
+ismap_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ismap :: String | r))
 ismap_ = ismap <<< Applicative.pure
 
 loading
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (loading :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (loading :: String | r))
 loading = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "loading", value: _ } <<< Deku.Attribute.prop')
 
-loading_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (loading :: String | r))
+loading_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (loading :: String | r))
 loading_ = loading <<< Applicative.pure
 
-loadingEager :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (loading :: String | r))
+loadingEager :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (loading :: String | r))
 loadingEager = loading_ "eager"
 
-loadingLazy :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (loading :: String | r))
+loadingLazy :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (loading :: String | r))
 loadingLazy = loading_ "lazy"
 
 decoding
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (decoding :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (decoding :: String | r))
 decoding = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "decoding", value: _ } <<< Deku.Attribute.prop')
 
-decoding_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (decoding :: String | r))
+decoding_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (decoding :: String | r))
 decoding_ = decoding <<< Applicative.pure
 
-decodingAuto :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (decoding :: String | r))
+decodingAuto :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (decoding :: String | r))
 decodingAuto = decoding_ "auto"
 
-decodingAsync :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (decoding :: String | r))
+decodingAsync :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (decoding :: String | r))
 decodingAsync = decoding_ "async"
 
-decodingSync :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (decoding :: String | r))
+decodingSync :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (decoding :: String | r))
 decodingSync = decoding_ "sync"
 
 scrolling
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (scrolling :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (scrolling :: String | r))
 scrolling = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "scrolling", value: _ } <<< Deku.Attribute.prop')
 
 scrolling_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (scrolling :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (scrolling :: String | r))
 scrolling_ = scrolling <<< Applicative.pure
 
 marginwidth
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (marginwidth :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (marginwidth :: String | r))
 marginwidth = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "marginwidth", value: _ } <<< Deku.Attribute.prop')
 
 marginwidth_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (marginwidth :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (marginwidth :: String | r))
 marginwidth_ = marginwidth <<< Applicative.pure
 
 marginheight
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (marginheight :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (marginheight :: String | r))
 marginheight = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "marginheight", value: _ } <<< Deku.Attribute.prop')
 
 marginheight_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (marginheight :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (marginheight :: String | r))
 marginheight_ = marginheight <<< Applicative.pure
 
 framespacing
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (framespacing :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (framespacing :: String | r))
 framespacing = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "framespacing", value: _ } <<< Deku.Attribute.prop')
 
 framespacing_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (framespacing :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (framespacing :: String | r))
 framespacing_ = framespacing <<< Applicative.pure
 
 frameborder
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (frameborder :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (frameborder :: String | r))
 frameborder = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "frameborder", value: _ } <<< Deku.Attribute.prop')
 
 frameborder_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (frameborder :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (frameborder :: String | r))
 frameborder_ = frameborder <<< Applicative.pure
 
 allowtransparency
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (allowtransparency :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (allowtransparency :: String | r))
 allowtransparency = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "allowtransparency", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 allowtransparency_
-  :: forall r
-   . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (allowtransparency :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (allowtransparency :: String | r))
 allowtransparency_ = allowtransparency <<< Applicative.pure
 
 allowfullscreen
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (allowfullscreen :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (allowfullscreen :: String | r))
 allowfullscreen = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "allowfullscreen", value: _ } <<< Deku.Attribute.prop')
 
 allowfullscreen_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (allowfullscreen :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (allowfullscreen :: String | r))
 allowfullscreen_ = allowfullscreen <<< Applicative.pure
 
 allow
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (allow :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (allow :: String | r))
 allow = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "allow", value: _ } <<< Deku.Attribute.prop')
 
-allow_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (allow :: String | r))
+allow_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (allow :: String | r))
 allow_ = allow <<< Applicative.pure
 
 sandbox
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandbox = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "sandbox", value: _ } <<< Deku.Attribute.prop')
 
-sandbox_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandbox_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandbox_ = sandbox <<< Applicative.pure
 
 sandboxAllowTopNavigationToCustomProtocols
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowTopNavigationToCustomProtocols = sandbox_ "allow-top-navigation-to-custom-protocols"
 
-sandboxAllowDownloads
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandboxAllowDownloads :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowDownloads = sandbox_ "allow-downloads"
 
 sandboxAllowPresentation
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowPresentation = sandbox_ "allow-presentation"
 
 sandboxAllowOrientationLock
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowOrientationLock = sandbox_ "allow-orientation-lock"
 
-sandboxAllowModals :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandboxAllowModals :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowModals = sandbox_ "allow-modals"
 
 sandboxAllowPopupsToEscapeSandbox
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowPopupsToEscapeSandbox = sandbox_ "allow-popups-to-escape-sandbox"
 
-sandboxAllowScripts :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandboxAllowScripts :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowScripts = sandbox_ "allow-scripts"
 
 sandboxAllowPointerLock
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowPointerLock = sandbox_ "allow-pointer-lock"
 
-sandboxAllowForms :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandboxAllowForms :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowForms = sandbox_ "allow-forms"
 
 sandboxAllowSameOrigin
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowSameOrigin = sandbox_ "allow-same-origin"
 
 sandboxAllowTopNavigationByUserActivation
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowTopNavigationByUserActivation = sandbox_ "allow-top-navigation-by-user-activation"
 
 sandboxAllowTopNavigation
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowTopNavigation = sandbox_ "allow-top-navigation"
 
-sandboxAllowPopups :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (sandbox :: String | r))
+sandboxAllowPopups :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (sandbox :: String | r))
 sandboxAllowPopups = sandbox_ "allow-popups"
 
 srcdoc
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (srcdoc :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (srcdoc :: String | r))
 srcdoc = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "srcdoc", value: _ } <<< Deku.Attribute.prop')
 
-srcdoc_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (srcdoc :: String | r))
+srcdoc_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (srcdoc :: String | r))
 srcdoc_ = srcdoc <<< Applicative.pure
 
 typemustmatch
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (typemustmatch :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (typemustmatch :: String | r))
 typemustmatch = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "typemustmatch", value: _ } <<< Deku.Attribute.prop')
 
 typemustmatch_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (typemustmatch :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (typemustmatch :: String | r))
 typemustmatch_ = typemustmatch <<< Applicative.pure
 
 standby
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (standby :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (standby :: String | r))
 standby = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "standby", value: _ } <<< Deku.Attribute.prop')
 
-standby_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (standby :: String | r))
+standby_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (standby :: String | r))
 standby_ = standby <<< Applicative.pure
 
 declare
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (declare :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (declare :: String | r))
 declare = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "declare", value: _ } <<< Deku.Attribute.prop')
 
-declare_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (declare :: String | r))
+declare_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (declare :: String | r))
 declare_ = declare <<< Applicative.pure
 
 codetype
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (codetype :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (codetype :: String | r))
 codetype = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "codetype", value: _ } <<< Deku.Attribute.prop')
 
-codetype_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (codetype :: String | r))
+codetype_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (codetype :: String | r))
 codetype_ = codetype <<< Applicative.pure
 
 codebase
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (codebase :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (codebase :: String | r))
 codebase = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "codebase", value: _ } <<< Deku.Attribute.prop')
 
-codebase_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (codebase :: String | r))
+codebase_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (codebase :: String | r))
 codebase_ = codebase <<< Applicative.pure
 
 code
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (code :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (code :: String | r))
 code = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "code", value: _ } <<< Deku.Attribute.prop')
 
-code_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (code :: String | r))
+code_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (code :: String | r))
 code_ = code <<< Applicative.pure
 
 classid
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (classid :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (classid :: String | r))
 classid = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "classid", value: _ } <<< Deku.Attribute.prop')
 
-classid_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (classid :: String | r))
+classid_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (classid :: String | r))
 classid_ = classid <<< Applicative.pure
 
 archive
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (archive :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (archive :: String | r))
 archive = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "archive", value: _ } <<< Deku.Attribute.prop')
 
-archive_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (archive :: String | r))
+archive_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (archive :: String | r))
 archive_ = archive <<< Applicative.pure
 
 autocomplete
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocomplete = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "autocomplete", value: _ } <<< Deku.Attribute.prop')
 
 autocomplete_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocomplete_ = autocomplete <<< Applicative.pure
 
-autocompleteImpp
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteImpp :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteImpp = autocomplete_ "impp"
 
 autocompleteEmail
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteEmail = autocomplete_ "email"
 
 autocompleteTelExtension
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelExtension = autocomplete_ "tel-extension"
 
 autocompleteTelLocalSuffix
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelLocalSuffix = autocomplete_ "tel-local-suffix"
 
 autocompleteTelLocalPrefix
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelLocalPrefix = autocomplete_ "tel-local-prefix"
 
 autocompleteTelLocal
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelLocal = autocomplete_ "tel-local"
 
 autocompleteTelAreaCode
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelAreaCode = autocomplete_ "tel-area-code"
 
 autocompleteTelNational
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelNational = autocomplete_ "tel-national"
 
 autocompleteTelCountryCode
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTelCountryCode = autocomplete_ "tel-country-code"
 
-autocompleteTel
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteTel :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTel = autocomplete_ "tel"
 
 autocompletePhoto
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompletePhoto = autocomplete_ "photo"
 
-autocompleteUrl
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteUrl :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteUrl = autocomplete_ "url"
 
-autocompleteSex
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteSex :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteSex = autocomplete_ "sex"
 
 autocompleteBdayYear
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteBdayYear = autocomplete_ "bday-year"
 
 autocompleteBdayMonth
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteBdayMonth = autocomplete_ "bday-month"
 
 autocompleteBdayDay
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteBdayDay = autocomplete_ "bday-day"
 
-autocompleteBday
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteBday :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteBday = autocomplete_ "bday"
 
 autocompleteLanguage
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteLanguage = autocomplete_ "language"
 
 autocompleteTransactionAmount
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTransactionAmount = autocomplete_ "transaction-amount"
 
 autocompleteTransactionCurrency
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteTransactionCurrency = autocomplete_ "transaction-currency"
 
 autocompleteCcType
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcType = autocomplete_ "cc-type"
 
 autocompleteCcCsc
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcCsc = autocomplete_ "cc-csc"
 
 autocompleteCcExpYear
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcExpYear = autocomplete_ "cc-exp-year"
 
 autocompleteCcExpMonth
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcExpMonth = autocomplete_ "cc-exp-month"
 
 autocompleteCcExp
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcExp = autocomplete_ "cc-exp"
 
 autocompleteCcNumber
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcNumber = autocomplete_ "cc-number"
 
 autocompleteCcFamilyName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcFamilyName = autocomplete_ "cc-family-name"
 
 autocompleteCcAdditionalName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcAdditionalName = autocomplete_ "cc-additional-name"
 
 autocompleteCcGivenName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcGivenName = autocomplete_ "cc-given-name"
 
 autocompleteCcName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCcName = autocomplete_ "cc-name"
 
 autocompletePostalCode
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompletePostalCode = autocomplete_ "postal-code"
 
 autocompleteCountryName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCountryName = autocomplete_ "country-name"
 
 autocompleteCountry
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCountry = autocomplete_ "country"
 
 autocompleteAddressLevel1
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLevel1 = autocomplete_ "address-level1"
 
 autocompleteAddressLevel2
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLevel2 = autocomplete_ "address-level2"
 
 autocompleteAddressLevel3
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLevel3 = autocomplete_ "address-level3"
 
 autocompleteAddressLevel4
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLevel4 = autocomplete_ "address-level4"
 
 autocompleteAddressLine3
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLine3 = autocomplete_ "address-line3"
 
 autocompleteAddressLine2
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLine2 = autocomplete_ "address-line2"
 
 autocompleteAddressLine1
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAddressLine1 = autocomplete_ "address-line1"
 
 autocompleteStreetAddress
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteStreetAddress = autocomplete_ "street-address"
 
 autocompleteOrganization
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteOrganization = autocomplete_ "organization"
 
 autocompleteOneTimeCode
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteOneTimeCode = autocomplete_ "one-time-code"
 
 autocompleteCurrentPassword
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteCurrentPassword = autocomplete_ "current-password"
 
 autocompleteNewPassword
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteNewPassword = autocomplete_ "new-password"
 
 autocompleteUsername
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteUsername = autocomplete_ "username"
 
 autocompleteOrganizationTitle
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteOrganizationTitle = autocomplete_ "organization-title"
 
 autocompleteNickname
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteNickname = autocomplete_ "nickname"
 
 autocompleteHonorificSuffix
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteHonorificSuffix = autocomplete_ "honorific-suffix"
 
 autocompleteFamilyName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteFamilyName = autocomplete_ "family-name"
 
 autocompleteAdditionalName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteAdditionalName = autocomplete_ "additional-name"
 
 autocompleteGivenName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteGivenName = autocomplete_ "given-name"
 
 autocompleteHonorificPrefix
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteHonorificPrefix = autocomplete_ "honorific-prefix"
 
-autocompleteName
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteName :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteName = autocomplete_ "name"
 
-autocompleteOn :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteOn :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteOn = autocomplete_ "on"
 
-autocompleteOff
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteOff :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteOff = autocomplete_ "off"
 
 autocompletePager
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompletePager = autocomplete_ "pager"
 
-autocompleteFax
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteFax :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteFax = autocomplete_ "fax"
 
 autocompleteMobile
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteMobile = autocomplete_ "mobile"
 
-autocompleteWork
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteWork :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteWork = autocomplete_ "work"
 
-autocompleteHome
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+autocompleteHome :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteHome = autocomplete_ "home"
 
 autocompleteBilling
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteBilling = autocomplete_ "billing"
 
 autocompleteShipping
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteShipping = autocomplete_ "shipping"
 
 autocompleteSection
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (autocomplete :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (autocomplete :: String | r))
 autocompleteSection = autocomplete_ "section-"
 
-dirname
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (dirname :: String | r))
-dirname = Functor.map
-  (Deku.Attribute.unsafeAttribute <<< { key: "dirname", value: _ } <<< Deku.Attribute.prop')
-
-dirname_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (dirname :: String | r))
-dirname_ = dirname <<< Applicative.pure
-
 form
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (form :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (form :: String | r))
 form = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "form", value: _ } <<< Deku.Attribute.prop')
 
-form_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (form :: String | r))
+form_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (form :: String | r))
 form_ = form <<< Applicative.pure
 
 xdata
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (xdata :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (xdata :: String | r))
 xdata = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "data", value: _ } <<< Deku.Attribute.prop')
 
-xdata_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (xdata :: String | r))
+xdata_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (xdata :: String | r))
 xdata_ = xdata <<< Applicative.pure
 
 muted
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (muted :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (muted :: String | r))
 muted = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "muted", value: _ } <<< Deku.Attribute.prop')
 
-muted_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (muted :: String | r))
+muted_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (muted :: String | r))
 muted_ = muted <<< Applicative.pure
 
 controls
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (controls :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (controls :: String | r))
 controls = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "controls", value: _ } <<< Deku.Attribute.prop')
 
-controls_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (controls :: String | r))
+controls_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (controls :: String | r))
 controls_ = controls <<< Applicative.pure
 
 autoplay
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (autoplay :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (autoplay :: String | r))
 autoplay = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "autoplay", value: _ } <<< Deku.Attribute.prop')
 
-autoplay_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (autoplay :: String | r))
+autoplay_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (autoplay :: String | r))
 autoplay_ = autoplay <<< Applicative.pure
 
 loop
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (loop :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (loop :: String | r))
 loop = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "loop", value: _ } <<< Deku.Attribute.prop')
 
-loop_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (loop :: String | r))
+loop_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (loop :: String | r))
 loop_ = loop <<< Applicative.pure
 
 preload
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (preload :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (preload :: String | r))
 preload = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "preload", value: _ } <<< Deku.Attribute.prop')
 
-preload_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (preload :: String | r))
+preload_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (preload :: String | r))
 preload_ = preload <<< Applicative.pure
 
-preloadAuto :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (preload :: String | r))
+preloadAuto :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (preload :: String | r))
 preloadAuto = preload_ "auto"
 
-preloadMetadata :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (preload :: String | r))
+preloadMetadata :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (preload :: String | r))
 preloadMetadata = preload_ "metadata"
 
-preloadNone :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (preload :: String | r))
+preloadNone :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (preload :: String | r))
 preloadNone = preload_ "none"
 
 playsinline
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (playsinline :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (playsinline :: String | r))
 playsinline = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "playsinline", value: _ } <<< Deku.Attribute.prop')
 
 playsinline_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (playsinline :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (playsinline :: String | r))
 playsinline_ = playsinline <<< Applicative.pure
 
 poster
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (poster :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (poster :: String | r))
 poster = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "poster", value: _ } <<< Deku.Attribute.prop')
 
-poster_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (poster :: String | r))
+poster_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (poster :: String | r))
 poster_ = poster <<< Applicative.pure
 
 default
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (default :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (default :: String | r))
 default = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "default", value: _ } <<< Deku.Attribute.prop')
 
-default_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (default :: String | r))
+default_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (default :: String | r))
 default_ = default <<< Applicative.pure
 
 label
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (label :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (label :: String | r))
 label = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "label", value: _ } <<< Deku.Attribute.prop')
 
-label_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (label :: String | r))
+label_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (label :: String | r))
 label_ = label <<< Applicative.pure
 
 srclang
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (srclang :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (srclang :: String | r))
 srclang = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "srclang", value: _ } <<< Deku.Attribute.prop')
 
-srclang_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (srclang :: String | r))
+srclang_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (srclang :: String | r))
 srclang_ = srclang <<< Applicative.pure
 
 kind
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kind = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "kind", value: _ } <<< Deku.Attribute.prop')
 
-kind_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kind_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kind_ = kind <<< Applicative.pure
 
-kindMetadata :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kindMetadata :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kindMetadata = kind_ "metadata"
 
-kindChapters :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kindChapters :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kindChapters = kind_ "chapters"
 
-kindDescriptions :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kindDescriptions :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kindDescriptions = kind_ "descriptions"
 
-kindCaptions :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kindCaptions :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kindCaptions = kind_ "captions"
 
-kindSubtitles :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (kind :: String | r))
+kindSubtitles :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (kind :: String | r))
 kindSubtitles = kind_ "subtitles"
 
 valign
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (valign :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (valign :: String | r))
 valign = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "valign", value: _ } <<< Deku.Attribute.prop')
 
-valign_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (valign :: String | r))
+valign_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (valign :: String | r))
 valign_ = valign <<< Applicative.pure
 
 charoff
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (charoff :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (charoff :: String | r))
 charoff = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "charoff", value: _ } <<< Deku.Attribute.prop')
 
-charoff_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (charoff :: String | r))
+charoff_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (charoff :: String | r))
 charoff_ = charoff <<< Applicative.pure
 
 char
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (char :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (char :: String | r))
 char = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "char", value: _ } <<< Deku.Attribute.prop')
 
-char_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (char :: String | r))
+char_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (char :: String | r))
 char_ = char <<< Applicative.pure
 
 span
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (span :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (span :: String | r))
 span = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "span", value: _ } <<< Deku.Attribute.prop')
 
-span_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (span :: String | r))
+span_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (span :: String | r))
 span_ = span <<< Applicative.pure
 
 nowrap
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (nowrap :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (nowrap :: String | r))
 nowrap = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "nowrap", value: _ } <<< Deku.Attribute.prop')
 
-nowrap_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (nowrap :: String | r))
+nowrap_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (nowrap :: String | r))
 nowrap_ = nowrap <<< Applicative.pure
 
 bgcolor
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (bgcolor :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (bgcolor :: String | r))
 bgcolor = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "bgcolor", value: _ } <<< Deku.Attribute.prop')
 
-bgcolor_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (bgcolor :: String | r))
+bgcolor_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (bgcolor :: String | r))
 bgcolor_ = bgcolor <<< Applicative.pure
 
 scope
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scope = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "scope", value: _ } <<< Deku.Attribute.prop')
 
-scope_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scope_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scope_ = scope <<< Applicative.pure
 
-scopeAuto :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scopeAuto :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scopeAuto = scope_ "auto"
 
-scopeColgroup :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scopeColgroup :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scopeColgroup = scope_ "colgroup"
 
-scopeRowgroup :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scopeRowgroup :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scopeRowgroup = scope_ "rowgroup"
 
-scopeCol :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scopeCol :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scopeCol = scope_ "col"
 
-scopeRow :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (scope :: String | r))
+scopeRow :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (scope :: String | r))
 scopeRow = scope_ "row"
 
 axis
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (axis :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (axis :: String | r))
 axis = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "axis", value: _ } <<< Deku.Attribute.prop')
 
-axis_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (axis :: String | r))
+axis_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (axis :: String | r))
 axis_ = axis <<< Applicative.pure
 
 abbr
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (abbr :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (abbr :: String | r))
 abbr = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "abbr", value: _ } <<< Deku.Attribute.prop')
 
-abbr_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (abbr :: String | r))
+abbr_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (abbr :: String | r))
 abbr_ = abbr <<< Applicative.pure
 
 headers
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (headers :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (headers :: String | r))
 headers = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "headers", value: _ } <<< Deku.Attribute.prop')
 
-headers_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (headers :: String | r))
+headers_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (headers :: String | r))
 headers_ = headers <<< Applicative.pure
 
 rowspan
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rowspan :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (rowspan :: String | r))
 rowspan = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rowspan", value: _ } <<< Deku.Attribute.prop')
 
-rowspan_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rowspan :: String | r))
+rowspan_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rowspan :: String | r))
 rowspan_ = rowspan <<< Applicative.pure
 
 colspan
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (colspan :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (colspan :: String | r))
 colspan = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "colspan", value: _ } <<< Deku.Attribute.prop')
 
-colspan_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (colspan :: String | r))
+colspan_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (colspan :: String | r))
 colspan_ = colspan <<< Applicative.pure
 
 accept
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (accept :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (accept :: String | r))
 accept = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "accept", value: _ } <<< Deku.Attribute.prop')
 
-accept_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (accept :: String | r))
+accept_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (accept :: String | r))
 accept_ = accept <<< Applicative.pure
 
 formnovalidate
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (formnovalidate :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formnovalidate :: String | r))
 formnovalidate = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "formnovalidate", value: _ } <<< Deku.Attribute.prop')
 
 formnovalidate_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (formnovalidate :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (formnovalidate :: String | r))
 formnovalidate_ = formnovalidate <<< Applicative.pure
 
 novalidate
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (novalidate :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (novalidate :: String | r))
 novalidate = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "novalidate", value: _ } <<< Deku.Attribute.prop')
 
 novalidate_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (novalidate :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (novalidate :: String | r))
 novalidate_ = novalidate <<< Applicative.pure
 
 formtarget
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (formtarget :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formtarget :: String | r))
 formtarget = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "formtarget", value: _ } <<< Deku.Attribute.prop')
 
 formtarget_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (formtarget :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (formtarget :: String | r))
 formtarget_ = formtarget <<< Applicative.pure
 
 formenctype
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (formenctype :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formenctype :: String | r))
 formenctype = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "formenctype", value: _ } <<< Deku.Attribute.prop')
 
 formenctype_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (formenctype :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (formenctype :: String | r))
 formenctype_ = formenctype <<< Applicative.pure
 
 enctype
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (enctype :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (enctype :: String | r))
 enctype = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "enctype", value: _ } <<< Deku.Attribute.prop')
 
-enctype_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (enctype :: String | r))
+enctype_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (enctype :: String | r))
 enctype_ = enctype <<< Applicative.pure
 
-enctypeTextPlain :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enctype :: String | r))
+enctypeTextPlain :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enctype :: String | r))
 enctypeTextPlain = enctype_ "text/plain"
 
 enctypeMultipartFormData
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enctype :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enctype :: String | r))
 enctypeMultipartFormData = enctype_ "multipart/form-data"
 
 enctypeApplicationXWwwFormUrlencoded
-  :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (enctype :: String | r))
+  :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (enctype :: String | r))
 enctypeApplicationXWwwFormUrlencoded = enctype_ "application/x-www-form-urlencoded"
 
 formmethod
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (formmethod :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formmethod :: String | r))
 formmethod = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "formmethod", value: _ } <<< Deku.Attribute.prop')
 
 formmethod_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (formmethod :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (formmethod :: String | r))
 formmethod_ = formmethod <<< Applicative.pure
 
 method
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (method :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (method :: String | r))
 method = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "method", value: _ } <<< Deku.Attribute.prop')
 
-method_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (method :: String | r))
+method_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (method :: String | r))
 method_ = method <<< Applicative.pure
 
-methodDialog :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (method :: String | r))
+methodDialog :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (method :: String | r))
 methodDialog = method_ "dialog"
 
-methodPost :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (method :: String | r))
+methodPost :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (method :: String | r))
 methodPost = method_ "post"
 
-methodGet :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (method :: String | r))
+methodGet :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (method :: String | r))
 methodGet = method_ "get"
 
 formaction
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (formaction :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (formaction :: String | r))
 formaction = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "formaction", value: _ } <<< Deku.Attribute.prop')
 
 formaction_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (formaction :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (formaction :: String | r))
 formaction_ = formaction <<< Applicative.pure
 
 action
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (action :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (action :: String | r))
 action = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "action", value: _ } <<< Deku.Attribute.prop')
 
-action_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (action :: String | r))
+action_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (action :: String | r))
 action_ = action <<< Applicative.pure
 
 acceptCharset
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (acceptCharset :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (acceptCharset :: String | r))
 acceptCharset = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "accept-charset", value: _ } <<< Deku.Attribute.prop')
 
 acceptCharset_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (acceptCharset :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (acceptCharset :: String | r))
 acceptCharset_ = acceptCharset <<< Applicative.pure
 
 for
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (for :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (for :: String | r))
 for = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "for", value: _ } <<< Deku.Attribute.prop')
 
-for_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (for :: String | r))
+for_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (for :: String | r))
 for_ = for <<< Applicative.pure
 
 capture
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (capture :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (capture :: String | r))
 capture = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "capture", value: _ } <<< Deku.Attribute.prop')
 
-capture_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (capture :: String | r))
+capture_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (capture :: String | r))
 capture_ = capture <<< Applicative.pure
 
 minlength
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (minlength :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (minlength :: String | r))
 minlength = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "minlength", value: _ } <<< Deku.Attribute.prop')
 
 minlength_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (minlength :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (minlength :: String | r))
 minlength_ = minlength <<< Applicative.pure
 
 maxlength
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (maxlength :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (maxlength :: String | r))
 maxlength = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "maxlength", value: _ } <<< Deku.Attribute.prop')
 
 maxlength_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (maxlength :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (maxlength :: String | r))
 maxlength_ = maxlength <<< Applicative.pure
+
+dirname
+  :: forall r
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
+dirname = Functor.map
+  (Deku.Attribute.unsafeAttribute <<< { key: "dirname", value: _ } <<< Deku.Attribute.prop')
+
+dirname_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (dirname :: String | r))
+dirname_ = dirname <<< Applicative.pure
 
 placeholder
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (placeholder :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (placeholder :: String | r))
 placeholder = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "placeholder", value: _ } <<< Deku.Attribute.prop')
 
 placeholder_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (placeholder :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (placeholder :: String | r))
 placeholder_ = placeholder <<< Applicative.pure
 
 list
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (list :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (list :: String | r))
 list = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "list", value: _ } <<< Deku.Attribute.prop')
 
-list_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (list :: String | r))
+list_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (list :: String | r))
 list_ = list <<< Applicative.pure
 
 step
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (step :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (step :: String | r))
 step = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "step", value: _ } <<< Deku.Attribute.prop')
 
-step_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (step :: String | r))
+step_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (step :: String | r))
 step_ = step <<< Applicative.pure
 
 max
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (max :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (max :: String | r))
 max = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "max", value: _ } <<< Deku.Attribute.prop')
 
-max_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (max :: String | r))
+max_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (max :: String | r))
 max_ = max <<< Applicative.pure
 
 min
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (min :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (min :: String | r))
 min = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "min", value: _ } <<< Deku.Attribute.prop')
 
-min_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (min :: String | r))
+min_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (min :: String | r))
 min_ = min <<< Applicative.pure
 
 pattern
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (pattern :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (pattern :: String | r))
 pattern = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "pattern", value: _ } <<< Deku.Attribute.prop')
 
-pattern_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (pattern :: String | r))
+pattern_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (pattern :: String | r))
 pattern_ = pattern <<< Applicative.pure
 
 multiple
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (multiple :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (multiple :: String | r))
 multiple = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "multiple", value: _ } <<< Deku.Attribute.prop')
 
-multiple_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (multiple :: String | r))
+multiple_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (multiple :: String | r))
 multiple_ = multiple <<< Applicative.pure
 
 required
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (required :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (required :: String | r))
 required = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "required", value: _ } <<< Deku.Attribute.prop')
 
-required_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (required :: String | r))
+required_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (required :: String | r))
 required_ = required <<< Applicative.pure
 
 readonly
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (readonly :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (readonly :: String | r))
 readonly = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "readonly", value: _ } <<< Deku.Attribute.prop')
 
-readonly_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (readonly :: String | r))
+readonly_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (readonly :: String | r))
 readonly_ = readonly <<< Applicative.pure
 
 size
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (size :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (size :: String | r))
 size = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "size", value: _ } <<< Deku.Attribute.prop')
 
-size_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (size :: String | r))
+size_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (size :: String | r))
 size_ = size <<< Applicative.pure
 
 checked
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (checked :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (checked :: String | r))
 checked = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "checked", value: _ } <<< Deku.Attribute.prop')
 
-checked_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (checked :: String | r))
+checked_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (checked :: String | r))
 checked_ = checked <<< Applicative.pure
 
 selected
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (selected :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (selected :: String | r))
 selected = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "selected", value: _ } <<< Deku.Attribute.prop')
 
-selected_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (selected :: String | r))
+selected_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (selected :: String | r))
 selected_ = selected <<< Applicative.pure
 
 wrap
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (wrap :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (wrap :: String | r))
 wrap = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "wrap", value: _ } <<< Deku.Attribute.prop')
 
-wrap_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (wrap :: String | r))
+wrap_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (wrap :: String | r))
 wrap_ = wrap <<< Applicative.pure
 
-wrapHard :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (wrap :: String | r))
+wrapHard :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (wrap :: String | r))
 wrapHard = wrap_ "hard"
 
-wrapSoft :: forall r. FRP.Event.Event (Deku.Attribute.Attribute (wrap :: String | r))
+wrapSoft :: forall r. FRP.Poll.Poll (Deku.Attribute.Attribute (wrap :: String | r))
 wrapSoft = wrap_ "soft"
 
 rows
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rows :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rows :: String | r))
 rows = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rows", value: _ } <<< Deku.Attribute.prop')
 
-rows_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rows :: String | r))
+rows_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rows :: String | r))
 rows_ = rows <<< Applicative.pure
 
 cols
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (cols :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cols :: String | r))
 cols = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "cols", value: _ } <<< Deku.Attribute.prop')
 
-cols_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (cols :: String | r))
+cols_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cols :: String | r))
 cols_ = cols <<< Applicative.pure
 
 optimum
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (optimum :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (optimum :: String | r))
 optimum = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "optimum", value: _ } <<< Deku.Attribute.prop')
 
-optimum_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (optimum :: String | r))
+optimum_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (optimum :: String | r))
 optimum_ = optimum <<< Applicative.pure
 
 high
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (high :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (high :: String | r))
 high = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "high", value: _ } <<< Deku.Attribute.prop')
 
-high_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (high :: String | r))
+high_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (high :: String | r))
 high_ = high <<< Applicative.pure
 
 low
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (low :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (low :: String | r))
 low = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "low", value: _ } <<< Deku.Attribute.prop')
 
-low_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (low :: String | r))
+low_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (low :: String | r))
 low_ = low <<< Applicative.pure
 
 open
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (open :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (open :: String | r))
 open = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "open", value: _ } <<< Deku.Attribute.prop')
 
-open_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (open :: String | r))
+open_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (open :: String | r))
 open_ = open <<< Applicative.pure
 
 event
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (event :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (event :: String | r))
 event = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "event", value: _ } <<< Deku.Attribute.prop')
 
-event_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (event :: String | r))
+event_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (event :: String | r))
 event_ = event <<< Applicative.pure
 
 language
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (language :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (language :: String | r))
 language = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "language", value: _ } <<< Deku.Attribute.prop')
 
-language_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (language :: String | r))
+language_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (language :: String | r))
 language_ = language <<< Applicative.pure
 
 defer
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (defer :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (defer :: String | r))
 defer = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "defer", value: _ } <<< Deku.Attribute.prop')
 
-defer_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (defer :: String | r))
+defer_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (defer :: String | r))
 defer_ = defer <<< Applicative.pure
 
 async
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (async :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (async :: String | r))
 async = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "async", value: _ } <<< Deku.Attribute.prop')
 
-async_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (async :: String | r))
+async_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (async :: String | r))
 async_ = async <<< Applicative.pure
 
 nomodule
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (nomodule :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (nomodule :: String | r))
 nomodule = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "nomodule", value: _ } <<< Deku.Attribute.prop')
 
-nomodule_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (nomodule :: String | r))
+nomodule_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (nomodule :: String | r))
 nomodule_ = nomodule <<< Applicative.pure
 
 profile
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (profile :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (profile :: String | r))
 profile = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "profile", value: _ } <<< Deku.Attribute.prop')
 
-profile_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (profile :: String | r))
+profile_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (profile :: String | r))
 profile_ = profile <<< Applicative.pure
 
 version
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (version :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (version :: String | r))
 version = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "version", value: _ } <<< Deku.Attribute.prop')
 
-version_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (version :: String | r))
+version_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (version :: String | r))
 version_ = version <<< Applicative.pure
 
 manifest
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (manifest :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (manifest :: String | r))
 manifest = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "manifest", value: _ } <<< Deku.Attribute.prop')
 
-manifest_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (manifest :: String | r))
+manifest_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (manifest :: String | r))
 manifest_ = manifest <<< Applicative.pure
 
 rules
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rules :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (rules :: String | r))
 rules = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rules", value: _ } <<< Deku.Attribute.prop')
 
-rules_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rules :: String | r))
+rules_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rules :: String | r))
 rules_ = rules <<< Applicative.pure
 
 frame
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (frame :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (frame :: String | r))
 frame = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "frame", value: _ } <<< Deku.Attribute.prop')
 
-frame_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (frame :: String | r))
+frame_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (frame :: String | r))
 frame_ = frame <<< Applicative.pure
 
 cellspacing
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (cellspacing :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cellspacing :: String | r))
 cellspacing = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "cellspacing", value: _ } <<< Deku.Attribute.prop')
 
 cellspacing_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (cellspacing :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cellspacing :: String | r))
 cellspacing_ = cellspacing <<< Applicative.pure
 
 cellpadding
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (cellpadding :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (cellpadding :: String | r))
 cellpadding = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "cellpadding", value: _ } <<< Deku.Attribute.prop')
 
 cellpadding_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (cellpadding :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (cellpadding :: String | r))
 cellpadding_ = cellpadding <<< Applicative.pure
 
 bordercolor
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (bordercolor :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (bordercolor :: String | r))
 bordercolor = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "bordercolor", value: _ } <<< Deku.Attribute.prop')
 
 bordercolor_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (bordercolor :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (bordercolor :: String | r))
 bordercolor_ = bordercolor <<< Applicative.pure
 
 summary
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (summary :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (summary :: String | r))
 summary = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "summary", value: _ } <<< Deku.Attribute.prop')
 
-summary_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (summary :: String | r))
+summary_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (summary :: String | r))
 summary_ = summary <<< Applicative.pure
 
 datapagesize
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (datapagesize :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (datapagesize :: String | r))
 datapagesize = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "datapagesize", value: _ } <<< Deku.Attribute.prop')
 
 datapagesize_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (datapagesize :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (datapagesize :: String | r))
 datapagesize_ = datapagesize <<< Applicative.pure
 
 vlink
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (vlink :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (vlink :: String | r))
 vlink = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "vlink", value: _ } <<< Deku.Attribute.prop')
 
-vlink_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (vlink :: String | r))
+vlink_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (vlink :: String | r))
 vlink_ = vlink <<< Applicative.pure
 
 topmargin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (topmargin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (topmargin :: String | r))
 topmargin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "topmargin", value: _ } <<< Deku.Attribute.prop')
 
 topmargin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (topmargin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (topmargin :: String | r))
 topmargin_ = topmargin <<< Applicative.pure
 
 text
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (text :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (text :: String | r))
 text = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "text", value: _ } <<< Deku.Attribute.prop')
 
-text_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (text :: String | r))
+text_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (text :: String | r))
 text_ = text <<< Applicative.pure
 
 rightmargin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (rightmargin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (rightmargin :: String | r))
 rightmargin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "rightmargin", value: _ } <<< Deku.Attribute.prop')
 
 rightmargin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (rightmargin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (rightmargin :: String | r))
 rightmargin_ = rightmargin <<< Applicative.pure
 
 link
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (link :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (link :: String | r))
 link = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "link", value: _ } <<< Deku.Attribute.prop')
 
-link_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (link :: String | r))
+link_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (link :: String | r))
 link_ = link <<< Applicative.pure
 
 leftmargin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (leftmargin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (leftmargin :: String | r))
 leftmargin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "leftmargin", value: _ } <<< Deku.Attribute.prop')
 
 leftmargin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (leftmargin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (leftmargin :: String | r))
 leftmargin_ = leftmargin <<< Applicative.pure
 
 bottommargin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (bottommargin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (bottommargin :: String | r))
 bottommargin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "bottommargin", value: _ } <<< Deku.Attribute.prop')
 
 bottommargin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (bottommargin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (bottommargin :: String | r))
 bottommargin_ = bottommargin <<< Applicative.pure
 
 alink
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (alink :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (alink :: String | r))
 alink = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "alink", value: _ } <<< Deku.Attribute.prop')
 
-alink_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (alink :: String | r))
+alink_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (alink :: String | r))
 alink_ = alink <<< Applicative.pure
 
 clear
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (clear :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (clear :: String | r))
 clear = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "clear", value: _ } <<< Deku.Attribute.prop')
 
-clear_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (clear :: String | r))
+clear_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (clear :: String | r))
 clear_ = clear <<< Applicative.pure
 
 noshade
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (noshade :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (noshade :: String | r))
 noshade = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "noshade", value: _ } <<< Deku.Attribute.prop')
 
-noshade_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (noshade :: String | r))
+noshade_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (noshade :: String | r))
 noshade_ = noshade <<< Applicative.pure
 
 truespeed
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (truespeed :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (truespeed :: String | r))
 truespeed = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "truespeed", value: _ } <<< Deku.Attribute.prop')
 
 truespeed_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (truespeed :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (truespeed :: String | r))
 truespeed_ = truespeed <<< Applicative.pure
 
 direction
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (direction :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (direction :: String | r))
 direction = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "direction", value: _ } <<< Deku.Attribute.prop')
 
 direction_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (direction :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (direction :: String | r))
 direction_ = direction <<< Applicative.pure
 
 behavior
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (behavior :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (behavior :: String | r))
 behavior = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "behavior", value: _ } <<< Deku.Attribute.prop')
 
-behavior_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (behavior :: String | r))
+behavior_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (behavior :: String | r))
 behavior_ = behavior <<< Applicative.pure
 
 ariaValuetext
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuetext :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuetext :: String | r))
 ariaValuetext = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-valuetext", value: _ } <<< Deku.Attribute.prop')
 
 ariaValuetext_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuetext :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuetext :: String | r))
 ariaValuetext_ = ariaValuetext <<< Applicative.pure
 
 ariaValuenow
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuenow :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuenow :: String | r))
 ariaValuenow = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-valuenow", value: _ } <<< Deku.Attribute.prop')
 
 ariaValuenow_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuenow :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuenow :: String | r))
 ariaValuenow_ = ariaValuenow <<< Applicative.pure
 
 ariaValuemin
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuemin :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuemin :: String | r))
 ariaValuemin = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-valuemin", value: _ } <<< Deku.Attribute.prop')
 
 ariaValuemin_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuemin :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuemin :: String | r))
 ariaValuemin_ = ariaValuemin <<< Applicative.pure
 
 ariaValuemax
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuemax :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuemax :: String | r))
 ariaValuemax = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-valuemax", value: _ } <<< Deku.Attribute.prop')
 
 ariaValuemax_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaValuemax :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaValuemax :: String | r))
 ariaValuemax_ = ariaValuemax <<< Applicative.pure
 
 ariaSort
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSort :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSort :: String | r))
 ariaSort = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-sort", value: _ } <<< Deku.Attribute.prop')
 
-ariaSort_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSort :: String | r))
+ariaSort_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSort :: String | r))
 ariaSort_ = ariaSort <<< Applicative.pure
 
 ariaSetsize
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSetsize :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSetsize :: String | r))
 ariaSetsize = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-setsize", value: _ } <<< Deku.Attribute.prop')
 
 ariaSetsize_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSetsize :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSetsize :: String | r))
 ariaSetsize_ = ariaSetsize <<< Applicative.pure
 
 ariaSelected
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSelected :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSelected :: String | r))
 ariaSelected = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-selected", value: _ } <<< Deku.Attribute.prop')
 
 ariaSelected_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaSelected :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaSelected :: String | r))
 ariaSelected_ = ariaSelected <<< Applicative.pure
 
 ariaRowspan
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowspan :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowspan :: String | r))
 ariaRowspan = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-rowspan", value: _ } <<< Deku.Attribute.prop')
 
 ariaRowspan_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowspan :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowspan :: String | r))
 ariaRowspan_ = ariaRowspan <<< Applicative.pure
 
 ariaRowindextext
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowindextext :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowindextext :: String | r))
 ariaRowindextext = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-rowindextext", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaRowindextext_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowindextext :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowindextext :: String | r))
 ariaRowindextext_ = ariaRowindextext <<< Applicative.pure
 
 ariaRowindex
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowindex :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowindex :: String | r))
 ariaRowindex = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-rowindex", value: _ } <<< Deku.Attribute.prop')
 
 ariaRowindex_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowindex :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowindex :: String | r))
 ariaRowindex_ = ariaRowindex <<< Applicative.pure
 
 ariaRowcount
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowcount :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowcount :: String | r))
 ariaRowcount = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-rowcount", value: _ } <<< Deku.Attribute.prop')
 
 ariaRowcount_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRowcount :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRowcount :: String | r))
 ariaRowcount_ = ariaRowcount <<< Applicative.pure
 
 ariaRoledescription
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRoledescription :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRoledescription :: String | r))
 ariaRoledescription = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-roledescription", value: _ } <<<
       Deku.Attribute.prop'
@@ -3493,94 +3375,93 @@ ariaRoledescription = Functor.map
 ariaRoledescription_
   :: forall r
    . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRoledescription :: String | r))
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRoledescription :: String | r))
 ariaRoledescription_ = ariaRoledescription <<< Applicative.pure
 
 ariaRequired
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRequired :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRequired :: String | r))
 ariaRequired = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-required", value: _ } <<< Deku.Attribute.prop')
 
 ariaRequired_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaRequired :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaRequired :: String | r))
 ariaRequired_ = ariaRequired <<< Applicative.pure
 
 ariaReadonly
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaReadonly :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaReadonly :: String | r))
 ariaReadonly = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-readonly", value: _ } <<< Deku.Attribute.prop')
 
 ariaReadonly_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaReadonly :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaReadonly :: String | r))
 ariaReadonly_ = ariaReadonly <<< Applicative.pure
 
 ariaPressed
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPressed :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPressed :: String | r))
 ariaPressed = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-pressed", value: _ } <<< Deku.Attribute.prop')
 
 ariaPressed_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPressed :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPressed :: String | r))
 ariaPressed_ = ariaPressed <<< Applicative.pure
 
 ariaPosinset
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPosinset :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPosinset :: String | r))
 ariaPosinset = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-posinset", value: _ } <<< Deku.Attribute.prop')
 
 ariaPosinset_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPosinset :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPosinset :: String | r))
 ariaPosinset_ = ariaPosinset <<< Applicative.pure
 
 ariaPlaceholder
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPlaceholder :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPlaceholder :: String | r))
 ariaPlaceholder = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-placeholder", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaPlaceholder_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaPlaceholder :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaPlaceholder :: String | r))
 ariaPlaceholder_ = ariaPlaceholder <<< Applicative.pure
 
 ariaOwns
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaOwns :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaOwns :: String | r))
 ariaOwns = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-owns", value: _ } <<< Deku.Attribute.prop')
 
-ariaOwns_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaOwns :: String | r))
+ariaOwns_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaOwns :: String | r))
 ariaOwns_ = ariaOwns <<< Applicative.pure
 
 ariaOrientation
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaOrientation :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaOrientation :: String | r))
 ariaOrientation = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-orientation", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaOrientation_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaOrientation :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaOrientation :: String | r))
 ariaOrientation_ = ariaOrientation <<< Applicative.pure
 
 ariaMultiselectable
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaMultiselectable :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaMultiselectable :: String | r))
 ariaMultiselectable = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-multiselectable", value: _ } <<<
       Deku.Attribute.prop'
@@ -3589,322 +3470,320 @@ ariaMultiselectable = Functor.map
 ariaMultiselectable_
   :: forall r
    . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaMultiselectable :: String | r))
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaMultiselectable :: String | r))
 ariaMultiselectable_ = ariaMultiselectable <<< Applicative.pure
 
 ariaMultiline
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaMultiline :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaMultiline :: String | r))
 ariaMultiline = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-multiline", value: _ } <<< Deku.Attribute.prop')
 
 ariaMultiline_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaMultiline :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaMultiline :: String | r))
 ariaMultiline_ = ariaMultiline <<< Applicative.pure
 
 ariaModal
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaModal :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaModal :: String | r))
 ariaModal = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-modal", value: _ } <<< Deku.Attribute.prop')
 
 ariaModal_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaModal :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaModal :: String | r))
 ariaModal_ = ariaModal <<< Applicative.pure
 
 ariaLive
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLive :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLive :: String | r))
 ariaLive = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-live", value: _ } <<< Deku.Attribute.prop')
 
-ariaLive_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLive :: String | r))
+ariaLive_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLive :: String | r))
 ariaLive_ = ariaLive <<< Applicative.pure
 
 ariaLevel
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLevel :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLevel :: String | r))
 ariaLevel = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-level", value: _ } <<< Deku.Attribute.prop')
 
 ariaLevel_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLevel :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLevel :: String | r))
 ariaLevel_ = ariaLevel <<< Applicative.pure
 
 ariaLabelledby
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLabelledby :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLabelledby :: String | r))
 ariaLabelledby = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-labelledby", value: _ } <<< Deku.Attribute.prop')
 
 ariaLabelledby_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLabelledby :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLabelledby :: String | r))
 ariaLabelledby_ = ariaLabelledby <<< Applicative.pure
 
 ariaLabel
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLabel :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLabel :: String | r))
 ariaLabel = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-label", value: _ } <<< Deku.Attribute.prop')
 
 ariaLabel_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaLabel :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaLabel :: String | r))
 ariaLabel_ = ariaLabel <<< Applicative.pure
 
 ariaKeyshortcuts
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaKeyshortcuts :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaKeyshortcuts :: String | r))
 ariaKeyshortcuts = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-keyshortcuts", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaKeyshortcuts_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaKeyshortcuts :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaKeyshortcuts :: String | r))
 ariaKeyshortcuts_ = ariaKeyshortcuts <<< Applicative.pure
 
 ariaInvalid
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaInvalid :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaInvalid :: String | r))
 ariaInvalid = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-invalid", value: _ } <<< Deku.Attribute.prop')
 
 ariaInvalid_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaInvalid :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaInvalid :: String | r))
 ariaInvalid_ = ariaInvalid <<< Applicative.pure
 
 ariaHidden
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaHidden :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaHidden :: String | r))
 ariaHidden = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-hidden", value: _ } <<< Deku.Attribute.prop')
 
 ariaHidden_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaHidden :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaHidden :: String | r))
 ariaHidden_ = ariaHidden <<< Applicative.pure
 
 ariaHaspopup
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaHaspopup :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaHaspopup :: String | r))
 ariaHaspopup = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-haspopup", value: _ } <<< Deku.Attribute.prop')
 
 ariaHaspopup_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaHaspopup :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaHaspopup :: String | r))
 ariaHaspopup_ = ariaHaspopup <<< Applicative.pure
 
 ariaFlowto
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaFlowto :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaFlowto :: String | r))
 ariaFlowto = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-flowto", value: _ } <<< Deku.Attribute.prop')
 
 ariaFlowto_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaFlowto :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaFlowto :: String | r))
 ariaFlowto_ = ariaFlowto <<< Applicative.pure
 
 ariaExpanded
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaExpanded :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaExpanded :: String | r))
 ariaExpanded = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-expanded", value: _ } <<< Deku.Attribute.prop')
 
 ariaExpanded_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaExpanded :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaExpanded :: String | r))
 ariaExpanded_ = ariaExpanded <<< Applicative.pure
 
 ariaErrormessage
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaErrormessage :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaErrormessage :: String | r))
 ariaErrormessage = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-errormessage", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaErrormessage_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaErrormessage :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaErrormessage :: String | r))
 ariaErrormessage_ = ariaErrormessage <<< Applicative.pure
 
 ariaDisabled
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDisabled :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDisabled :: String | r))
 ariaDisabled = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-disabled", value: _ } <<< Deku.Attribute.prop')
 
 ariaDisabled_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDisabled :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDisabled :: String | r))
 ariaDisabled_ = ariaDisabled <<< Applicative.pure
 
 ariaDetails
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDetails :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDetails :: String | r))
 ariaDetails = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-details", value: _ } <<< Deku.Attribute.prop')
 
 ariaDetails_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDetails :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDetails :: String | r))
 ariaDetails_ = ariaDetails <<< Applicative.pure
 
 ariaDescription
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDescription :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDescription :: String | r))
 ariaDescription = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-description", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaDescription_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDescription :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDescription :: String | r))
 ariaDescription_ = ariaDescription <<< Applicative.pure
 
 ariaDescribedby
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDescribedby :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDescribedby :: String | r))
 ariaDescribedby = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-describedby", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaDescribedby_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaDescribedby :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaDescribedby :: String | r))
 ariaDescribedby_ = ariaDescribedby <<< Applicative.pure
 
 ariaCurrent
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaCurrent :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaCurrent :: String | r))
 ariaCurrent = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-current", value: _ } <<< Deku.Attribute.prop')
 
 ariaCurrent_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaCurrent :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaCurrent :: String | r))
 ariaCurrent_ = ariaCurrent <<< Applicative.pure
 
 ariaControls
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaControls :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaControls :: String | r))
 ariaControls = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-controls", value: _ } <<< Deku.Attribute.prop')
 
 ariaControls_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaControls :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaControls :: String | r))
 ariaControls_ = ariaControls <<< Applicative.pure
 
 ariaColspan
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColspan :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColspan :: String | r))
 ariaColspan = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-colspan", value: _ } <<< Deku.Attribute.prop')
 
 ariaColspan_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColspan :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColspan :: String | r))
 ariaColspan_ = ariaColspan <<< Applicative.pure
 
 ariaColindextext
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColindextext :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColindextext :: String | r))
 ariaColindextext = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-colindextext", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaColindextext_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColindextext :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColindextext :: String | r))
 ariaColindextext_ = ariaColindextext <<< Applicative.pure
 
 ariaColindex
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColindex :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColindex :: String | r))
 ariaColindex = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-colindex", value: _ } <<< Deku.Attribute.prop')
 
 ariaColindex_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColindex :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColindex :: String | r))
 ariaColindex_ = ariaColindex <<< Applicative.pure
 
 ariaColcount
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColcount :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColcount :: String | r))
 ariaColcount = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-colcount", value: _ } <<< Deku.Attribute.prop')
 
 ariaColcount_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaColcount :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaColcount :: String | r))
 ariaColcount_ = ariaColcount <<< Applicative.pure
 
 ariaChecked
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaChecked :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaChecked :: String | r))
 ariaChecked = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-checked", value: _ } <<< Deku.Attribute.prop')
 
 ariaChecked_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaChecked :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaChecked :: String | r))
 ariaChecked_ = ariaChecked <<< Applicative.pure
 
 ariaBusy
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaBusy :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaBusy :: String | r))
 ariaBusy = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-busy", value: _ } <<< Deku.Attribute.prop')
 
-ariaBusy_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaBusy :: String | r))
+ariaBusy_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaBusy :: String | r))
 ariaBusy_ = ariaBusy <<< Applicative.pure
 
 ariaAutocomplete
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaAutocomplete :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaAutocomplete :: String | r))
 ariaAutocomplete = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-autocomplete", value: _ } <<<
       Deku.Attribute.prop'
   )
 
 ariaAutocomplete_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaAutocomplete :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaAutocomplete :: String | r))
 ariaAutocomplete_ = ariaAutocomplete <<< Applicative.pure
 
 ariaAtomic
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaAtomic :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaAtomic :: String | r))
 ariaAtomic = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "aria-atomic", value: _ } <<< Deku.Attribute.prop')
 
 ariaAtomic_
-  :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (ariaAtomic :: String | r))
+  :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaAtomic :: String | r))
 ariaAtomic_ = ariaAtomic <<< Applicative.pure
 
 ariaActivedescendant
   :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaActivedescendant :: String | r))
+   . FRP.Poll.Poll String
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaActivedescendant :: String | r))
 ariaActivedescendant = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "aria-activedescendant", value: _ } <<<
       Deku.Attribute.prop'
@@ -3913,15 +3792,13 @@ ariaActivedescendant = Functor.map
 ariaActivedescendant_
   :: forall r
    . String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (ariaActivedescendant :: String | r))
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (ariaActivedescendant :: String | r))
 ariaActivedescendant_ = ariaActivedescendant <<< Applicative.pure
 
 role
-  :: forall r
-   . FRP.Event.Event String
-  -> FRP.Event.Event (Deku.Attribute.Attribute (role :: String | r))
+  :: forall r. FRP.Poll.Poll String -> FRP.Poll.Poll (Deku.Attribute.Attribute (role :: String | r))
 role = Functor.map
   (Deku.Attribute.unsafeAttribute <<< { key: "role", value: _ } <<< Deku.Attribute.prop')
 
-role_ :: forall r. String -> FRP.Event.Event (Deku.Attribute.Attribute (role :: String | r))
+role_ :: forall r. String -> FRP.Poll.Poll (Deku.Attribute.Attribute (role :: String | r))
 role_ = role <<< Applicative.pure

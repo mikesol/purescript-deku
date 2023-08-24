@@ -2,9 +2,18 @@ workspace:
   package_set:
     registry: 31.0.0
   extra_packages:
+    hyrule:
+      git: "https://github.com/mikesol/purescript-hyrule.git"
+      ref: "f388528a9aaa25a5307bf67f6ed12d2097620929"
+      dependencies:
+        - effect
+        - js-timers
+        - web-html
+        - unsafe-reference
+        - web-uievents
     bolson:
-      repo: "https://github.com/mikesol/purescript-bolson.git"
-      version: "v0.3.9"
+      git: "https://github.com/mikesol/purescript-bolson.git"
+      ref: "d87900c"
       dependencies:
         - hyrule
     tidy: 
@@ -24,7 +33,7 @@ workspace:
       - tuples
     tidy-codegen:
       repo: "https://github.com/natefaubion/purescript-tidy-codegen"
-      version: "type-applications"
+      version: "main"
       dependencies:
       - aff
       - ansi
@@ -68,4 +77,3 @@ workspace:
       - tuples
       - type-equality
       - unicode
-

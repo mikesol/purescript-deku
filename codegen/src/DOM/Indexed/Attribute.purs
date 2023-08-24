@@ -3,7 +3,7 @@ module DOM.Indexed.Attribute where
 import Prelude
 import Prim hiding (Type)
 
-import DOM.Common (Attribute, Ctor(..), Keyword, declHandler, typeAttributed, typeEvented, typeIndexedAt)
+import DOM.Common (Attribute, Ctor(..), Keyword, declHandler, typeAttributed, typePolled, typeIndexedAt)
 import DOM.TypeStub (constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import PureScript.CST.Types (Declaration, Export, ImportDecl, Type)
@@ -16,7 +16,7 @@ imports attributes =
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Event" [] "FRP.Event"
+            , declImportAs "FRP.Poll" [] "FRP.Poll"
             , declImportAs "Deku.DOM.Combinators" [ importValue "unset" ] "Combinators"
             ]
         , handlerImports ( map _.type attributes )
@@ -43,14 +43,14 @@ generate attributes =
             -- generate simple function definition
             [ declSignature ctor
                 $ typeForall [ typeVar "r" ]
-                $ typeArrow [ typeEvented $ constructArg t ]
-                $ typeEvented $ typeAttributed $ typeIndexedAt index indexType
+                $ typeArrow [ typePolled $ constructArg t ]
+                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
             , declHandler ctor name $ handler t
 
             , declSignature shortHand 
                 $ typeForall [ typeVar "r" ]
                 $ typeArrow [ constructArg t ]
-                $ typeEvented $ typeAttributed $ typeIndexedAt index indexType
+                $ typePolled $ typeAttributed $ typeIndexedAt index indexType
             , declValue shortHand [] $ exprOp ( exprIdent ctor ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ] 
             ]
             -- create additional shorthands for known keywords
@@ -63,6 +63,6 @@ generate attributes =
         let valueName = ctor <> name
         [ declSignature valueName 
                 $ typeForall [ typeVar "r" ]
-                $ typeEvented $ typeAttributed $ typeIndexedAt index $ indexType
+                $ typePolled $ typeAttributed $ typeIndexedAt index $ indexType
         , declValue valueName [] $ exprApp ( exprIdent shortHand ) [ exprString original ] 
         ]

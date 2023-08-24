@@ -4,7 +4,7 @@ import Prelude
 import Prim hiding (Type)
 
 import Comment (documentDecl)
-import DOM.Common (declHandler, selfKey, typeAttributed, typeEvented, nominal, typeIndexedAt)
+import DOM.Common (declHandler, selfKey, typeAttributed, typePolled, nominal, typeIndexedAt)
 import DOM.TypeStub (TypeStub(..), constructArg, constructIndex, handler, handlerImports)
 import Data.Array as Array
 import Data.Array.NonEmpty as NEA
@@ -22,7 +22,7 @@ imports es =
             [ declImportAs "Control.Applicative" [ importValue "pure" ] "Applicative"
             , declImport "Control.Category" [ importOp "<<<" ]
             , declImportAs "Data.Functor" [ importValue "map" ] "Functor"
-            , declImportAs "FRP.Event" [] "FRP.Event"
+            , declImportAs "FRP.Poll" [] "FRP.Poll"
             , declImport "Type.Proxy" [ importType "Proxy" ]
             ]
         , handlerImports $ Array.cons rawSelf es
@@ -47,15 +47,15 @@ generate es =
             ]
             $ declSignature "self"
             $ typeForall [ typeVar "r" ]
-            $ typeArrow [ typeEvented $ constructArg rawSelf ]
-            $ typeEvented $ typeAttributed $ typeVar "r"
+            $ typeArrow [ typePolled $ constructArg rawSelf ]
+            $ typePolled $ typeAttributed $ typeVar "r"
         , declHandler "self" selfKey $ handler $ rawSelf
 
         , documentDecl [ "Shorthand version of `self`" ]
             $ declSignature "self_"
             $ typeForall [ typeVar "r" ]
             $ typeArrow [ constructArg rawSelf ]
-            $ typeEvented $ typeAttributed $ typeVar "r"
+            $ typePolled $ typeAttributed $ typeVar "r"
         , declValue "self_" [] $ exprOp ( exprIdent "self" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
         
         , documentDecl 
@@ -66,8 +66,8 @@ generate es =
             $ declSignature "selfT"
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
-            $ typeArrow [ typeEvented $ selfHandler $ typeVar "e" ]
-            $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+            $ typeArrow [ typePolled $ selfHandler $ typeVar "e" ]
+            $ typePolled $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declHandler "selfT" selfKey $ handler rawSelf
 
         , documentDecl [ "Shorthand version of `selfT`" ]
@@ -75,7 +75,7 @@ generate es =
             $ typeForall [ typeVar "name", typeVar "e", typeVar "r" ]
             $ typeConstrained [ typeApp ( typeCtor "IsSelf" ) [ typeVar "e" , typeVar "name"  ] ]
             $ typeArrow [ selfHandler $ typeVar "e" ]
-            $ typeEvented $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
+            $ typePolled $ typeAttributed $ typeIndexedAt nominal $ typeApp ( typeCtor "Proxy" ) [ typeVar "name" ]
         , declValue "selfT_" [] $ exprOp ( exprIdent "selfT" ) [ binaryOp "<<<" $ exprIdent "Applicative.pure" ]
 
         ]

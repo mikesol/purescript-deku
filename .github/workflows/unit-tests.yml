@@ -12,31 +12,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Cache purescript dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            .spago
-            ${{ env.spago_global_cache }}
-            output
-          key: >-
-            ${{ hashFiles('package-lock.json') }}-
-            ${{ hashFiles('spago.dhall') }}-
-            ${{ hashFiles('packages.dhall') }}-
-            ${{ hashFiles('test.dhall') }}-
-            ${{ hashFiles('examples.dhall') }}
       - name: Install dependencies
         run: npm ci
-      - name: Build examples
-        run: npm run build:examples
       - name: Test
         run: npm t
-      - name: Build test
-        run: npm run build:test
-      # perf test runs locally but hangs on gh actions
-      # inspect why at some point
-      # - name: Bunlde performance
-      #   run: npm run bundle:performance
-      # - name: Test performance
-      #   run: npm run test:performance

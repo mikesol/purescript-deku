@@ -4,8 +4,11 @@ export const setHydrating = (state) => () => {
 export const unSetHydrating = (state) => () => {
   state.hydrating = false;
 };
+export const associateWithUnsubscribe_ = (a) => state => () => {
+  state.units[a.id].unsubscribe = a.unsubscribe;
+}
 export const attributeParent_ = (runOnJust) => (a) => (state) => () => {
-  // console.log("attributeParent_", a);
+  // @ console.log("attributeParent_", a, new Date().getTime());
   if (state.units[a.id]) {
     const dom = state.units[a.parent].main;
     // only attribute if it is not attributed already
@@ -221,7 +224,7 @@ export const getAllComments = (state) => () => {
 };
 export const makeDynBeacon_ =
   (runOnJust) => (tryHydration) => (a) => (state) => () => {
-    // console.log("makeDynBeacon_", a);
+    // @ console.log("makeDynBeacon_", a, new Date().getTime());
     var startBeacon;
     var endBeacon;
     var ptr = a.id;
@@ -279,7 +282,7 @@ export const getDynFamily = (id) => (state) => () =>
   state.units[id] && state.units[id].dynFamily
     ? state.units[id].dynFamily
     : (() => {
-        throw new Error(`No positional information for ${id}`);
+        throw new Error(`No dyn family for ${id}`);
       })();
 export const getParent = (id) => (state) => () =>
   state.units[id] &&
@@ -304,7 +307,7 @@ export const getScope = (id) => (state) => () =>
 
 export const makeElement_ =
   (runOnJust) => (tryHydration) => (a) => (state) => () => {
-    // console.log("makeElement_", a);
+    // @ console.log("makeElement_", a, new Date().getTime());
     var dom;
     var ptr = a.id;
     if (!state.scopes[a.scope]) {
@@ -353,7 +356,7 @@ export const makeElement_ =
 
 export const makeText_ =
   (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
-    // console.log("makeText_", a);
+    // @ console.log("makeText_", a, new Date().getTime());
     var ptr = a.id;
     var dom;
     if (!state.scopes[a.scope]) {
@@ -400,6 +403,7 @@ export const makeText_ =
           pos: a.pos,
           parent: a.parent,
           scope: a.scope,
+          dynFamily: a.dynFamily,
         };
         main.$dekuId = ptr;
         return true;
@@ -428,7 +432,7 @@ export function makeFFIDOMSnapshot() {
 }
 
 export const setProp_ = (tryHydration) => (a) => (state) => () => {
-  // console.log("setProp_", a);
+  // @ console.log("setProp_", a, new Date().getTime());
   if (state.units[a.id]) {
     var ptr = a.id;
     var avv = a.value;
@@ -472,7 +476,7 @@ export const setProp_ = (tryHydration) => (a) => (state) => () => {
 };
 
 export const setCb_ = (tryHydration) => (a) => (state) => () => {
-  // console.log("setCb_", a);
+  // @ console.log("setCb_", a, new Date().getTime());
   if (state.units[a.id]) {
     var ptr = a.id;
     var avv = a.value;
@@ -512,7 +516,7 @@ export const setCb_ = (tryHydration) => (a) => (state) => () => {
 };
 
 export const unsetAttribute_ = (tryHydration) => (a) => (state) => () => {
-  // console.log("unsetAttribute_", a);
+  // @ console.log("unsetAttribute_", a, new Date().getTime());
   if (state.units[a.id]) {
     var ptr = a.id;
     // it may be the case that we have created an element via
@@ -538,7 +542,7 @@ export const unsetAttribute_ = (tryHydration) => (a) => (state) => () => {
   }
 };
 export const setText_ = (a) => (state) => () => {
-  // console.log("setText_", a);
+  // @ console.log("setText_", a, new Date().getTime());
   if (state.units[a.id]) {
     var ptr = a.id;
     state.units[ptr].main.nodeValue = a.text;
@@ -547,11 +551,12 @@ export const setText_ = (a) => (state) => () => {
 
 export const makePursx_ =
   (runOnJust) => (tryHydration) => (maybe) => (a) => (state) => () => {
-    // console.log("makePursx_", a);
+    // @ console.log("makePursx_", a, new Date().getTime());
     var dom;
     var tmp;
     var ptr = a.id;
     var html = a.html;
+    var dynFamily = a.dynFamily;
     var verb = a.verb;
     var cache = a.cache;
     var parent = a.parent;
@@ -573,6 +578,7 @@ export const makePursx_ =
           scope: scope,
           parent: parent,
           main: dom,
+          dynFamily: dynFamily,
         };
         dom.$dekuId = ptr;
         return true;
@@ -605,6 +611,7 @@ export const makePursx_ =
         listeners: {},
         pos: a.pos,
         scope: scope,
+        dynFamily: dynFamily,
         parent: parent,
         main: tmp.firstChild,
       };
@@ -650,7 +657,7 @@ export const makePursx_ =
   };
 
 export const makeRoot_ = (a) => (state) => () => {
-  // console.log("makeRoot_", a);
+  // @ console.log("makeRoot_", a, new Date().getTime());
   var ptr = a.id;
   state.units[ptr] = {
     main: a.root,
@@ -659,7 +666,7 @@ export const makeRoot_ = (a) => (state) => () => {
 };
 
 export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
-  // console.log("giveNewParent_", b);
+  // @ console.log("giveNewParent_", b, new Date().getTime());
   const insertAt = (ptr, parent, node) => {
     if (state.units[ptr].startBeacon) {
       // we continue this operation until we hit the end beacon
@@ -723,11 +730,10 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
           didInsert = true;
           break;
         }
-        if (state.units[dkid].dynFamily !== state.units[ptr].dynFamily) {
+        if (state.units[dkid].dynFamily !== a.dynFamily) {
           i++;
           continue;
         }
-
         // if we've found equal positions already we stop here
         // as all we care about is the pos fixer-upper happening above
         if (didInsert) {
@@ -772,7 +778,7 @@ export const giveNewParent_ = (just) => (runOnJust) => (b) => (state) => () => {
 };
 
 export const disconnectElement_ = (a) => (state) => () => {
-  // console.log("disconnectElement_", a);
+  // @ console.log("disconnectElement_", a, new Date().getTime());
   if (state.units[a.id]) {
     var ptr = a.id;
     if (
@@ -813,8 +819,11 @@ export const stateHasKey = (id) => (state) => () => {
 };
 
 export const deleteFromCache_ = (a) => (state) => () => {
-  // console.log("deleteFromCache_", a);
+  // @ console.log("deleteFromCache_", a, new Date().getTime());
   if (state.units[a.id]) {
+    if (state.units[a.id].unsubscribe) {
+      state.units[a.id].unsubscribe();
+    }
     delete state.units[a.id];
   }
 };

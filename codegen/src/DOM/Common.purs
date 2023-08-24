@@ -200,9 +200,9 @@ typeArrayed :: Type Void -> Type Void
 typeArrayed t = 
     unsafePartial $ typeApp ( typeCtor "Array" ) $ pure t
 
-typeEvented :: Type Void -> Type Void
-typeEvented t =
-    unsafePartial $ typeApp ( typeCtor "FRP.Event.Event" ) $ pure t
+typePolled :: Type Void -> Type Void
+typePolled t =
+    unsafePartial $ typeApp ( typeCtor "FRP.Poll.Poll" ) $ pure t
 
 typeAttributed :: Type Void -> Type Void
 typeAttributed t =

@@ -3,23 +3,21 @@ module Deku.Pursx.Unsafe where
 import Prelude
 
 import Bolson.Control as Bolson
-import Bolson.Core (Element(..), Entity(..), PSR)
-import Control.Alt ((<|>))
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
+import Bolson.Core (Element(..), Entity(..))
 import Control.Plus (empty)
-import Data.Maybe (Maybe(..), maybe)
-import Data.Newtype (unwrap)
-import Data.Profunctor (lcmap)
+import Data.Maybe (Maybe(..))
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
-import Deku.Attribute (Attribute, AttributeValue(..), unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Nut(..), Nut', NutF(..), Node(..))
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
+import Data.Traversable (for_)
+import Deku.Attribute (Attribute, unsafeUnAttribute)
+import Deku.Control (unsafeSetAttribute)
+import Deku.Core (DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), flattenArgs)
+import FRP.Event (merge)
+import FRP.Poll (Poll, poll, sample)
 import Foreign.Object as Object
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record (get)
-import Safe.Coerce (coerce)
 import Type.Proxy (Proxy(..))
 
 class
@@ -36,7 +34,7 @@ domableToNode (Nut df) = step1 df
   where
   step1 :: forall payload. NutF payload -> Node payload
   step1 (NutF (Element' n)) = n
-  step1 _ = Node \_ _ -> empty
+  step1 _ = Node $ Element \_ _ -> poll \_ -> empty
 
 instance pursxToElementConsInsert ::
   ( Row.Cons key (Nut) r' r
@@ -54,18 +52,32 @@ instance pursxToElementConsInsert ::
       { cache: Object.insert (reflectType pxk) false cache
       , element: Nut
           ( NutF
-              ( Element' $ Node \info di ->
-                  __internalDekuFlatten
-                    { parent: Just (reflectType pxk <> "@!%" <> pxScope)
-                    , scope: info.scope
-                    , raiseId: \_ -> pure unit
-                    , pos: info.pos
-                    , ez: false
-                    , dynFamily: Nothing
-                    }
-                    di
-                    ((\(Nut df) -> df) (get pxk r))
-                    <|> (let Node y = (domableToNode element) in y) info di
+              ( Element' $ Node $ Element
+                  \info di@(DOMInterpret { deferPayload, deleteFromCache }) ->
+                    Bolson.behaving
+                      \ee kx subscribe -> do
+                        let Node (Element rest) = domableToNode element
+                        let evt1 = sample (rest info di) ee
+                        let
+                          evt0 = sample
+                            ( __internalDekuFlatten
+                                ((\(Nut df) -> df) (get pxk r))
+                                { parent: Just
+                                    (reflectType pxk <> "@!%" <> pxScope)
+                                , scope: info.scope
+                                , raiseId: \_ -> pure unit
+                                , pos: info.pos
+                                , ez: false
+                                , deferralPath: info.deferralPath
+                                , dynFamily: Nothing
+                                }
+                                di
+                            )
+                            ee
+                        kx $ deferPayload info.deferralPath $ deleteFromCache
+                          { id: reflectType pxk <> "@!%" <> pxScope }
+
+                        subscribe (merge [ evt0, evt1 ])
               )
           )
       }
@@ -73,54 +85,41 @@ instance pursxToElementConsInsert ::
     pxk = Proxy :: _ key
 
 else instance pursxToElementConsAttr ::
-  ( Row.Cons key (Event (Attribute deku)) r' r
+  ( Row.Cons key (Poll (Attribute deku)) r' r
   , PursxToElement rest r
   , Reflectable key String
   , IsSymbol key
   ) =>
   PursxToElement
-    (RL.Cons key (Event (Attribute deku)) rest)
+    (RL.Cons key (Poll (Attribute deku)) rest)
     r where
-  pursxToElement pxScope _ r =
+  pursxToElement pxScope _ r = do
     let
       { cache, element } = pursxToElement pxScope (Proxy :: Proxy rest) r
-    in
-      { cache: Object.insert (reflectType pxk) true cache
-      , element: Nut
-          ( NutF
-              ( Element'
-                  ( Node
-                      \parent
-                       di@(DOMInterpret { setProp, setCb, unsetAttribute }) ->
-                        map
-                          ( lcmap unsafeUnAttribute
-                              ( \{ key, value } -> case value of
-                                  Prop' p -> setProp
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    , value: p
-                                    }
-                                  Cb' c -> setCb
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    , value: c
-                                    }
-                                  Unset' -> unsetAttribute
-                                    { id:
-                                        ((reflectType pxk) <> "@!%" <> pxScope)
-                                    , key
-                                    }
-                              )
-                          )
-                          (get pxk r)
-                          <|> (let Node y = (domableToNode element) in y) parent
-                            di
-                  )
-              )
-          )
-      }
+      Node (Element rest) = domableToNode element
+
+      elt :: forall payload. Node' payload
+      elt parent di@(DOMInterpret { deferPayload, deleteFromCache }) =
+        Bolson.behaving \ee kx subscribe -> do
+          let bhv = rest parent di
+          let myId = reflectType pxk <> "@!%" <> pxScope
+          subscribe $ sample (map unsafeUnAttribute (get pxk r))
+            ( ( \fff xx -> fff $ unsafeSetAttribute di
+                  myId
+                  xx
+              ) <$> ee
+            )
+          -- this may result in double deletion requests if
+          -- we attach multiple attributes to a single element
+          -- in the cache, but that's ok
+          -- the important thing is that, when it's cleaned up,
+          -- it's out of the cache
+          kx $ deferPayload parent.deferralPath $ deleteFromCache
+            { id: myId }
+          subscribe (sample bhv ee)
+    { cache: Object.insert (reflectType pxk) true cache
+    , element: Nut (NutF (Element' (Node (Element elt))))
+    }
     where
     pxk = Proxy :: _ key
 
@@ -128,7 +127,9 @@ instance pursxToElementNil ::
   PursxToElement RL.Nil r where
   pursxToElement _ _ _ =
     { cache: Object.empty
-    , element: Nut (NutF $ Element' $ Node \_ _ -> empty)
+    , element: Nut
+        ( NutF $ Element' $ Node $ Element \_ _ -> poll \_ -> empty
+        )
     }
 
 unsafeMakePursx
@@ -151,68 +152,49 @@ unsafeMakePursx'
 unsafeMakePursx' verb html r = Nut ee
   where
   ee :: forall payload. NutF payload
-  ee = NutF (Element' (Node go))
+  ee = NutF (Element' (Node (Element go)))
 
+  go :: forall payload. Node' payload
   go
-    :: forall payload
-     . PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
-  go
-    z@{ parent, scope, raiseId, dynFamily, pos }
-    di@(DOMInterpret { makePursx: mpx, ids, deleteFromCache, attributeParent }) =
-    makeLemmingEventO $ mkSTFn2 \(Subscriber mySub) k1 -> do
-      me <- ids
-      pxScope <- ids
+    z@{ parent, scope, raiseId, dynFamily, pos, deferralPath }
+    di@
+      ( DOMInterpret
+          { makePursx: mpx
+          , deferPayload
+          , ids
+          , deleteFromCache
+          , attributeParent
+          }
+      ) =
+    Bolson.behaving \eee kx subscribe -> do
+      me <- show <$> ids
+      pxScope <- show <$> ids
       raiseId me
       let
         { cache, element: element' } = pursxToElement
           pxScope
           (Proxy :: _ rl)
           r
-      let Node element = domableToNode element'
-      unsub <- runSTFn2 mySub
-        ( merge
-            [ pure $
-                mpx
-                  { id: me
-                  , parent
-                  , cache
-                  , dynFamily
-                  , pos
-                  , pxScope: pxScope
-                  , scope
-                  , html
-                  , verb
-                  }
-            , element z di
-            , maybe empty
-                ( \p ->
-                    pure $ attributeParent
-                      { id: me, parent: p, pos, dynFamily, ez: false }
-                )
-                parent
-            ]
-        )
-        k1
-      pure do
-        runSTFn1 k1 (deleteFromCache { id: me })
-        unsub
+      let Node (Element element) = domableToNode element'
+      let bhv = element z di
+      kx $ mpx
+        { id: me
+        , parent
+        , cache
+        , dynFamily
+        , pos
+        , pxScope: pxScope
+        , scope
+        , html
+        , verb
+        }
+      for_ parent \p -> kx $ attributeParent
+        { id: me, parent: p, pos, dynFamily, ez: false }
+      kx (deferPayload deferralPath (deleteFromCache { id: me }))
+      subscribe (sample bhv eee)
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = Bolson.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos }) id -> sendToPos { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
-  a
-  b
-  ((coerce :: NutF payload -> Nut' payload) c)
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten (NutF c) a b = Bolson.flatten flattenArgs c a b

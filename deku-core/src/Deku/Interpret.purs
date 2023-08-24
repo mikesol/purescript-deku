@@ -6,13 +6,16 @@
 module Deku.Interpret
   ( EliminatableInstruction(..)
   , FFIDOMSnapshot(..)
-  , FunctionOfFFIDOMSnapshot(..)
   , FunctionOfFFIDOMSnapshotU
+  , FunctionOfArrayInstructionsU
+  , EffectfulExecutor
+  , EffectfulPayload
   , Instruction(..)
   , RenderableInstruction(..)
-  , FreeEFunctionOfFFIDOMSnapshotU
-  , FreeEFunctionOfFFIDOMSnapshot
-  , EFunctionOfFFIDOMSnapshot(..)
+  , STPayload
+  , forcePayloadE
+  , deferPayloadE
+  , __internalDekuFlatten
   , fullDOMInterpret
   , getAllComments
   , hydratingDOMInterpret
@@ -25,40 +28,33 @@ module Deku.Interpret
 import Prelude
 
 import Bolson.Control as BC
-import Bolson.Core (Element(..), PSR, Scope(..))
-import Bolson.Core as Bolson
-import Control.Monad.Free (Free, liftF, wrap)
+import Bolson.Core (Scope(..))
 import Control.Monad.ST (ST)
+import Control.Monad.ST.Class (class MonadST, liftST)
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
 import Control.Monad.ST.Internal as Ref
-import Control.Plus (empty)
+import Data.Array as Array
+import Data.Foldable (for_)
+import Data.List ((:))
+import Data.List as List
+import Data.Map as Map
 import Data.Maybe (Maybe(..), maybe)
+import Data.Monoid.Endo (Endo(..))
 import Data.Newtype (unwrap)
 import Data.String.Utils (includes)
-import Deku.Core (DOMInterpret(..), Nut', NutF(..), Node(..))
+import Deku.Core (DOMInterpret(..), Node', Nut(..), Nut', NutF(..), flattenArgs)
 import Deku.Core as Core
 import Effect (Effect)
-import FRP.Event (Event)
+import FRP.Event (create, subscribe)
+import FRP.Poll (sample)
 import Safe.Coerce (coerce)
-import Test.QuickCheck (arbitrary, mkSeed)
-import Test.QuickCheck.Gen (Gen, evalGen)
 
 -- foreign
 data FFIDOMSnapshot
 
-type FunctionOfFFIDOMSnapshot a =
-  (FFIDOMSnapshot -> Effect a)
-
-type FunctionOfFFIDOMSnapshotU = FunctionOfFFIDOMSnapshot Unit
-
-newtype EFunctionOfFFIDOMSnapshot a = EFunctionOfFFIDOMSnapshot
-  (Event (FunctionOfFFIDOMSnapshot a))
-
-derive instance Functor EFunctionOfFFIDOMSnapshot
-
-type FreeEFunctionOfFFIDOMSnapshot a = Free EFunctionOfFFIDOMSnapshot a
-type FreeEFunctionOfFFIDOMSnapshotU = FreeEFunctionOfFFIDOMSnapshot Unit
+type FunctionOfFFIDOMSnapshotU =
+  FFIDOMSnapshot -> Effect Unit
 
 foreign import makeFFIDOMSnapshot :: Effect FFIDOMSnapshot
 
@@ -130,79 +126,92 @@ foreign import deleteFromCache_
 foreign import giveNewParent_
   :: (Int -> Maybe Int)
   -> RunOnJust
-  -> Core.GiveNewParent FreeEFunctionOfFFIDOMSnapshotU
+  -> Core.GiveNewParent EffectfulPayload
   -> FunctionOfFFIDOMSnapshotU
 
 giveNewParentOrReconstruct
-  :: DOMInterpret FreeEFunctionOfFFIDOMSnapshotU
+  :: DOMInterpret EffectfulPayload
+  -> EffectfulExecutor
   -> (Int -> Maybe Int)
   -> RunOnJust
-  -> Core.GiveNewParent FreeEFunctionOfFFIDOMSnapshotU
-  -> FreeEFunctionOfFFIDOMSnapshotU
-giveNewParentOrReconstruct di just roj gnp = join $ liftF
-  $ EFunctionOfFFIDOMSnapshot
-  $ pure \ffi -> do
-      let
-        hasIdAndInScope = do
-          pure $ liftF $ EFunctionOfFFIDOMSnapshot $ pure $
-            giveNewParent_ just roj gnp
-        needsFreshNut =
-          do
-            let
-              { dynFamily
-              , ez
-              , parent
-              , pos
-              , raiseId
-              , scope
-              } = gnp
-            let
-              ( ee
-                  :: EFunctionOfFFIDOMSnapshot
-                       (Free EFunctionOfFFIDOMSnapshot Unit)
-              ) = EFunctionOfFFIDOMSnapshot $ map (\a _ -> pure a) $
-                __internalDekuFlatten
-                  { dynFamily
-                  , ez
-                  , parent: Just parent
-                  , pos
-                  , raiseId
-                  , scope
-                  }
-                  di
-                  gnp.ctor
-            pure (wrap ee)
-      hasId <- stateHasKey gnp.id ffi
-      if hasId then do
-        scope <- getScope gnp.id ffi
-        case scope, gnp.scope of
-          Global, _ -> hasIdAndInScope
-          Local x, Local y ->
-            if includes x y then hasIdAndInScope else needsFreshNut
-          _, _ -> needsFreshNut
-      else needsFreshNut
+  -> Core.GiveNewParent EffectfulPayload
+  -> EffectfulPayload
+giveNewParentOrReconstruct
+  di@
+    ( DOMInterpret
+        { associateWithUnsubscribe
+        }
+    )
+  executor
+  just
+  roj
+  gnp
+  ffi = do
+  let
+    hasIdAndInScope = giveNewParent_ just roj gnp ffi
+    needsFreshNut =
+      do
+        let
+          { dynFamily
+          , ez
+          , parent
+          , pos
+          , raiseId
+          , scope
+          } = gnp
+        myId <- liftST $ Ref.new Nothing
+        let
+          newRaiseId = raiseId *> void <<< liftST <<< flip Ref.write myId <<<
+            Just
+        let
+          ohBehave = __internalDekuFlatten
+            gnp.ctor
+            { dynFamily
+            , ez
+            , deferralPath: gnp.deferralPath
+            , parent: Just parent
+            , pos
+            , raiseId: newRaiseId
+            , scope
+            }
+            di
+        pump <- liftST create
+        unsubscribe <- liftST $ subscribe
+          (sample ohBehave pump.event)
+          executor
+        pump.push identity
+        fetchedId <- liftST $ Ref.read myId
+        for_ fetchedId $ executor <<< associateWithUnsubscribe <<<
+          { unsubscribe, id: _ }
+  hasId <- stateHasKey gnp.id ffi
+  if hasId then do
+    scope <- getScope gnp.id ffi
+    case scope, gnp.scope of
+      Global, _ -> hasIdAndInScope
+      Local x, Local y -> do
+        -- the free thing won't work
+        -- that's fine, though
+        -- we can issue `associateWithUnsubscribe`
+        -- add an `unsubscribe` field in the ffi
+        -- and then thunk this on delete from cache
+        if includes x y then hasIdAndInScope else needsFreshNut
+      _, _ -> needsFreshNut
+  else needsFreshNut
 
 __internalDekuFlatten
   :: forall payload
-   . PSR (pos :: Maybe Int, dynFamily :: Maybe String, ez :: Boolean)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = BC.flatten
-  { doLogic: \pos (DOMInterpret { sendToPos: sendToPos' }) id -> sendToPos'
-      { id, pos }
-  , ids: unwrap >>> _.ids
-  , disconnectElement:
-      \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
-        disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Element e
-  }
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten c a b = BC.flatten flattenArgs
+  ((coerce :: NutF payload -> Nut' payload) c)
   a
   b
-  ((coerce :: NutF payload -> Nut' payload) c)
 
 foreign import disconnectElement_
   :: Core.DisconnectElement -> FunctionOfFFIDOMSnapshotU
+
+foreign import associateWithUnsubscribe_
+  :: Core.AssociateWithUnsubscribe -> FunctionOfFFIDOMSnapshotU
 
 foreign import setHydrating :: FunctionOfFFIDOMSnapshotU
 foreign import unSetHydrating :: FunctionOfFFIDOMSnapshotU
@@ -214,46 +223,38 @@ foreign import getScope :: String -> FFIDOMSnapshot -> Effect Scope
 
 fullDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret FreeEFunctionOfFFIDOMSnapshotU
-fullDOMInterpret seed =
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
+  -> EffectfulExecutor
+  -> Core.DOMInterpret EffectfulPayload
+fullDOMInterpret seed deferredCache executor =
   let
     l = Core.DOMInterpret
       { ids: do
           s <- Ref.read seed
-          let
-            o = show
-              (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
           void $ Ref.modify (add 1) seed
-          pure o
-      , makeElement: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          makeElement_
-            runOnJust
-            false
-      , makeDynBeacon: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          makeDynBeacon_ runOnJust false
-      , attributeParent: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          attributeParent_ runOnJust
-      , makeRoot: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makeRoot_
-      , makeText: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makeText_
-          runOnJust
-          false
-          (maybe unit)
-      , makePursx: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makePursx_
-          runOnJust
-          false
-          (maybe unit)
-      , setProp: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setProp_ false
-      , setCb: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setCb_ false
-      , unsetAttribute: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          unsetAttribute_ false
-      , setText: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setText_
-      , sendToPos: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< sendToPos
-      , removeDynBeacon: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+          pure s
+      , associateWithUnsubscribe: associateWithUnsubscribe_
+      , deferPayload: deferPayloadE deferredCache
+      , forcePayload: forcePayloadE deferredCache executor
+      , makeElement: makeElement_ runOnJust false
+      , makeDynBeacon: makeDynBeacon_ runOnJust false
+      , attributeParent: attributeParent_ runOnJust
+      , makeRoot: makeRoot_
+      , makeText: makeText_ runOnJust false (maybe unit)
+      , makePursx: makePursx_ runOnJust false (maybe unit)
+      , setProp: setProp_ false
+      , setCb: setCb_ false
+      , unsetAttribute: unsetAttribute_ false
+      , setText: setText_
+      , sendToPos: sendToPos
+      , removeDynBeacon:
           removeDynBeacon_
-      , deleteFromCache: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+      , deleteFromCache:
           deleteFromCache_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l Just runOnJust gnp
-      , disconnectElement: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
+          runOnJust
+          gnp
+      , disconnectElement:
           disconnectElement_
       }
   in
@@ -272,10 +273,7 @@ data RenderableInstruction
 data EliminatableInstruction
   = SendToPos Core.SendToPos
   | MakeRoot Core.MakeRoot
-  | GiveNewParent
-      ( Core.GiveNewParent
-          (Ref.STRef Global (Array Instruction) -> ST Global Unit)
-      )
+  | GiveNewParent (Core.GiveNewParent STPayload)
   | DisconnectElement Core.DisconnectElement
   | RemoveDynBeacon Core.RemoveDynBeacon
   | DeleteFromCache Core.DeleteFromCache
@@ -336,9 +334,7 @@ ssrSetText a i = void $ Ref.modify (_ <> [ RenderableInstruction $ SetText a ])
 
 ssrGiveNewParent
   :: forall r
-   . ( Core.GiveNewParent
-         (Ref.STRef Global (Array Instruction) -> ST Global Unit)
-     )
+   . Core.GiveNewParent STPayload
   -> Ref.STRef r (Array Instruction)
   -> ST r Unit
 ssrGiveNewParent a i = void $ Ref.modify
@@ -384,17 +380,77 @@ ssrDisconnectElement a i = void $ Ref.modify
   (_ <> [ EliminatableInstruction $ DisconnectElement a ])
   i
 
+deferPayloadE
+  :: forall i o
+   . Functor o
+  => MonadST Global o
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (Array (i -> o Unit)))
+  -> List.List Int
+  -> (i -> o Unit)
+  -> i
+  -> o Unit
+deferPayloadE deferredCache l p _ = do
+  void $ liftST $ Ref.modify
+    ( flip Map.alter l case _ of
+        Nothing -> Just [ p ]
+        Just x -> Just (x <> [ p ])
+    )
+    deferredCache
+
+forcePayloadE
+  :: forall i o
+   . Functor o
+  => MonadST Global o
+  => Ref.STRef Global
+       (Map.Map (List.List Int) (Array (i -> o Unit)))
+  -> ((i -> o Unit) -> o Unit)
+  -> List.List Int
+  -> i
+  -> o Unit
+forcePayloadE deferredCache executor l = fn
+  where
+  fn _ = do
+    o <- liftST $ Ref.read deferredCache
+    let
+      tail = case _ of
+        n : List.Nil -> (n + 1) : List.Nil
+        a : b -> a : tail b
+        x -> x
+      leftBound = Just l
+      rightBound = Just $ tail l
+      { newMap, instructions } = flip (Map.foldSubmap leftBound rightBound) o
+        \k v ->
+          { newMap: Endo (Map.delete k)
+          , instructions: Endo $ Array.cons v
+          }
+    void $ liftST $ Ref.modify (unwrap newMap)
+      deferredCache
+    for_ (join $ unwrap instructions []) executor
+
+type FunctionOfArrayInstructionsU =
+  Ref.STRef Global (Array Instruction) -> ST Global Unit
+
+type STPayload = FunctionOfArrayInstructionsU
+
+type EffectfulPayload = FunctionOfFFIDOMSnapshotU
+
+type EffectfulExecutor = EffectfulPayload -> Effect Unit
+type STExecutor = STPayload -> ST Global Unit
+
 ssrDOMInterpret
   :: Ref.STRef Global Int
-  -> Core.DOMInterpret (Ref.STRef Global (Array Instruction) -> ST Global Unit)
-ssrDOMInterpret seed = Core.DOMInterpret
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array STPayload))
+  -> STExecutor
+  -> Core.DOMInterpret STPayload
+ssrDOMInterpret seed deferredCache executor = Core.DOMInterpret
   { ids: do
       s <- Ref.read seed
-      let
-        o = show
-          (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
       void $ Ref.modify (add 1) seed
-      pure o
+      pure s
+  , associateWithUnsubscribe: \_ _ -> pure unit
+  , deferPayload: deferPayloadE deferredCache
+  , forcePayload: forcePayloadE deferredCache executor
   , makeElement: ssrMakeElement
   , attributeParent: \_ _ -> pure unit
   , makeRoot: ssrMakeRoot
@@ -423,56 +479,49 @@ sendToPos a = \state -> do
       , parent
       , dynFamily
       , id: a.id
+      , deferralPath: List.Nil
       , pos: Just a.pos
       , ez: false
       , raiseId: mempty
       -- change me!
-      , ctor: NutF (Bolson.envy empty)
+      , ctor: (\(Nut x) -> x) mempty
       }
   coerce (giveNewParent_ Just runOnJust newA) state
 
 hydratingDOMInterpret
   :: Ref.STRef Region.Global Int
-  -> Core.DOMInterpret FreeEFunctionOfFFIDOMSnapshotU
-hydratingDOMInterpret seed =
+  -> Ref.STRef Global (Map.Map (List.List Int) (Array EffectfulPayload))
+  -> EffectfulExecutor
+  -> Core.DOMInterpret EffectfulPayload
+hydratingDOMInterpret seed deferredCache executor =
   let
     l = Core.DOMInterpret
       { ids: do
           s <- Ref.read seed
-          let
-            o = show
-              (evalGen (arbitrary :: Gen Int) { newSeed: mkSeed s, size: 5 })
           void $ Ref.modify (add 1) seed
-          pure o
-      , makeElement: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          makeElement_
-            runOnJust
-            true
-      , makeDynBeacon: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          makeDynBeacon_ runOnJust true
-      , attributeParent: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          attributeParent_ runOnJust
-      , makeRoot: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makeRoot_
-      , makeText: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makeText_
-          runOnJust
-          true
-          (maybe unit)
-      , makePursx: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< makePursx_
-          runOnJust
-          true
-          (maybe unit)
-      , setProp: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setProp_ true
-      , setCb: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setCb_ true
-      , unsetAttribute: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
-          unsetAttribute_ true
-      , setText: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< setText_
-      , sendToPos: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<< sendToPos
-      , deleteFromCache: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+          pure s
+      , associateWithUnsubscribe: associateWithUnsubscribe_
+      , deferPayload: deferPayloadE deferredCache
+      , forcePayload: forcePayloadE deferredCache executor
+      , makeElement: makeElement_ runOnJust true
+      , makeDynBeacon: makeDynBeacon_ runOnJust true
+      , attributeParent: attributeParent_ runOnJust
+      , makeRoot: makeRoot_
+      , makeText: makeText_ runOnJust true (maybe unit)
+      , makePursx: makePursx_ runOnJust true (maybe unit)
+      , setProp: setProp_ true
+      , setCb: setCb_ true
+      , unsetAttribute: unsetAttribute_ true
+      , setText: setText_
+      , sendToPos: sendToPos
+      , deleteFromCache:
           deleteFromCache_
-      , removeDynBeacon: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+      , removeDynBeacon:
           removeDynBeacon_
-      , giveNewParent: \gnp -> giveNewParentOrReconstruct l Just runOnJust gnp
-      , disconnectElement: liftF <<< EFunctionOfFFIDOMSnapshot <<< pure <<<
+      , giveNewParent: \gnp -> giveNewParentOrReconstruct l executor Just
+          runOnJust
+          gnp
+      , disconnectElement:
           disconnectElement_
       }
   in

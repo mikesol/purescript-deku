@@ -5,7 +5,7 @@ module Deku.DOM.Self where
 import Control.Applicative (pure) as Applicative
 import Control.Category ((<<<))
 import Data.Functor (map) as Functor
-import FRP.Event as FRP.Event
+import FRP.Poll as FRP.Poll
 import Type.Proxy (Proxy)
 import Deku.Attribute as Deku.Attribute
 import Web.DOM.Element as Web.DOM.Element
@@ -62,8 +62,8 @@ class IsSelf (element :: Type) (name :: Symbol) | element -> name
 -- | properties to it, etc.
 self
   :: forall r
-   . FRP.Event.Event (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute r)
+   . FRP.Poll.Poll (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute r)
 self = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -74,7 +74,7 @@ self = Functor.map
 self_
   :: forall r
    . (Web.DOM.Element.Element -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute r)
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute r)
 self_ = self <<< Applicative.pure
 
 -- | A slightly less permissive version of `Self` that associates Deku Elements to
@@ -83,8 +83,8 @@ self_ = self <<< Applicative.pure
 selfT
   :: forall name e r
    . IsSelf e name
-  => FRP.Event.Event (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+  => FRP.Poll.Poll (e -> Effect.Effect Data.Unit.Unit)
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (__tag :: Proxy name | r))
 selfT = Functor.map
   ( Deku.Attribute.unsafeAttribute <<< { key: "@self@", value: _ } <<< Deku.Attribute.cb'
       <<< Deku.Attribute.cb
@@ -96,7 +96,7 @@ selfT_
   :: forall name e r
    . IsSelf e name
   => (e -> Effect.Effect Data.Unit.Unit)
-  -> FRP.Event.Event (Deku.Attribute.Attribute (__tag :: Proxy name | r))
+  -> FRP.Poll.Poll (Deku.Attribute.Attribute (__tag :: Proxy name | r))
 selfT_ = selfT <<< Applicative.pure
 
 instance IsSelf Web.HTML.HTMLAnchorElement.HTMLAnchorElement "HTMLAnchorElement"

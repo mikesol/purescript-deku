@@ -6,7 +6,9 @@
 module Deku.Core
   ( ANut(..)
   , AttributeParent
+  , AssociateWithUnsubscribe
   , DOMInterpret(..)
+  , DekuExtra
   , DeleteFromCache
   , DisconnectElement
   , GiveNewParent
@@ -26,27 +28,22 @@ module Deku.Core
   , UnsetAttribute
   , SetText
   , Nut'
+  , Node'
+  , HeadNode'
   , NutF(..)
   , Child(..)
-  , bus
-  , busUncurried
-  , bussed
-  , bussedUncurried
-  , vbussed
-  , vbussedUncurried
-  , insert
-  , insert_
+  , flattenArgs
   , remove
   , sendToPos
   , sendToTop
   , dyn
   , fixed
-  , envy
   , unsafeSetPos
   ) where
 
 import Prelude
 
+import Bolson.Control (Flatten, behaving)
 import Bolson.Control as BControl
 import Bolson.Core (Scope)
 import Bolson.Core as Bolson
@@ -54,22 +51,18 @@ import Control.Monad.ST (ST)
 import Control.Monad.ST as ST
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Global as Region
-import Control.Monad.ST.Uncurried (mkSTFn2, runSTFn1, runSTFn2)
 import Control.Plus (empty)
+import Data.Foldable (for_)
+import Data.List (List)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Profunctor (lcmap)
-import Data.Tuple (curry)
-import Data.Tuple.Nested (type (/\), (/\))
+import Data.Tuple (Tuple(..))
+import Data.Tuple.Nested ((/\))
 import Deku.Attribute (Cb)
-import Effect (Effect)
-import FRP.Event (Event, Subscriber(..), merge, makeLemmingEventO)
-import FRP.Event as FRP.Event
-import FRP.Event.VBus (class VBus, V, vbus)
+import FRP.Event (Event)
+import FRP.Poll (Poll, poll, sample)
 import Foreign.Object (Object)
-import Prim.RowList (class RowToList)
-import Safe.Coerce (coerce)
-import Type.Proxy (Proxy)
 import Web.DOM as Web.DOM
 
 -- | The signature of a custom Deku hook. This works when `payload` variables
@@ -85,84 +78,21 @@ type NutWith env = env -> Nut
 -- | twice on `Nut`.
 newtype ANut = ANut Nut
 
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bus
-  :: forall a b
-   . ((a -> Effect Unit) -> Event a -> b)
-  -> Event b
-bus f = FRP.Event.bus f
+type DekuExtra = (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
 
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-busUncurried
-  :: forall a b
-   . (((a -> Effect Unit) /\ Event a) -> b)
-  -> Event b
-busUncurried = curry >>> bus
+type HeadNode' payload = Bolson.HeadElement' (DOMInterpret payload)
+  payload
 
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussed
-  :: forall a
-   . ((a -> Effect Unit) -> Event a -> Nut)
-  -> Nut
-bussed f = Nut (z (map (\(Nut i) -> i) g))
-  where
-  g :: Event Nut
-  g = bus f
-
-  z :: forall payload. Event (NutF payload) -> NutF payload
-  z x = NutF
-    ( Bolson.EventfulElement'
-        (Bolson.EventfulElement (coerce x))
-    )
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-bussedUncurried
-  :: forall a
-   . ( ((a -> Effect Unit) /\ Event a)
-       -> Nut
-     )
-  -> Nut
-bussedUncurried = curry >>> bussed
-
-vbussed
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> ({ | push } -> { | event } -> Nut)
-  -> Nut
-vbussed px f = Nut
-  ( NutF
-      ( Bolson.EventfulElement'
-          (Bolson.EventfulElement gooo)
-      )
-  )
-  where
-  go :: Event Nut
-  go = vbus px f
-
-  goo :: forall payload. Event (NutF payload)
-  goo = map (\(Nut nf) -> nf) go
-
-  gooo :: forall payload. Event (Bolson.Entity Int (Node payload))
-  gooo = map (\(NutF e) -> e) goo
-
--- | For internal use only in deku's hooks. See `Deku.Hooks` for more information.
-vbussedUncurried
-  :: forall rbus bus push event
-   . RowToList bus rbus
-  => VBus rbus push event
-  => Proxy (V bus)
-  -> (({ | push } /\ { | event }) -> Nut)
-  -> Nut
-vbussedUncurried px = curry >>> vbussed px
+-- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
+-- | hood, and this is used with `Bolson`'s `Entity` type.
+type Node' payload = Bolson.Element' (DOMInterpret payload) DekuExtra payload
 
 -- | For internal use in the `Nut` type signature. `Nut` uses `Bolson` under the
 -- | hood, and this is used with `Bolson`'s `Entity` type.
 newtype Node payload = Node
-  ( Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+  ( Bolson.Element (DOMInterpret payload)
+      (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
+      payload
   )
 
 -- | For internal use in the construction of Nut.
@@ -179,7 +109,12 @@ instance Semigroup Nut where
   append a b = fixed [ a, b ]
 
 instance Monoid Nut where
-  mempty = Nut (NutF (Bolson.envy empty))
+  mempty = Nut
+    ( NutF
+        ( Bolson.Element'
+            (Node (Bolson.Element \_ _ -> poll \_ -> empty))
+        )
+    )
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 unsafeSetPos
@@ -199,37 +134,13 @@ unsafeSetPos' i (Nut df) = Nut (g df)
       :: Bolson.Entity Int (Node payload)
       -> Bolson.Entity Int (Node payload)
     f ii = case ii of
-      Bolson.Element' (Node e') -> Bolson.Element'
-        (Node (lcmap (_ { pos = i }) e'))
-      Bolson.EventfulElement' (Bolson.EventfulElement e') ->
-        Bolson.EventfulElement' (Bolson.EventfulElement (map f e'))
+      Bolson.Element' (Node (Bolson.Element e')) -> Bolson.Element'
+        (Node (Bolson.Element (lcmap (_ { pos = i }) e')))
+      -- we don't need to set the pos recursively down as
+      -- dynify guarantees to wrap in an Element
       _ -> ii
 
-newtype Child = Child (forall payload. Bolson.Child Int (Node payload))
-
--- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
-insert
-  :: Int
-  -> Nut
-  -> Child
-insert i x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos i x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
-
-insert_
-  :: Nut
-  -> Child
-insert_ x = Child (f ((\(Nut z) -> z) b))
-  where
-  b :: Nut
-  b = unsafeSetPos' Nothing x
-
-  f :: forall payload. NutF payload -> Bolson.Child Int (Node payload)
-  f (NutF d) = Bolson.Insert d
+newtype Child = Child (Bolson.Child Int)
 
 -- | For internal use only in deku's hooks. See `useDyn` in `Deku.Hooks` for more information.
 remove :: Child
@@ -271,6 +182,7 @@ type GiveNewParent payload =
   , scope :: Scope
   , pos :: Maybe Int
   , dynFamily :: Maybe String
+  , deferralPath :: List Int
   , ctor :: NutF payload
   , raiseId :: String -> ST.ST Region.Global Unit
   }
@@ -352,6 +264,9 @@ type MakeDynBeacon =
   , dynFamily :: Maybe String
   }
 
+type AssociateWithUnsubscribe =
+  { id :: String, unsubscribe :: ST.ST Region.Global Unit }
+
 derive instance Newtype (DOMInterpret payload) _
 
 -- | This is the interpreter that any Deku backend creator needs to impelement.
@@ -359,7 +274,10 @@ derive instance Newtype (DOMInterpret payload) _
 -- | As an example, if you want to create a nullary interpreter that
 -- | spits out `unit`, you can set everything to `mempty`.
 newtype DOMInterpret payload = DOMInterpret
-  { ids :: ST Global String
+  { ids :: ST Global Int
+  , deferPayload :: List Int -> payload -> payload
+  , forcePayload :: List Int -> payload
+  , associateWithUnsubscribe :: AssociateWithUnsubscribe -> payload
   , makeRoot :: MakeRoot -> payload
   , makeElement :: MakeElement -> payload
   , makeDynBeacon :: MakeDynBeacon -> payload
@@ -380,143 +298,142 @@ newtype DOMInterpret payload = DOMInterpret
 newtype ExDOMInterpret = ExDOMInterpret (forall payload. DOMInterpret payload)
 newtype ExEvent = ExEvent (forall payload. Event payload)
 
-portalFlatten
-  :: forall payload136 b143 d145 t149 t157 t159 payload171
-   . Newtype b143
-       { ids :: d145
-       | t149
-       }
-  => { disconnectElement ::
-         DOMInterpret t157
-         -> { id :: String
-            , parent :: String
-            , scope :: Scope
-            | t159
-            }
-         -> t157
-     , doLogic :: Int -> DOMInterpret payload136 -> String -> payload136
-     , ids :: b143 -> d145
-     , toElt ::
-         Node payload171
-         -> Bolson.Element (DOMInterpret payload171)
-              ( pos :: Maybe Int
-              , dynFamily :: Maybe String
-              , ez :: Boolean
-              )
-              payload171
-     }
-portalFlatten =
+flattenArgs
+  :: forall payload. Flatten Int (DOMInterpret payload) Node DekuExtra payload
+flattenArgs =
   { doLogic: \pos (DOMInterpret { sendToPos: stp }) id -> stp { id, pos }
+  , deferPayload: \(DOMInterpret { deferPayload }) -> deferPayload
+  , forcePayload: \(DOMInterpret { forcePayload }) -> forcePayload
   , ids: unwrap >>> _.ids
   , disconnectElement:
       \(DOMInterpret { disconnectElement }) { id, scope, parent } ->
         disconnectElement { id, scope, parent, scopeEq: eq }
-  , toElt: \(Node e) -> Bolson.Element e
+  , toElt: \(Node e) -> e
   }
 
 __internalDekuFlatten
   :: forall payload
-   . Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-  -> DOMInterpret payload
-  -> NutF payload
-  -> Event payload
-__internalDekuFlatten a b c = BControl.flatten portalFlatten a b
-  ((\(NutF x) -> x) c)
+   . NutF payload
+  -> Node' payload
+__internalDekuFlatten a b c = BControl.flatten flattenArgs ((\(NutF x) -> x) a)
+  b
+  c
 
 dynify
   :: forall i
    . (i -> Nut)
   -> i
   -> Nut
-dynify f es = Nut (go' ((\(Nut df) -> df) (f es)))
+dynify dfun es = Nut (go' ((\(Nut df) -> df) (dfun es)))
   where
   go' :: forall payload. NutF payload -> NutF payload
-  go' x = NutF (Bolson.Element' (Node (go x)))
+  go' x = NutF (Bolson.Element' (Node (Bolson.Element (go x))))
 
   go
     :: forall payload
      . NutF payload
-    -> Bolson.PSR (pos :: Maybe Int, ez :: Boolean, dynFamily :: Maybe String)
-    -> DOMInterpret payload
-    -> Event payload
+    -> Node' payload
   go
     fes
-    { parent, scope, raiseId, pos, dynFamily, ez }
+    { parent, scope, raiseId, pos, dynFamily, ez, deferralPath }
     di@
       ( DOMInterpret
-          { ids, makeElement, makeDynBeacon, attributeParent, removeDynBeacon }
-      ) =
-    makeLemmingEventO
-      ( mkSTFn2 \(Subscriber mySub) k -> do
-          me <- ids
-          raiseId me
-          -- `dyn`-s need to have a parent
-          -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
-          -- Then, we can call `childNodes` and `nextSibling`.
-          -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
-          parentEvent /\ parentId <- case parent of
-            Nothing -> do
-              dummyParent <- ids
-              pure
-                ( ( pure
-                      ( makeElement
-                          { id: dummyParent
-                          , parent: Nothing
-                          , scope
-                          , ns : Nothing
-                          , tag: "div"
-                          , pos: Nothing
-                          , dynFamily: Nothing
-                          }
-                      )
-                  ) /\ dummyParent
-                )
-            Just x -> pure (empty /\ x)
-          unsub <- runSTFn2 mySub
-            ( merge
-                [ parentEvent
-                , pure $ makeDynBeacon
-                    { id: me, parent: Just parentId, scope, dynFamily, pos }
-                , pure $ attributeParent
-                    { id: me, parent: parentId, pos, dynFamily, ez }
-                , ( __internalDekuFlatten
-                      { parent: Just parentId
-                      , scope
-                      , ez: false
-                      , raiseId: \_ -> pure unit
-                      -- clear the pos
-                      -- as we don't want the pointer's positional information
-                      -- trickling down to what the pointer points to
-                      -- the logic in Interpret.js will always give
-                      -- the correct positional information to what
-                      -- pointers point to
-                      , pos: Nothing
-                      , dynFamily: Just me
-                      }
-                      di
-                      fes
-                  )
-                ]
-            )
-            k
-          pure do
-            runSTFn1 k (removeDynBeacon { id: me })
-            unsub
+          { ids
+          , makeElement
+          , deferPayload
+          , makeDynBeacon
+          , attributeParent
+          , removeDynBeacon
+          }
+      ) = behaving \e kx subscribe -> do
+    me <- ids
+    raiseId $ show me
+    -- `dyn`-s need to have a parent
+    -- Tis is because we need to preserve the order of children and a parent is the cleanest way to do this.
+    -- Then, we can call `childNodes` and `nextSibling`.
+    -- In practice, they will almost always have a parent, but for portals they don't, so we create a dummy one that is not rendered.
+    parentEvent /\ parentId <- case parent of
+      Nothing -> do
+        dummyParent <- ids
+        pure
+          ( [ makeElement
+                { id: show dummyParent
+                , parent: Nothing
+                , scope
+                , tag: "div"
+                , ns: Nothing
+                , pos: Nothing
+                , dynFamily: Nothing
+                }
+
+            ] /\ show dummyParent
+          )
+      Just x -> pure ([] /\ x)
+    let
+      evt = sample
+        ( __internalDekuFlatten fes
+            { parent: Just parentId
+            , scope
+            , ez: false
+            , raiseId: \_ -> pure unit
+            , deferralPath
+            -- clear the pos
+            -- as we don't want the pointer's positional information
+            -- trickling down to what the pointer points to
+            -- the logic in Interpret.js will always give
+            -- the correct positional information to what
+            -- pointers point to
+            , pos: Nothing
+            , dynFamily: Just $ show me
+            }
+            di
+        )
+        e
+    for_
+      ( parentEvent
+          <>
+            [ makeDynBeacon
+                { id: show me
+                , parent: Just parentId
+                , scope
+                , dynFamily
+                , pos
+                }
+            , attributeParent
+                { id: show me, parent: parentId, pos, dynFamily, ez }
+            ]
       )
+      kx
+    for_ [ removeDynBeacon { id: show me } ]
+      (kx <<< deferPayload deferralPath)
+    subscribe evt
 
 -- | This function is used along with `useDyn` to create dynamic collections of elements, like todo items in a todo mvc app.
 -- | See [**Dynamic components**](https://purescript-deku.netlify.app/core-concepts/collections#dynamic-components) in the Deku guide for more information.
 dyn
-  :: Event (Event Child)
+  :: Poll (Tuple (Poll Child) Nut)
   -> Nut
 dyn = dynify myDyn
   where
-  myDyn :: Event (Event Child) -> Nut
-  myDyn e = Nut (myDyn' ((map <<< map) (\(Child c) -> c) e))
+  bolsonify
+    :: forall payload
+     . Tuple (Poll Child) Nut
+    -> Tuple (Poll (Bolson.Child Int)) (Bolson.Entity Int (Node payload))
+  bolsonify (Tuple child (Nut nut)) = Tuple (map (\(Child x) -> x) child)
+    ((\(NutF n) -> n) nut)
+
+  myDyn
+    :: (Poll (Tuple (Poll Child) Nut))
+    -> Nut
+  myDyn e = Nut
+    (myDyn' (map bolsonify e))
 
   myDyn'
     :: forall payload
-     . Event (Event (Bolson.Child Int (Node payload)))
+     . Poll
+         ( Tuple (Poll (Bolson.Child Int))
+             (Bolson.Entity Int (Node payload))
+         )
     -> NutF payload
   myDyn' x = NutF (Bolson.dyn x)
 
@@ -535,27 +452,3 @@ fixed = dynify myFixed
      . Array (NutF payload)
     -> NutF payload
   myFixed' x = NutF (Bolson.fixed (map (\(NutF y) -> y) x))
-
--- dynify
---   ( coerce
---       (Bolson.fixed :: Array (Nut' payload) -> Nut' payload)
---   )
-
--- | Once upon a time, this function was used to emit arbitrary `Nut`-s using an event.
--- | Nowadays, its use is discouraged as there are other patterns in place to emit Nuts, like
--- | for example `switcher`. It is left in the library for backwards compatibility, but will
--- | likely be deprecated, and then all traces of it will be purged, and then people will be forced to study
--- | a revisionist history of the library that denies it ever existed.
-envy
-  :: Event Nut
-  -> Nut
-envy = dynify myEnvy
-  where
-  myEnvy :: Event Nut -> Nut
-  myEnvy e = Nut (myEnvy' (map (\(Nut c) -> c) e))
-
-  myEnvy'
-    :: forall payload
-     . Event (NutF payload)
-    -> NutF payload
-  myEnvy' x = NutF (Bolson.envy (map (\(NutF y) -> y) x))
