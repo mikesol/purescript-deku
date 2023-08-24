@@ -12,7 +12,7 @@ const doTest = (name, closure, onlyWithSSR) => {
         isNaN(onlyWithSSR) ? 0 : onlyWithSSR
       )();
       await myScript(false);
-      finished();
+      // finished();
     });
   });
   (onlyWithSSR === true ? it.only : it)(name + " with SSR", async () => {
@@ -27,7 +27,7 @@ const doTest = (name, closure, onlyWithSSR) => {
         isNaN(onlyWithSSR) ? 0 : onlyWithSSR
       )();
       await myScript(true);
-      finished();
+      // finished();
     });
   });
 };
@@ -554,6 +554,8 @@ describe("deku", () => {
       const $ = require("jquery");
       $("#run").trigger("click");
       $("#swaprows").trigger("click");
+      $("#clear").trigger("click");
+      // $("#runlots").trigger("click");
     })
   );
 });

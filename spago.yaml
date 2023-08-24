@@ -4,7 +4,7 @@ workspace:
   extra_packages:
     hyrule:
       git: "https://github.com/mikesol/purescript-hyrule.git"
-      ref: "bf25f5c"
+      ref: "f388528a9aaa25a5307bf67f6ed12d2097620929"
       dependencies:
         - effect
         - js-timers
@@ -12,8 +12,8 @@ workspace:
         - unsafe-reference
         - web-uievents
     bolson:
-      repo: "https://github.com/mikesol/purescript-bolson.git"
-      version: "fantasy-land2"
+      git: "https://github.com/mikesol/purescript-bolson.git"
+      ref: "d87900c"
       dependencies:
         - hyrule
     tidy: 
