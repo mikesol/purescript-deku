@@ -549,4 +549,11 @@ describe("deku", () => {
       expect($("#db").text()).toBe("4");
     })
   );
+  doTest("stress test doesn't blow up", (f) =>
+    f(tests.stressTest, () => {
+      const $ = require("jquery");
+      $("#run").trigger("click");
+      $("#swaprows").trigger("click");
+    })
+  );
 });

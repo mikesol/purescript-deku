@@ -4,21 +4,22 @@ import Prelude
 
 import Bolson.Control as Bolson
 import Bolson.Core (Element(..), Entity(..))
-import Data.Traversable (for_)
-import FRP.Poll (poll, Poll, sample, sample_)
 import Control.Plus (empty)
 import Data.Maybe (Maybe(..))
 import Data.Reflectable (class Reflectable, reflectType)
 import Data.Symbol (class IsSymbol)
+import Data.Traversable (for_)
 import Deku.Attribute (Attribute, unsafeUnAttribute)
-import Deku.Core (DOMInterpret(..), Node', Nut(..), NutF(..), Node(..), flattenArgs)
-import FRP.Event (merge)
-import Foreign.Object as Object
 import Deku.Control (unsafeSetAttribute)
+import Deku.Core (DOMInterpret(..), Node(..), Node', Nut(..), NutF(..), flattenArgs)
+import FRP.Event (merge)
+import FRP.Poll (Poll, poll, sample)
+import Foreign.Object as Object
 import Prim.Row as Row
 import Prim.RowList as RL
 import Record (get)
 import Type.Proxy (Proxy(..))
+
 class
   PursxToElement (rl :: RL.RowList Type) (r :: Row Type)
   | rl -> r where
@@ -98,18 +99,24 @@ else instance pursxToElementConsAttr ::
       Node (Element rest) = domableToNode element
 
       elt :: forall payload. Node' payload
-      elt parent di = Bolson.behaving' \fff ee _ subscribe -> do
-        let bhv = rest parent di
-        subscribe
-          ( ( ( \xx -> fff $ unsafeSetAttribute di
-                  (reflectType pxk <> "@!%" <> pxScope)
+      elt parent di@(DOMInterpret { deferPayload, deleteFromCache }) =
+        Bolson.behaving \ee kx subscribe -> do
+          let bhv = rest parent di
+          let myId = reflectType pxk <> "@!%" <> pxScope
+          subscribe $ sample (map unsafeUnAttribute (get pxk r))
+            ( ( \fff xx -> fff $ unsafeSetAttribute di
+                  myId
                   xx
-              ) <$>
-                (sample_ (map unsafeUnAttribute (get pxk r)) ee)
+              ) <$> ee
             )
-          )
-          identity
-        subscribe (sample bhv ee) identity
+          -- this may result in double deletion requests if
+          -- we attach multiple attributes to a single element
+          -- in the cache, but that's ok
+          -- the important thing is that, when it's cleaned up,
+          -- it's out of the cache
+          kx $ deferPayload parent.deferralPath $ deleteFromCache
+            { id: myId }
+          subscribe (sample bhv ee)
     { cache: Object.insert (reflectType pxk) true cache
     , element: Nut (NutF (Element' (Node (Element elt))))
     }

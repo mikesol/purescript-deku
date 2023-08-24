@@ -282,7 +282,7 @@ export const getDynFamily = (id) => (state) => () =>
   state.units[id] && state.units[id].dynFamily
     ? state.units[id].dynFamily
     : (() => {
-        throw new Error(`No positional information for ${id}`);
+        throw new Error(`No dyn family for ${id}`);
       })();
 export const getParent = (id) => (state) => () =>
   state.units[id] &&
@@ -403,6 +403,7 @@ export const makeText_ =
           pos: a.pos,
           parent: a.parent,
           scope: a.scope,
+          dynFamily: a.dynFamily,
         };
         main.$dekuId = ptr;
         return true;
@@ -555,6 +556,7 @@ export const makePursx_ =
     var tmp;
     var ptr = a.id;
     var html = a.html;
+    var dynFamily = a.dynFamily;
     var verb = a.verb;
     var cache = a.cache;
     var parent = a.parent;
@@ -576,6 +578,7 @@ export const makePursx_ =
           scope: scope,
           parent: parent,
           main: dom,
+          dynFamily: dynFamily,
         };
         dom.$dekuId = ptr;
         return true;
@@ -608,6 +611,7 @@ export const makePursx_ =
         listeners: {},
         pos: a.pos,
         scope: scope,
+        dynFamily: dynFamily,
         parent: parent,
         main: tmp.firstChild,
       };

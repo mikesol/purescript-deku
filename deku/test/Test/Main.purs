@@ -6,11 +6,13 @@ import Control.Alt ((<|>))
 import Control.Monad.ST.Global (Global)
 import Control.Monad.ST.Internal (ST)
 import Control.Plus (empty)
-import Data.Array ((..))
+import Data.Array (replicate, (!!), (..))
+import Data.Array as Array
 import Data.Filterable (compact, filter)
-import Data.Foldable (intercalate, oneOf, oneOfMap, traverse_)
+import Data.Foldable (intercalate, for_, oneOf, oneOfMap, traverse_)
 import Data.FunctorWithIndex (mapWithIndex)
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe, maybe)
+import Data.Traversable (sequence)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
 import Deku.Control (globalPortal1, portal1, text, text_)
@@ -20,14 +22,16 @@ import Deku.DOM.Attributes as DA
 import Deku.DOM.Combinators (injectElementT)
 import Deku.DOM.Listeners as DL
 import Deku.Do as Deku
-import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks (dynOptions, guard, guardWith, useDyn, useDynWith, useDynAtBeginning, useDynAtEnd, useDynAtEndWith, useHot, useHotRant, useRant, useRef, useState, useState', (<#~>))
+import Deku.Hooks as DH
 import Deku.Interpret (FFIDOMSnapshot)
 import Deku.Pursx ((~~))
 import Deku.Toplevel (hydrate', runInBody', runSSR)
 import Effect (Effect)
-import Effect.Random (random)
-import FRP.Event (fold, mapAccum)
-import FRP.Poll (Poll, effectToPoll)
+import Effect.Random (random, randomInt)
+import FRP.Event (fold, mapAccum, folded, keepLatest, makeEvent, subscribe)
+import FRP.Poll (Poll, poll, effectToPoll)
+import Record (union)
 import Type.Proxy (Proxy(..))
 import Web.HTML (window)
 import Web.HTML.HTMLInputElement as InputElement
@@ -671,3 +675,169 @@ useHotRantWorks = Deku.do
     , framed "da"
     , guard presence $ framed "db"
     ]
+
+-- begin stress test
+
+randomFromArray :: Array String -> Poll String
+randomFromArray arr = poll \e -> makeEvent \k ->
+  subscribe e \f -> do
+    index <- randomInt 0 (alen - 1)
+    k $ f $ fromMaybe "foo" (arr !! index)
+  where
+  alen = Array.length arr
+
+randomAdjectives :: Poll String
+randomAdjectives = randomFromArray [ "pretty", "large", "big", "small", "tall", "short", "long", "handsome", "plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy", "odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive", "fancy" ]
+
+randomColors :: Poll String
+randomColors = randomFromArray [ "red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange" ]
+
+randomNouns :: Poll String
+randomNouns = randomFromArray [ "table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard" ]
+
+rowReplicator
+  :: Int -> Poll Unit
+rowReplicator n = oneOf (replicate n $ pure unit)
+
+makeRow ∷ forall a. { n :: Int, excl :: Int -> Poll a, selectMe :: Int -> Effect Unit, removeMe :: Effect Unit } → Nut
+makeRow { n, excl, selectMe, removeMe } = rowTemplate ~~
+  { label:
+      text $ Array.fold
+        <$> sequence
+          [ randomAdjectives
+          , pure " "
+          , randomNouns
+          , pure " "
+          , randomColors
+          , pure " "
+          , pure "" <|> folded (excl n $> "!!!")
+          ]
+  , select: DL.click_ \_ -> selectMe n
+  , remove: DL.click_ \_ -> removeMe
+  }
+
+bootstrapWith
+  :: forall r
+   . { appendRows :: Poll Unit
+     , rowbox :: Int -> Poll Unit
+     , selectMe :: Int -> Effect Unit
+     , removeMe :: Effect Unit -> Effect Unit
+     , selectbox :: Int -> Poll Unit
+     , unselectbox :: Int -> Poll Unit
+     , swap :: Poll Boolean
+     , n :: Int
+     | r
+     }
+  -> Nut
+bootstrapWith { selectMe, removeMe, swap, appendRows, n, rowbox } = Deku.do
+  { value: index, remove } <- useDynWith (mapWithIndex (\i _ -> Tuple i i) (rowReplicator n <|> keepLatest (appendRows $> rowReplicator 1000))) $ dynOptions
+    { sendTo = case _ of
+        1 -> swap <#> if _ then 1 else 998
+        998 -> swap <#> if _ then 998 else 1
+        _ -> empty
+
+    }
+  makeRow { n: index, excl: rowbox, selectMe, removeMe: removeMe remove }
+
+tableBody
+  :: { rowBuilder :: Poll RowBuilder
+     , appendRows :: Poll Unit
+     , swap :: Poll Boolean
+     , pushToRow :: { address :: Int, payload :: Unit } -> Effect Unit
+     , rowbox :: Int -> Poll Unit
+     , selectbox :: Int -> Poll Unit
+     , unselectbox :: Int -> Poll Unit
+     , selectMe :: Int -> Effect Unit
+     , removeMe :: Effect Unit -> Effect Unit
+     }
+  -> Nut
+tableBody i = Deku.do
+  D.tbody [ DA.id_ "tbody" ]
+    [ i.rowBuilder <#~> case _ of
+        C1000 -> bootstrapWith
+          $ i `union` { n: 1000 }
+        C10000 -> bootstrapWith
+          $ i `union` { n: 10000 }
+        Clear -> mempty
+    ]
+
+data RowBuilder = C1000 | C10000 | Clear
+
+stressTest :: Nut
+stressTest =  Deku.do
+  setRowBuilder /\ rowBuilder <- DH.useState'
+  thunkAppendRows /\ appendRows <- DH.useState'
+  incrementRows' /\ nRows <- DH.useState Nothing
+  setSwap /\ swap <- DH.useState'
+  pushToRow /\ rowbox <- DH.useMailboxed
+  pushToSelect /\ selectbox <- DH.useMailboxed
+  pushToUnselect /\ unselectbox <- DH.useMailboxed
+  setCurrentSelection /\ currentSelection <- DH.useHot Nothing
+  selectionRef <- DH.useRef Nothing currentSelection
+  let incrementRows = incrementRows' <<< Just
+  let clearRows = incrementRows' Nothing
+  let
+    selectMe index = do
+      pushToSelect { address: index, payload: unit }
+      s <- selectionRef
+      setCurrentSelection $ Just index
+      for_ s \i -> do
+        pushToUnselect { address: i, payload: unit }
+    removeMe rmEffect = do
+      rmEffect
+      setCurrentSelection Nothing
+  body ~~
+    { tbody: tableBody { selectMe, removeMe, selectbox, unselectbox, swap, rowBuilder, appendRows, pushToRow, rowbox }
+    , c1000: DL.click_ \_ -> incrementRows 1000 *> setRowBuilder C1000
+    , c10000: DL.click_ \_ -> incrementRows 10000 *> setRowBuilder C10000
+    , append: DL.click_ \_ -> incrementRows 1000 *> thunkAppendRows unit
+    , clear: DL.click_ \_ -> clearRows *> setRowBuilder Clear
+    , swap: DL.runOn DL.click $ oneOf [ pure false, swap ] <#> not >>> setSwap
+    , update: DL.runOn DL.click $ fold (\a b -> maybe 0 (add a) b) 0 nRows <#> \n -> do
+        for_ (0 .. (n / 10 - 1)) \i -> do
+          pushToRow { address: i * 10, payload: unit }
+    }
+
+rowTemplate = Proxy :: Proxy """<tr><td class="col-md-1"></td><td class="col-md-4"><a ~select~ class="lbl">~label~</a></td><td class="col-md-1"><a ~remove~ class="remove"><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>"""
+
+body =
+  Proxy
+    :: Proxy
+         """<div id="main">
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>VanillaJS-"keyed"</h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6 smallpad">
+                            <button ~c1000~ type="button" class="btn btn-primary btn-block" id="run">Create 1,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button ~c10000~ type="button" class="btn btn-primary btn-block" id="runlots">Create 10,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button ~append~ type="button" class="btn btn-primary btn-block" id="add">Append 1,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button ~update~ type="button" class="btn btn-primary btn-block" id="update">Update every 10th row</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button ~clear~ type="button" class="btn btn-primary btn-block" id="clear">Clear</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button ~swap~ type="button" class="btn btn-primary btn-block" id="swaprows">Swap Rows</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover table-striped test-data">
+            ~tbody~
+        </table>
+        <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>
+</div>"""
+-- end stress test
